@@ -11,7 +11,8 @@ class ProperyManager extends AbstractManager{
     }
 
     init(){
-        
+        super.init();
     }
 }
-module.exports = PropertyManager;
+
+export default PropertyManager;
