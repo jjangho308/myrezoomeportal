@@ -1,11 +1,5 @@
 import AbstractManager from "./abstract";
 
-class RequestJob{
-    constructor(opt){
-        this.socket = opt.socket;
-    }
-}
-
 /**
  * Request job manager from client. <br />
  * 초기화 시 Job map를 생성하며 Client channel의 HTTP Request 발생 시 Job을 생성하여 저장한다.
@@ -28,4 +22,4 @@ class RequestManager extends AbstractManager{
     }
 }
 
-export RequestJob from RequestJob;
+export default RequestManager
