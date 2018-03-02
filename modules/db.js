@@ -1,3 +1,4 @@
+import csdr from 'cassandra-driver'
 import AbstractManager from "./abstract";
 
 /**
@@ -10,5 +11,21 @@ class DataManager extends AbstractManager{
         super(opt)
     }
 
-    init();
+    init(){
+        
+    }
+
+    connect(opt){
+        this.client = new csdr.Client({
+
+        })
+    }
+
+    getUserDAO(){
+
+    }
+
+    getTransactionDAO(){
+
+    }
 }
