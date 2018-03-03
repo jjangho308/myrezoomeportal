@@ -1,6 +1,6 @@
 import PushManager from '../modules/push'
 
-describe('Push suit', function(){
+describe.skip('Push suit', function(){
     var push = new PushManager();
     
     before('Push initialize', function(){

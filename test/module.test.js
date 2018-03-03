@@ -6,6 +6,6 @@ describe('Module Test', ()=>{
         var push1 = managers.push;
         var push2 = managers.push;
 
-        assert.equals(push1, push2);
+        assert.deepEqual(push1, push2);
     })
 })
