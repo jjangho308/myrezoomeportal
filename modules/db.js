@@ -15,10 +15,13 @@ class DataManager extends AbstractManager{
         
     }
 
-    connect(opt){
-        this.client = new csdr.Client({
+    connectCassandra(opt, cb){
+        this.client = new csdr.Client(opt);
+        cb();
+    }
 
-        })
+    connectNoSQL(opt, cb){
+        
     }
 
     getUserDAO(){

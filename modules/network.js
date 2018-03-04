@@ -6,12 +6,13 @@ import AbstractManager from "./abstract";
  * @since 180228
  */
 class NetworkManager extends AbstractManager{
-    constructor(context){
-        this.context = context;
+    constructor(opt){
+        super(opt);
     }
 
-    init();
+    init(){
 
+    }
 }
 
 export default NetworkManager

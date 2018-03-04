@@ -17,7 +17,31 @@ class RequestManager extends AbstractManager{
         this.queue = null;
     }
 
+    /**
+     * Put request job. <br />
+     * 
+     * @param {RequestJob} job 
+     */
     putJob(job){
+        
+    }
+
+    /**
+     * 
+     * @param {string} jobId 
+     */
+    getJob(jobId){
+        
+    }
+}
+
+class RequestJob {
+    constructor(opt){
+        this.jobid = null;
+
+        // Client socket.
+        this.socket = opt.socket;
+
         
     }
 }
