@@ -69,12 +69,12 @@ class CryptoManager extends AbstractManager {
      */
     encryptAES(plain, key, cb) {
         this.generatePRN(this.spec.ivLength, ((err, iv) => {
-                var cipher = crypto.createCipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), iv);
-                cipher.setAutoPadding(true);
-                var encrypted = cipher.update(plain, 'utf8', this.spec.encode);
-                encrypted += cipher.final(this.spec.encode);
-                cb(null, iv.toString(this.spec.encode), encrypted);
-            }).bind(this));
+            var cipher = crypto.createCipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), iv);
+            cipher.setAutoPadding(true);
+            var encrypted = cipher.update(plain, 'utf8', this.spec.encode);
+            encrypted += cipher.final(this.spec.encode);
+            cb(null, iv.toString(this.spec.encode), encrypted);
+        }).bind(this));
     }
 
     /**
