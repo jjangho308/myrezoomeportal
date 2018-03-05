@@ -35,15 +35,4 @@ class RequestManager extends AbstractManager{
     }
 }
 
-class RequestJob {
-    constructor(opt){
-        this.jobid = null;
-
-        // Client socket.
-        this.socket = opt.socket;
-
-        
-    }
-}
-
 export default RequestManager
