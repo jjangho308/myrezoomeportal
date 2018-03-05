@@ -60,5 +60,4 @@ PropertyManager.NOSQL_ID        = 'nosql.id';
 PropertyManager.NOSQL_PW        = 'nosql.pw';
 PropertyManager.NOSQL_TIMEOUT   = 'nosql.timeout';
 
-
 export default PropertyManager;
