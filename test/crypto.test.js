@@ -1,12 +1,14 @@
+import crypto from 'crypto';
+
 import CryptoManager from '../modules/crypto';
 
-describe('Crypto test suit', () => {
-    var crypto;
+describe('CryptoManager test suit', () => {
+    var cryptoManager;
 
-    before('Crypto module init', () => {
-        crypto = new CryptoManager();
-        crypto.setDefaultSpec({
-            symAlg      : 'aes128',
+    before('CryptoManager module init', () => {
+        cryptoManager = new CryptoManager();
+        cryptoManager.setDefaultSpec({
+            symAlg      : 'aes-128-cbc',
             symLength   : 16,
             encode      : 'base64',
             ivLength    : 16,
@@ -15,7 +17,7 @@ describe('Crypto test suit', () => {
     });
 
     it('Generate AES key', done => {
-        crypto.generateAESKey((err, aes) => {
+        cryptoManager.generateAESKey((err, aes) => {
             if (!err) {
                 console.log('AES Key : ' + aes);
                 done();
@@ -23,14 +25,26 @@ describe('Crypto test suit', () => {
         });
     })
 
-    it('AES Encrypt/Decrypt', done => {
-        
+    it('AES short string', done => {
         var plain = "Hello, world!";
+        console.log("Original : " + plain);
+        cryptoManager.generateAESKey((err, aes) => {
+            cryptoManager.encryptAES(plain, aes, (err, iv, encrypted) => {
+                console.log("Encrypted : " + encrypted);
+                cryptoManager.decryptAES(encrypted, aes, iv, (err, decrypted) => {
+                    console.log("Decrypted : " + decrypted);
+                    if (plain == decrypted)
+                        done();
+                })
+            })
+        });
+    })
 
-        crypto.generateAESKey((err, aes) => {
-
-            crypto.encryptAES(plain, aes, (err, iv, encrypted) => {
-                crypto.decryptAES(encrypted, aes, iv, (err, decrypted) => {
+    it('AES long string', done => {
+        var plain = "Hello, world!wal iefljaisdj lfijawlieilf jalisd ilfilase jfliasd";
+        cryptoManager.generateAESKey((err, aes) => {
+            cryptoManager.encryptAES(plain, aes, (err, iv, encrypted) => {
+                cryptoManager.decryptAES(encrypted, aes, iv, (err, decrypted) => {
 
                     console.log("Original : " + plain);
                     console.log("Decrypted : " + decrypted);
@@ -42,7 +56,7 @@ describe('Crypto test suit', () => {
     })
 
     it.skip('Generate RSA keypair', done => {
-        crypto.generateRSAKeyPair((err, keypair) => {
+        cryptoManager.generateRSAKeyPair((err, keypair) => {
             console.log('PubKey : ' + keypair.pub);
             console.log('PriKey : ' + keypair.pri);
             done();
@@ -55,9 +69,9 @@ describe('Crypto test suit', () => {
 
     it.skip('RSA Signature', done => {
         var plain = "Hello, world!";
-        crypto.generateAESKey((keypair) => {
-            crypto.encryptRSA(plain, keypair.pri, (encrypted) => {
-                crypto.decryptRSA(encrypted, keypair.pub, (decrypted) => {
+        cryptoManager.generateAESKey((keypair) => {
+            cryptoManager.encryptRSA(plain, keypair.pri, (encrypted) => {
+                cryptoManager.decryptRSA(encrypted, keypair.pub, (decrypted) => {
                     if (plain == decrypted)
                         done();
                 })
