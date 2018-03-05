@@ -1,3 +1,5 @@
+import HashMap from 'hashmap';
+
 import AbstractManager from "./abstract";
 
 /**
@@ -13,8 +15,8 @@ class RequestManager extends AbstractManager{
     }
 
     init(){
-        // TODO set initiali queue size from properties. <br />
-        this.queue = null;
+        this.jobMap = new HashMap();
+        this.setPrepared();
     }
 
     /**
@@ -22,7 +24,7 @@ class RequestManager extends AbstractManager{
      * 
      * @param {RequestJob} job 
      */
-    putJob(job){
+    putJob(request){
         
     }
 
@@ -32,6 +34,10 @@ class RequestManager extends AbstractManager{
      */
     getJob(jobId){
         
+    }
+
+    runJob(){
+
     }
 }
 
