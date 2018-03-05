@@ -12,7 +12,8 @@ class PushManager extends AbstractManager {
         super(opt);
     }
 
-    init() {}
+    init() {
+    }
 
     /**
      * Connect AMQ server. <br />
@@ -54,7 +55,7 @@ class PushManager extends AbstractManager {
     }
 
     sendMessage(msg, cb) {
-        for(var header in this.targets){
+        for (var header in this.targets) {
             this.channel.send(header, msg, function (err) {
                 if (err) {
                     console.log('send error: ' + err.message);

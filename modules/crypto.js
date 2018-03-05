@@ -4,14 +4,14 @@ import AbstractManager from "./abstract";
 
 /**
  * CryptoManager. <br />
-*/
-class CryptoManager extends AbstractManager{
-    
-    constructor(opt){
+ */
+class CryptoManager extends AbstractManager {
+
+    constructor(opt) {
         super(opt);
     }
 
-    init(){
+    init() {
 
     }
 
@@ -25,48 +25,78 @@ class CryptoManager extends AbstractManager{
      *      encode      : Encoding scheme.
      * }
      */
-    setDefaultSpec(spec){
+    setDefaultSpec(spec) {
         this.spec = spec;
     }
 
-    generateAESKey(spec, cb){
-        crypto.randomBytes(this.spec.symLength, (err, key)=>{
-            if(err){
+    /**
+     * Generate random number with given length. <br />
+     * 
+     * @since 180305
+     * @author TACKSU
+     * 
+     * @param {number} length Length of data to be generated..
+     * @param {function} cb Callback.
+     */
+    generatePRN(length, cb) {
+        crypto.randomBytes(length, cb);
+    }
+
+    generateAESKey(cb) {
+        crypto.randomBytes(this.spec.symLength, (err, key) => {
+            if (err) {
                 cb(err);
             }
             cb(null, key.toString(this.spec.encode));
         });
     }
 
-    generateRSAKeyPair(spec, cb){
+    generateRSAKeyPair(cb) {
         var dh = crypto.createDiffieHellman(this.spec.asmLength);
         dh.generateKeys(this.spec.encode);
         cb(null, {
-            pub : dh.getPublicKey(this.spec.encode),
-            pri : dh.getPrivateKey(this.spec.encode)
+            pub: dh.getPublicKey(this.spec.encode),
+            pri: dh.getPrivateKey(this.spec.encode)
         })
     }
 
-    encryptAES(plain, key, cb){
-        var cipher = crypto.createCipher(this.spec.symAlg);
-        cipher.update(plain, key);
-
-        // Force assync
-        process.nextTick(()=>{
-            var encrypted = cipher.final();
-            cb(null, encrypted);
-        })
+    /**
+     * Encrypt data with symmetric key and iv. <br />
+     * 
+     * @param {string} plain Plain text.
+     * @param {string} key Symmetric key.
+     * @param {function} cb Callback function
+     */
+    encryptAES(plain, key, cb) {
+        this.generatePRN(this.spec.ivLength, ((err, iv) => {
+                var cipher = crypto.createCipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), iv);
+                cipher.update(plain);
+                var encrypted = cipher.final();
+                cb(null, iv.toString(this.spec.encode), encrypted);
+            }
+        ).bind(this));
     }
 
-    decryptAES(encrypted, key, cb){
+    /**
+     * Decrypt string with symmetric key and iv.
+     * 
+     * @param {*} encrypted 
+     * @param {*} key 
+     * @param {*} iv 
+     * @param {*} cb 
+     */
+    decryptAES(encrypted, key, iv, cb) {
+        var decipher = crypto.createDecipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), Buffer.from(iv, this.spec.encode));
+        decipher.update(encrypted);
+        var decrypted = decipher.final();
+        cb(null, decrypted);
+    }
+
+    encryptRSA(plain, key, cb) {
 
     }
 
-    encryptRSA(plain, key, cb){
-
-    }
-
-    decryptRSA(encrypted, key, cb){
+    decryptRSA(encrypted, key, cb) {
 
     }
 }

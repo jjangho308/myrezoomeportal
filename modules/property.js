@@ -18,6 +18,4 @@ class PropertyManager extends AbstractManager{
     }
 }
 
-export default {
-    PropertyManager : PropertyManager
-};
+export default PropertyManager;
