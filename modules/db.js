@@ -25,7 +25,11 @@ class DataManager extends AbstractManager{
     }
 
     getUserDAO(){
+        
+    }
 
+    getOrgDao(){
+        
     }
 
     getTransactionDAO(){

@@ -50,4 +50,15 @@ class PropertyManager extends AbstractManager{
 PropertyManager.PUSH_HOST       = 'push.host';
 PropertyManager.PUSH_PROTOCOL   = 'push.protocol';
 
+/****************************************/
+/* NOSQL                                */
+/****************************************/
+PropertyManager.NOSQL_HOST      = 'nosql.host';
+PropertyManager.NOSQL_PORT      = 'nosql.port'
+PropertyManager.NOSQL_PROTOCOL  = 'nosql.protocol';
+PropertyManager.NOSQL_ID        = 'nosql.id';
+PropertyManager.NOSQL_PW        = 'nosql.pw';
+PropertyManager.NOSQL_TIMEOUT   = 'nosql.timeout';
+
+
 export default PropertyManager;

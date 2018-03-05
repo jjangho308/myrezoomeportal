@@ -8,8 +8,8 @@ import query from 'user_query.js';
  * @author TACKSU
 */
 class UserDao extends AbstractDAO{
-    constructor(client){
-        this.client = client;
+    constructor(connection){
+        this.connection = connection;
     }
 
     put(user, cb){
