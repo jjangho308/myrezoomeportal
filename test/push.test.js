@@ -1,9 +1,13 @@
-import PushManager from '../modules/push'
+import assert from 'assert';
 
-describe.skip('Push suit', function(){
-    var push = new PushManager();
+import Push from '../modules/push'
+
+describe.skip('Push test suite', ()=>{
+    var push = null;
     
-    before('Push initialize', function(){
+    // lambda expression
+    before('Push initialize', ()=>{
+        push = new Push();
         push.connect({
             targets : [{
                 'destination': '/queue/SCH',
@@ -24,13 +28,27 @@ describe.skip('Push suit', function(){
         });
     })
 
-    it('Send message', done => {
+    it.skip('sync test', () => {
         this.timeout(10000);
-        push.sendMessage('Hello, world!', err =>{
+        var result = push.sendMessage('Hello, world!');
+        if(result == true){
+            assert.assertTrue(true);
+        }
+    });
+
+    it('Send message', done => {
+        push.sendMessage('Hello, world!', err => {
             if(!err)
                 done();
-        })
-    });
+        });
+    }).timeout(10000);
+
+    it('Send message2', done => {
+        push.sendMessage('SCH is genious!!', err => {
+            if(!err)
+                done();
+        });
+    }).timeout(10000);
 
     after('Diconnect AMQ', done =>{
         push.disconnect();
