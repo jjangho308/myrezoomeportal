@@ -19,6 +19,7 @@
     "morgan": "^1.9.0",
     "nodemon": "^1.15.1",
     "pdfkit": "^0.8.3",
+    "properties-reader": "0.0.16",
     "serve-favicon": "~2.4.5",
     "stompit": "^0.25.0"
   },
