@@ -22,10 +22,12 @@ class RequestManager extends AbstractManager{
     /**
      * Put request job. <br />
      * 
-     * @param {RequestJob} job 
+     * @param {object} job 
      */
     putJob(request){
-        
+        switch(request.cmd){
+            
+        }
     }
 
     /**

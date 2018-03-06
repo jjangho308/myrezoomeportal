@@ -1,5 +1,5 @@
 import assert from 'assert';
-
+import PushManager from '../modules/push'
 describe('Push suit', function () {
     var push = new PushManager();
 
