@@ -5,7 +5,7 @@
  * @author TACKSU
  */
 export default {
-    get : '',
+    get : 'select * from TBL_USER where user_id = ?',
     put : '',
     set : '',
     del : ''
