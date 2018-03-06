@@ -12,13 +12,8 @@ class PushManager extends AbstractManager {
         super(opt);
     }
 
-<<<<<<< HEAD
 
     init() { }
-=======
-    init() {
-    }
->>>>>>> 9bf261d2481f914d6d361345f4d3dd8eef4a67e7
 
     /**
      * Connect AMQ server. <br />
