@@ -1,19 +1,11 @@
 import assert from 'assert';
 
-import Push from '../modules/push'
+describe('Push suit', function () {
+    var push = new PushManager();
 
-describe.skip('Push test suite', ()=>{
-    var push = null;
-    
-    // lambda expression
-    before('Push initialize', ()=>{
-        push = new Push();
+    before('create Push Connection', function () {
         push.connect({
-            targets : [{
-                'destination': '/queue/SCH',
-                'content-type': 'text/plain'
-            }],
-            servers : [
+            servers: [
                 {
                     host: 'b-cb8c6e8c-f893-4464-aa69-b3501991ef60-1.mq.ap-southeast-2.amazonaws.com',
                     port: 61614,
@@ -25,32 +17,22 @@ describe.skip('Push test suite', ()=>{
                     }
                 }
             ]
-        });
+        }, function (res) { });
     })
 
-    it.skip('sync test', () => {
-        this.timeout(10000);
-        var result = push.sendMessage('Hello, world!');
-        if(result == true){
-            assert.assertTrue(true);
-        }
-    });
-
     it('Send message', done => {
-        push.sendMessage('Hello, world!', err => {
-            if(!err)
+        push.sendMessage('Hello, world!',
+            {
+                'destination': '/queue/QUEUE_A',
+                'content-type': 'text/plain'
+            }
+            , function(response) {
+                console.log(response)
                 done();
-        });
-    }).timeout(10000);
+            })
+    }).timeout(3000);
 
-    it('Send message2', done => {
-        push.sendMessage('SCH is genious!!', err => {
-            if(!err)
-                done();
-        });
-    }).timeout(10000);
-
-    after('Diconnect AMQ', done =>{
+    after('Diconnect AMQ', done => {
         push.disconnect();
         done();
     })

@@ -12,8 +12,13 @@ class PushManager extends AbstractManager {
         super(opt);
     }
 
+<<<<<<< HEAD
+
+    init() { }
+=======
     init() {
     }
+>>>>>>> 9bf261d2481f914d6d361345f4d3dd8eef4a67e7
 
     /**
      * Connect AMQ server. <br />
@@ -23,11 +28,13 @@ class PushManager extends AbstractManager {
      */
     connect(opt, cb) {
 
+        //static value
         this.servers = opt.servers;
-        this.targets = opt.targets;
+
+        //this.targets = opt.targets;
 
         var connections = new stompit.ConnectFailover(this.servers, {
-            maxReconnects: 1
+            maxReconnects: 5
         });
 
         connections.on('connecting', function (connector) {
@@ -51,9 +58,29 @@ class PushManager extends AbstractManager {
 
             this.channel = channel;
         }.bind(this))
-        cb ? cb() : null;
+        cb(this.channelFactory);
     }
 
+<<<<<<< HEAD
+
+    /**
+     * Send Message to AMQ Server <br />
+     * 
+     * @since 180302
+     * @param {object} msg
+     */
+    sendMessage(msg, destination, cb) {
+        this.destination = destination;
+
+        this.channel.send(this.destination, msg, function (err) {
+            if (err) {
+                console.log('send error: ' + err.message);
+                return;
+            }
+            console.log('sent message');
+            cb(err);
+        });
+=======
     sendMessage(msg, cb) {
         for (var header in this.targets) {
             this.channel.send(header, msg, function (err) {
@@ -65,6 +92,7 @@ class PushManager extends AbstractManager {
                 cb(err);
             });
         }
+>>>>>>> 9bf261d2481f914d6d361345f4d3dd8eef4a67e7
     }
 
     disconnect() {
