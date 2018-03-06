@@ -9,7 +9,6 @@ import AbstractManager from "./abstract";
  * @since 180226
  */
 class PropertyManager extends AbstractManager{
-    static filePath = "../config.properties";
 
     constructor(opt){
         super(opt)
@@ -17,6 +16,7 @@ class PropertyManager extends AbstractManager{
 
     init(){
         super.init();
+        this.filePath = "../config.properties";
         this.properties = reader(filePath);
     }
 
