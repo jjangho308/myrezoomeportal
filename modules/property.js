@@ -76,4 +76,15 @@ PropertyManager.NOSQL_ID = 'nosql.id';
 PropertyManager.NOSQL_PW = 'nosql.pw';
 PropertyManager.NOSQL_TIMEOUT = 'nosql.timeout';
 
+
+/****************************************/
+/* MySQL                                */
+/****************************************/
+PropertyManager.MySQL_HOST = 'mysql.host';
+PropertyManager.MySQL_PORT = 'mysql.port'
+PropertyManager.MySQL_ID = 'mysql.id';
+PropertyManager.MySQL_PW = 'mysql.pw';
+PropertyManager.MySQL_TIMEOUT = 'mysql.timeout';
+
+
 export default PropertyManager;
