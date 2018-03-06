@@ -6,6 +6,7 @@ import PropertyManager from '../modules/property';
 describe('Property test suit', () => {
     var propertyManager;
     before('PropertyManager init', () => {
+        process.env.NODE_ENV = ( process.env.NODE_ENV && ( process.env.NODE_ENV ).trim().toLowerCase() == 'production' ) ? 'production' : 'development';
         propertyManager = new PropertyManager();
         propertyManager.init();
     })
