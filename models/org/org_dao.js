@@ -1,13 +1,14 @@
-//import AbstractDAO from 'abstract_dao.js'
-import userQuery from './user_query.js';
+//import AbstractDAO from 'abstract_dao.js';
+import orgQuery from './org_query.js';
+import util from 'util';
 
 /**
- * DAO for user. <br />
+ * DAO for org. <br />
  * 
- * @since 180302
- * @author TACKSU
+ * @since 180306
+ * @author KWANGWOOK
 */
-class UserDao {
+class OrgDao {
     constructor(connection){
         this.connection = connection;
     }
@@ -16,11 +17,11 @@ class UserDao {
 
     }
 
-    get(userid, cb){
+    get(orgcodes, cb){
 
-        var param = [userid];
+        var makequery = util.format(orgQuery.get, orgcodes);
 
-        this.connection.query(userQuery.get, param,function(err, rows){
+        this.connection.query(makequery, function(err, rows){
             if(err) {
                 throw err;
             } else {              
@@ -46,4 +47,4 @@ class UserDao {
     }
 }
 
-export default UserDao;
+export default OrgDao;

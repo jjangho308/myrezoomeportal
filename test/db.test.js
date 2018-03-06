@@ -1,8 +1,9 @@
 //import DatabaseManager from '../modules/db';
 import AnchorDAO from '../models/anchor/anchor_dao';
 import crypto from 'crypto';
+import DataManager from '../modules/db';
 
-describe('Cassandra test suit', () => {
+describe.skip('Cassandra test suit', () => {
     var csdr = null;
     before('DB module initialize', () => {
         /*
@@ -48,7 +49,7 @@ describe('Cassandra test suit', () => {
     })
 
     it('GetbyTxId transaction', done => {
-        csdr.getbyTxId("421fc7b7c9fcd4e4436228af0652732d7145edf4", done2 => {
+        csdr.getbyTxId('421fc7b7c9fcd4e4436228af0652732d7145edf4', done2 => {
             console.log("====================get TxId test====================");
             console.log(done2);
             console.log("=====================================================");
@@ -59,37 +60,72 @@ describe('Cassandra test suit', () => {
 
     })
 
-    it('Del transaction', done => {
-
-    })
-
-    it('Set transaction', done => {
+    it('GetbyUsrFormId', done => {
+        csdr.getbyUserIdAndFormId("LKW","2", done2 => {
+            console.log("===============get GetbyUsrFormId test===============");
+            console.log(done2);
+            console.log("=====================================================");
+            if(done2!=null) {
+                done();
+            }
+        });
 
     })
 
     after('Disconnect cassandra connection', () => {
-        db.disconnectCsdr();
+        csdr.close();
     })
 })
 
-describe.skip('MySQL test suit', () => {
+describe.skip('Blockchain test suit', () => {
     var db = null;
-    before('DB module initialize', () => {
-        db = new DatabaseManager();
-        db.connectMySQL({
-            host: 'localhost',
-            user: 'me',
-            password: 'secret',
-            database: 'my_db'
-        })
+    before('Blockchain module initialize', () => {
+        
+
     });
 
-    it('Put & Get user', done=>{
+    it.skip('Put & Get user', done=>{
+
+        /*
         var userDAO = db.getUserDAO();
         userDAO.put({
 
         }, ()=>{
             userDAO.get()
         })
+        */
     })
+})
+
+describe('MySQL test suit', () => {
+    var db = null;
+    before('DB module initialize', () => {
+        var dbConfig = {
+            host : "127.0.0.1",
+            port : 3306,
+            user : "rezoome",
+            password : "sgen2018!",
+            database: "rezoome"
+        }
+        
+        db = new DataManager(dbConfig);
+
+    });
+
+    it('Get user', done=>{
+        db.getUserInfo('honggildong', function(res){
+            console.log(res);
+            done();
+        });
+    });
+
+    it('Get org', done=>{
+        var orgcodes = ["01", "02"];
+        db.getOrgInfo(orgcodes, function(res){
+            console.log(res);
+            done();
+        })
+    })
+
+
 })
