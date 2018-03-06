@@ -30,7 +30,20 @@ class TokenManager extends AbstractManager {
             var bearer = bearerHeader.split(" ");
             bearerToken = bearer[1];
         } else {
-            res.send(403);
+            var ignoredCmd = ['token', 'health']; // ignore cmd
+            var ignoredFlag = false;
+
+            ignoredCmd.forEach(function (ingored) {
+                if (ingored == req.body.cmd) {
+                    innoredFlag = true;
+                }
+            });
+
+            if (innoredFlag) {
+                next();
+            } else {
+                res.send(403);
+            }
         }
 
         jwt.verify(bearerToken, 'secretkey', function (error, decoded) {
