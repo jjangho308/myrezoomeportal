@@ -11,3 +11,6 @@ var router = express.Router();
 router.get('/', (req, res) =>{
     
 });
+
+export default {
+}

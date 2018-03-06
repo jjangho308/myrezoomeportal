@@ -1,5 +1,6 @@
 import reader from 'properties-reader';
 
+import Environment from '../core/environment'
 import AbstractManager from "./abstract";
 
 /**
@@ -8,16 +9,16 @@ import AbstractManager from "./abstract";
  * @author TACKSU
  * @since 180226
  */
-class PropertyManager extends AbstractManager{
+class PropertyManager extends AbstractManager {
 
-    constructor(opt){
+    constructor(opt) {
         super(opt)
     }
 
-    init(){
+    init() {
         super.init();
-        this.filePath = "../config.properties";
-        this.properties = reader(filePath);
+        this.filePath = Environment.developement() ? './debug.properties' : './config.properties';
+        this.properties = reader(this.filePath);
     }
 
     /**
@@ -28,7 +29,7 @@ class PropertyManager extends AbstractManager{
      * 
      * @param {*} cb 
      */
-    watchFile(cb){
+    watchFile(cb) {
         // TODO Implement here.
     }
 
@@ -38,26 +39,41 @@ class PropertyManager extends AbstractManager{
      * @param {string} key 
      * @param {*} defValue 
      */
-    getProperty(key, defValue){
-        if(!this.properties)
+    get(key, defValue) {
+        if (!this.properties){
             throw new ReferenceError("Failed to load property file.");
-            
+        }
+        
         var value = this.properties.get(key);
         return value ? value : defValue;
     }
-}
 
-PropertyManager.PUSH_HOST       = 'push.host';
-PropertyManager.PUSH_PROTOCOL   = 'push.protocol';
+    set(key, value){
+        if (!this.properties)
+            throw new ReferenceError("Failed to load property file.");
+
+        this.properties.set(key, value);
+    }
+}
 
 /****************************************/
 /* NOSQL                                */
 /****************************************/
-PropertyManager.NOSQL_HOST      = 'nosql.host';
-PropertyManager.NOSQL_PORT      = 'nosql.port'
-PropertyManager.NOSQL_PROTOCOL  = 'nosql.protocol';
-PropertyManager.NOSQL_ID        = 'nosql.id';
-PropertyManager.NOSQL_PW        = 'nosql.pw';
-PropertyManager.NOSQL_TIMEOUT   = 'nosql.timeout';
+PropertyManager.PUSH_HOST = 'push.host';
+PropertyManager.PUSH_PORT = 'push.port';
+PropertyManager.PUSH_SSL = 'push.ssl';
+PropertyManager.PUSH_HEADER_HOST = 'push.header.host';
+PropertyManager.PUSH_HEADER_LOGIN = 'push.header.login';
+PropertyManager.PUSH_HEADER_PASSCODE = 'push.header.passcode';
+
+/****************************************/
+/* NOSQL                                */
+/****************************************/
+PropertyManager.NOSQL_HOST = 'nosql.host';
+PropertyManager.NOSQL_PORT = 'nosql.port'
+PropertyManager.NOSQL_PROTOCOL = 'nosql.protocol';
+PropertyManager.NOSQL_ID = 'nosql.id';
+PropertyManager.NOSQL_PW = 'nosql.pw';
+PropertyManager.NOSQL_TIMEOUT = 'nosql.timeout';
 
 export default PropertyManager;
