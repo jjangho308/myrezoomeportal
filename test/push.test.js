@@ -1,4 +1,4 @@
-import PushManager from '../modules/push'
+import assert from 'assert';
 
 describe('Push suit', function () {
     var push = new PushManager();

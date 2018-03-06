@@ -12,8 +12,13 @@ class PushManager extends AbstractManager {
         super(opt);
     }
 
+<<<<<<< HEAD
 
     init() { }
+=======
+    init() {
+    }
+>>>>>>> 9bf261d2481f914d6d361345f4d3dd8eef4a67e7
 
     /**
      * Connect AMQ server. <br />
@@ -56,6 +61,7 @@ class PushManager extends AbstractManager {
         cb(this.channelFactory);
     }
 
+<<<<<<< HEAD
 
     /**
      * Send Message to AMQ Server <br />
@@ -74,6 +80,19 @@ class PushManager extends AbstractManager {
             console.log('sent message');
             cb(err);
         });
+=======
+    sendMessage(msg, cb) {
+        for (var header in this.targets) {
+            this.channel.send(header, msg, function (err) {
+                if (err) {
+                    console.log('send error: ' + err.message);
+                    return;
+                }
+                console.log('sent message');
+                cb(err);
+            });
+        }
+>>>>>>> 9bf261d2481f914d6d361345f4d3dd8eef4a67e7
     }
 
     disconnect() {
