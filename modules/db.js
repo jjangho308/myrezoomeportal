@@ -2,6 +2,7 @@ import mysql from 'mysql';
 import userDao from '../models/user/user_dao';
 import orgDao from '../models/org/org_dao';
 
+
 /**
  * Data accessor. <br />
  * 
@@ -75,11 +76,6 @@ class DataManager{
                 });                
             }
         });  
-    }
-
-    getTransactionDAO(){
-
-    }
 }
 
 export default DataManager;

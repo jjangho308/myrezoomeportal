@@ -7,7 +7,9 @@ import userQuery from './user_query.js';
  * @since 180302
  * @author TACKSU
 */
+
 class UserDao {
+  
     constructor(connection){
         this.connection = connection;
     }

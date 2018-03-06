@@ -1,0 +1,6 @@
+/**
+ * Environment. <br />
+ */
+export default {
+
+}

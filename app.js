@@ -22,6 +22,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// tokenManager = new TokenManeger();
+// app.use(tokenManager.filterToken);
+
 app.use('/', index);
 app.use('/users', users);
 
