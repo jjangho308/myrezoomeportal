@@ -1,6 +1,6 @@
 import assert from 'assert';
 import PushManager from '../modules/push'
-describe('Push suit', function () {
+describe.skip('Push suit', function () {
     var push = new PushManager();
 
     before('create Push Connection', function () {
@@ -20,14 +20,14 @@ describe('Push suit', function () {
         }, function (res) { });
     })
 
-    it('Send message', done => {
+    it.skip('1. Send message', done => {
         push.sendMessage('Hello, world!',
             {
                 'destination': '/queue/QUEUE_A',
                 'content-type': 'text/plain'
             }
-            , function(response) {
-                console.log(response)
+            , function(err) {
+                //console.log(response)
                 done();
             })
     }).timeout(3000);

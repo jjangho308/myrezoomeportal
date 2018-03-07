@@ -52,6 +52,7 @@ class PushManager extends AbstractManager {
             }
 
             this.channel = channel;
+            
         }.bind(this))
         cb(this.channelFactory);
     }

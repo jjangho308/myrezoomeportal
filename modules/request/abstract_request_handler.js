@@ -1,5 +1,7 @@
 class AbstractRequestHandler{
     constructor(opt){
-        super(opt);
+        this.opt=opt;
     }
 }
+
+export default AbstractRequestHandler
