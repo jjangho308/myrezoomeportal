@@ -25,6 +25,10 @@ export default (function(){
 
         push : function(){
             return pushInstance = pushInstance ? pushInstance : new PushManager();
+        }, 
+
+        database : function() {
+            return dbInstance = dbInstance ? dbInstance : new DatabaseManager();
         }
     }
 })();

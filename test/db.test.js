@@ -2,6 +2,7 @@
 import AnchorDAO from '../models/anchor/anchor_dao';
 import crypto from 'crypto';
 import DataManager from '../modules/db';
+import NexledgerService from '../modules/nexledgerservice';
 
 describe.skip('Cassandra test suit', () => {
     var csdr = null;
@@ -78,23 +79,39 @@ describe.skip('Cassandra test suit', () => {
 })
 
 describe.skip('Blockchain test suit', () => {
-    var db = null;
-    before('Blockchain module initialize', () => {
-        
+    var nodeurl = null;
+    var nexledgerService = null;
 
+    before('Blockchain module initialize', () => {
+        nexledgerService = new NexledgerService();
+        nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
     });
 
-    it.skip('Put & Get user', done=>{
+    it('Put Nexledger', done=>{
 
-        /*
-        var userDAO = db.getUserDAO();
-        userDAO.put({
+        var data = {
+            name: "lkwook",
+            subject: "meth",
+            score: "80"
+        };
 
-        }, ()=>{
-            userDAO.get()
-        })
-        */
-    })
+        nexledgerService.put(nodeurl,"155WAnc5m7RFjjLgQJjQN82nr7xjYXN2wg",data, function(res){
+            console.log("==========test put procedure==========");
+            console.log(res);
+            console.log("======================================");
+        });
+    });
+
+    it('Get Nexledger', done=>{
+
+        var rtxid = "4aa86a59d0326428af1c91818e639235969a3c55946921cb29406c4da04b8066";
+
+        nexledgerService.getbytxid(nodeurl, rtxid, function(res){
+            console.log("==========test get procedure==========");
+            console.log(res);
+            console.log("======================================");
+        });
+    });
 })
 
 describe.skip('MySQL test suit', () => {
