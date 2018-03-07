@@ -39,11 +39,7 @@ export default (function(){
             return cryptoInstance = cryptoInstance ? cryptoInstance : new CryptoManager();
         },
 
-<<<<<<< HEAD
-        database : function() {
-=======
         db : function(){
->>>>>>> cbb0547da3ddb41333015cf4606fdf6bd38e4ba1
             return dbInstance = dbInstance ? dbInstance : new DatabaseManager();
         }
     }
