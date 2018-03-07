@@ -25,6 +25,22 @@ export default (function(){
 
         push : function(){
             return pushInstance = pushInstance ? pushInstance : new PushManager();
+        },
+
+        network : function(){
+            return networkInstance = networkInstance ? networkInstance : new NetworkManager();
+        },
+
+        // blockchain : function(){
+        //     return bcInstance = bcInstance ? bcInstance : new BlockchainManager();
+        // },
+
+        crypto : function(){
+            return cryptoInstance = cryptoInstance ? cryptoInstance : new CryptoManager();
+        },
+
+        db : function(){
+            return dbInstance = dbInstance ? dbInstance : new DatabaseManager();
         }
     }
 })();

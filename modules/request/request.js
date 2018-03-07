@@ -38,8 +38,15 @@ class RequestManager extends AbstractManager{
         
     }
 
+    /**
+     * Job map에 쌓인 RequestJob을 처리한다. <br />
+     * 현재 Map에 Request가 없을 경우 다음 tick까지 보류한다. <br />
+     * 
+     * @since 180306
+     * @author TACKSU
+    */
     runJob(){
-
+        // TODO Implements here.
     }
 }
 
