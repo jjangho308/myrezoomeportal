@@ -70,11 +70,12 @@ PropertyManager.PUSH_HEADER_PASSCODE = 'push.header.passcode';
 /* NOSQL                                */
 /****************************************/
 PropertyManager.NOSQL_HOST = 'nosql.host';
-PropertyManager.NOSQL_PORT = 'nosql.port'
-PropertyManager.NOSQL_PROTOCOL = 'nosql.protocol';
-PropertyManager.NOSQL_ID = 'nosql.id';
-PropertyManager.NOSQL_PW = 'nosql.pw';
-PropertyManager.NOSQL_TIMEOUT = 'nosql.timeout';
+PropertyManager.NOSQL_KEYSPACE_NAME = 'nosql.keyspacename';
+//PropertyManager.NOSQL_PORT = 'nosql.port'
+//PropertyManager.NOSQL_PROTOCOL = 'nosql.protocol';
+//PropertyManager.NOSQL_ID = 'nosql.id';
+//PropertyManager.NOSQL_PW = 'nosql.pw';
+//PropertyManager.NOSQL_TIMEOUT = 'nosql.timeout';
 
 
 /****************************************/
