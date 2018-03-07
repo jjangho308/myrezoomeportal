@@ -1,6 +1,6 @@
 import TokenManager from '../modules/token'
 
-describe('TokenManager Test Suit', () => {
+describe.skip('TokenManager Test Suit', () => {
     var token;
     var tokenString;
 
