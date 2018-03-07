@@ -1,5 +1,7 @@
 import HashMap from 'hashmap';
 
+import UserLoginHandler from './user_login_handler';
+
 import AbstractManager from "./abstract";
 
 /**
@@ -9,14 +11,16 @@ import AbstractManager from "./abstract";
  * 
  * @since 180228
 */
-class RequestManager extends AbstractManager{
-    constructor(opt){
+class RequestManager extends AbstractManager {
+    constructor(opt) {
         super(opt);
     }
 
-    init(){
+    init() {
         this.jobMap = new HashMap();
         this.setPrepared();
+
+        UserLoginHandler = new UserLoginHandler();
     }
 
     /**
@@ -24,9 +28,14 @@ class RequestManager extends AbstractManager{
      * 
      * @param {object} job 
      */
-    putJob(request){
-        switch(request.cmd){
-            
+    putJob(request) {
+        switch (request.cmd) {
+            case 'login':
+                UserLoginHandler(request, request.body);
+                break;
+
+
+
         }
     }
 
@@ -34,11 +43,11 @@ class RequestManager extends AbstractManager{
      * 
      * @param {string} jobId 
      */
-    getJob(jobId){
-        
+    getJob(jobId) {
+
     }
 
-    runJob(){
+    runJob() {
 
     }
 }
