@@ -1,5 +1,7 @@
 import HashMap from 'hashmap';
 
+import UserLoginHandler from './user_login_handler';
+
 import AbstractManager from "./abstract";
 
 /**
@@ -9,14 +11,16 @@ import AbstractManager from "./abstract";
  * 
  * @since 180228
 */
-class RequestManager extends AbstractManager{
-    constructor(opt){
+class RequestManager extends AbstractManager {
+    constructor(opt) {
         super(opt);
     }
 
-    init(){
+    init() {
         this.jobMap = new HashMap();
         this.setPrepared();
+
+        UserLoginHandler = new UserLoginHandler();
     }
 
     /**
@@ -24,9 +28,14 @@ class RequestManager extends AbstractManager{
      * 
      * @param {object} job 
      */
-    putJob(request){
-        switch(request.cmd){
-            
+    putJob(request) {
+        switch (request.cmd) {
+            case 'login':
+                UserLoginHandler(request, request.body);
+                break;
+
+
+
         }
     }
 
@@ -34,12 +43,19 @@ class RequestManager extends AbstractManager{
      * 
      * @param {string} jobId 
      */
-    getJob(jobId){
-        
+    getJob(jobId) {
+
     }
 
+    /**
+     * Job map에 쌓인 RequestJob을 처리한다. <br />
+     * 현재 Map에 Request가 없을 경우 다음 tick까지 보류한다. <br />
+     * 
+     * @since 180306
+     * @author TACKSU
+    */
     runJob(){
-
+        // TODO Implements here.
     }
 }
 

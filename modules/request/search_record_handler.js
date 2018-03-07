@@ -13,9 +13,19 @@ class SearchRecordRequestHandler extends AbstractRequestHandler {
     /**
      * 
      * @param {HttpRequest} httpReq 
-     * @param {SearchRecordRequest} clientReq 
+     * @param {SearchRecordRequest} clientReq {
+     *      userId : "rezoome Id",
+     *      orgs    : [{
+     *                      code : '기관 코드',
+     *                      key : {
+     *                                  var1 : '키1',
+     * *                                var2 : '키2',
+     *                              }
+     *                  }
+     *              ]
+     * }
      */
-    process(httpReq, clientReq) {
+    process(clientReq, httpRes) {
         var queryResult;
         
         var destination = {
