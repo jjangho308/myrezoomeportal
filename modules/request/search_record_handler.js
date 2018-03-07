@@ -10,7 +10,6 @@ class SearchRecordRequestHandler extends AbstractRequestHandler {
         super(opt);
     }
 
-
     /**
      * 
      * @param {HttpRequest} httpReq 
@@ -18,6 +17,7 @@ class SearchRecordRequestHandler extends AbstractRequestHandler {
      */
     process(httpReq, clientReq) {
         var queryResult;
+        
         var destination = {
             destination: '',
             "content-type": 'application/json'
@@ -25,13 +25,13 @@ class SearchRecordRequestHandler extends AbstractRequestHandler {
 
 
         // 1. 기관 정보를 db에서 가져오고
-        var dbConfig = {
-            host: "127.0.0.1",
-            port: 3306,
-            user: "rezoome",
-            password: "sgen2018!",
-            database: "rezoome"
-        }
+        // var dbConfig = {
+        //     host: "127.0.0.1",
+        //     port: 3306,
+        //     user: "rezoome",
+        //     password: "sgen2018!",
+        //     database: "rezoome"
+        // }
 
         var orgs = clientReq.args.orgs;
         var sqlparam = "";
@@ -44,25 +44,15 @@ class SearchRecordRequestHandler extends AbstractRequestHandler {
             }
         }
 
-        this.Push = new PushManager();
+        //Manager 가져오기
+        //this.Push = new PushManager();
+        
 
-        this.Push.connect({
-            servers: [
-                {
-                    host: 'b-cb8c6e8c-f893-4464-aa69-b3501991ef60-1.mq.ap-southeast-2.amazonaws.com',
-                    port: 61614,
-                    ssl: true,
-                    connectHeaders: {
-                        host: '/',
-                        login: 'rezoome',
-                        passcode: 'sgen2018!!!!'
-                    }
-                }
-            ]
-        }, function (res) {
-        });
 
-        var db = new DataManager(dbConfig);
+
+
+        //Manager 가져오기
+        //var db = new DataManager(dbConfig);
 
         db.getOrgInfo(sqlparam, function (res) {
             queryResult = res;
