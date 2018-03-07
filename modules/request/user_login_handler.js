@@ -14,7 +14,7 @@ class UserLoginRequestHandler extends AbstractRequestHandler {
      * @param {HttpRequest} httpReq 
      * @param {SearchRecordRequest} clientReq 
      */
-    process(httpReq, clientReq) {
+    process(httpReq, clientReq, res) {
         var queryResult;
         var destination = {
             destination: '',
@@ -22,13 +22,12 @@ class UserLoginRequestHandler extends AbstractRequestHandler {
         }
         
         // 1. 사용자 정보를 DB에서 조회
-        managers.database.getUserInfo(clientReq.userid, function(error, response) {
+        managers.database().getUserInfo(clientReq.userid, function(error, response) {
             if(error) {
                 console.log(error);
             } else {
-                if(typeof response !== 'undefined') {
+                if(!!response) {
                     // 사용자 유저 존재
-
                     if(clientReq.password === response.password) {
                         // 비밀번호 확인
                         res.send("login ok");
@@ -44,5 +43,5 @@ class UserLoginRequestHandler extends AbstractRequestHandler {
     }
 }
 
-export default SearchRecordRequestHandler;
+export default UserLoginRequestHandler;
 
