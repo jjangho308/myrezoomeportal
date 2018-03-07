@@ -25,7 +25,6 @@ export default (function(){
 
         push : function(){
             return pushInstance = pushInstance ? pushInstance : new PushManager();
-<<<<<<< HEAD
         },
 
         network : function(){
@@ -41,11 +40,6 @@ export default (function(){
         },
 
         db : function(){
-=======
-        }, 
-
-        database : function() {
->>>>>>> cd03ebef24c7a0284a0f59df3e6edae8e973db0d
             return dbInstance = dbInstance ? dbInstance : new DatabaseManager();
         }
     }
