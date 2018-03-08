@@ -26,10 +26,10 @@ class UserLoginRequestHandler extends AbstractRequestHandler {
                     // 비밀번호 확인
                     if (clientReq.password === response.password) {
                         // 토큰 생성
-                        tokenInfo = {};
-                        tokenInfo.userid = clientReq.userid;
-                        tokenInfo.timestamp = current_time;
-                        var token = managers.token().generateToken(tokenInfo);
+                        var userInfo = {};
+                        userInfo.userid = clientReq.userid;
+                        userInfo.timestamp = "current_time";
+                        var token = managers.token().generateToken(userInfo);
 
                         var response = {};
                         response.token = token;

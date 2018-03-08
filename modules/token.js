@@ -14,7 +14,7 @@ class TokenManager extends AbstractManager {
     generateToken(info) {
         return jwt.sign({
             data: info,
-            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 12) // 1hour
+            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 12) // 12hour
             //}, 'rezoomesecretkey', { expiresIn: '1' });
         }, 'rezoomesecretkey');
     }
