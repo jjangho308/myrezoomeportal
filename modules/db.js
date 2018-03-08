@@ -1,6 +1,8 @@
 import mysql from 'mysql';
 import userDao from '../models/user/user_dao';
 import orgDao from '../models/org/org_dao';
+import Managers from "../core/managers";
+import Property from "./property";
 
 
 /**
@@ -8,10 +10,10 @@ import orgDao from '../models/org/org_dao';
  * 
  * @since 180228
 */
-class DataManager{
-    constructor(dbConfig){
+class DataManager {
+    constructor() {
         //super(opt)
-        this.init(dbConfig);
+        this.init();
     }
 
     /*
@@ -24,12 +26,23 @@ class DataManager{
         database:db_config.database
     }
     */
-    init(dbConfig){
+    init() {
+        var propertyManager=Managers.property();
+        propertyManager.init();
+
+        var dbConfig = {
+            host: propertyManager.get(PropertyManager.MySQL_HOST),
+            port: propertyManager.get(PropertyManager.MySQL_PORT),
+            user: propertyManager.get(PropertyManager.MySQL_ID),
+            password: propertyManager.get(PropertyManager.MySQL_ID),
+            database: propertyManager.get(PropertyManager.MySQL_DATABASE)
+        }
+
         this.pool = mysql.createPool(dbConfig);
-        this.pool.getConnection(function(err, connection){
-            if(err) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
                 throw err;
-            } 
+            }
             else {
                 /*
                 connection.query("select * from TBL_USER", function(err, rows){
@@ -46,36 +59,36 @@ class DataManager{
                 //connection.release();
             }
         });
-        
+
     }
 
-    getUserInfo(userid,cb){
-        this.pool.getConnection(function(err, connection){
-            if(err) {
+    getUserInfo(userid, cb) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
                 throw err;
-            } 
+            }
             else {
                 var userDao1 = new userDao(connection);
-                userDao1.get(userid,function(res) {
-                    cb(res);                    
-                });                
+                userDao1.get(userid, function (res) {
+                    cb(res);
+                });
             }
-        });  
+        });
 
     }
 
-    getOrgInfo(orgcodes,cb) {
-        this.pool.getConnection(function(err, connection){
-            if(err) {
+    getOrgInfo(orgcodes, cb) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
                 throw err;
-            } 
+            }
             else {
                 var orgDao1 = new orgDao(connection);
-                orgDao1.get(orgcodes,function(res) {
-                    cb(res);                    
-                });                
+                orgDao1.get(orgcodes, function (res) {
+                    cb(res);
+                });
             }
-        });  
+        });
     }
 }
 

@@ -57,7 +57,7 @@ class PropertyManager extends AbstractManager {
 }
 
 /****************************************/
-/* NOSQL                                */
+/* Amazon MQ                            */
 /****************************************/
 PropertyManager.PUSH_HOST = 'push.host';
 PropertyManager.PUSH_PORT = 'push.port';
@@ -65,6 +65,8 @@ PropertyManager.PUSH_SSL = 'push.ssl';
 PropertyManager.PUSH_HEADER_HOST = 'push.header.host';
 PropertyManager.PUSH_HEADER_LOGIN = 'push.header.login';
 PropertyManager.PUSH_HEADER_PASSCODE = 'push.header.passcode';
+PropertyManager.PUSH_ = 'push.header.passcode';
+
 
 /****************************************/
 /* NOSQL                                */
@@ -86,6 +88,7 @@ PropertyManager.MySQL_PORT = 'mysql.port'
 PropertyManager.MySQL_ID = 'mysql.id';
 PropertyManager.MySQL_PW = 'mysql.pw';
 PropertyManager.MySQL_TIMEOUT = 'mysql.timeout';
+PropertyManager.MySQL_DATABASE = 'mysql.database';
 
 
 export default PropertyManager;
