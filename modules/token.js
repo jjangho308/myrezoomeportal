@@ -11,16 +11,12 @@ class TokenManager extends AbstractManager {
         super(opt);
     }
 
-    setInfo(info) {
-        this.info = info;
-    }
-
-    generateToken() {
+    generateToken(info) {
         return jwt.sign({
-            data: this.info,
-            //exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
+            data: info,
+            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 12) // 1hour
             //}, 'rezoomesecretkey', { expiresIn: '1' });
-        }, 'rezoomesecretkey'); // not expired time
+        }, 'rezoomesecretkey');
     }
 
     filterToken(req, res, next) {

@@ -4,6 +4,8 @@ import NetworkManager from '../modules/network';
 import BlockchainManager from '../modules/blockchain';
 import CryptoManager from '../modules/crypto';
 import DatabaseManager from '../modules/db';
+import TokenManager from '../modules/token';
+import PDFManager from '../modules/pdf';
 
 /**
  * Wrapper function to provide singleton instance of each modules. <br />
@@ -18,6 +20,8 @@ export default (function(){
     var bcInstance = null;
     var cryptoInstance = null;
     var dbInstance = null;
+    var tokenInstance = null;
+    var pdfInstance = null;
     return {
         property : function(){
             return propertyInstance = propertyInstance ? propertyInstance : new PropertyManager();
@@ -41,6 +45,14 @@ export default (function(){
 
         db : function(){
             return dbInstance = dbInstance ? dbInstance : new DatabaseManager();
-        }
+        },
+
+        token : function() {
+            return tokenInstance = tokenInstance ? tokenInstance : new TokenManager();
+        },
+
+        pdf : function() {
+            return pdfInstance = pdfInstance ? pdfInstance : new PDFManager();
+        }        
     }
 })();

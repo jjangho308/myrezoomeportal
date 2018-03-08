@@ -15,66 +15,92 @@ class PDFkManager extends AbstractManager {
 
     }
 
-    makePDF(PDFDocument, blobStream, lorem, res) {
-        // create a document and pipe to a blob
-        var doc = new PDFDocument();
-        var stream = doc.pipe(blobStream());
-        doc.pipe(fs.createWriteStream('certificate.pdf'));
+    makePDF(PDFDocument, lorem, res) {
+        QRCode.toDataURL(JSON.stringify(lorem), function (error, qr_url) {
 
-        // draw some text
-        doc.fontSize(25)
-            .text(lorem, 100, 80);
+            if (error) {
+                console.log(error);
+            }
 
-        // // and some justified text wrapped into columns
-        // doc.text(lorem, 100, 300)
-        //     .font('Times-Roman', 13)
-        //     .moveDown()
-        //     .text(lorem, {
-        //       width: 412,
-        //       align: 'justify',
-        //       indent: 30,
-        //       columns: 2,
-        //       height: 300,
-        //       ellipsis: true
-        //     });
+            try {
+                var doc = new PDFDocument({
+                    size: 'A4',
+                    //layout: 'landscape' // default is portrait
+                });
 
-        doc.image('public/images/twice.jpg', {
-            fit: [400, 400],
-            align: 'center',
-            valign: 'center'
+                // create file and http response
+                doc.pipe(fs.createWriteStream('public/certificate.pdf'));
+                // doc.pipe(res);
+
+                // QR코드 입력
+                doc.image(qr_url, 490, 0, {
+                    fit: [100, 100],
+                    align: 'center',
+                    valign: 'center'
+                });
+
+                doc.font('fonts/test.ttf')
+                    .fontSize(35)
+                    .text("어학증명서", 50, 120, {
+                        align: 'center'
+                    });
+
+                doc.fontSize(25)
+                    .text("이름       : ", 100, 250);
+
+                doc.fontSize(25)
+                    .text(lorem.name, 250, 250)
+                    .underline(250, 275, 100, 1);
+
+                doc.fontSize(25)
+                    .text("생년월일 : ", 100, 300);
+
+                doc.fontSize(25)
+                    .text(lorem.birthday, 250, 300)
+                    .underline(250, 325, 100, 1);
+
+                doc.fontSize(25)
+                    .text("점수       : ", 100, 350);
+
+                doc.fontSize(25)
+                    .text(lorem.grade, 250, 350)
+                    .underline(250, 375, 100, 1);
+
+                doc.fontSize(25)
+                    .text("발급일자  : ", 100, 400);
+
+                doc.fontSize(25)
+                    .text(lorem.publish_date, 250, 400)
+                    .underline(250, 425, 150, 1);
+
+                doc.fontSize(25)
+                    .text("위의 사실을 증명합니다.", 50, 500, {
+                        align: 'center'
+                    });
+
+                doc.fontSize(20)
+                    .text("2018년 03월 08일", 50, 600, {
+                        align: 'center'
+                    });
+
+                doc.fontSize(40)
+                    .text("레주메(주)", 50, 700, {
+                        align: 'center'
+                    });
+
+                doc.image('public/images/dojang.png', 320, 680, {
+                    fit: [80, 80],
+                    align: 'center',
+                    valign: 'center'
+                });
+
+                // end and display the document in the iframe to the right
+                doc.end();                
+                res.render('pdf_view', { title: '레주메 증명서 발급', pdf: 'certificate.pdf' });
+            } catch (execption) {
+                console.log(execption);
+            }
         });
-
-        // // some vector graphics
-        // doc.save()
-        //     .moveTo(100, 150)
-        //     .lineTo(100, 250)
-        //     .lineTo(200, 250)
-        //     .fill("#FF3300");
-
-        // doc.circle(280, 200, 50)
-        //     .fill("#6600FF");
-
-        // // an SVG path
-        // doc.scale(0.6)
-        //     .translate(470, 130)
-        //     .path('M 250,75 L 323,301 131,161 369,161 177,301 z')
-        //     .fill('red', 'even-odd')
-        //     .restore();  
-
-        // end and display the document in the iframe to the right
-        doc.end();
-
-        stream.on('finish', function () {
-            //iframe.src = stream.toBlobURL('application/pdf');
-            //res.render('pdfview', { title: 'Rezoome HTML' , src: stream.toBlobURL('application/pdf') });
-            //stream.toBlobURL('application/pdf')
-            //console.log(stream.toBlobURL('application/pdf'));
-
-            //stream.toBlobURL('application/pdf');
-        });
-
-        res.contentType("application/pdf");
-        doc.pipe(res);
     }
 }
 

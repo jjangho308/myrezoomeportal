@@ -2,7 +2,7 @@ import managers from '../../core/managers';
 import AbstractRequestHandler from './abstract_request_handler'
 
 /**
- * 이력 검색 요청 핸들러.
+ * 사용자 로그인 요청 핸들러.
 */
 class UserLoginRequestHandler extends AbstractRequestHandler {
     constructor(opt) {
@@ -11,32 +11,38 @@ class UserLoginRequestHandler extends AbstractRequestHandler {
 
     /**
      * 
-     * @param {HttpRequest} httpReq 
-     * @param {SearchRecordRequest} clientReq 
+     * @param {UserLoginRequest} clientReq 
+     * @param {UserLoginResponse} clientRes
      */
-    process(httpReq, clientReq, res) {
-        var queryResult;
-        var destination = {
-            destination: '',
-            "content-type": 'application/json'
-        }
+    process(clientReq, clientRes) {
         
         // 1. 사용자 정보를 DB에서 조회
-        managers.database().getUserInfo(clientReq.userid, function(error, response) {
-            if(error) {
+        managers.database().getUserInfo(clientReq.userid, function (error, response) {
+            if (error) {
                 console.log(error);
             } else {
-                if(!!response) {
-                    // 사용자 유저 존재
-                    if(clientReq.password === response.password) {
-                        // 비밀번호 확인
-                        res.send("login ok");
+                // 사용자 유저 존재
+                if (!!response) {
+                    // 비밀번호 확인
+                    if (clientReq.password === response.password) {
+                        // 토큰 생성
+                        tokenInfo = {};
+                        tokenInfo.userid = clientReq.userid;
+                        tokenInfo.timestamp = current_time;
+                        var token = managers.token().generateToken(tokenInfo);
+
+                        var response = {};
+                        response.token = token;
+                        response.code = 200;
+                        response.result = "login success";
+                        res.send(response);
                     } else {
-                        res.send("login fail");
+                        // 비밀번호 실패
+                        res.send("login fail::mismatch password");
                     }
                 } else {
                     // 사용자 유저 없음
-                    res.send("user not exist");
+                    res.send("login fail::id not exist");
                 }
             }
         });
