@@ -96,7 +96,7 @@ class PDFkManager extends AbstractManager {
 
                 // end and display the document in the iframe to the right
                 doc.end();                
-                res.render('pdf_view', { title: '레주메 증명서 발급', pdf: 'certificate.pdf' });
+                res.render('pdfview', {pdf: 'certificate.pdf' });
             } catch (execption) {
                 console.log(execption);
             }

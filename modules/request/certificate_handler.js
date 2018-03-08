@@ -24,7 +24,7 @@ class CertificateRequestHandler extends AbstractRequestHandler {
         REZOOME_CERTIFICATE.orgname = "오픽";
         REZOOME_CERTIFICATE.hash = "ssdfawefasdfv234r34trefwerfswerf";
 
-        managers.pdf().makePDF(PDF, REZOOME_CERTIFICATE, res);
+        managers.pdf().makePDF(PDF, REZOOME_CERTIFICATE, clientRes);
     }
 }
 

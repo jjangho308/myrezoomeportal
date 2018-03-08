@@ -17,34 +17,30 @@ class UserLoginRequestHandler extends AbstractRequestHandler {
     process(clientReq, clientRes) {
         
         // 1. 사용자 정보를 DB에서 조회
-        managers.database().getUserInfo(clientReq.userid, function (error, response) {
-            if (error) {
-                console.log(error);
-            } else {
-                // 사용자 유저 존재
-                if (!!response) {
-                    // 비밀번호 확인
-                    if (clientReq.password === response.password) {
-                        // 토큰 생성
-                        var userInfo = {};
-                        userInfo.userid = clientReq.userid;
-                        userInfo.timestamp = "current_time";
-                        var token = managers.token().generateToken(userInfo);
+        managers.db().getUserInfo(clientReq.userid, function (res) {
+            // 사용자 유저 존재
+            if (!!res) {
+                // 비밀번호 확인
+                if (clientReq.password === res[0].PASSWORD) {
+                    // 토큰 생성
+                    var userInfo = {};
+                    userInfo.userid = clientReq.userid;
+                    userInfo.timestamp = "2018-03-08";
+                    var tokenvalue = managers.token().generateToken(userInfo);
 
-                        var response = {};
-                        response.token = token;
-                        response.code = 200;
-                        response.result = "login success";
-                        res.send(response);
-                    } else {
-                        // 비밀번호 실패
-                        res.send("login fail::mismatch password");
-                    }
+                    var response = {};
+                    response.token = tokenvalue;
+                    response.code = 200;
+                    response.result = "login success";
+                    clientRes.send(response);                    
                 } else {
-                    // 사용자 유저 없음
-                    res.send("login fail::id not exist");
+                    // 비밀번호 실패
+                    clientRes.send("login fail::mismatch password");                    
                 }
-            }
+            } else {
+                // 사용자 유저 없음
+                clientResres.send("login fail::id not exist");
+            }            
         });
     }
 }
