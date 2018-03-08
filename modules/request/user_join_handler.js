@@ -4,15 +4,15 @@ import AbstractRequestHandler from './abstract_request_handler'
 /**
  * 사용자 로그인 요청 핸들러.
 */
-class UserLoginRequestHandler extends AbstractRequestHandler {
+class UserJoinRequestHandler extends AbstractRequestHandler {
     constructor(opt) {
         super(opt);
     }
 
     /**
      * 
-     * @param {UserLoginRequest} clientReq 
-     * @param {UserLoginResponse} clientRes
+     * @param {UserJoinRequest} clientReq 
+     * @param {UserJoinResponse} clientRes
      */
     process(clientReq, clientRes) {
         
@@ -34,7 +34,7 @@ class UserLoginRequestHandler extends AbstractRequestHandler {
                         var response = {};
                         response.token = token;
                         response.code = 200;
-                        response.result = "login success";
+                        response.msg = "login success";
                         res.send(response);
                     } else {
                         // 비밀번호 실패
@@ -49,5 +49,5 @@ class UserLoginRequestHandler extends AbstractRequestHandler {
     }
 }
 
-export default UserLoginRequestHandler;
+export default UserJoinRequestHandler;
 
