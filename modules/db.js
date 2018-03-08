@@ -31,13 +31,14 @@ class DataManager {
         propertyManager.init();
 
         var dbConfig = {
-            host: propertyManager.get(PropertyManager.MySQL_HOST),
-            port: propertyManager.get(PropertyManager.MySQL_PORT),
-            user: propertyManager.get(PropertyManager.MySQL_ID),
-            password: propertyManager.get(PropertyManager.MySQL_ID),
-            database: propertyManager.get(PropertyManager.MySQL_DATABASE)
+            host: propertyManager.get(Property.MySQL_HOST),
+            port: propertyManager.get(Property.MySQL_PORT),
+            user: propertyManager.get(Property.MySQL_ID),
+            password: propertyManager.get(Property.MySQL_PW),
+            database: propertyManager.get(Property.MySQL_DATABASE)
         }
 
+        
         this.pool = mysql.createPool(dbConfig);
         this.pool.getConnection(function (err, connection) {
             if (err) {
