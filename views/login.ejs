@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>로그인</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        
+        $(document).ready(function () {
+
+        });
+
+        function login() {
+            var id = $("#id").val();
+            var pw = $("#pw").val();
+
+            var param = {
+                userid: id,
+                password: pw,
+                cmd: 'login'
+            };
+
+            $.ajax({
+                url: '/users',
+                type: 'post',
+                data: param,
+                success: function (data) {
+                    alert(JSON.stringify(data));
+                    window.location.replace('/users/main');
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <h3>레주메</h3>  
+    <input id="id" type="text" />
+    <input id="pw" type="text" />
+
+    <button onclick="login()">login</button>
+</body>
+</html>

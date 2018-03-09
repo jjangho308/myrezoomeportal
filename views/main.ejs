@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <title>메인</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $(function () {
+                var param = {
+                    userid: "rezoome",
+                    cmd: 'search'
+                };
+
+                $.ajax({
+                    url: '/users',
+                    type: 'post',
+                    data: param,
+                    success: function (data) {
+                        alert(JSON.stringify(data));
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h3>레주메 이력서</h3>
+</body>
+
+</html>

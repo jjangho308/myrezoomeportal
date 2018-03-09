@@ -39,7 +39,7 @@ class UserLoginRequestHandler extends AbstractRequestHandler {
                 }
             } else {
                 // 사용자 유저 없음
-                clientResres.send("login fail::id not exist");
+                clientRes.send("login fail::id not exist");
             }            
         });
     }
