@@ -1,15 +1,13 @@
 import SearchRecordRequestHandler from '../modules/request/search_record_handler'
 
 describe('SearchRecordRequestHandler Test suit', () => {
-    var dbconfig;
     var HD=null;
     before('SearchRecordRequestHandler init', () => {
-        HD = new SearchRecordRequestHandler("test");
+        HD = new SearchRecordRequestHandler();
     })
 
     it('1. SearchRecordRequestHandler process TEST', done =>{
-        HD.process("HttpRequest", {"mid" : "msgid-0001", "token" : "Rm9vYmFyIQ==Rm9vYmFyIQ==Rm9vYmFyIQ==", "cmd" : "Search", "args" : { "username" : "CH", "birth" : "1987-03-08", "gender" : 1, "phone" : "010-0000-0000", "from" : "2016-10-10", "to" : "2017-02-28", "pkey" : "asdlf;kjasl;dfkjasl;dfkjjjjeic==", "orgs" : [ { "code" : "01", "key" : "chang8.shin"}, { "code" : "02", "key" : "32832"} ]}});
-        
+        HD.process("HttpRequest", {"mid" : "mid-00001","token" : "asdfasfasdfasdfasdf","cmd" : "Search","args" : {"publickey" :"cmzcdkrkeicjk=dkrkgvndfj3739","userid" : "rezoome","orgs" : [{"code": "01","key": {"var1": "32832","var2": "abcd"}},{"code": "02","key": {"var1": "33253","var2": "ddddd"}},{"code": "03","key": {"var1": "18273","var2": "fncmlkl"}}]}});        
     }).timeout(10000);
 
     after('', done =>{

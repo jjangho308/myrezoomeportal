@@ -1,6 +1,8 @@
 import DataManager from '../db';
 import PushManager from '../push';
 import AbstractRequestHandler from './abstract_request_handler'
+import Managers from '../../core/managers'
+
 
 /**
  * 이력 검색 요청 핸들러.
@@ -12,7 +14,7 @@ class SearchRecordRequestHandler extends AbstractRequestHandler {
 
     /**
      * 
-     * @param {HttpRequest} httpReq 
+     * @param {HttpResponse} httpRes 
      * @param {SearchRecordRequest} clientReq {
      *      userId : "rezoome Id",
      *      orgs    : [{
@@ -25,61 +27,50 @@ class SearchRecordRequestHandler extends AbstractRequestHandler {
      *              ]
      * }
      */
-    process(clientReq, httpRes) {
-        var queryResult;
-        
-        var destination = {
-            destination: '',
-            "content-type": 'application/json'
-        }
-
-
+    process(httpRes, clientReq) {
         // 1. 기관 정보를 db에서 가져오고
-        // var dbConfig = {
-        //     host: "127.0.0.1",
-        //     port: 3306,
-        //     user: "rezoome",
-        //     password: "sgen2018!",
-        //     database: "rezoome"
-        // }
-
+        
+        //orgcode => sendmessage 
+        var rezoome_id =  clientReq.args.userid;
         var orgs = clientReq.args.orgs;
-        var sqlparam = "";
 
+        //get personal info(rezoome id => username, birth, gender, phone, ci, email)
+        ///////////////////////////////////////////////////////////////////
+        var db = Managers.db();
+        db.init();
 
-        for (var i in orgs) {
-            sqlparam += JSON.stringify(orgs[i].code);
-            if (i != (orgs.length - 1)) {
-                sqlparam = sqlparam + ",";
-            }
-        }
+        var push = Managers.push();
+        push.init();
+        ///////////////////////////////////////////////////////////////////
 
-        //Manager 가져오기
-        //this.Push = new PushManager();
+        //send message
+        db.getUserInfo(rezoome_id, function(res){
+            this.makeMSG(clientReq, res, function(msg){
+                    push.sendMessage(msg, orgs, function(err){
+                    
+                });
+            })
+        }.bind(this));
+        //send httpRes
+        
+    }
+
+    makeMSG(clientReq, personalInfo, cb){
+        var msg = {};
+        msg.cmd=clientReq.cmd;
+        msg.mid=clientReq.mid;
         
 
+        var args = {};
+        args.username = personalInfo[0].NAME;
+        args.birth = personalInfo[0].BIRTH;
+        args.gender = personalInfo[0].GENDER;
+        args.phone = personalInfo[0].PHONE;
+        args.ci = personalInfo[0].CI;
+        args.email = personalInfo[0].EMAIL;
 
-
-
-        //Manager 가져오기
-        //var db = new DataManager(dbConfig);
-
-        db.getOrgInfo(sqlparam, function (res) {
-            queryResult = res;
-            console.log(queryResult);
-
-            for (var i in queryResult) {
-                destination.destination = queryResult[i].ORG_QUEUE_NAME;
-                console.log(destination);
-
-                
-                this.Push.sendMessage(JSON.stringify(clientReq), destination, function (err) {
-                    if (err != null) {
-                        console.log(err);
-                    }
-                });
-            }
-        }.bind(this));
+        msg.args = args;
+        cb(msg);
     }
 }
 
