@@ -29,11 +29,6 @@ class PushManager extends AbstractManager {
             }
         }];
 
-        this.destination = {
-            "destination": '',
-            "content-type": 'application/json'
-        }
-
         this.connect(server, function (factory) {
             console.log("AMQ Connect Success!");
         })
@@ -94,18 +89,19 @@ class PushManager extends AbstractManager {
             }
         }
 
+
+
         var db = Managers.db();
         db.init();
         var queryResult;
 
         // 1.2 query by 1.1
         db.getOrgInfo(sqlparam, function (res) {
-            for (var i in res) {
-                this.destination.destination = res[i].ORG_QUEUE_NAME;
-                
-
+            for (var i in res) {                
+    
                 //seeting destination at this.destination
-                this.channel.send(this.destination, JSON.stringify(this.msg), function (err) {
+                this.channel.send(res[i].ORG_QUEUE_NAME, JSON.stringify(this.msg), function (err) {
+                    
                     if (err) {
                         console.log('send error: ' + err.message);
                         return;

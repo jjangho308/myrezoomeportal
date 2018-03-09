@@ -27,7 +27,7 @@ class SearchRecordRequestHandler extends AbstractRequestHandler {
      *              ]
      * }
      */
-    process(httpRes, clientReq) {
+    process(clientReq, httpRes) {
         // 1. 기관 정보를 db에서 가져오고
         
         //orgcode => sendmessage 
@@ -45,14 +45,14 @@ class SearchRecordRequestHandler extends AbstractRequestHandler {
 
         //send message
         db.getUserInfo(rezoome_id, function(res){
+            
             this.makeMSG(clientReq, res, function(msg){
+                
                     push.sendMessage(msg, orgs, function(err){
-                    
                 });
             })
         }.bind(this));
         //send httpRes
-        
     }
 
     makeMSG(clientReq, personalInfo, cb){
