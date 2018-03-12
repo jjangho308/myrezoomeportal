@@ -18,8 +18,6 @@ class ClientRequestManager extends AbstractManager {
         super(opt);
     }
 
-    
-
     init() {
         this.requestMap = new HashMap();
         this.requestHandler = new HashMap();
