@@ -11,7 +11,7 @@ import AbstractManager from "./abstract";
  * 
  * @since 180228
 */
-class RequestManager extends AbstractManager {
+class ClientRequestManager extends AbstractManager {
     constructor(opt) {
         super(opt);
     }
@@ -59,4 +59,4 @@ class RequestManager extends AbstractManager {
     }
 }
 
-export default RequestManager
+export default ClientRequestManager
