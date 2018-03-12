@@ -1,8 +1,10 @@
 import HashMap from 'hashmap';
 
-import UserLoginHandler from './user_login_handler';
-
 import AbstractManager from "./abstract";
+
+import UserLoginHandler from './user_login_handler';
+import SearchRecordHandler from './search_record_handler';
+
 
 /**
  * Request job manager from client. <br />
@@ -16,11 +18,14 @@ class ClientRequestManager extends AbstractManager {
         super(opt);
     }
 
-    init() {
-        this.jobMap = new HashMap();
-        this.setPrepared();
+    
 
-        UserLoginHandler = new UserLoginHandler();
+    init() {
+        this.requestMap = new HashMap();
+        this.requestHandler = new HashMap();
+        this.requestHandler.set("login", new UserLoginHandler());
+        this.requestHandler.set('search', new SearchRecordHandler());
+        this.setPrepared();
     }
 
     /**
@@ -28,35 +33,25 @@ class ClientRequestManager extends AbstractManager {
      * 
      * @param {object} job 
      */
-    putJob(request) {
-        switch (request.cmd) {
-            case 'login':
-                UserLoginHandler(request, request.body);
-                break;
+    addRequest(request) {
+        this.requestMap.set(request.id, request);
 
-
-
-        }
+        var result = this.requestHandler.get(request.cmd).handle(request);
     }
-
+    
     /**
-     * 
-     * @param {string} jobId 
+     * Agent에서 비동기적인 응답이 전달되면 ClientRequest가 들고 있던
+     * socket을 통해 ClientBrowser로 Response를 push 한다.
+     * @param {*} requestId 
+     * @param {*} response 
      */
-    getJob(jobId) {
-
-    }
-
-    /**
-     * Job map에 쌓인 RequestJob을 처리한다. <br />
-     * 현재 Map에 Request가 없을 경우 다음 tick까지 보류한다. <br />
-     * 
-     * @since 180306
-     * @author TACKSU
-    */
-    runJob(){
-        // TODO Implements here.
+    pushResponse(requestId, response){
+        var result = this.requestMap.get(request.id).processResponse(response);
     }
 }
+
+ClientRequestManager.RESULT_PENDING = 1
+ClientRequestManager.RESULT_SUCCESS = 2
+ClientRequestManager.RESULT_FAILURE = 3
 
 export default ClientRequestManager
