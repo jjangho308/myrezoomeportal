@@ -5,7 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-//var index = require('./routes/index');
+var client = require('./routes/client');
+var agent = require('./routes/agent');
+var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
@@ -22,14 +24,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// tokenManager = new TokenManeger();
-// app.use(tokenManager.filterToken);
-
 //for front end angular2
 // app.use(express.static(path.join(__dirname, 'front')));
 
-//app.use('/', index);
-app.use('/users', users);
+app.use('/', index);
+app.use('/client', client);
+app.use('/agent', agent);
+
+app.use('/users', users); // test
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
