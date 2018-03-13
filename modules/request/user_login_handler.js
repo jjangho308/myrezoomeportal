@@ -1,10 +1,10 @@
 import managers from '../../core/managers';
-import AbstractRequestHandler from './abstract_request_handler'
+import AbstractClientRequestHandler from './abstract_clientrequest_handler';
 
 /**
  * 사용자 로그인 요청 핸들러.
 */
-class UserLoginRequestHandler extends AbstractRequestHandler {
+class UserLoginRequestHandler extends AbstractClientRequestHandler {
     constructor(opt) {
         super(opt);
     }

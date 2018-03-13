@@ -5,29 +5,71 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
-
         $(document).ready(function () {
             $(function () {
                 var param = {
-                    userid: "rezoome",
-                    cmd: 'search'
+                    cmd: 'search',
+                    mid: 'midxxxxx',
+                    args: {
+                        userid: 'rezoome',
+                        orgs: [
+                            { 'code': '01' },
+                            { 'code': '02' }
+                        ]
+                    }
                 };
 
                 $.ajax({
                     url: '/users',
                     type: 'post',
-                    data: param,
+                    data: JSON.stringify(param),
+                    contentType: "application/json",
                     success: function (data) {
-                        alert(JSON.stringify(data));
+                        // alert(JSON.stringify(data));
+                    },
+                    error: function (error) {
+                        console.log(error);
                     }
                 });
             });
         });
+
+        function pdf() {
+            var id = $("#id").val();
+            var pw = $("#pw").val();
+
+            var param = {
+                userid: id,
+                password: pw,
+                cmd: 'certificate'
+            };
+
+            $.ajax({
+                url: '/users',
+                type: 'post',
+                data: param,
+                success: function (data) {
+                    //alert(JSON.stringify(data));
+                    //console.log(JSON.stringify(data));                    
+                    window.location.replace('/users/pdf?file=' + data.data);
+                }
+            });
+        }
     </script>
 </head>
 
 <body>
-    <h3>레주메 이력서</h3>
+
+    <h3>레주메 로그인 성공</h3>
+    <h4>사용자 토큰 : </h4>
+    <h5>
+        <%= token %>
+    </h5>
+
+    <h4>기관정보 요청 결과 :</h4>
+    <h5>오픽 / AL3 / 2018년 01월 01일</h5>
+    <button onclick="pdf()">이력서</button>
+
 </body>
 
 </html>

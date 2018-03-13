@@ -1,10 +1,11 @@
+import PDF from 'pdfkit';
 import managers from '../../core/managers';
-import AbstractRequestHandler from './abstract_request_handler'
+import AbstractClientRequestHandler from './abstract_clientrequest_handler';
 
 /**
  * 증명서 요청 핸들러.
 */
-class CertificateRequestHandler extends AbstractRequestHandler {
+class CertificateRequestHandler extends AbstractClientRequestHandler {
     constructor(opt) {
         super(opt);
     }
