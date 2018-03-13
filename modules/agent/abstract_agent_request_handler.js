@@ -6,15 +6,15 @@
  * @since 180306
  * @author TACKSU
 */
-class AbstractAgentRequestHandler{
-    constructor(opt){
+class AbstractAgentRequestHandler {
+    constructor(opt) {
     }
 
     /**
      * 
      * @param {AbstractAgentRequest} agentRequest
      */
-    process(agentRequest){
+    request(agentRequest) {
 
     }
 }

@@ -9,7 +9,7 @@ import AbstractAgentRequestHandler from "./abstract_agent_request_handler";
  * @since 180306
  * @author TACKSU
 */
-class SearchRecordHandler extends AbstractAgentRequestHandler{
+class SearchResultHandler extends AbstractAgentRequestHandler{
 
     /**
      * Default constructor. <br />
@@ -23,9 +23,9 @@ class SearchRecordHandler extends AbstractAgentRequestHandler{
      * 
      * @param {*} request 
      */
-    process(request){
-        Managers.request().response(request.mid, request.args);
+    request(request){
+        Managers.request().response(request.mid, request);
     }
 }
 
-export default SearchRecordHandler;
+export default SearchResultHandler;

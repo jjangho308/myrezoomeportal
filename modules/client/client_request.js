@@ -75,8 +75,9 @@ class ClientRequestManager extends AbstractManager {
      * @param {*} requestId 
      * @param {*} response 
      */
-    response(requestId, response) {
-        var result = this.requestMap.get(requestId).processResponse(response);
+    response(requestId, response, cb) {
+        var entity = this.requestMap.get(requestId);
+        this.handlerMap.get(entity.constructor).response(entity, response);
     }
 }
 

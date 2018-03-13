@@ -20,7 +20,7 @@ class AgentRequestManager extends AbstractManager {
     }
 
     init(from) {
-        this.entityMap.set("Search", SearchResultRequestEntity)
+        this.entityMap.set("SearchResult", SearchResultRequestEntity)
         this.handlerMap.set(SearchResultRequestEntity, new SearchResultRequestHandler());
     }
 
@@ -32,8 +32,8 @@ class AgentRequestManager extends AbstractManager {
      * 
      * @param {AbstractAgentRequest} agentRequest 
      */
-    process(requestEntity) {
-        this.handlerMap.get(requestEntity).process(requestEntity);
+    request(requestEntity) {
+        this.handlerMap.get(requestEntity).request(requestEntity);
     }
 }
 

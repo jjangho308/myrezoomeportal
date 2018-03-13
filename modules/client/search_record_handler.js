@@ -35,7 +35,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      *              ]
      * }
      */
-    processRequest(clientReq, done) {
+    request(clientReq, done) {
         // 1. 기관 정보를 db에서 가져오고
 
         //orgcode => sendmessage 
@@ -61,9 +61,10 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         })
     }
 
-    processResponse(clientRequest, agentRequest) {
+    response(clientRequest, agentRequest) {
         var socket = clientRequest.socket;
-        socket.push
+        
+        // TODO socket으로 발신
     }
 
     // makeMSG(clientReq, personalInfo) {

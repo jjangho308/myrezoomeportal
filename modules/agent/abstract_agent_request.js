@@ -8,7 +8,7 @@
 */
 class AbstractAgentRequest{
     constructor(opt){
-        
+        this.mid = opt.mid;
     }
 }
 

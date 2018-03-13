@@ -12,7 +12,7 @@ describe('Chai HTTP test suite', () => {
     })
 
     it('Chai GET Request test', done => {
-        chai.request(app).get('/client').end((err, res)=>{
+        chai.request(app).get('/client').end((err, res) => {
             done();
         });
     })
@@ -28,7 +28,7 @@ describe('Chai HTTP test suite', () => {
                     pkey: 'asdfasefa'
                 }
             })
-            .end((err, res)=>{
+            .end((err, res) => {
                 done();
             });;
     })
