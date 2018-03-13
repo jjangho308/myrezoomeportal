@@ -1,13 +1,13 @@
 import DataManager from '../db';
 import PushManager from '../push';
-import AbstractRequestHandler from './abstract_request_handler'
 import Managers from '../../core/managers'
+import AbstractClientRequestHandler from './abstract_clientrequest_handler';
 
 
 /**
  * 이력 검색 요청 핸들러.
 */
-class SearchRecordRequestHandler extends AbstractRequestHandler {
+class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     constructor(opt) {
         super(opt);
     }
@@ -75,4 +75,3 @@ class SearchRecordRequestHandler extends AbstractRequestHandler {
 }
 
 export default SearchRecordRequestHandler;
-

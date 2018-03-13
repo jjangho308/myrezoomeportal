@@ -4,15 +4,19 @@
  * @since 180305
  * @author TACKSU 
  */
-class AbstractRequest {
+class AbstractClientRequest {
     /**
      * 
      * @param {object} opt 
      */
     constructor(opt) {
+
         this.mid = opt.mid;
+        /**
+         * WebSocket instance for request client. <br />
+         */
         this.socket = opt.socket;
     }
 }
 
-export default AbstractRequest;
+export default AbstractClientRequest;
