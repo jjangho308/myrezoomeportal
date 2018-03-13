@@ -1,3 +1,5 @@
+import AbstractAgentRequest from "./abstract_agent_request";
+
 /**
  * Response class of SearchRecordRequest. <br />
  * 
@@ -6,8 +8,10 @@
  * @since 180306
  * @author TACKSU
 */
-class SearchRecordResponse extends AbstractResponse{
+class SearchRecordRequest extends AbstractAgentRequest{
     constructor(opt){
         super(opt)
     }
 }
+
+export default SearchRecordRequest;

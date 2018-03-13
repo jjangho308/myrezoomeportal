@@ -1,3 +1,6 @@
+import Managers from '../core/Managers';
+import AbstractAgentRequestHandler from "./abstract_agent_request_handler";
+
 /**
  * Handler of {@link SearchRecordResponse}. <br />
  * 
@@ -6,8 +9,7 @@
  * @since 180306
  * @author TACKSU
 */
-class SearchRecordResponseHandler extends AbstractResponseHandler{
-
+class SearchRecordHandler extends AbstractAgentRequestHandler{
 
     /**
      * Default constructor. <br />
@@ -18,10 +20,12 @@ class SearchRecordResponseHandler extends AbstractResponseHandler{
     }
 
     /**
-     * Process {@link SearchRecordResponse}
-     * @param {SearchRecordResponse} response 
+     * 
+     * @param {*} request 
      */
-    process(response){
-        
+    process(request){
+        Managers.request()
     }
 }
+
+export default SearchRecordHandler;

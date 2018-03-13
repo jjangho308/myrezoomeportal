@@ -38,10 +38,9 @@ class ClientRequestManager extends AbstractManager {
      * 
      * @param {object} job 
      */
-    addRequest(request) {
+    request(request) {
         this.requestMap.set(request.mid, request);
-
-        this.requestHandler.get(request.cmd).processRequest(request, (resultCode, result)=>{
+        this.requestHandler.get(request.cmd).processRequest(request, ((resultCode, result)=>{
             switch(resultCode){
                 case ClientRequestManager.RESULT_FAILURE : {
                     // result instanceof Error Retry?
@@ -50,6 +49,7 @@ class ClientRequestManager extends AbstractManager {
 
                 case ClientRequestManager.RESULT_PENDING : {
                     // result instanceof Object Keep request?
+                    this.requestMap.set(request.mid, request);
                     break;
                 }
 
@@ -58,7 +58,7 @@ class ClientRequestManager extends AbstractManager {
                     break;
                 }
             }
-        });
+        }).bind(this));
     }
     
     /**
@@ -67,13 +67,13 @@ class ClientRequestManager extends AbstractManager {
      * @param {*} requestId 
      * @param {*} response 
      */
-    pushResponse(requestId, response){
-        var result = this.requestMap.get(request.id).processResponse(response);
+    response(requestId, response){
+        var result = this.requestMap.get(requestId).processResponse(response);
     }
 }
 
-ClientRequestManager.RESULT_PENDING = 1
-ClientRequestManager.RESULT_SUCCESS = 2
-ClientRequestManager.RESULT_FAILURE = 3
+ClientRequestManager.RESULT_SUCCESS = 0;
+ClientRequestManager.RESULT_PENDING = 1;
+ClientRequestManager.RESULT_FAILURE = 2;
 
 export default ClientRequestManager

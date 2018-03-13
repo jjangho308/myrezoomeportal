@@ -6,8 +6,10 @@
  * @since 180305
  * @author TACKSU
 */
-class AbstractResponse{
+class AbstractAgentRequest{
     constructor(opt){
         
     }
 }
+
+export default AbstractAgentRequest;
