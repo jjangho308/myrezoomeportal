@@ -130,7 +130,7 @@ describe.skip('MySQL test suit', () => {
     });
 
     it('Get user', done=>{
-        db.getUserInfo('honggildong', function(res){
+        db.getUserInfo('rezoome', function(res){
             console.log(res);
             done();
         });
@@ -139,6 +139,14 @@ describe.skip('MySQL test suit', () => {
     it('Get org', done=>{
         var orgcodes = ["01", "02"];
         db.getOrgInfo(orgcodes, function(res){
+            console.log(res);
+            done();
+        })
+    });
+
+    it('Get org all', done=>{
+        var orgcodes = ["01", "02"];
+        db.getOrgAllInfo(function(res){
             console.log(res);
             done();
         })
