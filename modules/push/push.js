@@ -1,5 +1,6 @@
 import stompit from 'stompit'
-import Managers from "../core/managers";
+
+import Managers from "../../core/managers";
 
 import AbstractManager from "../abstract_manager";
 import Property from "../property/property";

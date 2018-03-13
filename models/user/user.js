@@ -6,18 +6,19 @@ import AbstractModel from '../abstract_model';
  * @author TACKSU
  */
 class User extends AbstractModel {
-    constructor(record) {
+    constructor(row) {
+        super(row);
         // TODO 이 부분 실제 db schema에 맞게 수정할 것
-        // this.user_fname = record.FNAME;
-        // this.user_lname = record.LNAME;
+        // this.user_fname = row.FNAME;
+        // this.user_lname = row.LNAME;
 
-        this.username = record.NAME;
+        this.username = row.NAME;
         
-        this.birth = record.BIRTH;
-        this.gender = record.GENDER;
-        this.phone = record.PHONE;
-        this.ci = record.CI;
-        this.email = record.EMAIL;
+        this.birth = row.BIRTH;
+        this.gender = row.GENDER;
+        this.phone = row.PHONE;
+        this.ci = row.CI;
+        this.email = row.EMAIL;
     }
 }
 export default User;

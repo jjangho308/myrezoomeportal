@@ -1,4 +1,4 @@
-import Managers from '../core/Managers';
+import Managers from '../../core/Managers';
 import AbstractAgentRequestHandler from "./abstract_agent_request_handler";
 
 /**
@@ -24,7 +24,7 @@ class SearchRecordHandler extends AbstractAgentRequestHandler{
      * @param {*} request 
      */
     process(request){
-        Managers.request()
+        Managers.request().response(request.mid, request.args);
     }
 }
 

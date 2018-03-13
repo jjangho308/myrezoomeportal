@@ -1,9 +1,12 @@
 import crypto from 'crypto';
 
-import AbstractManager from "./abstract";
+import AbstractManager from '../abstract_manager';
 
 /**
  * CryptoManager. <br />
+ * 
+ * @since 183013
+ * @author TACKSU
  */
 class CryptoManager extends AbstractManager {
 

@@ -15,33 +15,51 @@ import AgentRequestManager from '../modules/agent/agent_request';
  * @since 180304
  */
 export default (() => {
-    const propertyInstance = new PropertyManager();
-    const cryptoInstance = new CryptoManager();
-    const dbInstance = new DatabaseManager();
-    const pushInstance = new PushManager();
-    const bcInstance = new BlockchainManager();
-    const tokenInstance = new TokenManager();
-    const pdfInstance = new PDFManager();
-    const clientRequestInstance = new ClientRequestManager();
-    const agentRequestInstance = new AgentRequestManager();
+    var propertyInstance = null;
+    var cryptoInstance = null;
+    var dbInstance = null;
+    var pushInstance = null;
+    var bcInstance = null;
+    var tokenInstance = null;
+    var pdfInstance = null;
+    var clientRequestInstance = null;
+    var agentRequestInstance = null;
 
     return {
-        property: () => propertyInstance,
+        property: () => {
+            return propertyInstance = propertyInstance ? propertyInstance : new PropertyManager();
+        },
 
-        push: () => pushInstance,
+        push: () => {
+            return pushInstance = pushInstance ? pushInstance : new PushManager();
+        },
 
-        blockchain: () => bcInstance,
+        // blockchain : ()=>{
+        //     return bcInstance = bcInstance ? bcInstance : new BlockchainManager();
+        // },
 
-        crypto: () => cryptoInstance,
+        crypto: () => {
+            return cryptoInstance = cryptoInstance ? cryptoInstance : new CryptoManager();
+        },
 
-        db: () => dbInstance,
+        db: () => {
+            return dbInstance = dbInstance ? dbInstance : new DatabaseManager();
+        },
 
-        token: () => tokenInstance,
+        token: () => {
+            return tokenInstance = tokenInstance ? tokenInstance : new TokenManager();
+        },
 
-        pdf: () => pdfInstance,
+        pdf: () => {
+            return pdfInstance = pdfInstance ? pdfInstance : new PDFManager();
+        },
 
-        clientRequest: () => clientRequestInstance,
+        client: () => {
+            return clientRequestInstance = clientRequestInstance ? clientRequestInstance : new ClientRequestManager();
+        },
 
-        agentRequest: () => agentRequestInstance
+        agent : ()=>{
+            return agentRequestInstance = agentRequestInstance ? agentRequestInstance : new AgentRequestManager();
+        }
     }
 })();

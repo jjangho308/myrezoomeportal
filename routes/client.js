@@ -1,7 +1,7 @@
 import express from 'express';
+import controller from './client_ctrl';
 
 var router = express.Router();
-
 
 /**
  * Router for client request channel. <br />
@@ -9,9 +9,7 @@ var router = express.Router();
  * @since 180305
  * @author TACKSU
  */
-router.get('/', (req, res) =>{
-    
-});
+router.post('/', controller.post);
+router.use('/', controller.default);
 
-export default {
-}
+export default router;

@@ -1,6 +1,6 @@
 import reader from 'properties-reader';
 
-import Environment from '../core/environment'
+import Environment from '../../core/environment'
 import AbstractManager from "../abstract_manager";
 
 /**

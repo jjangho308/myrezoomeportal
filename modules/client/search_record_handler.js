@@ -1,12 +1,12 @@
-import DataManager from '../db';
-import PushManager from '../push';
 import Managers from '../../core/managers'
+
+import DataManager from '../db/db';
+import PushManager from '../push/push';
 
 import AbstractClientRequestHandler from './abstract_clientrequest_handler';
 
 import ClientRequestManager from './client_request'
 import SearchRecordPush from '../push/message/search';
-
 
 /**
  * Handler for SearchRecordRequest. <br />
@@ -52,7 +52,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             var msg = new SearchRecordPush({
                 cmd: clientReq.cmd,
                 mid: clientReq.mid,
-                args = users
+                args : users
             });
 
             Managers.push().sendMessage(msg, orgs, err => {

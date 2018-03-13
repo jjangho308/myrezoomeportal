@@ -7,6 +7,7 @@ import AbstractModel from '../abstract_model'
  */
 class Org extends AbstractModel {
     constructor(row) {
+        super(row);
         this.queueName = row.ORG_QUEUE_NAME;
         this.code = null;
         this.name = null;

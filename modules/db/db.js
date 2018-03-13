@@ -1,8 +1,9 @@
 import mysql from 'mysql';
-import UserDao from '../models/user/user_dao';
-import orgDao from '../models/org/org_dao';
-import Managers from "../core/managers";
-import Property from "./property";
+import UserDao from '../../models/user/user_dao';
+import orgDao from '../../models/org/org_dao';
+import Managers from "../../core/managers";
+import Property from "../property/property";
+import AbstractManager from '../abstract_manager';
 
 
 /**
@@ -10,7 +11,7 @@ import Property from "./property";
  * 
  * @since 180228
  */
-class DataManager {
+class DataManager extends AbstractManager{
 
     constructor(opt) {
         super(opt);
