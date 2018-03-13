@@ -97,6 +97,7 @@ class PushManager extends AbstractManager {
 
             // 1.2 query by 1.1
             db.getOrgInfo(sqlparam, function (res) {
+
                 for (var i in res) {
 
                     //seeting destination at this.destination
@@ -106,7 +107,29 @@ class PushManager extends AbstractManager {
                             console.log('send error: ' + err.message);
                             return;
                         }
-                        console.log('sent message');
+
+                        
+                        console.log('general sent message');
+                        cb(err);
+                    });
+                }
+            }.bind(this));
+        }else{
+            var db = Managers.db();
+            db.init();
+
+            db.getOrgAllInfo(function(res){
+                for (var i in res) {
+
+                    //seeting destination at this.destination
+                    this.channel.send(res[i].ORG_QUEUE_NAME, JSON.stringify(this.msg), function (err) {
+
+                        if (err) {
+                            console.log('send error: ' + err.message);
+                            return;
+                        }
+
+                        console.log('org all sent message');
                         cb(err);
                     });
                 }

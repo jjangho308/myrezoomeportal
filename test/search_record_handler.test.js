@@ -7,7 +7,9 @@ describe('SearchRecordRequestHandler Test suit', () => {
     })
 
     it('1. SearchRecordRequestHandler process TEST', done =>{
-        HD.process({"mid" : "mid-00001","token" : "asdfasfasdfasdfasdf","cmd" : "Search","args" : {"publickey" :"cmzcdkrkeicjk=dkrkgvndfj3739","userid" : "rezoome","orgs" : [{"code": "01","key": {"var1": "32832","var2": "abcd"}},{"code": "02","key": {"var1": "33253","var2": "ddddd"}},{"code": "03","key": {"var1": "18273","var2": "fncmlkl"}}]}}, "HttpRequest");        
+        //HD.process({"mid" : "mid-00001","token" : "asdfasfasdfasdfasdf","cmd" : "Search","args" : {"publickey" :"cmzcdkrkeicjk=dkrkgvndfj3739","userid" : "rezoome"}}, "HttpRequest");        
+        HD.process({"mid" : "mid-00001","token" : "asdfasfasdfasdfasdf","cmd" : "Search","args" : {"publickey" :"cmzcdkrkeicjk=dkrkgvndfj3739","userid" : "rezoome","orgs" : [{"code": "01","key": {"var1": "32832","var2": "abcd"}},{"code": "02","key": {"var1": "33253","var2": "ddddd"}}]}}, "HttpRequest");        
+
     }).timeout(10000);
 
     after('', done =>{
