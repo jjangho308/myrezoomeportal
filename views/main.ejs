@@ -8,22 +8,25 @@
         $(document).ready(function () {
             $(function () {
                 var param = {
-                    cmd: 'search',
+                    cmd: 'Search',
                     mid: 'midxxxxx',
                     args: {
-                        userid: 'rezoome',
+                        //userid: 'rezoome',
                         orgs: [
                             { 'code': '01' },
-                            { 'code': '02' }
+                            { 'code': '03' }
                         ]
                     }
                 };
 
                 $.ajax({
-                    url: '/users',
+                    url: '/client',
                     type: 'post',
                     data: JSON.stringify(param),
                     contentType: "application/json",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "bearer " + sessionStorage.getItem("token"));
+                    },
                     success: function (data) {
                         // alert(JSON.stringify(data));
                     },
@@ -35,19 +38,23 @@
         });
 
         function pdf() {
-            var id = $("#id").val();
-            var pw = $("#pw").val();
 
             var param = {
-                userid: id,
-                password: pw,
-                cmd: 'certificate'
-            };
+                    cmd: 'Certificate',
+                    mid: 'midxxxxx',
+                    args: {
+                        
+                    }
+                };
 
             $.ajax({
-                url: '/users',
+                url: '/',
                 type: 'post',
-                data: param,
+                data: JSON.stringify(param),
+                    contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "bearer " + sessionStorage.getItem("token"));
+                },
                 success: function (data) {
                     //alert(JSON.stringify(data));
                     //console.log(JSON.stringify(data));                    
@@ -60,14 +67,10 @@
 
 <body>
 
-    <h3>레주메 로그인 성공</h3>
-    <h4>사용자 토큰 : </h4>
-    <h5>
-        <%= token %>
-    </h5>
+    <h3>레주메 메인페이지</h3>
 
     <h4>기관정보 요청 결과 :</h4>
-    <h5>오픽 / AL3 / 2018년 01월 01일</h5>
+    <h5>...</h5>
     <button onclick="pdf()">이력서</button>
 
 </body>

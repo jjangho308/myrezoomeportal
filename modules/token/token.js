@@ -16,7 +16,7 @@ class TokenManager extends AbstractManager {
     generateToken(info) {
         return jwt.sign({
             data: info,
-            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 12) // 12hour
+            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 1) // 1hour
             //}, 'rezoomesecretkey', { expiresIn: '1' });
         }, 'rezoomesecretkey');
     }
@@ -27,33 +27,34 @@ class TokenManager extends AbstractManager {
         if (typeof bearerHeader !== 'undefined') {
             var bearer = bearerHeader.split(" ");
             bearerToken = bearer[1];
+
+            jwt.verify(bearerToken, 'rezoomesecretkey', function (error, decoded) {
+                if (error) {
+                    console.log(error);
+                    res.send(403);
+                } else {
+                    console.log(decoded);
+                    req.token = bearerToken;
+                    req.body.args.userid = decoded.data.userid;
+                    next();
+                }
+            });
         } else {
-            var ignoredCmd = ['token', 'health']; // ignore cmd
+            var ignoredCmd = ['Health','Login']; // ignore cmd
             var ignoredFlag = false;
 
             ignoredCmd.forEach(function (ingored) {
-                if (ingored == req.body.cmd) {
-                    innoredFlag = true;
+                if (ingored == req.body.cmd) {                    
+                    ignoredFlag = true;                    
                 }
             });
 
-            if (innoredFlag) {
+            if (ignoredFlag) {                
                 next();
             } else {
                 res.send(403);
             }
-        }
-
-        jwt.verify(bearerToken, 'secretkey', function (error, decoded) {
-            if (error) {
-                console.log(error);
-                res.send(403);
-            } else {
-                console.log(decoded);
-                req.token = bearerToken;
-                next();
-            }
-        });
+        }        
     }
 
     decodedToken(token) {

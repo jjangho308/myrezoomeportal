@@ -115,6 +115,7 @@ class PushManager extends AbstractManager {
     disconnect() {
         this.channel.close();
     }
+
 }
 
 export default PushManager;

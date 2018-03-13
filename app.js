@@ -27,9 +27,6 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// tokenManager = new TokenManeger();
-// app.use(tokenManager.filterToken);
-
 //for front end angular2
 // app.use(express.static(path.join(__dirname, 'front')));
 

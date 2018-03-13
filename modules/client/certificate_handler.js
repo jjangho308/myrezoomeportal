@@ -18,14 +18,24 @@ class CertificateRequestHandler extends AbstractClientRequestHandler {
     process(clientReq, clientRes) {
 
         var REZOOME_CERTIFICATE = {};
-        REZOOME_CERTIFICATE.name = "아무개";
-        REZOOME_CERTIFICATE.birthday = "2000.01.01";
-        REZOOME_CERTIFICATE.grade = "AL3";
-        REZOOME_CERTIFICATE.publish_date = "2018년 01월 01일";
-        REZOOME_CERTIFICATE.orgname = "오픽";
-        REZOOME_CERTIFICATE.hash = "ssdfawefasdfv234r34trefwerfswerf";
 
-        managers.pdf().makePDF(PDF, REZOOME_CERTIFICATE, clientRes);
+        // 1. 사용자 정보를 DB에서 조회
+        managers.db().getUserInfo(clientReq.args.userid, function (res) {
+
+            console.log(res);
+
+            // 사용자 유저 존재
+            if (!!res) {
+                REZOOME_CERTIFICATE.name = res[0].NAME;
+                REZOOME_CERTIFICATE.birthday = res[0].BIRTH;
+                REZOOME_CERTIFICATE.grade = "AL3";
+                REZOOME_CERTIFICATE.publish_date = "2018년 01월 01일";
+                REZOOME_CERTIFICATE.orgname = "오픽";
+                REZOOME_CERTIFICATE.hash = "ssdfawefasdfv234r34trefwerfswerf";
+
+                managers.pdf().makePDF(PDF, REZOOME_CERTIFICATE, clientRes);
+            }
+        });
     }
 }
 
