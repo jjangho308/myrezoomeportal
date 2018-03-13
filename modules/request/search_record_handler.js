@@ -3,11 +3,16 @@ import PushManager from '../push';
 import Managers from '../../core/managers'
 import AbstractClientRequestHandler from './abstract_clientrequest_handler';
 
+import ClientRequestManager from './client_request'
 import SearchRecordPush from '../push/message/search';
 
 
 /**
+ * Handler for SearchRecordRequest. <br />
  * 이력 검색 요청 핸들러.
+ * 
+ * @author CHANGHO
+ * @since 180313
  */
 class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     constructor(opt) {
@@ -29,7 +34,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      *              ]
      * }
      */
-    processRequest(clientReq) {
+    processRequest(clientReq, done) {
         // 1. 기관 정보를 db에서 가져오고
 
         //orgcode => sendmessage 
@@ -40,19 +45,19 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         ///////////////////////////////////////////////////////////////////
         var db = Managers.db();
 
-        var push = Managers.push();
-        ///////////////////////////////////////////////////////////////////
-
         //send message
-        db.getUserInfo(rezoome_id, function (res) {
+        db.getUserDao().get(rezoome_id, (err, users) => {
 
-            var msg = this.makeMSG(clientReq, res);
-            push.sendMessage(msg, orgs, err => {
-
+            var msg = new SearchRecordPush({
+                cmd: clientReq.cmd,
+                mid: clientReq.mid,
+                args = users
             });
-        }.bind(this));
 
-        return ClientRequestManager.RESULT_PENDING;
+            Managers.push().sendMessage(msg, orgs, err => {
+                !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
+            });
+        })
     }
 
     processResponse(clientRequest, agentRequest) {
@@ -60,23 +65,23 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         socket.push
     }
 
-    makeMSG(clientReq, personalInfo) {
+    // makeMSG(clientReq, personalInfo) {
 
-        var args = {};
-        args.username = personalInfo[0].NAME;
-        args.birth = personalInfo[0].BIRTH;
-        args.gender = personalInfo[0].GENDER;
-        args.phone = personalInfo[0].PHONE;
-        args.ci = personalInfo[0].CI;
-        args.email = personalInfo[0].EMAIL;
+    //     var args = {};
+    //     args.username = personalInfo[0].NAME;
+    //     args.birth = personalInfo[0].BIRTH;
+    //     args.gender = personalInfo[0].GENDER;
+    //     args.phone = personalInfo[0].PHONE;
+    //     args.ci = personalInfo[0].CI;
+    //     args.email = personalInfo[0].EMAIL;
 
-        var msg = new SearchRecordPush({
-            cmd: clientReq.cms,
-            mid: clientReq.mid,
-            args = args
-        });
-        return msg;
-    }
+    //     var msg = new SearchRecordPush({
+    //         cmd: clientReq.cms,
+    //         mid: clientReq.mid,
+    //         args = args
+    //     });
+    //     return msg;
+    // }
 }
 
 export default SearchRecordRequestHandler;

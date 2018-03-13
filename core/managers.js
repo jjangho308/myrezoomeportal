@@ -14,7 +14,7 @@ import ClientRequestManager from '../modules/request/client_request';
  * @TODO add managers.
  * @since 180304
  */
-export default (function(){
+export default (() => {
     var propertyInstance = null;
     var cryptoInstance = null;
     var networkInstance = null;
@@ -24,41 +24,41 @@ export default (function(){
     var tokenInstance = null;
     var pdfInstance = null;
     var clientRequestInstance = null;
-    
+
     return {
-        property : function(){
+        property: () => {
             return propertyInstance = propertyInstance ? propertyInstance : new PropertyManager();
         },
 
-        push : function(){
+        push: () => {
             return pushInstance = pushInstance ? pushInstance : new PushManager();
         },
 
-        network : function(){
+        network: () => {
             return networkInstance = networkInstance ? networkInstance : new NetworkManager();
         },
 
-        // blockchain : function(){
+        // blockchain : ()=>{
         //     return bcInstance = bcInstance ? bcInstance : new BlockchainManager();
         // },
 
-        crypto : function(){
+        crypto: () => {
             return cryptoInstance = cryptoInstance ? cryptoInstance : new CryptoManager();
         },
 
-        db : function(){
+        db: () => {
             return dbInstance = dbInstance ? dbInstance : new DatabaseManager();
         },
 
-        token : function() {
+        token: () => {
             return tokenInstance = tokenInstance ? tokenInstance : new TokenManager();
         },
 
-        pdf : function() {
+        pdf: () => {
             return pdfInstance = pdfInstance ? pdfInstance : new PDFManager();
         },
 
-        clientRequest : function(){
+        clientRequest: () => {
             return clientRequestInstance = clientRequestInstance ? clientRequestInstance : new ClientRequestManager();
         }
     }

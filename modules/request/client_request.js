@@ -41,7 +41,24 @@ class ClientRequestManager extends AbstractManager {
     addRequest(request) {
         this.requestMap.set(request.mid, request);
 
-        var result = this.requestHandler.get(request.cmd).processRequest(request);
+        this.requestHandler.get(request.cmd).processRequest(request, (resultCode, result)=>{
+            switch(resultCode){
+                case ClientRequestManager.RESULT_FAILURE : {
+                    // result instanceof Error Retry?
+                    break;
+                }
+
+                case ClientRequestManager.RESULT_PENDING : {
+                    // result instanceof Object Keep request?
+                    break;
+                }
+
+                case ClientRequestManager.RESULT_SUCCESS : {
+                    // Remove request?
+                    break;
+                }
+            }
+        });
     }
     
     /**

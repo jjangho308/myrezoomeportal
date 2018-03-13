@@ -13,11 +13,12 @@ class PushManager extends AbstractManager {
     constructor(opt) {
         super(opt);
     }
+
     init() {
         //property를 가져온다
         var propertyManager = Managers.property();
 
-        var server = [{
+        this.connect([{
             host: propertyManager.get(Property.PUSH_HOST),
             port: propertyManager.get(Property.PUSH_PORT),
             ssl: true,
@@ -26,9 +27,7 @@ class PushManager extends AbstractManager {
                 login: propertyManager.get(Property.PUSH_HEADER_LOGIN),
                 passcode: propertyManager.get(Property.PUSH_HEADER_PASSCODE)
             }
-        }];
-
-        this.connect(server, function (factory) {
+        }], (factory) => {
             console.log("AMQ Connect Success!");
         })
     }
@@ -77,7 +76,8 @@ class PushManager extends AbstractManager {
      */
     sendMessage(msg, orgs, cb) {
 
-        this.msg = msg;
+        // FIXME 이렇게 할 경우 아래의 this.msg에서 access했을 때 의도한 msg와 다른 msg가 들어 있을 가능성 있음
+        // this.msg = msg;
         // 1.getting QueueName, using orgcode..
         // 1.1 make SQL Param
         var sqlparam = '';
@@ -88,26 +88,25 @@ class PushManager extends AbstractManager {
             }
         }
 
-
-
         var db = Managers.db();
-        var queryResult;
 
-        // 1.2 query by 1.1
-        db.getOrgInfo(sqlparam, (res => {
-            for (var i in res) {
+        db.getOrgDao().getByCodes(orgs, ((err, result) => {
+            !!err ? cb(err) : (() => {
+                var msgString = JSON.stringify(msg);
+                for (var i in result) {
 
-                //seeting destination at this.destination
-                this.channel.send(res[i].ORG_QUEUE_NAME, JSON.stringify(this.msg), err => {
+                    //seeting destination at this.destination
+                    this.channel.send(result[i].queueName, msgString, err => {
 
-                    if (err) {
-                        console.log('send error: ' + err.message);
-                        return;
-                    }
-                    console.log('sent message');
-                    cb(err);
-                });
-            }
+                        if (err) {
+                            console.log('send error: ' + err.message);
+                            cb(err)
+                        }
+                        console.log('sent message');
+                        cb(null);
+                    });
+                }
+            }).call(this);
         }).bind(this));
     }
 
