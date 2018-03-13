@@ -18,14 +18,19 @@ class UserLoginRequestHandler extends AbstractClientRequestHandler {
         
         // 1. 사용자 정보를 DB에서 조회
         managers.db().getUserInfo(clientReq.userid, function (res) {
+
+            console.log(res);
+
             // 사용자 유저 존재
             if (!!res) {
                 // 비밀번호 확인
                 if (clientReq.password === res[0].PASSWORD) {
                     // 토큰 생성
+
+                    var date = new Date();                    
                     var userInfo = {};
                     userInfo.userid = clientReq.userid;
-                    userInfo.timestamp = "2018-03-08";
+                    userInfo.timestamp = date.getTime();
                     var tokenvalue = managers.token().generateToken(userInfo);
 
                     var response = {};

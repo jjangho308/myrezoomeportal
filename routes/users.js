@@ -27,21 +27,21 @@ router.post('/', function (req, res, next) {
 
   var cmd = req.body.cmd;
 
-  if (cmd == 'login') {
+  if (cmd == 'Login') {
     var userLogin = new UserLoginHandler();
     try {
       userLogin.process(req.body, res);
     } catch (exception) {
       console.log(exception);
     }
-  } else if (cmd == 'search') {
+  } else if (cmd == 'Search') {
     var search = new SearchRequestHandler();
     try {
       search.process(req.body, res);
     } catch (exception) {
       console.log(exception);
     }
-  } else if (cmd == 'certificate') {
+  } else if (cmd == 'Certificate') {
     var certificate = new CertificateHandler();
 
     // var REZOOME_CERTIFICATE = {};
