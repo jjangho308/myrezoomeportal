@@ -1,7 +1,8 @@
 import stompit from 'stompit'
-import AbstractManager from "./abstract";
 import Managers from "../core/managers";
-import Property from "./property";
+
+import AbstractManager from "../abstract_manager";
+import Property from "../property/property";
 
 /**
  * PushManager. <br />
