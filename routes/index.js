@@ -24,7 +24,7 @@ router.get('/main', function (req, res, next) {
 
 /* router for above page logic */
 router.post('/', managers.token().filterToken, (req, res, next) => {
-// router.post('/', (req, res, next) => {
+  // router.post('/', (req, res, next) => {
   console.log(req.body);
 
   var cmd = req.body.cmd;
@@ -39,7 +39,12 @@ router.post('/', managers.token().filterToken, (req, res, next) => {
   } else if (cmd === 'Join') {
 
   } else if (cmd === 'Certificate') {
-
+    var certificate = new CertificateHandler();
+    try {
+      certificate.process(req.body, res);
+    } catch (exception) {
+      console.log(exception);
+    }
   } else {
     res.send(403);
   }

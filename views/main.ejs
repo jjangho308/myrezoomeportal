@@ -14,7 +14,7 @@
                         //userid: 'rezoome',
                         orgs: [
                             { 'code': '01' },
-                            { 'code': '02' }
+                            { 'code': '03' }
                         ]
                     }
                 };
@@ -38,19 +38,23 @@
         });
 
         function pdf() {
-            var id = $("#id").val();
-            var pw = $("#pw").val();
 
             var param = {
-                userid: id,
-                password: pw,
-                cmd: 'certificate'
-            };
+                    cmd: 'Certificate',
+                    mid: 'midxxxxx',
+                    args: {
+                        
+                    }
+                };
 
             $.ajax({
-                url: '/users',
+                url: '/',
                 type: 'post',
-                data: param,
+                data: JSON.stringify(param),
+                    contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "bearer " + sessionStorage.getItem("token"));
+                },
                 success: function (data) {
                     //alert(JSON.stringify(data));
                     //console.log(JSON.stringify(data));                    
