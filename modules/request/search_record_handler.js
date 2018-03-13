@@ -37,10 +37,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         //get personal info(rezoome id => username, birth, gender, phone, ci, email)
         ///////////////////////////////////////////////////////////////////
         var db = Managers.db();
-        db.init();
 
         var push = Managers.push();
-        push.init();
         ///////////////////////////////////////////////////////////////////
 
         //send message
