@@ -77,49 +77,47 @@ class PushManager extends AbstractManager {
      * @param {object} msg
      */
     sendMessage(msg, orgs, cb) {
-        
+
         this.msg = msg;
         // 1.getting QueueName, using orgcode..
         // 1.1 make SQL Param
 
-        if(!!orgs){
-            console.log("orgs is null");
-            return;
-        }
-
-        var sqlparam = '';
-        for (var i in orgs) {
-            sqlparam += JSON.stringify(orgs[i].code);
-            if (i != (orgs.length - 1)) {
-                sqlparam = sqlparam + ",";
+        if (!!orgs) {
+            var sqlparam = '';
+            for (var i in orgs) {
+                sqlparam += JSON.stringify(orgs[i].code);
+                if (i != (orgs.length - 1)) {
+                    sqlparam = sqlparam + ",";
+                }
             }
+
+            var db = Managers.db();
+            db.init();
+            var queryResult;
+
+            // 1.2 query by 1.1
+            db.getOrgInfo(sqlparam, function (res) {
+                for (var i in res) {
+
+                    //seeting destination at this.destination
+                    this.channel.send(res[i].ORG_QUEUE_NAME, JSON.stringify(this.msg), function (err) {
+
+                        if (err) {
+                            console.log('send error: ' + err.message);
+                            return;
+                        }
+                        console.log('sent message');
+                        cb(err);
+                    });
+                }
+            }.bind(this));
         }
-
-        var db = Managers.db();
-        db.init();
-        var queryResult;
-
-        // 1.2 query by 1.1
-        db.getOrgInfo(sqlparam, function (res) {
-            for (var i in res) {                
-    
-                //seeting destination at this.destination
-                this.channel.send(res[i].ORG_QUEUE_NAME, JSON.stringify(this.msg), function (err) {
-                    
-                    if (err) {
-                        console.log('send error: ' + err.message);
-                        return;
-                    }
-                    console.log('sent message');
-                    cb(err);
-                });
-            }
-        }.bind(this));
     }
-
     disconnect() {
         this.channel.close();
     }
+
+
 }
 
 export default PushManager;
