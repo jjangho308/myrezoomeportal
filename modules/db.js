@@ -74,6 +74,7 @@ class DataManager {
                     cb(res);
                 });
             }
+            connection.release();
         });
 
     }
@@ -89,6 +90,22 @@ class DataManager {
                     cb(res);
                 });
             }
+            connection.release();
+        });
+    }
+
+    getOrgAllInfo(cb) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                throw err;
+            }
+            else {
+                var orgDao1 = new orgDao(connection);
+                orgDao1.getall(function (res) {
+                    cb(res);
+                });
+            }
+            connection.release();
         });
     }
 }
