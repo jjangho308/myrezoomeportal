@@ -1,10 +1,13 @@
-import csdr from 'cassandra-driver';
 
-class AbstractDAO {
+/**
+ * Abstract class of DAO. <br />
+ * 
+ * @since 180313
+ * @author TACKSU
+ */
+class AbstractDao {
     constructor(opt) {
-        if (!opt.driver) {
-            throw new Error("No driver")
-        }
-        this.driver = opt.driver;
     }
 }
+
+export default AbstractDao;
