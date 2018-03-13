@@ -3,10 +3,12 @@ import PushManager from '../push';
 import Managers from '../../core/managers'
 import AbstractClientRequestHandler from './abstract_clientrequest_handler';
 
+import SearchRecordPush from '../push/message/search';
+
 
 /**
  * 이력 검색 요청 핸들러.
-*/
+ */
 class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     constructor(opt) {
         super(opt);
@@ -27,12 +29,12 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      *              ]
      * }
      */
-    process(clientReq, httpRes) {
+    processRequest(clientReq) {
         // 1. 기관 정보를 db에서 가져오고
-        
+
         //orgcode => sendmessage 
-        var rezoome_id =  clientReq.args.userid;
-        var orgs = clientReq.args.orgs;
+        var rezoome_id = clientReq.userid;
+        var orgs = clientReq.orgs;
 
         //get personal info(rezoome id => username, birth, gender, phone, ci, email)
         ///////////////////////////////////////////////////////////////////
@@ -42,22 +44,23 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         ///////////////////////////////////////////////////////////////////
 
         //send message
-        db.getUserInfo(rezoome_id, function(res){
-            
-            this.makeMSG(clientReq, res, function(msg){
-                
-                    push.sendMessage(msg, orgs, function(err){
-                });
-            })
+        db.getUserInfo(rezoome_id, function (res) {
+
+            var msg = this.makeMSG(clientReq, res);
+            push.sendMessage(msg, orgs, err => {
+
+            });
         }.bind(this));
-        //send httpRes
+
+        return ClientRequestManager.RESULT_PENDING;
     }
 
-    makeMSG(clientReq, personalInfo, cb){
-        var msg = {};
-        msg.cmd=clientReq.cmd;
-        msg.mid=clientReq.mid;
-        
+    processResponse(clientRequest, agentRequest) {
+        var socket = clientRequest.socket;
+        socket.push
+    }
+
+    makeMSG(clientReq, personalInfo) {
 
         var args = {};
         args.username = personalInfo[0].NAME;
@@ -67,8 +70,12 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         args.ci = personalInfo[0].CI;
         args.email = personalInfo[0].EMAIL;
 
-        msg.args = args;
-        cb(msg);
+        var msg = new SearchRecordPush({
+            cmd: clientReq.cms,
+            mid: clientReq.mid,
+            args = args
+        });
+        return msg;
     }
 }
 

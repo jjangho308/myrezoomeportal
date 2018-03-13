@@ -16,7 +16,6 @@ class PushManager extends AbstractManager {
     init() {
         //property를 가져온다
         var propertyManager = Managers.property();
-        propertyManager.init();
 
         var server = [{
             host: propertyManager.get(Property.PUSH_HOST),
@@ -77,7 +76,7 @@ class PushManager extends AbstractManager {
      * @param {object} msg
      */
     sendMessage(msg, orgs, cb) {
-        
+
         this.msg = msg;
         // 1.getting QueueName, using orgcode..
         // 1.1 make SQL Param
@@ -92,16 +91,15 @@ class PushManager extends AbstractManager {
 
 
         var db = Managers.db();
-        db.init();
         var queryResult;
 
         // 1.2 query by 1.1
-        db.getOrgInfo(sqlparam, function (res) {
-            for (var i in res) {                
-    
+        db.getOrgInfo(sqlparam, (res => {
+            for (var i in res) {
+
                 //seeting destination at this.destination
-                this.channel.send(res[i].ORG_QUEUE_NAME, JSON.stringify(this.msg), function (err) {
-                    
+                this.channel.send(res[i].ORG_QUEUE_NAME, JSON.stringify(this.msg), err => {
+
                     if (err) {
                         console.log('send error: ' + err.message);
                         return;
@@ -110,7 +108,7 @@ class PushManager extends AbstractManager {
                     cb(err);
                 });
             }
-        }.bind(this));
+        }).bind(this));
     }
 
     disconnect() {

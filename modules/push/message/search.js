@@ -1,7 +1,10 @@
-import PushManager from '../../push';
 
-import Util from '../../util/util';
-
+/**
+ * Push message instance for SearchRecordCommand. <br />
+ * 
+ * @since 180313
+ * @author TACKSU
+ */
 class SearchRecordPush{
     
     /**
@@ -10,8 +13,10 @@ class SearchRecordPush{
      * @param {Socket} socket
      */
     constructor(opt){
-        this.mid        = Util.uuid();
-        this.socekt     = this.socket;
-        this.command    = PushManager.SEARCH_RECORD;
+        this.mid    = opt.mid;
+        this.cmd    = "Search";
+        this.args   = opt.args;
     }
 }
+
+export default SearchRecordPush;

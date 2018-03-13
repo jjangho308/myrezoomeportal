@@ -6,6 +6,7 @@ import CryptoManager from '../modules/crypto';
 import DatabaseManager from '../modules/db';
 import TokenManager from '../modules/token';
 import PDFManager from '../modules/pdf';
+import ClientRequestManager from '../modules/request/client_request';
 
 /**
  * Wrapper function to provide singleton instance of each modules. <br />
@@ -15,13 +16,15 @@ import PDFManager from '../modules/pdf';
  */
 export default (function(){
     var propertyInstance = null;
-    var pushInstance = null;
-    var networkInstance = null;
-    var bcInstance = null;
     var cryptoInstance = null;
+    var networkInstance = null;
     var dbInstance = null;
+    var pushInstance = null;
+    var bcInstance = null;
     var tokenInstance = null;
     var pdfInstance = null;
+    var clientRequestInstance = null;
+    
     return {
         property : function(){
             return propertyInstance = propertyInstance ? propertyInstance : new PropertyManager();
@@ -53,6 +56,10 @@ export default (function(){
 
         pdf : function() {
             return pdfInstance = pdfInstance ? pdfInstance : new PDFManager();
-        }        
+        },
+
+        clientRequest : function(){
+            return clientRequestInstance = clientRequestInstance ? clientRequestInstance : new ClientRequestManager();
+        }
     }
 })();

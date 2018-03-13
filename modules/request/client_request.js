@@ -19,7 +19,14 @@ class ClientRequestManager extends AbstractManager {
     }
 
     init() {
+        /**
+         * Map of request key and entity. <br />
+         */
         this.requestMap = new HashMap();
+
+        /**
+         * Map of request entity and handler. <br />
+         */
         this.requestHandler = new HashMap();
         this.requestHandler.set("login", new UserLoginHandler());
         this.requestHandler.set('search', new SearchRecordHandler());
@@ -32,9 +39,9 @@ class ClientRequestManager extends AbstractManager {
      * @param {object} job 
      */
     addRequest(request) {
-        this.requestMap.set(request.id, request);
+        this.requestMap.set(request.mid, request);
 
-        var result = this.requestHandler.get(request.cmd).handle(request);
+        var result = this.requestHandler.get(request.cmd).processRequest(request);
     }
     
     /**
