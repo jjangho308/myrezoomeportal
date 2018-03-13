@@ -33,6 +33,7 @@ class TokenManager extends AbstractManager {
                 } else {
                     console.log(decoded);
                     req.token = bearerToken;
+                    req.body.args.userid = decoded.data.userid;
                     next();
                 }
             });
