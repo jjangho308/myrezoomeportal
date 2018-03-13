@@ -19,13 +19,13 @@ class ClientRequestManager extends AbstractManager {
     constructor(opt) {
         super(opt);
         this.entityMap = new HashMap();
-        this.entityHandlerMap = new HashMap();
+        this.handlerMap = new HashMap();
         this.requestMap = new HashMap();
     }
 
     init() {
         this.entityMap.set('Search', SearchRecordRequest);
-        this.entityHandlerMap.set(SearchRecordRequest, new SearchRecordHandler());
+        this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
 
         this.setPrepared();
     }
@@ -35,13 +35,13 @@ class ClientRequestManager extends AbstractManager {
     }
 
     getHandler(entity) {
-        return this.entityHandlerMap.get(entity.prototype);
+        return this.handlerMap.get(entity.prototype);
     }
 
     /**
-     * Put request job. <br />
+     * Handle client request
      * 
-     * @param {object} job 
+     * @param {AbstractClientRequest} request
      */
     request(request) {
         this.requestMap.set(request.mid, request);
