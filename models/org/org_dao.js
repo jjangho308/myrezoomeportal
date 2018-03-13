@@ -34,6 +34,23 @@ class OrgDao {
         });
     }
 
+    getall(cb){
+
+        var makequery = util.format(orgQuery.getall);
+
+        this.connection.query(makequery, function(err, rows){
+            if(err) {
+                throw err;
+            } else {              
+                var response = {};
+                response.code = '200';
+                response.err = '';
+                //res.send(response);
+                cb(rows);
+            }
+        });
+    }
+
     set(opt, user, cb){
         
     }
