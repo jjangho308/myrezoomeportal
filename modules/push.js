@@ -81,6 +81,12 @@ class PushManager extends AbstractManager {
         this.msg = msg;
         // 1.getting QueueName, using orgcode..
         // 1.1 make SQL Param
+
+        if(!!orgs){
+            console.log("orgs is null");
+            return;
+        }
+
         var sqlparam = '';
         for (var i in orgs) {
             sqlparam += JSON.stringify(orgs[i].code);
@@ -88,8 +94,6 @@ class PushManager extends AbstractManager {
                 sqlparam = sqlparam + ",";
             }
         }
-
-
 
         var db = Managers.db();
         db.init();
