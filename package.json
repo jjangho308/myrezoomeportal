@@ -5,7 +5,7 @@
   "scripts": {
     "babel-node": "babel-node --presets es2015",
     "start": "nodemon --exec npm run babel-node -- ./bin/www",
-    "test": "mocha --compilers js:babel-core/register"
+    "test": "mocha --reiquire babel-core/register"
   },
   "dependencies": {
     "blob-stream": "^0.1.3",
