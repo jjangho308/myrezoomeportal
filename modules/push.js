@@ -78,7 +78,7 @@ class PushManager extends AbstractManager {
      */
     sendMessage(msg, orgs, cb) {
 
-        this.msg = msg;
+        
         // 1.getting QueueName, using orgcode..
         // 1.1 make SQL Param
 
@@ -101,7 +101,7 @@ class PushManager extends AbstractManager {
                 for (var i in res) {
 
                     //seeting destination at this.destination
-                    this.channel.send(res[i].ORG_QUEUE_NAME, JSON.stringify(this.msg), function (err) {
+                    this.channel.send(res[i].ORG_QUEUE_NAME, JSON.stringify(msg), function (err) {
 
                         if (err) {
                             console.log('send error: ' + err.message);
@@ -122,7 +122,7 @@ class PushManager extends AbstractManager {
                 for (var i in res) {
 
                     //seeting destination at this.destination
-                    this.channel.send(res[i].ORG_QUEUE_NAME, JSON.stringify(this.msg), function (err) {
+                    this.channel.send(res[i].ORG_QUEUE_NAME, JSON.stringify(msg), function (err) {
 
                         if (err) {
                             console.log('send error: ' + err.message);
