@@ -1,5 +1,6 @@
 import AbstractManager from "./abstract";
 import fs from 'fs';
+import QRCode from 'qrcode';
 
 /**
  * PDFManager. <br />
@@ -30,7 +31,6 @@ class PDFkManager extends AbstractManager {
 
                 // create file and http response
                 doc.pipe(fs.createWriteStream('public/certificate.pdf'));
-                // doc.pipe(res);
 
                 // QR코드 입력
                 doc.image(qr_url, 490, 0, {
@@ -39,7 +39,7 @@ class PDFkManager extends AbstractManager {
                     valign: 'center'
                 });
 
-                doc.font('fonts/test.ttf')
+                doc.font('public/fonts/test.ttf')
                     .fontSize(35)
                     .text("어학증명서", 50, 120, {
                         align: 'center'
@@ -95,8 +95,13 @@ class PDFkManager extends AbstractManager {
                 });
 
                 // end and display the document in the iframe to the right
-                doc.end();                
-                res.render('pdfview', {pdf: 'certificate.pdf' });
+                doc.end();     
+                //doc.pipe(res);    
+                
+                //res.render('pdfview', {pdf: 'certificate.pdf'});
+                //res.send("ok")
+                
+                res.send({data: '/certificate.pdf'});
             } catch (execption) {
                 console.log(execption);
             }

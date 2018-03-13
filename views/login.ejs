@@ -24,8 +24,8 @@
                 type: 'post',
                 data: param,
                 success: function (data) {
-                    alert(JSON.stringify(data));
-                    window.location.replace('/users/main');
+                    // alert(JSON.stringify(data));
+                    window.location.replace('/users/main?token=' + data.token);
                 }
             });
         }
@@ -34,8 +34,8 @@
 
 <body>
     <h3>레주메</h3>  
-    <input id="id" type="text" />
-    <input id="pw" type="text" />
+    <input id="id" type="text" value="rezoome"/>
+    <input id="pw" type="text" value="1234"/>
 
     <button onclick="login()">login</button>
 </body>
