@@ -51,14 +51,19 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         db.getUserDao().get(rezoome_id, (users) => {
             //console.log("test user :" + users);
             
+            var targs=users;
+            targs.pkey = clientReq.pkey;
 
             var msg = new SearchRecordPush({
                 cmd: clientReq.cmd,
                 mid: clientReq.mid,
-                sid: ClientReq.sid,
-                args : users
+                sid: clientReq.sid, 
+                args : targs,
             });
+            
 
+
+            console.log("===================msg===================");
             console.log(msg);
 
             Managers.push().sendMessage(msg, orgs, err => {

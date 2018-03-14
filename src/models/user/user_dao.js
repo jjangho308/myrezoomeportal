@@ -21,8 +21,6 @@ class UserDao {
 
     get(userid, cb) {
 
-        console.log("test 20180314 1 : " + userid);
-
         var param = [userid];
 
         this.connectionPool.getConnection(function (err, connection) {
