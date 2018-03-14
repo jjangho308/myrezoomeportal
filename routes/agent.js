@@ -23,7 +23,7 @@ router.post('/', (req, res, next) => {
 
         result.code = '200';
         result.msg = 'success';
-        result.queueName = 'QUEUE_A';
+        result.queueName = 'OPIC';
 
         response.result = result;
 
