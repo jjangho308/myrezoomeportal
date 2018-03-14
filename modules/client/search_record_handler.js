@@ -39,21 +39,25 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         // 1. 기관 정보를 db에서 가져오고
 
         //orgcode => sendmessage 
-        var rezoome_id = clientReq.userid;
-        var orgs = clientReq.orgs;
+        var rezoome_id = clientReq.args.userid;
+        var orgs = clientReq.args.orgs;
 
         //get personal info(rezoome id => username, birth, gender, phone, ci, email)
         ///////////////////////////////////////////////////////////////////
         var db = Managers.db();
 
         //send message
-        db.getUserDao().get(rezoome_id, (err, users) => {
+        db.getUserDao().get(rezoome_id, (users) => {
+            //console.log("test user :" + users);
+
 
             var msg = new SearchRecordPush({
                 cmd: clientReq.cmd,
                 mid: clientReq.mid,
                 args : users
             });
+
+            console.log(msg);
 
             Managers.push().sendMessage(msg, orgs, err => {
                 !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);

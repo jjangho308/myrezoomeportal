@@ -1,6 +1,7 @@
 //import AbstractDAO from 'abstract_dao.js';
 import orgQuery from './org_query.js';
 import util from 'util';
+import OrgModel from './org';
 
 /**
  * DAO for org. <br />
@@ -25,9 +26,33 @@ class OrgDao {
      * @param {string} orgcode Specific orgcode.
      * @param {function(err:Error, result:OrgModel[])} cb Callback.
      */
-    get(orgcodes, cb) {
+    getByCodes(orgcodes, cb) {
 
         var makequery = util.format(orgQuery.getByCodes, orgcodes);
+
+        this.connectionPool.getConnection((err, connection) => {
+            if (err) {
+                cb(err);
+            } else {
+                connection.query(makequery, function (err, rows) {
+                    if (err) {
+                        cb(err, null);
+                    } else {
+                        var result = [];
+                        for (var i in rows) {
+                            result.push(new OrgModel(rows[i]));
+                        }
+                        connection.release();
+                        cb(null, result);
+                    }
+                });
+            }
+        });
+    }
+
+    findAll(cb) {
+
+        var makequery = util.format(orgQuery.findAll);
 
         this.connectionPool.getConnection((err, connection) => {
             if (err) {
@@ -38,30 +63,14 @@ class OrgDao {
                         cb(err);
                     } else {
                         var result = [];
+                        console.log(rows);
                         for (var i in rows) {
                             result.push(new OrgModel(rows[i]));
                         }
                         connection.release();
-                        cb(null, rows);
+                        cb(result);
                     }
                 });
-            }
-        });
-    }
-
-    findAll(query, cb) {
-
-        var makequery = util.format(orgQuery.findAll);
-
-        this.connection.query(makequery, function (err, rows) {
-            if (err) {
-                throw err;
-            } else {
-                var response = {};
-                response.code = '200';
-                response.err = '';
-                //res.send(response);
-                cb(rows);
             }
         });
     }

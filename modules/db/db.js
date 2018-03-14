@@ -1,6 +1,6 @@
 import mysql from 'mysql';
 import UserDao from '../../models/user/user_dao';
-import orgDao from '../../models/org/org_dao';
+import OrgDao from '../../models/org/org_dao';
 import Managers from "../../core/managers";
 import Property from "../property/property";
 import AbstractManager from '../abstract_manager';
@@ -79,7 +79,7 @@ class DataManager extends AbstractManager{
             if (err) {
                 throw err;
             } else {
-                var orgDao1 = new orgDao(connection);
+                var orgDao1 = new OrgDao(connection);
                 orgDao1.get(orgcodes, function (res) {
                     cb(res);
                 });
@@ -93,7 +93,7 @@ class DataManager extends AbstractManager{
             if (err) {
                 throw err;
             } else {
-                var orgDao1 = new orgDao(connection);
+                var orgDao1 = new OrgDao(connection);
                 orgDao1.getall(function (res) {
                     cb(res);
                 });

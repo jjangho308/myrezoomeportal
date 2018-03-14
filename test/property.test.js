@@ -2,10 +2,12 @@ import crypto from 'crypto';
 import assert from 'assert';
 
 import PropertyManager from '../modules/property/property';
+import initialize from '../core/initializer';
 
 describe.skip('Property test suit', () => {
     var propertyManager;
     before('PropertyManager init', () => {
+        Initializer();
         process.env.NODE_ENV = ( process.env.NODE_ENV && ( process.env.NODE_ENV ).trim().toLowerCase() == 'production' ) ? 'production' : 'development';
         propertyManager = new PropertyManager();
         propertyManager.init();

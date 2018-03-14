@@ -1,10 +1,12 @@
-import TokenManager from '../modules/token/token'
+import TokenManager from '../modules/token/token';
+import initialize from '../core/initializer';
 
 describe.skip('TokenManager Test Suit', () => {
     var token;
     var tokenString;
 
     before('Token module init', () => {
+        Initializer();
         token = new TokenManager();
 
         var info = {};

@@ -82,34 +82,64 @@ class PushManager extends AbstractManager {
         // this.msg = msg;
         // 1.getting QueueName, using orgcode..
         // 1.1 make SQL Param
-        var sqlparam = '';
-        for (var i in orgs) {
-            sqlparam += JSON.stringify(orgs[i].code);
-            if (i != (orgs.length - 1)) {
-                sqlparam = sqlparam + ",";
-            }
-        }
+        if (!!orgs) {
 
-        var db = Managers.db();
-
-        db.getOrgDao().getByCodes(orgs, ((err, result) => {
-            !!err ? cb(err) : (() => {
-                var msgString = JSON.stringify(msg);
-                for (var i in result) {
-
-                    //seeting destination at this.destination
-                    this.channel.send(result[i].queueName, msgString, err => {
-
-                        if (err) {
-                            console.log('send error: ' + err.message);
-                            cb(err)
-                        }
-                        console.log('sent message');
-                        cb(null);
-                    });
+            var sqlparam = '';
+            for (var i in orgs) {
+                sqlparam += JSON.stringify(orgs[i].code);
+                if (i != (orgs.length - 1)) {
+                    sqlparam = sqlparam + ",";
                 }
-            }).call(this);
-        }).bind(this));
+            }
+
+
+
+            var db = Managers.db();
+            console.log(sqlparam);
+
+            db.getOrgDao().getByCodes(sqlparam, ((err, result) => {
+                !!err ? cb(err) : (() => {
+                    console.log(result);
+                    var msgString = JSON.stringify(msg);
+                    for (var i in result) {
+
+                        //seeting destination at this.destination
+                        this.channel.send(result[i].queueName, msgString, err => {
+
+                            if (err) {
+                                console.log('send error: ' + err.message);
+                                cb(err)
+                            }
+                            console.log('sent message');
+                            cb(null);
+                        });
+                    }
+                }).call(this);
+            }).bind(this));
+        }
+        else {
+            var db = Managers.db();
+
+            db.getOrgDao().findAll(function (result) {
+                if (!!result) {
+                    var msgString = JSON.stringify(msg);
+                    for (var i in result) {
+                        //seeting destination at this.destination
+                        this.channel.send(result[i].queueName, msgString, err => {
+
+                            if (err) {
+                                console.log('send error: ' + err.message);
+                                cb(err)
+                            }
+                            console.log('sent message');
+                            cb(null);
+                        });
+                    }
+                } else {
+                    console.log("error");
+                }
+            }.bind(this));
+        }
     }
 
     disconnect() {

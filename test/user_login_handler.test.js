@@ -1,9 +1,10 @@
 import managers from '../core/managers';
+import initialize from '../core/initializer';
 
 describe.skip('User Login Test Suit', function () {
 
     before('init', () => {
-
+        Initializer();
     })
 
     it('TC#1 login', done => {

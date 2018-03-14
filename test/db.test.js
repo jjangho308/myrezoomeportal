@@ -3,10 +3,12 @@ import AnchorDAO from '../models/anchor/anchor_dao';
 import crypto from 'crypto';
 import DataManager from '../modules/db/db';
 import NexledgerService from '../modules/blockchain/nexledgerservice';
+import initialize from '../core/initializer';
 
 describe.skip('Cassandra test suit', () => {
     var csdr = null;
     before('DB module initialize', () => {
+        Initializer();
         /*
         db = new DatabaseManager();
         db.connectCsdr({
@@ -83,6 +85,7 @@ describe.skip('Blockchain test suit', () => {
     var nexledgerService = null;
 
     before('Blockchain module initialize', () => {
+        Initializer();
         nexledgerService = new NexledgerService();
         nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
     });
@@ -117,16 +120,7 @@ describe.skip('Blockchain test suit', () => {
 describe.skip('MySQL test suit', () => {
     var db = null;
     before('DB module initialize', () => {
-        var dbConfig = {
-            host : "127.0.0.1",
-            port : 3306,
-            user : "rezoome",
-            password : "sgen2018!",
-            database: "rezoome"
-        }
-        
-        db = new DataManager(dbConfig);
-
+        Initializer();
     });
 
     it('Get user', done=>{
