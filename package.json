@@ -5,7 +5,8 @@
   "scripts": {
     "babel-node": "babel-node --presets es2015",
     "start": "nodemon --exec npm run babel-node -- ./bin/www",
-    "test": "mocha --require babel-core/register"
+    "test": "mocha --require babel-core/register",
+    "build": "./node_modules/.bin/babel ./test/*.test.js --out-dir dist --source-maps"
   },
   "dependencies": {
     "blob-stream": "^0.1.3",
@@ -42,6 +43,8 @@
   "babel": {
     "presets": [
       "es2015"
-    ]
+    ],
+    "retainLines" : true,
+    "sourceMaps" : true
   }
 }

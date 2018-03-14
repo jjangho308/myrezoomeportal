@@ -7,5 +7,6 @@
 */
 class AnchorModel extends AbstractModel{
     constructor(opt){
+        super(opt);
     }
 }
