@@ -45,7 +45,7 @@ class ClientRequestManager extends AbstractManager {
      */
     request(request) {
         this.requestMap.set(request.mid, request);
-        this.requestHandler.get(request.constructor).processRequest(request, ((resultCode, result) => {
+        this.requestHandler.get(request.constructor).request(request, ((resultCode, result) => {
             switch (resultCode) {
                 case ClientRequestManager.RESULT_FAILURE:
                     {

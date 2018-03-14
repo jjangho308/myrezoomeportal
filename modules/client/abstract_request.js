@@ -24,8 +24,8 @@ class AbstractClientRequest {
         this.socket = opt.socket;
     }
 
-    processRequest(clientRequestEntity, done) {}
-    processResponse(clientResponseEntity, done) {}
+    request(clientRequestEntity, done) {}
+    response(clientResponseEntity, done) {}
 }
 
 export default AbstractClientRequest;
