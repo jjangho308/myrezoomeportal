@@ -1,3 +1,4 @@
+import AbstractPush from "./abstract_message"
 
 /**
  * Push message instance for SearchRecordCommand. <br />
@@ -5,7 +6,7 @@
  * @since 180313
  * @author TACKSU
  */
-class SearchRecordPush{
+class SearchRecordPush extends AbstractPush{
     
     /**
      * 
@@ -13,9 +14,8 @@ class SearchRecordPush{
      * @param {Socket} socket
      */
     constructor(opt){
-        this.mid    = opt.mid;
+        super(opt);
         this.cmd    = "Search";
-        this.args   = opt.args;
     }
 }
 
