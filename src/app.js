@@ -36,7 +36,7 @@ app.use(function (req, res, next) {
   console.log('Initial middleware' + req.method);
   next();
 });
-app.use('/', agentRouter);
+app.use('/agent', agentRouter);
 app.use('/client', clientRouter);
 // app.use('/users', users);
 

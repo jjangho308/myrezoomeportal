@@ -1,6 +1,6 @@
 import express from 'express';
 
-import tokenAuth from '../mw/auth';
+import tokenAuth from '../mw/client_auth';
 import controller from './client_ctrl';
 import managers from '../core/managers';
 

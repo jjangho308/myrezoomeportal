@@ -8,7 +8,7 @@ import controller from './agent_ctrl';
  * @author TACKSU
  */
 var router = express.Router();
-router.post('/agent', controller.post);
-router.use('/agent', controller.default);
+router.post('/', controller.post);
+router.use('/', controller.default);
 
 export default router;
