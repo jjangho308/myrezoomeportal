@@ -3,7 +3,7 @@ import Managers from '../core/managers'
 import TokenManager from '../modules/token/token'
 import jwt from 'jsonwebtoken';
 
-describe.skip('TokenManager Test Suit', () => {
+describe('TokenManager Test Suit', () => {
     var token;
     var tokenString;
 
@@ -17,7 +17,7 @@ describe.skip('TokenManager Test Suit', () => {
         // token.setInfo(info);
     });
 
-    it('TC#1 TokenManager.generateToken()', done => {
+    it.skip('TC#1 TokenManager.generateToken()', done => {
         tokenString = token.generateToken();
         if (typeof tokenString !== 'undefined') {
             console.log("token : \n" + tokenString);
@@ -25,7 +25,7 @@ describe.skip('TokenManager Test Suit', () => {
         }
     });
 
-    it('TC#2 TokenManager.validToken()', done => {
+    it.skip('TC#2 TokenManager.validToken()', done => {
         var decoded = token.decodedToken(tokenString);
 
         console.log("decoded :");
@@ -39,7 +39,7 @@ describe.skip('TokenManager Test Suit', () => {
     it('JWT POC', done => {
         var signedToken = jwt.sign({
             data: {
-                userId: 'asdfasdf123'
+                userid: 'asdfasdf123'
             },
             exp: Math.floor(Date.now() / 1000) + (60 * 60 * 1) // 1hour
         }, 'rezoomesecretkey');
