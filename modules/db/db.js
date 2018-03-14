@@ -40,6 +40,7 @@ class DataManager extends AbstractManager{
 
         this.connectionPool.getConnection(function (err, connection) {
             if (err) {
+                console.log(err);
                 throw err;
             } else {
                 /*

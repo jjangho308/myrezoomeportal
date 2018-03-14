@@ -1,7 +1,7 @@
 import SearchRecordRequestHandler from '../modules/client/search_record_handler';
 import Initializer from '../core/initializer';
 
-describe('SearchRecordRequestHandler Test suit', () => {
+describe.skip('SearchRecordRequestHandler Test suit', () => {
     var HD=null;
     before('SearchRecordRequestHandler init', () => {
         Initializer();
@@ -15,9 +15,11 @@ describe('SearchRecordRequestHandler Test suit', () => {
         //     }
         // });        
         HD.request({"mid" : "mid-00001","token" : "asdfasfasdfasdfasdf","cmd" : "Search","args" : {"publickey" :"cmzcdkrkeicjk=dkrkgvndfj3739","userid" : "rezoome","orgs" : [{"code": "01","key": {"var1": "32832","var2": "abcd"}},{"code": "02","key": {"var1": "33253","var2": "ddddd"}}]}}, function(res){
+            console.log(res);
             if(res==1) {
                 done();
             }
+
         });        
 
     }).timeout(10000);
