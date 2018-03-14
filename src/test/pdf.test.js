@@ -2,13 +2,14 @@ import fs from 'fs';
 import pdfKit from 'pdfkit';
 import blobStream from 'blob-stream';
 import PDFManager from '../modules/pdf/pdf';
+import initialize from '../core/initializer';
 
 describe.skip('PDF Test Suit', () => {
     var pdf;
 
     before('PDF module init', () => {
         // server.listen(4000);
-        pdf = new PDFManager();
+        Initializer();
     });
 
     it('TC#1 PDFManger.makePDF', done => {

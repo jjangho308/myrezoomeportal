@@ -1,9 +1,11 @@
 import CryptoManager from '../modules/crypto/crypto';
+import initialize from '../core/initializer';
 
 describe.skip('Crypto test suit', () => {
     var crypto;
 
     before('Crypto module init', () => {
+        Initializer();
         crypto = new CryptoManager();
         crypto.setDefaultSpec({
             symLength : 64,

@@ -7,7 +7,7 @@ describe.skip('Client request test suite', () => {
     var clientRequestManager = null;
 
     before('Service init', () => {
-        Initializer.init();
+        Initializer();
         clientRequestManager = Managers.clientRequest();
     })
 

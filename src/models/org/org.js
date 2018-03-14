@@ -9,9 +9,10 @@ class Org extends AbstractModel {
     constructor(row) {
         super(row);
         this.queueName = row.ORG_QUEUE_NAME;
-        this.code = null;
-        this.name = null;
-        this.pkey = null;
+        this.code = row.ORG_CD;
+        this.name = row.ORG_NAME;
+        this.pkey = row.PUB_KEY;
+        this.updt = row.UPDT_DT;
     }
 }
 
