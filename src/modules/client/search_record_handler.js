@@ -49,6 +49,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         //send message
         db.getUserDao().get(rezoome_id, (users) => {
             //console.log("test user :" + users);
+            
 
             var msg = new SearchRecordPush({
                 cmd: clientReq.cmd,

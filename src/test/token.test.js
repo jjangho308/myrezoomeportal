@@ -39,7 +39,7 @@ describe('TokenManager Test Suit', () => {
     it('JWT POC', done => {
         var signedToken = jwt.sign({
             data: {
-                userid: 'asdfasdf123'
+                userid: 'rezoome'
             },
             exp: Math.floor(Date.now() / 1000) + (60 * 60 * 1) // 1hour
         }, 'rezoomesecretkey');

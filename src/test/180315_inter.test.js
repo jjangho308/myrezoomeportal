@@ -9,7 +9,7 @@ import Util from '../util/util';
 
 describe('Portal <-> Agent Search Record interpolation test suite.', () => {
 
-    var tokenInstance = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6ImFzZGZhc2RmMTIzIn0sImV4cCI6MTUyMTAxOTkzNiwiaWF0IjoxNTIxMDE2MzM2fQ.UKOZF-6i1EBcPeYIS-RUQjZW22OMdCR_ybuhSQva54o';
+    var tokenInstance = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6InJlem9vbWUifSwiZXhwIjoxNTIxMDIwODA4LCJpYXQiOjE1MjEwMTcyMDh9.kMeWGDY94Aq-fkK5l_QxASkz-_BPqJYrYQ78uCsteVw';
     var msgId = null;
 
     before('Portal initailize', () => {
