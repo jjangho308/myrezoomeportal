@@ -1,5 +1,7 @@
-import AbstractManager from "./abstract";
 import jwt from 'jsonwebtoken'
+
+import AbstractManager from "../abstract_manager";
+
 
 /**
  * TokenManager. <br />

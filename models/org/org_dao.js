@@ -7,24 +7,56 @@ import util from 'util';
  * 
  * @since 180306
  * @author KWANGWOOK
-*/
+ */
 class OrgDao {
-    constructor(connection){
-        this.connection = connection;
+    constructor(connectionPool) {
+        this.connectionPool = connectionPool;
     }
 
-    put(user, cb){
+    put(org, cb) {
 
     }
 
-    get(orgcodes, cb){
+    /**
+     * Get multiple OrgModel by orgcodes. <br />
+     * 
+     * @since 180313
+     * 
+     * @param {string} orgcode Specific orgcode.
+     * @param {function(err:Error, result:OrgModel[])} cb Callback.
+     */
+    get(orgcodes, cb) {
 
-        var makequery = util.format(orgQuery.get, orgcodes);
+        var makequery = util.format(orgQuery.getByCodes, orgcodes);
 
-        this.connection.query(makequery, function(err, rows){
-            if(err) {
+        this.connectionPool.getConnection((err, connection) => {
+            if (err) {
+                cb(err);
+            } else {
+                connection.query(makequery, function (err, rows) {
+                    if (err) {
+                        cb(err);
+                    } else {
+                        var result = [];
+                        for (var i in rows) {
+                            result.push(new OrgModel(rows[i]));
+                        }
+                        connection.release();
+                        cb(null, rows);
+                    }
+                });
+            }
+        });
+    }
+
+    findAll(query, cb) {
+
+        var makequery = util.format(orgQuery.findAll);
+
+        this.connection.query(makequery, function (err, rows) {
+            if (err) {
                 throw err;
-            } else {              
+            } else {
                 var response = {};
                 response.code = '200';
                 response.err = '';
@@ -34,32 +66,15 @@ class OrgDao {
         });
     }
 
-    getall(cb){
-
-        var makequery = util.format(orgQuery.getall);
-
-        this.connection.query(makequery, function(err, rows){
-            if(err) {
-                throw err;
-            } else {              
-                var response = {};
-                response.code = '200';
-                response.err = '';
-                //res.send(response);
-                cb(rows);
-            }
-        });
-    }
-
-    set(opt, user, cb){
-        
-    }
-
-    del(opt, cb){
+    set(opt, user, cb) {
 
     }
 
-    delall(opt, cb){
+    del(opt, cb) {
+
+    }
+
+    delall(opt, cb) {
 
     }
 }

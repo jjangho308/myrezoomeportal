@@ -1,3 +1,5 @@
+import util from '../../util/util';
+
 /**
  * Abstract request class. <br />
  * 
@@ -11,12 +13,19 @@ class AbstractClientRequest {
      */
     constructor(opt) {
 
-        this.mid = opt.mid;
+        /**
+         * Message id. <br />
+         */
+        this.mid = util.uuid();
+
         /**
          * WebSocket instance for request client. <br />
          */
         this.socket = opt.socket;
     }
+
+    processRequest(clientRequestEntity, done) {}
+    processResponse(clientResponseEntity, done) {}
 }
 
 export default AbstractClientRequest;

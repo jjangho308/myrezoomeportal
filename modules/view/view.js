@@ -1,4 +1,4 @@
-import AbstractManager from '../abstract';
+import AbstractManager from '../abstract_manager';
 
 /**
  * View template mapper. <br />
@@ -20,3 +20,5 @@ class ViewManager extends AbstractManager{
 
     renderHTML(res, data)
 }
+
+export default ViewManager;

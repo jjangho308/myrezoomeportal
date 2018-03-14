@@ -10,16 +10,18 @@
             "name": "All unit tests",
             "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
             "args": [
+                "test/chai.test.js",
                 "--require",
                 "babel-core/register",
-                "test/*.test.js"
+                "-u", "tdd",
+                "--colors"
             ],
             "stopOnEntry": false,
             "cwd": "${workspaceFolder}/.",
             "env": {
                 "NODE_ENV": "testing"
             },
-            "internalConsoleOptions": "openOnSessionStart"
+            "internalConsoleOptions": "openOnSessionStart",
         }
     ]
 }

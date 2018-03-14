@@ -8,6 +8,13 @@ import uuidv4 from 'uuid/v4';
  * @author TACKSU
  */
 export default {
+
+    /**
+     * Generate new UUID. <br />
+     * 
+     * @since 180305
+     * @author TACKSU
+     */
     uuid: function () {
         return uuidv4();
     }
