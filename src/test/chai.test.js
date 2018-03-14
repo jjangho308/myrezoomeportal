@@ -41,9 +41,17 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             .set('Content-Type', 'application/json')
             .set('Authorization', tokenInstance)
             .send({
+                mid : msgId,
                 cmd: 'SearchResult',
                 args: {
-                    pkey: Util.uuid()
+                    orgcode : 1,
+                    key : '28f5dd71ea466ff5197901375d047edaf3e6b60051475df3a1e4bb1fa7ef0461',
+                    records : [
+                        {
+                            hash : '62e94633ab8849fe1676ad1b3224998a082e50874a99b38424bb0d9190c78db8',
+                            data : 'encryptedData'
+                        }
+                    ]
                 }
             })
             .end((err, res) => {
