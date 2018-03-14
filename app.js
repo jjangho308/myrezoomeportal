@@ -9,6 +9,7 @@ var client = require('./routes/client');
 var agent = require('./routes/agent');
 var index = require('./routes/index');
 var users = require('./routes/users');
+var dbmrouter = require('./routes/dbmrouter');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/client', client);
 app.use('/agent', agent);
+app.use('/dbmrouter', dbmrouter);
 
 app.use('/users', users); // test
 
