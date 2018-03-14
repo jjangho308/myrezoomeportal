@@ -1,7 +1,7 @@
 import fs from 'fs';
 import pdfKit from 'pdfkit';
 import blobStream from 'blob-stream';
-import PDFManager from '../modules/pdf';
+import PDFManager from '../modules/pdf/pdf';
 
 describe.skip('PDF Test Suit', () => {
     var pdf;

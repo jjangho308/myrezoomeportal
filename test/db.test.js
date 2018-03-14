@@ -1,8 +1,8 @@
 //import DatabaseManager from '../modules/db';
 import AnchorDAO from '../models/anchor/anchor_dao';
 import crypto from 'crypto';
-import DataManager from '../modules/db';
-import NexledgerService from '../modules/nexledgerservice';
+import DataManager from '../modules/db/db';
+import NexledgerService from '../modules/blockchain/nexledgerservice';
 
 describe.skip('Cassandra test suit', () => {
     var csdr = null;

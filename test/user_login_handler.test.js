@@ -1,6 +1,6 @@
 import managers from '../core/managers';
 
-describe('User Login Test Suit', function () {
+describe.skip('User Login Test Suit', function () {
 
     before('init', () => {
 

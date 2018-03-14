@@ -5,7 +5,7 @@ import app from '../app';
 
 import Initializer from '../core/initializer';
 
-describe('Chai HTTP test suite', () => {
+describe.skip('Chai HTTP test suite', () => {
     before('Chai init', () => {
         chai.use(chaihttp);
         Initializer();

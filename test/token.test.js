@@ -1,4 +1,4 @@
-import TokenManager from '../modules/token'
+import TokenManager from '../modules/token/token'
 
 describe.skip('TokenManager Test Suit', () => {
     var token;

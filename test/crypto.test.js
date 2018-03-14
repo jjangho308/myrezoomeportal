@@ -1,4 +1,4 @@
-import CryptoManager from '../modules/crypto';
+import CryptoManager from '../modules/crypto/crypto';
 
 describe.skip('Crypto test suit', () => {
     var crypto;
