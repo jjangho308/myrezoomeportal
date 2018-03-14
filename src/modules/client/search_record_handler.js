@@ -40,8 +40,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
         //orgcode => sendmessage 
         console.log(clientReq);
-        var rezoome_id = clientReq.args.userid;
-        var orgs = clientReq.args.orgs;
+        var rezoome_id = clientReq.userid;
+        var orgs = clientReq.orgs;
 
         //get personal info(rezoome id => username, birth, gender, phone, ci, email)
         ///////////////////////////////////////////////////////////////////
@@ -50,7 +50,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         //send message
         db.getUserDao().get(rezoome_id, (users) => {
             //console.log("test user :" + users);
-
 
             var msg = new SearchRecordPush({
                 cmd: clientReq.cmd,

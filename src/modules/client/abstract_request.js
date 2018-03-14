@@ -22,6 +22,11 @@ class AbstractClientRequest {
          * WebSocket instance for request client. <br />
          */
         this.socket = opt.socket;
+
+        /**
+         * User id. <br />
+         */
+        this.userid = opt.userid;
     }
 
     request(clientRequestEntity, done) {}

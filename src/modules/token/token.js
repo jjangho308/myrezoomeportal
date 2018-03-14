@@ -9,8 +9,10 @@ import AbstractManager from "../abstract_manager";
  * @since 180305
  */
 class TokenManager extends AbstractManager {
+
     constructor(opt) {
         super(opt);
+        this.secretKey = 'rezoomesecretkey';
     }
 
     init(from) {
@@ -22,7 +24,7 @@ class TokenManager extends AbstractManager {
             data: info,
             exp: Math.floor(Date.now() / 1000) + (60 * 60 * 1) // 1hour
             //}, 'rezoomesecretkey', { expiresIn: '1' });
-        }, 'rezoomesecretkey');
+        }, this.secretKey);
     }
 
     filterToken(req, res, next) {
@@ -65,6 +67,10 @@ class TokenManager extends AbstractManager {
         return jwt.decode(token, {
             complete: true
         });
+    }
+
+    verify(token) {
+        return jwt.verify(token, this.secretKey);
     }
 }
 
