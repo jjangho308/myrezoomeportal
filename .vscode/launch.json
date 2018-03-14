@@ -7,21 +7,50 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "All unit tests",
+            "name": "ES6 UNIT Tests",
             "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
             "args": [
-                "test/chai.test.js",
+                "${file}",
                 "--require",
                 "babel-core/register",
                 "-u", "tdd",
                 "--colors"
             ],
             "stopOnEntry": false,
-            "cwd": "${workspaceFolder}/.",
+            "cwd": "${workspaceRoot}",
             "env": {
                 "NODE_ENV": "testing"
             },
+            "runtimeArgs": [
+                "--nolazy"
+            ],
             "internalConsoleOptions": "openOnSessionStart",
+            "sourceMaps": true,
+            "outFiles": ["${workspaceRoot}/dist"]
         }
+        // ,{
+        //     "type": "node",
+        //     "request": "launch",
+        //     "name": "UNIT Tests",
+        //     "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+        //     "args": [
+        //         "./dist/test/chai.test.js",
+        //         // "--require",
+        //         // "babel-core/register",
+        //         "-u", "tdd",
+        //         "--colors"
+        //     ],
+        //     "stopOnEntry": false,
+        //     "cwd": "${workspaceRoot}",
+        //     "env": {
+        //         "NODE_ENV": "testing"
+        //     },
+        //     "runtimeArgs": [
+        //         "--nolazy"
+        //     ],
+        //     "internalConsoleOptions": "openOnSessionStart",
+        //     "sourceMaps": true,
+        //     "outFiles": ["${workspaceRoot}/dist"]
+        // }
     ]
 }
