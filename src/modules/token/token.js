@@ -19,9 +19,11 @@ class TokenManager extends AbstractManager {
         super.init(from);
     }
 
-    generateToken(info) {
+    issueToken(userid) {
         return jwt.sign({
-            data: info,
+            data: {
+                userid : userid
+            },
             exp: Math.floor(Date.now() / 1000) + (60 * 60 * 1) // 1hour
             //}, 'rezoomesecretkey', { expiresIn: '1' });
         }, this.secretKey);

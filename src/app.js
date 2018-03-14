@@ -11,6 +11,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+import Initialize from './core/initializer';
 import agentRouter from './routes/agent';
 import clientRouter from './routes/client';
 
@@ -31,7 +32,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //for front end angular2
 // app.use(express.static(path.join(__dirname, 'front')));
 
-//app.use('/', index);
+// Static router
+app.use('/static', express.static('public'));
+
 app.use(function (req, res, next) {
   console.log('Initial middleware' + req.method);
   next();
@@ -58,8 +61,18 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-import Initialize from './core/initializer';
-Initialize();
+import socketIO from 'socket.io';
+import http from 'http';
+var io = socketIO(http.Server(app));
+var soc = null;
+io.on('connection', socket => {
+  soc = socket;
+  soc.on('msg', msg => {
+    console.log(msg);
+    io.emit('res', 'asdfasdf');
+  })
+})
 
+// Initialize();
 
 module.exports = app;

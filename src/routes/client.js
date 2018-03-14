@@ -1,6 +1,6 @@
 import express from 'express';
 
-import tokenAuth from '../mw/client_auth';
+import clientTokenAuth from '../mw/client_auth';
 import controller from './client_ctrl';
 import managers from '../core/managers';
 
@@ -14,7 +14,7 @@ var router = express.Router();
  * @since 180305
  * @author TACKSU
  */
-router.post('/', tokenAuth);
+router.post('/', clientTokenAuth);
 router.post('/', controller.post);
 router.use('/', controller.default);
 
