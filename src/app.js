@@ -14,7 +14,7 @@ import agentRouter from './routes/agent';
 import clientRouter from './routes/client';
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -56,5 +56,9 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+import Initialize from './core/initializer';
+Initialize();
+
 
 module.exports = app;
