@@ -39,6 +39,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         // 1. 기관 정보를 db에서 가져오고
 
         //orgcode => sendmessage 
+        console.log(clientReq);
         var rezoome_id = clientReq.args.userid;
         var orgs = clientReq.args.orgs;
 
@@ -54,6 +55,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             var msg = new SearchRecordPush({
                 cmd: clientReq.cmd,
                 mid: clientReq.mid,
+                sid: ClientReq.sid,
                 args : users
             });
 
