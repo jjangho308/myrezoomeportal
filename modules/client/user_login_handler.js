@@ -26,7 +26,6 @@ class UserLoginRequestHandler extends AbstractClientRequestHandler {
                 // 비밀번호 확인
                 if (clientReq.password === res[0].PASSWORD) {
                     // 토큰 생성
-
                     var date = new Date();                    
                     var userInfo = {};
                     userInfo.userid = clientReq.userid;
@@ -37,7 +36,7 @@ class UserLoginRequestHandler extends AbstractClientRequestHandler {
                     response.token = tokenvalue;
                     response.code = 200;
                     response.result = "login success";
-                    clientRes.send(response);                    
+                    clientRes.send(response);
                 } else {
                     // 비밀번호 실패
                     clientRes.send("login fail::mismatch password");                    

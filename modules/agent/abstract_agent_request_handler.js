@@ -6,16 +6,17 @@
  * @since 180306
  * @author TACKSU
 */
-class AbstractResponseHandler{
-    constructor(opt){
-        
+class AbstractAgentRequestHandler {
+    constructor(opt) {
     }
 
     /**
      * 
-     * @param {*} response 
+     * @param {AbstractAgentRequest} agentRequest
      */
-    process(response){
+    request(agentRequest) {
 
     }
 }
+
+export default AbstractAgentRequestHandler;

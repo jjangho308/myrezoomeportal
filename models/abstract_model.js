@@ -9,3 +9,5 @@ class AbstractModel{
         
     }
 }
+
+export default AbstractModel;

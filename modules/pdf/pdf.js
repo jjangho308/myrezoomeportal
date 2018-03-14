@@ -1,4 +1,4 @@
-import AbstractManager from "./abstract";
+import AbstractManager from "../abstract_manager";
 import fs from 'fs';
 import QRCode from 'qrcode';
 

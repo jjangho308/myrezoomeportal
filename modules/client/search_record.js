@@ -5,14 +5,13 @@ import AbstractRequest from "./abstract_request";
  * 
  * @since 180305
  * @author TACKSU
-*/
-class SearchRequestRecord extends AbstractRequest{
-    constructor(opt){
+ */
+class SearchRecordRequest extends AbstractRequest {
+    constructor(opt) {
         super(opt);
-        this.userProfile = opt.userProfile
-        this.from = opt.from;
-        this.to = opt.to;
-        this.orgs = opt.org;
         this.pkey = opt.pkey;
+        this.require = opt.require;
     }
 }
+
+export default SearchRecordRequest;

@@ -1,7 +1,7 @@
 import reader from 'properties-reader';
 
-import Environment from '../core/environment'
-import AbstractManager from "./abstract";
+import Environment from '../../core/environment'
+import AbstractManager from "../abstract_manager";
 
 /**
  * Read configuration properties from config.properties file. <br />
