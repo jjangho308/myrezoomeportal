@@ -50,6 +50,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         //send message
         db.getUserDao().get(rezoome_id, (users) => {
             //console.log("test user :" + users);
+
+            console.log(rezoome_id);
+            console.log(users);
             
             var targs=users;
             targs.pkey = clientReq.pkey;
