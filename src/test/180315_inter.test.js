@@ -18,7 +18,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
         Initializer();
     })
 
-    it('Issue auth token', ()=>{
+    it.skip('Issue auth token', () => {
         var tokenManager = Managers.token();
     })
 
@@ -27,24 +27,11 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
         chai.request(app)
             .post('/client')
             .set('Content-Type', 'application/json')
-            .set('Authorization', 'Bearer ' + tokenInstance)
+            .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6InNlb255ZW9uIn0sImV4cCI6MTUyMTEzOTk1MCwiaWF0IjoxNTIxMDk2NzUwfQ.YFxcC_zN9wNNXVkXIl1KS87ZOdI2qqwPe7Jf8O7rwUI')
             .send({
                 cmd: 'Search',
                 args: {
-                    pkey: Util.uuid(),
-                    orgs: [{
-                        code: "01",
-                        key: {
-                            var1: "32832",
-                            var2: "abcd"
-                        }
-                    }, {
-                        code: "02",
-                        key: {
-                            var1: "33253",
-                            var2: "ddddd"
-                        }
-                    }]
+                    pkey: 'asdfasdf'
                 }
             })
             .end((err, res) => {
@@ -52,7 +39,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             });;
     })
 
-    it('Agent Search result request', done => {
+    it.skip('Agent Search result request', done => {
         chai.request(app)
             .post('/agent')
             .set('Content-Type', 'application/json')

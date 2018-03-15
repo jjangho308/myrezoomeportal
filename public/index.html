@@ -36,16 +36,16 @@
                 headers: {
                     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6InNlb255ZW9uIn0sImV4cCI6MTUyMTEzOTk1MCwiaWF0IjoxNTIxMDk2NzUwfQ.YFxcC_zN9wNNXVkXIl1KS87ZOdI2qqwPe7Jf8O7rwUI'
                 },
-                data: {
+                data: JSON.stringify({
                     cmd : 'Search',
                     args : {
                         pkey: 'asdfasdf'
                     }
-                },
+                }),
                 success: function (res) {
                     setSocket(res.mid);
                 },
-                dataType: 'application/json',
+                contentType: 'application/json',
             })
         }
 

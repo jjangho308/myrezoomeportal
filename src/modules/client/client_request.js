@@ -72,11 +72,11 @@ class ClientRequestManager extends AbstractManager {
     /**
      * Agent에서 비동기적인 응답이 전달되면 ClientRequest가 들고 있던
      * socket을 통해 ClientBrowser로 Response를 push 한다.
-     * @param {*} requestId 
+     * @param {*} msgId 
      * @param {*} response 
      */
-    response(requestId, response, cb) {
-        var entity = this.requestMap.get(requestId);
+    response(msgId, response, cb) {
+        var entity = this.requestMap.get(msgId);
         this.handlerMap.get(entity.constructor).response(entity, response);
     }
 
