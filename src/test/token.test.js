@@ -41,19 +41,25 @@ describe('TokenManager Test Suit', () => {
             data: {
                 userid: 'chang8shin'
             },
-            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 1) // 1hour
+            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 12) // 1hour
         }, 'rezoomesecretkey');
-
         console.log(signedToken);
 
-        var decoded = jwt.decode(signedToken, {
-            complete: true
-        })
+        signedToken = jwt.sign({
+            data: {
+                userid: 'seonyeon'
+            },
+            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 12) // 1hour
+        }, 'rezoomesecretkey');
+        console.log(signedToken);
 
-        console.log(decoded);
-
-        var verified = jwt.verify(signedToken, 'rezoomesecretkey');
-        console.log(verified);
+        signedToken = jwt.sign({
+            data: {
+                userid: 'heonug'
+            },
+            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 12) // 1hour
+        }, 'rezoomesecretkey');
+        console.log(signedToken);
     });
 
     after(function () {

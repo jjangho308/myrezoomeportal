@@ -19,11 +19,11 @@
 
     <script type='text/javascript'>
         var socket = null;
-        var endPoint = 'http://devportalalb-1075047289.ap-northeast-2.elb.amazonaws.com:3000/client'
+        var endPoint = 'http://devportalalb-1075047289.ap-northeast-2.elb.amazonaws.com:3000'
 
         function connectIO() {
             console.log('connectIO');
-            socket = io('http://localhost:3000');
+            socket = io(endPoint);
             socket.on('SearchRecord', function (msg) {
                 alert(msg);
             })
@@ -32,12 +32,15 @@
         function requestYSY() {
             $.ajax({
                 type: 'POST',
-                url: endPoint,
+                url: endPoint + '/client',
                 headers: {
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6InN1bmd5ZW9uIn0sImV4cCI6MTUyMTA5NTQ0OSwiaWF0IjoxNTIxMDkxODQ5fQ.xdMXrQjJZyG7DmYonz4f9ZFIbeGCSeYT8FgROKFKsJA'
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6InNlb255ZW9uIn0sImV4cCI6MTUyMTEzOTk1MCwiaWF0IjoxNTIxMDk2NzUwfQ.YFxcC_zN9wNNXVkXIl1KS87ZOdI2qqwPe7Jf8O7rwUI'
                 },
                 data: {
-                    pkey: 'asdfasdf'
+                    cmd : 'Search',
+                    args : {
+                        pkey: 'asdfasdf'
+                    }
                 },
                 success: function (res) {
                     setSocket(res.mid);
@@ -49,12 +52,15 @@
         function requestPHW() {
             $.ajax({
                 type: 'POST',
-                url: endPoint,
+                url: endPoint + '/client',
                 headers: {
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6Imhlb251ZyJ9LCJleHAiOjE1MjEwOTU4MjUsImlhdCI6MTUyMTA5MjIyNX0.xkxh3S058rIYrG5hnF6rptq65S5fhyW7lberYBeH98k'
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6Imhlb251ZyJ9LCJleHAiOjE1MjExMzk5NTAsImlhdCI6MTUyMTA5Njc1MH0.MFDsAwGfvlbpAcXZI4LtmhVjoDx1UVl-GaMsTwSOA-s'
                 },
                 data: {
-                    pkey: 'asdfasdf'
+                    cmd : 'Search',
+                    args : {
+                        pkey: 'asdfasdf'
+                    }
                 },
                 success: function (res) {
                     setSocket(res.mid);
@@ -66,12 +72,15 @@
         function requestSCH() {
             $.ajax({
                 type: 'POST',
-                url: endPoint,
+                url: endPoint + '/client',
                 headers: {
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6ImNoYW5nOHNoaW4ifSwiZXhwIjoxNTIxMDk1ODYwLCJpYXQiOjE1MjEwOTIyNjB9.caCpLks1lOmLmdF1CRizKXMKrEtoxiJmZ1idZDCmtk0'
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6ImNoYW5nOHNoaW4ifSwiZXhwIjoxNTIxMTM5OTUwLCJpYXQiOjE1MjEwOTY3NTB9.ipLgRV2CL-kWc0D2ZgovK1-9xQiCEto6FDsISNORzuM'
                 },
                 data: {
-                    pkey: 'asdfasdf'
+                    cmd : 'Search',
+                    args : {
+                        pkey: 'asdfasdf'
+                    }
                 },
                 success: function (res) {
                     setSocket(res.mid);
