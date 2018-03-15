@@ -24,6 +24,9 @@ class SearchResultHandler extends AbstractAgentRequestHandler{
      * @param {*} request 
      */
     request(request){
+        console.log('Search result Agent Request');
+        console.log('mid : ' + request.mid);
+        console.log('request : ' + request);
         Managers.request().response(request.mid, request);
     }
 }

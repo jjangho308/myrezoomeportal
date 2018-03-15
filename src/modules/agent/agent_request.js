@@ -33,7 +33,7 @@ class AgentRequestManager extends AbstractManager {
      * @param {AbstractAgentRequest} agentRequest 
      */
     request(requestEntity) {
-        this.handlerMap.get(requestEntity).request(requestEntity);
+        this.handlerMap.get(requestEntity.constructor).request(requestEntity);
     }
 }
 
