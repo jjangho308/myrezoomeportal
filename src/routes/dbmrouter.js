@@ -20,7 +20,7 @@ router.post('/', (req, res, next) => {
         result.code = '200';
         result.msg = 'success';
         
-        var db = new DataManager();
+        var db = Managers.db();
 
         db.getUserInfo('rezoome', function(res2){
             console.log(res2);

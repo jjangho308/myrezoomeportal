@@ -30,22 +30,15 @@ class OrgDao {
 
         var makequery = util.format(orgQuery.getByCodes, orgcodes);
 
-        this.connectionPool.getConnection((err, connection) => {
+        this.connectionPool.query(makequery, function (err, rows) {
             if (err) {
-                cb(err);
+                cb(err, null);
             } else {
-                connection.query(makequery, function (err, rows) {
-                    if (err) {
-                        cb(err, null);
-                    } else {
-                        var result = [];
-                        for (var i in rows) {
-                            result.push(new OrgModel(rows[i]));
-                        }
-                        connection.release();
-                        cb(null, result);
-                    }
-                });
+                var result = [];
+                for (var i in rows) {
+                    result.push(new OrgModel(rows[i]));
+                }
+                cb(null, result);
             }
         });
     }
@@ -54,23 +47,16 @@ class OrgDao {
 
         var makequery = util.format(orgQuery.findAll);
 
-        this.connectionPool.getConnection((err, connection) => {
+        this.connectionPool.query(makequery, function (err, rows) {
             if (err) {
                 cb(err);
             } else {
-                connection.query(makequery, function (err, rows) {
-                    if (err) {
-                        cb(err);
-                    } else {
-                        var result = [];
-                        console.log(rows);
-                        for (var i in rows) {
-                            result.push(new OrgModel(rows[i]));
-                        }
-                        connection.release();
-                        cb(result);
-                    }
-                });
+                var result = [];
+                console.log(rows);
+                for (var i in rows) {
+                    result.push(new OrgModel(rows[i]));
+                }
+                cb(result);
             }
         });
     }

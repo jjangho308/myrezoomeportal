@@ -23,23 +23,16 @@ class UserDao {
 
         var param = [userid];
 
-        this.connectionPool.getConnection(function (err, connection) {
+        this.connectionPool.query(userQuery.get, param, function (err, rows) {
             if (err) {
                 throw err;
             } else {
-                connection.query(userQuery.get, param, function (err, rows) {
-                    if (err) {
-                        throw err;
-                    } else {
-                        var result = null;
-                        
-                        for (var i in rows) {
-                            result = new UserModel(rows[i]);
-                        }
-                        connection.release();
-                        cb(result);
-                    }
-                });
+                var result = null;
+
+                for (var i in rows) {
+                    result = new UserModel(rows[i]);
+                }
+                cb(result);
             }
         });
     }

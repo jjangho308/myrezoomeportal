@@ -11,7 +11,7 @@ import AbstractManager from '../abstract_manager';
  * 
  * @since 180228
  */
-class DataManager extends AbstractManager{
+class DataManager extends AbstractManager {
 
     constructor(opt) {
         super(opt);
@@ -55,59 +55,38 @@ class DataManager extends AbstractManager{
                 }
                 });
                 */
-                connection.release();
+                //connection.release();
             }
         });
     }
 
     getUserInfo(userid, cb) {
-        this.connectionPool.getConnection(function (err, connection) {
-            if (err) {
-                throw err;
-            } else {
-                var userDao = new UserDao(connection);
-                userDao.get(userid, function (res) {
-                    cb(res);
-                });
-            }
-            connection.release();
+        var userDao = new UserDao(this.connectionPool);
+        userDao.get(userid, function (res) {
+            cb(res);
         });
-
     }
 
     getOrgInfo(orgcodes, cb) {
-        this.connectionPool.getConnection(function (err, connection) {
-            if (err) {
-                throw err;
-            } else {
-                var orgDao1 = new OrgDao(connection);
-                orgDao1.get(orgcodes, function (res) {
-                    cb(res);
-                });
-            }
-            connection.release();
+        var orgDao1 = new OrgDao(this.connectionPool);
+        orgDao1.get(orgcodes, function (res) {
+            cb(res);
         });
     }
 
     getOrgAllInfo(cb) {
-        this.connectionPool.getConnection(function (err, connection) {
-            if (err) {
-                throw err;
-            } else {
-                var orgDao1 = new OrgDao(connection);
-                orgDao1.getall(function (res) {
-                    cb(res);
-                });
-            }
-            connection.release();
+
+        var orgDao1 = new OrgDao(this.connectionPool);
+        orgDao1.getall(function (res) {
+            cb(res);
         });
     }
 
-    getUserDao(){
+    getUserDao() {
         return new UserDao(this.connectionPool);
     }
 
-    getOrgDao(){
+    getOrgDao() {
         return new OrgDao(this.connectionPool);
     }
 }
