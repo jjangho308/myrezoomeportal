@@ -79,6 +79,10 @@ class ClientRequestManager extends AbstractManager {
         var entity = this.requestMap.get(requestId);
         this.handlerMap.get(entity.constructor).response(entity, response);
     }
+
+    setSocket(mid, socket){
+        this.requestMap.get(mid).socket = socket;
+    }
 }
 
 ClientRequestManager.RESULT_SUCCESS = 0;
