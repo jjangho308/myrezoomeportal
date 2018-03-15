@@ -11,8 +11,9 @@ import AbstractAgentRequest from "./abstract_agent_request";
 class SearchResultRequest extends AbstractAgentRequest {
     constructor(opt) {
         super(opt)
-        this.key = opt.key;
-        this.records = opt.records;
+        this.key = opt.keyEnc;
+        this.dataEnc = opt.dataEnc;
+        this.dataHas = opt.dataHash;
     }
 }
 

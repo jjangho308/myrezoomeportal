@@ -13,6 +13,7 @@ import AgentRequestManager from '../modules/agent/agent_request';
  */
 export default {
     post: (req, res, next) => {
+        console.log('Agent body : ' + req.body);
         var agentRequestManager = Managers.agent();
         var entity = new (agentRequestManager.getEntity(req.body.cmd))(req.body.args);
         entity.mid = req.body.mid;
