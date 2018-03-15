@@ -76,9 +76,10 @@ class ClientRequestManager extends AbstractManager {
      * @param {*} response 
      */
     response(msgId, response, cb) {
-        console.log('Stored Request' + JSON.stringify(this.requestMap));
+        console.log('Stored Request :');
+        console.log('Stored Request :' + JSON.stringify(this.requestMap));
         var entity = this.requestMap.get(msgId);
-        console.log('Stored Request' + JSON.stringify(entity));
+        console.log('Stored Request :' + JSON.stringify(entity));
         if(!!entity){
             this.handlerMap.get(entity.constructor).response(entity, response);
         }
