@@ -61,6 +61,6 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-// Initialize();
+Initialize();
 
 module.exports = app;

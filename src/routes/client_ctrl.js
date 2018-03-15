@@ -9,7 +9,7 @@ import Managers from '../core/managers';
 export default {
     post: (req, res, next) => {
         var clientRequest = Managers.client();
-        var requestEntity = new(clientRequest.getEntity(req.body.cmd))(req.body.args);
+        var requestEntity = new (clientRequest.getEntity(req.body.cmd))(req.body.args);
         clientRequest.request(requestEntity, (err, result) => {});
         res.json({
             mid: requestEntity.mid

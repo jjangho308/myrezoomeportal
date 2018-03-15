@@ -74,7 +74,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
     response(clientRequest, agentRequest) {
         var socket = clientRequest.socket;
-        socket.emit('SearchResult', agetnRequest);
+        socket.emit('SearchResult', agentRequest);
     }
 
     // makeMSG(clientReq, personalInfo) {

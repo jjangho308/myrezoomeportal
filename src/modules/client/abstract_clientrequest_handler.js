@@ -13,7 +13,7 @@ class AbstractClientRequestHandler{
      * Client 요청을 처리한다.
      * @param {*} request 
      */
-    processRequest(request){
+    request(request){
 
     }
 
@@ -21,7 +21,7 @@ class AbstractClientRequestHandler{
      * 비동기적으로 전달 된 Response를 처리한다.
      * @param {*} response 
      */
-    processResponse(response){
+    response(response){
 
     }
 }

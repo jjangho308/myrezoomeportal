@@ -15,7 +15,7 @@ export default {
     post: (req, res, next) => {
         var agentRequestManager = Managers.agent();
         var entity = new (agentRequestManager.getEntity(req.body.cmd))(req.body.args);
-        agentRequestManager.process(entity);
+        agentRequestManager.request(entity);
         res.sendStatus(200);
     },
     

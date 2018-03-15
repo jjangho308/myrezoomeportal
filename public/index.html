@@ -24,7 +24,7 @@
         function connectIO() {
             console.log('connectIO');
             socket = io(endPoint);
-            socket.on('SearchRecord', function (msg) {
+            socket.on('SearchResult', function (msg) {
                 alert(msg);
             })
         }
