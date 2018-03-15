@@ -24,10 +24,6 @@ class AbstractClientRequest {
         this.userid = opt.userid;
     }
 
-    set socket(socket) {
-        this.socket = socket;
-    }
-
     request(clientRequestEntity, done) {}
     response(clientResponseEntity, done) {}
 }
