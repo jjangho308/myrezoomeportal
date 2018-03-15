@@ -32,16 +32,11 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+import socketCB from '../src/core/socket'
 import socketIO from 'socket.io';
 var io = socketIO(server);
 var soc = null;
-io.on('connection', socket => {
-  soc = socket;
-  soc.on('msg', msg => {
-    console.log(msg);
-    io.emit('res', 'asdfasdf');
-  })
-})
+io.on('connection', socketCB)
 
 /**
  * Normalize a port into a number, string, or false.
