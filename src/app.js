@@ -44,7 +44,7 @@ app.use(function (req, res, next) {
 app.use('/agent', agentRouter);
 app.use('/client', clientRouter);
 // app.use('/users', users);
-app.use('/', (req, res, next)=>{
+app.use('/', (req, res, next) => {
   res.send(200);
 })
 
@@ -62,6 +62,7 @@ app.use(function (err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
+  console.log('error : ' + JSON.stringify(err));
   res.status(err.status || 500);
   res.render('error');
 });

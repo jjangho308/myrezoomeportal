@@ -23,7 +23,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
     })
 
 
-    it('Client Request Search record', done => {
+    it.skip('Client Request Search record', done => {
         chai.request(app)
             .post('/client')
             .set('Content-Type', 'application/json')
@@ -39,21 +39,19 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             });;
     })
 
-    it.skip('Agent Search result request', done => {
+    it('Agent Search result request', done => {
         chai.request(app)
             .post('/agent')
             .set('Content-Type', 'application/json')
             .set('Authorization', tokenInstance)
             .send({
-                mid: msgId,
-                cmd: 'SearchResult',
-                args: {
-                    orgcode: 1,
-                    key: '28f5dd71ea466ff5197901375d047edaf3e6b60051475df3a1e4bb1fa7ef0461',
-                    records: [{
-                        hash: '62e94633ab8849fe1676ad1b3224998a082e50874a99b38424bb0d9190c78db8',
-                        data: 'encryptedData'
-                    }]
+                "mid": "5b675e15-1ba9-49b2-9f1b-f08340e37e7d",
+                "cmd": "SearchResult",
+                "code": "OK",
+                "args": {
+                    "keyEnc": "AGENCY PUBLIC KEY - asdfasdf",
+                    "dataEnc": "AES - MapperEntity [name=YOOSEONGYEON, grade=IM2, date=20180313]",
+                    "dataHash": "HASH - MapperEntity [name=YOOSEONGYEON, grade=IM2, date=20180313]"
                 }
             })
             .end((err, res) => {

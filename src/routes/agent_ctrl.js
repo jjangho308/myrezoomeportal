@@ -15,13 +15,13 @@ export default {
     post: (req, res, next) => {
         console.log('Agent body : ' + req.body);
         var agentRequestManager = Managers.agent();
-        var entity = new (agentRequestManager.getEntity(req.body.cmd))(req.body.args);
+        var entity = new(agentRequestManager.getEntity(req.body.cmd))(req.body.args);
         entity.mid = req.body.mid;
         entity.cmd = req.body.cmd;
         agentRequestManager.request(entity);
         res.sendStatus(200);
     },
-    
+
     default: (req, res, next) => {
         console.log('Default controller');
         res.sendStatus(200);

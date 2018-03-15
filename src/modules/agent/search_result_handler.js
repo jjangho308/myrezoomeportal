@@ -2,7 +2,7 @@ import Managers from '../../core/managers';
 import AbstractAgentRequestHandler from "./abstract_agent_request_handler";
 
 /**
- * Handler of {@link SearchRecordResponse}. <br />
+ * Handler of {@link SearchRecordRessonse}. <br />
  * 
  * {@link SearchRecordResponse}의 핸들러입니다. <br />
  * 
@@ -26,8 +26,7 @@ class SearchResultHandler extends AbstractAgentRequestHandler{
     request(request){
         console.log('Search result Agent Request');
         console.log('mid : ' + request.mid);
-        console.log('request : ' + request);
-        Managers.request().response(request.mid, request);
+        Managers.client().response(request.mid, request, ()=>{});
     }
 }
 
