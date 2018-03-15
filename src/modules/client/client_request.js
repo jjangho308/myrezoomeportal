@@ -77,7 +77,11 @@ class ClientRequestManager extends AbstractManager {
      */
     response(msgId, response, cb) {
         var entity = this.requestMap.get(msgId);
-        this.handlerMap.get(entity.constructor).response(entity, response);
+        console.log('Stored Request' + JSON.stringify(requestMap));
+        console.log('Stored Request' + JSON.stringify(entity));
+        if(!!entity){
+            this.handlerMap.get(entity.constructor).response(entity, response);
+        }
     }
 
     setSocket(mid, socket){
