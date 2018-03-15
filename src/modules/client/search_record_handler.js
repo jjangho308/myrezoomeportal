@@ -68,7 +68,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
             console.log("===================msg===================");
             console.log(msg);
-            Mangers.push().init();
+            Managers.push().init();
             Managers.push().sendMessage(msg, orgs, err => {
                 !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
             });
