@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/static', express.static('public'));
 
 app.use(function (req, res, next) {
-  console.log('Initial middleware' + req.method);
+  console.log('Initial middleware : ' + req.body);
   next();
 });
 
