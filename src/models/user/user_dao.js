@@ -32,7 +32,7 @@ class UserDao {
                         throw err;
                     } else {
                         var result = null;
-                        console.log("test 20180314 2 : " + rows);
+                        
                         for (var i in rows) {
                             result = new UserModel(rows[i]);
                         }

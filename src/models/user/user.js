@@ -9,9 +9,7 @@ class User extends AbstractModel {
     constructor(row) {
         super(row);
         
-        this.user_fname = row.FIRSTNAME;
-        this.user_lname = row.LASTNAME;
-
+        this.username = row.LASTNAME+row.FIRSTNAME;
         //this.username = row.NAME;
         
         this.birth = row.BIRTH;
