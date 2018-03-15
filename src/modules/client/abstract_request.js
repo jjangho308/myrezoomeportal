@@ -19,14 +19,13 @@ class AbstractClientRequest {
         this.mid = util.uuid();
 
         /**
-         * WebSocket instance for request client. <br />
-         */
-        this.socket = opt.socket;
-
-        /**
          * User id. <br />
          */
         this.userid = opt.userid;
+    }
+
+    set socket(socket) {
+        this.socket = socket;
     }
 
     request(clientRequestEntity, done) {}

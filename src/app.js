@@ -61,18 +61,6 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-import socketIO from 'socket.io';
-import http from 'http';
-var io = socketIO(http.Server(app));
-var soc = null;
-io.on('connection', socket => {
-  soc = socket;
-  soc.on('msg', msg => {
-    console.log(msg);
-    io.emit('res', 'asdfasdf');
-  })
-})
-
 // Initialize();
 
 module.exports = app;
