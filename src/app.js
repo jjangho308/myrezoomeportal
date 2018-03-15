@@ -39,9 +39,14 @@ app.use(function (req, res, next) {
   console.log('Initial middleware' + req.method);
   next();
 });
+
+
 app.use('/agent', agentRouter);
 app.use('/client', clientRouter);
 // app.use('/users', users);
+app.use('/', (req, res, next)=>{
+  res.send(200);
+})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
