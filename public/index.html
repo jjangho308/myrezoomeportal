@@ -56,16 +56,16 @@
                 headers: {
                     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6Imhlb251ZyJ9LCJleHAiOjE1MjExMzk5NTAsImlhdCI6MTUyMTA5Njc1MH0.MFDsAwGfvlbpAcXZI4LtmhVjoDx1UVl-GaMsTwSOA-s'
                 },
-                data: {
+                data: JSON.stringify({
                     cmd : 'Search',
                     args : {
                         pkey: 'asdfasdf'
                     }
-                },
+                }),
                 success: function (res) {
                     setSocket(res.mid);
                 },
-                dataType: 'application/json',
+                contentType: 'application/json',
             })
         }
 
@@ -76,16 +76,16 @@
                 headers: {
                     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6ImNoYW5nOHNoaW4ifSwiZXhwIjoxNTIxMTM5OTUwLCJpYXQiOjE1MjEwOTY3NTB9.ipLgRV2CL-kWc0D2ZgovK1-9xQiCEto6FDsISNORzuM'
                 },
-                data: {
+                data: JSON.stringify({
                     cmd : 'Search',
                     args : {
                         pkey: 'asdfasdf'
                     }
-                },
+                }),
                 success: function (res) {
                     setSocket(res.mid);
                 },
-                dataType: 'application/json',
+                contentType: 'application/json',
             })
         }
 
