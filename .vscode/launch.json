@@ -27,6 +27,26 @@
             "internalConsoleOptions": "openOnSessionStart",
             "sourceMaps": true,
             "outFiles": ["${workspaceRoot}/dist"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Rezoome Start",
+            "program": "C:/Program Files/nodejs/node_modules/npm/bin/npm",
+            "args": [
+                "start",
+            ],
+            "stopOnEntry": false,
+            "cwd": "${workspaceRoot}",
+            "env": {
+                "NODE_ENV": "testing"
+            },
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "internalConsoleOptions": "openOnSessionStart",
+            "sourceMaps": true,
+            "outFiles": ["${workspaceRoot}/dist"]
         }
         // ,{
         //     "type": "node",
