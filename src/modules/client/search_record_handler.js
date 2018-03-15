@@ -76,7 +76,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     }
 
     response(clientRequest, agentRequest) {
-        console.log('Sockt Push : ' + JSON.stringify(clientRequest));
+        console.log('Socket Push : ');
         var socket = clientRequest.socket;
         if (!!socket) {
             console.log('Socket exists');
