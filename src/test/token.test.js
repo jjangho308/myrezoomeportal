@@ -47,7 +47,7 @@ describe('TokenManager Test Suit', () => {
 
         signedToken = jwt.sign({
             data: {
-                userid: 'seonyeon'
+                userid: 'sungyeon'
             },
             exp: Math.floor(Date.now() / 1000) + (60 * 60 * 12) // 1hour
         }, 'rezoomesecretkey');
