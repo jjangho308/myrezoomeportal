@@ -117,7 +117,7 @@ describe.skip('Blockchain test suit', () => {
     });
 })
 
-describe.skip('MySQL test suit', () => {
+describe('MySQL test suit', () => {
     var db = null;
     before('DB module initialize', () => {
         Initializer();
