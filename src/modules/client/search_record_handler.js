@@ -53,17 +53,17 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
             console.log(rezoome_id);
             console.log(users);
-            
-            var targs=users;
+
+            var targs = users;
             targs.pkey = clientReq.pkey;
 
             var msg = new SearchRecordPush({
                 cmd: clientReq.cmd,
                 mid: clientReq.mid,
-                sid: clientReq.sid, 
-                args : targs,
+                sid: clientReq.sid,
+                args: targs,
             });
-            
+
 
 
             console.log("===================msg===================");
@@ -77,9 +77,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
     response(clientRequest, agentRequest) {
         var socket = clientRequest.socket;
-        if(!!socket){
+        if (!!socket) {
+            console.log('Socket exists');
+            console.log('Socket message : ' + JSON.stringify(agentRequest));
             socket.emit('SearchResult', JSON.stringify(agentRequest));
-        }else{
+        } else {
             console.log('Socket is not prepared');
         }
     }
