@@ -5,8 +5,8 @@
   "scripts": {
     "babel-node": "babel-node --presets es2015",
     "start": "nodemon --exec npm run babel-node -- ./bin/www",
-    "test": "mocha --require babel-core/register",
-    "build": "./node_modules/.bin/babel ./src/**/*.js ./test/*.test.js --out-dir dist --source-maps",
+    "test": "mocha --require babel-core/register ./src/test/*.test.js",
+    "build": "./node_modules/.bin/babel ./src/**/*.js --out-dir dist --source-maps",
     "debug" : "node --nolazy --inspect-brk=9229 ./bin/www"
   },
   "dependencies": {
