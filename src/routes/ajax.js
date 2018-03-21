@@ -9,6 +9,6 @@ import ctrl from './ajax_ctrl';
 */
 var router = express.Router();
 // router.get('/', token);
-router.get('/', ctrl);
+router.get('/:command', ctrl);
 
 export default router;
