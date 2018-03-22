@@ -12,11 +12,11 @@ import view from '';
 var router = express.Router();
 
 router.get('/', tokenAuth);
-router.get('/', ctrl);
+router.get('/', ctrl.get);
 router.get('/', view);
 
 router.post('/', tokenAuth);
-router.post('/', ctrl);
+router.post('/', ctrl.post);
 router.post('/', view);
 
 export default router;

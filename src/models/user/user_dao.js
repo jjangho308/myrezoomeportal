@@ -16,7 +16,15 @@ class UserDao {
     }
 
     put(user, cb) {
+        this.connectionPool.query(userQuery.put, param, (err, rows) => {
 
+            var userId = null;
+            for (var i in rows) {
+                userId = rows[i].userid;
+            }
+
+            cb(err, userId);
+        })
     }
 
     get(userid, cb) {
@@ -29,8 +37,17 @@ class UserDao {
             } else {
                 var result = null;
 
+
                 for (var i in rows) {
-                    result = new UserModel(rows[i]);
+                    var row = {
+                        username: rows[i].LASTNAME + rows[i].FIRSTNAME,
+                        birth: rows[i].BIRTH,
+                        gender: rows[i].GENDER,
+                        phone: rows[i].PHONE,
+                        ci: rows[i].CI,
+                        email: rows[i].EMAIL
+                    }
+                    result = new UserModel(row);
                 }
                 cb(result);
             }
@@ -38,7 +55,7 @@ class UserDao {
     }
 
     set(opt, user, cb) {
-
+        
     }
 
     del(opt, cb) {

@@ -1,10 +1,15 @@
 import mysql from 'mysql';
-import UserDao from '../../models/user/user_dao';
-import OrgDao from '../../models/org/org_dao';
+
 import Managers from "../../core/managers";
 import Property from "../property/property";
+
 import AbstractManager from '../abstract_manager';
 
+import UserDao from '../../models/user/user_dao';
+import OrgDao from '../../models/org/org_dao';
+import CertDao from '../../models/cert/cert_dao';
+import RecordDao from '../../models/record/cert_dao';
+import ResumeDao from '../../models/resume/resume_dao';
 
 /**
  * Data accessor. <br />
@@ -88,6 +93,18 @@ class DataManager extends AbstractManager {
 
     getOrgDao() {
         return new OrgDao(this.connectionPool);
+    }
+
+    getCertDao() {
+        return new CertDao(this.connectionPool);
+    }
+
+    getResumeDao() {
+        return new ResumesDao(this.connectionPool);
+    }
+
+    getRecordDao() {
+        return new RecordDao(this.connectionPool);
     }
 }
 
