@@ -33,10 +33,9 @@ class UserDao {
 
         this.connectionPool.query(userQuery.get, param, function (err, rows) {
             if (err) {
-                throw err;
+                cb(err, null);
             } else {
                 var result = null;
-
 
                 for (var i in rows) {
                     var row = {
@@ -55,14 +54,10 @@ class UserDao {
     }
 
     set(opt, user, cb) {
-        
+
     }
 
     del(opt, cb) {
-
-    }
-
-    delall(opt, cb) {
 
     }
 }
