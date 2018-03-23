@@ -1,7 +1,6 @@
 class SharedResumeDAO extends AbstractDAO {
     constructor(connectionPool) {
         super(connectionPool);
-        this.connectionPool = connectionPool;
     }
 
     put(sharedResume, cb) {

@@ -7,9 +7,17 @@
 class ResumeDao extends AbstractDao {
     constructor(connectionPool) {
         super(connectionPool);
-        this.connectionPool = connectionPool;
     }
 
+    /**
+     * Create new Resume entity. <br />
+     * 
+     * @since 180323
+     * @author TACKSU
+     * 
+     * @param {*} resume Resume entity
+     * @param {function(err, result)} cb Callback
+     */
     put(resume, cb) {
 
     }

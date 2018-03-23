@@ -1,3 +1,5 @@
+import Managers from '../core/managers';
+
 /**
  * Controller for /certs URI. <br />
  * 
@@ -8,22 +10,26 @@ export default {
     /**
      * Function to get certificates by given condition. <br />
      * 
-     * Accept : text/html : Rendered as static html page.
-     * Accept : application/json -> Rendered as JSON string.
      * 
      * @since 180322
      * @author TACKSU
      */
     get: (req, res, next) => {
-        var accept = req.get('Accept');
+
+        var userid = req.params.userid;
+        // AJAX request
         if (!!req.xhr) {
-
-        } else {
-            var userData = null;
-
-            res.render('certs', userData, (err, html) => {
-                res.status(200).send(html);
-            })
+            var certDao = Managers.db().getCertDAO();
+        }
+        // HTML page
+        else {
+            Managers.db().getUserDAO().get({
+                userid: userid
+            }, (err, userModel) => {
+                res.render('certs', userModel, (err, html) => {
+                    res.status(200).send(html);
+                })
+            });
         }
     },
 
