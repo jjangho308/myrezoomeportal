@@ -105,10 +105,16 @@ class DataManager extends AbstractManager {
         return new CertDAO(this.connectionPool);
     }
 
+    /**
+     * Obtain ResumeDAO. <br />
+     */
     getResumeDAO() {
         return new ResumeDAO(this.connectionPool);
     }
 
+    /**
+     * Obtain RecordDAO. <br />
+     */
     getRecordDAO() {
         return new RecordDAO(this.connectionPool);
     }
