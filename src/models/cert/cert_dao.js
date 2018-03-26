@@ -26,9 +26,9 @@ class CertificateDAO extends AbstractDAO {
 
     get(creteria, cb) {
         if (Env.developement()) {
-            var current = Date.now();
-            var nextYear = Date.now().setFullYear(2019);
-            
+            var current = new Date(Date.now());
+            var nextYear = new Date(current.getTime() + (60 * 60 * 24 * 356)*1000);
+
             var certModels = [
                 new CertModel({
                     certId: Util.uuid(),
@@ -45,7 +45,7 @@ class CertificateDAO extends AbstractDAO {
                     issued: Util.uuid()
                 })
             ];
-            cb(null, )
+            cb(null, certModels)
         } else if (Env.prouction()) {
             var userId = creteria.userId;
             var certId = creteria.certId;

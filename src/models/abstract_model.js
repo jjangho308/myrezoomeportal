@@ -5,8 +5,7 @@
  * @author TACKSU
 */
 class AbstractModel{
-    constructor(opt){
-        
+    constructor(opt){    
     }
 }
 
