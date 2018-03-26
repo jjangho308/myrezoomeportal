@@ -1,9 +1,54 @@
 .main {
-    background-color: #ffff00;
+    background-color: #ffffff;
 }
 
 .Group-3 {
     width: 1680px;
     height: 807px;
     object-fit: contain;
+    z-index: 0;
+  }
+
+  .Black {
+    width: 244px;
+    height: 42px;
+    object-fit: contain;
+    position: absolute;
+    top : 17px;
+    left: 115px;
+    z-index: 2;
+    
+  }
+
+  .intro {
+      position: relative;
+    left : 7%;  
+
+  }
+
+  .\- {
+    width: 855px;
+    height: 103px;
+    font-family: SpoqaHanSans;
+    font-size: 70px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+  }
+
+  .topmenudefault {
+      position: absolute;
+      left: 840px;
+  }
+
+  .Button-Shape {
+    width: 102px;
+    height: 38.1px;
+    opacity: 0.2;
+    border-radius: 3px;
+    background-color: #ffffff;
   }
