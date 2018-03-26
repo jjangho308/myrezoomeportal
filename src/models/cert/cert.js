@@ -12,20 +12,25 @@ class CertModel extends AbstractModel {
         /**
          * ID of certificate.
          */
-        this.certid = opt.certid;
+        this.certId = opt.certId;
 
         /**
-         * Expiration date.
+         * Issued data. <br />
+         */
+        this.date = opt.date;
+
+        /**
+         * Expiration date. <br />
          */
         this.exp = opt.exp;
 
         /**
-         * TXID of contained record.
+         * TXID of contained record. <br />
          */
         this.txid = opt.txid;
 
         /**
-         * Issued number of this certificate.
+         * Issued number of this certificate. <br />
          */
         this.issued = opt.issued;
     }

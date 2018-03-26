@@ -18,29 +18,33 @@ export default {
      */
     get: (req, res, next) => {
 
-        var userid = null;
+        var userId = null;
         if (Env.prouction()) {
-            userid = req.params.userid;
+            userId = req.params.userId;
         } else {
-            userid = 12345;
+            userId = 12345;
         }
 
         // AJAX request
         if (!!req.xhr) {
             var certDao = Managers.db().getCertDAO();
-            certDao.getByUserID(userId, (err, result) => {
+            certDao.get({
+                userId: userId
+            }, (err, result) => {
                 res.status(200).json(result);
             });
         }
         // HTML page
         else {
             Managers.db().getUserDAO().get({
-                userid: userid
+                userId: userId
             }, (err, userModel) => {
                 if (!!err) {
                     res.status(500).render('error');
                 } else {
-                    res.render('certs', userModel);
+                    res.render('certs', userModel, (err, html) => {
+                        res.send(html);
+                    });
                 }
             });
         }

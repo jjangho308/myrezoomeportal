@@ -2,6 +2,8 @@
 import userQuery from './user_query.js';
 import UserModel from './user';
 
+import Env from '../../core/environment';
+
 /**
  * DAO for user. <br />
  * 
@@ -27,11 +29,11 @@ class UserDao {
         })
     }
 
-    get(userid, cb) {
+    get(creteria, cb) {
 
-        var param = [userid];
+        var param = [creteria.userid];
 
-        if (process.env.NODE_ENV == 'development') {
+        if (Env.developement()) {
             var userSuji = new UserModel({
                 userid: 12345,
                 birth: new Date('1993-10-19'),
@@ -43,7 +45,7 @@ class UserDao {
                 imgsrc: 'kjk.com/rse'
             })
             cb(null, userSuji);
-        } else if (process.env.NODE_ENV == 'production') {
+        } else if (Env.prouction()) {
             this.connectionPool.query(userQuery.get, param, function (err, rows) {
                 if (err) {
                     cb(err, null);

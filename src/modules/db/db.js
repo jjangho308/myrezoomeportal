@@ -5,11 +5,13 @@ import Property from "../property/property";
 
 import AbstractManager from '../abstract_manager';
 
-import UserDao from '../../models/user/user_dao';
-import OrgDao from '../../models/org/org_dao';
-import CertDao from '../../models/cert/cert_dao'
-import ResumeDao from '../../models/resume/resume_dao';
-import RecordDao from '../../models/record/record_dao';
+import UserDAO from '../../models/user/user_DAO';
+import OrgDAO from '../../models/org/org_DAO';
+import RecordDAO from '../../models/record/record_DAO';
+import CertDAO from '../../models/cert/cert_DAO'
+import ResumeDAO from '../../models/resume/resume_DAO';
+
+import Env from '../../core/environment';
 
 /**
  * Data accessor. <br />
@@ -33,78 +35,82 @@ class DataManager extends AbstractManager {
     }
     */
     init() {
-        var propertyManager = Managers.property();
+        if (Env.developement()) {
 
-        this.connectionPool = mysql.createPool({
-            host: propertyManager.get(Property.MySQL_HOST),
-            port: propertyManager.get(Property.MySQL_PORT),
-            user: propertyManager.get(Property.MySQL_ID),
-            password: propertyManager.get(Property.MySQL_PW),
-            database: propertyManager.get(Property.MySQL_DATABASE)
-        });
+        } else if (Env.prouction()) {
+            var propertyManager = Managers.property();
 
-        this.connectionPool.getConnection(function (err, connection) {
-            if (err) {
-                console.log(err);
-                throw err;
-            } else {
-                /*
-                connection.query("select * from TBL_USER", function(err, rows){
-                if(err) {
+            this.connectionPool = mysql.createPool({
+                host: propertyManager.get(Property.MySQL_HOST),
+                port: propertyManager.get(Property.MySQL_PORT),
+                user: propertyManager.get(Property.MySQL_ID),
+                password: propertyManager.get(Property.MySQL_PW),
+                database: propertyManager.get(Property.MySQL_DATABASE)
+            });
+
+            this.connectionPool.getConnection(function (err, connection) {
+                if (err) {
+                    console.log(err);
                     throw err;
-                } else {              
-                    var response = {};
-                    response.code = '200';
-                    response.err = '';
-                    res.send(response);
+                } else {
+                    /*
+                    connection.query("select * from TBL_USER", function(err, rows){
+                    if(err) {
+                        throw err;
+                    } else {              
+                        var response = {};
+                        response.code = '200';
+                        response.err = '';
+                        res.send(response);
+                    }
+                    });
+                    */
+                    //connection.release();
                 }
-                });
-                */
-                //connection.release();
-            }
-        });
+            });
+        }
     }
 
     getUserInfo(userid, cb) {
-        var userDao = new UserDao(this.connectionPool);
-        userDao.get(userid, function (res) {
+        var userDAO = new UserDAO(this.connectionPool);
+        userDAO.get(userid, function (res) {
             cb(res);
         });
     }
 
     getOrgInfo(orgcodes, cb) {
-        var orgDao1 = new OrgDao(this.connectionPool);
-        orgDao1.get(orgcodes, function (res) {
+        var orgDAO1 = new OrgDAO(this.connectionPool);
+        orgDAO1.get(orgcodes, function (res) {
             cb(res);
         });
     }
 
     getOrgAllInfo(cb) {
 
-        var orgDao1 = new OrgDao(this.connectionPool);
-        orgDao1.getall(function (res) {
+        var orgDAO1 = new OrgDAO(this.connectionPool);
+        orgDAO1.getall(function (res) {
             cb(res);
         });
     }
 
-    getUserDao() {
-        return new UserDao(this.connectionPool);
+    getUserDAO() {
+        return new UserDAO(this.connectionPool);
     }
 
-    getOrgDao() {
-        return new OrgDao(this.connectionPool);
+    getOrgDAO() {
+        return new OrgDAO(this.connectionPool);
     }
 
-    getCertDao() {
-        return new CertDao(this.connectionPool);
+    getCertDAO() {
+        return new CertDAO(this.connectionPool);
     }
 
-    getResumeDao() {
-        return new ResumesDao(this.connectionPool);
+    getResumeDAO() {
+        return new ResumeDAO(this.connectionPool);
     }
 
-    getRecordDao() {
-        return new RecordDao(this.connectionPool);
+    getRecordDAO() {
+        return new RecordDAO(this.connectionPool);
     }
 }
 

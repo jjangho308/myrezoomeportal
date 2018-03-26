@@ -13,7 +13,9 @@ export default (req, res, next) => {
     // 개발 중에는 token auth skip하도록 설정.
     if (Env.developement()) {
         req.params.userid = 12345;
-        req.body.args.userid = 12345;
+        req.body.args = {
+            userid : 12345
+        };
         next();
     } else {
         // TODO Authorization 뿐만 아니라 cookie에서 JWT 항목 추출하여 검증해야 함.

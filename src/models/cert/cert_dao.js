@@ -1,5 +1,10 @@
+import Env from '../../core/environment';
+
 import CertsQuery from './certs_query';
-import AbstractDao from '../abstract_dao';
+import AbstractDAO from '../abstract_dao';
+
+import CertModel from './cert';
+import Util from '../../util/util';
 
 /**
  * DAO for certificate entity. <br />
@@ -7,7 +12,7 @@ import AbstractDao from '../abstract_dao';
  * @since 180323
  * @author TACKSU
  */
-class CertificateDAO extends AbstractDao {
+class CertificateDAO extends AbstractDAO {
     constructor(connectionPool) {
         super(connectionPool);
     }
@@ -20,26 +25,49 @@ class CertificateDAO extends AbstractDao {
     }
 
     get(creteria, cb) {
-        var userId = creteria.userid;
-        var certId = creteria.certid;
+        if (Env.developement()) {
+            var current = Date.now();
+            var nextYear = Date.now().setFullYear(2019);
+            
+            var certModels = [
+                new CertModel({
+                    certId: Util.uuid(),
+                    date: current,
+                    exp: nextYear,
+                    txid: Util.uuid(),
+                    issued: Util.uuid()
+                }),
+                new CertModel({
+                    certId: Util.uuid(),
+                    date: current,
+                    exp: nextYear,
+                    txid: Util.uuid(),
+                    issued: Util.uuid()
+                })
+            ];
+            cb(null, )
+        } else if (Env.prouction()) {
+            var userId = creteria.userId;
+            var certId = creteria.certId;
 
-        if (!!userId) {
-            this.connectionPool.query(CertsQuery.getByUserID, [userId], (err, result) => {
-                if (!!err) {
-                    cb(err, null);
-                } else {
-                    cb(null, result);
-                }
-            });
-        } else if (!!certId) {
-            this.connectionPool.query(CertsQuery.getByCertId, [certId], (err, result) => {
-                if (!!err) {
-                    cb(err, null);
-                } else {
-                    
-                    cb(null, result);
-                }
-            })
+            if (!!userId) {
+                this.connectionPool.query(CertsQuery.getByUserID, [userId], (err, result) => {
+                    if (!!err) {
+                        cb(err, null);
+                    } else {
+                        cb(null, result);
+                    }
+                });
+            } else if (!!certId) {
+                this.connectionPool.query(CertsQuery.getByCertId, [certId], (err, result) => {
+                    if (!!err) {
+                        cb(err, null);
+                    } else {
+
+                        cb(null, result);
+                    }
+                })
+            }
         }
     }
 
@@ -51,3 +79,5 @@ class CertificateDAO extends AbstractDao {
 
     }
 }
+
+export default CertificateDAO;
