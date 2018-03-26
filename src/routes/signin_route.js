@@ -1,5 +1,5 @@
 import express from 'express';
-import ctrl from './signin.ctrl';
+import ctrl from './signin_ctrl';
 
 /**
  * Router for /sigin URI. <br />
@@ -10,6 +10,6 @@ import ctrl from './signin.ctrl';
 var router = express.Router();
 
 router.post('/', ctrl.post_ajax);
-router.post('/', view);
+//router.post('/', view);
 
 export default router;

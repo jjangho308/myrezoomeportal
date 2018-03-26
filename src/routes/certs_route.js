@@ -1,7 +1,7 @@
 import express from 'express';
 import tokenAuth from '../mw/client_auth';
-import ctrl from './certs.ctrl';
-import view from '';
+import ctrl from './certs_ctrl';
+//import view from '';
 
 /**
  * Router for /certs URI. <br />
@@ -16,11 +16,11 @@ router.get('/', ctrl);
 
 router.get('/:id', tokenAuth);
 router.get('/:id', ctrl);
-router.get('/', view);
+//router.get('/', view);
 
 router.post('/', tokenAuth);
 router.post('/', ctrl);
-router.post('/', view);
+//router.post('/', view);
 
 router.post('/:id', tokenAuth);
 router.patch('/:id', ctrl);

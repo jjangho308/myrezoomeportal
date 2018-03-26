@@ -1,5 +1,5 @@
 import express from 'express';
-import ctrl from './login.ctrl';
+import ctrl from './login_ctrl';
 
 /**
  * Router for /login URI. <br />
@@ -10,6 +10,6 @@ import ctrl from './login.ctrl';
 var router = express.Router();
 
 router.post('/', ctrl);
-router.post('/', view);
+//router.post('/', view);
 
 export default router;
