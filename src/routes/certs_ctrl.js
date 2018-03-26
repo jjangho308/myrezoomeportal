@@ -20,15 +20,20 @@ export default {
         // AJAX request
         if (!!req.xhr) {
             var certDao = Managers.db().getCertDAO();
+            certDao.getByUserID(userId, (err, result) => {
+                res.status(200).json(result);
+            });
         }
         // HTML page
         else {
             Managers.db().getUserDAO().get({
                 userid: userid
             }, (err, userModel) => {
-                res.render('certs', userModel, (err, html) => {
-                    res.status(200).send(html);
-                })
+                if (!!err) {
+                    res.status(500).render('error');
+                } else {
+                    res.render('certs', userModel);
+                }
             });
         }
     },
