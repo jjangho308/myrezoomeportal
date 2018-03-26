@@ -1,9 +1,23 @@
-<html>
+<%#{
+    firstName : string
+    lastName : string
+    birth : date
+    imgsrc : File url of profile image
+    gender : 0 - Male, 1 - Female
+    phone : string
+    email : string
+    ci : string
+}
+%>
+    <html>
 
-<head>
-<title>Rezoome /certs page</title>
-</head>
+    <head>
+        <title>Rezoome Certificate page</title>
+    </head>
 
-<body>{{result.title}}</body>
+    <body>
+        <div id='name' 이름 : <%=lastName + firstName %>></div>
+        <div id='gender' 성별 : <%=gender == 0 ? '남성' : '여성' %>></div>
+    </body>
 
-</html>
+    </html>
