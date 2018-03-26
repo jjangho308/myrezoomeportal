@@ -13,10 +13,10 @@ var router = express.Router();
 
 router.get('/', tokenAuth);
 router.get('/', ctrl.get);
-router.get('/', view);
+//router.get('/', view);
 
 router.post('/', tokenAuth);
 router.post('/', ctrl.post);
-router.post('/', view);
+//router.post('/', view);
 
 export default router;

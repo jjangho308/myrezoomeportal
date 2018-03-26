@@ -3,6 +3,7 @@
 <head>
     <title>메인</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/main.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -40,18 +41,18 @@
         function pdf() {
 
             var param = {
-                    cmd: 'Certificate',
-                    mid: 'midxxxxx',
-                    args: {
-                        
-                    }
-                };
+                cmd: 'Certificate',
+                mid: 'midxxxxx',
+                args: {
+
+                }
+            };
 
             $.ajax({
                 url: '/',
                 type: 'post',
                 data: JSON.stringify(param),
-                    contentType: "application/json",
+                contentType: "application/json",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "bearer " + sessionStorage.getItem("token"));
                 },
@@ -65,13 +66,26 @@
     </script>
 </head>
 
-<body>
+<body class="main">
 
-    <h3>레주메 메인페이지</h3>
+    <div class="header">
 
-    <h4>기관정보 요청 결과 :</h4>
-    <h5>...</h5>
-    <button onclick="pdf()">이력서</button>
+
+    </div>
+    <div class="intro">
+        <img src="img/group-3.png" srcset="img/group-3@2x.png 2x,
+                    img/group-3@3x.png 3x" class="Group-3">
+
+        <img src="img/black.png" srcset="img/black@2x.png 2x,
+                    img/black@3x.png 3x" class="Black">
+
+        <div class="topmenudefault">
+            <p class="-">기업 서비스 v</p>
+            <p class="-"> | </p>    
+            <p class="- Button-Shape"> 무료가입 </p>    
+        </div>
+
+    </div>
 
 </body>
 
