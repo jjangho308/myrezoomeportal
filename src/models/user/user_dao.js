@@ -2,6 +2,8 @@
 import userQuery from './user_query.js';
 import UserModel from './user';
 
+import Env from '../../core/environment';
+
 /**
  * DAO for user. <br />
  * 
@@ -27,30 +29,44 @@ class UserDao {
         })
     }
 
-    get(userid, cb) {
+    get(creteria, cb) {
 
-        var param = [userid];
+        var param = [creteria.userid];
 
-        this.connectionPool.query(userQuery.get, param, function (err, rows) {
-            if (err) {
-                cb(err, null);
-            } else {
-                var result = null;
+        if (Env.developement()) {
+            var userSuji = new UserModel({
+                userid: 12345,
+                birth: new Date('1993-10-19'),
+                firstName: '수지',
+                lastName: '이',
+                gender: 1,
+                phone: '010-0000-2222',
+                email: 'asdfasdf@asdf.com',
+                imgsrc: 'kjk.com/rse'
+            })
+            cb(null, userSuji);
+        } else if (Env.prouction()) {
+            this.connectionPool.query(userQuery.get, param, function (err, rows) {
+                if (err) {
+                    cb(err, null);
+                } else {
+                    var result = null;
 
-                for (var i in rows) {
-                    var row = {
-                        username: rows[i].LASTNAME + rows[i].FIRSTNAME,
-                        birth: rows[i].BIRTH,
-                        gender: rows[i].GENDER,
-                        phone: rows[i].PHONE,
-                        ci: rows[i].CI,
-                        email: rows[i].EMAIL
+                    for (var i in rows) {
+                        var row = {
+                            username: rows[i].LASTNAME + rows[i].FIRSTNAME,
+                            birth: rows[i].BIRTH,
+                            gender: rows[i].GENDER,
+                            phone: rows[i].PHONE,
+                            ci: rows[i].CI,
+                            email: rows[i].EMAIL
+                        }
+                        result = new UserModel(row);
                     }
-                    result = new UserModel(row);
+                    cb(result);
                 }
-                cb(result);
-            }
-        });
+            });
+        }
     }
 
     set(opt, user, cb) {

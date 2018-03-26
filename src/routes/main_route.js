@@ -1,14 +1,9 @@
-import express from 'express';
+/**
+ * Router for './main'. <br />
+ * 
+ * @since 180326
+ * @author TACKSU
+ */
+export default (req, res, next) => {
 
-var router = express.Router();
-
-//router.get('/', view);
-
-
-router.get('/', function (req, res) {
-    res.render('main', {
-        
-    })
-})
-
-export default router;
+}

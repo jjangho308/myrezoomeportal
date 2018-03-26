@@ -6,15 +6,16 @@ import AbstractModel from '../abstract_model';
  * @author TACKSU
  */
 class User extends AbstractModel {
-    constructor(opt) {
-        super(opt);
-        this.username = opt.username
-        this.birth = opt.birth;
-        this.gender = opt.gender;
-        this.phone = opt.phohne;
-        this.ci = opt.ci;
-        this.email = opt.email;
-        this.imgsrc = opt.imgsrc;
+    constructor(data) {
+        super(data);
+        this.firstName = data.firstName;
+        this.lastName = data.lastName;
+        this.birth = data.birth;
+        this.gender = data.gender;
+        this.phone = data.phohne;
+        this.ci = data.ci;
+        this.email = data.email;
+        this.imgsrc = data.imgsrc;
     }
 }
 
