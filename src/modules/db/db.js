@@ -7,8 +7,7 @@ import AbstractManager from '../abstract_manager';
 
 import UserDao from '../../models/user/user_dao';
 import OrgDao from '../../models/org/org_dao';
-import CertDao from '../../models/cert/'
-import RecordDao from '../../models/record/cert_dao';
+import CertDao from '../../models/cert/cert_dao'
 import ResumeDao from '../../models/resume/resume_dao';
 
 /**
