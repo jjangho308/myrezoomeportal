@@ -15,7 +15,7 @@ import Initialize from './core/initializer';
 import agentRouter from './routes/agent';
 
 
-import rootRouter from './routes/root.route';
+import rootRouter from './routes/root_route';
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));

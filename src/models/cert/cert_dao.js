@@ -1,4 +1,5 @@
 import CertsQuery from './certs_query';
+import AbstractDao from '../abstract_dao';
 
 /**
  * DAO for certificate entity. <br />
@@ -6,7 +7,7 @@ import CertsQuery from './certs_query';
  * @since 180323
  * @author TACKSU
  */
-class CertificateDAO extends AbstractDAO {
+class CertificateDAO extends AbstractDao {
     constructor(connectionPool) {
         super(connectionPool);
     }

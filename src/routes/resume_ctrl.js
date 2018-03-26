@@ -1,4 +1,3 @@
-
 /**
  * Controller for /resumes URI. <br />
  * 
@@ -6,11 +5,11 @@
  * @author TACKSU
  */
 export default {
-    get_resumes_page: (req, res, next) => {
-        
+    get: (req, res, next) => {
+
     },
 
-    get_reseumes_ajax: (req, res, next) => {
+    post: (req, res, next) => {
 
     }
 }

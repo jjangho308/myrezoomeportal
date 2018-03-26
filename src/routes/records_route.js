@@ -1,7 +1,7 @@
 import express from 'express';
 import tokenAuth from '../mw/client_auth';
-import ctrl from './records.ctrl';
-import view from '';
+import ctrl from './records_ctrl';
+import view from '../mw/view';
 
 /**
  * Router for records. <br />

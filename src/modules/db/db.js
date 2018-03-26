@@ -9,6 +9,7 @@ import UserDao from '../../models/user/user_dao';
 import OrgDao from '../../models/org/org_dao';
 import CertDao from '../../models/cert/cert_dao'
 import ResumeDao from '../../models/resume/resume_dao';
+import RecordDao from '../../models/record/record_dao';
 
 /**
  * Data accessor. <br />

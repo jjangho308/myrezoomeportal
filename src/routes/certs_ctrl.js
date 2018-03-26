@@ -1,5 +1,7 @@
 import Managers from '../core/managers';
 
+import Env from '../core/environment';
+
 /**
  * Controller for /certs URI. <br />
  * 
@@ -16,7 +18,13 @@ export default {
      */
     get: (req, res, next) => {
 
-        var userid = req.params.userid;
+        var userid = null;
+        if (Env.prouction()) {
+            userid = req.params.userid;
+        } else {
+            userid = 12345;
+        }
+
         // AJAX request
         if (!!req.xhr) {
             var certDao = Managers.db().getCertDAO();

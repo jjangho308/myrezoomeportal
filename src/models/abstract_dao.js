@@ -18,4 +18,4 @@ class AbstractDAO {
     }
 }
 
-export default AbstractDao;
+export default AbstractDAO;

@@ -6,7 +6,7 @@
  * @author TACKSU
  */
 export default {
-    post_ajax: (req, res, next) => {
+    post: (req, res, next) => {
 
     }
 }

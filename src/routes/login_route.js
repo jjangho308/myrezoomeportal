@@ -1,5 +1,6 @@
 import express from 'express';
-import ctrl from './login.ctrl';
+import ctrl from './login_ctrl';
+import view from '../mw/view';
 
 /**
  * Router for /login URI. <br />

@@ -1,10 +1,12 @@
+import AbstractDAO from "../abstract_dao";
+
 /**
  * DAO of resume. <br />
  * 
  * @since 180323
  * @author TACKSU
  */
-class ResumeDao extends AbstractDao {
+class ResumeDao extends AbstractDAO {
     constructor(connectionPool) {
         super(connectionPool);
     }
@@ -34,3 +36,5 @@ class ResumeDao extends AbstractDao {
 
     }
 }
+
+export default ResumeDao;
