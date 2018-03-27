@@ -23,7 +23,7 @@ describe('User DAO test suit.', () => {
 
         var userModel = new UserModel({
             uid: Util.uuid(),
-            email: 'asdf' + getRandomInt(1, 100) + '@asdfasdf.com',
+            email: 'asdf' + getRandomInt(1, 10000) + '@asdfasdf.com',
             pwd: Util.uuid(),
             ci: Util.uuid(),
 
@@ -69,6 +69,52 @@ describe('User DAO test suit.', () => {
             }
         })
     });
+
+    it('User update test', done => {
+        var userDAO = Managers.db().getUserDAO();
+
+        var userModel = new UserModel({
+            uid: Util.uuid(),
+            email: 'asdf' + getRandomInt(1, 100000) + '@asdfasdf.com',
+            pwd: Util.uuid(),
+            ci: Util.uuid(),
+
+            familyNameKR: '홍',
+            firstNameKR: '길동',
+
+            firstNameEN: 'Gil-dong',
+            familyNameEN: 'Hong',
+
+            birth: new Date('1987-03-21'),
+            gender: 'M',
+
+            country: 'KN',
+            area: 'Where?',
+
+            cid: Util.uuid(),
+
+            phone: '010-4848-7845',
+            mcc: 'KTF',
+            carrierName: 'KT',
+        });
+
+        userDAO.put(userModel, (err, insertId) => {
+            if (err) {
+                console.log(err.toString());
+            } else {
+                userModel.ci = Util.uuid();
+                userDAO.set({
+                    suid: insertId
+                }, userModel, (err, affectedRows) => {
+                    if (err) {
+                        console.log(err.toString());
+                    } else if (affectedRows > 0) {
+                        done();
+                    }
+                });
+            }
+        })
+    })
 });
 
 function getRandomInt(min, max) {

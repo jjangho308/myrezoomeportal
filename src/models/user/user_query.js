@@ -6,10 +6,16 @@
  */
 export default {
     getById: 'SELECT * FROM TCUP_USR where S_USR_ID = ?',
-    count: 'SELECT COUNT(*) TCUP_USR WHERE EMAIL = ?;',
+
     getByEmail: 'SELECT * FROM TCUP_USR WHERE EMAIL = ?;',
+
+    count: 'SELECT COUNT(*) TCUP_USR WHERE EMAIL = ?;',
+
     put: 'INSERT INTO TCUP_USR SET ?',
-    set: '',
-    del: '',
-    findAll: 'select * from TBL_USER'
+
+    setById: 'UPDATE TCUP_USR SET ? where S_USR_ID = ?',
+
+    setByEmail: 'UPDATE TCUP_USR SET ? where EMAIL = ?',
+    
+    del: ''
 }

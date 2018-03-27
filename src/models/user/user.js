@@ -48,8 +48,8 @@ class User extends AbstractModel {
         return new User({
             suid: row.S_USR_ID,
             uid: row.UID,
-            ci : row.CI,
-            pwd : row.PWD,
+            ci: row.CI,
+            pwd: row.PWD,
             email: row.EMAIL,
             firstNameKR: row.K_FRST_NM,
             familyNameKR: row.K_FMLY_NM,
@@ -69,6 +69,28 @@ class User extends AbstractModel {
             created: row.CRTD_DT,
             modified: row.MDFID_DT
         });
+    }
+
+    static toRow(user) {
+        return {
+            UID: user.uid,
+            EMAIL: user.email,
+            PWD: user.pwd,
+            CI: user.ci,
+            E_FMLY_NM: user.familyNameEN,
+            E_FRST_NM: user.firstNameEN,
+            E_FULL_NM: user.fullNameEN,
+            K_FMLY_NM: user.familyNameKR,
+            K_FRST_NM: user.firstNameKR,
+            K_FULL_NM: user.fullNameKR,
+            BRTH_YMD: user.birth,
+            GENDER: user.gender,
+            PHN_NUM: user.phone,
+            CARRIER_NM: user.carrierName,
+            MCC: user.mcc,
+            CNTY_CD: user.country,
+            CNTY_CD_AREA: user.area
+        };
     }
 }
 

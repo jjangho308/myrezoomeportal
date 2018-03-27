@@ -1,3 +1,5 @@
+import mysql from 'mysql';
+
 //import AbstractDAO from 'abstract_dao.js'
 import userQuery from './user_query.js';
 import UserModel from './user';
@@ -81,18 +83,18 @@ class UserDao {
      * 
      */
     get(creteria, cb) {
-        
-        var params = null;
+
+        var where = null;
         var sql = null;
         if (!!creteria.suid) {
-            params = [creteria.suid];
+            where = [creteria.suid];
             sql = userQuery.getById;
         } else if (!!creteria.email) {
-            params = [creteria.email];
+            where = [creteria.email];
             sql = userQuery.getByEmail;
         }
 
-        this.connectionPool.query(sql, params, function (err, rows) {
+        this.connectionPool.query(sql, where, function (err, rows) {
             if (!!err) {
                 cb(err);
             } else {
@@ -107,8 +109,22 @@ class UserDao {
         });
     }
 
-    set(opt, user, cb) {
+    set(creteria, userModel, cb) {
+        var where = null;
+        var sql = null;
+        if (!!creteria.suid) {
+            sql = userQuery.setById;
+            where = [creteria.suid];
+        } else if (!!creteria.email) {
+            sql = userQuery.setByEmail;
+            where = [creteria.email];
+        }
 
+        var params = UserModel.toRow(userModel);
+
+        this.connectionPool.query(sql, [params, where], (err, result) => {
+            cb(err, result.affectedRows);
+        });
     }
 
     del(opt, cb) {
