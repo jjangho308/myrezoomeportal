@@ -1,14 +1,6 @@
 .main {
     background-color: #ffffff;
 }
-
-.Group-3 {
-    width: 1680px;
-    height: 807px;
-    object-fit: contain;
-    z-index: 0;
-  }
-
   .Black {
     width: 244px;
     height: 42px;
@@ -20,10 +12,13 @@
     
   }
 
-  .intro {
-      position: relative;
+  .introtop {
+    position: relative;
     left : 7%;  
-
+    width: 1680px;
+    height: 807px;
+    object-fit: contain;
+    background-image: url("../img/group-3.png");
   }
 
   .\- {
@@ -51,4 +46,41 @@
     opacity: 0.2;
     border-radius: 3px;
     background-color: #ffffff;
+  }
+
+  .introcenter1 {
+      width: 855px;
+      height: 103px;
+      font-family: SpoqaHanSans;
+      font-size: 70px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: left;
+      color: #ffffff;
+  }
+
+  .introcenter2 {
+    width: 508px;
+    height: 64px;
+    font-family: SpoqaHanSans;
+    font-size: 16px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .introcenter3 {
+    width: 363px;
+    height: 75px;
+    border-radius: 2px;
+    background-color: #1e88f5;
+    box-shadow: 0 1px 2px 0 rgba(76, 128, 241, 0.5);
+
   }
