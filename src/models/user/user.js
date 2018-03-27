@@ -12,6 +12,8 @@ class User extends AbstractModel {
         this.suid = data.suid;
         this.uid = data.uid;
         this.email = data.email;
+        this.pwd = data.pwd;
+        this.ci = data.ci;
 
         this.firstNameKR = data.firstNameKR;
         this.familyNameKR = data.familyNameKR;
@@ -25,14 +27,14 @@ class User extends AbstractModel {
 
         this.birth = data.birth;
         this.gender = data.gender;
-        
+
         this.country = data.country;
-        this.ares = data.area;
-        
+        this.area = data.area;
+
         this.phone = data.phone;
         this.carrierName = data.carrierName;
         this.mcc = data.mcc;
-        
+
         this.status = data.status;
         this.first = data.first;
 
@@ -40,6 +42,33 @@ class User extends AbstractModel {
 
         this.created = data.created;
         this.modified = data.modified;
+    }
+
+    static fromRow(row) {
+        return new User({
+            suid: row.S_USR_ID,
+            uid: row.UID,
+            ci : row.CI,
+            pwd : row.PWD,
+            email: row.EMAIL,
+            firstNameKR: row.K_FRST_NM,
+            familyNameKR: row.K_FMLY_NM,
+            fullNameKR: row.K_FULL_NM,
+            firstNameEN: row.E_FRST_NM,
+            familyNameEN: row.E_FMLY_NM,
+            fullNameEN: row.E_FULL_NM,
+            birth: row.BRTH_YMD,
+            gender: row.GENDER,
+            country: row.CNTY_CD,
+            area: row.CNTY_CD_AREA,
+            phone: row.PHN_NUM,
+            carrierName: row.CARRIER_NM,
+            mcc: row.MCC,
+            status: row.STS_CD,
+            first: row.FRST_YN,
+            created: row.CRTD_DT,
+            modified: row.MDFID_DT
+        });
     }
 }
 

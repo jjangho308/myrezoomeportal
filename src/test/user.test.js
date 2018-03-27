@@ -24,18 +24,20 @@ describe('User DAO test suit.', () => {
         var userModel = new UserModel({
             uid: Util.uuid(),
             email: 'asdf' + getRandomInt(1, 100) + '@asdfasdf.com',
-            password: Util.uuid(),
+            pwd: Util.uuid(),
+            ci: Util.uuid(),
 
             familyNameKR: '홍',
             firstNameKR: '길동',
 
             firstNameEN: 'Gil-dong',
-            lastNameEN: 'Hong',
+            familyNameEN: 'Hong',
 
             birth: new Date('1987-03-21'),
             gender: 'M',
 
             country: 'KN',
+            area: 'Where?',
 
             cid: Util.uuid(),
 
@@ -48,18 +50,25 @@ describe('User DAO test suit.', () => {
                 console.log(err.toString());
             } else {
                 userDAO.get({
-                    UID: insertId
-                }, (err, searchedModel) => {
+                    suid: insertId
+                }, (err, userBySUID) => {
                     if (err) {
                         console.log(err.toString());
-                    } else if (searchedModel.email == userModel.email) {
-                        console.log(JSON.stringify(searchedModel));
-                        done();
+                    } else {
+                        userDAO.get({
+                            email: userModel.email
+                        }, (err, userByEmail) => {
+                            if (err) {
+                                console.log(err.toString());
+                            } else if (userBySUID[0].email == userByEmail[0].email) {
+                                done();
+                            }
+                        })
                     }
                 });
             }
         })
-    })
+    });
 });
 
 function getRandomInt(min, max) {
