@@ -3,6 +3,7 @@ import Initialize from '../core/initializer';
 import Managers from '../core/managers';
 import DatabaseManager from '../modules/db/db';
 
+import UserDAO from '../models/user/user_dao';
 import UserModel from '../models/user/user';
 
 import Util from '../util/util';
@@ -19,7 +20,8 @@ describe('User DAO test suit.', () => {
     });
 
     it('User Put & Get test', done => {
-        var userDAO = Managers.db().getUserDAO();
+        var userDAO = new UserDAO();
+        userDAO = Managers.db().getUserDAO();
 
         var userModel = new UserModel({
             uid: Util.uuid(),
@@ -71,7 +73,8 @@ describe('User DAO test suit.', () => {
     });
 
     it('User update test', done => {
-        var userDAO = Managers.db().getUserDAO();
+        var userDAO = new UserDAO();
+        userDAO = Managers.db().getUserDAO();
 
         var userModel = new UserModel({
             uid: Util.uuid(),

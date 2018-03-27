@@ -1,22 +1,24 @@
 import mysql from 'mysql';
 
-//import AbstractDAO from 'abstract_dao.js'
 import userQuery from './user_query.js';
 import UserModel from './user';
-
-import Env from '../../core/environment';
+import AbstractDAO from '../abstract_dao.js';
 
 /**
- * DAO for user. <br />
+ * DAO for UserModel. <br />
  * 
  * @since 180302
  * @author TACKSU
  */
+class UserDao extends AbstractDAO {
 
-class UserDao {
-
+    /**
+     * Default constructor. <br />
+     * @since 180327
+     * @param {MysqlConnectionPool} connectionPool 
+     */
     constructor(connectionPool) {
-        this.connectionPool = connectionPool;
+        super(connectionPool);
     }
 
     /**
@@ -29,45 +31,8 @@ class UserDao {
      * @param {Function(err,result)} cb 
      */
     put(userModel, cb) {
-        // var params = {
-        //     UID: this.connectionPool.escape(userModel.uid),
-        //     EMAIL: this.connectionPool.escape(userModel.email),
-        //     PWD: this.connectionPool.escape(userModel.pwd),
-        //     CI: this.connectionPool.escape(userModel.ci),
-        //     E_FMLY_NM: this.connectionPool.escape(userModel.familyNameEN),
-        //     E_FRST_NM: this.connectionPool.escape(userModel.firstNameEN),
-        //     E_FULL_NM: this.connectionPool.escape(userModel.fullNameEN),
-        //     K_FMLY_NM: this.connectionPool.escape(userModel.familyNameKR),
-        //     K_FRST_NM: this.connectionPool.escape(userModel.firstNameKR),
-        //     K_FULL_NM: this.connectionPool.escape(userModel.fullNameKR),
-        //     BRTH_YMD: this.connectionPool.escape(userModel.birth),
-        //     GENDER: this.connectionPool.escape(userModel.gender),
-        //     PHN_NUM: this.connectionPool.escape(userModel.phone),
-        //     CARRIER_NM: this.connectionPool.escape(userModel.carrierName),
-        //     MCC: this.connectionPool.escape(userModel.mcc),
-        //     CNTY_CD: this.connectionPool.escape(userModel.country),
-        //     CNTY_CD_AREA: this.connectionPool.escape(userModel.area)
-        // };
 
-        var params = {
-            UID: userModel.uid,
-            EMAIL: userModel.email,
-            PWD: userModel.pwd,
-            CI: userModel.ci,
-            E_FMLY_NM: userModel.familyNameEN,
-            E_FRST_NM: userModel.firstNameEN,
-            E_FULL_NM: userModel.fullNameEN,
-            K_FMLY_NM: userModel.familyNameKR,
-            K_FRST_NM: userModel.firstNameKR,
-            K_FULL_NM: userModel.fullNameKR,
-            BRTH_YMD: userModel.birth,
-            GENDER: userModel.gender,
-            PHN_NUM: userModel.phone,
-            CARRIER_NM: userModel.carrierName,
-            MCC: userModel.mcc,
-            CNTY_CD: userModel.country,
-            CNTY_CD_AREA: userModel.area
-        };
+        var params = UserModel.toRow(userModel);
 
         this.connectionPool.query(userQuery.put, params, (err, result) => {
             if (!!err) {
@@ -79,8 +44,10 @@ class UserDao {
     }
 
     /**
-     * Search UserModel from User Table. <br />
+     * Search specific UserModel by given creteria from User Table. <br />
      * 
+     * @since 180327
+     * @author TACKSU
      */
     get(creteria, cb) {
 
@@ -109,6 +76,19 @@ class UserDao {
         });
     }
 
+    /**
+     * Update specific UserModel entry by given creteria. <br />
+     * 
+     * @since 180327
+     * @author TACKSU
+     * 
+     * @param {object} creteria {
+     *      suid : primary key number of UserModel,
+     *      email : Email address of UserModel
+     * }
+     * @param {UserModel} userModel 
+     * @param {function(object, number)} cb 
+     */
     set(creteria, userModel, cb) {
         var where = null;
         var sql = null;
@@ -127,7 +107,17 @@ class UserDao {
         });
     }
 
-    del(opt, cb) {
+
+    /**
+     * Delete specific UserModel entry from User Table by given creteria. <br />
+     * 
+     * @since 180327
+     * @author TACKSU
+     * 
+     * @param {} creteria 
+     * @param {function(object, number)} cb 
+     */
+    del(creteria, cb) {
 
     }
 }
