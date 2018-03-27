@@ -65,9 +65,6 @@ PropertyManager.PUSH_SSL = 'push.ssl';
 PropertyManager.PUSH_HEADER_HOST = 'push.header.host';
 PropertyManager.PUSH_HEADER_LOGIN = 'push.header.login';
 PropertyManager.PUSH_HEADER_PASSCODE = 'push.header.passcode';
-PropertyManager.PUSH_ = 'push.header.passcode';
-PropertyManager.PUSH_ = 'push.header.passcode';
-
 
 /****************************************/
 /* NOSQL                                */

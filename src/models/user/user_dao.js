@@ -1,79 +1,123 @@
-//import AbstractDAO from 'abstract_dao.js'
+import mysql from 'mysql';
+
 import userQuery from './user_query.js';
 import UserModel from './user';
-
-import Env from '../../core/environment';
+import AbstractDAO from '../abstract_dao.js';
 
 /**
- * DAO for user. <br />
+ * DAO for UserModel. <br />
  * 
  * @since 180302
  * @author TACKSU
  */
+class UserDao extends AbstractDAO {
 
-class UserDao {
-
+    /**
+     * Default constructor. <br />
+     * @since 180327
+     * @param {MysqlConnectionPool} connectionPool 
+     */
     constructor(connectionPool) {
-        this.connectionPool = connectionPool;
+        super(connectionPool);
     }
 
-    put(user, cb) {
-        this.connectionPool.query(userQuery.put, param, (err, rows) => {
+    /**
+     * Put a new UserModel entity to user table. <br />
+     * 
+     * @since 180322
+     * @author TACKSU
+     * 
+     * @param {UserModel} userModel 
+     * @param {Function(err,result)} cb 
+     */
+    put(userModel, cb) {
 
-            var userId = null;
-            for (var i in rows) {
-                userId = rows[i].userid;
+        var params = UserModel.toRow(userModel);
+
+        this.connectionPool.query(userQuery.put, params, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else if (!!result) {
+                cb(err, result.insertId);
             }
-
-            cb(err, userId);
-        })
+        });
     }
 
+    /**
+     * Search specific UserModel by given creteria from User Table. <br />
+     * 
+     * @since 180327
+     * @author TACKSU
+     */
     get(creteria, cb) {
 
-        var param = [creteria.userid];
-
-        if (Env.developement()) {
-            var userSuji = new UserModel({
-                userid: 12345,
-                birth: new Date('1993-10-19'),
-                firstName: '수지',
-                lastName: '이',
-                gender: 1,
-                phone: '010-0000-2222',
-                email: 'asdfasdf@asdf.com',
-                imgsrc: 'kjk.com/rse'
-            })
-            cb(null, userSuji);
-        } else if (Env.prouction()) {
-            this.connectionPool.query(userQuery.get, param, function (err, rows) {
-                if (err) {
-                    cb(err, null);
-                } else {
-                    var result = null;
-
-                    for (var i in rows) {
-                        var row = {
-                            username: rows[i].LASTNAME + rows[i].FIRSTNAME,
-                            birth: rows[i].BIRTH,
-                            gender: rows[i].GENDER,
-                            phone: rows[i].PHONE,
-                            ci: rows[i].CI,
-                            email: rows[i].EMAIL
-                        }
-                        result = new UserModel(row);
-                    }
-                    cb(result);
-                }
-            });
+        var where = null;
+        var sql = null;
+        if (!!creteria.suid) {
+            where = [creteria.suid];
+            sql = userQuery.getById;
+        } else if (!!creteria.email) {
+            where = [creteria.email];
+            sql = userQuery.getByEmail;
         }
+
+        this.connectionPool.query(sql, where, function (err, rows) {
+            if (!!err) {
+                cb(err);
+            } else {
+                var result = [];
+
+                for (var i in rows) {
+                    var entry = UserModel.fromRow(rows[i]);
+                    result.push(entry);
+                }
+                cb(err, result);
+            }
+        });
     }
 
-    set(opt, user, cb) {
+    /**
+     * Update specific UserModel entry by given creteria. <br />
+     * 
+     * @since 180327
+     * @author TACKSU
+     * 
+     * @param {object} creteria {
+     *      suid : primary key number of UserModel,
+     *      email : Email address of UserModel
+     * }
+     * @param {UserModel} userModel 
+     * @param {function(object, number)} cb 
+     */
+    set(creteria, userModel, cb) {
+        var where = null;
+        var sql = null;
+        if (!!creteria.suid) {
+            sql = userQuery.setById;
+            where = [creteria.suid];
+        } else if (!!creteria.email) {
+            sql = userQuery.setByEmail;
+            where = [creteria.email];
+        }
 
+        var params = UserModel.toRow(userModel);
+
+        this.connectionPool.query(sql, [params, where], (err, result) => {
+            cb(err, result.affectedRows);
+        });
     }
 
-    del(opt, cb) {
+
+    /**
+     * Delete specific UserModel entry from User Table by given creteria. <br />
+     * 
+     * @since 180327
+     * @author TACKSU
+     * 
+     * @param {} creteria 
+     * @param {function(object, number)} cb 
+     */
+    del(creteria, cb) {
 
     }
 }
