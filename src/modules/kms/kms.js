@@ -1,21 +1,30 @@
 import aws from 'aws-sdk';
 import crypto from 'crypto';
+import AbstractManager from "../abstract_manager";
 
 
+class KMSManager extends AbstractManager{
+    constructor(opt){
+        super(opt);
+    }
 
-class KMSManager {
-    generateDataKey() {
-        const kms = new aws.KMS({
+    init(){  
+        this.kms = new aws.KMS({
             accessKeyId: 'AKIAI6WIYRSEBP5HWRNQ',
             secretAccessKey: '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',
             region: 'ap-northeast-2'
         });
+
+        
+    }
+
+    generateDataKey() {
         return new Promise((resolve, reject) => {
             const params = {
                 KeyId: 'a515baff-dbef-4c93-85fc-083bf39f7fa5', // The identifier of the CMK to use to encrypt the data key. You can use the key ID or Amazon Resource Name (ARN) of the CMK, or the name or ARN of an alias that refers to the CMK.
                 KeySpec: 'AES_256'// Specifies the type of data key to return.
             };
-            kms.generateDataKey(params, (err, data) => {
+            this.kms.generateDataKey(params, (err, data) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -62,16 +71,11 @@ class KMSManager {
     }
 
     decrypt(buffer) {
-        const kms = new aws.KMS({
-            accessKeyId: 'AKIAI6WIYRSEBP5HWRNQ',
-            secretAccessKey: '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',
-            region: 'ap-northeast-2'
-        });
         return new Promise((resolve, reject) => {
             const params = {
                 CiphertextBlob: buffer// The data to dencrypt.
             };
-            kms.decrypt(params, (err, data) => {
+            this.kms.decrypt(params, (err, data) => {
                 if (err) {
                     reject(err);
                 } else {

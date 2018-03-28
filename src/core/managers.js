@@ -1,5 +1,6 @@
 import PropertyManager from '../modules/property/property';
 import PushManager from '../modules/push/push';
+import KMSManager from '../modules/kms/kms';
 import BlockchainManager from '../modules/blockchain/blockchain';
 import CryptoManager from '../modules/crypto/crypto';
 import DatabaseManager from '../modules/db/db';
@@ -19,11 +20,13 @@ export default (() => {
     var cryptoInstance = null;
     var dbInstance = null;
     var pushInstance = null;
+    var kmsInstance = null;
     var bcInstance = null;
     var tokenInstance = null;
     var pdfInstance = null;
     var clientRequestInstance = null;
     var agentRequestInstance = null;
+    
 
     return {
         property: () => {
@@ -32,6 +35,10 @@ export default (() => {
 
         push: () => {
             return pushInstance = pushInstance ? pushInstance : new PushManager();
+        },
+
+        kms: () => {
+            return kmsInstance = kmsInstance ? kmsInstance : new KMSManager();
         },
 
         // blockchain : ()=>{

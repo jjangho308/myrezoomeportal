@@ -1,13 +1,12 @@
 import assert from 'assert';
-import KMSManager from '../modules/push/kms';
+import KMSManager from '../modules/kms/kms';
 
-describe('KMS suit', function () {
-    //var push = new PushManager();
-
-    var datakey;
-
+describe.skip('KMS suit', function () {
+    
     before('create KMS ', function () {
         var kms = new KMSManager();
+        kms.init();
+
         kms.generateDataKey()
         .then(data =>{
             
@@ -15,13 +14,13 @@ describe('KMS suit', function () {
             for (let i = 0; i < data.Plaintext.length; i++) {
                 data.Plaintext[i] = null;
             }
-            //
+
             kms.decrypt(data.CiphertextBlob)
             .then(key => {
+                
                 const originBuffer = kms.decryptAES(key, encrpyted);
                 console.log(originBuffer);
             })
-
         })
     })
 
