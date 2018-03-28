@@ -1,7 +1,7 @@
 import CryptoManager from '../modules/crypto/crypto';
-import initialize from '../core/initializer';
+import Initializer from '../core/initializer';
 
-describe.skip('Crypto test suit', () => {
+describe('Crypto test suit', () => {
     var crypto;
 
     before('Crypto module init', () => {

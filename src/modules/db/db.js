@@ -20,6 +20,11 @@ import Env from '../../core/environment';
  */
 class DatabaseManager extends AbstractManager {
 
+    /**
+     * Default constructor. <br />
+     * 
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
     }
@@ -63,6 +68,7 @@ class DatabaseManager extends AbstractManager {
                 });
                 */
                 //connection.release();
+                connection.release();
             }
         });
     }
@@ -112,6 +118,19 @@ class DatabaseManager extends AbstractManager {
      */
     getRecordDAO() {
         return new RecordDAO(this.connectionPool);
+    }
+
+
+    /**
+     * Disconnect all connection and close session. <br />
+     * 
+     * @since 180328
+     * @author TACKSU
+     * 
+     * @param {*} cb 
+     */
+    end(cb) {
+        this.connectionPool.end(cb);
     }
 }
 

@@ -14,6 +14,7 @@ class UserDao extends AbstractDAO {
 
     /**
      * Default constructor. <br />
+     * 
      * @since 180327
      * @param {MysqlConnectionPool} connectionPool 
      */
