@@ -10,4 +10,6 @@ var router = express.Router();
 
 router.get('/', ctrl.get);
 
+router.post('/edu',ctrl.edu);
+
 export default router;
