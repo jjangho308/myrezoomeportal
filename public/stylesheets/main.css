@@ -327,7 +327,6 @@
 
 .center_content_body_edu {
   position: relative;
-  height: 129px;
   width: 880px;
   margin: 0px 0px 0px 38px;
 }
@@ -410,4 +409,27 @@
   height: 129px;
   width: 880px;
   margin: 0px 0px 0px 38px;
+}
+
+.tb_edu {
+  width: 880px;
+  height: 129px;
+}
+
+.record_date {
+  width: 297px;
+  font-family: 'Spoqa Han Sans';
+  font-size: 13px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #a9afb3;
+}
+
+.record_img {
+  width: 70px;
+  height: 70px;
 }

@@ -37,7 +37,7 @@
                 });
 
                 $.ajax({
-                    url: '/edu',
+                    url: '/main/edu',
                     type: 'post',
                     contentType: "application/json",
                     beforeSend: function (xhr) {
@@ -45,6 +45,20 @@
                     },
                     success: function (data) {
                         // alert(JSON.stringify(data));
+                        var edutable = document.getElementById('id_tb_edu');
+                        var rowlen = data.length;
+                        
+                        for(var i=0; i<rowlen; i++) {
+                            var row = edutable.insertRow(i);
+                            row.style.height = '129px';
+                            //row.insertCell(i).innerHTML = '<div class="record_date>"'+ data[i].date +'</div>';
+                            //var cell1 = row.insertCell(0);
+                            row.innerHTML = '<td class="record_date">'+ data[i].date +'</td>';
+                            row.innerHTML += '<td>'+ '<img class="record_img" src="' + data[i].orglogo +'">' +'</td>';
+                            row.innerHTML += '<td>'+ '<img class="record_img" src="' + data[i].orglogo +'">' +'</td>';
+                            row.innerHTML += '<td>'+ '<p>' + data[i].org_name + '</p>' + '<p>' + data[i].org_major + '</p>' + '<p>' + data[i].grade + '</p>' +'</td>';
+                        }
+
                     },
                     error: function (error) {
                         console.log(error);
@@ -172,8 +186,8 @@
                             <p class="content_link1">+추가</p>
                         </div>
                         <div class="center_content_body_edu">
-                            <table class="tb_edu">
-
+                            <table id="id_tb_edu" class="tb_edu">
+                                    
                             </table>
                         </div>
                     </div>
