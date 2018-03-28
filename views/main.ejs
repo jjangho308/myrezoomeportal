@@ -2,8 +2,8 @@
 
 <head>
     <title>메인</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/main.css' />
+    <link href='https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -66,36 +66,102 @@
     </script>
 </head>
 
-<body class="main">
+<body>
 
-    <div class="header">
+    <div class="wrap">
+        <div class="header">
+            <div class="header_content">
+                <div class="logo">
+                        <img src="img/black.svg"
+                        class="Black">
+                </div>
+                <div class="header_sub">
+                    <!-- Right to left layout -->        
+                    <div class="header_user_menu">
+                            <img src="img/more.png"
+                            srcset="img/more@2x.png 2x,
+                                    img/more@3x.png 3x"
+                            class="More">
+                        
+                    </div>
 
+                    <div class="header_user_info">
+                        suji.lee@email.com
+                    </div>
 
-    </div>
-    <div class="introtop">
-        
+                    <div>
+                            <img src="img/user-photo.png"
+                            srcset="img/user-photo@2x.png 2x,
+                                    img/user-photo@3x.png 3x"
+                            class="header_user_photo">
+                    </div>
 
-        <img src="img/black.png" srcset="img/black@2x.png 2x,
-                    img/black@3x.png 3x" class="Black">
+                    <div class="header_line">
+                            <img src="img/line.png"
+                            srcset="img/line@2x.png 2x,
+                                    img/line@3x.png 3x"
+                            class="Line">
+                    </div>
 
-        <div class="topmenudefault">
-            <p id="topmenu1" class="-">기업 서비스 v</p>
-            <p id="topmenu2" class="-"> | </p>    
-            <p id="topmenu3" class="- Button-Shape"> 무료가입 </p>    
+                    <div class="header_menu">
+                        <div class="header_menu_text">
+                                기업서비스
+                        </div>
+                        <img src="img/more.png"
+                            srcset="img/more@2x.png 2x,
+                                    img/more@3x.png 3x"
+                            class="header_more_1">
+                    </div>
+                    
+                    
+                    
+                </div>
+                
+            </div>
+
         </div>
-        <div class="introcenter1">
-                쉽고 빠른 증명서 발급. 레쥬메
+        <div class="container">
+            <!-- User Info Contents -->
+            <div class="center_user_info">
+                <div class="center_user_photo">
+                    <img src="img/usertemp.jpg" width="147" height="145">
+                </div>
+                <div class="center_user_info_text">
+                    <div class="center_user_name">이수지</div>
+                    <div class="center_user_email">suji@email.com</div>
+                </div>
             </div>
-            <div class="introcenter2">
-                증명서 한장 발급받기 위해 설치했었던 엑티브엑스! 이제 안녕.
-                <br>
-                블록체인을 활용한 증명서 발급 및 조회 서비스 레쥬메를 사용해보세요.
+            <!-- Center Menu Contents -->
+            <div class="center_menu">
+                <div class="center_menu_3">이력서 보관함</div>
+                <div class="center_menu_2">증명서 보관함</div>
+                <div class="center_menu_1">My 레쥬메</div>
             </div>
+            <div class="content_row_line"></div>
+            <!-- Rezoome Info Contents -->
+            <div class="content">
+                <div class="content_name">My 레쥬메</div>
+                <div class="content_description">연계된 기관들로부터 불러온 이력사항을 클릭하여, 증명서 발급 및 이력서를 쉽게 생성할수 있습니다.</div>
+                
+                <div class="content_update">
+                    <div class="content_update_time">업데이트 : 2018.03.09 (금) 18:07</div>
+                    <button class="content_update_reload"></div>
+                    
+                    
+                </div>
+                <div class="content_body">
+                    <div class="content_body_education"></div>
+                    <div class="content_body_foreinglanguage"></div>
+                    <div class="content_body_qualification"></div>
+                </div>
+
+            </div>
+        </div>
         
-            <button class="introcenter3">
-            </button>
+        <div class="footer">
+
+        </div>
     </div>
-   
 
 
 </body>

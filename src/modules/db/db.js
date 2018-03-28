@@ -14,11 +14,11 @@ import ResumeDAO from '../../models/resume/resume_DAO';
 import Env from '../../core/environment';
 
 /**
- * Data accessor. <br />
+ * Database manager. <br />
  * 
  * @since 180228
  */
-class DataManager extends AbstractManager {
+class DatabaseManager extends AbstractManager {
 
     constructor(opt) {
         super(opt);
@@ -35,40 +35,39 @@ class DataManager extends AbstractManager {
     }
     */
     init() {
-        if (Env.developement()) {
+        var propertyManager = Managers.property();
 
-        } else if (Env.prouction()) {
-            var propertyManager = Managers.property();
+        this.connectionPool = mysql.createPool({
+            host: propertyManager.get(Property.MySQL_HOST),
+            port: propertyManager.get(Property.MySQL_PORT),
+            user: propertyManager.get(Property.MySQL_ID),
+            password: propertyManager.get(Property.MySQL_PW),
+            database: propertyManager.get(Property.MySQL_DATABASE)
+        });
 
-            this.connectionPool = mysql.createPool({
-                host: propertyManager.get(Property.MySQL_HOST),
-                port: propertyManager.get(Property.MySQL_PORT),
-                user: propertyManager.get(Property.MySQL_ID),
-                password: propertyManager.get(Property.MySQL_PW),
-                database: propertyManager.get(Property.MySQL_DATABASE)
-            });
-
-            this.connectionPool.getConnection(function (err, connection) {
-                if (err) {
-                    console.log(err);
+        /*
+        this.connectionPool.getConnection(function (err, connection) {
+            if (err) {
+                console.log(err);
+                throw err;
+            } else {
+                /*
+                connection.query("select * from TBL_USER", function(err, rows){
+                if(err) {
                     throw err;
-                } else {
-                    /*
-                    connection.query("select * from TBL_USER", function(err, rows){
-                    if(err) {
-                        throw err;
-                    } else {              
-                        var response = {};
-                        response.code = '200';
-                        response.err = '';
-                        res.send(response);
-                    }
-                    });
-                    */
-                    //connection.release();
+                } else {              
+                    var response = {};
+                    response.code = '200';
+                    response.err = '';
+                    res.send(response);
                 }
-            });
-        }
+                });
+                
+                //connection.release();
+            }
+        });
+        */
+        
     }
 
     getUserInfo(userid, cb) {
@@ -86,7 +85,6 @@ class DataManager extends AbstractManager {
     }
 
     getOrgAllInfo(cb) {
-
         var orgDAO1 = new OrgDAO(this.connectionPool);
         orgDAO1.getall(function (res) {
             cb(res);
@@ -120,4 +118,4 @@ class DataManager extends AbstractManager {
     }
 }
 
-export default DataManager;
+export default DatabaseManager;

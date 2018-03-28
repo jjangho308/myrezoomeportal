@@ -1,4 +1,6 @@
-<%#{
+<%#
+HTML Page render시 전달되는 데이터 :
+{
     firstName : string
     lastName : string
     birth : date
@@ -7,6 +9,22 @@
     phone : string
     email : string
     ci : string
+}
+
+/certs GET Ajax request:
+'Accept' : 'application/json',
+'Authorization' : 'Bearer {jwt}'
+헤더 입력할 것
+Response object :
+{
+    err : object - 에러 객체
+    err.code : integer - 에러 코드
+    err.msg : string - 에러 메시지
+    result : array - 증명서 배열
+    result.certId : string(UUID) - 증명서 ID
+    result.txid : string(UUID) - 증명서의 이력 TXID
+    result.date : date(UTC) - 발급 날짜
+    result.issued : string(Format 미정) - 발급 번호
 }
 %>
     <html>
