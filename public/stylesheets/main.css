@@ -1,3 +1,7 @@
+@import url(style.css”);
+
+
+
 .wrap {
   background-color: #ffffff;
   position: relative;
@@ -257,6 +261,16 @@
 
 .content_update_time {
   float:left;
+  opacity: 0.8;
+  font-family: SpoqaHanSans;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.08;
+  letter-spacing: normal;
+  text-align: right;
+  color: #4a4a4a;
 }
 
 .content_update_reload {
@@ -288,11 +302,27 @@
 .content_text1 {
   position: relative;
   float: left;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #676767;
 }
 
 .content_link1 {
   position: relative;
   float: right;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  text-align: left;
+  color: #4a90e2;
 }
 
 .center_content_body_edu {
@@ -312,11 +342,27 @@
 .content_text2 {
   position: relative;
   float: left;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #676767;
 }
 
 .content_link2 {
   position: relative;
   float: right;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  text-align: left;
+  color: #4a90e2;
 }
 
 .center_content_body_foreinglanguage {
@@ -336,11 +382,27 @@
 .content_text3 {
   position: relative;
   float: left;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #676767;
 }
 
 .content_link3 {
   position: relative;
   float: right;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  text-align: left;
+  color: #4a90e2;
 }
 
 .center_content_body_qualification {

@@ -35,6 +35,21 @@
                         console.log(error);
                     }
                 });
+
+                $.ajax({
+                    url: '/edu',
+                    type: 'post',
+                    contentType: "application/json",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "bearer " + sessionStorage.getItem("token"));
+                    },
+                    success: function (data) {
+                        // alert(JSON.stringify(data));
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
             });
         });
 
@@ -156,7 +171,11 @@
                             <p class="content_text1">학력</p>
                             <p class="content_link1">+추가</p>
                         </div>
-                        <div class="center_content_body_edu"></div>
+                        <div class="center_content_body_edu">
+                            <table class="tb_edu">
+
+                            </table>
+                        </div>
                     </div>
                     <div class="content_body_foreinglanguage">
                         <div class="top_content_body_foreinglanguage">
