@@ -48,16 +48,24 @@ class CertModel extends AbstractModel {
         }
     }
 
-    fromRow(row) {
-        this.sid = row.S_CERT_SHR_ID;
-        this.certId = row.CERT_ID;
-        this.uid = row.UID;
-        this.encryptedData = row.ENC_CERT_DATA;
-        this.deleted = row.DEL_YN;
-        this.created = row.CRTD_DT;
-        this.modified = row.MDFID_DT
-
-        // TODO 발급 번호 DB 컬럼 없음
+    /**
+     * Create instance from given row of MySQL database. <br />
+     * 
+     * @since 180328
+     * @author TACKSU
+     * 
+     * @param {MySqlROW} row 
+     */
+    static fromRow(row) {
+        return new CertModel({
+            sid: row.S_CERT_SHR_ID,
+            certId: row.CERT_ID,
+            uid: row.UID,
+            encryptedData: row.ENC_CERT_DATA,
+            deleted: row.DEL_YN,
+            created: row.CRTD_DT,
+            modified: row.MDFID_DT
+        })
     }
 
     toRow() {

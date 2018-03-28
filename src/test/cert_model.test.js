@@ -13,7 +13,7 @@ import CertDAO from '../models/cert/cert_dao';
  */
 describe('Certficiate Model DAO test suite.', () => {
     before('Service initialization', () => {
-        Initializer(Initializer.UNIT_TEST);
+        Initializer();
     })
 
     it('CertModel Put & Get test case', done => {
@@ -28,10 +28,15 @@ describe('Certficiate Model DAO test suite.', () => {
         certDao.put(certModel, (err, insertId) => {
             certDao.get({
                 sid: insertId
-            }, (err, findCertModel) => {
-                if (certModel.certId == findCertModel.certId) {
-                    done();
+            }, (err, certModelList) => {
+                for (var i in certModelList) {
+                    if (certModel.certId == certModelList[i].certId) {
+                        done();
+                    }
                 }
+                Managers.db().end((err) => {
+                    console.log(err.toString());
+                });
             })
         })
     })
@@ -49,9 +54,5 @@ describe('Certficiate Model DAO test suite.', () => {
         });
     })
 
-    after('Close database connection', () => {
-        Managers.db().end((err) => {
-            console.log(err.toString());
-        });
-    })
+    after('Close database connection', () => {})
 });
