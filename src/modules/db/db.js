@@ -6,10 +6,11 @@ import Property from "../property/property";
 import AbstractManager from '../abstract_manager';
 
 import UserDAO from '../../models/user/user_dao';
-import OrgDAO from '../../models/org/org_dao';
-import RecordDAO from '../../models/record/record_dao';
-import CertDAO from '../../models/cert/cert_dao'
-import ResumeDAO from '../../models/resume/resume_dao';
+import OrgDAO from '../../models/org/org_DAO';
+import RecordDAO from '../../models/record/record_DAO';
+import CertDAO from '../../models/cert/cert_DAO'
+import ResumeDAO from '../../models/resume/resume_DAO';
+import SharedCertDAO from '../../models/shared_cert/shared_cert_dao';
 
 import Env from '../../core/environment';
 
@@ -98,6 +99,17 @@ class DatabaseManager extends AbstractManager {
         return new UserDAO(this.connectionPool);
     }
 
+<<<<<<< HEAD
+=======
+    getSharedCertDAO(){
+        return new SharedCertDAO(this.connectionPool);
+    }
+
+    getOrgDAO() {
+        return new OrgDAO(this.connectionPool);
+    }
+
+>>>>>>> b1d1b719085e3b12201c7a080fb7ac5f3d8fe9b6
     getCertDAO() {
         return new CertDAO(this.connectionPool);
     }

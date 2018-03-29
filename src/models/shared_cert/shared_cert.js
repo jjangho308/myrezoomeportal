@@ -1,5 +1,6 @@
 import AbstractModel from "../abstract_model";
 
+
 class SharedCertModel extends AbstractModel {
     constructor(data) {
         super(data);
@@ -24,13 +25,37 @@ class SharedCertModel extends AbstractModel {
         this.exp = data.exp;
 
         /**
-         * Receiving EMail addresses. <br />
+         * flag of delete <br />
          */
-        this.emails = data.emails;
+        this.delYN=data.delYN;
 
         /**
-         * Additional message to send via EMail. <br />
+         * flag of public. <br />
          */
-        this.msg = data.msg;
+        this.pubYN=data.pubYN;
+    }
+
+    static fromRow(row){
+        return new SharedCertModel({
+            certid : row.CERT_ID,
+            url : row.URL,
+            password :  row.PASSCODE,
+            exp :  row.EXPIRED_DT,
+            delYN :  row.DEL_YN,
+            pubYN :  row.PUB_YN
+        });
+    }
+
+    static toRow(sharedcert){
+        return {
+            CERT_ID: sharedcert.certid,
+            URL: sharedcert.url,
+            PASSCODE: sharedcert.password,
+            EXPIRED_DT: sharedcert.exp,
+            DEL_YN: sharedcert.delYN,
+            PUB_YN: sharedcert.pubYN
+        };
     }
 }
+
+export default SharedCertModel;

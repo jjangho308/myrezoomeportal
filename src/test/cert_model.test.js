@@ -16,7 +16,7 @@ describe('Certficiate Model DAO test suite.', () => {
         Initializer();
     })
 
-    it.skip('CertModel Put & Get test case', done => {
+    it('CertModel Put & Get test case', done => {
         var certModel = new CertModel({
             uid: 30,
             certId: Util.uuid(),
