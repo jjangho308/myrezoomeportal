@@ -57,18 +57,27 @@ class CertificateDAO extends AbstractDAO {
      * @since 180328
      * @author TACKSU
      * 
-     * @param {*} creteria 
+     * @param {*} creteria {
+     *      uid : User ID,
+     *      certId : Certificate ID
+     * }
      * @param {*} cb 
      */
     get(creteria, cb) {
         var condition = {};
-        if (!!creteria.sid) {
-            condition.S_CERT_SHR_ID = creteria.sid;
+        if (!!creteria.uId) {
+            condition.UID = creteria.uId;
         }
 
         if (!!creteria.certId) {
+            delete condition.UID;
             condition.CERT_ID = creteria.certId;
         }
+
+        if (!!creteria.sId) {
+            condition.S_CERT_SHR_ID = creteria.sId;
+        }
+
         var query = mysql.format(CertQuery.get, condition);
         this.connectionPool.query(CertQuery.get, condition, (err, rows) => {
             if (!!err) {
@@ -83,8 +92,34 @@ class CertificateDAO extends AbstractDAO {
         });
     }
 
-    set(certId, certModel, cb) {
+    /**
+     * Update certificate. <br />
+     * 
+     * @since 180329
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} certModel 
+     * @param {*} cb 
+     */
+    set(creteria, certModel, cb) {
+        var condition = {};
+        if (!!creteria.sId) {
+            condition.S_CERT_SHR_ID = creteria.sId;
+        }
 
+        if (!!creteria.certId) {
+            condition.CERT_ID = creteria.certId;
+        }
+
+        var query = mysql.format(CertQuery.set, [certModel.toRow(), condition])
+        this.connectionPool.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.affectedRows);
+            }
+        })
     }
 
     del(certId, cb) {
