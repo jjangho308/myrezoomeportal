@@ -99,8 +99,6 @@ class DatabaseManager extends AbstractManager {
         return new UserDAO(this.connectionPool);
     }
 
-<<<<<<< HEAD
-=======
     getSharedCertDAO(){
         return new SharedCertDAO(this.connectionPool);
     }
@@ -109,13 +107,8 @@ class DatabaseManager extends AbstractManager {
         return new OrgDAO(this.connectionPool);
     }
 
->>>>>>> b1d1b719085e3b12201c7a080fb7ac5f3d8fe9b6
     getCertDAO() {
         return new CertDAO(this.connectionPool);
-    }
-
-    getOrgDAO() {
-        return new OrgDAO(this.connectionPool);
     }
 
     /**
