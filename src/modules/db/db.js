@@ -99,7 +99,7 @@ class DatabaseManager extends AbstractManager {
         return new UserDAO(this.connectionPool);
     }
 
-    getSharedCertDAO(){
+    getSharedCertDAO() {
         return new SharedCertDAO(this.connectionPool);
     }
 

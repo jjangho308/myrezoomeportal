@@ -15,7 +15,7 @@ class SharedCertDAO extends AbstractDAO {
         super(connectionPool);
     }
 
-     /**
+    /**
      * Put a new SharedCertDAO entity to user table. <br />
      * 
      * @since 180329
@@ -27,16 +27,16 @@ class SharedCertDAO extends AbstractDAO {
     put(sharedCert, cb) {
         var params = SharedCertModel.toRow(sharedCert);
 
-        this.connectionPool.query(userQuery.put, params, (err, result)=>{
-            if(!!err){
+        this.connectionPool.query(userQuery.put, params, (err, result) => {
+            if (!!err) {
                 cb(err);
-            }else if(!!result){
+            } else if (!!result) {
                 cb(err, result);
             }
         })
     }
 
-     /**
+    /**
      * Search specific SharedCertModel by given creteria from shared cert info Table. <br />
      * 
      * @since 180329
@@ -45,17 +45,17 @@ class SharedCertDAO extends AbstractDAO {
     get(criteria, cb) {
         var where = null;
         var sql = null;
-        if (!!criteria.suid){
+        if (!!criteria.suid) {
             where = [criteria.suid];
             sql = userQuery.getById;
         }
 
-        this.connectionPool.query(sql, where, function (err, rows){
-            if(!!err){
+        this.connectionPool.query(sql, where, function (err, rows) {
+            if (!!err) {
                 cb(err);
-            }else{
+            } else {
                 var result = [];
-                for(var i in rows){
+                for (var i in rows) {
                     var entry = SharedCertModel.fromRow(rows[i]);
                     result.push(entry);
                 }
@@ -81,13 +81,13 @@ class SharedCertDAO extends AbstractDAO {
     set(criteria, sharedCert, cb) {
         var where = null;
         var sql = null;
-        if(!!criteria.suid){
+        if (!!criteria.suid) {
             sql = userQuery.setById;
             where = [criteria.suid];
         }
         var params = SharedCertModel.toRow(sharedCert);
 
-        this.connectionPool.query(sql, [params, where], (err, result)=>{
+        this.connectionPool.query(sql, [params, where], (err, result) => {
             cb(err, result.affectedRows);
         })
     }
