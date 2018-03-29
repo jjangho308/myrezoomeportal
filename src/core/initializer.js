@@ -1,5 +1,6 @@
 import ManagerProvider from './managers'
 import AbstractManager from '../modules/abstract_manager';
+
 /**
  * Rezoome portal initialize. <br />
  * 
@@ -7,15 +8,20 @@ import AbstractManager from '../modules/abstract_manager';
  * @author TACKSU
  * @param {*} cb 
  */
-export default function init(from) {
-
+var initializer = (from) => {
     // Initialize managers.
     for (var i in ManagerProvider) {
         if (ManagerProvider[i] instanceof Function) {
             var manager = ManagerProvider[i]();
             if (manager instanceof AbstractManager) {
-                manager.init();
+                manager.init(from);
             }
         }
     }
-};
+}
+
+initializer.DEBUG = 0;
+initializer.UNIT_TEST = 1;
+initializer.RUNTIME = 2
+
+export default initializer;
