@@ -27,7 +27,7 @@ describe('Certficiate Model DAO test suite.', () => {
         var certDao = Managers.db().getCertDAO();
         certDao.put(certModel, (err, insertId) => {
             certDao.get({
-                sid: insertId
+                sId: insertId
             }, (err, certModelList) => {
                 for (var i in certModelList) {
                     if (certModel.certId == certModelList[i].certId) {
@@ -54,7 +54,7 @@ describe('Certficiate Model DAO test suite.', () => {
     it('Search certificate data by certId', done => {
         var certDAO = Managers.db().getCertDAO();
         certDAO.get({
-            certId: '2ba2f1ed-a5d9-4d76-b025-a3a6447c2bcf'
+            certId: '51a65916-f2c2-45fc-af60-ad82ca341d4a'
         }, (err, searchedCertModels) => {
             if (!!err) {
                 console.log(err.toString());
@@ -68,6 +68,7 @@ describe('Certficiate Model DAO test suite.', () => {
         certDAO = Managers.db().getCertDAO();
         var originData = Util.uuid();
         var updatedData = Util.uuid();
+        
         var certModel = new CertModel({
             uid: 30,
             certId: Util.uuid(),

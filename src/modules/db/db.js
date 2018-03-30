@@ -55,6 +55,7 @@ class DatabaseManager extends AbstractManager {
             connectionLimit: 500
         });
 
+<<<<<<< HEAD
         // this.connectionPool.getConnection(function (err, connection) {
         //     if (err) {
         //         console.log(err);
@@ -76,6 +77,31 @@ class DatabaseManager extends AbstractManager {
         //         connection.release();
         //     }
         // });
+=======
+        /*
+        this.connectionPool.getConnection(function (err, connection) {
+            if (err) {
+                console.log(err);
+                throw err;
+            } else {
+                /*
+                connection.query("select * from TBL_USER", function(err, rows){
+                if(err) {
+                    throw err;
+                } else {              
+                    var response = {};
+                    response.code = '200';
+                    response.err = '';
+                    res.send(response);
+                }
+                });
+                
+                //connection.release();
+                connection.release();
+            }
+        });
+        */
+>>>>>>> 8f1de11b2340ef4c1eb0f489e31244f10183f16d
     }
 
     getUserInfo(userid, cb) {
