@@ -5,7 +5,7 @@ import Property from "../property/property";
 
 import AbstractManager from '../abstract_manager';
 
-import UserDAO from '../../models/user/user_DAO';
+import UserDAO from '../../models/user/user_dao';
 import OrgDAO from '../../models/org/org_DAO';
 import RecordDAO from '../../models/record/record_DAO';
 import CertDAO from '../../models/cert/cert_DAO'
@@ -101,7 +101,7 @@ class DatabaseManager extends AbstractManager {
         return new UserDAO(this.connectionPool);
     }
 
-    getSharedCertDAO(){
+    getSharedCertDAO() {
         return new SharedCertDAO(this.connectionPool);
     }
     getSharedResumeDAO(){

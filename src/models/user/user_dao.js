@@ -35,7 +35,8 @@ class UserDao extends AbstractDAO {
 
         var params = UserModel.toRow(userModel);
 
-        this.connectionPool.query(userQuery.put, params, (err, result) => {
+        var query = mysql.format(userQuery.put, params);
+        this.connectionPool.query(query, (err, result) => {            
             if (!!err) {
                 cb(err);
             } else if (!!result) {
@@ -51,7 +52,6 @@ class UserDao extends AbstractDAO {
      * @author TACKSU
      */
     get(creteria, cb) {
-
         var where = null;
         var sql = null;
         if (!!creteria.suid) {
