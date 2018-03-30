@@ -21,6 +21,7 @@ describe('Resume model dao test suit.', () => {
 
     it('Resume Put & Get test case.', done => {
         var resumeModel = new ResumeModel({
+            rsmId: Util.uuid(),
             uId: Util.uuid(),
             title: 'My Resume',
             blcMap: [],
