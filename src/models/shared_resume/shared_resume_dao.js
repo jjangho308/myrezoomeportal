@@ -30,6 +30,7 @@ class SharedResumeDAO extends AbstractDAO {
                 cb(err);
             }else if(!!result){
                 cb(err, result);
+                
             }
         })
     }
@@ -58,6 +59,20 @@ class SharedResumeDAO extends AbstractDAO {
             }
         })
 
+    }
+
+    set(criteria, sharedResume, cb){
+        var where = null;
+        var sql = null;
+        if(!!criteria.suid){
+            sql = userQuery.setById;
+            where = [criteria.suid];
+        }
+        var params = SharedResumeModel.toRow(sharedResume);
+
+        this.connectionPool.query(sql, [params, where], (err, result)=> {
+            cb(err, result.affectedRows);
+        })
     }
 
     del(sharedResumeId, cb) {

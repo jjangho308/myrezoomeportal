@@ -16,7 +16,7 @@ describe('Shared resume DAO test suit.', () => {
          Initialize();
      });
 
-     it('1. Shared resume PUT & GET TEST', done => {
+     it.skip('1. Shared resume PUT & GET TEST', done => {
         var SharedResumeDAO = Managers.db().getSharedResumeDAO();
 
         var date = new Date();
@@ -51,40 +51,40 @@ describe('Shared resume DAO test suit.', () => {
         })
      })
 
-    //  it.skip('2. Shared resume Update test ', done => {
-    //     var sharedCertDAO = Managers.db().getSharedCertDAO();
+     it('2. Shared resume Update test ', done => {
+        var SharedResumeDAO = Managers.db().getSharedResumeDAO();
 
-    //     var date = new Date();
-    //     var year = date.getFullYear(); //년도
-    //     var month = date.getMonth()+1; //월 (월은 0부터 시작)
-    //     var day = date.getDate(); //일
+        var date = new Date();
+        var year = date.getFullYear(); //년도
+        var month = date.getMonth()+1; //월 (월은 0부터 시작)
+        var day = date.getDate(); //일
               
-    //     var sharedCert=new SharedCertModel({
-    //         certid: Util.uuid(),
-    //         url: 'asdf.' + getRandomInt(1, 10000) + '.rezoome.io',
-    //         password: Util.uuid(),
-    //         exp: year+"-"+month+"-"+day,
-    //         delYN: 'N',
-    //         pubYN: 'N'
-    //     });
+        var sharedResume=new SharedResumeModel({
+            rsmid: Util.uuid(),
+            url: 'asdf.' + getRandomInt(1, 10000) + '.rezoome.io',
+            password: Util.uuid(),
+            exp: year+"-"+month+"-"+day,
+            delYN: 'N',
+            pubYN: 'N'
+        });
 
-    //     sharedCertDAO.put(sharedCert, (err, result)=> {
-    //         if(err){
-    //             console.log(err.toString());
-    //         }else{
-    //             sharedCert.exp = year+"-"+month+"-"+(day+1);
-    //             sharedCertDAO.set({
-    //                 suid: result.insertId
-    //             }, sharedCert, (err, resultrows)=>{
-    //                 if(err){
-    //                     console.log(err.toString());
-    //                 }else if(resultrows > 0){
-    //                     done();
-    //                 }
-    //             })                
-    //         }
-    //     })
-    //  })
+        SharedResumeDAO.put(sharedResume, (err, result)=> {
+            if(err){
+                console.log(err.toString());
+            }else{
+                sharedResume.exp = year+"-"+month+"-"+(day+1);
+                SharedResumeDAO.set({
+                    suid: result.insertId
+                }, sharedResume, (err, resultrows)=>{
+                    if(err){
+                        console.log(err.toString());
+                    }else if(resultrows > 0){
+                        done();
+                    }
+                })                
+            }
+        })
+     })
     })
 
 
