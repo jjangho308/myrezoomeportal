@@ -5,19 +5,29 @@ import Property from "../property/property";
 
 import AbstractManager from '../abstract_manager';
 
-import UserDao from '../../models/user/user_dao';
-import OrgDao from '../../models/org/org_dao';
-//import CertDao from '../../models/cert/'
-//import RecordDao from '../../models/record/cert_dao';
-//import ResumeDao from '../../models/resume/resume_dao';
+import UserDAO from '../../models/user/user_dao';
+import OrgDAO from '../../models/org/org_DAO';
+import RecordDAO from '../../models/record/record_DAO';
+import CertDAO from '../../models/cert/cert_DAO'
+import ResumeDAO from '../../models/resume/resume_DAO';
+
+import SharedCertDAO from '../../models/shared_cert/shared_cert_dao';
+import SharedResumeDAO from '../../models/shared_resume/shared_resume_dao';
+
+import Env from '../../core/environment';
 
 /**
- * Data accessor. <br />
+ * Database manager. <br />
  * 
  * @since 180228
  */
-class DataManager extends AbstractManager {
+class DatabaseManager extends AbstractManager {
 
+    /**
+     * Default constructor. <br />
+     * 
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
     }
@@ -61,51 +71,77 @@ class DataManager extends AbstractManager {
                 });
                 */
                 //connection.release();
+                connection.release();
             }
         });
     }
 
     getUserInfo(userid, cb) {
-        var userDao = new UserDao(this.connectionPool);
-        userDao.get(userid, function (res) {
+        var userDAO = new UserDAO(this.connectionPool);
+        userDAO.get(userid, function (res) {
             cb(res);
         });
     }
 
     getOrgInfo(orgcodes, cb) {
-        var orgDao1 = new OrgDao(this.connectionPool);
-        orgDao1.get(orgcodes, function (res) {
+        var orgDAO1 = new OrgDAO(this.connectionPool);
+        orgDAO1.get(orgcodes, function (res) {
             cb(res);
         });
     }
 
     getOrgAllInfo(cb) {
-
-        var orgDao1 = new OrgDao(this.connectionPool);
-        orgDao1.getall(function (res) {
+        var orgDAO1 = new OrgDAO(this.connectionPool);
+        orgDAO1.getall(function (res) {
             cb(res);
         });
     }
 
-    getUserDao() {
-        return new UserDao(this.connectionPool);
+    getUserDAO() {
+        return new UserDAO(this.connectionPool);
     }
 
-    getOrgDao() {
-        return new OrgDao(this.connectionPool);
+    getSharedCertDAO() {
+        return new SharedCertDAO(this.connectionPool);
+    }
+    getSharedResumeDAO(){
+        return new SharedResumeDAO(this.connectionPool);
     }
 
-    getCertDao() {
-        return new CertDao(this.connectionPool);
+    getOrgDAO() {
+        return new OrgDAO(this.connectionPool);
     }
 
-    getResumeDao() {
-        return new ResumesDao(this.connectionPool);
+    getCertDAO() {
+        return new CertDAO(this.connectionPool);
     }
 
-    getRecordDao() {
-        return new RecordDao(this.connectionPool);
+    /**
+     * Obtain ResumeDAO. <br />
+     */
+    getResumeDAO() {
+        return new ResumeDAO(this.connectionPool);
+    }
+
+    /**
+     * Obtain RecordDAO. <br />
+     */
+    getRecordDAO() {
+        return new RecordDAO(this.connectionPool);
+    }
+
+
+    /**
+     * Disconnect all connection and close session. <br />
+     * 
+     * @since 180328
+     * @author TACKSU
+     * 
+     * @param {*} cb 
+     */
+    end(cb) {
+        this.connectionPool.end(cb);
     }
 }
 
-export default DataManager;
+export default DatabaseManager;

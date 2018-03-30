@@ -1,5 +1,7 @@
 import Managers from '../core/managers';
 
+import Env from '../core/environment';
+
 /**
  * Controller for /certs URI. <br />
  * 
@@ -16,19 +18,34 @@ export default {
      */
     get: (req, res, next) => {
 
-        var userid = req.params.userid;
+        var userId = null;
+        if (Env.prouction()) {
+            userId = req.params.userId;
+        } else {
+            userId = 12345;
+        }
+
         // AJAX request
         if (!!req.xhr) {
             var certDao = Managers.db().getCertDAO();
+            certDao.search({
+                userId: userId
+            }, (err, result) => {
+                res.status(200).json(result);
+            });
         }
         // HTML page
         else {
             Managers.db().getUserDAO().get({
-                userid: userid
+                userId: userId
             }, (err, userModel) => {
-                res.render('certs', userModel, (err, html) => {
-                    res.status(200).send(html);
-                })
+                if (!!err) {
+                    res.status(500).render('error');
+                } else {
+                    res.render('certs', userModel, (err, html) => {
+                        res.send(html);
+                    });
+                }
             });
         }
     },
@@ -41,6 +58,17 @@ export default {
      */
     post: (req, res, next) => {
         // TODO Insert a new Certificate entity into database.
+        var uId = req.params.uId;
+        var certDAO = Managers.db().getCertDAO();
+        var certEntity = new CertModel(req.body.args)
+        certDAO.put(certEntity, (err, result) => {
+            if (!!err) {
+                res.json(JSON.stringify(err));
+            } else {
+                certEntity.certId = result.certId;
+                res.json(certEntity);
+            }
+        })
     },
 
     /**
@@ -49,6 +77,15 @@ export default {
      * @since 180322
      */
     patch: (req, res, next) => {
-        // TODO Update given certificate 
+        var uId = req.params.uId;
+        var certDAO = Managers.db().getCertDAO();
+        var certEntity = new CertModel(req.body.args)
+        certDAO.set(certEntity.certId, certEntity, (err, result) => {
+            if (!!err) {
+                res.json(JSON.stringify(err));
+            } else {
+                res.json(result);
+            }
+        })
     }
 }

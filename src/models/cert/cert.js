@@ -9,24 +9,76 @@ import AbstractModel from "../abstract_model";
 class CertModel extends AbstractModel {
     constructor(data) {
         super(data);
-        /**
-         * ID of certificate.
-         */
-        this.certid = opt.certid;
 
-        /**
-         * Expiration date.
-         */
-        this.exp = opt.exp;
+        if (!!data) {
+            /**
+             * Specification id of certificate. <br />
+             */
+            this.sid = data.sid;
 
-        /**
-         * TXID of contained record.
-         */
-        this.txid = opt.txid;
+            /**
+             * User id of owner of certificate. <br />
+             */
+            this.uid = data.uid;
 
-        /**
-         * Issued number of this certificate.
-         */
-        this.issued = opt.issued;
+            /**
+             * ID of certificate. <br />
+             */
+            this.certId = data.certId;
+
+            /**
+             * Encrypted original record data certified by this certificate. <br />
+             */
+            this.encryptedData = data.encryptedData;
+
+            /**
+             * Modified date. <br />
+             */
+            this.modified = data.modified;
+
+            /**
+             * Created date.
+             */
+            this.created = data.created;
+
+            /**
+             * Delete flag. <br />
+             */
+            this.deleted = data.deleted ? data.deleted : 'N';
+        }
+    }
+
+    /**
+     * Create instance from given row of MySQL database. <br />
+     * 
+     * @since 180328
+     * @author TACKSU
+     * 
+     * @param {MySqlROW} row 
+     */
+    static fromRow(row) {
+        return new CertModel({
+            sid: row.S_CERT_SHR_ID,
+            certId: row.CERT_ID,
+            uid: row.UID,
+            encryptedData: row.ENC_CERT_DATA,
+            deleted: row.DEL_YN,
+            created: row.CRTD_DT,
+            modified: row.MDFID_DT
+        })
+    }
+
+    toRow() {
+        return {
+            S_CERT_SHR_ID: this.sid,
+            CERT_ID: this.certId,
+            UID: this.uid,
+            ENC_CERT_DATA: this.encryptedData,
+            DEL_YN: this.deleted,
+            CRTD_DT: this.created,
+            MDFID_DT: this.modified
+        }
     }
 }
+
+export default CertModel;

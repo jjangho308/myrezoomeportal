@@ -4,11 +4,18 @@
  * @since 180302
  * @author TACKSU
  */
-let TABLE_NAME = 'TBL_USER'
 export default {
-    get : 'select * from TBL_USER where user_id = ?',
-    put : '',
-    set : '',
-    del : '',
-    findAll : 'select * from TBL_USER'
+    getById: 'SELECT * FROM TCUP_USR where S_USR_ID = ?',
+
+    getByEmail: 'SELECT * FROM TCUP_USR WHERE EMAIL = ?;',
+
+    count: 'SELECT COUNT(*) TCUP_USR WHERE EMAIL = ?;',
+
+    put: 'INSERT INTO TCUP_USR SET ?',
+
+    setById: 'UPDATE TCUP_USR SET ? where S_USR_ID = ?',
+
+    setByEmail: 'UPDATE TCUP_USR SET ? where EMAIL = ?',
+    
+    del: ''
 }

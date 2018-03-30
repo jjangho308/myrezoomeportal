@@ -33,15 +33,17 @@ class ResumeModel extends AbstractModel {
         this.status = data.status;
     }
 
-    set status(value){
-        if(value === 0 || value === 1){
+    set status(value) {
+        if (value === 0 || value === 1) {
             this.mode = value;
-        }else{
+        } else {
             this.mode = 1;
         }
     }
 
-    get status(){
+    get status() {
         return this.mode;
     }
 }
+
+export default ResumeModel;

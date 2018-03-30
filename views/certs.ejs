@@ -1,9 +1,68 @@
-<html>
+<%#
+HTML Page render시 전달되는 데이터 :
+{
+    firstName : string
+    lastName : string
+    birth : date
+    imgsrc : File url of profile image
+    gender : 0 - Male, 1 - Female
+    phone : string
+    email : string
+    ci : string
+}
 
-<head>
-<title>Rezoome /certs page</title>
-</head>
+/certs GET Ajax request:
+'Accept' : 'application/json',
+'Authorization' : 'Bearer {jwt}'
+헤더 입력할 것
+Response object :
+{
+    err : object - 에러 객체
+    err.code : integer - 에러 코드
+    err.msg : string - 에러 메시지
+    result : array - 증명서 배열
+    result.certId : string(UUID) - 증명서 ID
+    result.txid : string(UUID) - 증명서의 이력 TXID
+    result.date : date(UTC) - 발급 날짜
+    result.issued : string(Format 미정) - 발급 번호
+}
+%>
+    <html>
 
-<body>{{result.title}}</body>
+    <head>
+        <title>Rezoome Certificate page</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type='text/javascript'>
+            var hostUrl = 'http://localhost:3000';
+            var jwtToken =
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6InNlb255ZW9uIn0sImV4cCI6MTUyMTEzOTk1MCwiaWF0IjoxNTIxMDk2NzUwfQ.YFxcC_zN9wNNXVkXIl1KS87ZOdI2qqwPe7Jf8O7rwUI';
 
-</html>
+            function loadCerts() {
+                $.ajax({
+                    url: hostUrl + '/certs',
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + jwtToken
+                    },
+                    success(result) {
+                        $('.contents')[0].innerHTML = JSON.stringify(result);
+                    }
+                })
+            }
+        </script>
+    </head>
+
+    <body onload='loadCerts();'>
+        <div id='name'>이름 :
+            <%=lastName + firstName %>
+        </div>
+        <div id='gender'>성별 :
+            <%=gender==0 ? '남성' : '여성' %>
+        </div>
+        <div class='contents'>
+
+        </div>
+    </body>
+
+    </html>
