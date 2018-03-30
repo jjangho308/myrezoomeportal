@@ -1,8 +1,10 @@
+import AbstractModel from "../abstract_model";
+
 /**
  * Model of sharing resume entity. <br />
  * 
- * @since 180323
- * @author TACKSU
+ * @since 180329
+ * @author JJANGHO
  */
 class SharedResumeModel extends AbstractModel {
     constructor(opt) {
@@ -22,14 +24,33 @@ class SharedResumeModel extends AbstractModel {
          */
         this.exp = opt.exp;
 
-        /**
-         * Receiving emails. <br />
-         */
-        this.emails = opt.emails;
+        this.password = opt.password;
 
-        /**
-         * Optional message. <br />
-         */
-        this.msg = opt.msg;
+        this.exp = opt.exp;
+
+        this.delYN=opt.delYN;
+        this.pubYN=opt.pubYN;
+    }
+
+    static fromRow(row){
+        return new SharedResumeModel({
+            rsmid : row.RSM_ID,
+            url : row.URL,
+            exp : row.EXPIRED_DT,
+            delYN : row.DEL_YN,
+            pubYN : row.PUB_YN
+        });
+    }
+
+    static toRow(sharedrsm){
+        return {
+            RSM_ID:sharedrsm.rsmid,
+            URL:sharedrsm.url,
+            EXPIRED_DT:sharedrsm.exp,
+            DEL_YN:sharedrsm.delYN,
+            PUB_YN:sharedrsm.pubYN  
+        }
     }
 }
+
+export default SharedResumeModel;
