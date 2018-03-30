@@ -34,12 +34,9 @@ describe('Certficiate Model DAO test suite.', () => {
                         done();
                     }
                 }
-                Managers.db().end((err) => {
-                    console.log(err.toString());
-                });
             })
         })
-    })
+    });
 
 
     it('Search certificate model data by userId', done => {
@@ -52,17 +49,19 @@ describe('Certficiate Model DAO test suite.', () => {
             } else if (searchedCertModels.length > 0)
                 done();
         });
-    })
+    });
 
     it('Search certificate data by certId', done => {
         var certDAO = Managers.db().getCertDAO();
         certDAO.get({
             certId: '2ba2f1ed-a5d9-4d76-b025-a3a6447c2bcf'
         }, (err, searchedCertModels) => {
-            if (searchedCertModels.length > 0)
+            if (!!err) {
+                console.log(err.toString());
+            } else if (searchedCertModels.length > 0)
                 done();
         });
-    })
+    });
 
     it('Update Certificate model', done => {
         var certDAO = new CertDAO();
@@ -104,7 +103,7 @@ describe('Certficiate Model DAO test suite.', () => {
                 }
             })
         })
-    })
+    });
 
     after('Close database connection', () => {})
 });
