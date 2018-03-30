@@ -42,13 +42,13 @@ class ResumeDao extends AbstractDAO {
         var resumeRow = resume.toRow();
 
         var query = mysql.format(Query.put, resumeRow);
-        this.connectionPool.query(query, (err, result) => {
+        this.connectionPool.query(query, function(err, result){
             if (!!err) {
                 cb(err);
             } else {
                 cb(err, result.insertId);
             }
-        })
+        });
     }
 
     get(creteria, cb) {
