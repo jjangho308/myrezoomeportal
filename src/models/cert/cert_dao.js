@@ -42,10 +42,10 @@ class CertificateDAO extends AbstractDAO {
 
         // var query = "INSERT INTO TCDA_CERT_SHR (`CERT_ID`, `UID`, `ENC_CERT_DATA`, `DEL_YN`) VALUES ('45748487-6720-4061-9bed-98c9401fc7d3', 30, 'ca75e6a7-9220-4cff-adcd-1e0ef0fbbe62', 'N');"
         var query = mysql.format(CertQuery.put, param);
-        this.connectionPool.query(query, (err, result) => {
+        this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
-            } else if (!!result) {
+            } else {
                 cb(err, result.insertId);
             }
         });
@@ -81,22 +81,17 @@ class CertificateDAO extends AbstractDAO {
         }
 
         var query = mysql.format(CertQuery.get, condition);
-        try {
-            this.connectionPool.query(CertQuery.get, condition, (err, rows) => {
-                if (!!err) {
-                    cb(err);
-                } else {
-                    var certList = [];
-                    for (var i in rows) {
-                        certList.push(CertModel.fromRow(rows[i]));
-                    }
-                    cb(err, certList);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                var certList = [];
+                for (var i in rows) {
+                    certList.push(CertModel.fromRow(rows[i]));
                 }
-            });
-        } catch (e) {
-            console.log(e.toString());
-        }
-
+                cb(err, certList);
+            }
+        })
     }
 
     /**
@@ -120,13 +115,13 @@ class CertificateDAO extends AbstractDAO {
         }
 
         var query = mysql.format(CertQuery.set, [certModel.toRow(), condition])
-        this.connectionPool.query(query, (err, result) => {
+        this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
             } else {
                 cb(err, result.affectedRows);
             }
-        })
+        });
     }
 
     del(certId, cb) {
