@@ -84,11 +84,9 @@ describe('Shared cert DAO test suit.', () => {
                 })
             }
         })
-
-
-    })
-
-})
+     })
+     
+ })
 
 
 function getRandomInt(min, max) {

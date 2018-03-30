@@ -1,5 +1,5 @@
 /**
- * Query statements for User. <br />
+ * Query statements for certificate. <br />
  * 
  * @since 180328
  * @author JJANGHO
