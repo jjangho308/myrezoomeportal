@@ -75,6 +75,8 @@ class CertificateDAO extends AbstractDAO {
         }
 
         if (!!creteria.sId) {
+            delete condition.UID;
+            delete condition.CERT_ID;
             condition.S_CERT_SHR_ID = creteria.sId;
         }
 
