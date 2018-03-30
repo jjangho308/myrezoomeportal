@@ -50,7 +50,8 @@ class DatabaseManager extends AbstractManager {
             port: propertyManager.get(Property.MySQL_PORT),
             user: propertyManager.get(Property.MySQL_ID),
             password: propertyManager.get(Property.MySQL_PW),
-            database: propertyManager.get(Property.MySQL_DATABASE)
+            database: propertyManager.get(Property.MySQL_DATABASE),
+            connectionLimit: 500
         });
 
         this.connectionPool.getConnection(function (err, connection) {
