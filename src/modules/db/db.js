@@ -51,9 +51,11 @@ class DatabaseManager extends AbstractManager {
             user: propertyManager.get(Property.MySQL_ID),
             password: propertyManager.get(Property.MySQL_PW),
             database: propertyManager.get(Property.MySQL_DATABASE),
+            multipleStatements: true,
             connectionLimit: 500
         });
 
+        /*
         this.connectionPool.getConnection(function (err, connection) {
             if (err) {
                 console.log(err);
@@ -70,11 +72,12 @@ class DatabaseManager extends AbstractManager {
                     res.send(response);
                 }
                 });
-                */
+                
                 //connection.release();
                 connection.release();
             }
         });
+        */
     }
 
     getUserInfo(userid, cb) {
