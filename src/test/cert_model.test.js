@@ -23,8 +23,8 @@ describe('Certficiate Model DAO test suite.', () => {
             encryptedData: Util.uuid(),
         })
 
-        var certDao = new CertDAO();
-        certDao = Managers.db().getCertDAO();
+        //var certDao = new CertDAO();
+        var certDao = Managers.db().getCertDAO();
         certDao.put(certModel, (err, insertId) => {
             certDao.get({
                 sid: insertId

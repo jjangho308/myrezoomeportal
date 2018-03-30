@@ -50,30 +50,32 @@ class DatabaseManager extends AbstractManager {
             port: propertyManager.get(Property.MySQL_PORT),
             user: propertyManager.get(Property.MySQL_ID),
             password: propertyManager.get(Property.MySQL_PW),
-            database: propertyManager.get(Property.MySQL_DATABASE)
+            database: propertyManager.get(Property.MySQL_DATABASE),
+            multipleStatements: true,
+            connectionLimit: 500
         });
 
-        this.connectionPool.getConnection(function (err, connection) {
-            if (err) {
-                console.log(err);
-                throw err;
-            } else {
-                /*
-                connection.query("select * from TBL_USER", function(err, rows){
-                if(err) {
-                    throw err;
-                } else {              
-                    var response = {};
-                    response.code = '200';
-                    response.err = '';
-                    res.send(response);
-                }
-                });
-                */
-                //connection.release();
-                connection.release();
-            }
-        });
+        // this.connectionPool.getConnection(function (err, connection) {
+        //     if (err) {
+        //         console.log(err);
+        //         throw err;
+        //     } else {
+        //         /*
+        //         connection.query("select * from TBL_USER", function(err, rows){
+        //         if(err) {
+        //             throw err;
+        //         } else {              
+        //             var response = {};
+        //             response.code = '200';
+        //             response.err = '';
+        //             res.send(response);
+        //         }
+        //         });
+        //         */
+        //         //connection.release();
+        //         connection.release();
+        //     }
+        // });
     }
 
     getUserInfo(userid, cb) {
