@@ -1,7 +1,7 @@
 import Env from '../../core/environment';
 
 import AbstractDAO from "../abstract_dao";
-import Resume from './resume';
+import ResumeModel from './resume';
 
 import Query from './resume_query';
 
@@ -15,6 +15,14 @@ import Util from '../../util/util';
  */
 class ResumeDao extends AbstractDAO {
 
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180330
+     * @author TACKSU
+     * 
+     * @param {MySqlConnectionPool} connectionPool 
+     */
     constructor(connectionPool) {
         super(connectionPool);
     }
@@ -29,34 +37,24 @@ class ResumeDao extends AbstractDAO {
      * @param {function(err, result)} cb Callback
      */
     put(resume, cb) {
+        var resumeRow = resume.toRow();
 
+        this.connectionPool.query(Query.put, resumeRow, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.insertId);
+            }
+        })
     }
 
     get(creteria, cb) {
         var userId = null;
         var resumeId = null;
-        if (Env.developement()) {
-            userId = creteria.userId;
-            var resumeModels = [new Resume({
-                rsmId: Util.uuid(),
-                title: '마인 이력서',
-                status: 0,
-                records: [{
-                        txid: Util.uuid()
-                    },
-                    {
-                        txid: Util.uuid()
-                    }
-                ]
-            })];
+        userId = creteria.userId;
+        resumeId = creteria.resumeId;
 
-            cb(null, resumeModels);
-        } else if (Env.prouction()) {
-            userId = creteria.userId;
-            resumeId = creteria.resumeId;
-
-            this.connectionPool.query(Query.get)
-        }
+        this.connectionPool.query(Query.get)
     }
 
     set(resumeid, resume, cb) {

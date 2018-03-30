@@ -7,6 +7,13 @@ import AbstractModel from '../abstract_model';
  * @author TACKSU
  */
 class User extends AbstractModel {
+
+    /**
+     * Default constructor. <br />
+     * 
+     * @since
+     * @param {*} data 
+     */
     constructor(data) {
         super(data);
         this.suid = data.suid;
@@ -15,14 +22,14 @@ class User extends AbstractModel {
         this.pwd = data.pwd;
         this.ci = data.ci;
 
-        this.firstNameKR = data.firstNameKR;
-        this.familyNameKR = data.familyNameKR;
+        this.firstNameKO = data.firstNameKO;
+        this.familyNameKO = data.familyNameKO;
         // 한글 fullname은 '{FamilyName}{FirstName}'으로 조합한다.
-        this.fullNameKR = data.fullNameKR ? data.fullNameKR : data.familyNameKR + data.firstNameKR;
+        this.fullNameKO = data.fullNameKO ? data.fullNameKO : data.familyNameKO + data.firstNameKO;
 
         this.firstNameEN = data.firstNameEN;
         this.familyNameEN = data.familyNameEN;
-        // 영문 fullname은 '{FirstName} {LastName}'으로 조합한다.
+        // 영문 fullname은 '{FirstName} {FamilyName}'으로 조합한다.
         this.fullNameEN = data.fullNameEN ? data.fullNameEN : data.firstNameEN + ' ' + data.familyNameEN;
 
         this.birth = data.birth;
@@ -51,9 +58,9 @@ class User extends AbstractModel {
             ci: row.CI,
             pwd: row.PWD,
             email: row.EMAIL,
-            firstNameKR: row.K_FRST_NM,
-            familyNameKR: row.K_FMLY_NM,
-            fullNameKR: row.K_FULL_NM,
+            firstNameKO: row.K_FRST_NM,
+            familyNameKO: row.K_FMLY_NM,
+            fullNameKO: row.K_FULL_NM,
             firstNameEN: row.E_FRST_NM,
             familyNameEN: row.E_FMLY_NM,
             fullNameEN: row.E_FULL_NM,
@@ -80,9 +87,9 @@ class User extends AbstractModel {
             E_FMLY_NM: user.familyNameEN,
             E_FRST_NM: user.firstNameEN,
             E_FULL_NM: user.fullNameEN,
-            K_FMLY_NM: user.familyNameKR,
-            K_FRST_NM: user.firstNameKR,
-            K_FULL_NM: user.fullNameKR,
+            K_FMLY_NM: user.familyNameKO,
+            K_FRST_NM: user.firstNameKO,
+            K_FULL_NM: user.fullNameKO,
             BRTH_YMD: user.birth,
             GENDER: user.gender,
             PHN_NUM: user.phone,
