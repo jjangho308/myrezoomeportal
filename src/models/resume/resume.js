@@ -60,6 +60,8 @@ class ResumeModel extends AbstractModel {
          * Date of modified. <br />
          */
         this.modifiedDate = data.modifiedDate;
+
+        this.trim(this);
     }
 
     /**
@@ -92,7 +94,7 @@ class ResumeModel extends AbstractModel {
      * @author TACKSU
      */
     toRow() {
-        return {
+        return this.trim({
             S_USR_RSM_ID: this.sId,
             RSM_ID: this.rsmId,
             UID: this.uId,
@@ -103,7 +105,9 @@ class ResumeModel extends AbstractModel {
             LST_SHRD_DT: this.lastSharedDate,
             CRTD_DT: this.createdDate,
             MDFID_DT: this.modifiedDate
-        }
+        });
+
+        return row;
     }
 }
 

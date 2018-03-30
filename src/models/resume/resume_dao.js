@@ -1,3 +1,5 @@
+import mysql from 'mysql';
+
 import Env from '../../core/environment';
 
 import AbstractDAO from "../abstract_dao";
@@ -39,7 +41,8 @@ class ResumeDao extends AbstractDAO {
     put(resume, cb) {
         var resumeRow = resume.toRow();
 
-        this.connectionPool.query(Query.put, resumeRow, (err, result) => {
+        var query = mysql.format(Query.put, resumeRow);
+        this.connectionPool.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
             } else {
