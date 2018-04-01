@@ -13,6 +13,5 @@ export default {
 
     setById: 'UPDATE TCDA_RSM_SHR_INFO SET ? where S_RSM_SHR_INFO_ID = ?',
 
-    
     del: ''
 }
