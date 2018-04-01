@@ -5,7 +5,7 @@
  * @author TACKSU
  */
 class AbstractModel {
-    
+
     /**
      * Default constructor. <br />
      * 
@@ -15,7 +15,7 @@ class AbstractModel {
     constructor(opt) {}
 
     /**
-     * Trim member fields. <br />
+     * Remove undefiend or null/empty container fields. <br /> <br />
      * 
      * @since 180330
      * @author TACKSU
