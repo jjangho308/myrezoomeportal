@@ -9,5 +9,5 @@ export default {
     put: 'INSERT INTO ' + TABLE_NAME + ' SET ?',
     get: 'SELECT * FROM ' + TABLE_NAME + ' WHERE ?',
     set: 'UPDATE ' + TABLE_NAME + ' SET ? WHERE ?',
-    del: 'UPDATE ' + TABLE_NAME + 'SET DELETE_YN = \'Y\' WHERE ?'
+    del: 'UPDATE ' + TABLE_NAME + " SET DEL_YN = 'Y' WHERE ?"
 }
