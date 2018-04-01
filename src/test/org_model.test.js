@@ -17,6 +17,6 @@ describe('Organization model test suite.', () => {
     var orgDAO = new orgDAO();
     before('Service initialization', () => {
         Initializer();
-        orgDAO = Managers.db();
+        orgDAO = Managers.db().getOrgDAO();
     })
 });

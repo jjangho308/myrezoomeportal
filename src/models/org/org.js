@@ -23,7 +23,7 @@ class Org extends AbstractModel {
         this.thmPath = data.thmPath;
         this.modified = data.modified;
         this.created = data.created;
-        
+
         this.trim(this);
     }
 
