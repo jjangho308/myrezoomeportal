@@ -54,26 +54,11 @@ class UserDao extends AbstractDAO {
     get(creteria, cb) {
         var condition = null;
         var sql = null;
-<<<<<<< HEAD
-        if (!!creteria.suid) {
-            where = [creteria.suid];
-            sql = userQuery.getById;
-        } else if (!!creteria.email) {
-            where = [creteria.email];
-            sql = userQuery.getByEmail;
-        } else if (!!creteria.uid){
-            where = [creteria.uid];
-            sql = userQuery.getByUId;
-        }
-
-        this.connectionPool.query(sql, where, function (err, rows) {
-=======
 
         condition = (new UserModel(creteria)).toRow();
 
         var query = mysql.format(userQuery.get, condition);
         this.query(query, (err, rows) => {
->>>>>>> c011276e77c842161875f487abc6c0ce913bae6f
             if (!!err) {
                 cb(err);
             } else {
