@@ -16,6 +16,29 @@ class AbstractDAO {
     constructor(connectionPool) {
         this.connectionPool = connectionPool;
     }
+
+
+    /**
+     * Query delegator for connection-release pattern. <br />
+     * 
+     * @since 180330
+     * @author TACKSU
+     * 
+     * @param {string} query Query string.
+     * @param {function(object, object)} cb Callback
+     */
+    query(query, cb) {
+        this.connectionPool.getConnection((err, connection) => {
+            if (!!err) {
+                connection.release();
+            } else {
+                connection.query(query, (err, result) => {
+                    connection.release();
+                    cb(err, result);
+                })
+            }
+        });
+    }
 }
 
 export default AbstractDAO;

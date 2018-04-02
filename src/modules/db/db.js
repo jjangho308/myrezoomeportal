@@ -52,7 +52,8 @@ class DatabaseManager extends AbstractManager {
             password: propertyManager.get(Property.MySQL_PW),
             database: propertyManager.get(Property.MySQL_DATABASE),
             multipleStatements: true,
-            connectionLimit: 500
+            connectionLimit: 500,
+            waitForConnections:false
         });
 
         /*

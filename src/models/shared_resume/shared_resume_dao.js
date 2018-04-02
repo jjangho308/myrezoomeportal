@@ -1,7 +1,7 @@
 import mysql from 'mysql';
 import SharedResumeModel from './shared_resume';
 import AbstractDAO from '../abstract_dao';
-import userQuery from './shared_resume_query';
+import sharedQuery from './shared_resume_query';
 
 /**
  * DAO for shared resume entity. <br />
@@ -14,7 +14,7 @@ class SharedResumeDAO extends AbstractDAO {
         super(connectionPool);
     }
 
-     /**
+    /**
      * Put a new SharedCertDAO entity to user table. <br />
      * 
      * @since 180329
@@ -25,52 +25,68 @@ class SharedResumeDAO extends AbstractDAO {
      */
     put(sharedResume, cb) {
         var params = SharedResumeModel.toRow(sharedResume);
-        this.connectionPool.query(userQuery.put, params, (err, result)=>{
-            if(!!err){
+        var query = mysql.format(sharedQuery.put, params);
+        this.query(query, (err, result) => {
+            if (!!err) {
                 cb(err);
-            }else if(!!result){
+            } else if (!!result) {
                 cb(err, result);
-                
+
             }
         })
     }
 
+    /**
+     * Select shared resume entity from datbase. <br />
+     * 
+     * @param {*} sharedResume 
+     * @param {*} cb 
+     */
     get(sharedResume, cb) {
         var where = null;
         var sql = null;
-        if(!!sharedResume.suid){
+        if (!!sharedResume.suid) {
             where = [sharedResume.suid];
-            sql = userQuery.getById;
+            sql = sharedQuery.getById;
         }
 
-        this.connectionPool.query(sql, where, function(err,rows){
-            if(!!err){
+        var query = mysql.format(sql, where);
+        this.query(query, function (err, rows) {
+            if (!!err) {
                 cb(err);
-            }else{
+            } else {
                 var result = [];
-                
-                for(var i in rows){
+
+                for (var i in rows) {
                     var entry = SharedResumeModel.fromRow(rows[i]);
                     console.log(entry);
                     result.push(entry);
                 }
-                
+
                 cb(err, result);
             }
         })
 
     }
 
-    set(criteria, sharedResume, cb){
+    /**
+     * Update specific shared resume model by given creteria. <br />
+     * 
+     * @param {*} criteria 
+     * @param {*} sharedResume 
+     * @param {*} cb 
+     */
+    set(criteria, sharedResume, cb) {
         var where = null;
         var sql = null;
-        if(!!criteria.suid){
-            sql = userQuery.setById;
+        if (!!criteria.suid) {
+            sql = sharedQuery.setById;
             where = [criteria.suid];
         }
         var params = SharedResumeModel.toRow(sharedResume);
 
-        this.connectionPool.query(sql, [params, where], (err, result)=> {
+        var query = mysql.format(sql, [params, where]);
+        this.query(query, (err, result) => {
             cb(err, result.affectedRows);
         })
     }
