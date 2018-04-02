@@ -30,7 +30,7 @@ class AbstractDAO {
     query(query, cb) {
         this.connectionPool.getConnection((err, connection) => {
             if (!!err) {
-                connection.release();
+                cb(err);
             } else {
                 connection.query(query, (err, result) => {
                     connection.release();

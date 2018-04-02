@@ -2,7 +2,7 @@ import Managers from '../core/managers';
 import AgentRequestManager from '../modules/agent/agent_request';
 
 /**
- * Default controller. <br />
+ * Controller function for /agent URI channle. <br />
  * 
  * @since 180313
  * @author TACKSU

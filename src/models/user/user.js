@@ -16,21 +16,29 @@ class User extends AbstractModel {
      */
     constructor(data) {
         super(data);
-        this.suid = data.suid;
-        this.uid = data.uid;
+        this.sId = data.sId;
+        this.uId = data.uId;
         this.email = data.email;
         this.pwd = data.pwd;
         this.ci = data.ci;
 
         this.firstNameKO = data.firstNameKO;
         this.familyNameKO = data.familyNameKO;
-        // 한글 fullname은 '{FamilyName}{FirstName}'으로 조합한다.
-        this.fullNameKO = data.fullNameKO ? data.fullNameKO : data.familyNameKO + data.firstNameKO;
+        // 한글 fullname은 '{FamilyName}{FirstName}'으로 조합한다
+        if (!!data.fullNameKO) {
+            this.fullNameKO = data.fullNameKO;
+        } else if (!!data.firstNameKO && !!data.familyNameKO) {
+            this.fullNameKO = data.familyNameKO + data.firstNameKO;
+        }
 
         this.firstNameEN = data.firstNameEN;
         this.familyNameEN = data.familyNameEN;
         // 영문 fullname은 '{FirstName} {FamilyName}'으로 조합한다.
-        this.fullNameEN = data.fullNameEN ? data.fullNameEN : data.firstNameEN + ' ' + data.familyNameEN;
+        if (!!data.fullNameEN) {
+            this.fullNameEN = data.fullNameEN;
+        } else if (!!data.firstNameEN && !!data.familyNameEN) {
+            this.fullNameEN = data.familyNameEN + ' ' + data.firstNameEN;
+        }
 
         this.birth = data.birth;
         this.gender = data.gender;
@@ -49,12 +57,22 @@ class User extends AbstractModel {
 
         this.created = data.created;
         this.modified = data.modified;
+
+        this.trim(this);
     }
 
+    /**
+     * Institate user model from MySQL row. <br />
+     * 
+     * @since 180402
+     * @author TACKSU
+     * 
+     * @param {*} row 
+     */
     static fromRow(row) {
         return new User({
-            suid: row.S_USR_ID,
-            uid: row.UID,
+            sId: row.S_USR_ID,
+            uId: row.UID,
             ci: row.CI,
             pwd: row.PWD,
             email: row.EMAIL,
@@ -78,26 +96,35 @@ class User extends AbstractModel {
         });
     }
 
-    static toRow(user) {
-        return {
-            UID: user.uid,
-            EMAIL: user.email,
-            PWD: user.pwd,
-            CI: user.ci,
-            E_FMLY_NM: user.familyNameEN,
-            E_FRST_NM: user.firstNameEN,
-            E_FULL_NM: user.fullNameEN,
-            K_FMLY_NM: user.familyNameKO,
-            K_FRST_NM: user.firstNameKO,
-            K_FULL_NM: user.fullNameKO,
-            BRTH_YMD: user.birth,
-            GENDER: user.gender,
-            PHN_NUM: user.phone,
-            CARRIER_NM: user.carrierName,
-            MCC: user.mcc,
-            CNTY_CD: user.country,
-            CNTY_CD_AREA: user.area
+    /**
+     * Convert instance to MySQL row. <br />
+     * 
+     * @since 180402
+     * @author TACKSU
+     */
+    toRow() {
+        var row = {
+            S_USR_ID: this.sId,
+            UID: this.uId,
+            EMAIL: this.email,
+            PWD: this.pwd,
+            CI: this.ci,
+            E_FMLY_NM: this.familyNameEN,
+            E_FRST_NM: this.firstNameEN,
+            E_FULL_NM: this.fullNameEN,
+            K_FMLY_NM: this.familyNameKO,
+            K_FRST_NM: this.firstNameKO,
+            K_FULL_NM: this.fullNameKO,
+            BRTH_YMD: this.birth,
+            GENDER: this.gender,
+            PHN_NUM: this.phone,
+            CARRIER_NM: this.carrierName,
+            MCC: this.mcc,
+            CNTY_CD: this.country,
+            CNTY_CD_AREA: this.area
         };
+
+        return this.trim(row);
     }
 }
 

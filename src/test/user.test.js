@@ -24,13 +24,13 @@ describe('User DAO test suit.', () => {
         userDAO = Managers.db().getUserDAO();
 
         var userModel = new UserModel({
-            uid: Util.uuid(),
+            uId: Util.uuid(),
             email: 'asdf' + getRandomInt(1, 10000) + '@asdfasdf.com',
             pwd: Util.uuid(),
             ci: Util.uuid(),
 
-            familyNameKR: '홍',
-            firstNameKR: '길동',
+            familyNameKO: '홍',
+            firstNameKO: '길동',
 
             firstNameEN: 'Gil-dong',
             familyNameEN: 'Hong',
@@ -52,7 +52,7 @@ describe('User DAO test suit.', () => {
                 console.log(err.toString());
             } else {
                 userDAO.get({
-                    suid: insertId
+                    sId: insertId
                 }, (err, userBySUID) => {
                     if (err) {
                         console.log(err.toString());
@@ -77,13 +77,13 @@ describe('User DAO test suit.', () => {
         userDAO = Managers.db().getUserDAO();
 
         var userModel = new UserModel({
-            uid: Util.uuid(),
+            uId: Util.uuid(),
             email: 'asdf' + getRandomInt(1, 100000) + '@asdfasdf.com',
             pwd: Util.uuid(),
             ci: Util.uuid(),
 
-            familyNameKR: '홍',
-            firstNameKR: '길동',
+            familyNameKO: '홍',
+            firstNameKO: '길동',
 
             firstNameEN: 'Gil-dong',
             familyNameEN: 'Hong',
@@ -107,7 +107,7 @@ describe('User DAO test suit.', () => {
             } else {
                 userModel.ci = Util.uuid();
                 userDAO.set({
-                    suid: insertId
+                    sId: insertId
                 }, userModel, (err, affectedRows) => {
                     if (err) {
                         console.log(err.toString());

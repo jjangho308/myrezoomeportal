@@ -18,5 +18,17 @@ describe('Organization model test suite.', () => {
     before('Service initialization', () => {
         Initializer();
         orgDAO = Managers.db().getOrgDAO();
+    });
+
+    it('Organization get test case', done => {
+        orgDAO.get({
+            sId: 35
+        }, (err, orgModels) => {
+            if (!!err) {
+                console.log(err.toString());
+            } else {
+                done();
+            }
+        })
     })
 });

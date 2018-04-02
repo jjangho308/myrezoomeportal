@@ -1,68 +1,124 @@
-<%#
-HTML Page render시 전달되는 데이터 :
-{
-    firstName : string
-    lastName : string
-    birth : date
-    imgsrc : File url of profile image
-    gender : 0 - Male, 1 - Female
-    phone : string
-    email : string
-    ci : string
-}
-
-/certs GET Ajax request:
-'Accept' : 'application/json',
-'Authorization' : 'Bearer {jwt}'
-헤더 입력할 것
-Response object :
-{
-    err : object - 에러 객체
-    err.code : integer - 에러 코드
-    err.msg : string - 에러 메시지
-    result : array - 증명서 배열
-    result.certId : string(UUID) - 증명서 ID
-    result.txid : string(UUID) - 증명서의 이력 TXID
-    result.date : date(UTC) - 발급 날짜
-    result.issued : string(Format 미정) - 발급 번호
-}
-%>
-    <html>
-
+<!doctype html>
+<html>
     <head>
-        <title>Rezoome Certificate page</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type='text/javascript'>
-            var hostUrl = 'http://localhost:3000';
-            var jwtToken =
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6InNlb255ZW9uIn0sImV4cCI6MTUyMTEzOTk1MCwiaWF0IjoxNTIxMDk2NzUwfQ.YFxcC_zN9wNNXVkXIl1KS87ZOdI2qqwPe7Jf8O7rwUI';
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            function loadCerts() {
-                $.ajax({
-                    url: hostUrl + '/certs',
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + jwtToken
-                    },
-                    success(result) {
-                        $('.contents')[0].innerHTML = JSON.stringify(result);
-                    }
-                })
-            }
-        </script>
+        <title>Certificate</title>
+        <link rel='stylesheet' href='/stylesheets/certs.css' />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     </head>
 
-    <body onload='loadCerts();'>
-        <div id='name'>이름 :
-            <%=lastName + firstName %>
-        </div>
-        <div id='gender'>성별 :
-            <%=gender==0 ? '남성' : '여성' %>
-        </div>
-        <div class='contents'>
+    <body>
+        <div class="wrap">
+                <div class="header">
+                    <div class="header_content">
+                        <div class="logo">
+                                <img src="img/black.svg"
+                                class="Black">
+                        </div>
+                        <div class="header_sub">
+                            <!-- Right to left layout -->        
+                            <div class="header_user_menu">
+                                    <img src="img/more.png"
+                                    srcset="img/more@2x.png 2x,
+                                            img/more@3x.png 3x"
+                                    class="More">
+                                
+                            </div>
+        
+                            <div class="header_user_info">
+                                suji.lee@email.com
+                            </div>
+        
+                            <div>
+                                    <img src="img/user-photo.png"
+                                    srcset="img/user-photo@2x.png 2x,
+                                            img/user-photo@3x.png 3x"
+                                    class="header_user_photo">
+                            </div>
+        
+                            <div class="header_line">
+                                    <img src="img/line.png"
+                                    srcset="img/line@2x.png 2x,
+                                            img/line@3x.png 3x"
+                                    class="Line">
+                            </div>
+        
+                            <div class="header_menu">
+                                <div class="header_menu_text">
+                                        기업서비스
+                                </div>
+                                <img src="img/more.png"
+                                    srcset="img/more@2x.png 2x,
+                                            img/more@3x.png 3x"
+                                    class="header_more_1">
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        
+                    </div>
+        
+                </div>
 
-        </div>
-    </body>
+            </div>
+            <div class = "expire-date-div">
+                <span>만료일 설정</span>
+                <div class="abc-radio">
+                    <input type="radio" id="radio7" name="expire-date-2" value="">
+                    <label for="radio7" class="default-period-label" class="default-label">
+                        기한 없음
+                    </label>
+                </div>
+                <div class="abc-radio">
+                    <input type="radio" id="radio8" name="expire-date-2" value="">
+                    <label for="radio8" class="expire-period-label">
+                       특정 기간까지 공유
+                    </label>
+                </div>
 
-    </html>
+                <div class="period-div">
+                  <button class="calendar"><img src="img/myresume/on.png" alt=""></button>
+                <input type="text" class="form-control expire-period"  placeholder="2018-04-04"/>
+
+                   <button>설정</button>
+                </div>
+
+            </div>
+            
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <button class="confirm-btn">확인</button>
+        <button class="cancel-btn">취소</button>
+    </div>
+</div>
+    
+<div class="header">
+   
+   <img src="img/certviewer/wt.png" alt="">
+   <div>
+       <p>증명서 상세보기</p>
+       <p>인하대학교 졸업증명서(학사)</p>
+       
+   </div>
+   <button>···</button>
+   <button>전송</button>
+   <button>다운로드</button>
+   <button>인쇄</button>
+    
+    
+</div>
+
+<div class="main-body">
+    <div class="container">
+        
+    </div>
+</div>
+
+
+</html>
