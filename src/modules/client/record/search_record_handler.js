@@ -40,18 +40,38 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
         //orgcode => sendmessage 
         console.log(clientReq);
-        var rezoome_id = clientReq.userid;
+
+        //token에서 rezoome id를 가져와야한다.
+        var rezoome_id = clientReq.uid;
         var orgs = clientReq.orgs;
 
         var db = Managers.db();
 
         //send message
-        db.getUserDao().get(rezoome_id, (users) => {
+        db.getUserDAO().get({
+            uid: rezoome_id
+        }, (err, users) => {
+            db.get
             //console.log("test user :" + users);
+            var targs = {
+                familyNameEN: users.familyNameEN,
+                firstNameEN: users.firstNameEN,
+                fullNameEN: users.fullNameEN,
+                familyNameKO: users.familyNameKO,
+                firstNameKO: users.firstNameKO,
+                fullNameKO: users.fullNameKO,
+                birth: users.birth,
+                gender: users.gender,
+                phone: users.phone,
+                email: users.email,
+                ci: users.ci,
+                pkey: clientReq.pkey,
+            }
 
-            var targs = users;
-            targs.pkey = clientReq.pkey;
+            
 
+            
+            
             var msg = new SearchRecordPush({
                 cmd: clientReq.cmd,
                 mid: clientReq.mid,
@@ -63,7 +83,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
             console.log("===================msg===================");
             console.log(msg);
-            // Managers.push().init();
+            Managers.push().init();
             Managers.push().sendMessage(msg, orgs, err => {
                 !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
             });
@@ -83,7 +103,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     }
 
     // makeMSG(clientReq, personalInfo) {
-
     //     var args = {};
     //     args.username = personalInfo[0].NAME;
     //     args.birth = personalInfo[0].BIRTH;
@@ -101,4 +120,4 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     // }
 }
 
-export default SearchRecordRequestHandler;
+export default SearchRecordRequestHandler; 

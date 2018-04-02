@@ -11,8 +11,8 @@ import RecordDAO from '../../dao/record_dao';
 import CertDAO from '../../dao/cert_dao'
 import ResumeDAO from '../../dao/resume_dao';
 
-import SharedCertDAO from '../../dao/shared_cert_dao';
-import SharedResumeDAO from '../../dao/shared_resume_dao';
+// import SharedCertDAO from '../../models/shared_cert/shared_cert_dao';
+// import SharedResumeDAO from '../../models/shared_resume/shared_resume_dao';
 
 import Env from '../../core/environment';
 
