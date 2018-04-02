@@ -1,7 +1,5 @@
 import express from 'express';
-import tokenAuth from '../mw/client_auth';
 import ctrl from './certs_ctrl';
-import view from '../mw/view';
 
 /**
  * Router for /certs URI. <br />
@@ -11,6 +9,8 @@ import view from '../mw/view';
  */
 var router = express.Router();
 
+router.get('/', ctrl.get);
+/*
 // 증명서 보관함 페이지 controller
 router.get('/', tokenAuth);
 router.get('/', ctrl.get);
@@ -27,5 +27,7 @@ router.post('/', view);
 
 router.post('/:id', tokenAuth);
 router.patch('/:id', ctrl.patch);
+
+*/ 
 
 export default router;

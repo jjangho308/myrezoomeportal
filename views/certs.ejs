@@ -1,124 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+        <title>Certificate</title>
+        <link rel='stylesheet' href='/stylesheets/certs.css' />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    </head>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-    
-    <link rel="stylesheet" href="css/mypage/certviewer.css">
-    <script src="js/certviewer.js"></script>
-    
-    <script src="js/selectize.js"></script>
-    <link rel="stylesheet" href="css/selectize.css">
-    
-</head>
-
-<!------ Include the above in your HEAD tag ---------->
-
-<body>
-    <a href="#cert-add-dialog" rel="modal:open">sadas</a>
-    
-<div id="cert-add-dialog" class="modal">
-    <p>증명서 전송<span>증명서를 레쥬메 서비스를 통해 보다 편리하게 전송해보세요.</span></p>
-    
-       
-    <div class="modal-sub-header">
-        <span>증명서 링크 생성</span>
-        <span>이메일로 전송</span>
+    <body>
+        <div class="wrap">
+                <div class="header">
+                    <div class="header_content">
+                        <div class="logo">
+                                <img src="img/black.svg"
+                                class="Black">
+                        </div>
+                        <div class="header_sub">
+                            <!-- Right to left layout -->        
+                            <div class="header_user_menu">
+                                    <img src="img/more.png"
+                                    srcset="img/more@2x.png 2x,
+                                            img/more@3x.png 3x"
+                                    class="More">
+                                
+                            </div>
         
-    </div>
-      
-       
-    <div class="modal-body">
-     
-        <div class="cert-create-div">
-          
-           <input type="text" id="cert-url-input" placeholder="생성된 링크가 없습니다. 링크 생성 버튼을 클릭해주세요.">
-            <button  id="create-link-button">링크 생성</button>
-
-            <div class = "open-range-div">
-                <span>공개 대상</span>
-                <div class="abc-radio">
-                    <input type="radio" id="radio1" name="open-range-1" value="">
-                    <label for="radio1" class="default-password-label" class="default-label">
-                        링크 소유자
-                    </label>
-                </div>
-                <div class="abc-radio">
-                    <input type="radio"  id="radio2" name="open-range-1"value="">
-                    <label for="radio2" class="aware-password-label">
-                       비밀번호를 알고있는 사람
-                    </label>
-                </div>
-
-
-                   <div class="password-div">
-                       <input type="text"  placeholder="비밀번호를 설정해주세요." />
-                       <button>설정</button>
-                    </div>
-
-            </div>
-            <div class = "expire-date-div">
-                <span>만료일 설정</span>
-                <div class="abc-radio">
-                    <input type="radio" id="radio3" name="expire-date-1" value="">
-                    <label for="radio3" class="default-period-label" class="default-label">
-                        기한 없음
-                    </label>
-                </div>
-                <div class="abc-radio">
-                    <input type="radio" id="radio4" name="expire-date-1" value="">
-                    <label for="radio4" class="expire-period-label">
-                       특정 기간까지 공유
-                    </label>
-                </div>
-
-                <div class="period-div">
-                  <button class="calendar"><img src="img/myresume/on.png" alt=""></button>
-                <input type="text" class="form-control expire-period"  placeholder="2018-04-04"/>
-
-                   <button>설정</button>
-                </div>
-
-            </div>
-
-        </div>
+                            <div class="header_user_info">
+                                suji.lee@email.com
+                            </div>
         
-        <div class="email-send-div">
-            <input type="text" id="email-send-input" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학
-">
-            
-        <textarea name="" id="" cols="30" rows="10" valign='middle'></textarea>
-            <div class = "open-range-div">
-                <span>공개 대상</span>
-                <div class="abc-radio">
-                    <input type="radio" id="radio5" name="open-range-2" value="">
-                    <label for="radio5" class="default-password-label" class="default-label">
-                        링크 소유자
-                    </label>
-                </div>
-                <div class="abc-radio">
-                    <input type="radio"  id="radio6" name="open-range-2"value="">
-                    <label for="radio6" class="aware-password-label">
-                       비밀번호를 알고있는 사람
-                    </label>
-                </div>
-
-
-                   <div class="password-div">
-                       <input type="text"  placeholder="비밀번호를 설정해주세요." />
-                       <button>설정</button>
+                            <div>
+                                    <img src="img/user-photo.png"
+                                    srcset="img/user-photo@2x.png 2x,
+                                            img/user-photo@3x.png 3x"
+                                    class="header_user_photo">
+                            </div>
+        
+                            <div class="header_line">
+                                    <img src="img/line.png"
+                                    srcset="img/line@2x.png 2x,
+                                            img/line@3x.png 3x"
+                                    class="Line">
+                            </div>
+        
+                            <div class="header_menu">
+                                <div class="header_menu_text">
+                                        기업서비스
+                                </div>
+                                <img src="img/more.png"
+                                    srcset="img/more@2x.png 2x,
+                                            img/more@3x.png 3x"
+                                    class="header_more_1">
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        
                     </div>
+        
+                </div>
 
             </div>
             <div class = "expire-date-div">
@@ -177,7 +121,4 @@
 </div>
 
 
-</body>
-    
-   
-  
+</html>
