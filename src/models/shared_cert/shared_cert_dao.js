@@ -29,7 +29,6 @@ class SharedCertDAO extends AbstractDAO {
 
         var query = mysql.format(userQuery.put, params);
         this.query(query, (err, result) => {
-            connection.release();
             if (!!err) {
                 cb(err);
             } else if (!!result) {
