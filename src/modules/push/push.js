@@ -92,10 +92,8 @@ class PushManager extends AbstractManager {
                 }
             }
 
-
-
             var db = Managers.db();
-            console.log(sqlparam);
+            
 
             db.getOrgDao().getByCodes(sqlparam, ((err, result) => {
                 !!err ? cb(err) : (() => {
