@@ -30,38 +30,81 @@ class ResumeDao extends AbstractDAO {
     }
 
     /**
-     * Create new Resume entity. <br />
+     * Insert a given resume model to database. <br />
      * 
      * @since 180323
      * @author TACKSU
      * 
-     * @param {*} resume Resume entity
+     * @param {*} resume Resume model.
      * @param {function(err, result)} cb Callback
      */
     put(resume, cb) {
         var resumeRow = resume.toRow();
 
         var query = mysql.format(Query.put, resumeRow);
-        this.connectionPool.query(query, function(err, result){
+        this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
             } else {
                 cb(err, result.insertId);
             }
-        });
+        })
     }
 
+    /**
+     * Select resumes from database. <br />
+     * 
+     * @param {*} creteria 
+     * @param {function(object, array)} cb 
+     */
     get(creteria, cb) {
-        var userId = null;
-        var resumeId = null;
-        userId = creteria.userId;
-        resumeId = creteria.resumeId;
+        var condition = {};
 
-        this.connectionPool.query(Query.get)
+        if (!!creteria.sId) {
+            condition.S_USR_RSM_ID = creteria.sId;
+        }
+        if (!!creteria.rsmId) {
+            condition.RSM_ID = creteria.rsmId;
+        }
+        if (!!creteria.uId) {
+            condition.UID = creteria.uId;
+        }
+
+        var query = mysql.format(Query.get, condition);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                var returnValue = [];
+                for (var i in result) {
+                    returnValue.push(ResumeModel.fromRow(result[i]));
+                }
+                cb(err, returnValue);
+            }
+        });
+
     }
 
-    set(resumeid, resume, cb) {
+    set(creteria, resumeModel, cb) {
+        var condition = {};
+        if (!!creteria.sId) {
+            condition.S_USR_RSM_ID = creteria.sId;
+        }
+        if (!!creteria.rsmId) {
+            condition.RSM_ID = creteria.rsmId;
+        }
+        if (!!creteria.uId) {
+            condition.UID = creteria.uId;
+        }
 
+        var query = mysql.format(Query.set, [resumeModel.toRow(), condition]);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.affectedRows);
+            }
+        })
     }
 
     del(resumeid, cb) {

@@ -27,11 +27,18 @@ class SharedCertDAO extends AbstractDAO {
     put(sharedCert, cb) {
         var params = SharedCertModel.toRow(sharedCert);
 
-        this.connectionPool.query(userQuery.put, params, (err, result) => {
-            if (!!err) {
-                cb(err);
-            } else if (!!result) {
-                cb(err, result);
+        this.connectionPool.getConnection(function (err, connection) {
+            if (err) {
+                connection.release();
+            } else {
+                connection.query(userQuery.put, params, (err, result) => {
+                    connection.release();
+                    if (!!err) {
+                        cb(err);
+                    } else if (!!result) {
+                        cb(err, result);
+                    }
+                })
             }
         })
     }
@@ -50,7 +57,8 @@ class SharedCertDAO extends AbstractDAO {
             sql = userQuery.getById;
         }
 
-        this.connectionPool.query(sql, where, function (err, rows) {
+        var query = mysql.format(sql, where);
+        this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);
             } else {
@@ -87,7 +95,8 @@ class SharedCertDAO extends AbstractDAO {
         }
         var params = SharedCertModel.toRow(sharedCert);
 
-        this.connectionPool.query(sql, [params, where], (err, result) => {
+        var query = mysql.format(sql, [params, where]);
+        this.query(query, (err, result) => {
             cb(err, result.affectedRows);
         })
     }

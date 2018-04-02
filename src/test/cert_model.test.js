@@ -68,7 +68,7 @@ describe('Certficiate Model DAO test suite.', () => {
         certDAO = Managers.db().getCertDAO();
         var originData = Util.uuid();
         var updatedData = Util.uuid();
-        
+
         var certModel = new CertModel({
             uid: 30,
             certId: Util.uuid(),

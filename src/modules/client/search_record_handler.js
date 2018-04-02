@@ -43,16 +43,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         var rezoome_id = clientReq.userid;
         var orgs = clientReq.orgs;
 
-        //get personal info(rezoome id => username, birth, gender, phone, ci, email)
-        ///////////////////////////////////////////////////////////////////
         var db = Managers.db();
 
         //send message
         db.getUserDao().get(rezoome_id, (users) => {
             //console.log("test user :" + users);
-
-            console.log(rezoome_id);
-            console.log(users);
 
             var targs = users;
             targs.pkey = clientReq.pkey;
@@ -68,7 +63,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
             console.log("===================msg===================");
             console.log(msg);
-            Managers.push().init();
+            // Managers.push().init();
             Managers.push().sendMessage(msg, orgs, err => {
                 !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
             });
