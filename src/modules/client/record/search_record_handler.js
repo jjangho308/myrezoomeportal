@@ -1,12 +1,12 @@
-import Managers from '../../core/managers'
+import Managers from '../../../core/managers'
 
-import DataManager from '../db/db';
-import PushManager from '../push/push';
+import DataManager from '../../db/db';
+import PushManager from '../../push/push';
 
-import AbstractClientRequestHandler from './abstract_clientrequest_handler';
+import AbstractClientRequestHandler from '../abstract_client_request_handler';
 
-import ClientRequestManager from './client_request'
-import SearchRecordPush from '../push/message/search';
+import ClientRequestManager from '../client_request'
+import SearchRecordPush from '../../push/message/search';
 
 /**
  * Handler for SearchRecordRequest. <br />
@@ -68,10 +68,10 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                 pkey: clientReq.pkey,
             }
 
-            
 
-            
-            
+
+
+
             var msg = new SearchRecordPush({
                 cmd: clientReq.cmd,
                 mid: clientReq.mid,
@@ -120,4 +120,4 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     // }
 }
 
-export default SearchRecordRequestHandler; 
+export default SearchRecordRequestHandler;

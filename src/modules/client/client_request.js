@@ -2,11 +2,8 @@ import HashMap from 'hashmap';
 
 import AbstractManager from "../abstract_manager";
 
-
-import UserLoginHandler from './user_login_handler';
-
-import SearchRecordRequest from './search_record';
-import SearchRecordHandler from './search_record_handler';
+import SearchRecordRequest from './record/search_record';
+import SearchRecordHandler from './record/search_record_handler';
 
 /**
  * Request job manager from client. <br />

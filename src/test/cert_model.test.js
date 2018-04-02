@@ -3,7 +3,7 @@ import Managers from '../core/managers';
 import Util from '../util/util';
 
 import CertModel from '../models/cert/cert';
-import CertDAO from '../models/cert/cert_dao';
+import CertDAO from '../dao/cert_dao';
 
 /**
  * Test suit for Certificate model. <br />

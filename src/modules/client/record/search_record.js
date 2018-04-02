@@ -1,4 +1,4 @@
-import AbstractRequest from "./abstract_request";
+import AbstractClientRequestEntity from "../abstract_client_request_entity";
 
 /**
  * Request to search user's record by given organization. <br />
@@ -6,7 +6,7 @@ import AbstractRequest from "./abstract_request";
  * @since 180305
  * @author TACKSU
  */
-class SearchRecordRequest extends AbstractRequest {
+class SearchRecordRequest extends AbstractClientRequestEntity {
     constructor(opt) {
         super(opt);
         this.pkey = opt.pkey;
