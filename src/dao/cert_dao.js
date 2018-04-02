@@ -3,10 +3,10 @@ import mysql from 'mysql';
 import Env from '../../core/environment';
 
 import CertQuery from './cert_query';
-import AbstractDAO from '../abstract_dao';
+import AbstractDAO from './abstract_dao';
 
-import CertModel from './cert';
-import Util from '../../util/util';
+import CertModel from '../models/cert/cert';
+import Util from '../util/util';
 
 /**
  * DAO for certificate entity. <br />

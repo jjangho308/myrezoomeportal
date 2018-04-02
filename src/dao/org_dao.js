@@ -1,9 +1,8 @@
-//import AbstractDAO from 'abstract_dao.js';
-import orgQuery from './org_query.js';
 import mysql from 'mysql';
-import OrgModel from './org';
 
-import AbstractDAO from '../abstract_dao';
+import orgQuery from './org_query.js';
+import OrgModel from '../models/org/org';
+import AbstractDAO from './abstract_dao';
 
 /**
  * DAO for org. <br />

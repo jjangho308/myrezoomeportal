@@ -6,7 +6,7 @@ import util from '../../util/util';
  * @since 180305
  * @author TACKSU 
  */
-class AbstractClientRequest {
+class AbstractClientRequestEntity {
     /**
      * 
      * @param {object} opt 
@@ -23,9 +23,6 @@ class AbstractClientRequest {
          */
         this.userid = opt.userid;
     }
-
-    request(clientRequestEntity, done) {}
-    response(clientResponseEntity, done) {}
 }
 
-export default AbstractClientRequest;
+export default AbstractClientRequesEntityt;

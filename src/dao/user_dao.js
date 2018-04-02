@@ -1,8 +1,8 @@
 import mysql from 'mysql';
 
 import userQuery from './user_query.js';
-import UserModel from './user';
-import AbstractDAO from '../abstract_dao.js';
+import UserModel from '../models/user/user';
+import AbstractDAO from './abstract_dao.js';
 
 /**
  * DAO for UserModel. <br />
@@ -92,10 +92,10 @@ class UserDao extends AbstractDAO {
         var params = userModel.toRow();
 
         var query = mysql.format(userQuery.set, [params, condition]);
-        this.query(query, (err, result)=>{
-            if(!!err){
+        this.query(query, (err, result) => {
+            if (!!err) {
                 cb(err);
-            }else{
+            } else {
                 cb(err, result.affectedRows);
             }
         })

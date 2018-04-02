@@ -10,7 +10,7 @@ import ctrl from './certs_ctrl';
 var router = express.Router();
 
 router.get('/', ctrl.get);
-/*
+
 // 증명서 보관함 페이지 controller
 router.get('/', tokenAuth);
 router.get('/', ctrl.get);
@@ -27,7 +27,5 @@ router.post('/', view);
 
 router.post('/:id', tokenAuth);
 router.patch('/:id', ctrl.patch);
-
-*/ 
 
 export default router;

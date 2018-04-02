@@ -14,16 +14,18 @@ import SearchRecordHandler from './search_record_handler';
  * Agent에서 Http 요청이 올 때 여기 저장된 Job을 기반으로 해당 Client에 Socket Push를 전송하도록 한다.
  * 
  * @since 180228
+ * @author TACKSU
  */
 class ClientRequestManager extends AbstractManager {
     constructor(opt) {
         super(opt);
-        this.entityMap = new HashMap();
-        this.handlerMap = new HashMap();
-        this.requestMap = new HashMap();
     }
 
     init() {
+        this.entityMap = new HashMap();
+        this.handlerMap = new HashMap();
+        this.requestMap = new HashMap();
+
         this.entityMap.set('Search', SearchRecordRequest);
         this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
 
@@ -72,18 +74,22 @@ class ClientRequestManager extends AbstractManager {
     /**
      * Agent에서 비동기적인 응답이 전달되면 ClientRequest가 들고 있던
      * socket을 통해 ClientBrowser로 Response를 push 한다.
+     * 
+     * @since 180312
+     * @author TACKSU
+     * 
      * @param {*} msgId 
      * @param {*} response 
      */
     response(msgId, response, cb) {
         console.log('Stored Request :');
         var entity = this.requestMap.get(msgId);
-        if(!!entity){
+        if (!!entity) {
             this.handlerMap.get(entity.constructor).response(entity, response);
         }
     }
 
-    setSocket(mid, socket){
+    setSocket(mid, socket) {
         this.requestMap.get(mid).socket = socket;
     }
 }

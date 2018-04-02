@@ -2,12 +2,12 @@ import mysql from 'mysql';
 
 import Env from '../../core/environment';
 
-import AbstractDAO from "../abstract_dao";
-import ResumeModel from './resume';
+import AbstractDAO from "./abstract_dao";
+import ResumeModel from '../models/resume/resume';
 
 import Query from './resume_query';
 
-import Util from '../../util/util';
+import Util from '../util/util';
 
 /**
  * DAO of resume. <br />
