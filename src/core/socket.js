@@ -8,10 +8,10 @@ var clientRequest = Managers.client();
  * @since 180330
  * @author TACKSU
  */
-export default (socket)=>{
-    socket.on('SetSocket', msg=>{
+export default (socket) => {
+    socket.on('SetSocket', msg => {
         var mid = msg.mid;
         console.log('Socket setting : ' + mid);
-        clientRequest.setSocket(mid, socket);
+        clientRequest.assignSocket(mid, socket);
     })
 }
