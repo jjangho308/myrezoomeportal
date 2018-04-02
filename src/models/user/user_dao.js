@@ -33,16 +33,16 @@ class UserDao extends AbstractDAO {
      */
     put(userModel, cb) {
 
-        var params = UserModel.toRow(userModel);
+        var params = userModel.toRow();
 
         var query = mysql.format(userQuery.put, params);
-        this.connectionPool.query(query, (err, result) => {            
+        this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
             } else if (!!result) {
                 cb(err, result.insertId);
             }
-        });
+        })
     }
 
     /**
@@ -52,17 +52,13 @@ class UserDao extends AbstractDAO {
      * @author TACKSU
      */
     get(creteria, cb) {
-        var where = null;
+        var condition = null;
         var sql = null;
-        if (!!creteria.suid) {
-            where = [creteria.suid];
-            sql = userQuery.getById;
-        } else if (!!creteria.email) {
-            where = [creteria.email];
-            sql = userQuery.getByEmail;
-        }
 
-        this.connectionPool.query(sql, where, function (err, rows) {
+        condition = (new UserModel(creteria)).toRow();
+
+        var query = mysql.format(userQuery.get, condition);
+        this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);
             } else {
@@ -74,7 +70,7 @@ class UserDao extends AbstractDAO {
                 }
                 cb(err, result);
             }
-        });
+        })
     }
 
     /**
@@ -91,21 +87,18 @@ class UserDao extends AbstractDAO {
      * @param {function(object, number)} cb 
      */
     set(creteria, userModel, cb) {
-        var where = null;
-        var sql = null;
-        if (!!creteria.suid) {
-            sql = userQuery.setById;
-            where = [creteria.suid];
-        } else if (!!creteria.email) {
-            sql = userQuery.setByEmail;
-            where = [creteria.email];
-        }
+        var condition = new UserModel(creteria).toRow();
 
-        var params = UserModel.toRow(userModel);
+        var params = userModel.toRow();
 
-        this.connectionPool.query(sql, [params, where], (err, result) => {
-            cb(err, result.affectedRows);
-        });
+        var query = mysql.format(userQuery.set, [params, condition]);
+        this.query(query, (err, result)=>{
+            if(!!err){
+                cb(err);
+            }else{
+                cb(err, result.affectedRows);
+            }
+        })
     }
 
 

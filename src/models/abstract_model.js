@@ -24,7 +24,7 @@ class AbstractModel {
      */
     trim(obj) {
         for (var i in obj) {
-            if (obj[i] == undefined) {
+            if (obj[i] == undefined || obj[i] == NaN) {
                 delete obj[i];
             }
 
