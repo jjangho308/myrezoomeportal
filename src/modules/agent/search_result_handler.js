@@ -8,25 +8,33 @@ import AbstractAgentRequestHandler from "./abstract_agent_request_handler";
  * 
  * @since 180306
  * @author TACKSU
-*/
-class SearchResultHandler extends AbstractAgentRequestHandler{
+ */
+class SearchResultHandler extends AbstractAgentRequestHandler {
 
     /**
      * Default constructor. <br />
+     * 
+     * @since 180306
+     * @author TACKSU
+     * 
      * @param {*} opt 
      */
-    constructor(opt){
+    constructor(opt) {
         super(opt);
     }
 
     /**
+     * Agent로부터 전달된 이력 데이터의 처리. <br />
+     * 
+     * @since 180306
+     * @author TACKSU
      * 
      * @param {*} request 
      */
-    request(request){
+    request(request) {
         console.log('Search result Agent Request');
         console.log('mid : ' + request.mid);
-        Managers.client().response(request.mid, request, ()=>{});
+        Managers.client().response(request.mid, request, () => {});
     }
 }
 
