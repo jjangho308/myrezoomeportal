@@ -17,6 +17,15 @@ import SearchRecordHandler from './search_record_handler';
  * @author TACKSU
  */
 class ClientRequestManager extends AbstractManager {
+
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 18305
+     * @author TACKSU
+     * 
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
     }
@@ -42,6 +51,9 @@ class ClientRequestManager extends AbstractManager {
 
     /**
      * Handle client request
+     * 
+     * @since 180312
+     * @author TACKSU
      * 
      * @param {AbstractClientRequest} request
      */
@@ -72,8 +84,9 @@ class ClientRequestManager extends AbstractManager {
     }
 
     /**
-     * Agent에서 비동기적인 응답이 전달되면 ClientRequest가 들고 있던
-     * socket을 통해 ClientBrowser로 Response를 push 한다.
+     * 특정 ClientRequest는 바로 Response가 가능한 것이 아닌
+     * 다른 채널로부터 Response를 받아 처리할 경우가 있다.
+     * 이 경우 Response를 처리할 로직.
      * 
      * @since 180312
      * @author TACKSU
@@ -89,7 +102,16 @@ class ClientRequestManager extends AbstractManager {
         }
     }
 
-    setSocket(mid, socket) {
+    /**
+     * Assign client socket to given mid for WebSocket push. <br />
+     * 
+     * @since 180312
+     * @author TACKSU
+     * 
+     * @param {string} mid 
+     * @param {Socket} socket 
+     */
+    assignSocket(mid, socket) {
         this.requestMap.get(mid).socket = socket;
     }
 }
