@@ -2,6 +2,10 @@ import Managers from '../core/managers';
 
 import Env from '../core/environment';
 
+import GetCertsRequest from '../modules/client/certs/get_certs_request';
+import IssueNewCertRequest from '../modules/client/certs/issue_cert_request';
+import UpdateCertRequest from '../modules/client/certs/update_cert_request';
+
 /**
  * Controller for /certs URI. <br />
  * 
@@ -12,7 +16,6 @@ export default {
 
     /**
      * Function to get certificates by given condition. <br />
-     * 
      * 
      * @since 180322
      * @author TACKSU
@@ -26,19 +29,21 @@ export default {
             userId = 12345;
         }
 
-        // AJAX request
+        // /certs AJAX request
         if (!!req.xhr) {
-            var certDao = Managers.db().getCertDAO();
-            certDao.search({
-                userId: userId
-            }, (err, result) => {
-                res.status(200).json(result);
+            Managers.client().request(new GetCertsRequest(req.body), (err, result) => {
+                if (!!err) {
+                    res.status(500).render('error', err);
+                } else {
+                    res.json(result);
+                }
             });
         }
-        // HTML page
+
+        // /certs HTML page
         else {
             Managers.db().getUserDAO().get({
-                userId: userId
+                uId: userId
             }, (err, userModel) => {
                 if (!!err) {
                     res.status(500).render('error');
@@ -58,18 +63,18 @@ export default {
      * @author TACKSU
      */
     post: (req, res, next) => {
+
         // TODO Insert a new Certificate entity into database.
-        var uId = req.params.uId;
-        var certDAO = Managers.db().getCertDAO();
-        var certModel = new CertModel(req.body.args)
-        certDAO.put(certModel, (err, result) => {
-            if (!!err) {
-                res.json(JSON.stringify(err));
-            } else {
-                certModel.certId = result.certId;
-                res.json(certModel);
-            }
-        })
+
+        if (!!req.xhr) {
+            Managers.client().request(new IssueNewCertRequest(req.body), (err, result) => {
+                if (!!err) {
+                    res.json(JSON.stringify(err));
+                } else {
+                    res.json(result);
+                }
+            })
+        }
     },
 
     /**
@@ -79,12 +84,15 @@ export default {
      * @author TACKSU
      */
     patch: (req, res, next) => {
-        var uId = req.params.uId;
-        var certDAO = Managers.db().getCertDAO();
-        var certModel = new CertModel(req.body.args)
-        certDAO.set(certModel.certId, certModel, (err, result) => {
+
+        var arg = req.body;
+        arg.certId = req.params.certId;
+        arg.uId = req.params.uId;
+
+        var request = new UpdateCertRequest(arg);
+        Managers.client().request(request, (err, result) => {
             if (!!err) {
-                res.json(JSON.stringify(err));
+                res.status(500).json(JSON.stringify(err));
             } else {
                 res.json(result);
             }

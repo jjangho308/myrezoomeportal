@@ -16,16 +16,16 @@ router.get('/', tokenAuth);
 router.get('/', ctrl.get);
 
 // 증명서 뷰 페이지 controller
-router.get('/:id', tokenAuth);
-router.get('/:id', ctrl.get);
-router.get('/:id', view);
+router.get('/:certId', tokenAuth);
+router.get('/:certId', ctrl.get);
+router.get('/:certId', view);
 
 // 증명서 CRUD ajax request controller
 router.post('/', tokenAuth);
 router.post('/', ctrl.post);
 router.post('/', view);
 
-router.post('/:id', tokenAuth);
-router.patch('/:id', ctrl.patch);
+router.post('/:certId', tokenAuth);
+router.patch('/:certId', ctrl.patch);
 
 export default router;

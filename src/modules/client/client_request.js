@@ -54,7 +54,7 @@ class ClientRequestManager extends AbstractManager {
      * 
      * @param {AbstractClientRequest} request
      */
-    request(request) {
+    request(request, cb) {
         this.requestMap.set(request.mid, request);
         this.handlerMap.get(request.constructor).request(request, ((resultCode, result) => {
             switch (resultCode) {
