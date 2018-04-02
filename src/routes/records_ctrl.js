@@ -1,4 +1,10 @@
-import db from '../modules/db/db';
+import Managers from '../core/managers';
+
+
+import SearchRecordsRequest from '../modules/client/record/search_record';
+import GetRecordsRequest from '../modules/client/record/'
+import CreatePrivateRecordRequest from '../modules/client/record/create_record';
+import UpdatePrivateRecordRequest from '../modules/client/record/update_record';
 
 /**
  * Controller for /records URI. <br />
@@ -7,30 +13,62 @@ import db from '../modules/db/db';
  * @author TACKSU
  */
 export default {
+
+    /**
+     * Get private record of given user. <br />
+     * 
+     * @since 180402
+     * @author TACKSU
+     */
     get: (req, res, next) => {
-        var userid = req.params.userid;
+        var userid = req.params.userId;
 
-        var accept = req.get('accept');
-        if ('test/html' == accept) {
-            var userDao = db.getUserDao();
-            userDao.get(userId, (err, result) => {
+        if (!!req.xhr) {
+            Managers.client().request(new GetRecordsRequest(req.body), (err, result) => {
                 if (!!err) {
-
+                    res.status(500).json(err);
                 } else {
-                    // Render to records.
-                    res.render('records', result, (err, html) => {
-                        res.send(html);
-                    })
+                    res.json(result);
                 }
             })
-        } else if ('application/json' == accept) {
-            // TODO 이력 DB를 읽어와서 json으로 render
-            var result = null;
-            res.status(200).json(result);
         }
+        next();
     },
 
+    /**
+     * Create new private record entity to database. <br />
+     * 
+     * @since 180402
+     * @author TACKSU
+     */
     post: (req, res, next) => {
+        if (!!req.xhr) {
+            Mangers.client().request(new CreatePrivateRecordRequest(req.body), (err, result) => {
+                if (!!err) {
+                    res.status(500).json(err);
+                } else {
+                    res.json(result);
+                }
+            })
+        }
+        next();
+    },
 
+    /**
+     * Update specific private record of given user. <br />
+     * 
+     * @since 180402
+     * @author TACKSU
+     */
+    patch: (req, res, next) => {
+        var recordId = req.params.recordId;
+        req.body.recordId = req.params.recordId;
+        Manager.client().request(new UpdatePrivateRecordRequest(req.body), (err, result) => {
+            if (!!err) {
+                res.status(500).json(err);
+            } else {
+                res.json(result);
+            }
+        })
     }
 }

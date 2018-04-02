@@ -1,16 +1,16 @@
 import express from 'express';
-import ctrl from './signin_ctrl';
+import ctrl from './login_ctrl';
 import view from '../mw/view';
 
 /**
- * Router for /sigin URI. <br />
+ * Router for /login URI. <br />
  * 
- * @since 180321
+ * @since 180322
  * @author TACKSU
  */
 var router = express.Router();
 
-router.post('/', ctrl.post);
+router.post('/', ctrl);
 router.post('/', view);
 
 export default router;
