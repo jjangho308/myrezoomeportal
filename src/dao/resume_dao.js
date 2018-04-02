@@ -1,6 +1,6 @@
 import mysql from 'mysql';
 
-import Env from '../../core/environment';
+import Env from '../core/environment';
 
 import AbstractDAO from "./abstract_dao";
 import ResumeModel from '../models/resume/resume';

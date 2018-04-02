@@ -1,4 +1,4 @@
-import AbstractDAO from '../abstract_dao'
+import AbstractDAO from './abstract_dao';
 
 /**
  * DAO for record. <br />
@@ -6,6 +6,8 @@ import AbstractDAO from '../abstract_dao'
  * @since 180326
  * @author TACKSU
  */
+
+ 
 class RecordDAO extends AbstractDAO {
     constructor(connectionPool) {
         super(connectionPool);
@@ -25,7 +27,9 @@ class RecordDAO extends AbstractDAO {
         var recordId = creteria.recordId;
     }
 
-    getBlockChainTxid()
+    getBlockChainTxid(){
+        
+    }
 
     /**
      * 기 입력된 이력을 변경

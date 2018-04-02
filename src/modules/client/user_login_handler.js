@@ -1,5 +1,5 @@
 import managers from '../../core/managers';
-import AbstractClientRequestHandler from './abstract_clientrequest_handler';
+import AbstractClientRequestHandler from './abstract_client_request_handler';
 
 /**
  * 사용자 로그인 요청 핸들러.

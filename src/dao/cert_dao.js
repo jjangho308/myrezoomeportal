@@ -1,6 +1,6 @@
 import mysql from 'mysql';
 
-import Env from '../../core/environment';
+import Env from '../core/environment'
 
 import CertQuery from './cert_query';
 import AbstractDAO from './abstract_dao';

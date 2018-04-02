@@ -15,7 +15,7 @@ class SearchRecordPush extends AbstractPush{
      */
     constructor(opt){
         super(opt);
-        this.cmd    = "Search";
+        this.cmd    = "SearchRecord";
     }
 }
 
