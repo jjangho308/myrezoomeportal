@@ -18,7 +18,7 @@ class GetCertificateRequest extends AbstractClientRequest{
      */
     constructor(opt){
         super(opt);
-        this.sId = opt.sId;
+        this.sId = opt.sId; 
         this.uId = opt.uId;
     }
 }

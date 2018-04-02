@@ -2,7 +2,7 @@ import Managers from '../core/managers';
 
 
 import SearchRecordsRequest from '../modules/client/record/search_record';
-import GetRecordsRequest from '../modules/client/record/'
+import GetRecordsRequest from '../modules/client/record/get_records_request'
 import CreatePrivateRecordRequest from '../modules/client/record/create_record';
 import UpdatePrivateRecordRequest from '../modules/client/record/update_record';
 
