@@ -60,6 +60,9 @@ class UserDao extends AbstractDAO {
         } else if (!!creteria.email) {
             where = [creteria.email];
             sql = userQuery.getByEmail;
+        } else if (!!creteria.uid){
+            where = [creteria.uid];
+            sql = userQuery.getByUId;
         }
 
         this.connectionPool.query(sql, where, function (err, rows) {

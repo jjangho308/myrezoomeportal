@@ -6,6 +6,8 @@
  */
 export default {
     getById: 'SELECT * FROM TCUP_USR where S_USR_ID = ?',
+    
+    getByUId: 'SELECT * FROM TCUP_USR where UID = ?',
 
     getByEmail: 'SELECT * FROM TCUP_USR WHERE EMAIL = ?;',
 
