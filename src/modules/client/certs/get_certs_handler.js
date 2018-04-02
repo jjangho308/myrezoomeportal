@@ -18,7 +18,7 @@ class GetCertificateHandler extends AbstractClientRequestHandler {
      * @since 180402
      * @author TACKSU
      * 
-     * @param {*} opt 
+     * @param {*} opt
      */
     constructor(opt) {
         super(opt);

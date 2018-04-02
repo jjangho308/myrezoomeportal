@@ -5,14 +5,14 @@ import Property from "../property/property";
 
 import AbstractManager from '../abstract_manager';
 
-import UserDAO from '../../models/user/user_dao';
-import OrgDAO from '../../models/org/org_DAO';
-import RecordDAO from '../../models/record/record_DAO';
-import CertDAO from '../../models/cert/cert_DAO'
-import ResumeDAO from '../../models/resume/resume_DAO';
+import UserDAO from '../../dao/user_dao';
+import OrgDAO from '../../dao/org_dao';
+import RecordDAO from '../../dao/record_dao';
+import CertDAO from '../../dao/cert_dao'
+import ResumeDAO from '../../dao/resume_dao';
 
-import SharedCertDAO from '../../models/shared_cert/shared_cert_dao';
-import SharedResumeDAO from '../../models/shared_resume/shared_resume_dao';
+import SharedCertDAO from '../../dao/shared_cert_dao';
+import SharedResumeDAO from '../../dao/shared_resume_dao';
 
 import Env from '../../core/environment';
 
@@ -53,7 +53,7 @@ class DatabaseManager extends AbstractManager {
             database: propertyManager.get(Property.MySQL_DATABASE),
             multipleStatements: true,
             connectionLimit: 500,
-            waitForConnections:false
+            waitForConnections: false
         });
 
         /*
@@ -109,7 +109,7 @@ class DatabaseManager extends AbstractManager {
     getSharedCertDAO() {
         return new SharedCertDAO(this.connectionPool);
     }
-    getSharedResumeDAO(){
+    getSharedResumeDAO() {
         return new SharedResumeDAO(this.connectionPool);
     }
 

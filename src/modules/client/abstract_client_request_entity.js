@@ -7,6 +7,7 @@ import util from '../../util/util';
  * @author TACKSU 
  */
 class AbstractClientRequestEntity {
+    
     /**
      * 
      * @param {object} opt 
@@ -25,4 +26,4 @@ class AbstractClientRequestEntity {
     }
 }
 
-export default AbstractClientRequesEntityt;
+export default AbstractClientRequestEntity;
