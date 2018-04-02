@@ -9,83 +9,89 @@ import Env from '../core/environment';
  * @author TACKSU
  */
 export default {
-    /**
-     * Function to get certificates by given condition. <br />
-     * 
-     * 
-     * @since 180322
-     * @author TACKSU
-     */
+
     get: (req, res, next) => {
-
-        var userId = null;
-        if (Env.prouction()) {
-            userId = req.params.userId;
-        } else {
-            userId = 12345;
-        }
-
-        // AJAX request
-        if (!!req.xhr) {
-            var certDao = Managers.db().getCertDAO();
-            certDao.search({
-                userId: userId
-            }, (err, result) => {
-                res.status(200).json(result);
-            });
-        }
-        // HTML page
-        else {
-            Managers.db().getUserDAO().get({
-                userId: userId
-            }, (err, userModel) => {
-                if (!!err) {
-                    res.status(500).render('error');
-                } else {
-                    res.render('certs', userModel, (err, html) => {
-                        res.send(html);
-                    });
-                }
-            });
-        }
-    },
-
-    /**
-     * Function to create new certificate entity by given arguments. <br />
-     * 
-     * @since 180322
-     * @author TACKSU
-     */
-    post: (req, res, next) => {
-        // TODO Insert a new Certificate entity into database.
-        var uId = req.params.uId;
-        var certDAO = Managers.db().getCertDAO();
-        var certEntity = new CertModel(req.body.args)
-        certDAO.put(certEntity, (err, result) => {
-            if (!!err) {
-                res.json(JSON.stringify(err));
-            } else {
-                certEntity.certId = result.certId;
-                res.json(certEntity);
-            }
-        })
-    },
-
-    /**
-     * Function to update given certificates. <br />
-     * 
-     * @since 180322
-     */
-    patch: (req, res, next) => {
-        var uId = req.params.uId;
-        var certDAO = Managers.db().getCertDAO();
-        var certEntity = new CertModel(req.body.args)
-        certDAO.set(certEntity.certId, certEntity, (err, result) => {
-            if (!!err) {
-                res.json(JSON.stringify(err));
-            } else {
-                res.json(result);
-            }
-        })
+        res.render('certs', {});
     }
+
+
+    // /**
+    //  * Function to get certificates by given condition. <br />
+    //  * 
+    //  * 
+    //  * @since 180322
+    //  * @author TACKSU
+    //  */
+    // get: (req, res, next) => {
+
+    //     var userId = null;
+    //     if (Env.prouction()) {
+    //         userId = req.params.userId;
+    //     } else {
+    //         userId = 12345;
+    //     }
+
+    //     // AJAX request
+    //     if (!!req.xhr) {
+    //         var certDao = Managers.db().getCertDAO();
+    //         certDao.search({
+    //             userId: userId
+    //         }, (err, result) => {
+    //             res.status(200).json(result);
+    //         });
+    //     }
+    //     // HTML page
+    //     else {
+    //         Managers.db().getUserDAO().get({
+    //             userId: userId
+    //         }, (err, userModel) => {
+    //             if (!!err) {
+    //                 res.status(500).render('error');
+    //             } else {
+    //                 res.render('certs', userModel, (err, html) => {
+    //                     res.send(html);
+    //                 });
+    //             }
+    //         });
+    //     }
+    // },
+
+    // /**
+    //  * Function to create new certificate entity by given arguments. <br />
+    //  * 
+    //  * @since 180322
+    //  * @author TACKSU
+    //  */
+    // post: (req, res, next) => {
+    //     // TODO Insert a new Certificate entity into database.
+    //     var uId = req.params.uId;
+    //     var certDAO = Managers.db().getCertDAO();
+    //     var certEntity = new CertModel(req.body.args)
+    //     certDAO.put(certEntity, (err, result) => {
+    //         if (!!err) {
+    //             res.json(JSON.stringify(err));
+    //         } else {
+    //             certEntity.certId = result.certId;
+    //             res.json(certEntity);
+    //         }
+    //     })
+    // },
+
+    // /**
+    //  * Function to update given certificates. <br />
+    //  * 
+    //  * @since 180322
+    //  */
+    // patch: (req, res, next) => {
+    //     var uId = req.params.uId;
+    //     var certDAO = Managers.db().getCertDAO();
+    //     var certEntity = new CertModel(req.body.args)
+    //     certDAO.set(certEntity.certId, certEntity, (err, result) => {
+    //         if (!!err) {
+    //             res.json(JSON.stringify(err));
+    //         } else {
+    //             res.json(result);
+    //         }
+    //     })
+    // }
 }

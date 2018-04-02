@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    font-family: SpoqaHanSans;
+}
+
+#header {
+    height: 850px;
+    object-fit: contain;
+    background-color: rgba(14, 49, 89, 0.85);
+}
+
+
+/*
+
+#navbar{
+margin: auto;
+  width: 1680px;
+  height: 60px;
+        padding: 0px 65px;
+}
+*/
+
+.navbar-header {
+    padding: 21px 115px;
+}
+
+#home_icon {
+    width: 158px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.grid {
+    width: 1680px;
+    height: 60px;
+    margin: auto;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 21px 115px;
+    overflow: hidden;
+    border: none;
+}
+
+li {
+    border: none;
+    float: right;
+    height: 18px;
+    padding: 0px 26px;
+}
+
+li:nth-child(1) {
+    float: left;
+}
+
+li:nth-child(3) {
+    border-left: 1px solid gray;
+    margin-right: -5px;
+}
+
+li a {
+    display: block;
+    color: white;
+    height: 18px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: left;
+    color: #ffffff;
+}
+
+li a:hover {}
+
+.Button-Shape {
+    padding: 10px 18px;
+    margin-top: -10px;
+    border-radius: 3px;
+    background-color: #597190;
+    border: none;
+}
+
+#jombo {
+    margin-top: 238px;
+    margin-bottom: 0px;
+    font-size: 55px;
+    text-align: center;
+    color: #ffffff;
+}
+
+#sub-title {
+    font-size: 16px;
+    text-align: center;
+    color: white;
+    margin-bottom: 70px;
+}
+
+#resume-start-btn {
+    width: 350px;
+    height: 70px;
+    border-radius: 2px;
+    display: block;
+    background-color: #4a90e2;
+    border: none;
+    text-align: center;
+    margin: auto;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+#body-div {
+    width: 1920px;
+    height: 600px;
+    background-color: #ffffff;
+    border: solid 1px #e2e8f0;
+    padding: 100px;
+}
