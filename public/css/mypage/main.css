@@ -1,0 +1,508 @@
+@import url(http://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+body {
+    margin: 0;
+    font-family: 'Spoqa Han Sans', 'Spoqa Han Sans KR';
+}
+
+p {
+    margin: 0px;
+}
+
+#header {
+    height: 850px;
+    object-fit: contain;
+    background-color: rgba(14, 49, 89, 0.85);
+}
+
+.navbar {
+    height: 60px;
+    background-color: #3c435f;
+    border: solid 1px #2e344d;
+}
+
+.container {
+    width: 1680px;
+    margin: auto;
+}
+
+.navbar-header {
+    padding: 21px 115px;
+}
+
+#home_icon {
+    width: 193px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.check-icon {
+    width: 11px;
+    height: 6px;
+    object-fit: contain;
+    margin: 2px 18px;
+}
+
+#user-small-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border: solid 1px #8e9aca;
+    border-radius: 20px;
+    vertical-align: middle
+}
+
+ul {
+    list-style-type: none;
+    overflow: hidden;
+    border: none;
+}
+
+.navbar ul {
+    height: 62px;
+    margin: 0;
+    padding: 0px 115px;
+}
+
+.navbar li {
+    border: none;
+    float: right;
+    height: 18px;
+    margin: 9px;
+    padding: 0px 19px;
+}
+
+.navbar li:nth-child(1) {
+    float: left;
+}
+
+.navbar li:nth-child(2) span {
+    margin-left: 12px;
+    line-height: 40px;
+}
+
+.navbar li:nth-child(3) {
+    margin-top: 21px;
+    border-right: 2px solid #64678b;
+}
+
+li a {
+    display: inline-block;
+    color: white;
+    height: 18px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.grid {
+    width: 940px;
+    margin: auto;
+}
+
+#header-1 {
+    height: 150px;
+    background-color: #ffffff;
+}
+
+#header-1 div:nth-child(1) {
+    width: 20%;
+    display: inline-block;
+}
+
+#header-1 div:nth-child(2) {
+    width: 20%;
+    display: inline-block;
+}
+
+#header-1 div p:nth-child(1) {
+    color: #676767;
+    font-size: 27px;
+    font-weight: bold;
+    margin: 0px;
+}
+
+#header-1 div p:nth-child(2) {
+    color: #676767;
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0px;
+}
+
+#header-1 div:nth-child(3) {
+    width: 20%;
+    display: inline-block;
+}
+
+
+#header-2 {
+    height: 60px;
+    background-color: #ffffff;
+    border-top: solid 1px #d8d8d8;
+    border-bottom: solid 1px #d8d8d8;
+    color: #676767;
+}
+
+#header-2 ul{
+    margin:0px;
+    padding: 0px ;
+}
+
+#header-myresume{
+    border-bottom: solid 5px #4c80f1;
+}
+
+#header-2 li:hover{
+    cursor: pointer;
+}
+
+#header-2 li a {
+    font-size: 15px;
+    text-align: center;
+    color: #676767;
+}
+
+#header-2 li a:active {
+    font-weight: bold;
+}
+
+#user-big-icon {
+    margin-top: 40px;
+    vertical-align: -60px;
+    width: 147px;
+    height: 147px;
+    object-fit: contain;
+}
+
+#header-2 li {
+    text-align:  center;
+    float: right;
+    padding: 15px 20px;
+    margin-right: 10px;
+}
+
+#main-body {
+    padding-bottom: 52px;
+    margin-top: -3px;
+    background-color: #f2f5f8;
+    color: #676767;
+}
+
+#main-footer{
+        line-height: 18px;
+    padding: 28px 120px;
+    border: solid 1px #d8d8d8;
+}
+
+#main-footer span:nth-child(1){
+    font-size: 13px;
+    color: #676767;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+#main-footer span:nth-child(2){
+    font-size: 12px;
+    color: #676767;
+}
+
+#main-footer span:nth-child(3){
+    float: right;
+    font-size: 12px;
+    color: #676767;
+    padding: 0px 20px;
+}
+#main-footer span:nth-child(4){
+    float: right;
+    font-size: 8px;
+    color: #676767;
+    font-weight: bold;
+}
+
+
+#main-footer span:nth-child(5){
+     float: right;
+    font-size: 12px;
+    color: #676767;
+    padding: 0px 20px;
+    
+    font-weight: bold;
+}
+
+
+.grid>p:nth-child(1) {
+    padding: 30px 0px 10px 0px;
+    font-size: 26px;
+}
+
+.grid>p:nth-child(2) {
+    font-size: 13px;
+    font-weight: 300;
+    color: #4a4a4a;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e1e6f0;
+}
+
+.grid>p:nth-child(3) {
+    font-size: 13px;
+    line-height: 3;
+    float: right;
+    color: #4a4a4a;
+    display: inline-block;
+    line-height: 47px;
+}
+
+.spec-div {
+    width: 901px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: solid 1px #eff0f4;
+    margin-top: 20px;
+    padding: 18px 26px;
+}
+
+.spec-detail-div {
+    margin-bottom: 30px;
+}
+
+.spec-title {
+    border-bottom: solid 2px #dfe5ef;
+    padding: 0px 0px 15px 10px;
+}
+
+.spec-title span:nth-child(1) {
+    font-size: 16px;
+    color: #676767;
+    font-weight: bold;
+}
+
+.spec-title span:nth-child(2) {
+    float: right;
+}
+
+.spec-title span:nth-child(2) a {
+    line-height: 22px;
+    float: right;
+    font-size: 12px;
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+.spec-body {
+    padding: 20px 10px;
+    border-bottom: solid 1px #dfe5ef;
+}
+
+.spec-left {
+    display: inline-block;
+    width: 220px;
+    padding: 0px 20px;
+}
+
+.spec-left span {
+    font-size: 13px;
+    color: #a9afb3;
+    padding-left: 12px;
+}
+
+.spec-center {
+    display: inline-block;
+    width: 220px;
+    vertical-align: middle;
+}
+
+.spec-center img:nth-child(1) {
+    width: 60px;
+    height: 60px;
+    vertical-align: -50px;
+}
+
+.spec-center img:nth-child(2) {
+    width: 15px;
+    height: 8px;
+}
+
+.spec-right {
+    vertical-align: middle;
+    display: inline-block;
+    width: 375px;
+    color: #676767;
+}
+
+.spec-right button {
+    position: relative;
+    top: -31px;
+    float: right;
+    width: 70px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #ced3d6;
+}
+
+.spec-right button a {
+    font-size: 12px;
+    color: #676767;
+    text-decoration: none;
+}
+
+.spec-right p {
+    color: #676767;
+    text-align: left;
+}
+
+.spec-right p:nth-child(1) {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.spec-right p:nth-child(2) {
+    font-size: 13px;
+}
+
+.spec-right p:nth-child(3) {
+    font-size: 13px;
+}
+
+
+
+.modal-body #school {
+    width: 483px;
+    margin-bottom: 30px;
+}
+
+.modal-body #major {
+    width: 271px;
+}
+
+.study-period {
+    margin-left: -5px;
+    width: 110px;
+}
+
+select#study-field {
+    margin-top: -10px;
+    height: 41px;
+}
+
+#study-period-span {
+    vertical-align: 18px;
+    color: #ced3d6;
+    font-size: 22px;
+}
+
+#score {
+    vertical-align: top;
+    width: 80px;
+}
+
+.selectize-input {
+    width: 100px;
+    font-size: 13px;
+    color: #676767;
+}
+
+.selectize-control {
+    display: inline-block;
+}
+
+select:required:invalid {
+    color: gray;
+    font-size: 13px;
+    font-weight: normal;
+    color: #d1d1d1;
+}
+
+option[value=""][disabled] {
+    display: none;
+}
+
+.select-100 {
+    display: inline-block;
+    width: 100px;
+    vertical-align: top;
+}
+
+.study-field-div {
+    vertical-align: 2px;
+}
+
+#language-name {
+    width: 360px;
+}
+
+#language-grade {
+    width: 464px;
+}
+
+#expire-checkbox {
+    display: inline-block;
+    color: #a9afb3;
+    font-size: 12px;
+    vertical-align: 25px;
+    margin-left: 10px;
+}
+
+#cert-name {
+    width: 464px;
+}
+
+#cert-grade {
+    width: 464px;
+}
+
+#select-footer{
+    
+    position: fixed;
+   width: calc(100% - 240px);
+    bottom:0px;
+        height: 41px;
+    background-color: #1d2533;
+      box-shadow: 0 -2px 10px 0 rgba(151, 151, 151, 0.5);
+    padding:15px 120px;
+    
+    display: none;
+}
+
+#select-footer img:nth-child(1){
+      width: 20.2px;
+  height: 20.2px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+#select-footer span:nth-child(2){
+    font-size: 14px;
+  font-weight: bold;
+  color: #85ff00;
+    line-height: 44px;
+}
+
+#select-footer span:nth-child(3){
+    font-size: 14px;
+    color: #ffffff;
+}
+
+
+#select-footer button{
+    float:right;
+  width: 110px;
+  height: 40px;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.07);
+  background-color: #1b222f;
+  border: solid 1px #89909d;
+    font-size: 13px;
+    color: #ffffff;
+    margin-left: 20px;
+}
+
+#select-footer button:nth-child(4){
+    
+    width: 40px;
+}
+
+#resume-store-div{
+    display: none;
+}

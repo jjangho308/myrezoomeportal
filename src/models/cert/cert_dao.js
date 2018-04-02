@@ -1,6 +1,8 @@
+import mysql from 'mysql';
+
 import Env from '../../core/environment';
 
-import CertsQuery from './certs_query';
+import CertQuery from './cert_query';
 import AbstractDAO from '../abstract_dao';
 
 import CertModel from './cert';
@@ -13,66 +15,113 @@ import Util from '../../util/util';
  * @author TACKSU
  */
 class CertificateDAO extends AbstractDAO {
+    /**
+     * Default constructor. <br />
+     * 
+     * @param {MySqlConnectionPool} connectionPool 
+     */
     constructor(connectionPool) {
         super(connectionPool);
     }
 
-    put(cert, cb) {
+    /**
+     * Insert a new Certificate entity to database. <br />
+     * 
+     * @since 180326
+     * @author TACKSU
+     * 
+     * @param {CertModel} certModel 
+     * @param {function(object, number)} cb 
+     */
+    put(certModel, cb) {
+        var param = certModel.toRow();
 
-        this.connectionPool.query(CertsQuery.put, (err, result) => {
+        delete param.S_CERT_SHR_ID;
+        delete param.CRTD_DT;
+        delete param.MDFID_DT;
 
+        // var query = "INSERT INTO TCDA_CERT_SHR (`CERT_ID`, `UID`, `ENC_CERT_DATA`, `DEL_YN`) VALUES ('45748487-6720-4061-9bed-98c9401fc7d3', 30, 'ca75e6a7-9220-4cff-adcd-1e0ef0fbbe62', 'N');"
+        var query = mysql.format(CertQuery.put, param);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.insertId);
+            }
+        });
+    }
+
+    /**
+     * Search certificate entry from Table. <br />
+     * 
+     * @since 180328
+     * @author TACKSU
+     * 
+     * @param {*} creteria {
+     *      uid : User ID,
+     *      certId : Certificate ID
+     * }
+     * @param {*} cb 
+     */
+    get(creteria, cb) {
+        var condition = {};
+        if (!!creteria.uId) {
+            condition.UID = creteria.uId;
+        }
+
+        if (!!creteria.certId) {
+            delete condition.UID;
+            condition.CERT_ID = creteria.certId;
+        }
+
+        if (!!creteria.sId) {
+            delete condition.UID;
+            delete condition.CERT_ID;
+            condition.S_CERT_SHR_ID = creteria.sId;
+        }
+
+        var query = mysql.format(CertQuery.get, condition);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                var certList = [];
+                for (var i in rows) {
+                    certList.push(CertModel.fromRow(rows[i]));
+                }
+                cb(err, certList);
+            }
         })
     }
 
-    get(creteria, cb) {
-        if (Env.developement()) {
-            var current = new Date(Date.now());
-            var nextYear = new Date(current.getTime() + (60 * 60 * 24 * 356)*1000);
-
-            var certModels = [
-                new CertModel({
-                    certId: Util.uuid(),
-                    date: current,
-                    exp: nextYear,
-                    txid: Util.uuid(),
-                    issued: Util.uuid()
-                }),
-                new CertModel({
-                    certId: Util.uuid(),
-                    date: current,
-                    exp: nextYear,
-                    txid: Util.uuid(),
-                    issued: Util.uuid()
-                })
-            ];
-            cb(null, certModels)
-        } else if (Env.prouction()) {
-            var userId = creteria.userId;
-            var certId = creteria.certId;
-
-            if (!!userId) {
-                this.connectionPool.query(CertsQuery.getByUserID, [userId], (err, result) => {
-                    if (!!err) {
-                        cb(err, null);
-                    } else {
-                        cb(null, result);
-                    }
-                });
-            } else if (!!certId) {
-                this.connectionPool.query(CertsQuery.getByCertId, [certId], (err, result) => {
-                    if (!!err) {
-                        cb(err, null);
-                    } else {
-
-                        cb(null, result);
-                    }
-                })
-            }
+    /**
+     * Update certificate. <br />
+     * 
+     * @since 180329
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} certModel 
+     * @param {*} cb 
+     */
+    set(creteria, certModel, cb) {
+        var condition = {};
+        if (!!creteria.sId) {
+            condition.S_CERT_SHR_ID = creteria.sId;
         }
-    }
 
-    set(certId, cert, cb) {
+        if (!!creteria.certId) {
+            condition.CERT_ID = creteria.certId;
+        }
 
+        var query = mysql.format(CertQuery.set, [certModel.toRow(), condition])
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.affectedRows);
+            }
+        });
     }
 
     del(certId, cb) {

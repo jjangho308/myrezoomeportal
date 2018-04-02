@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 import Initialize from './core/initializer';
-import agentRouter from './routes/agent';
+import agentRouter from './routes/agent_route';
 
 
 import rootRouter from './routes/root_route';

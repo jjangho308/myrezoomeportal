@@ -5,11 +5,14 @@ import Property from "../property/property";
 
 import AbstractManager from '../abstract_manager';
 
-import UserDAO from '../../models/user/user_DAO';
+import UserDAO from '../../models/user/user_dao';
 import OrgDAO from '../../models/org/org_DAO';
 import RecordDAO from '../../models/record/record_DAO';
 import CertDAO from '../../models/cert/cert_DAO'
 import ResumeDAO from '../../models/resume/resume_DAO';
+
+import SharedCertDAO from '../../models/shared_cert/shared_cert_dao';
+import SharedResumeDAO from '../../models/shared_resume/shared_resume_dao';
 
 import Env from '../../core/environment';
 
@@ -20,6 +23,11 @@ import Env from '../../core/environment';
  */
 class DatabaseManager extends AbstractManager {
 
+    /**
+     * Default constructor. <br />
+     * 
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
     }
@@ -42,7 +50,10 @@ class DatabaseManager extends AbstractManager {
             port: propertyManager.get(Property.MySQL_PORT),
             user: propertyManager.get(Property.MySQL_ID),
             password: propertyManager.get(Property.MySQL_PW),
-            database: propertyManager.get(Property.MySQL_DATABASE)
+            database: propertyManager.get(Property.MySQL_DATABASE),
+            multipleStatements: true,
+            connectionLimit: 500,
+            waitForConnections:false
         });
 
         /*
@@ -64,10 +75,10 @@ class DatabaseManager extends AbstractManager {
                 });
                 
                 //connection.release();
+                connection.release();
             }
         });
         */
-        
     }
 
     getUserInfo(userid, cb) {
@@ -95,6 +106,13 @@ class DatabaseManager extends AbstractManager {
         return new UserDAO(this.connectionPool);
     }
 
+    getSharedCertDAO() {
+        return new SharedCertDAO(this.connectionPool);
+    }
+    getSharedResumeDAO(){
+        return new SharedResumeDAO(this.connectionPool);
+    }
+
     getOrgDAO() {
         return new OrgDAO(this.connectionPool);
     }
@@ -115,6 +133,19 @@ class DatabaseManager extends AbstractManager {
      */
     getRecordDAO() {
         return new RecordDAO(this.connectionPool);
+    }
+
+
+    /**
+     * Disconnect all connection and close session. <br />
+     * 
+     * @since 180328
+     * @author TACKSU
+     * 
+     * @param {*} cb 
+     */
+    end(cb) {
+        this.connectionPool.end(cb);
     }
 }
 

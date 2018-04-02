@@ -1,0 +1,317 @@
+p{
+    white-space: nowrap;
+    overflow: hidden;
+    
+    text-overflow: ellipsis;
+    
+}
+input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    border-radius: 3px;
+    border: solid 1px #ced3d6;
+    vertical-align: middle;
+}
+
+
+/* Base for label styling */
+
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+    vertical-align: middle;
+    position: relative;
+    padding-left: 1.95em;
+    cursor: pointer;
+}
+
+
+/* checkbox aspect */
+
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 19px;
+    height: 19px;
+    border: 0.5px solid #ccc;
+    background: #fff;
+    border-radius: 4px;
+}
+
+
+/* checked mark aspect */
+
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+    content: '✔' !important;
+    position: absolute;
+    top: 0px;
+    height: 19px;
+    width: 19px;
+    left: 0px;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.8;
+    color: white;
+    background-color: #4778d9;
+    transition: all .2s;
+    border: 0.5px solid #4778d9;
+    font-family: Helvetica, Arial, sans-serif !important;
+    ;
+    ;
+}
+
+
+/* checked mark aspect changes */
+
+[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+
+[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+/* disabled checkbox */
+
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+}
+
+[type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+}
+
+[type="checkbox"]:disabled + label {
+    color: #aaa;
+}
+
+
+.modal {
+    max-width: 570px!important;
+    padding: 0px!important;
+    width: 570px;
+}
+
+.modal > p:nth-child(1){
+
+      
+}
+.modal > p {
+    color: #676767;
+    font-size: 18px;
+    line-height: 1.22;
+    margin-top: 24px;
+    font-weight: bold;  
+    margin-left: 39px;
+}
+
+.modal > p> span {
+    color: #a9afb3;
+    font-size: 10px;
+    margin-left: 11px;
+    font-weight: normal;
+}
+
+.modal table {
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 4px;
+    max-width: 800px;
+    width: 100%;
+    border-top: solid 1px #ced3d6;
+    margin-top: 20px;
+    height: 300px;
+}
+
+.modal table td,
+table th {
+    padding-left: 8px;
+}
+
+.modal table tr {
+    height: 100px;
+    display: block;
+}
+
+.modal table tbody {
+    overflow-y: scroll;
+    display: block;
+    height: 300px;
+}
+
+.modal table tbody tr {
+    height: 48px;
+    border-bottom: solid 1px #dfe5ef;
+}
+
+.modal table th {
+    font-weight: bold;
+}
+
+.modal table td,
+table th {
+    text-align: left;
+    font-size: 12px;
+    color: #676767;
+    height: 45px;
+    vertical-align: middle;
+}
+
+.modal table td:nth-child(1),
+th:nth-child(1) {
+    width: 88px;
+    text-align: center;
+}
+
+.modal table td:nth-child(2),
+th:nth-child(2) {
+    width: 78px;
+}
+
+.modal table td:nth-child(3),
+th:nth-child(3) {
+    width: 60px;
+}
+
+.modal table td:nth-child(4),
+th:nth-child(4) {
+    width: 50px;
+}
+
+.modal table td:nth-child(5),
+th:nth-child(5) {
+    width: 50px;
+}
+
+.modal table td:nth-child(6),
+th:nth-child(6) {
+    width: 100px;
+}
+
+.modal a.close-modal {
+    position: absolute;
+    top: 21.5px!important;
+    right: 24.5px!important;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR…o8lCKWUlg/YtGs7tObunDAZfpDLbfEI15zsEIY3U/x/gHHc/G1zltnAgAAAABJRU5ErkJggg==);
+}
+
+.modal-footer {
+    background-color: #f2f5f8;
+    height: 70px;
+    border-radius: 4px;
+}
+
+.modal button {
+    width: 115px;
+    height: 40px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.08;
+    text-align: center;
+    vertical-align: top;
+}
+
+.modal .cancel-btn {
+    background-color: #f8fafb;
+    border: solid 1px #ced3d6;
+    color: #676767;
+    float: right;
+    margin: 15px 10px 0px 0px;
+}
+
+.modal .confirm-btn {
+    float: right;
+    margin: 15px 36px 0px 0px;
+    background-color: #4c80f1;
+    color: #f8fafb;
+    border: solid 1px #dfe5ef;
+}
+
+.modal-body {
+    margin-top: 24px;
+    padding: 30px;
+    border: solid 1px #ced3d6;
+}
+
+.modal-body p {
+    color: #676767;
+    line-height: 1;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 16px 0px;
+}
+
+.modal-body input {
+    color: #676767;
+    font-size: 13px;
+    font-weight: normal;
+    margin-bottom: 10px;
+    height: 32px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #ced3d6;
+    padding: 3px 11px;
+    vertical-align: top;
+}
+
+.modal-body select {
+    color: #676767;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    vertical-align: middle;
+    height: 47px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #ced3d6;
+    padding: 3px 16px;
+}
+
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #d0d0d0;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #d0d0d0;
+}
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #d0d0d0;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: #d0d0d0;
+}
+
+.calendar{
+        border-bottom-left-radius: 4px 4px!important;
+    border-top-left-radius: 4px 4px!important;
+    border-bottom-right-radius: 0px 0px!important;
+    border-top-right-radius: 0px 0px!important;
+    background: white!important;
+    border: 1px solid #ced3d6!important;
+    width: 40px!important;
+    height: 40px!important;
+}

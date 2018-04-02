@@ -1,7 +1,9 @@
 //import AbstractDAO from 'abstract_dao.js';
 import orgQuery from './org_query.js';
-import util from 'util';
+import mysql from 'mysql';
 import OrgModel from './org';
+
+import AbstractDAO from '../abstract_dao';
 
 /**
  * DAO for org. <br />
@@ -9,13 +11,35 @@ import OrgModel from './org';
  * @since 180306
  * @author KWANGWOOK
  */
-class OrgDao {
+class OrgDao extends AbstractDAO {
+
+    /**
+     * Default constructor. <br />
+     * 
+     * @param {MySqlConnectionPool} connectionPool 
+     */
     constructor(connectionPool) {
-        this.connectionPool = connectionPool;
+        super(connectionPool);
     }
 
-    put(org, cb) {
-
+    /**
+     * Insert a new Organization model to database. <br />
+     * 
+     * @since 180401
+     * @author TACKSU
+     * 
+     * @param {OrgModel} orgModel 
+     * @param {*} cb 
+     */
+    put(orgModel, cb) {
+        var query = mysql.format(orgQuery.put, orgModel.toRow());
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err)
+            } else {
+                cb(err, result.insertId);
+            }
+        })
     }
 
     /**
@@ -28,37 +52,37 @@ class OrgDao {
      */
     getByCodes(orgcodes, cb) {
 
-        var makequery = util.format(orgQuery.getByCodes, orgcodes);
+        var makeQuery = mysql.format(orgQuery.getByCodes, orgcodes);
 
-        this.connectionPool.query(makequery, function (err, rows) {
+        this.query(makeQuery, (err, rows) => {
             if (err) {
                 cb(err, null);
             } else {
                 var result = [];
                 for (var i in rows) {
-                    result.push(new OrgModel(rows[i]));
+                    result.push(OrgModel.fromRow(rows[i]));
                 }
                 cb(null, result);
             }
-        });
+        })
     }
 
     findAll(cb) {
 
-        var makequery = util.format(orgQuery.findAll);
+        var makequery = mysql.format(orgQuery.findAll);
 
-        this.connectionPool.query(makequery, function (err, rows) {
+        this.query(makeQuery, (err, rows) => {
             if (err) {
                 cb(err);
             } else {
                 var result = [];
                 console.log(rows);
                 for (var i in rows) {
-                    result.push(new OrgModel(rows[i]));
+                    result.push(OrgModel.fromRow(rows[i]));
                 }
                 cb(result);
             }
-        });
+        })
     }
 
     set(opt, user, cb) {

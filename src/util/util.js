@@ -7,15 +7,49 @@ import uuidv4 from 'uuid/v4';
  * @since 180305
  * @author TACKSU
  */
-export default {
+export default (() => {
+    var util = {
+
+        /**
+         * Generate new UUID. <br />
+         * 
+         * @since 180305
+         * @author TACKSU
+         */
+        uuid: function () {
+            return uuidv4();
+        },
+
+        /**
+         * Convert 'Y/N' DB row to boolean. <br />
+         * 
+         * @since 180330
+         * @author TACKSU
+         */
+        flagToBool: function (ynString) {
+            return ynString == 'Y' ? true : false
+        },
+
+        /**
+         * Convert boolean to Y/N flag. <br />
+         * 
+         * @since 180330
+         * @author TACKSU
+         */
+        boolToFlag: function (value) {
+            return value ? 'Y' : 'N';
+        }
+    }
 
     /**
-     * Generate new UUID. <br />
-     * 
-     * @since 180305
-     * @author TACKSU
+     * Shorterm of flagToBool. <br />
      */
-    uuid: function () {
-        return uuidv4();
-    }
-};
+    util.ftb = util.flagToBool;
+
+    /**
+     * Shorterm of boolToFlag. <br />
+     */
+    util.btf = util.boolToFlag;
+
+    return util;
+})();

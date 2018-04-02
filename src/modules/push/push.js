@@ -30,7 +30,7 @@ class PushManager extends AbstractManager {
                 passcode: propertyManager.get(Property.PUSH_HEADER_PASSCODE)
             }
         }], (factory) => {
-            console.log("AMQ Connect Success!");
+            //console.log("AMQ Connect Success!");
         })
     }
 
@@ -47,7 +47,7 @@ class PushManager extends AbstractManager {
 
         connections.on('connecting', function (connector) {
             var address = connector.serverProperties.remoteAddress.transportPath;
-            console.log('Connecting to ' + address);
+            //console.log('Connecting to ' + address);
         })
 
         connections.on('error', function (error) {
@@ -92,10 +92,8 @@ class PushManager extends AbstractManager {
                 }
             }
 
-
-
             var db = Managers.db();
-            console.log(sqlparam);
+            
 
             db.getOrgDao().getByCodes(sqlparam, ((err, result) => {
                 !!err ? cb(err) : (() => {

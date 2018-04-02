@@ -1,7 +1,9 @@
+import mysql from 'mysql';
+
 import Env from '../../core/environment';
 
 import AbstractDAO from "../abstract_dao";
-import Resume from './resume';
+import ResumeModel from './resume';
 
 import Query from './resume_query';
 
@@ -15,52 +17,94 @@ import Util from '../../util/util';
  */
 class ResumeDao extends AbstractDAO {
 
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180330
+     * @author TACKSU
+     * 
+     * @param {MySqlConnectionPool} connectionPool 
+     */
     constructor(connectionPool) {
         super(connectionPool);
     }
 
     /**
-     * Create new Resume entity. <br />
+     * Insert a given resume model to database. <br />
      * 
      * @since 180323
      * @author TACKSU
      * 
-     * @param {*} resume Resume entity
+     * @param {*} resume Resume model.
      * @param {function(err, result)} cb Callback
      */
     put(resume, cb) {
+        var resumeRow = resume.toRow();
 
+        var query = mysql.format(Query.put, resumeRow);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.insertId);
+            }
+        })
     }
 
+    /**
+     * Select resumes from database. <br />
+     * 
+     * @param {*} creteria 
+     * @param {function(object, array)} cb 
+     */
     get(creteria, cb) {
-        var userId = null;
-        var resumeId = null;
-        if (Env.developement()) {
-            userId = creteria.userId;
-            var resumeModels = [new Resume({
-                rsmId: Util.uuid(),
-                title: '마인 이력서',
-                status: 0,
-                records: [{
-                        txid: Util.uuid()
-                    },
-                    {
-                        txid: Util.uuid()
-                    }
-                ]
-            })];
+        var condition = {};
 
-            cb(null, resumeModels);
-        } else if (Env.prouction()) {
-            userId = creteria.userId;
-            resumeId = creteria.resumeId;
-
-            this.connectionPool.query(Query.get)
+        if (!!creteria.sId) {
+            condition.S_USR_RSM_ID = creteria.sId;
         }
+        if (!!creteria.rsmId) {
+            condition.RSM_ID = creteria.rsmId;
+        }
+        if (!!creteria.uId) {
+            condition.UID = creteria.uId;
+        }
+
+        var query = mysql.format(Query.get, condition);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                var returnValue = [];
+                for (var i in result) {
+                    returnValue.push(ResumeModel.fromRow(result[i]));
+                }
+                cb(err, returnValue);
+            }
+        });
+
     }
 
-    set(resumeid, resume, cb) {
+    set(creteria, resumeModel, cb) {
+        var condition = {};
+        if (!!creteria.sId) {
+            condition.S_USR_RSM_ID = creteria.sId;
+        }
+        if (!!creteria.rsmId) {
+            condition.RSM_ID = creteria.rsmId;
+        }
+        if (!!creteria.uId) {
+            condition.UID = creteria.uId;
+        }
 
+        var query = mysql.format(Query.set, [resumeModel.toRow(), condition]);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.affectedRows);
+            }
+        })
     }
 
     del(resumeid, cb) {
