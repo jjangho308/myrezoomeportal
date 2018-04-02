@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="158" height="18" viewBox="0 0 158 18">
+    <defs>
+        <path id="a" d="M6 6.5C6 5.672 6.664 5 7.493 5h12.014C20.332 5 21 5.666 21 6.5c0 .828-.664 1.5-1.493 1.5H7.493A1.493 1.493 0 0 1 6 6.5z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g stroke="#FFF" stroke-width="2.7" transform="translate(77 2)">
+            <circle cx="19.5" cy="6.5" r="6.5"/>
+            <circle cx="6.5" cy="6.5" r="6.5"/>
+        </g>
+        <g transform="translate(77 2)">
+            <use fill="#14C7FF" xlink:href="#a"/>
+            <path stroke="#3C435F" stroke-width="2" d="M5 6.5C5 5.12 6.112 4 7.493 4h12.014A2.493 2.493 0 0 1 22 6.5C22 7.88 20.888 9 19.507 9H7.493A2.493 2.493 0 0 1 5 6.5z"/>
+        </g>
+        <text fill="#FFF" font-family="SpoqaHanSans-Bold, SpoqaHanSans" font-size="20" font-weight="bold" transform="translate(-2 -7)">
+            <tspan x="26" y="23">E</tspan>
+        </text>
+        <text fill="#FFF" font-family="SpoqaHanSans-Bold, SpoqaHanSans" font-size="20" font-weight="bold" transform="translate(-2 -7)">
+            <tspan x="51" y="23">Z</tspan>
+        </text>
+        <text fill="#FFF" font-family="SpoqaHanSans-Bold, SpoqaHanSans" font-size="20" font-weight="bold" transform="translate(-2 -7)">
+            <tspan x="120" y="23">M</tspan>
+        </text>
+        <text fill="#FFF" font-family="SpoqaHanSans-Bold, SpoqaHanSans" font-size="20" font-weight="bold" transform="translate(-2 -7)">
+            <tspan x="148" y="23">E</tspan>
+        </text>
+        <text fill="#FFF" font-family="SpoqaHanSans-Bold, SpoqaHanSans" font-size="20" font-weight="bold" transform="translate(-2 -7)">
+            <tspan x="0" y="23">R</tspan>
+        </text>
+    </g>
+</svg>
