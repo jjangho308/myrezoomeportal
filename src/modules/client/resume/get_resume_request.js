@@ -1,4 +1,4 @@
-import AbstractClientRequesEntity from "../abstract_client_request_entity";
+import AbstractClientRequestEntity from "../abstract_client_request_entity";
 
 
 /**
@@ -7,7 +7,7 @@ import AbstractClientRequesEntity from "../abstract_client_request_entity";
  * @since 180402
  * @author TACKSU
  */
-class GetResumeRequestEntity extends AbstractClientRequesEntity{
+class GetResumeRequestEntity extends AbstractClientRequestEntity{
 
     /**
      * Default constructor. <br />
