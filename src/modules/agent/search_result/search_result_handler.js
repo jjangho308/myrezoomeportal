@@ -1,8 +1,10 @@
 import Managers from '../../core/managers';
 import AbstractAgentRequestHandler from "./abstract_agent_request_handler";
 
+import SearchResultRequest from './search_result_request';
+
 /**
- * Handler of {@link SearchRecordRessonse}. <br />
+ * Handler of {@link SearchResultRequest}. <br />
  * 
  * {@link SearchRecordResponse}의 핸들러입니다. <br />
  * 
@@ -29,12 +31,14 @@ class SearchResultHandler extends AbstractAgentRequestHandler {
      * @since 180306
      * @author TACKSU
      * 
-     * @param {*} request 
+     * @param {*} requestEntity
      */
-    request(request) {
-        console.log('Search result Agent Request');
-        console.log('mid : ' + request.mid);
-        Managers.client().response(request.mid, request, () => {});
+    request(requestEntity, cb) {
+        // console.log('Search result Agent Request');
+        // console.log('mid : ' + requestEntity.mid);
+        Managers.client().response(requestEntity.mid, requestEntity, () => {
+
+        });
     }
 }
 

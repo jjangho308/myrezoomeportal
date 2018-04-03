@@ -5,9 +5,18 @@
  * 
  * @since 180305
  * @author TACKSU
-*/
-class AbstractAgentRequestEntity{
-    constructor(opt){
+ */
+class AbstractAgentRequestEntity {
+
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180403
+     * @author TACKSU
+     * 
+     * @param {*} opt 
+     */
+    constructor(opt) {
         this.mid = opt.mid;
     }
 }
