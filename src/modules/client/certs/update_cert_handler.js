@@ -24,8 +24,12 @@ class UpdateCertificateHandler extends AbstractClientRequestHandler {
      * @param {*} cb 
      */
     request(requestEntity, cb) {
+        if(requestEntity.uId != requestEntity.uId){
+            // TODO authentication error. <br />
+        }
+
         var certDAO = Managers.db().getCertDAO();
-        certDA.update({
+        certDAO.update({
             certId: requestEntity.certId
         }, requestEntity, (err, affectedRows) => {
             if (!!err) {

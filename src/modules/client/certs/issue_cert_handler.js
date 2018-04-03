@@ -30,12 +30,16 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
      * @param {*} cb 
      */
     request(request, cb) {
+        if (request.uId != request.cert.uId) {
+            // TODO throw authentication error. <br />
+        }
+
         var certDAO = Managers.db().getCertDAO();
-        certDAO.put(request, (err, result) => {
+        certDAO.put(request.cert, (err, insertId) => {
             if (!!err) {
                 cb(ClientRequest.RESULT_FAILURE, err);
             } else {
-                cb(ClientRequest.RESULT_SUCCESS, result);
+                cb(ClientRequest.RESULT_SUCCESS, insertId);
             }
         });
     }
