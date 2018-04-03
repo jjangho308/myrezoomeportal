@@ -38,6 +38,25 @@ export default (() => {
          */
         boolToFlag: function (value) {
             return value ? 'Y' : 'N';
+        },
+
+        /**
+         * Trim undefined/null/empty array of given object. <br />
+         * 
+         * @since 180403
+         * @author TACKSU
+         */
+        trim: (obj) => {
+            for (var i in obj) {
+                if (obj[i] == undefined || obj[i] == NaN) {
+                    delete obj[i];
+                }
+
+                if (!!obj[i] && obj[i] instanceof Array && obj[i].length == 0) {
+                    delete obj[i];
+                }
+            }
+            return obj;
         }
     }
 
