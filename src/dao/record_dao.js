@@ -1,4 +1,6 @@
+import mysql from 'mysql';
 import AbstractDAO from './abstract_dao';
+import recordQuery from './record_query';
 
 /**
  * DAO for record. <br />
@@ -11,6 +13,29 @@ import AbstractDAO from './abstract_dao';
 class RecordDAO extends AbstractDAO {
     constructor(connectionPool) {
         super(connectionPool);
+    }
+
+    isSignUp(uid, cb){
+        var query = mysql.format(recordQuery.isSignUp, uid);
+        this.query(query, (err, result) => {
+            if(err){
+                cb(err)
+            }else{
+                cb(err, result.length);
+            }
+        })
+    }
+
+    getQueueName(orgid, cb){
+        var query = mysql.format(recordQuery.getQueuenameByOrgId, orgid);
+        this.query(query, (err,result) => {
+            if(err){
+                cb(err);
+            }else{
+                cb(err, result);
+            }
+        })
+
     }
 
     /**
@@ -47,3 +72,5 @@ class RecordDAO extends AbstractDAO {
     }
 
 }
+
+export default RecordDAO;

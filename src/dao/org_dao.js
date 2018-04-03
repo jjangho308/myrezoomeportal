@@ -44,12 +44,10 @@ class OrgDao extends AbstractDAO {
     getSubIdByOrgId(orgid, cb){
         var query = mysql.format(orgQuery.getSubIdsByOrgId, orgid);
         this.query(query, function(err, rows){
-            console.log(err);
-            console.log(rows);
             if(err){
-
+                cb(err)
             }else{
-                console.log(rows);
+                cb(err, rows)
             }
         })
 

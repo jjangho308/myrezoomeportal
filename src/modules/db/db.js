@@ -95,6 +95,13 @@ class DatabaseManager extends AbstractManager {
         });
     }
 
+     /**
+     * Obtain RecordDAO. <br />
+     */
+    getRecordDAO() {
+        return new RecordDAO(this.connectionPool);
+    }
+
     getOrgAllInfo(cb) {
         var orgDAO1 = new OrgDAO(this.connectionPool);
         orgDAO1.getall(function (res) {
@@ -106,6 +113,10 @@ class DatabaseManager extends AbstractManager {
         return new UserDAO(this.connectionPool);
     }
 
+    getOrgDAO() {
+        return new OrgDAO(this.connectionPool);
+    }
+
     getSharedCertDAO() {
         return new SharedCertDAO(this.connectionPool);
     }
@@ -113,9 +124,7 @@ class DatabaseManager extends AbstractManager {
         return new SharedResumeDAO(this.connectionPool);
     }
 
-    getOrgDAO() {
-        return new OrgDAO(this.connectionPool);
-    }
+
 
     getCertDAO() {
         return new CertDAO(this.connectionPool);
@@ -128,12 +137,7 @@ class DatabaseManager extends AbstractManager {
         return new ResumeDAO(this.connectionPool);
     }
 
-    /**
-     * Obtain RecordDAO. <br />
-     */
-    getRecordDAO() {
-        return new RecordDAO(this.connectionPool);
-    }
+
 
 
     /**

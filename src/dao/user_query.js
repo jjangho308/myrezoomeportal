@@ -4,11 +4,11 @@
  * @since 180302
  * @author TACKSU
  */
-var TABLE_NAME = 'TCUP_USR'
+var TABLE_NAME = 'rezoome_db.TCUP_USR'
 export default {
     get: 'SELECT * FROM ' + TABLE_NAME + ' WHERE ?',
 
-    getById: 'SELECT * FROM TCUP_USR where S_USR_ID = ?',
+    getById: 'SELECT * FROM TCUP_USR where USR_ID = ?',
 
     getByUId: 'SELECT * FROM TCUP_USR where UID = ?',
 

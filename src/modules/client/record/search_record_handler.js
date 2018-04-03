@@ -12,7 +12,7 @@ import SearchRecordPush from '../../push/message/search';
  * Handler for SearchRecordRequest. <br />
  * 이력 검색 요청 핸들러.
  * 
- * @author CHANGHO
+ * @author JJANGHO
  * @since 180313
  */
 class SearchRecordRequestHandler extends AbstractClientRequestHandler {
@@ -23,32 +23,18 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     /**
      * 
      * @param {HttpResponse} httpRes 
-     * @param {SearchRecordRequest} clientReq {
-     *      userId : "rezoome Id",
-     *      orgs    : [{
-     *                      code : '기관 코드',
-     *                      key : {
-     *                                  var1 : '키1',
-     * *                                var2 : '키2',
-     *                              }
-     *                  }
-     *              ]
-     * }
+     * @param {SearchRecordRequest} clientReq 
+     * 
      */
     request(clientReq, done) {
-        // 1. 기관 정보를 db에서 가져오고
-        //token에서 rezoome id를 가져와야한다.
-        var rezoome_id = clientReq.uid;
-        var orgIds = clientReq.orgid;
-
         var db = Managers.db();
 
-        //send message
+        var uid = clientReq.uid;
+        var orgIds = clientReq.orgid;
+
         db.getUserDAO().get({
-            uId: rezoome_id
+            uId: uid
         }, (err, users) => {
-            //console.log(users);
-            //console.log("test user :" + users);
             var targs = {
                 familyNameEN: users[0].familyNameEN,
                 firstNameEN: users[0].firstNameEN,
@@ -64,27 +50,25 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                 pkey: clientReq.pkey,
             }
 
-            db.getOrgDAO().getSubIdByOrgId(orgIds, (err, subids) => {
-                console.log(err);
-                console.log(subids);
-            })
+            for (var i in clientReq.orgInfos) {
+                var msg = new SearchRecordPush({
+                    mid: clientReq.mid,
+                    sid: clientReq.sid,
+                    args: targs,
+                });
 
-            var msg = new SearchRecordPush({
-                cmd: clientReq.cmd,
-                mid: clientReq.mid,
-                sid: clientReq.sid,
-                args: targs,
-            });
+                msg.args.subIDs=clientReq.orgInfos[i].subIDs;
+                msg.args.require=clientReq.orgInfos[i].require;
+                msg.args.records=clientReq.orgInfos[i].records;
 
-            console.log(msg);
+                //console.log(msg)
 
-            Managers.push().init();
-            Managers.push().sendMessage(msg, orgs, err => {
-                !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
-            });
+                Managers.push().init();
+                Managers.push().sendMessage(msg, clientReq.orgInfos[i], err => {
+                    !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
+                });
+            }
         })
-
-
     }
 
     response(clientRequest, agentRequest) {
@@ -98,23 +82,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             console.log('Socket is not prepared');
         }
     }
-
-    // makeMSG(clientReq, personalInfo) {
-    //     var args = {};
-    //     args.username = personalInfo[0].NAME;
-    //     args.birth = personalInfo[0].BIRTH;
-    //     args.gender = personalInfo[0].GENDER;
-    //     args.phone = personalInfo[0].PHONE;
-    //     args.ci = personalInfo[0].CI;
-    //     args.email = personalInfo[0].EMAIL;
-
-    //     var msg = new SearchRecordPush({
-    //         cmd: clientReq.cms,
-    //         mid: clientReq.mid,
-    //         args = args
-    //     });
-    //     return msg;
-    // }
 }
 
 export default SearchRecordRequestHandler;

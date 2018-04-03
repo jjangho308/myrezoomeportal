@@ -8,7 +8,7 @@ import Property from "../property/property";
 /**
  * PushManager. <br />
  * 
- * @author 신창호.
+ * @author JJANGHO
  * @since 180228
  */
 class PushManager extends AbstractManager {
@@ -76,68 +76,30 @@ class PushManager extends AbstractManager {
      * @since 180302
      * @param {object} msg
      */
-    sendMessage(msg, orgs, cb) {
+    sendMessage(msg, orgInfos, cb) {
+        //orgid로 queuename을 가져오고
+        var db = Managers.db();
 
-        // FIXME 이렇게 할 경우 아래의 this.msg에서 access했을 때 의도한 msg와 다른 msg가 들어 있을 가능성 있음
-        // this.msg = msg;
-        // 1.getting QueueName, using orgcode..
-        // 1.1 make SQL Param
-        if (!!orgs) {
+        var msgString = JSON.stringify(msg);
 
-            var sqlparam = '';
-            for (var i in orgs) {
-                sqlparam += JSON.stringify(orgs[i].code);
-                if (i != (orgs.length - 1)) {
-                    sqlparam = sqlparam + ",";
+        db.getRecordDAO().getQueueName(orgInfos.orgId, (err, queuename) => {
+            if (err) {
+                cb(err);
+            } else {
+                for (var i in queuename) {
+                    //seeting destination at this.destination
+                    this.channel.send(queuename[i].AMQ_NM, msgString, err => {
+                        if (err) {
+                            console.log('send error: ' + err.message);
+                            cb(err)
+                        }
+                        console.log('sent message');
+                        cb(null);
+                    });
+
                 }
             }
-
-            var db = Managers.db();
-            
-
-            db.getOrgDao().getByCodes(sqlparam, ((err, result) => {
-                !!err ? cb(err) : (() => {
-                    console.log(result);
-                    var msgString = JSON.stringify(msg);
-                    for (var i in result) {
-
-                        //seeting destination at this.destination
-                        this.channel.send(result[i].queueName, msgString, err => {
-
-                            if (err) {
-                                console.log('send error: ' + err.message);
-                                cb(err)
-                            }
-                            console.log('sent message');
-                            cb(null);
-                        });
-                    }
-                }).call(this);
-            }).bind(this));
-        }
-        else {
-            var db = Managers.db();
-
-            db.getOrgDao().findAll(function (result) {
-                if (!!result) {
-                    var msgString = JSON.stringify(msg);
-                    for (var i in result) {
-                        //seeting destination at this.destination
-                        this.channel.send(result[i].queueName, msgString, err => {
-
-                            if (err) {
-                                console.log('send error: ' + err.message);
-                                cb(err)
-                            }
-                            console.log('sent message');
-                            cb(null);
-                        });
-                    }
-                } else {
-                    console.log("error");
-                }
-            }.bind(this));
-        }
+        })
     }
 
     disconnect() {
