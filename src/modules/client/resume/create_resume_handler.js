@@ -1,6 +1,10 @@
 import AbstractClientRequestHandler from "../abstract_client_request_handler";
 import CreateResumeRequest from './create_resume_request';
 
+import ClientRequest from '../client_request';
+
+import Managers from '../../../core/managers';
+
 /**
  * Handler for {@link CreateResumeRequest}. <br />
  * 
@@ -18,11 +22,23 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
      * @since 180402
      * @author TACKSU
      * 
-     * @param {*} request 
+     * @param {*} requestEntity 
      * @param {*} cb 
      */
-    request(request, cb) {
+    request(requestEntity, cb) {
+        if (requestEntity.uId != requestEntity.cert.uId) {
+            // TODO throw authentication error
+            // TODO 이런 취약점 유의할 것.
+        }
 
+        var resumeDAO = Managers.db().getResumeDAO();
+        resumeDAO.put(requestEntity.cert, (err, insertId) => {
+            if (!!err) {
+                cb(ClientRequest.RESULT_FAILURE, err);
+            } else {
+                cb(ClientRequest.RESULT_SUCCESS, insertId);
+            }
+        })
     }
 }
 

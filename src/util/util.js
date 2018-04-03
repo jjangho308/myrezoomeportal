@@ -1,4 +1,5 @@
 import uuidv4 from 'uuid/v4';
+import crypto from 'crypto'
 
 /**
  * Common utility class. <br />
@@ -41,7 +42,7 @@ export default (() => {
         },
 
         /**
-         * Trim undefined/null/empty array of given object. <br />
+         * Trim undefined/null/empty array of given object. <br />w
          * 
          * @since 180403
          * @author TACKSU
@@ -57,6 +58,28 @@ export default (() => {
                 }
             }
             return obj;
+        },
+
+        /**
+         * Hash SHA-256 function . <br />
+         * 
+         * @since 180404
+         * @author TACKSU
+         */
+        sha256: (obj, cb) => {
+            if (!!cb) {
+                procss.nextTick(() => {});
+            }
+        },
+
+        /**
+         * Hash MD-5 function. <br />
+         * 
+         * @since 180404
+         * @author TACKSU
+         */
+        md5: (obj, cb) => {
+
         }
     }
 

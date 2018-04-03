@@ -1,5 +1,8 @@
 import AbstractClientRequestHandler from "../abstract_client_request_handler";
 
+import Manager from '../../../core/managers';
+import ClientRequest from '../client_request';
+
 /**
  * Handler for UpdateCertificateHandler. <br />
  * 
@@ -11,8 +14,30 @@ class UpdateCertificateHandler extends AbstractClientRequestHandler {
         super(opt);
     }
 
-    request(request, cb) {
+    /**
+     * Update given certifiacte. <br />
+     * 
+     * @since 180402
+     * @author TACKSU
+     * 
+     * @param {*} request 
+     * @param {*} cb 
+     */
+    request(requestEntity, cb) {
+        if(requestEntity.uId != requestEntity.uId){
+            // TODO authentication error. <br />
+        }
 
+        var certDAO = Managers.db().getCertDAO();
+        certDAO.update({
+            certId: requestEntity.certId
+        }, requestEntity, (err, affectedRows) => {
+            if (!!err) {
+                cb(ClientRequest.RESULT_FAILURE, err);
+            } else {
+                cb(ClientRequest.RESULT_SUCCESS, affectedRows);
+            }
+        })
     }
 }
 

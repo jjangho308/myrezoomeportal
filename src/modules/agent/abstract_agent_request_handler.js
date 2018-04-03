@@ -5,16 +5,27 @@
  * 
  * @since 180306
  * @author TACKSU
-*/
+ */
 class AbstractAgentRequestHandler {
-    constructor(opt) {
-    }
 
     /**
+     * Default constructor. <br />
      * 
-     * @param {AbstractAgentRequest} agentRequest
+     * @since 180312
+     * @author TACKSU
+     * @param {*} opt 
      */
-    request(agentRequest) {
+    constructor(opt) {}
+
+    /**
+     * Process HTTP request from agent. <br />
+     * 
+     * @since 180312
+     * @author TACKSU
+     * 
+     * @param {AbstractAgentRequest} requestEntity
+     */
+    request(requestEntity) {
 
     }
 }

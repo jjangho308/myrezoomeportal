@@ -7,14 +7,24 @@ import AbstractClientRequestEntity from "../abstract_client_request_entity";
  * @since 180402
  * @author TACKSU
  */
-class GetResumeRequestEntity extends AbstractClientRequestEntity{
+class GetResumeRequestEntity extends AbstractClientRequestEntity {
 
     /**
      * Default constructor. <br />
      * @param {*} opt 
      */
-    constructor(opt){
+    constructor(opt) {
         super(opt);
+
+        /**
+         * User id. <br />
+         */
+        this.uId = opt.uId;
+
+        /**
+         * SID of user. <br />
+         */
+        this.sId = opt.sId;
     }
 }
 

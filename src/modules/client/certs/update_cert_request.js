@@ -18,8 +18,10 @@ class UpdateCertificateRequest extends AbstractClientRequesEntity {
      */
     constructor(opt) {
         super(opt);
+        this.uId = opt.uId;
+        this.sId = opt.sId;
+        this.cert = opt.cert;
     }
-    
 }
 
 export default UpdateCertificateRequest;

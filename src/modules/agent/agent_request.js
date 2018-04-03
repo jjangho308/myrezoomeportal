@@ -13,6 +13,14 @@ import SearchResultRequestHandler from './search_result_handler';
  */
 class AgentRequestManager extends AbstractManager {
 
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180403
+     * @author TACKSU
+     * 
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
         this.entityMap = new HashMap();

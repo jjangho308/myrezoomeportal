@@ -5,10 +5,19 @@ import AbstractClientRequestEntity from "../abstract_client_request_entity";
  * @since 180402
  * @author TACKSU
  */
-class CreateResumeRequest extends AbstractClientRequestEntity{
-    constructor(opt)
-    {
+class CreateResumeRequest extends AbstractClientRequestEntity {
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180403
+     * @author TACKSU
+     * 
+     * @param {*} opt 
+     */
+    constructor(opt) {
         super(opt);
+        this.uId = opt.uId;
+        this.cert = opt.cert;
     }
 }
 
