@@ -19,7 +19,7 @@ class CertModel extends AbstractModel {
             /**
              * User id of owner of certificate. <br />
              */
-            this.uid = data.uid;
+            this.uId = data.uId;
 
             /**
              * ID of certificate. <br />
@@ -58,9 +58,9 @@ class CertModel extends AbstractModel {
      */
     static fromRow(row) {
         return new CertModel({
-            sid: row.S_CERT_SHR_ID,
+            sId: row.S_CERT_SHR_ID,
             certId: row.CERT_ID,
-            uid: row.UID,
+            uId: row.UID,
             encryptedData: row.ENC_CERT_DATA,
             deleted: row.DEL_YN,
             created: row.CRTD_DT,
@@ -68,11 +68,17 @@ class CertModel extends AbstractModel {
         })
     }
 
+    /**
+     * Convert instance to MySQL row. <br />
+     * 
+     * @since 180328
+     * @author TACKSU
+     */
     toRow() {
         return {
-            S_CERT_SHR_ID: this.sid,
+            S_CERT_SHR_ID: this.sId,
             CERT_ID: this.certId,
-            UID: this.uid,
+            UID: this.uId,
             ENC_CERT_DATA: this.encryptedData,
             DEL_YN: this.deleted,
             CRTD_DT: this.created,

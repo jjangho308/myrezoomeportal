@@ -5,16 +5,33 @@ import AbstractManager from '../abstract_manager';
 /**
  * CryptoManager. <br />
  * 
- * @since 183013
+ * @since 180313
  * @author TACKSU
  */
 class CryptoManager extends AbstractManager {
 
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180313
+     * @author TACKSU
+     * 
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
     }
 
-    init() {
+
+    /**
+     * Initializer. <br />
+     * 
+     * @since 180403
+     * @author TACKSU
+     * 
+     * @param {InitializedFrom} from 
+     */
+    init(from) {
 
     }
 
@@ -30,6 +47,10 @@ class CryptoManager extends AbstractManager {
      */
     setDefaultSpec(spec) {
         this.spec = spec;
+    }
+
+    getSystemSymmetricKey(){
+        
     }
 
     /**

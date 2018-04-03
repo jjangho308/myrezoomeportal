@@ -2,8 +2,8 @@ import HashMap from 'hashmap';
 
 import AbstractManager from "../abstract_manager";
 
-import SearchResultRequestEntity from './search_result';
-import SearchResultRequestHandler from './search_result_handler';
+import SearchResultRequestEntity from './search_result/search_result_request';
+import SearchResultRequestHandler from './search_result/search_result_handler';
 
 /**
  * Agent request manager. <br />

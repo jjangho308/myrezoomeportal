@@ -1,5 +1,5 @@
-import Managers from '../../core/managers';
-import AbstractAgentRequestHandler from "./abstract_agent_request_handler";
+import Managers from '../../../core/managers';
+import AbstractAgentRequestHandler from "../abstract_agent_request_handler";
 
 import SearchResultRequest from './search_result_request';
 

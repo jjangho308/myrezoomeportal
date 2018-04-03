@@ -45,7 +45,8 @@ describe('/certs URI Page test suite.', () => {
 
     it('Issue certificate request test', done => {
         var certModel = new CertModel({
-
+            uId: 'uid',
+            encryptedData: ''
         });
         chai.request(app)
             .post('/certs')

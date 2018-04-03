@@ -18,7 +18,7 @@ describe('Certficiate Model DAO test suite.', () => {
 
     it('CertModel Put & Get test case', done => {
         var certModel = new CertModel({
-            uid: 30,
+            uId: 30,
             certId: Util.uuid(),
             encryptedData: Util.uuid(),
         })
@@ -70,7 +70,7 @@ describe('Certficiate Model DAO test suite.', () => {
         var updatedData = Util.uuid();
 
         var certModel = new CertModel({
-            uid: 30,
+            uId: 30,
             certId: Util.uuid(),
             encryptedData: originData,
         })

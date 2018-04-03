@@ -1,4 +1,4 @@
-import AbstractAgentRequest from "./abstract_agent_request";
+import AbstractAgentRequest from "../abstract_agent_request_entity";
 
 /**
  * Response class of SearchResultRequest. <br />
