@@ -1,4 +1,4 @@
-import AbstractClientRequesEntityt from "../abstract_client_request_entity";
+import AbstractClientRequesEntity from "../abstract_client_request_entity";
 
 /**
  * Client request to issue new certificate. <br />
@@ -7,8 +7,8 @@ import AbstractClientRequesEntityt from "../abstract_client_request_entity";
  * @author TACKSU
  */
 class IssueCertificateRequest extends AbstractClientRequesEntity {
-    consturctor(opt) {
-        super(opt)
+    constructor(opt) {
+        super(opt);
     }
 }
 

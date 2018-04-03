@@ -1,4 +1,4 @@
-import AbstractClientRequest from "../abstract_request";
+import AbstractClientRequest from "../abstract_client_request_entity";
 
 /**
  * Get saved certificate entities and response them to client. <br />
