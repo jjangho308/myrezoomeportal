@@ -6,8 +6,8 @@ import AbstractClientRequest from "../abstract_client_request_entity";
  * @since 180402
  * @author TACKSU
  */
-class GetCertificateRequest extends AbstractClientRequest{
-    
+class GetCertificateRequest extends AbstractClientRequest {
+
     /**
      * Default constructor. <br />
      * 
@@ -16,9 +16,16 @@ class GetCertificateRequest extends AbstractClientRequest{
      * 
      * @param {*} opt 
      */
-    constructor(opt){
+    constructor(opt) {
         super(opt);
-        this.sId = opt.sId; 
+        /**
+         * Sequential ID of user. <br />
+         */
+        this.sId = opt.sId;
+
+        /**
+         * User ID. <br />
+         */
         this.uId = opt.uId;
     }
 }

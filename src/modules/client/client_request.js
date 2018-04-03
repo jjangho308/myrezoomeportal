@@ -53,6 +53,7 @@ class ClientRequestManager extends AbstractManager {
      * @author TACKSU
      * 
      * @param {AbstractClientRequest} request
+     * @param {function(object, object)} cb Callback function.
      */
     request(request, cb) {
         this.requestMap.set(request.mid, request);
@@ -61,6 +62,7 @@ class ClientRequestManager extends AbstractManager {
                 case ClientRequestManager.RESULT_FAILURE:
                     {
                         // result instanceof Error Retry?
+                        cb(result, null);
                         break;
                     }
 
@@ -68,12 +70,14 @@ class ClientRequestManager extends AbstractManager {
                     {
                         // result instanceof Object Keep request?
                         this.requestMap.set(request.mid, request);
+                        cb(null, result);
                         break;
                     }
 
                 case ClientRequestManager.RESULT_SUCCESS:
                     {
                         // Remove request?
+                        cb(null, result);
                         break;
                     }
             }

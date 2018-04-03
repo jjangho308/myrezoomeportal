@@ -41,7 +41,7 @@ export default (() => {
         },
 
         /**
-         * Trim undefined/null/empty array of given object. <br />
+         * Trim undefined/null/empty array of given object. <br />w
          * 
          * @since 180403
          * @author TACKSU
