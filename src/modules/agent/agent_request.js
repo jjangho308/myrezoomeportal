@@ -32,6 +32,14 @@ class AgentRequestManager extends AbstractManager {
         this.handlerMap.set(SearchResultRequestEntity, new SearchResultRequestHandler());
     }
 
+    /**
+     * Invoke AgentRequestEntity. <br />
+     * 
+     * @since 180403
+     * @author TACKSU
+     * 
+     * @param {string} code 
+     */
     getEntity(code) {
         return this.entityMap.get(code);
     }

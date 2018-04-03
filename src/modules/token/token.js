@@ -10,20 +10,32 @@ import AbstractManager from "../abstract_manager";
  */
 class TokenManager extends AbstractManager {
 
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180305
+     * 
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
-        this.secretKey = 'rezoomesecretkey';
     }
 
     init(from) {
         super.init(from);
+        this.secretKey = 'rezoomesecretkey';
     }
 
-    issueToken(userid) {
+    /**
+     * Issue JWT. <br />
+     * 
+     * @since 180305
+     * @param {string} userid 
+     */
+    issueToken(opt) {
         return jwt.sign({
-            data: {
-                userid : userid
-            },
+            data: opt,
+            // TODO 이 부분 property로 바꿀 필요가 있어보임.
             exp: Math.floor(Date.now() / 1000) + (60 * 60 * 1) // 1hour
             //}, 'rezoomesecretkey', { expiresIn: '1' });
         }, this.secretKey);

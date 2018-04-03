@@ -7,4 +7,6 @@
  */
 export default (req, res, next) => {
     // TODO ServerID 넣어주기:
+    req.params.sId = process.args[2];
+    next();
 }

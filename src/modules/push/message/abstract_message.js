@@ -4,7 +4,7 @@ import process from "process"
  * 
  * @since 180306
  * @author TACKSU
-*/
+ */
 class AbstractPush {
     constructor(opt) {
         this.mid = opt.mid;
