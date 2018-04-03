@@ -1,4 +1,4 @@
-import SearchRecordRequestHandler from '../modules/client/search_record_handler';
+import SearchRecordRequestHandler from '../modules/client/record/search_record_handler'
 import Initializer from '../core/initializer';
 
 describe('SearchRecordRequestHandler Test suit', () => {
@@ -10,13 +10,10 @@ describe('SearchRecordRequestHandler Test suit', () => {
 
     it('1. SearchRecordRequestHandler process TEST', () => {      
         HD.request({
-            "uid": "dd98740d-9ece-4fe8-af63-c8a49b2fa20e"
+            "uid": "dd98740d-9ece-4fe8-af63-c8a49b2fa20e",
+            "orgid": "100"
         }, function (res) {
-            
-            if (res == 1) {
-                done();
-            }
-
+            console.log(res);
         });
 
     }).timeout(10000);
