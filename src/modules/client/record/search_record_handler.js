@@ -37,40 +37,37 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      */
     request(clientReq, done) {
         // 1. 기관 정보를 db에서 가져오고
-
-        //orgcode => sendmessage 
-        console.log(clientReq);
-
         //token에서 rezoome id를 가져와야한다.
         var rezoome_id = clientReq.uid;
-        var orgs = clientReq.orgs;
+        var orgIds = clientReq.orgid;
 
         var db = Managers.db();
 
         //send message
         db.getUserDAO().get({
-            uid: rezoome_id
+            uId: rezoome_id
         }, (err, users) => {
-            db.get
+            //console.log(users);
             //console.log("test user :" + users);
             var targs = {
-                familyNameEN: users.familyNameEN,
-                firstNameEN: users.firstNameEN,
-                fullNameEN: users.fullNameEN,
-                familyNameKO: users.familyNameKO,
-                firstNameKO: users.firstNameKO,
-                fullNameKO: users.fullNameKO,
-                birth: users.birth,
-                gender: users.gender,
-                phone: users.phone,
-                email: users.email,
-                ci: users.ci,
+                familyNameEN: users[0].familyNameEN,
+                firstNameEN: users[0].firstNameEN,
+                fullNameEN: users[0].fullNameEN,
+                familyNameKO: users[0].familyNameKO,
+                firstNameKO: users[0].firstNameKO,
+                fullNameKO: users[0].fullNameKO,
+                birth: users[0].birth,
+                gender: users[0].gender,
+                phone: users[0].phone,
+                email: users[0].email,
+                ci: users[0].ci,
                 pkey: clientReq.pkey,
             }
 
-
-
-
+            db.getOrgDAO().getSubIdByOrgId(orgIds, (err, subids) => {
+                console.log(err);
+                console.log(subids);
+            })
 
             var msg = new SearchRecordPush({
                 cmd: clientReq.cmd,
@@ -79,15 +76,15 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                 args: targs,
             });
 
-
-
-            console.log("===================msg===================");
             console.log(msg);
+
             Managers.push().init();
             Managers.push().sendMessage(msg, orgs, err => {
                 !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
             });
         })
+
+
     }
 
     response(clientRequest, agentRequest) {
