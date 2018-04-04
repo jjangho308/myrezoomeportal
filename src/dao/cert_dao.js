@@ -35,6 +35,7 @@ class CertificateDAO extends AbstractDAO {
      */
     put(certModel, cb) {
         var param = certModel.toRow();
+        param.CERT_ID = Util.uuid();
 
         delete param.S_CERT_SHR_ID;
         delete param.CRTD_DT;
