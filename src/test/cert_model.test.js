@@ -38,7 +38,6 @@ describe('Certficiate Model DAO test suite.', () => {
         })
     });
 
-
     it('Search certificate model data by userId', done => {
         var certDAO = Managers.db().getCertDAO();
         certDAO.get({

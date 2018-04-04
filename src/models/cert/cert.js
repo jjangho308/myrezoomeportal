@@ -14,7 +14,7 @@ class CertModel extends AbstractModel {
             /**
              * Specification id of certificate. <br />
              */
-            this.sid = data.sid;
+            this.sId = data.sId;
 
             /**
              * User id of owner of certificate. <br />
