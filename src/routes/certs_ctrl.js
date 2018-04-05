@@ -31,6 +31,7 @@ export default {
 
         // /certs AJAX request
         if (!!req.xhr) {
+            console.log(Managers.client());
             Managers.client().request(new GetCertsRequest(req.body), (err, result) => {
                 if (!!err) {
                     res.status(500).render('error', err);

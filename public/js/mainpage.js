@@ -6,6 +6,8 @@ require socket.is
 
 function clientsocket_listener() {
 
+    $.getScript( 'localstorage.js');
+
     var socket = io();
 
     socket.on('SearchResult', function(msg){
@@ -36,6 +38,9 @@ function clientsocket_listener() {
             $.getScript( file_name );
             
             getviewdata(records[i],targetdivid);
+
+            //save localstorage
+            setData(records[i]);
 
 
         }
