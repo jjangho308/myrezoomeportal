@@ -1,6 +1,6 @@
 import AbstractClientRequestHandler from "../abstract_client_request_handler";
 
-import Manager from '../../../core/managers';
+import Managers from '../../../core/managers';
 import ClientRequest from '../client_request';
 
 /**
@@ -24,14 +24,14 @@ class UpdateCertificateHandler extends AbstractClientRequestHandler {
      * @param {*} cb 
      */
     request(requestEntity, cb) {
-        if(requestEntity.uId != requestEntity.uId){
+        if (requestEntity.uId != requestEntity.uId) {
             // TODO authentication error. <br />
         }
 
         var certDAO = Managers.db().getCertDAO();
         certDAO.set({
             certId: requestEntity.certId
-        }, requestEntity, (err, affectedRows) => {
+        }, requestEntity.cert, (err, affectedRows) => {
             if (!!err) {
                 cb(ClientRequest.RESULT_FAILURE, err);
             } else {

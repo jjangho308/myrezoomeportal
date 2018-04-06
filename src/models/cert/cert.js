@@ -76,7 +76,7 @@ class CertModel extends AbstractModel {
      * @author TACKSU
      */
     toRow() {
-        return {
+        var row = {
             S_CERT_SHR_ID: this.sId,
             CERT_ID: this.certId,
             UID: this.uId,
@@ -84,7 +84,8 @@ class CertModel extends AbstractModel {
             DEL_YN: this.deleted,
             CRTD_DT: this.created,
             MDFID_DT: this.modified
-        }
+        };
+        return this.trim(row);
     }
 }
 
