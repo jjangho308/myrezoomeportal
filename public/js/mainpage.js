@@ -13,7 +13,7 @@ $(document).ready(function(){
         type: 'POST',
         url: '/client',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6ImNoYW5nOHNoaW4ifSwiZXhwIjoxNTIxMTM5OTUwLCJpYXQiOjE1MjEwOTY3NTB9.ipLgRV2CL-kWc0D2ZgovK1-9xQiCEto6FDsISNORzuM'
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVJZCI6IlVJRDEifSwiZXhwIjoxNTIzMDI5NzUzLCJpYXQiOjE1MjI5ODY1NTN9.laM3F1RqDGz636eYkyprR2x5kqYrNZAhzpXXRoNElWE'
         },
         data: JSON.stringify({
             cmd: 'Search',
