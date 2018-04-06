@@ -1,11 +1,26 @@
 function test_getrecords() {
     //이력 조회
 
+    
     $.ajax({
-        url: "/records/",
-        success: function (result) {
-            console.log(result);
-        }
+        type: 'POST',
+        url: '/client',
+        headers: {
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVJZCI6IlVJRDIifSwiZXhwIjoxNTIzMDM4MTk3LCJpYXQiOjE1MjI5OTQ5OTd9.jl3Shav7MSFarGuEY5r41yTZybSQlRMWWIlP0SA29yY'
+        },
+        data: JSON.stringify({
+            cmd: 'SearchRecord',
+            
+            args: {
+                pkey: 'asdfasdf',
+                update: false
+            }
+            
+        }),
+        success: function (res) {
+            setSocket(res.mid);
+        },
+        contentType: 'application/json',
     });
 }
 
