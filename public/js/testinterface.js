@@ -6,15 +6,16 @@ function test_getrecords() {
         type: 'POST',
         url: '/client',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVJZCI6IlVJRDEifSwiZXhwIjoxNTIzMDI5NzUzLCJpYXQiOjE1MjI5ODY1NTN9.laM3F1RqDGz636eYkyprR2x5kqYrNZAhzpXXRoNElWE'
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVJZCI6IlVJRDIifSwiZXhwIjoxNTIzMDM4MTk3LCJpYXQiOjE1MjI5OTQ5OTd9.jl3Shav7MSFarGuEY5r41yTZybSQlRMWWIlP0SA29yY'
         },
         data: JSON.stringify({
-            cmd: 'SearchRecords',
-            /*
+            cmd: 'SearchRecord',
+            
             args: {
-                pkey: 'asdfasdf'
+                pkey: 'asdfasdf',
+                update: false
             }
-            */
+            
         }),
         success: function (res) {
             setSocket(res.mid);
