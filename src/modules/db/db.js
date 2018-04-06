@@ -11,9 +11,6 @@ import RecordDAO from '../../dao/record_dao';
 import CertDAO from '../../dao/cert_dao'
 import ResumeDAO from '../../dao/resume_dao';
 
-// import SharedCertDAO from '../../models/shared_cert/shared_cert_dao';
-// import SharedResumeDAO from '../../models/shared_resume/shared_resume_dao';
-
 import Env from '../../core/environment';
 
 /**
@@ -116,15 +113,6 @@ class DatabaseManager extends AbstractManager {
     getOrgDAO() {
         return new OrgDAO(this.connectionPool);
     }
-
-    getSharedCertDAO() {
-        return new SharedCertDAO(this.connectionPool);
-    }
-    getSharedResumeDAO() {
-        return new SharedResumeDAO(this.connectionPool);
-    }
-
-
 
     getCertDAO() {
         return new CertDAO(this.connectionPool);
