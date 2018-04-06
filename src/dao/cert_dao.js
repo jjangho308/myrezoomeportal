@@ -15,6 +15,7 @@ import Util from '../util/util';
  * @author TACKSU
  */
 class CertificateDAO extends AbstractDAO {
+    
     /**
      * Default constructor. <br />
      * 
