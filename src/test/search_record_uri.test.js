@@ -39,7 +39,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             });;
     })
 
-    it('Refresh search records', done => {
+    it.skip('Refresh search records', done => {
         chai.request(app)
             .post('/records')
             .set('Content-Type', 'application/json')
@@ -57,7 +57,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             });;
     })
 
-    it('Update search records', done => {
+    it.skip('Update search records', done => {
         chai.request(app)
             .post('/records')
             .set('Content-Type', 'application/json')

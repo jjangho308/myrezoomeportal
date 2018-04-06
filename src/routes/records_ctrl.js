@@ -21,10 +21,11 @@ export default {
      * @author TACKSU
      */
     get: (req, res, next) => {
-        var userid = req.params.userId;
+        var userId = req.params.uId;
 
         if (!!req.xhr) {
-            Managers.client().request(new GetRecordsRequest(req.body), (err, result) => {
+            req.body.uId = userId;
+            Managers.client().request(new SearchRecordsRequest(req.body), (err, result) => {
                 if (!!err) {
                     res.status(500).json(err);
                 } else {
@@ -50,7 +51,7 @@ export default {
                     res.json(result);
                 }
             })
-        }else{
+        } else {
             next();
         }
     },
