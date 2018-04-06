@@ -6,6 +6,7 @@ import records_router from './records_route';
 import certs_router from './certs_route';
 import resume_router from './resume_route';
 import main_router from './main_route';
+import client_router from './client_route';
 
 /**
  * Root router. <br />
@@ -20,5 +21,6 @@ router.use('/main', main_router);
 router.use('/records', records_router);
 router.use('/certs', certs_router);
 router.use('/resumes', resume_router);
+router.use('/client', client_router);
 
 export default router;

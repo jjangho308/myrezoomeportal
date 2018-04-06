@@ -22,7 +22,7 @@ class AbstractClientRequestEntity {
         /**
          * User id. <br />
          */
-        this.userid = opt.userid;
+        this.uId = opt.uId;
     }
 }
 
