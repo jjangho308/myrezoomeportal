@@ -3,8 +3,12 @@
 require socket.is 
 <script src="/socket.io/socket.io.js"></script>
 */
+var socket;
 
 $(document).ready(function(){
+    
+    socket = io();
+
     $.ajax({
         type: 'POST',
         url: '/client',
@@ -28,7 +32,7 @@ function clientsocket_listener() {
 
     $.getScript( 'localstorage.js');
 
-    var socket = io();
+    
 
     socket.on('SearchResult', function(msg){
         console.log('message: ' + msg);

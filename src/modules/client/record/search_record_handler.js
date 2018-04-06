@@ -28,7 +28,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      */
     request(clientReq, done) {
         var db = Managers.db();
-        var uid = clientReq.uid;
+
+        var uid = clientReq.uId;
+        var orgIds = clientReq.orgid;
 
         db.getUserDAO().get({
             uId: uid

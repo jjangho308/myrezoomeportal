@@ -6,6 +6,7 @@ import app from '../app';
 import Managers from '../core/managers';
 import Initializer from '../core/initializer';
 import Util from '../util/util';
+import CryptoManager from '../modules/crypto/crypto';
 
 describe('Portal <-> Agent Search Record interpolation test suite.', () => {
 
@@ -13,67 +14,72 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
 
     before('Initialize', () => {
         Initializer();
-        Managers.token().issueToken({
-            uId: 1
+        token = Managers.token().issueToken({
+            uId: 'UID1'
         })
+        console.log(token);
+
         chai.use(chaihttp);
     })
 
     it('First search records', done => {
+        var cryptoManager = new CryptoManager();
+        cryptoManager = Managers.crypto();
+        var keyPair = cryptoManager.generateRSAKeyPair();
         chai.request(app)
-            .post('/records')
+            .post('/client')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + token)
+            .set('Cookie', 'jwt=' + token)
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
-                pkey: '',
-                orgInfos: [{
-                    orgId: 'OrgCODE',
-                    subIDs: [],
-                }]
+                cmd: 'SearchRecord',
+                args: {
+                    pkey: keyPair.public
+                }
             })
             .end((err, res) => {
                 done();
             });;
     })
 
-    it('Refresh search records', done => {
+    it.skip('Refresh search records', done => {
         chai.request(app)
-            .post('/records')
+            .post('/client')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + token)
             .set('X-Requested-With', 'XMLHttpRequest')
+            .set('Cookie', 'jwt=' + token)
             .send({
-                pkey: '',
-                orgInfos: [{
-                    orgId: 'OrgCODE',
-                    subIDs: [],
-                }]
+                cmd: 'SearchRecord',
+                args: {
+                    pkey: ''
+                }
             })
             .end((err, res) => {
                 done();
             });;
     })
 
-    it('Update search records', done => {
+    it.skip('Update search records', done => {
         chai.request(app)
             .post('/records')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + token)
+            .set('Cookie', 'jwt=' + token)
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
-                pkey: '',
-                orgInfos: [{
-                    orgId: 'OrgCODE',
-                    subIDs: [],
-                }]
+                cmd: 'SearchRecord',
+                args: {
+                    pkey: ''
+                }
             })
             .end((err, res) => {
                 done();
             });;
     })
 
-    it.skip('Agent Response', done => {
+    it.skip('Agent Search Results Response', done => {
         chai.request(app)
             .post('/agent')
             .set('Content-Type', 'application/json')

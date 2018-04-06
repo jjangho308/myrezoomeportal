@@ -32,7 +32,11 @@ class CryptoManager extends AbstractManager {
      * @param {InitializedFrom} from 
      */
     init(from) {
-
+        this.setDefaultSpec({
+            symLength: 64,
+            asmLength: 64,
+            encode: 'base64'
+        })
     }
 
     /**
@@ -49,8 +53,14 @@ class CryptoManager extends AbstractManager {
         this.spec = spec;
     }
 
-    getSystemSymmetricKey(){
-        
+    /**
+     * Obtain system default symmetric key from system keystore. <br />
+     * 
+     * @since 180404
+     * @author TACKU
+     */
+    getSystemSymmetricKey() {
+        // TODO Implements here
     }
 
     /**
@@ -66,6 +76,14 @@ class CryptoManager extends AbstractManager {
         crypto.randomBytes(length, cb);
     }
 
+    /**
+     * Generate Symmetric key by cryptographic specification. <br />
+     * 
+     * @since 180305
+     * @author TACKSU
+     * 
+     * @param {function(object, string)} cb 
+     */
     generateAESKey(cb) {
         crypto.randomBytes(this.spec.symLength, (err, key) => {
             if (err) {
@@ -75,13 +93,21 @@ class CryptoManager extends AbstractManager {
         });
     }
 
+    /**
+     * Generate Asymmetric key pair. <br />
+     * 
+     * @since 180313
+     * @author TACKSU
+     * 
+     * @param {*} cb 
+     */
     generateRSAKeyPair(cb) {
         var dh = crypto.createDiffieHellman(this.spec.asmLength);
         dh.generateKeys(this.spec.encode);
-        cb(null, {
-            pub: dh.getPublicKey(this.spec.encode),
-            pri: dh.getPrivateKey(this.spec.encode)
-        })
+        return {
+            public: dh.getPublicKey(this.spec.encode),
+            private: dh.getPrivateKey(this.spec.encode)
+        };
     }
 
     /**
@@ -113,7 +139,7 @@ class CryptoManager extends AbstractManager {
         var decipher = crypto.createDecipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), Buffer.from(iv, this.spec.encode));
         var decrypted = decipher.update(encrypted, this.spec.encode, 'utf8');
         decrypted += decipher.final('utf8');
-        cb(null, decrypted);
+        return decrypted;
     }
 
     encryptRSA(plain, key, cb) {

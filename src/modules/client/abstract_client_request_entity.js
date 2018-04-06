@@ -7,20 +7,21 @@ import util from '../../util/util';
  * @author TACKSU 
  */
 class AbstractClientRequestEntity {
-    
+
     /**
+     * Default constructor. <br />
      * 
      * @param {object} opt 
      */
     constructor(opt) {
 
         /**
-         * Message id. <br />
+         * Auto generated message id. <br />
          */
-        this.mid = util.uuid();
+        this.mId = util.uuid();
 
         /**
-         * User id. <br />
+         * User UID by token parsing. <br />
          */
         this.uId = opt.uId;
     }

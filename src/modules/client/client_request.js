@@ -6,6 +6,26 @@ import SearchRecordRequest from './record/search_record';
 import SearchRecordHandler from './record/search_record_handler';
 
 /**
+ * Certificates request set. <br />
+ */
+import IssueCertificateRequest from './certs/issue_cert_request';
+import IssueCertificateHandler from './certs/issue_cert_handler';
+import GetCertificatesRequest from './certs/get_certs_request';
+import GetCertificatesHandler from './certs/get_certs_handler';
+import UpdateCertificateRequest from './certs/update_cert_request';
+import UpdateCertificateHandler from './certs/update_cert_handler';
+
+/**
+ * Resume request set. <br />
+ */
+import CreateResumeRequest from './resume/create_resume_request';
+import CreateResumeHandler from './resume/create_resume_handler';
+import GetResumeRequest from './resume/get_resume_request';
+import GetResumeHandler from './resume/get_resume_handler';
+import UpdateResumeRequest from './resume/update_resume_request';
+import UpdateResumeHandler from './resume/update_resume_handler';
+
+/**
  * Request job manager from client. <br />
  * 초기화 시 Job map를 생성하며 Client channel의 HTTP Request 발생 시 Job을 생성하여 저장한다.
  * Agent에서 Http 요청이 올 때 여기 저장된 Job을 기반으로 해당 Client에 Socket Push를 전송하도록 한다.
@@ -32,8 +52,16 @@ class ClientRequestManager extends AbstractManager {
         this.handlerMap = new HashMap();
         this.requestMap = new HashMap();
 
-        this.entityMap.set('Search', SearchRecordRequest);
+        this.entityMap.set('SearchRecord', SearchRecordRequest);
         this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
+
+        this.handlerMap.set(GetCertificatesRequest, new GetCertificatesHandler());
+        this.handlerMap.set(IssueCertificateRequest, new IssueCertificateHandler());
+        this.handlerMap.set(UpdateCertificateRequest, new UpdateCertificateHandler());
+
+        this.handlerMap.set(GetResumeRequest, new GetResumeHandler());
+        this.handlerMap.set(UpdateResumeRequest, new UpdateResumeHandler());
+        this.handlerMap.set(CreateResumeRequest, new CreateResumeHandler());
 
         this.setPrepared();
     }
@@ -52,7 +80,7 @@ class ClientRequestManager extends AbstractManager {
      * @since 180312
      * @author TACKSU
      * 
-     * @param {AbstractClientRequest} request
+     * @param {AbstractClientRequest} requests
      * @param {function(object, object)} cb Callback function.
      */
     request(request, cb) {

@@ -6,8 +6,6 @@ import managers from '../core/managers';
 
 var router = express.Router();
 
-// import SearchRequestHandler from '../modules/request/search_record_handler';
-
 /**
  * Router for client request channel. <br />
  * 
