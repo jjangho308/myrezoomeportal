@@ -47,7 +47,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it('Issue certificate request test', done => {
+    it.skip('Issue certificate request test', done => {
         var certModel = new CertModel({
             uId: 'UID1',
             encryptedData: Util.uuid()
@@ -67,14 +67,17 @@ describe('/certs URI Page test suite.', () => {
 
     it('Update certificate request test', done => {
         var certModel = new CertModel({
-
+            uId: 'UID1',
+            encryptedData: Util.uuid()
         });
         chai.request(app)
-            .patch('/certs/uuid')
+            .patch('/certs/5e043bfa-2235-4c51-bdf1-4d8b7b6ffe78')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + jwtToken)
             .set('X-Requested-With', 'XMLHttpRequest')
-            .send(JSON.stringify(certModel))
+            .send({
+                cert: certModel
+            })
             .end((err, res) => {
                 done();
             });

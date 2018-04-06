@@ -26,7 +26,7 @@ router.post('/', tokenAuth);
 router.post('/', ctrl.post);
 //router.post('/', view);
 
-router.post('/:certId', tokenAuth);
+router.patch('/:certId', tokenAuth);
 router.patch('/:certId', ctrl.patch);
 
 export default router;
