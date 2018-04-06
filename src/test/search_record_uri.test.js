@@ -23,9 +23,9 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
     })
 
     it('First search records', done => {
-        // var cryptoManger = new CryptoManager();
-        // cryptoManager = Managers.crypto();
-        // var keyPair = cryptoManager.generateRSAKeyPair();
+        var cryptoManager = new CryptoManager();
+        cryptoManager = Managers.crypto();
+        var keyPair = cryptoManager.generateRSAKeyPair();
         chai.request(app)
             .post('/client')
             .set('Content-Type', 'application/json')
@@ -35,7 +35,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             .send({
                 cmd: 'SearchRecord',
                 args: {
-                    pkey: ''
+                    pkey: keyPair.public
                 }
             })
             .end((err, res) => {
@@ -45,17 +45,16 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
 
     it.skip('Refresh search records', done => {
         chai.request(app)
-            .post('/records')
+            .post('/client')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + token)
             .set('X-Requested-With', 'XMLHttpRequest')
             .set('Cookie', 'jwt=' + token)
             .send({
-                pkey: '',
-                orgInfos: [{
-                    orgId: 'OrgCODE',
-                    subIDs: [],
-                }]
+                cmd: 'SearchRecord',
+                args: {
+                    pkey: ''
+                }
             })
             .end((err, res) => {
                 done();
@@ -70,7 +69,10 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             .set('Cookie', 'jwt=' + token)
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
-                pkey: ''
+                cmd: 'SearchRecord',
+                args: {
+                    pkey: ''
+                }
             })
             .end((err, res) => {
                 done();

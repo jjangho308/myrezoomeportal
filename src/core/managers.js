@@ -2,12 +2,12 @@ import PropertyManager from '../modules/property/property';
 import PushManager from '../modules/push/push';
 import KMSManager from '../modules/kms/kms';
 import BlockchainManager from '../modules/blockchain/blockchain';
-import CryptoManager from '../modules/crypto/crypto';
 import DatabaseManager from '../modules/db/db';
 import TokenManager from '../modules/token/token';
 import PDFManager from '../modules/pdf/pdf';
 import ClientRequestManager from '../modules/client/client_request';
 import AgentRequestManager from '../modules/agent/agent_request';
+import CryptoManager from '../modules/crypto/crypto';
 
 /**
  * Wrapper function to provide singleton instance of each modules. <br />

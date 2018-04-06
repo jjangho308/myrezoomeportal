@@ -57,9 +57,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     args: targs,
                 });
 
-                msg.args.subIDs=clientReq.orgInfos[i].subIDs;
-                msg.args.require=clientReq.orgInfos[i].require;
-                msg.args.records=clientReq.orgInfos[i].records;
+                msg.args.subIDs = clientReq.orgInfos[i].subIDs;
+                msg.args.require = clientReq.orgInfos[i].require;
+                msg.args.records = clientReq.orgInfos[i].records;
 
                 //console.log(msg)
 
