@@ -30,7 +30,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         var db = Managers.db();
 
         var uid = clientReq.uId;
-        var orgIds = clientReq.orgid;
 
         db.getUserDAO().get({
             uId: uid
@@ -39,7 +38,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             //첫번째 로긴
             if (users[0].first == 'Y') {
                 db.getOrgDAO().findAll((err, resultOrgIds) => {
-                    console.log(resultOrgIds);
                     for (var i in resultOrgIds) {
                         db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, result) => {
                             if (err) {
@@ -65,6 +63,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                     pkey: clientReq.pkey,
                                 }
 
+                                
+                                targs.pkey = clientReq.pkey;
+
                                 var msg = new SearchRecordPush({
                                     mid: clientReq.mId,
                                     sid: clientReq.sId,
@@ -73,12 +74,10 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                 msg.args.subIDs = subIds;
 
-                                console.log(msg);
-
-                                // Managers.push().init();
-                                // Managers.push().sendMessage(msg, resultOrgIds[i].ORG_ID, err => {
-                                //     !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
-                                // });
+                                Managers.push().init();
+                                Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
+                                    !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
+                                });
                             }
                         })
                     }
@@ -127,6 +126,14 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             // }
         })
     }
+
+    sendmessage(users, paramSubIds, clientReq) {
+
+
+
+    }
+
+
 
     response(clientRequest, agentRequest) {
         console.log('Socket Push : ');

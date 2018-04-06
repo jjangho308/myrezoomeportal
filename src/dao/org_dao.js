@@ -83,16 +83,11 @@ class OrgDao extends AbstractDAO {
 
         var makequery = mysql.format(orgQuery.findAll);
 
-        this.query(makeQuery, (err, rows) => {
+        this.query(makequery, (err, rows) => {
             if (err) {
                 cb(err);
             } else {
-                var result = [];
-                console.log(rows);
-                for (var i in rows) {
-                    result.push(OrgModel.fromRow(rows[i]));
-                }
-                cb(result);
+                cb(err, rows);
             }
         })
     }
