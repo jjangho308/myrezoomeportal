@@ -16,6 +16,8 @@ export default (req, res, next) => {
     try {
         var verified = tokenManager.verify(token);
         req.params.uId = verified.data.uId;
+        req.query.uId = verified.data.uId;
+        req.body.uId = verified.data.uId;
         next();
     } catch (e) {
         throw e;

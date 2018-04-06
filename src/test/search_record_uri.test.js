@@ -6,6 +6,7 @@ import app from '../app';
 import Managers from '../core/managers';
 import Initializer from '../core/initializer';
 import Util from '../util/util';
+import CryptoManager from '../modules/crypto/crypto';
 
 describe('Portal <-> Agent Search Record interpolation test suite.', () => {
 
@@ -22,17 +23,20 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
     })
 
     it('First search records', done => {
+        // var cryptoManger = new CryptoManager();
+        // cryptoManager = Managers.crypto();
+        // var keyPair = cryptoManager.generateRSAKeyPair();
         chai.request(app)
-            .post('/records')
+            .post('/client')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + token)
+            .set('Cookie', 'jwt=' + token)
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
-                pkey: '',
-                orgInfos: [{
-                    orgId: 'OrgCODE',
-                    subIDs: [],
-                }]
+                cmd: 'SearchRecord',
+                args: {
+                    pkey: ''
+                }
             })
             .end((err, res) => {
                 done();
@@ -45,6 +49,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + token)
             .set('X-Requested-With', 'XMLHttpRequest')
+            .set('Cookie', 'jwt=' + token)
             .send({
                 pkey: '',
                 orgInfos: [{
@@ -62,13 +67,10 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             .post('/records')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + token)
+            .set('Cookie', 'jwt=' + token)
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
-                pkey: '',
-                orgInfos: [{
-                    orgId: 'OrgCODE',
-                    subIDs: [],
-                }]
+                pkey: ''
             })
             .end((err, res) => {
                 done();
