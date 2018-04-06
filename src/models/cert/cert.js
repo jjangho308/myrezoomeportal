@@ -46,6 +46,7 @@ class CertModel extends AbstractModel {
              */
             this.deleted = data.deleted ? data.deleted : 'N';
         }
+        this.trim(this);
     }
 
     /**

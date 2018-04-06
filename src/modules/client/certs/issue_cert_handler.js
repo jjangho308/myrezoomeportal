@@ -2,6 +2,8 @@ import AbstractClientRequestHandler from "../abstract_client_request_handler";
 
 import ClientRequest from '../client_request';
 
+import Managers from '../../../core/managers'
+
 /**
  * Handler of IssueCertificateRequestEntity. <br />
  * 
