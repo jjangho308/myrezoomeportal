@@ -28,7 +28,7 @@ class AgentRequestManager extends AbstractManager {
     }
 
     init(from) {
-        this.entityMap.set("SearchResult", SearchResultRequestEntity)
+        this.entityMap.set("SearchRecord", SearchResultRequestEntity)
         this.handlerMap.set(SearchResultRequestEntity, new SearchResultRequestHandler());
     }
 
