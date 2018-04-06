@@ -13,9 +13,11 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
 
     before('Initialize', () => {
         Initializer();
-        Managers.token().issueToken({
-            uId: 1
+        token = Managers.token().issueToken({
+            uId: 'UID1'
         })
+        console.log(token);
+
         chai.use(chaihttp);
     })
 
@@ -73,7 +75,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             });;
     })
 
-    it.skip('Agent Response', done => {
+    it.skip('Agent Search Results Response', done => {
         chai.request(app)
             .post('/agent')
             .set('Content-Type', 'application/json')

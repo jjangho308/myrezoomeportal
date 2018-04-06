@@ -50,8 +50,9 @@ export default {
                     res.json(result);
                 }
             })
+        }else{
+            next();
         }
-        next();
     },
 
     /**
