@@ -9,6 +9,7 @@ $(document).ready(function(){
     
     socket = io();
 
+    /*
     $.ajax({
         type: 'POST',
         url: '/client',
@@ -26,6 +27,7 @@ $(document).ready(function(){
         },
         contentType: 'application/json',
     })
+    */
 });
 
 function clientsocket_listener() {
