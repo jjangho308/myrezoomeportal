@@ -34,8 +34,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         db.getUserDAO().get({
             uId: uid
         }, (err, users) => {
-            //console.log(users);
             //첫번째 로긴
+            console.log(users);
             if (users[0].first == 'Y') {
                 db.getOrgDAO().findAll((err, resultOrgIds) => {
                     for (var i in resultOrgIds) {
@@ -83,10 +83,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     }
                 })
             } else {
-                if (clientReq.update) {
+                if (clientReq.update==true) {
 
                 } else {
-
+                    //refresh
+                    
                 }
             }
 

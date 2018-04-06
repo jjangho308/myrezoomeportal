@@ -15,6 +15,8 @@ describe('SearchRecordRequestHandler Test suit', () => {
             //token
             "uId": "UID2",
 
+            "update" : false,
+            
             "cmd": "SearchRecord",
 
             "sid": "svr1",

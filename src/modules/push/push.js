@@ -82,8 +82,8 @@ class PushManager extends AbstractManager {
 
         var msgString = JSON.stringify(msg);
         
-        console.log(orgInfos);
-        console.log(msg);
+        // console.log(orgInfos);
+        // console.log(msg);
 
         db.getRecordDAO().getQueueName(orgInfos, (err, queuename) => {
             if (err) {
