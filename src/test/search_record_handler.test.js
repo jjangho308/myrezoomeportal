@@ -10,14 +10,16 @@ describe('SearchRecordRequestHandler Test suit', () => {
 
     it('1. SearchRecordRequestHandler process TEST', (done) => {
         HD.request({
-            "mid": "message928936142234",
+            "mId": "message928936142234",
 
             //token
-            "uid": "dd98740d-9ece-4fe8-af63-c8a49b2fa20e",
+            "uId": "UID2",
 
+            "update" : false,
+            
             "cmd": "SearchRecord",
 
-            "sid": "server1",
+            "sid": "svr1",
 
             "pkey": "ewkrjdsifjcvasdfjkasdkfljjei",
 

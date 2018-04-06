@@ -81,8 +81,11 @@ class PushManager extends AbstractManager {
         var db = Managers.db();
 
         var msgString = JSON.stringify(msg);
+        
+        // console.log(orgInfos);
+        // console.log(msg);
 
-        db.getRecordDAO().getQueueName(orgInfos.orgId, (err, queuename) => {
+        db.getRecordDAO().getQueueName(orgInfos, (err, queuename) => {
             if (err) {
                 cb(err);
             } else {

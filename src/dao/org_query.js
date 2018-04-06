@@ -11,7 +11,8 @@ export default {
     
     
     getByCodes : "SELECT ORG_QUEUE_NAME FROM TBL_ORG WHERE ORG_CD IN ( %s )",
-    findAll : "SELECT ORG_QUEUE_NAME FROM TBL_ORG",
+    //findAll : "SELECT a.ORG_ID, b.SUB_ID from rezoome_db.TCUP_ORG a, rezoome_db.TCCO_ORG_SUB b where a.ORG_ID=b.ORG_ID",
+    findAll : "SELECT ORG_ID from rezoome_db.TCUP_ORG",
     put : '',
     set : '',
     del : ''

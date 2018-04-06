@@ -10,6 +10,7 @@ class AbstractPush {
         this.mid = opt.mid;
         this.args = opt.args;
         this.sid = process.argv[2];
+        //this.sid = "svr1";
     }
 }
 
