@@ -32,7 +32,7 @@ class ClientRequestManager extends AbstractManager {
         this.handlerMap = new HashMap();
         this.requestMap = new HashMap();
 
-        this.entityMap.set('Search', SearchRecordRequest);
+        this.entityMap.set('SearchRecord', SearchRecordRequest);
         this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
 
         this.setPrepared();

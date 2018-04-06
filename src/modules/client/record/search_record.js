@@ -18,8 +18,8 @@ class SearchRecordRequest extends AbstractClientRequestEntity {
      */
     constructor(opt) {
         super(opt);
+        this.uId = opt.uId;
         this.pkey = opt.pkey;
-        this.orgInfos = opt.orgInfos;
     }
 }
 
