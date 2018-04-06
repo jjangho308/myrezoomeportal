@@ -4,6 +4,26 @@ require socket.is
 <script src="/socket.io/socket.io.js"></script>
 */
 
+$(document).ready(function(){
+    $.ajax({
+        type: 'POST',
+        url: '/client',
+        headers: {
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6ImNoYW5nOHNoaW4ifSwiZXhwIjoxNTIxMTM5OTUwLCJpYXQiOjE1MjEwOTY3NTB9.ipLgRV2CL-kWc0D2ZgovK1-9xQiCEto6FDsISNORzuM'
+        },
+        data: JSON.stringify({
+            cmd: 'Search',
+            args: {
+                pkey: 'asdfasdf'
+            }
+        }),
+        success: function (res) {
+            setSocket(res.mid);
+        },
+        contentType: 'application/json',
+    })
+});
+
 function clientsocket_listener() {
 
     $.getScript( 'localstorage.js');
@@ -49,3 +69,8 @@ function clientsocket_listener() {
 
 }
 
+function setSocket(mid) {
+    socket.emit('SetSocket', {
+        mid: mid
+    });
+}

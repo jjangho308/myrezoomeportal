@@ -30,7 +30,12 @@ function test_getresumes() {
 
 function test_postresumes() {
     //새 이력서 생성 Ajax
-    $.post( "/resumes", function( result ) {
+    var insertdata = {
+        txid : "a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0",
+        record : "abcdefgef"
+    }
+
+    $.post( "/resumes", insertdata,function( result ) {
         console.log(result);
     });
 }
@@ -44,7 +49,7 @@ function test_postsharedresumes() {
 
 function test_postsharedcerts() {
     //증명서 공유 생성 Ajax
-    $.post( "ajax/test.html", function( result ) {
+    $.post( "/shared_certs", function( result ) {
         console.log(result);
     });
 }
