@@ -1,5 +1,7 @@
 import AbstractClientRequesEntity from "../abstract_client_request_entity";
 
+import CertModel from '../../../models/cert/cert';
+
 /**
  * Request to update certificate. <br />
  * 
@@ -18,9 +20,25 @@ class UpdateCertificateRequest extends AbstractClientRequesEntity {
      */
     constructor(opt) {
         super(opt);
+        /**
+         * UID of user own certificate. <br />
+         */
         this.uId = opt.uId;
+
+        /**
+         * SID of user own certificate. <br />
+         */
         this.sId = opt.sId;
-        this.cert = opt.cert;
+
+        /**
+         * Certificate ID of certificat. <br />
+         */
+        this.certId = opt.certId;
+
+        /**
+         * Certificate model. <br />
+         */
+        this.cert = new CertModel(opt.cert);
     }
 }
 

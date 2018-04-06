@@ -82,7 +82,7 @@ export default {
 
         var arg = req.body;
         arg.certId = req.params.certId;
-        arg.uId = req.params.uId;
+        arg.uId = req.body.uId;
 
         var request = new UpdateCertRequest(arg);
         Managers.client().request(request, (err, result) => {
