@@ -66,17 +66,24 @@ describe('/certs URI Page test suite.', () => {
     })
 
     it('Update certificate request test', done => {
-        var certModel = new CertModel({
-            uId: 'UID1',
-            encryptedData: Util.uuid()
-        });
         chai.request(app)
             .patch('/certs/5e043bfa-2235-4c51-bdf1-4d8b7b6ffe78')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + jwtToken)
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
-                cert: certModel
+                cert: {
+                    txid: Util.uuid(),
+                    record: {
+                        orgCode: 'OPIc',
+                        subId: 'OPIc-Eng',
+                        data: {
+                            title: 'OPIc - 인증서',
+                            date: '20180404',
+                            exp: '20200404'
+                        }
+                    }
+                }
             })
             .end((err, res) => {
                 done();

@@ -21,12 +21,7 @@ export default {
      * @author TACKSU
      */
     get: (req, res, next) => {
-        var userId = null;
-        if (Env.prouction()) {
-            userId = req.params.userId;
-        } else {
-            userId = 12345;
-        }
+        var userId = req.body.uId;
 
         // AJAX request
         if (!!req.xhr) {

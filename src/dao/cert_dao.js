@@ -26,6 +26,19 @@ class CertificateDAO extends AbstractDAO {
     }
 
     /**
+     * Insert new certificate entity to database. <br />
+     * 
+     * @since 180406
+     * @author TACKSU
+     * 
+     * @param {*} certModel 
+     * @param {*} cb 
+     */
+    issueCertificate(certModel, cb){
+
+    }
+
+    /**
      * Insert a new Certificate entity to database. <br />
      * 
      * @since 180326

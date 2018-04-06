@@ -115,7 +115,7 @@ class CryptoManager extends AbstractManager {
      * 
      * @param {string} plain Plain text.
      * @param {string} key Symmetric key.
-     * @param {function} cb Callback function
+     * @param {function(err, iv, encrypted)} cb Callback function
      */
     encryptAES(plain, key, cb) {
         this.generatePRN(this.spec.ivLength, ((err, iv) => {

@@ -22,7 +22,7 @@ class IssueCertificateRequest extends AbstractClientRequesEntity {
         super(opt);
         this.uId = opt.uId;
         this.sId = opt.sId;
-        this.cert = new CertModel(opt.cert);
+        this.cert = opt.cert;
     }
 }
 

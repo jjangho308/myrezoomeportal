@@ -7,45 +7,26 @@ import AbstractModel from "../abstract_model";
  * @author TACKSU
  */
 class CertModel extends AbstractModel {
+
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180406
+     * @author TACKSU
+     * 
+     * @param {*} data 
+     */
     constructor(data) {
         super(data);
-
-        if (!!data) {
-            /**
-             * Specification id of certificate. <br />
-             */
-            this.sId = data.sId;
-
-            /**
-             * User id of owner of certificate. <br />
-             */
-            this.uId = data.uId;
-
-            /**
-             * ID of certificate. <br />
-             */
-            this.certId = data.certId;
-
-            /**
-             * Encrypted original record data certified by this certificate. <br />
-             */
-            this.encryptedData = data.encryptedData;
-
-            /**
-             * Modified date. <br />
-             */
-            this.modified = data.modified;
-
-            /**
-             * Created date.
-             */
-            this.created = data.created;
-
-            /**
-             * Delete flag. <br />
-             */
-            this.deleted = data.deleted ? data.deleted : 'N';
-        }
+        this.uId = data.uId;
+        this.sId = data.sId;
+        this.certId = data.certId;
+        this.blcMapId = data.blcMapId;
+        this.shared = data.shared;
+        this.lastShared = data.lastShared;
+        this.created = data.created;
+        this.modified = data.modified;
+        this.deleted = data.deleted;
         this.trim(this);
     }
 
@@ -59,14 +40,16 @@ class CertModel extends AbstractModel {
      */
     static fromRow(row) {
         return new CertModel({
-            sId: row.S_CERT_SHR_ID,
+            sId: row.S_USR_CERT_ID,
             certId: row.CERT_ID,
             uId: row.UID,
-            encryptedData: row.ENC_CERT_DATA,
-            deleted: row.DEL_YN,
+            blcMapId: row.BLC_MAP_ID,
+            shared: row.SHARED_YN == 'Y',
+            deleted: row.DEL_YN == 'Y',
+            lastShared: row.LST_SHRD_DT,
             created: row.CRTD_DT,
             modified: row.MDFID_DT
-        })
+        });
     }
 
     /**
@@ -76,16 +59,16 @@ class CertModel extends AbstractModel {
      * @author TACKSU
      */
     toRow() {
-        var row = {
-            S_CERT_SHR_ID: this.sId,
+        return this.trim({
+            S_USR_CERT_ID: this.sId,
             CERT_ID: this.certId,
             UID: this.uId,
-            ENC_CERT_DATA: this.encryptedData,
-            DEL_YN: this.deleted,
+            BLC_MAP_ID: this.blcMapId,
+            SHARED_YN: this.shared ? 'Y' : 'N',
+            LST_SHRD_DT: this.lastShared,
             CRTD_DT: this.created,
             MDFID_DT: this.modified
-        };
-        return this.trim(row);
+        });
     }
 }
 
