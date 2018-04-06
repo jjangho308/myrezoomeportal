@@ -1,5 +1,7 @@
 import AbstractClientRequesEntity from "../abstract_client_request_entity";
 
+import CertModel from '../../../models/cert/cert';
+
 /**
  * Client request to issue new certificate. <br />
  * 
@@ -20,7 +22,7 @@ class IssueCertificateRequest extends AbstractClientRequesEntity {
         super(opt);
         this.uId = opt.uId;
         this.sId = opt.sId;
-        this.cert = opt.cert;
+        this.cert = new CertModel(opt.cert);
     }
 }
 

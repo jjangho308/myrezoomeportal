@@ -9,7 +9,8 @@ import main_router from './main_route';
 import client_router from './client_route';
 
 /**
- * Root router. <br />
+ * Root router of all http request channel. <br />
+ * Do not split router files. <br />
  * 
  * @since 180321
  * @author TACKSU

@@ -18,7 +18,7 @@ class AbstractClientRequestEntity {
         /**
          * Auto generated message id. <br />
          */
-        this.mid = util.uuid();
+        this.mId = util.uuid();
 
         /**
          * User UID by token parsing. <br />
