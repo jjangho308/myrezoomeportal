@@ -7,6 +7,7 @@ import AbstractDAO from './abstract_dao';
 
 import CertModel from '../models/cert/cert';
 import SharedCertModel from '../models/cert/shared_cert';
+import SharedUrlModel from '../models/cert/shared_cert_url';
 import Util from '../util/util';
 
 /**
@@ -212,6 +213,93 @@ class CertificateDAO extends AbstractDAO {
      */
     delShared(creteria, cb) {
 
+    }
+
+    /**
+     * Insert new shared info. <br />
+     * 
+     * @since 180409
+     * @author TACKSU
+     * 
+     * @param {*} urlModel 
+     * @param {*} cb 
+     */
+    putSharedUrl(urlModel, cb) {
+        var param = urlModel.toRow();
+
+        var query = mysql.format(CertQuery.putUrl, param);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.insertId);
+            }
+        })
+    }
+
+    /**
+     * Update shared info. <br />
+     * @param {*} creteria 
+     * @param {*} urlModel 
+     * @param {*} cb 
+     */
+    setSharedUrl(creteria, urlModel, cb) {
+        var param = urlModel.toRow();
+        var condition = {
+            S_CERT_SHR_INFO_ID: creteria.sId
+        };
+
+        var query = mysql.format(CertQuery.setUrl, [param, condition]);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.affectedRows);
+            }
+        })
+    }
+
+    /**
+     * Select shared information. <br />
+     * 
+     * @since 180409
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} cb 
+     */
+    getSharedUrl(creteria, cb) {
+        var condition = {
+            S_CERT_SHR_INFO_ID: creteria.sId
+        }
+
+        var query = mysql.format(CertQuery.getUrl, condition);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                var models = [];
+                for (var i in rows) {
+                    models.push(SharedUrlModel.fromRow(rows[i]));
+                }
+                cb(err, models);
+            }
+        })
+    }
+
+    /**
+     * Delete shared url. <br />
+     * 
+     * @since 180409
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} cb 
+     */
+    delSharedUrl(creteria, cb) {
+        var condition = {
+            S_CERT_SHR_INFO_ID: creteria.sId
+        }
     }
 }
 

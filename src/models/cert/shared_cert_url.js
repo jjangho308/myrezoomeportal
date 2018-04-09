@@ -1,5 +1,7 @@
 import AbstractModel from "../abstract_model";
 
+import Util from '../../util/util';
+
 /**
  * Meta information of Shared certificate. <br />
  * 
@@ -49,8 +51,8 @@ class SharedCertUrl extends AbstractModel {
     }
 
     static fromRow(row) {
-        return new SharedCertModel({
-            sId: S_RSM_SHR_INFO_ID,
+        return new SharedCertUrl({
+            sId: row.S_RSM_SHR_INFO_ID,
             certId: row.CERT_ID,
             url: row.URL,
             password: row.PASSCODE,
@@ -67,8 +69,8 @@ class SharedCertUrl extends AbstractModel {
             URL: this.url,
             PASSCODE: this.password,
             EXPIRED_DT: this.expired,
-            DEL_YN: this.deleted,
-            PUB_YN: this.public
+            DEL_YN: Util.btf(this.deleted),
+            PUB_YN: Util.btf(this.public)
         });
     }
 
@@ -79,8 +81,8 @@ class SharedCertUrl extends AbstractModel {
             URL: sharedUrl.url,
             PASSCODE: sharedUrl.password,
             EXPIRED_DT: sharedUrl.expired,
-            DEL_YN: sharedUrl.deleted,
-            PUB_YN: sharedUrl.public
+            DEL_YN: Util.ftb(sharedUrl.deleted),
+            PUB_YN: Util.ftb(sharedUrl.public)
         });
     }
 }

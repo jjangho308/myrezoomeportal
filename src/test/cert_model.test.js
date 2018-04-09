@@ -4,6 +4,7 @@ import Util from '../util/util';
 
 import CertModel from '../models/cert/cert';
 import SharedCertModel from '../models/cert/shared_cert';
+import SharedCertUrlModel from '../models/cert/shared_cert_url';
 import CertDAO from '../dao/cert_dao';
 
 /**
@@ -155,6 +156,41 @@ describe('Certficiate Model DAO test suite.', () => {
             })
         })
     });
+
+    it('Shared info test case', done => {
+        var orig = Util.uuid();
+        var modified = Util.uuid();
+        var urlModel = new SharedCertUrlModel({
+            url: 'http://rzoo.me/gX8s!Q',
+            password: 'asdfasdf',
+            certId: orig,
+            public: false
+        })
+
+        certDAO.putSharedUrl(urlModel, (err, insertId) => {
+            if (err) {
+                console.log(err.toString());
+            } else {
+                certDAO.getSharedUrl({
+                    sId: insertId
+                }, (err, urlModels) => {
+                    if (err) {
+                        console.log(err.toString());
+                    } else if (urlModels.length > 0) {
+                        var foundModel = urlModels[0];
+                        foundModel.certId = modified;
+                        certDAO.setSharedUrl({
+                            sId: insertId
+                        }, foundModel, (err, affectedRows) => {
+                            if (affectedRows > 0) {
+                                done();
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    })
 
     after('Close database connection', () => {})
 });
