@@ -2,7 +2,7 @@ import Initializer from '../core/initializer';
 import Managers from '../core/managers';
 
 import ResumeModel from '../models/resume/resume';
-import ResumeDAO from '../models/resume/resume_dao';
+import ResumeDAO from '../dao/resume_dao';
 
 import Util from '../util/util';
 
@@ -68,5 +68,9 @@ describe('Resume model dao test suit.', () => {
                 }
             })
         })
+    })
+
+    it('Share resume put & get test', done => {
+
     })
 })

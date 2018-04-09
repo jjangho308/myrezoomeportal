@@ -5,7 +5,7 @@ import Env from '../core/environment';
 import AbstractDAO from "./abstract_dao";
 import ResumeModel from '../models/resume/resume';
 
-import Query from './resume_query';
+import ResumeQuery from './resume_query';
 
 import Util from '../util/util';
 
@@ -41,7 +41,7 @@ class ResumeDao extends AbstractDAO {
     put(resume, cb) {
         var resumeRow = resume.toRow();
 
-        var query = mysql.format(Query.put, resumeRow);
+        var query = mysql.format(ResumeQuery.put, resumeRow);
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -70,7 +70,7 @@ class ResumeDao extends AbstractDAO {
             condition.UID = creteria.uId;
         }
 
-        var query = mysql.format(Query.get, condition);
+        var query = mysql.format(ResumeQuery.get, condition);
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -85,6 +85,16 @@ class ResumeDao extends AbstractDAO {
 
     }
 
+    /**
+     * Update resume data. <br />
+     * 
+     * @since 180409
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} resumeModel 
+     * @param {*} cb 
+     */
     set(creteria, resumeModel, cb) {
         var condition = {};
         if (!!creteria.sId) {
@@ -97,7 +107,7 @@ class ResumeDao extends AbstractDAO {
             condition.UID = creteria.uId;
         }
 
-        var query = mysql.format(Query.set, [resumeModel.toRow(), condition]);
+        var query = mysql.format(ResumeQuery.set, [resumeModel.toRow(), condition]);
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
