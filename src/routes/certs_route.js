@@ -10,7 +10,7 @@ import tokenAuth from '../mw/client_auth';
  */
 var router = express.Router();
 
-router.get('/', ctrl.get);
+//router.get('/', ctrl.get);
 
 // 증명서 보관함 페이지 controller
 router.get('/', tokenAuth);

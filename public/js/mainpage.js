@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 function clientsocket_listener() {
 
-    $.getScript( 'localstorage.js');
+    $.getScript( 'js/localstorage.js');
 
     
 
@@ -75,8 +75,8 @@ function clientsocket_listener() {
 
 }
 
-function setSocket(mid) {
+function setSocket(mId) {
     socket.emit('SetSocket', {
-        mid: mid
+        mid: mId
     });
 }
