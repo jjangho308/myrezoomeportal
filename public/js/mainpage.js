@@ -75,8 +75,8 @@ function clientsocket_listener() {
 
 }
 
-function setSocket(mid) {
+function setSocket(mId) {
     socket.emit('SetSocket', {
-        mid: mid
+        mid: mId
     });
 }

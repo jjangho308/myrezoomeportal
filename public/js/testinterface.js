@@ -19,6 +19,7 @@ function test_getrecords() {
         }),
         success: function (res) {
             setSocket(res.mid);
+            clientsocket_listener();
         },
         contentType: 'application/json',
     });
