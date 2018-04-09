@@ -17,6 +17,14 @@ describe('TokenManager Test Suit', () => {
         // token.setInfo(info);
     });
 
+    it('TC#1 TokenManager.generateToken()', done => {
+        token = Managers.token().issueToken({
+            uId: 'UID2'
+        })
+        console.log("UID2 : " + token);
+        
+    });
+
     it.skip('TC#1 TokenManager.generateToken()', done => {
         tokenString = token.generateToken();
         if (typeof tokenString !== 'undefined') {
