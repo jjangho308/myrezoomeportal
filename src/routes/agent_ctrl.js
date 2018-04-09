@@ -13,12 +13,17 @@ import AgentRequestManager from '../modules/agent/agent_request';
  */
 export default {
     post: (req, res, next) => {
-        console.log('Agent body : ' + req.body);
+        console.log('Agent body : ');
+        console.log(req.body);
+        console.log('===========================');
         var agentRequestManager = Managers.agent();
         var entity = new(agentRequestManager.getEntity(req.body.cmd))(req.body.args);
-        entity.mId = req.body.mid;
+        entity.mid = req.body.mid;
         entity.cmd = req.body.cmd;
         entity.code = req.body.code;
+        console.log('Agent entity');
+        console.log(entity);
+        console.log('===========================');
         agentRequestManager.request(entity);
         res.sendStatus(200);
     },
