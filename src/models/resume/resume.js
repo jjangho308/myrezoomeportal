@@ -106,8 +106,6 @@ class ResumeModel extends AbstractModel {
             CRTD_DT: this.createdDate,
             MDFID_DT: this.modifiedDate
         });
-
-        return row;
     }
 }
 
