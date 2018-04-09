@@ -35,7 +35,7 @@ class SearchResultHandler extends AbstractAgentRequestHandler {
      */
     request(requestEntity, cb) {
         // console.log('Search result Agent Request');
-        console.log('mid : ' + requestEntity.mId);
+        console.log('search_result_handler mid : ' + requestEntity.mId);
         Managers.client().response(requestEntity.mId, requestEntity, () => {
             console.log(requestEntity);
         });
