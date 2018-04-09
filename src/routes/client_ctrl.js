@@ -25,7 +25,7 @@ export default {
         requestEntity.uId = req.body.uId;
         clientRequest.request(requestEntity, (err, result) => {});
         res.json({
-            mid: requestEntity.mid
+            mid: requestEntity.mId
         })
     },
 

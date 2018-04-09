@@ -6,6 +6,7 @@ import CertQuery from './cert_query';
 import AbstractDAO from './abstract_dao';
 
 import CertModel from '../models/cert/cert';
+import SharedCertModel from '../models/cert/shared_cert';
 import Util from '../util/util';
 
 /**
@@ -15,7 +16,7 @@ import Util from '../util/util';
  * @author TACKSU
  */
 class CertificateDAO extends AbstractDAO {
-    
+
     /**
      * Default constructor. <br />
      * 
@@ -23,6 +24,34 @@ class CertificateDAO extends AbstractDAO {
      */
     constructor(connectionPool) {
         super(connectionPool);
+    }
+
+    /**
+     * Search certificate. <br />
+     * 
+     * @since 180409
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} cb 
+     */
+    getCert(creteria, cb) {
+        var condition = {
+            CERT_ID: creteria.certId
+        }
+
+        var query = mysql.format(CertQuery.getCert, condition);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else if (rows.length > 0) {
+                var result = [];
+                for (var i in rows) {
+                    result.push(CertModel.fromRow(rows[i]));
+                }
+                cb(err, result);
+            }
+        })
     }
 
     /**
@@ -34,8 +63,42 @@ class CertificateDAO extends AbstractDAO {
      * @param {*} certModel 
      * @param {*} cb 
      */
-    issueCertificate(certModel, cb){
+    issueCert(certModel, cb) {
+        var param = certModel.toRow();
+        var query = mysql.format(CertQuery.issueCert, param);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.insertId);
+            }
+        })
+    }
 
+    /**
+     * Update certificate database. <br />
+     * 
+     * @since 180409
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} certModel 
+     * @param {*} cb 
+     */
+    setCert(creteria, certModel, cb) {
+        var param = certModel.toRow();
+        var condition = {
+            CERT_ID: creteria.certId
+        }
+
+        var query = mysql.format(CertQuery.setCert, [param, condition]);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.affectedRows);
+            }
+        })
     }
 
     /**
@@ -44,12 +107,11 @@ class CertificateDAO extends AbstractDAO {
      * @since 180326
      * @author TACKSU
      * 
-     * @param {CertModel} certModel 
+     * @param {SharedCertModel} sharedCert 
      * @param {function(object, number)} cb 
      */
-    put(certModel, cb) {
-        var param = certModel.toRow();
-        param.CERT_ID = Util.uuid();
+    shareCert(sharedCert, cb) {
+        var param = sharedCert.toRow();
 
         delete param.S_CERT_SHR_ID;
         delete param.CRTD_DT;
@@ -78,7 +140,7 @@ class CertificateDAO extends AbstractDAO {
      * }
      * @param {*} cb 
      */
-    get(creteria, cb) {
+    getShared(creteria, cb) {
         var condition = {};
         if (!!creteria.uId) {
             condition.UID = creteria.uId;
@@ -102,7 +164,7 @@ class CertificateDAO extends AbstractDAO {
             } else {
                 var certList = [];
                 for (var i in rows) {
-                    certList.push(CertModel.fromRow(rows[i]));
+                    certList.push(SharedCertModel.fromRow(rows[i]));
                 }
                 cb(err, certList);
             }
@@ -119,7 +181,7 @@ class CertificateDAO extends AbstractDAO {
      * @param {*} certModel 
      * @param {*} cb 
      */
-    set(creteria, certModel, cb) {
+    setShared(creteria, sharedCertModel, cb) {
         var condition = {};
         if (!!creteria.sId) {
             condition.S_CERT_SHR_ID = creteria.sId;
@@ -129,7 +191,7 @@ class CertificateDAO extends AbstractDAO {
             condition.CERT_ID = creteria.certId;
         }
 
-        var query = mysql.format(CertQuery.set, [certModel.toRow(), condition])
+        var query = mysql.format(CertQuery.set, [sharedCertModel.toRow(), condition])
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -139,7 +201,16 @@ class CertificateDAO extends AbstractDAO {
         });
     }
 
-    del(certId, cb) {
+    /**
+     * Delete shared entity. <br />
+     * 
+     * @since 180409
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} cb 
+     */
+    delShared(creteria, cb) {
 
     }
 }

@@ -7,6 +7,15 @@ import AbstractModel from "../abstract_model";
  * @author TACKSU
  */
 class SharedCertModel extends AbstractModel {
+
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180409
+     * @author TACKSU
+     * 
+     * @param {*} data 
+     */
     constructor(data) {
         super(data);
 
@@ -58,7 +67,7 @@ class SharedCertModel extends AbstractModel {
      * @param {MySqlROW} row 
      */
     static fromRow(row) {
-        return new CertModel({
+        return new SharedCertModel({
             sId: row.S_CERT_SHR_ID,
             certId: row.CERT_ID,
             uId: row.UID,
