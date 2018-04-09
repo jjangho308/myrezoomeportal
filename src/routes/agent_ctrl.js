@@ -16,7 +16,7 @@ export default {
         console.log('Agent body : ' + req.body);
         var agentRequestManager = Managers.agent();
         var entity = new(agentRequestManager.getEntity(req.body.cmd))(req.body.args);
-        entity.mid = req.body.mid;
+        entity.mId = req.body.mid;
         entity.cmd = req.body.cmd;
         agentRequestManager.request(entity);
         res.sendStatus(200);
