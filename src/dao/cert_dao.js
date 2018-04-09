@@ -118,7 +118,7 @@ class CertificateDAO extends AbstractDAO {
         delete param.MDFID_DT;
 
         // var query = "INSERT INTO TCDA_CERT_SHR (`CERT_ID`, `UID`, `ENC_CERT_DATA`, `DEL_YN`) VALUES ('45748487-6720-4061-9bed-98c9401fc7d3', 30, 'ca75e6a7-9220-4cff-adcd-1e0ef0fbbe62', 'N');"
-        var query = mysql.format(CertQuery.put, param);
+        var query = mysql.format(CertQuery.putShared, param);
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -157,7 +157,7 @@ class CertificateDAO extends AbstractDAO {
             condition.S_CERT_SHR_ID = creteria.sId;
         }
 
-        var query = mysql.format(CertQuery.get, condition);
+        var query = mysql.format(CertQuery.getShared, condition);
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);
@@ -191,7 +191,7 @@ class CertificateDAO extends AbstractDAO {
             condition.CERT_ID = creteria.certId;
         }
 
-        var query = mysql.format(CertQuery.set, [sharedCertModel.toRow(), condition])
+        var query = mysql.format(CertQuery.setShared, [sharedCertModel.toRow(), condition])
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
