@@ -6,7 +6,7 @@ function test_getrecords() {
         type: 'POST',
         url: '/client',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVJZCI6IlVJRDIifSwiZXhwIjoxNTIzMDM4MTk3LCJpYXQiOjE1MjI5OTQ5OTd9.jl3Shav7MSFarGuEY5r41yTZybSQlRMWWIlP0SA29yY'
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVJZCI6IlVJRDIifSwiZXhwIjoxNTIzMjkxNjg5LCJpYXQiOjE1MjMyNDg0ODl9.FyLDUbsElEM6fFZ2CGI9unkwyYXwOZNDf1XU-YiYM80'
         },
         data: JSON.stringify({
             cmd: 'SearchRecord',
