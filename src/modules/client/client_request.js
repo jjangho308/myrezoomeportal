@@ -97,7 +97,7 @@ class ClientRequestManager extends AbstractManager {
                 case ClientRequestManager.RESULT_PENDING:
                     {
                         // result instanceof Object Keep request?
-                        this.requestMap.set(request.mid, request);
+                        this.requestMap.set(request.mId, request);
                         cb(null, result);
                         break;
                     }
