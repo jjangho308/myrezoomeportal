@@ -44,7 +44,7 @@ class CertModel extends AbstractModel {
             certId: row.CERT_ID,
             uId: row.UID,
             blcMapId: row.BLC_MAP_ID,
-            shared: row.SHARED_YN == 'Y',
+            shared: row.SHRD_YN == 'Y',
             deleted: row.DEL_YN == 'Y',
             lastShared: row.LST_SHRD_DT,
             created: row.CRTD_DT,
@@ -64,7 +64,7 @@ class CertModel extends AbstractModel {
             CERT_ID: this.certId,
             UID: this.uId,
             BLC_MAP_ID: this.blcMapId,
-            SHARED_YN: this.shared ? 'Y' : 'N',
+            SHRD_YN: this.shared ? 'Y' : 'N',
             LST_SHRD_DT: this.lastShared,
             CRTD_DT: this.created,
             MDFID_DT: this.modified

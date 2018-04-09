@@ -29,9 +29,7 @@ export default {
         clientRequest.request(requestEntity, (err, res) => {});
         res.json({
             mid: requestEntity.mId
-        });
-        console.log(res);
-        console.log('==============================================================');
+        })
     },
 
     default: (req, res, next) => {
