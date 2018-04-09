@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 function clientsocket_listener() {
 
-    $.getScript( 'localstorage.js');
+    $.getScript( 'js/localstorage.js');
 
     
 
