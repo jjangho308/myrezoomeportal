@@ -126,7 +126,7 @@ describe('Certficiate Model DAO test suite.', () => {
         })
 
         certDAO.shareCert(sharedModel, (err, insertId) => {
-            certDAO.getCert({
+            certDAO.getShared({
                 sId: insertId
             }, (err, foundModels) => {
                 var searchedModel = foundModels[0];
