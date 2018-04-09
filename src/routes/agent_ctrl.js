@@ -18,6 +18,7 @@ export default {
         var entity = new(agentRequestManager.getEntity(req.body.cmd))(req.body.args);
         entity.mId = req.body.mid;
         entity.cmd = req.body.cmd;
+        entity.code = req.body.code;
         agentRequestManager.request(entity);
         res.sendStatus(200);
     },
