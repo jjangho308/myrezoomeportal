@@ -19,7 +19,7 @@ class User extends AbstractModel {
         this.sId = data.sId;
         this.uId = data.uId;
         this.email = data.email;
-        this.pwd = data.pwd;
+        this.pw = data.pw;
         this.ci = data.ci;
 
         this.firstNameKO = data.firstNameKO;
@@ -74,7 +74,7 @@ class User extends AbstractModel {
             sId: row.S_USR_ID,
             uId: row.UID,
             ci: row.CI,
-            pwd: row.PWD,
+            pw: row.PWD,
             email: row.EMAIL,
             firstNameKO: row.K_FRST_NM,
             familyNameKO: row.K_FMLY_NM,
@@ -107,7 +107,7 @@ class User extends AbstractModel {
             S_USR_ID: this.sId,
             UID: this.uId,
             EMAIL: this.email,
-            PWD: this.pwd,
+            PWD: this.pw,
             CI: this.ci,
             E_FMLY_NM: this.familyNameEN,
             E_FRST_NM: this.firstNameEN,
