@@ -2,6 +2,9 @@ import HashMap from 'hashmap';
 
 import AbstractManager from "../abstract_manager";
 
+import SignInRequest from './user/signin_request';
+import SignInRequestHandler from './user/signin_request_handler';
+
 import SearchRecordRequest from './record/search_record';
 import SearchRecordHandler from './record/search_record_handler';
 
@@ -51,6 +54,8 @@ class ClientRequestManager extends AbstractManager {
         this.entityMap = new HashMap();
         this.handlerMap = new HashMap();
         this.requestMap = new HashMap();
+
+        this.handlerMap.set(SignInRequest, new SignInRequestHandler());
 
         this.entityMap.set('SearchRecord', SearchRecordRequest);
         this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());

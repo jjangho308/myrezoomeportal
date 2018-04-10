@@ -11,6 +11,5 @@ import view from '../mw/view';
 var router = express.Router();
 
 router.post('/', ctrl.post);
-//router.post('/', view);
 
 export default router;

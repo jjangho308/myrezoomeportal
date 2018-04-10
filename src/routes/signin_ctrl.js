@@ -1,5 +1,7 @@
 import Managers from '../core/managers'
 
+import SignInRequest from '../modules/client/user/signin_request'
+
 /**
  * Controller for /signin URI. <br />
  * 
@@ -8,20 +10,31 @@ import Managers from '../core/managers'
  */
 export default {
 
+    /**
+     * Temporal get request controller. <br />
+     * 
+     * @since 180410
+     * @author TACKSU
+     */
     get: (req, res, next) => {
         res.render('main', {});
     },
 
+    /**
+     * Sign in process controller function. <br />
+     * 
+     * @since 180410
+     * @author TACKSU
+     */
     post: (req, res, next) => {
-        var token;
-
-        token = Managers.token().issueToken({
-            uId: 'UID2'
+        var signin = new SignInRequest(req.body);
+        Managers.client().request(signin, (err, result) => {
+            if (!!err) {
+                console.log(err.toString());
+            } else {
+                res.set('Set-Cookie', 'JWT=' + result.token);
+                res.json(result);
+            }
         });
-
-        
-        console.log("UID2 : " + token);
-        res.token = token;        
-    },
-
+    }
 }
