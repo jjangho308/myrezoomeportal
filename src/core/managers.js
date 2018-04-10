@@ -26,7 +26,7 @@ export default (() => {
     var pdfInstance = null;
     var clientRequestInstance = null;
     var agentRequestInstance = null;
-    
+
 
     return {
         property: () => {
@@ -65,7 +65,7 @@ export default (() => {
             return clientRequestInstance = clientRequestInstance ? clientRequestInstance : new ClientRequestManager();
         },
 
-        agent : ()=>{
+        agent: () => {
             return agentRequestInstance = agentRequestInstance ? agentRequestInstance : new AgentRequestManager();
         }
     }
