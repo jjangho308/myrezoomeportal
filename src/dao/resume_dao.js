@@ -4,6 +4,8 @@ import Env from '../core/environment';
 
 import AbstractDAO from "./abstract_dao";
 import ResumeModel from '../models/resume/resume';
+import SharedResumeModel from '../models/resume/shared_resume';
+import SharedResumeUrlModel from '../models/resume/shared_resume_url';
 
 import ResumeQuery from './resume_query';
 
@@ -38,7 +40,7 @@ class ResumeDao extends AbstractDAO {
      * @param {*} resume Resume model.
      * @param {function(err, result)} cb Callback
      */
-    put(resume, cb) {
+    putResume(resume, cb) {
         var resumeRow = resume.toRow();
 
         var query = mysql.format(ResumeQuery.put, resumeRow);
@@ -57,7 +59,7 @@ class ResumeDao extends AbstractDAO {
      * @param {*} creteria 
      * @param {function(object, array)} cb 
      */
-    get(creteria, cb) {
+    getResume(creteria, cb) {
         var condition = {};
 
         if (!!creteria.sId) {
@@ -95,7 +97,7 @@ class ResumeDao extends AbstractDAO {
      * @param {*} resumeModel 
      * @param {*} cb 
      */
-    set(creteria, resumeModel, cb) {
+    setResume(creteria, resumeModel, cb) {
         var condition = {};
         if (!!creteria.sId) {
             condition.S_USR_RSM_ID = creteria.sId;
@@ -117,7 +119,180 @@ class ResumeDao extends AbstractDAO {
         })
     }
 
-    del(resumeid, cb) {
+    /**
+     * Mark given resume deleted. <br />
+     * 
+     * @since 180410
+     * @author TACKSU
+     * 
+     * @param {*} resumeid 
+     * @param {*} cb 
+     */
+    delResume(resumeid, cb) {
+
+    }
+
+    /**
+     * Put shared resume. <br />
+     * 
+     * @since 180410
+     * @author TACKSU
+     * 
+     * @param {*} sharedResume 
+     * @param {*} cb 
+     */
+    putShare(sharedResume, cb) {
+        var param = sharedResume.toRow();
+
+        var query = mysql.format(ResumeQuery.putShare, param);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.insertId);
+            }
+        })
+    }
+
+    /**
+     * Search shared resume. <br />
+     * 
+     * @since 180410
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} cb 
+     */
+    getShare(creteria, cb) {
+        var condition = {
+            S_RSM_SHR_ID: creteria.sId
+        }
+
+        var query = mysql.format(ResumeQuery.getShare, condition);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                var result = [];
+                for (var i in rows) {
+                    result.push(SharedResumeModel.fromRow(rows[i]));
+                }
+                cb(err, result);
+            }
+        })
+    }
+
+    /**
+     * Update shared resume entity. <br />
+     * 
+     * @since 180410
+     * @author TACKSU
+     *
+     * @param {*} creteria 
+     * @param {*} sharedResume 
+     * @param {*} cb 
+     */
+    setShare(creteria, sharedResume, cb) {
+        var condition = {
+            S_RSM_SHR_ID: creteria.sId
+        }
+
+        var query = mysql.format(ResumeQuery.setShare, [sharedResume.toRow(), condition]);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.affectedRows);
+            }
+        })
+    }
+
+    /**
+     * Delete shared resume entity. <br />
+     * 
+     * @since 180410
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} cb 
+     */
+    delShare(creteria, cb) {
+
+    }
+
+    /**
+     * Put shared resume url info. <br />
+     * 
+     * @since 180410
+     * @author TACKSU
+     * 
+     * @param {*} sharedUrl 
+     * @param {*} cb 
+     */
+    putSharedUrl(sharedUrl, cb) {
+        var param = sharedUrl.toRow();
+
+        var query = mysql.format(ResumeQuery.putUrl, param);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.insertId);
+            }
+        })
+    }
+
+    getSharedUrl(creteria, cb) {
+        var condition = {
+            S_RSM_SHR_INFO_ID: creteria.sId
+        };
+
+        var query = mysql.format(ResumeQuery.getUrl, condition);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                var result = [];
+                for (var i in rows) {
+                    result.push(SharedResumeUrlModel.fromRow(rows[i]));
+                }
+                cb(err, result);
+            }
+        });
+    }
+
+    /**
+     * Update shared resume url. <br />
+     * 
+     * @since 180410
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} sharedUrl 
+     * @param {*} cb 
+     */
+    setSharedUrl(creteria, sharedUrl, cb) {
+        var condition = {
+            S_RSM_SHR_INFO_ID: creteria.sId
+        };
+
+        var query = mysql.format(ResumeQuery.setUrl, [sharedUrl.toRow(), condition]);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.affectedRows);
+            }
+        })
+    }
+
+    /**
+     * Mark as deleted given shared resume url entity. <br />
+     * 
+     * @param {*} creteria
+     * @param {*} cb 
+     */
+    delSharedUrl(creteria, cb) {
 
     }
 }
