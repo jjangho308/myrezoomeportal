@@ -1,63 +1,58 @@
 import AbstractModel from "../abstract_model";
 
+import Util from '../../util/util';
+
 /**
  * Model of sharing resume entity. <br />
  * 
  * @since 180329
  * @author JJANGHO
  */
-class SharedResumeUrlModel extends AbstractModel {
+class SharedResumeModel extends AbstractModel {
+
+    /**
+     * Default Constructor. <br />
+     * 
+     * 
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
+
         this.sId = opt.sId;
-
-        /**
-         * ID of sharing resume. <br />
-         */
         this.rsmId = opt.rsmId;
-
-        /**
-         * Short URL.
-         */
-        this.url = opt.url;
-
-        /**
-         * Expire data. <br />
-         */
-        this.expired = opt.expired;
-
-        this.password = opt.password;
-
+        this.uId = opt.uId;
+        this.data = opt.data;
         this.deleted = opt.deleted;
-
-        this.public = opt.public;
-
+        this.modified = opt.modified;
         this.created = opt.created;
 
-        this.modified = opt.modified;
-
+        this.trim(this);
     }
 
     static fromRow(row) {
         return new SharedResumeModel({
-            sId : row.S_RSM_SHR_INFO_ID,
+            sId: row.S_RSM_SHR_ID,
             rsmId: row.RSM_ID,
-            url: row.URL,
-            expired: row.EXPIRED_DT,
-            deleted: row.DEL_YN,
-            public: row.PUB_YN
+            uId: row.UID,
+            data: row.ENC_RSM_DATA,
+            deleted: Util.ftb(row.DEL_YN),
+            modified: row.MDFID_DT,
+            created: row.CRTD_DT
         });
     }
 
     toRow() {
         return this.trim({
+            S_RSM_SHR_ID: this.sId,
             RSM_ID: this.rsmId,
-            URL: this.url,
-            EXPIRED_DT: this.expired,
-            DEL_YN: this.deleted,
-            PUB_YN: this.public
+            UID: this.uId,
+            ENC_RSM_DATA: this.data,
+            DEL_YN: Util.btf(this.deleted),
+            MDFID_DT: this.modified,
+            CRTD_DT: this.created
         })
     }
 }
 
-export default SharedResumeUrlModel;
+export default SharedResumeModel;
