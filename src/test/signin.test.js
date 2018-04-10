@@ -13,7 +13,7 @@ describe('Sign In test suite', () => {
         chai.use(chaihttp);
     })
 
-    it('Sign In URI test', done => {
+    it('Sign In URI Test case', done => {
         chai.request(app)
             .post('/signin')
             .set('Content-Type', 'application/json')
@@ -25,4 +25,8 @@ describe('Sign In test suite', () => {
                 done();
             });
     });
+
+    it.skip('Sign Up URI Test case', done=>{
+        
+    })
 });
