@@ -10,6 +10,12 @@ $(document).ready(function(){
     
     socket = io();
 
+
+    /*
+        view init empty set
+    */
+   
+
     client_token = document.cookie.get("JWT");
     client_authorization = 'Bearer ' + client_token;
     /*
@@ -40,7 +46,10 @@ function clientsocket_listener() {
     
 
     socket.on('SearchResult', function(msg){
-        console.log('message: ' + msg);
+        var omsg = JSON.parse(msg);
+        console.log('message: ');
+        console.log(omsg);
+        
         /*
         orgcode	string	Plain text					기관 고유 넘버
         iv	string	Base64 encoded string					Initialization Vector
@@ -52,10 +61,10 @@ function clientsocket_listener() {
         records.stored	boolean	true/false					Blockchain에 등록되었는지 여부				
         */
 
-        var orgcode = msg.orgcode;
+        var orgcode = omsg.orgcode;
         
         
-        for(var i=0; i<msg.records.length ; i++) {
+        for(var i=0; i<omsg.records.length ; i++) {
             /* get formater for view*/
 
             /*temp get opic eng formatter get*/
