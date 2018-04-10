@@ -40,7 +40,7 @@ class TokenManager extends AbstractManager {
         return jwt.sign({
             data: opt,
             // TODO 이 부분 property로 바꿀 필요가 있어보임.
-            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 12) // 1hour
+            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 4320) // 1hour
             //}, 'rezoomesecretkey', { expiresIn: '1' });
         }, this.secretKey);
     }
