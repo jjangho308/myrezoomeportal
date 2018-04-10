@@ -78,3 +78,8 @@ function test_postsharedcerts() {
         console.log(result);
     });
 }
+
+function set_token(temp_token) {
+    client_authorization = 'Bearer ' + temp_token;
+
+}
