@@ -7,6 +7,7 @@ import certs_router from './certs_route';
 import resume_router from './resume_route';
 import main_router from './main_route';
 import client_router from './client_route';
+import intro_router from './intro_route';
 
 /**
  * Root router of all http request channel. <br />
@@ -16,6 +17,7 @@ import client_router from './client_route';
  * @author TACKSU
  */
 var router = express.Router();
+router.use('/', intro_router);
 router.use('/signin', signin_router);
 router.use('/signup', signup_router);
 router.use('/main', main_router);
