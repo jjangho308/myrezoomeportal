@@ -6,7 +6,7 @@ function test_getrecords() {
         type: 'POST',
         url: '/client',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVJZCI6IlVJRDIifSwiZXhwIjoxNTIzMjkxNjg5LCJpYXQiOjE1MjMyNDg0ODl9.FyLDUbsElEM6fFZ2CGI9unkwyYXwOZNDf1XU-YiYM80'
+            'Authorization': client_authorization
         },
         data: JSON.stringify({
             cmd: 'SearchRecord',
@@ -77,4 +77,9 @@ function test_postsharedcerts() {
     $.post( "/shared_certs", function( result ) {
         console.log(result);
     });
+}
+
+function set_token(temp_token) {
+    client_authorization = 'Bearer ' + temp_token;
+
 }

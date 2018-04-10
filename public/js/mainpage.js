@@ -4,11 +4,14 @@ require socket.is
 <script src="/socket.io/socket.io.js"></script>
 */
 var socket;
+var client_token;
 
 $(document).ready(function(){
     
     socket = io();
 
+    client_token = document.cookie.get("JWT");
+    client_authorization = 'Bearer ' + client_token;
     /*
     $.ajax({
         type: 'POST',
