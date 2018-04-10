@@ -28,6 +28,11 @@ function getviewdata(record,targetdivid) {
     viewdata.second = '영어'; /*회차 정보 추가해야함 */
     viewdata.third = record.grade;
 
+    var htmldiv = '<div class="spec-body">';
+    htmldiv = htmldiv + '<div class="spec-left">';
+    htmldiv = htmldiv + '<input type="checkbox" id="box-2" />';
+    htmldiv = htmldiv + '<label for="box-2"><label/>';
+    htmldiv = htmldiv + '<span></span>';
 
     $('#'+targetdivid).innerHTML = '<p class="record_first">' + viewdata.first + '</p>';
     $('#'+targetdivid).innerHTML += '<p class="record_second">' + viewdata.second + '</p>';
