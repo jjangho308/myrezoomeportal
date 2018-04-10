@@ -5,6 +5,8 @@ import ClientRequest from '../client_request';
 import Managers from '../../../core/managers'
 import Util from "../../../util/util";
 
+import CertModel from '../../../models/cert/cert';
+
 /**
  * Handler of IssueCertificateRequestEntity. <br />
  * 
@@ -33,23 +35,32 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
      * @param {*} cb 
      */
     request(request, cb) {
-        if (request.uId != request.cert.uId) {
-            // TODO throw authentication error. <br />
-        }
 
         // TODO 나중에 진짜 암호화된 데이터로 수정 필요
         var encrypted = Util.uuid();
         var certModel = new CertModel({
             uId: request.uId,
-            encryptedData: encrypted
+            blcMapId: request.cert.txid
         });
 
         var certDAO = Managers.db().getCertDAO();
-        certDAO.put(certModel, (err, insertId) => {
+        certDAO.putCert(certModel, (err, insertId) => {
             if (!!err) {
                 cb(ClientRequest.RESULT_FAILURE, err);
             } else {
-                cb(ClientRequest.RESULT_SUCCESS, insertId);
+                certDAO.getCert({
+                    sId: insertId
+                }, (err, certList) => {
+                    if (!!err) {
+                        cb(ClientRequest.RESULT_FAILURE, err);
+                    } else if (certList.length > 0) {
+                        cb(ClientRequest.RESULT_SUCCESS, {
+                            certId: certList[0].certId,
+                            txid: certList[0].blcMapId,
+                            date: certList[0].created
+                        });
+                    }
+                })
             }
         });
     }

@@ -31,7 +31,7 @@ describe('Certficiate Model DAO test suite.', () => {
             deleted: false
         })
 
-        certDAO.issueCert(certModel, (err, insertId) => {
+        certDAO.putCert(certModel, (err, insertId) => {
             certDAO.getCert({
                 certId: certModel.certId
             }, (err, certModels) => {
@@ -57,7 +57,7 @@ describe('Certficiate Model DAO test suite.', () => {
             deleted: false
         })
 
-        certDAO.issueCert(certModel, (err, insertId) => {
+        certDAO.putCert(certModel, (err, insertId) => {
             certModel.blcMapId = updated;
 
             certDAO.setCert({

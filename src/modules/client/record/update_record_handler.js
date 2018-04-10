@@ -6,7 +6,7 @@ import AbstractClientRequestHandler from "../abstract_client_request_handler";
  * @since 180406
  * @author TACKSU
  */
-class UpdateRecordHandler extends AbstractClientRequestHandler{
+class UpdateRecordHandler extends AbstractClientRequestHandler {
 
     /**
      * Default constructor. <br />
@@ -16,7 +16,7 @@ class UpdateRecordHandler extends AbstractClientRequestHandler{
      * 
      * @param {*} opt 
      */
-    constructor(opt){
+    constructor(opt) {
         super(opt);
     }
 
@@ -27,7 +27,7 @@ class UpdateRecordHandler extends AbstractClientRequestHandler{
      * @param {*} requestEntity 
      * @param {*} cb 
      */
-    request(requestEntity, cb){
+    request(requestEntity, cb) {
 
     }
 }
