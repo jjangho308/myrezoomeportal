@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
 
+    <link rel="stylesheet" href="css/selectize.css">
     <meta name="description" content="">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/mypage/main.css">
@@ -21,305 +22,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-    <script src="js/selectize.js"></script>
-    <link rel="stylesheet" href="css/selectize.css">
 
+    <script src="js/selectize.js"></script>
     <link rel="stylesheet" href="css/datepicker.css">
+    <link rel="stylesheet" href="css/progressbar.css">
 
 </head>
 
 <body>
-
-
-    <!-- Modal HTML embedded directly into document -->
-    <div id="spec-change-dialog" class="modal">
-        <p>이력 변경<span>My레쥬메에 반영하고자 하는 1건의 성적을 선택해주세요.</span></p>
-        <table id="spec-change-table">
-            <tr>
-                <th></th>
-                <th>응시일자</th>
-                <th>회차</th>
-                <th>시험명</th>
-                <th>언어</th>
-                <th>성적</th>
-            </tr>
-            <tr>
-                <td>
-
-                    <div class="abc-radio">
-                        <input type="radio" name="spec-change" id="radio1" value="">
-                        <label for="radio1">
-                        </label>
-                    </div>
-
-                </td>
-                <td>2018-03-12</td>
-                <td>301회</td>
-                <td>OPIc</td>
-                <td>영어</td>
-                <td>Advanced low</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="abc-radio">
-                        <input type="radio" name="spec-change" id="radio2" value="">
-                        <label for="radio2">
-                        </label>
-
-                    </div>
-                </td>
-                <td>2018-03-12</td>
-                <td>301회</td>
-                <td>OPIc</td>
-                <td>영어</td>
-                <td>Advanced low</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="abc-radio">
-                        <input type="radio" name="spec-change" id="radio3" value="">
-                        <label for="radio3">
-                        </label>
-
-                    </div>
-                </td>
-                <td>2018-03-12</td>
-                <td>301회</td>
-                <td>OPIc</td>
-                <td>영어</td>
-                <td>Advanced low</td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div class="abc-radio">
-                        <input type="radio" name="spec-change" id="radio4" value="">
-                        <label for="radio4">
-                        </label>
-                    </div>
-
-                </td>
-                <td>2018-03-12</td>
-                <td>301회</td>
-                <td>OPIc</td>
-                <td>영어</td>
-                <td>Advanced low</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="abc-radio">
-                        <input type="radio" name="spec-change" id="radio5" value="">
-                        <label for="radio5">
-                        </label>
-
-                    </div>
-                </td>
-                <td>2018-03-12</td>
-                <td>301회</td>
-                <td>OPIc</td>
-                <td>영어</td>
-                <td>Advanced low</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="abc-radio">
-                        <input type="radio" name="spec-change" id="radio6" value="">
-                        <label for="radio6">
-                        </label>
-
-                    </div>
-                </td>
-                <td>2018-03-12</td>
-                <td>301회</td>
-                <td>OPIc</td>
-                <td>영어</td>
-                <td>Advanced low</td>
-            </tr>
-
-            <tr>
-                <td>
-
-                    <div class="abc-radio">
-                        <input type="radio" name="spec-change" id="radio7" value="">
-                        <label for="radio7">
-                        </label>
-                    </div>
-
-                </td>
-                <td>2018-03-12</td>
-                <td>301회</td>
-                <td>OPIc</td>
-                <td>영어</td>
-                <td>Advanced low</td>
-            </tr>
-
-        </table>
-
-        <div class="modal-footer">
-            <button class="confirm-btn">확인</button>
-            <button class="cancel-btn">취소</button>
-        </div>
-    </div>
-
-
-
-
-    <div id="education-add-dialog" class="modal">
-        <p>이력 추가 - 학력<span>레쥬메 서비스를 통해 사용하고 싶은 이력을 추가할 수 있습니다.</span></p>
-        <div class="modal-body">
-
-            <p>학교명</p>
-            <select name="select-0" id="school">
-                <option value="" disabled selected>교육기관의 이름을 입력해주세요. Ex) 한양대학교
-
-                    <option value="volvo">서울대학교</option>
-                    <option value="saab">한양대학교</option>
-            </select>
-
-            <p>전공</p>
-
-            <div class="select-100">
-                <select name="select-1">
-                    <option value="" disabled selected>통신사
-                        <option value="volvo">통신사 1</option>
-                        <option value="saab">통신사 2</option>
-                </select>
-            </div>
-            <div class="select-100">
-                <select name="select-2">
-                    <option value="" disabled selected>학사
-                        <option value="volvo">학사</option>
-                        <option value="saab">석사</option>
-                </select>
-            </div>
-
-            <input type="text" id="major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학
-">
-            <p>재학 기간</p>
-
-            <div>
-                <button class="calendar"><img src="img/myresume/on.png" alt=""></button>
-                <input type="text" class="form-control study-period"  placeholder="2018-04-04"/>
-                <span id="study-period-span">~</span>
-                <button class="calendar"><img src="img/myresume/on.png" alt=""></button>
-                <input type="text" class="form-control study-period"  placeholder="2018-04-04"/>
-
-                <div class="select-100 study-field-div">
-                    <select name="select-3" id="study-field">
-                        <option value="" disabled selected>졸업여부
-
-                            <option value="volvo">학사</option>
-                            <option value="saab">석사</option>
-                    </select>
-                </div>
-            </div>
-            <p>학점</p>
-
-            <input type="text" id="score" placeholder="Ex) 4.0
-">
-
-            <div class="select-100">
-                <select name="select-4">
-                    <option value="volvo">4.3</option>
-                    <option value="saab">4.5</option>
-                </select>
-
-            </div>
-
-        </div>
-        <div class="modal-footer">
-            <button class="confirm-btn">확인</button>
-            <button class="cancel-btn">취소</button>
-        </div>
-    </div>
+<!--<input type="text" placeholder="asd">-->
+<!--
+<select size="2">
     
+    <option>1255</option>
+    <option>asdas</option>
+    <option>sdaasdassd</option>
+    <option>sdasasdaasasd</option>
+</select>
+-->
 
-    <div id="cert-add-dialog" class="modal">
-        <p>이력 추가 - 자격<span>레쥬메 서비스를 통해 사용하고 싶은 이력을 추가할 수 있습니다.</span></p>
-        <div class="modal-body">
-
-            <p>자격명</p>
-            
-           <input type="text" id="cert-name" placeholder="자격증의 이름을 입력해주세요. EX) 정보처리기사">
-           
-
-            <p>성적</p>
-
-              <input type="text" id="cert-grade" placeholder="성적을 입력해주세요. EX) 취득">
-            
-            <p>유효 기간</p>
-
-            <div>
-                <button class="calendar"><img src="img/myresume/on.png" alt=""></button>
-                <input type="text" class="form-control study-period"  placeholder="2018-04-04"/>
-                <span id="study-period-span">~</span>
-                <button class="calendar"><img src="img/myresume/on.png" alt=""></button>
-                <input type="text" class="form-control study-period" placeholder="2018-04-04" />
-
-                <div id="expire-checkbox">
-                    <input id="cert-checkbox" class="styled" type="checkbox">
-                    <label for="cert-checkbox">
-                        만료기간 없음
-                    </label>
-                </div>
-                    
-            </div>
-
-        </div>
-        <div class="modal-footer">
-            <button class="confirm-btn">확인</button>
-            <button class="cancel-btn">취소</button>
-        </div>
-    </div>
-
-    <div id="language-add-dialog" class="modal">
-        <p>이력 추가 - 외국어<span>레쥬메 서비스를 통해 사용하고 싶은 이력을 추가할 수 있습니다.</span></p>
-        <div class="modal-body">
-
-            <p>시험명</p>
-            
-             <div class="select-100">
-                <select name="select-1">
-                    <option value="" disabled selected>언어
-                        <option value="volvo">토플</option>
-                        <option value="saab">토익</option>
-                </select>
-            </div>
-           <input type="text" id="language-name" placeholder="어학 시험명을 입력해주세요. EX) OPIc
-
-">
-           
-
-            <p>성적</p>
-
-              <input type="text" id="language-grade" placeholder="성적을 입력해주세요. EX) Advanced Low
-
-">
-            
-            <p>유효 기간</p>
-
-            <div>
-                <button class="calendar"><img src="img/myresume/on.png" alt=""></button>
-                <input type="text" class="form-control study-period"  placeholder="2018-04-04"/>
-                <span id="study-period-span">~</span>
-                <button class="calendar"><img src="img/myresume/on.png" alt=""></button>
-                <input type="text" class="form-control study-period"  placeholder="2018-04-04"/>
-
-                <div id="expire-checkbox">
-                    <input id="checkbox2" class="styled" type="checkbox" checked="">
-                    <label for="checkbox2">
-                        만료기간 없음
-                    </label>
-                </div>
-                    
-            </div>
-
-        </div>
-        <div class="modal-footer">
-            <button class="confirm-btn">확인</button>
-            <button class="cancel-btn">취소</button>
-        </div>
-    </div>
     <div id = "myresume-modal"></div>
 
     
@@ -333,7 +54,7 @@
                 <li class="right">
                     <a href="#"><img id="user-small-icon" src="img/myresume/user-photo.png" /><span>suji.lee@email.com</span><img class="check-icon" src="img/myresume/shape@3x.png" /></a>
                 </li>
-                <li class="right"><a href="#">기업 서비스<img class="check-icon" src="img/myresume/shape@3x.png"/></a></li>
+                <li class="right"><a href="#">기업 서비스</a></li>
             </ul>
         </div>
     </nav>
@@ -372,19 +93,20 @@
     <div id="main-body">
         <div class="container">
             <div id="myresume-div">      
-                   <div class="grid myresume-grid">
+
+                     <div class="grid myresume-grid">
                     <p>My레쥬메</p>
                     <p>연계된 기관들로부터 불러온 이력사항을 클릭하여, 증명서 발급 및 이력서를 쉽게 생성할수 있습니다.</p>
-
+                    <img src="img/myresume/reload.svg" />
                     <p>업데이트 : 2018.03.09 (금) 18:07</p>
-                    <img class="" src="" />
+                    
 
                     <div class="spec-div">
                         <div class="spec-detail-div">
                             <div class="spec-title">
 
                                 <span>학력</span>
-                                <span><a href="#education-add-dialog" rel="modal:open">+ 추가</a></span>
+                                <span><a href="#education-add-dialog" rel="modal:open"  class="add-span">+ 추가</a></span>
 
                             </div>
 
@@ -432,9 +154,16 @@
                             <div class="spec-title">
 
                                 <span>외국어</span>
-                                <span><a href="#language-add-dialog" rel="modal:open">+ 추가</a></span>
+                                <span><a href="#language-add-dialog" rel="modal:open" class="add-span">+ 추가</a></span>
 
                             </div>
+                            
+                            
+                            <div class="spec-body-default">
+                                외국어 성적 정보가 없습니다. 
+                            </div>
+                            
+                            
                             <div class="spec-body">
                                 <div class="spec-left">
                                     <input type="checkbox" id="box-3" />
@@ -450,7 +179,9 @@
                                 <div class="spec-right">
                                     <p>인하대학교</p>
                                     <p>학사, 공과대학 컴퓨터공학 전공, 졸업</p>
-                                    <p>3.5 / 4.5</p>
+                                    <p>3.5 / 4.5 <span class="expire">만료예정</span></p>
+                                    
+                                    
                                     <button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>
 
     
@@ -472,7 +203,8 @@
                                     <p>인하대학교</p>
                                     <p>학사, 공과대학 컴퓨터공학 전공, 졸업</p>
                                     <p>3.5 / 4.5</p>
-
+                                    <button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>
+    
                                 </div>
                             </div>
 
@@ -481,8 +213,11 @@
                             <div class="spec-title">
 
                                 <span>자격</span>
-                                <span><a href="#cert-add-dialog" rel="modal:open">+ 추가</a></span>
+                                <span><a href="#cert-add-dialog" rel="modal:open"  class="add-span">+ 추가</a></span>
 
+                            </div>
+                            <div class="spec-body-default">
+                                자격 정보가 없습니다. 
                             </div>
                             <div class="spec-body">
                                 <div class="spec-left">
@@ -500,7 +235,7 @@
                                     <p>인하대학교</p>
                                     <p>학사, 공과대학 컴퓨터공학 전공, 졸업</p>
                                     <p>3.5 / 4.5</p>
-
+                                    <button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>
                                 </div>
                             </div>
                             <div class="spec-body">
@@ -517,9 +252,11 @@
                                 </div>
                                 <div class="spec-right">
                                     <p>인하대학교</p>
-                                    <p>학사, 공과대학 컴퓨터공학 전공, 졸업</p>
+                                    <p>학사, 공과대학 컴퓨터공학 전공, 졸업<span class="plus">+ 6</span></p>
+                                    
                                     <p>3.5 / 4.5</p>
-
+                                    <button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>
+        
                                 </div>
                             </div>
 
@@ -530,112 +267,20 @@
                 </div>
             </div>
             <div id="mycert-div">
-                <div class="grid mycert-grid">
-                    <p>증명서 보관함</p>
-                    <p>연계된 기관들로부터 불러온 이력사항을 클릭하여, 증명서 발급 및 이력서를 쉽게 생성할수 있습니다.</p>
-
-                    <div class="sub-info">
-
-                        <p>최신 발급일 순</p>
-
-                        <p>총 <strong>7건</strong>의 증명서를 보관중입니다.</p>
-
-                    </div>
-
-                    <img class="" src="" />
-
-                    <div class="cert-container add-cert">
-                        <img src="img/mycert/fill-1.png" alt="">
-                        <p>새로운 증명서 발급</p>
-
-                    </div>
-                    <div class="cert-container" tabindex="1">
-                        <p>제 1049-4002호</p>
-                        <img src="img/mycert/color_2.png" alt="">
-                        <p>인하대학교</p>
-                        <p>성적 증명서</p>
-                        <p>발급일시 : 2018-03-21 11:00</p>
-                    </div>
-                    <div class="cert-container" tabindex="1">
-                        <p>제 1049-4003호</p>
-                        <img src="img/mycert/color_2.png" alt="">
-                        <p>삼성SDS SW Certificate</p>
-                        <p>성적 증명서</p>
-                        <p>발급일시 : 2018-03-01 14:00</p>
-                    </div>
-                    <div class="cert-container" tabindex="1">
-                        <p>제 1049-4001호</p>
-                        <img src="img/mycert/color.png" alt="">
-                        <p>매경TEST(제 35회)</p>
-                        <p>성적 증명서</p>
-                        <p>발급일시 : 2018-03-21 11:00</p>
-                    </div>    
-                    <div class="cert-container" tabindex="1">
-                        <p>제 1049-4001호</p>
-                        <img src="img/mycert/color.png" alt="">
-                        <p>서울대학교</p>
-                        <p>졸업 증명서</p>
-                        <p>발급일시 : 2018-03-21 11:00</p>
-                    </div>                                             
-                </div>
             </div>
             
             <div id="resume-store-div">
-                <div class="grid mycert-grid">
-                    <p>이력서 보관함</p>
-                    <p>단순 작성만으로 이력 증빙이 모두 진행되는 새로운 증명서를 작성해보세요.</p>
 
-                    <div class="sub-info">
-
-                        <p>최신 생성일 순</p>
-
-                        <p>총 <strong>7건</strong>의 증명서를 보관중입니다.</p>
-
-                    </div>
-
-                    <img class="" src="" />
-
-                    <div class="cert-container add-cert">
-                        <img src="img/mycert/fill-1.png" alt="">
-                        <p>새로운 이력서 생성</p>
-
-                    </div>
-                    <div class="cert-container" tabindex="1">
-                        <p>....</p>
-                        <img src="img/resume-store/invalid-name.png" alt="">
-                        <p>이력서</p>
-                        <p>삼성전자용_2018 어쩌구</p>
-                        <p>업데이트 : 2018-03-01 11:00</p>
-                    </div>
-
-                    <div class="cert-container" tabindex="1">
-                        <p>....</p>
-                        <img src="img/resume-store/invalid-name.png" alt="">
-                        <p>이력서</p>
-                        <p>No Name #2</p>
-                        <p>업데이트 : 2018-03-01 11:00</p>
-                    </div>          
-                    <div class="cert-container" tabindex="1">
-                        <p>....</p>
-                        <img src="img/resume-store/invalid-name.png" alt="">
-                        <p>이력서</p>
-                        <p>이수지_중소기업용</p>
-                        <p>업데이트 : 2018-03-01 11:00</p>
-                    </div>
-                    <div class="cert-container" tabindex="1">
-                        <p>....</p>
-                        <img src="img/resume-store/invalid-name.png" alt="">
-                        <p>이력서</p>
-                        <p>삼성SDS용</p>
-                        <p>업데이트 : 2018-03-01 11:00</p>
-                    </div>            
-                </div>
             </div>
             
 
         </div>
     </div>
     
+    <div id="alarm-div">
+        <span></span>
+        <img src="/img/myresume/close-white.svg" alt="">
+    </div>
     
     <div id="main-footer">
         <span>© REZOOME</span>
@@ -655,7 +300,7 @@
         <button>···</button>
         
         <button>이력서 생성</button>
-        <button>증명서 발급</button>
+        <button id="cert-issue-button"><a href="#cert-issue-dialog" rel="modal:open">증명서 발급</a></button>
     </div>
     
 </body>

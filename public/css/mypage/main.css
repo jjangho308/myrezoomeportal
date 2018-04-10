@@ -1,4 +1,4 @@
-@import url(http://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
 body {
     margin: 0;
     font-family: 'Spoqa Han Sans', 'Spoqa Han Sans KR';
@@ -60,7 +60,7 @@ ul {
 .navbar ul {
     height: 62px;
     margin: 0;
-    padding: 0px 115px;
+    padding: 0px 63px;
 }
 
 .navbar li {
@@ -83,6 +83,7 @@ ul {
 .navbar li:nth-child(3) {
     margin-top: 21px;
     border-right: 2px solid #64678b;
+    padding-right: 37px;
 }
 
 li a {
@@ -97,8 +98,10 @@ li a {
 }
 
 .grid {
-    width: 940px;
+    width: 990px;
     margin: auto;
+        padding: 0px 25px;
+    
 }
 
 #header-1 {
@@ -147,9 +150,11 @@ li a {
 #header-2 ul{
     margin:0px;
     padding: 0px ;
+    overflow: visible;
 }
 
 #header-myresume{
+    font-weight: bold;
     border-bottom: solid 5px #4c80f1;
 }
 
@@ -176,10 +181,15 @@ li a {
 }
 
 #header-2 li {
+    margin-right: 63px;
     text-align:  center;
     float: right;
     padding: 15px 20px;
-    margin-right: 10px;
+    
+}
+
+#header-2 li:nth-child(1){
+    margin-right: -30px;
 }
 
 #main-body {
@@ -244,7 +254,7 @@ li a {
     border-bottom: 1px solid #e1e6f0;
 }
 
-.grid>p:nth-child(3) {
+.grid>p:nth-child(4) {
     font-size: 13px;
     line-height: 3;
     float: right;
@@ -253,13 +263,21 @@ li a {
     line-height: 47px;
 }
 
+.grid>img:nth-child(3){
+    float: right;
+    width: 21px;
+    height: 21px;
+    margin-top: 15px;
+    margin-left: 8px;
+}
+
 .spec-div {
-    width: 901px;
+    width: 931px;
     border-radius: 4px;
     background-color: #ffffff;
     border: solid 1px #eff0f4;
-    margin-top: 20px;
-    padding: 18px 26px;
+    margin-top: 48px;
+    padding: 18px 29px;
 }
 
 .spec-detail-div {
@@ -281,12 +299,24 @@ li a {
     float: right;
 }
 
-.spec-title span:nth-child(2) a {
+.add-span{
+    margin-right: 12px;
     line-height: 22px;
     float: right;
     font-size: 12px;
     color: #4a90e2;
     text-decoration: none;
+}
+
+.spec-body-default{
+    height: 102px;
+    border-bottom: solid 1px #dfe5ef;
+    color: #a9afb3;
+    font-size: 13px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 102px;
+    
 }
 
 .spec-body {
@@ -308,7 +338,7 @@ li a {
 
 .spec-center {
     display: inline-block;
-    width: 220px;
+    width: 108px;
     vertical-align: middle;
 }
 
@@ -321,19 +351,24 @@ li a {
 .spec-center img:nth-child(2) {
     width: 15px;
     height: 8px;
+    margin-left: 14px;
 }
 
 .spec-right {
-    vertical-align: middle;
+    vertical-align: top;
     display: inline-block;
     width: 375px;
     color: #676767;
+    line-height: 25px;
 }
 
 .spec-right button {
+    
     position: relative;
-    top: -31px;
-    float: right;
+        margin-bottom: -31px;
+    top: -53px;
+    float:right;
+    right: -147px;
     width: 70px;
     height: 30px;
     border-radius: 3px;
@@ -365,6 +400,37 @@ li a {
     font-size: 13px;
 }
 
+.expire{
+    display: inline-block;
+      width: 52px;
+  height: 15px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  border: solid 1px #ee7a43;
+    font-size: 9px;
+    color: #ee7a43;
+        line-height: 13px;
+    text-align: center;
+        margin-top: 5px;
+    margin-left: 11px;
+}
+
+.spec-right expire{
+    
+}
+
+.spec-right .plus{
+    display: inline-block;
+    line-height: 13px;
+    text-align: center;
+    margin-left: 11px;
+    width: 40px;
+    height: 15px;
+    border-radius: 3px;
+    background-color: #babecd;
+    font-size: 9px;
+    color: #ffffff;
+}
 
 
 .modal-body #school {
@@ -372,13 +438,22 @@ li a {
     margin-bottom: 30px;
 }
 
-.modal-body #major {
-    width: 271px;
+.modal-body .major {
+    width: 262px;
+}
+.modal-body .add-major {
+    width: 231px;
 }
 
+#major-div img
+{
+        width: 15px;
+    vertical-align: -7px;
+    margin-left: 11px;
+}
 .study-period {
-    margin-left: -5px;
-    width: 110px;
+    margin-left: -4px;
+    width: 117px;
 }
 
 select#study-field {
@@ -387,14 +462,20 @@ select#study-field {
 }
 
 #study-period-span {
-    vertical-align: 18px;
+    vertical-align: 24px;
     color: #ced3d6;
     font-size: 22px;
 }
 
+#grade-span{
+    vertical-align: -5px;
+    color: #ced3d6;
+    font-size: 14px;
+    margin: 0px 4px;
+}
 #score {
     vertical-align: top;
-    width: 80px;
+    width: 71px;
 }
 
 .selectize-input {
@@ -420,8 +501,9 @@ option[value=""][disabled] {
 
 .select-100 {
     display: inline-block;
-    width: 100px;
+    width: 95px;
     vertical-align: top;
+        margin-right: 2px;
 }
 
 .study-field-div {
@@ -429,7 +511,8 @@ option[value=""][disabled] {
 }
 
 #language-name {
-    width: 360px;
+    width: 358px;
+    margin-left: 5px;
 }
 
 #language-grade {
@@ -497,7 +580,10 @@ option[value=""][disabled] {
     color: #ffffff;
     margin-left: 20px;
 }
-
+#select-footer a{
+    text-decoration: none;
+    color:white;
+}
 #select-footer button:nth-child(4){
     
     width: 40px;
@@ -505,4 +591,100 @@ option[value=""][disabled] {
 
 #resume-store-div{
     display: none;
+}
+
+#cert-issue-dialog{
+      width: 330px;
+  height: 250px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 3px 0 rgba(64, 64, 64, 0.5);
+    
+  text-align: center;
+}
+#cert-issue-dialog a{
+    display: none;
+    text-align: center;
+    
+}
+
+#cert-issue-dialog p{
+    margin: 0px;
+    
+}
+
+#cert-issue-dialog p:nth-child(2){
+     font-size: 15px;
+  font-weight: bold;
+    line-height: 30px;
+    color: #676767;
+}
+
+
+#cert-issue-dialog p:nth-child(3){
+  font-size: 11px;
+    font-weight: normal;
+  line-height: 20px;
+  color: #676767;
+}
+
+#alarm-div{
+    
+    padding-right: 46px;
+    
+    display: none;
+  height: 50px;
+  border-radius: 4px;
+  background-color: #a0b0c2;
+  box-shadow: 0 1px 5px 0 rgba(172, 172, 172, 0.5);
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 50px;
+    padding-left: 19px;
+    position: fixed;
+    bottom:50px;
+    
+    
+    
+    right: 50%;
+    margin-right: -224px;
+}
+
+#alarm-div img{
+    position: relative;
+    top: 0px;
+    right: -32px;
+    cursor: pointer
+    
+}
+
+#education-add-dialog .selectize-input{
+    width: 100%;
+    
+}
+
+#school + div .selectize-dropdown-content{
+    background-color: #f8f8f8;
+    
+}
+
+#education-add-dialog #is-graduate{
+    width: 100px;
+    margin-left: 2px;
+    margin-right: 0px;
+}
+
+.add-span{    
+    margin-right: 12px;
+    line-height: 22px;
+    float: right;
+    font-size: 12px;
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+#education-add-dialog .add-span{
+    cursor:pointer;
+    font-weight: normal;
+    margin-right: 0px;
 }

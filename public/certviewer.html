@@ -26,8 +26,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <body>
-    <a href="#cert-add-dialog" rel="modal:open">sadas</a>
-    
+
 <div id="cert-add-dialog" class="modal">
     <p>증명서 전송<span>증명서를 레쥬메 서비스를 통해 보다 편리하게 전송해보세요.</span></p>
     
@@ -84,7 +83,7 @@
                 </div>
 
                 <div class="period-div">
-                  <button class="calendar"><img src="img/myresume/on.png" alt=""></button>
+                  <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
                 <input type="text" class="form-control expire-period"  placeholder="2018-04-04"/>
 
                    <button>설정</button>
@@ -95,10 +94,13 @@
         </div>
         
         <div class="email-send-div">
-            <input type="text" id="email-send-input" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학
-">
+            <input type="text" id="email-send-input" placeholder="증명서를 전송할 이메일주소를 입력하고, 엔터키를 눌러주세요.">
             
-        <textarea name="" id="" cols="30" rows="10" valign='middle'></textarea>
+<!--        <textarea name="" id="" cols="30" rows="10" valign='middle' placeholder="메일 본문 메시지 추가(선택 사항)"></textarea>-->
+        <div id="wrap">
+          <div class="area dummy"></div>
+          <textarea class="area"></textarea>
+        </div>
             <div class = "open-range-div">
                 <span>공개 대상</span>
                 <div class="abc-radio">
@@ -149,8 +151,9 @@
         
     </div>
     <div class="modal-footer">
-        <button class="confirm-btn">확인</button>
-        <button class="cancel-btn">취소</button>
+       <a>URL 링크삭제</a>
+        <button class="confirm-btn primary-solid-btn">확인</button>
+        <button class="cancel-btn border-btn">취소</button>
     </div>
 </div>
     
@@ -162,11 +165,17 @@
        <p>인하대학교 졸업증명서(학사)</p>
        
    </div>
-   <button>···</button>
-   <button>전송</button>
+   <button id="more-button">···</button>
+   <button>    <a href="#cert-add-dialog" rel="modal:open">전송</a>
+    </button>
    <button>다운로드</button>
    <button>인쇄</button>
-    
+   
+    <div id="more-button-div">
+       <p>항목#1</p>
+       <p>항목#2</p>
+       <p>항목#3</p>
+    </div> 
     
 </div>
 

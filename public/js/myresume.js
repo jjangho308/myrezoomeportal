@@ -1,12 +1,22 @@
 $(function(){
-//  $("#myresume-modal").load("myresume-modal.html"); 
-//    $("#myresume-div").load("myresume.html"); 
-//    $("#mycert-div").load("mycert.html"); 
+    $("#myresume-modal").load("dialog-myresume.html", function(){
+
+        $('select').selectize();
+         $( ".study-period" ).datepicker( );
+            $( ".study-period" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+    
+    }); 
+    
+    
+    $("#mycert-div").load("Certs.html"); 
+    
+    $("#resume-store-div").load("Resume.html"); 
     
 });
 
+
 $(document).ready(function(){
-    $(".spec-detail-div input:checkbox").click(function(){
+    $(document).on('click', '.spec-detail-div input:checkbox', function() {
         
         console.log($(this).is(':checked'));
         if ($(this).is(':checked'))
@@ -26,18 +36,12 @@ $(document).ready(function(){
             $("#main-footer").css("margin-bottom","0px"); 
         }else{
             
-            
-            
             $( "#select-footer span:nth-child(2)" ).text(numberOfChecked+"건의");
             
         $("#select-footer").show();   
         
         $("#main-footer").css("margin-bottom","71px"); 
         }
-          
-        
-        
-
         
     });
     
@@ -50,18 +54,13 @@ $(document).ready(function(){
         return false;
     });
     
- $( ".study-period" ).datepicker();
     
-    $( ".study-period" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-    
-    
-    $('select').selectize();
-    
+
     
     $('#header-mycert').click(function(){
-        $('#header-myresume').css("border","none");
-        $('#header-resume-store').css("border","none");
-        $(this).css("border-bottom","solid 5px #4c80f1");
+        $('#header-myresume').css({"border":"none",  "font-weight": "normal"});
+        $('#header-resume-store').css({"border":"none",  "font-weight": "normal"});
+        $(this).css({"border-bottom":"solid 5px #4c80f1", "font-weight": "bold"});
          $("#myresume-div").hide();
         $("#mycert-div").show();
         $("#resume-store-div").hide();
@@ -69,18 +68,18 @@ $(document).ready(function(){
     });
     
     $('#header-resume-store').click(function(){
-        $('#header-myresume').css("border","none");
-        $('#header-mycert').css("border","none");
-        $(this).css("border-bottom","solid 5px #4c80f1");
+        $('#header-myresume').css({"border":"none",  "font-weight": "normal"});
+        $('#header-mycert').css({"border":"none",  "font-weight": "normal"});
+        $(this).css({"border-bottom":"solid 5px #4c80f1", "font-weight": "bold"});
          $("#myresume-div").hide();
         $("#mycert-div").hide();
         $("#resume-store-div").show();
     });
     
     $('#header-myresume').click(function(){
-        $('#header-mycert').css("border","none");
-        $('#header-resume-store').css("border","none");
-        $(this).css("border-bottom","solid 5px #4c80f1");
+        $('#header-mycert').css({"border":"none",  "font-weight": "normal"});
+        $('#header-resume-store').css({"border":"none",  "font-weight": "normal"});
+        $(this).css({"border-bottom":"solid 5px #4c80f1", "font-weight": "bold"});
         
          $("#myresume-div").show();
         $("#mycert-div").hide();
@@ -88,6 +87,180 @@ $(document).ready(function(){
     });
     
     
+    $(document).on('click', '#cert-issue-button', function() {
+        $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+           
+            
+         setTimeout(function() {
+              $('.ko-progress-circle').attr('data-progress', 20);
+         }, 100);
+         setTimeout(function() {
+              $('.ko-progress-circle').attr('data-progress', 50);
+         }, 1000);
+         setTimeout(function() {
+              $('.ko-progress-circle').attr('data-progress', 100);
+         }, 2000);
+        
+         setTimeout(function() {
+             $("#cert-issue-dialog .close-modal").click();
+             $('#select-footer').css("display","none");
+             $('#alarm-div').css("display","block");
+             
+             $(".spec-detail-div input:checkbox:checked").click();
+         }, 3000);
+    
+    });
+    
+    
+    $(document).on('click', '#alarm-div img', function() {
+       $("#alarm-div").hide(); 
+    });
+    
+    $(document).on('click', '#spec-change-dialog .confirm-btn', function() {
+        $("#spec-change-dialog .close-modal").click();
+       $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
+        $('#alarm-div').css("display","block");
+        
+    });
+    
+    $(document).on('click', '#education-add-dialog .confirm-btn', function() {
+        
+        var is_error = false;
+        
+        if($("#school").next().find(".item").text() == ""){
+           $("#school").next().find(".selectize-input").addClass("error");
+            $("#school").next().next().css("display", "block");
+            is_error = true;
+        }else{
+            $("#school").next().find(".selectize-input").removeClass("error");
+            $("#school").next().next().css("display", "none");
+        }
+        
+        
+        $(".major").each(function(){
+               
+            var element = $(this);
+            
+            var range = element.closest(".error-range"); 
+            
+            if(element.val() == ""){
+                element.addClass("error");
+                range.find(".items ").addClass("error");
+                range.find(".error-message").css("display", "block");
+                is_error = true;
+            }else{
+                var range = element.closest(".error-range"); 
+                element.removeClass("error");
+                range.find(".items ").removeClass("error");
+                range.find(".error-message").css("display", "none");
+            }
+        })
+        
+        var period = $("#education-add-dialog .study-period");
+        var range = period.closest(".error-range"); 
+        
+        if((period[0].value == "") || (period[1].value == "")){
+             
+            
+            period.addClass("error");
+            range.find("button").addClass("error");
+            range.find(".items").addClass("error");
+            range.find(".error-message").css("display", "block");
+            is_error = true;
+            
+        }else{
+            period.removeClass("error");
+            range.find("button").removeClass("error");
+            range.find(".items").removeClass("error");
+            range.find(".error-message").css("display", "none");
+        }
+        
+        
+        var range = $("#score").closest(".error-range"); 
+        if($("#score").val() == ""){
+            $("#score").addClass("error");
+           range.find(".items").addClass("error");
+            range.find(".error-message").css("display", "block");
+            is_error = true;
+        }else{
+            $("#score").removeClass("error");
+           range.find(".items").removeClass("error");
+            range.find(".error-message").css("display", "none");
+        }
+        
+        if(is_error == false){
+        
+        $("#education-add-dialog .close-modal").click();
+       $("#alarm-div span").text("학력이 추가되었습니다.");
+        $('#alarm-div').css("display","block"); 
+        }
+
+        
+    });
+    
+    $(document).on('click', '#education-add-dialog .add-span', function() {
+       $("#major-div").append(` 
+<div class="error-range">
+                <div class="select-100">
+                    <select name="select-1">
+                            <option value="1">전공</option>
+                            <option value="2">부전공</option>
+                            <option value="3">복수전공</option>
+                    </select>
+                </div>
+                <div class="select-100">
+                    <select name="select-2">
+                            <option value="volvo">학사</option>
+                            <option value="saab">석사</option>
+                    </select>
+                </div>
+
+                <input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">
+                <img src="/img/myresume/close-white.svg"/>
+                <div class="error-message">전공을 입력해주세요.</div>
+</div>
+
+
+        `);
+        
+        $("select").selectize();
+    });
+    
+     $(document).on('click', ".more-store-resume", function() {
+
+         
+         var element = $(this).closest(".cert-container").find(".more-store-resume-div"); 
+        element.css("display","block");
+         
+     });
+    
+  $(document).click(function(e) {
+      console.log($(e.target).attr('class'));
+      if($(e.target).attr('class') == "more-store-resume")
+          return;
+      
+    var element = $(".more-store-resume-div"); 
+      element.css("display","none");
+  });
+    
+     $(document).on('click', ".add-cert", function() {
+
+         $('#add-cert-dialog').modal('show');
+         
+         
+     });
+    
+    $(document).on('click', '#add-cert-dialog .confirm-btn', function() {
+        $("#add-cert-dialog  .close-modal").click();
+       $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
+        $('#alarm-div').css("display","block");
+        
+    });
+    $(document).on('click', '.cancel-btn', function() {
+        $(".close-modal").click();
+        
+    });
+
 });
 
 

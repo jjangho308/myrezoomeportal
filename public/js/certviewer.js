@@ -4,6 +4,8 @@ $(document).ready(function(){
         $('.abc-radio label').css("color","#676767");
         $("#cert-url-input").val("http://rezoome.io/d/20194011003A");
         $('.abc-radio .default-label').click();
+        
+        $(".modal-footer a").css("display","inline-block");
     });
     
     
@@ -72,18 +74,29 @@ $(document).ready(function(){
         labelField: 'name',
         searchField: ['name', 'email'],
         options: [
-            {email: 'brian@thirdroute.com', name: 'Brian Reavis'},
-            {email: 'nikola@tesla.com', name: 'Nikola Tesla'},
-            {email: 'someone@gmail.com'}
         ],
         render: {
             item: function(item, escape) {
+                setTimeout(2000, function(){
+                    $(".email-remove-button").click(function(){
+                    console.log("c");
+                });
+                  });
+
+                
                 return '<div>' +
                     (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
                     (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+                    
+                    (`<img src="/img/myresume/close-gray.svg"  class="email-remove-button" onclick="$(this).parent().hide()">` ) 
+                
                 '</div>';
+                
+    
             },
             option: function(item, escape) {
+                                    
+                
                 var label = item.name || item.email;
                 var caption = item.name ? item.email : null;
                 return '<div>' +
@@ -91,6 +104,8 @@ $(document).ready(function(){
                     (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
                 '</div>';
             }
+            
+            
         },
         createFilter: function(input) {
             var match, regex;
@@ -122,5 +137,61 @@ $(document).ready(function(){
             return false;
         }
     });
+    
+    
+    $("#more-button").click(function(){
+        console.log($("#more-button-div").css("display"));
+        if($("#more-button-div").css("display")=="none"){
+            $("#more-button-div").show();
+        }else{
+            $("#more-button-div").hide();
+        }
+        
+    });
+
+    function formatDummyText( text ) {
+      if ( !text ) {
+        return '&nbsp;';
+      }
+      return text.replace( /\n$/, '<br>&nbsp;' )
+        .replace( /\n/g, '<br>' );
+    }
+
+    
+    var first = true;
+    $( function() {
+
+      var $wrap = $('#wrap');
+        var $textarea = $('textarea');
+      var $dummy = $('.dummy');
+
+
+      function positionTextarea() {
+        var h = $wrap.height();
+        var top = Math.max( 0, ( h - $dummy.height() ) * 0.5 );
+          
+          if(first){
+              h -= 5;
+              top -= 5;
+              first=false;
+          }
+        $textarea.css({
+          paddingTop: top,
+          height: h - top
+        });
+      }
+
+      $textarea.on( 'keyup change', function( event ) {
+        var html = formatDummyText( $textarea.val() );
+        $dummy.html( html );
+            positionTextarea();
+      }).trigger('change');
+
+      // should debounce this
+      $( window ).on( 'resize', positionTextarea );
+
+    });
+
+    
     
 });
