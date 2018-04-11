@@ -70,13 +70,20 @@ function clientsocket_listener() {
             /*temp get opic eng formatter get*/
             
             //var cert_code = records[i].certcode;
-            var subid = 'RCLPT0005';
-            var file_name = subid + '_formatter.js';
+            //var subid = 'RCLPT0005';
+            subid = omsg.records[i].subid;
+            var file_name = 'js/'+ subid + '_formatter.js';
 
             $.getScript( file_name );
-            
-            getviewdata(records[i],targetdivid);
 
+            var targetdivid = getTargetdivid(subid);
+            
+            try {
+                getviewdata(omsg.records[i],targetdivid);
+            }catch(exception) {
+                console.log(exception);
+                continue;
+            }
             //save localstorage
             setData(records[i]);
 
@@ -91,4 +98,18 @@ function setSocket(mId) {
     socket.emit('SetSocket', {
         mid: mId
     });
+}
+
+function getTargetdivid(subid) {
+    if(subid=='RCCNF0001') {
+        //mk test
+    }
+    else if(subid=='RCLPT0005') {
+        //opic
+        return "spec_forign_lang";
+    }
+    else if(subid=='RCOGC0008') {
+        //inha
+    }
+
 }

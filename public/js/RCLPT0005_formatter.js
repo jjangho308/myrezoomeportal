@@ -20,21 +20,28 @@ third - 성적
    }
    */
 function getviewdata(record,targetdivid) {
-    var viewdata;
-
-    viewdata.date = record.date;
-    viwedata.logo = 'https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/toeic.jpg';
-    viewdata.first = 'OPIC';
-    viewdata.second = '영어'; /*회차 정보 추가해야함 */
-    viewdata.third = record.grade;
-
+    console.log("RCLPT0005 OPIC");
+    
     var htmldiv = '<div class="spec-body">';
-    htmldiv = htmldiv + '<div class="spec-left">';
-    htmldiv = htmldiv + '<input type="checkbox" id="box-2" />';
-    htmldiv = htmldiv + '<label for="box-2"><label/>';
-    htmldiv = htmldiv + '<span></span>';
+        htmldiv = htmldiv + '<div class="spec-left">';
+        htmldiv = htmldiv + '<input type="checkbox" id="box-2" />';
+        htmldiv = htmldiv + '<label for="box-2"><label/>';
+        htmldiv = htmldiv + '<span></span>';
+        htmldiv = htmldiv + '</div>';
+        htmldiv = htmldiv + '<div class="spec-center">';
+        htmldiv = htmldiv + '<img src="img/myresume/user-photo@2x.png" alt="">';
+        htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+        htmldiv = htmldiv + '</div>';
+        htmldiv = htmldiv + '<div class="spec-right">';
+        htmldiv = htmldiv + '<p>OPIC</p>';
+        htmldiv = htmldiv + '<p>'+record.testid+'</p>';
+        htmldiv = htmldiv + '<p>'+record.grade+'</p>';
+        htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
+        htmldiv = htmldiv + '</div>';
+    htmldiv = htmldiv + '</div>';
 
-    $('#'+targetdivid).innerHTML = '<p class="record_first">' + viewdata.first + '</p>';
-    $('#'+targetdivid).innerHTML += '<p class="record_second">' + viewdata.second + '</p>';
-    $('#'+targetdivid).innerHTML += '<p class="record_third">' + viewdata.third + '</p>';
+    $('#'+targetdivid).append(htmldiv);
+    //$('#'+targetdivid).innerHTML = '<p class="record_first">' + viewdata.first + '</p>';
+    //$('#'+targetdivid).innerHTML += '<p class="record_second">' + viewdata.second + '</p>';
+    //$('#'+targetdivid).innerHTML += '<p class="record_third">' + viewdata.third + '</p>';
 }
