@@ -2,6 +2,10 @@
 var formatter= {
     "RCLPT0005":function viewformatter(record) {
         //opic
+
+        var jsonobject = JSON.parse(record.data);
+        conlole.log(jsonobject);
+
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="box-2" />';
@@ -14,7 +18,7 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>OPIC</p>';
-            htmldiv = htmldiv + '<p>'+record.testid+'</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject+'</p>';
             htmldiv = htmldiv + '<p>'+record.grade+'</p>';
             htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
             htmldiv = htmldiv + '</div>';
@@ -26,6 +30,10 @@ var formatter= {
 
     "RCCNF0001":function viewformatter(record) {
         //mktest
+
+        var jsonobject = JSON.parse(record.data);
+        conlole.log(jsonobject);
+
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="box-2" />';
@@ -38,7 +46,7 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>매경TEST</p>';
-            htmldiv = htmldiv + '<p>'+record + '</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject + '</p>';
             htmldiv = htmldiv + '<p>'+record.data+'</p>';
             htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
             htmldiv = htmldiv + '</div>';
@@ -49,6 +57,10 @@ var formatter= {
 
     "RCOGC0008":function viewformatter(record) {
         //inha
+
+        var jsonobject = JSON.parse(record.data);
+        conlole.log(jsonobject);
+
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="box-2" />';
@@ -61,7 +73,7 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>OPIC</p>';
-            htmldiv = htmldiv + '<p>'+record +'</p>';
+            htmldiv = htmldiv + '<p>'+ jsonobject +'</p>';
             htmldiv = htmldiv + '<p>'+record +'</p>';
             htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
             htmldiv = htmldiv + '</div>';
