@@ -79,7 +79,7 @@ function clientsocket_listener() {
             //var targetdivid = getTargetdivid(subid);
             
             try {
-                formatter[subid](record);
+                formatter[subid](omsg.records[i]);
                 //getviewdata(omsg.records[i]);
             }catch(exception) {
                 console.log(exception);
