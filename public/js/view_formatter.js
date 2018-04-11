@@ -37,7 +37,7 @@ var formatter= {
             htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>OPIC</p>';
+            htmldiv = htmldiv + '<p>매경TEST</p>';
             htmldiv = htmldiv + '<p>'+record + '</p>';
             htmldiv = htmldiv + '<p>'+record.data+'</p>';
             htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';

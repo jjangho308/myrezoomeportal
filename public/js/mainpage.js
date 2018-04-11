@@ -71,7 +71,7 @@ function clientsocket_listener() {
             
             //var cert_code = records[i].certcode;
             //var subid = 'RCLPT0005';
-            subid = omsg.records[i].subid;
+            var subid = omsg.records[i].subid;
             //var file_name = 'js/'+ subid + '_formatter.js';
 
             //$.getScript( file_name );
