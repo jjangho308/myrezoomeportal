@@ -115,7 +115,7 @@ describe('Blockchain test suit', () => {
 
     it('Get Nexledger', done => {
 
-        var rtxid = "4aa86a59d0326428af1c91818e639235969a3c55946921cb29406c4da04b8066";
+        var rtxid = "d61f5f9559bf94792f589c517ae46d3829af0b32fba47600f12e9b308b96204e";
 
         nexledgerService.getbytxid(nodeurl, rtxid, function (res) {
             console.log("==========test get procedure==========");
