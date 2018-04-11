@@ -4,7 +4,7 @@ var formatter= {
         //opic
 
         var jsonobject = JSON.parse(record.data);
-        conlole.log(jsonobject);
+        console.log(jsonobject);
 
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
@@ -32,7 +32,7 @@ var formatter= {
         //mktest
 
         var jsonobject = JSON.parse(record.data);
-        conlole.log(jsonobject);
+        console.log(jsonobject);
 
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
@@ -59,7 +59,7 @@ var formatter= {
         //inha
 
         var jsonobject = JSON.parse(record.data);
-        conlole.log(jsonobject);
+        console.log(jsonobject);
 
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
