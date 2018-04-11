@@ -4,7 +4,9 @@ var formatter= {
         //opic
 
         var jsonobject = JSON.parse(record.data);
+        console.log("==========OPIC JSON======================");
         console.log(jsonobject);
+        console.log("=========================================");
 
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
@@ -32,7 +34,9 @@ var formatter= {
         //mktest
 
         var jsonobject = JSON.parse(record.data);
+        console.log("==========MK TEST JSON======================");
         console.log(jsonobject);
+        console.log("============================================");
 
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
@@ -47,7 +51,7 @@ var formatter= {
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>매경TEST</p>';
             htmldiv = htmldiv + '<p>'+jsonobject[0] + '</p>';
-            htmldiv = htmldiv + '<p>'+jsonobject[0].point0+'</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject[0].grade +' / '+ jsonobject[0].point0+'</p>';
             htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
@@ -59,7 +63,9 @@ var formatter= {
         //inha
 
         var jsonobject = JSON.parse(record.data);
+        console.log("==========INHA JSON======================");
         console.log(jsonobject);
+        console.log("=========================================");
 
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
