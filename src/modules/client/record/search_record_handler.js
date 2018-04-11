@@ -34,8 +34,29 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         db.getUserDAO().get({
             uId: uid
         }, (err, users) => {
-            //첫번째 로긴
-            console.log(users);
+            var targs = {
+                familyNameEN: users[0].familyNameEN,
+                firstNameEN: users[0].firstNameEN,
+                fullNameEN: users[0].fullNameEN,
+                familyNameKO: users[0].familyNameKO,
+                firstNameKO: users[0].firstNameKO,
+                fullNameKO: users[0].fullNameKO,
+                birth: users[0].birth,
+                gender: users[0].gender,
+                phone: users[0].phone,
+                email: users[0].email,
+                ci: users[0].ci,
+                pkey: clientReq.pkey,
+            }
+            targs.pkey = clientReq.pkey;
+
+            var msg = new SearchRecordPush({
+                mid: clientReq.mId,
+                sid: clientReq.sId,
+                cmd: clientReq.cmd,
+                args: targs,
+            });
+
             if (users[0].first == 'Y') {
                 db.getOrgDAO().findAll((err, resultOrgIds) => {
                     for (var i in resultOrgIds) {
@@ -48,30 +69,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                     subIds.push(result[j].SUB_ID);
                                 }
 
-                                var targs = {
-                                    familyNameEN: users[0].familyNameEN,
-                                    firstNameEN: users[0].firstNameEN,
-                                    fullNameEN: users[0].fullNameEN,
-                                    familyNameKO: users[0].familyNameKO,
-                                    firstNameKO: users[0].firstNameKO,
-                                    fullNameKO: users[0].fullNameKO,
-                                    birth: users[0].birth,
-                                    gender: users[0].gender,
-                                    phone: users[0].phone,
-                                    email: users[0].email,
-                                    ci: users[0].ci,
-                                    pkey: clientReq.pkey,
-                                }
-
-                                
-                                targs.pkey = clientReq.pkey;
-
-                                var msg = new SearchRecordPush({
-                                    mid: clientReq.mId,
-                                    sid: clientReq.sId,
-                                    args: targs,
-                                });
-
                                 msg.args.subIDs = subIds;
 
                                 Managers.push().init();
@@ -83,11 +80,66 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     }
                 })
             } else {
-                if (clientReq.update==true) {
+                if (clientReq.update == true) {
+                    db.getOrgDAO().findAll((err, resultOrgIds) => {
+                        for (var i in resultOrgIds) {
+                            (function (i) {
+                                var subIds = [];
+
+                                //============================ 1. make subIDs =====================================
+                                db.getRecordDAO().getStoredDataByUserId(uid, resultOrgIds[i].ORG_ID, (err, storedDatas) => {
+                                    console.log("i index ORG_ID :" + resultOrgIds[i].ORG_ID);
+
+                                    //BLC MAP에 저장된 record가 있는경우
+                                    if (storedDatas.length > 0) {
+                                        //console.log("subIDs + records 함께 있어야해 ");
+                                        db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
+                                            var subIds = [];
+                                            for (var j in subIDsResult) {
+                                                subIds.push(subIDsResult[j].SUB_ID)
+                                            }
+
+                                            msg.args.subIDs = subIds;
+                                            var records = [];
+
+                                            for (var k in storedDatas) {
+                                                (function (k) {
+                                                    records.push({
+                                                        subID: storedDatas[k].SUB_ID,
+                                                        hashed: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                                    })
+                                                }).call(this, k);
+                                            }
+
+                                            msg.args.records = records;
+
+                                            console.log(msg);
+                                            console.log(msg.args.records);
+                                        })
+
+
+                                    } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
+                                        //console.log("subIDs만 있으면 돼!");
+                                        db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
+                                            var subIds = [];
+                                            for (var j in subIDsResult) {
+                                                subIds.push(subIDsResult[j].SUB_ID)
+                                            }
+
+                                            msg.args.subIDs = subIds;
+                                            delete msg.args.records;
+                                            console.log(msg);
+                                            console.log(msg.args.records);
+                                        })
+                                    }
+                                })
+                            }).call(this, i);
+                        } //Per orgIDs, Sending AMQ Message
+                    })
 
                 } else {
                     //refresh
-                    
+
                 }
             }
 
@@ -127,14 +179,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             // }
         })
     }
-
-    sendmessage(users, paramSubIds, clientReq) {
-
-
-
-    }
-
-
 
     response(clientRequest, agentRequest) {
         console.log('Socket Push : ');
