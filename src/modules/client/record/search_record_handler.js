@@ -87,83 +87,168 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             } else {
                 if (clientReq.update == true) {
                     db.getOrgDAO().findAll((err, resultOrgIds) => {
-                        for (var i in resultOrgIds) {
-                            (function (i) {
 
-                                //============================ 1. make subIDs =====================================
-                                db.getRecordDAO().getStoredDataByUserId(uid, resultOrgIds[i].ORG_ID, (err, storedDatas) => {
+                        var func1 = (function (i) {
 
-                                    //BLC MAP에 저장된 record가 있는경우
-                                    if (storedDatas.length > 0) {
-                                        //console.log("subIDs + records 함께 있어야해 ");
-                                        db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
+                            //============================ 1. make subIDs =====================================
+                            db.getRecordDAO().getStoredDataByUserId(uid, resultOrgIds[i].ORG_ID, (err, storedDatas) => {
+
+                                //BLC MAP에 저장된 record가 있는경우
+                                if (storedDatas.length > 0) {
+                                    //console.log("subIDs + records 함께 있어야해 ");
+                                    db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
 
 
-                                            var subIds = [];
-                                            for (var j in subIDsResult) {
-                                                subIds.push(subIDsResult[j].SUB_ID)
-                                            }
-                                            msg.args.subIDs = subIds;
+                                        var subIds = [];
+                                        for (var j in subIDsResult) {
+                                            subIds.push(subIDsResult[j].SUB_ID)
+                                        }
+                                        msg.args.subIDs = subIds;
 
-                                            var records = [];
+                                        var records = [];
 
-                                            var func = function (k) {
-                                                nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, (res) => {
-                                                    records.push({
-                                                        subID: storedDatas[k].SUB_ID,
-                                                        hashed: res.result.hash
-                                                    })
-                                                    if (k < storedDatas.length - 1) {
-                                                        func(++k);
-                                                    } else {
-                                                        msg.args.records = records;
+                                        var func2 = function (k) {
+                                            nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, (res) => {
+                                                records.push({
+                                                    subID: storedDatas[k].SUB_ID,
+                                                    hashed: res.result.hash
+                                                })
+                                                if (k < storedDatas.length - 1) {
+                                                    func2(++k);
+                                                } else {
+                                                    msg.args.records = records;
 
-                                                        console.log(msg);
-                                                        console.log(msg.args.records);
-                                                    }
-                                                });
-                                            };
-                                            if(storedDatas.length > 0){
-                                                func(0);
-                                            }
-                                            // for (var k in storedDatas) {
-                                            //     (function (k) {
-                                            //         nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, (res) => {
-                                            //             records.push({
-                                            //                 subID: storedDatas[k].SUB_ID,
-                                            //                 hashed: res.result.hash
-                                            //             })
-                                            //         })
-                                            //     }).call(this, k);
-                                            // }
+                                                    console.log(msg);
+                                                    console.log(msg.args.records);
+                                                }
+                                            });
+                                        };
+                                        if (storedDatas.length > 0) {
+                                            func2(0);
+                                        }
+                                        // for (var k in storedDatas) {
+                                        //     (function (k) {
+                                        //         nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, (res) => {
+                                        //             records.push({
+                                        //                 subID: storedDatas[k].SUB_ID,
+                                        //                 hashed: res.result.hash
+                                        //             })
+                                        //         })
+                                        //     }).call(this, k);
+                                        // }
 
-                                            // msg.args.records = records;
+                                        // msg.args.records = records;
 
-                                            // console.log(msg);
-                                            // console.log(msg.args.records);
-                                        })
-                                    } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
-                                        //console.log("subIDs만 있으면 돼!");
-                                        db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
-                                            delete msg.args.subIDs;
-                                            delete msg.args.records;
+                                        // console.log(msg);
+                                        // console.log(msg.args.records);
+                                    })
+                                } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
+                                    //console.log("subIDs만 있으면 돼!");
+                                    db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
+                                        delete msg.args.subIDs;
+                                        delete msg.args.records;
 
-                                            var subIds = [];
+                                        var subIds = [];
 
-                                            for (var j in subIDsResult) {
-                                                subIds.push(subIDsResult[j].SUB_ID)
-                                            }
+                                        for (var j in subIDsResult) {
+                                            subIds.push(subIDsResult[j].SUB_ID)
+                                        }
 
-                                            msg.args.subIDs = subIds;
+                                        msg.args.subIDs = subIds;
 
-                                            //console.log("BLCMAP에 없는 경우 :");
-                                            console.log(msg);
+                                        //console.log("BLCMAP에 없는 경우 :");
+                                        console.log(msg);
 
-                                        })
-                                    }
-                                })
-                            }).call(this, i);
-                        } //Per orgIDs, Sending AMQ Message
+                                    })
+                                }
+                            })
+
+                            if (i < resultOrgIds.length - 1) {
+                                func1(++i);
+                            } else {
+                                // rest code
+                            }
+                        });
+                        if (resultOrgIds.length > 0) {
+                            func1(0);
+                        }
+                        // for (var i in resultOrgIds) {
+                        //     (function (i) {
+
+                        //         //============================ 1. make subIDs =====================================
+                        //         db.getRecordDAO().getStoredDataByUserId(uid, resultOrgIds[i].ORG_ID, (err, storedDatas) => {
+
+                        //             //BLC MAP에 저장된 record가 있는경우
+                        //             if (storedDatas.length > 0) {
+                        //                 //console.log("subIDs + records 함께 있어야해 ");
+                        //                 db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
+
+
+                        //                     var subIds = [];
+                        //                     for (var j in subIDsResult) {
+                        //                         subIds.push(subIDsResult[j].SUB_ID)
+                        //                     }
+                        //                     msg.args.subIDs = subIds;
+
+                        //                     var records = [];
+
+                        //                     var func = function (k) {
+                        //                         nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, (res) => {
+                        //                             records.push({
+                        //                                 subID: storedDatas[k].SUB_ID,
+                        //                                 hashed: res.result.hash
+                        //                             })
+                        //                             if (k < storedDatas.length - 1) {
+                        //                                 func(++k);
+                        //                             } else {
+                        //                                 msg.args.records = records;
+
+                        //                                 console.log(msg);
+                        //                                 console.log(msg.args.records);
+                        //                             }
+                        //                         });
+                        //                     };
+                        //                     if (storedDatas.length > 0) {
+                        //                         func(0);
+                        //                     }
+                        //                     // for (var k in storedDatas) {
+                        //                     //     (function (k) {
+                        //                     //         nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, (res) => {
+                        //                     //             records.push({
+                        //                     //                 subID: storedDatas[k].SUB_ID,
+                        //                     //                 hashed: res.result.hash
+                        //                     //             })
+                        //                     //         })
+                        //                     //     }).call(this, k);
+                        //                     // }
+
+                        //                     // msg.args.records = records;
+
+                        //                     // console.log(msg);
+                        //                     // console.log(msg.args.records);
+                        //                 })
+                        //             } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
+                        //                 //console.log("subIDs만 있으면 돼!");
+                        //                 db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
+                        //                     delete msg.args.subIDs;
+                        //                     delete msg.args.records;
+
+                        //                     var subIds = [];
+
+                        //                     for (var j in subIDsResult) {
+                        //                         subIds.push(subIDsResult[j].SUB_ID)
+                        //                     }
+
+                        //                     msg.args.subIDs = subIds;
+
+                        //                     //console.log("BLCMAP에 없는 경우 :");
+                        //                     console.log(msg);
+
+                        //                 })
+                        //             }
+                        //         })
+                        //     }).call(this, i);
+                        // } //Per orgIDs, Sending AMQ Message
                     })
 
                 } else {
