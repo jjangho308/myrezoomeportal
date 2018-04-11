@@ -1,7 +1,7 @@
 import SearchRecordRequestHandler from '../modules/client/record/search_record_handler'
 import Initializer from '../core/initializer';
 
-describe.skip('SearchRecordRequestHandler Test suit', () => {
+describe('SearchRecordRequestHandler Test suit', () => {
     var HD = null;
     before('SearchRecordRequestHandler init', () => {
         Initializer();

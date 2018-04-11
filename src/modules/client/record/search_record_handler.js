@@ -8,6 +8,8 @@ import AbstractClientRequestHandler from '../abstract_client_request_handler';
 import ClientRequestManager from '../client_request'
 import SearchRecordPush from '../../push/message/search';
 
+import NexledgerService from '../../blockchain/nexledgerservice';
+
 /**
  * Handler for SearchRecordRequest. <br />
  * 이력 검색 요청 핸들러.
@@ -57,6 +59,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                 args: targs,
             });
 
+            var nexledgerService = new NexledgerService();
+            var nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
+
             if (users[0].first == 'Y') {
                 db.getOrgDAO().findAll((err, resultOrgIds) => {
                     for (var i in resultOrgIds) {
@@ -84,29 +89,31 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     db.getOrgDAO().findAll((err, resultOrgIds) => {
                         for (var i in resultOrgIds) {
                             (function (i) {
-                                var subIds = [];
 
                                 //============================ 1. make subIDs =====================================
                                 db.getRecordDAO().getStoredDataByUserId(uid, resultOrgIds[i].ORG_ID, (err, storedDatas) => {
-                                    console.log("i index ORG_ID :" + resultOrgIds[i].ORG_ID);
 
                                     //BLC MAP에 저장된 record가 있는경우
                                     if (storedDatas.length > 0) {
                                         //console.log("subIDs + records 함께 있어야해 ");
                                         db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
+
+
                                             var subIds = [];
                                             for (var j in subIDsResult) {
                                                 subIds.push(subIDsResult[j].SUB_ID)
                                             }
-
                                             msg.args.subIDs = subIds;
+
                                             var records = [];
 
                                             for (var k in storedDatas) {
                                                 (function (k) {
-                                                    records.push({
-                                                        subID: storedDatas[k].SUB_ID,
-                                                        hashed: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                                    nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, (res) => {
+                                                        records.push({
+                                                            subID: storedDatas[k].SUB_ID,
+                                                            hashed: res.result.hash
+                                                        })
                                                     })
                                                 }).call(this, k);
                                             }
@@ -116,20 +123,23 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                             console.log(msg);
                                             console.log(msg.args.records);
                                         })
-
-
                                     } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
                                         //console.log("subIDs만 있으면 돼!");
                                         db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
+                                            delete msg.args.subIDs;
+                                            delete msg.args.records;
+
                                             var subIds = [];
+
                                             for (var j in subIDsResult) {
                                                 subIds.push(subIDsResult[j].SUB_ID)
                                             }
 
                                             msg.args.subIDs = subIds;
-                                            delete msg.args.records;
+
+                                            //console.log("BLCMAP에 없는 경우 :");
                                             console.log(msg);
-                                            console.log(msg.args.records);
+
                                         })
                                     }
                                 })
