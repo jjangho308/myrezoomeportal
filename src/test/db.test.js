@@ -6,7 +6,7 @@ import initialize from '../core/initializer';
 
 import Managers from '../core/managers';
 
-describe('Cassandra test suit', () => {
+describe.skip('Cassandra test suit', () => {
     var csdr = null;
     before('DB module initialize', () => {
         Initializer();
@@ -84,28 +84,32 @@ describe('Cassandra test suit', () => {
     })
 })
 
-describe.skip('Blockchain test suit', () => {
+describe('Blockchain test suit', () => {
     var nodeurl = null;
     var nexledgerService = null;
 
     before('Blockchain module initialize', () => {
-        Initializer();
+        initialize();
         nexledgerService = new NexledgerService();
         nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
     });
 
     it('Put Nexledger', done => {
 
+        // var data = {
+        //     name: "lkwook",
+        //     subject: "meth",
+        //     score: "80"
+        // };
         var data = {
-            name: "lkwook",
-            subject: "meth",
-            score: "80"
-        };
+            hash:"dddddddddddddddddddddddddddddddd"
+        }
 
         nexledgerService.put(nodeurl, "155WAnc5m7RFjjLgQJjQN82nr7xjYXN2wg", data, function (res) {
             console.log("==========test put procedure==========");
             console.log(res);
             console.log("======================================");
+            done();
         });
     });
 
@@ -117,6 +121,7 @@ describe.skip('Blockchain test suit', () => {
             console.log("==========test get procedure==========");
             console.log(res);
             console.log("======================================");
+            done();
         });
     });
 })

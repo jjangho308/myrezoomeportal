@@ -72,14 +72,15 @@ function clientsocket_listener() {
             //var cert_code = records[i].certcode;
             //var subid = 'RCLPT0005';
             subid = omsg.records[i].subid;
-            var file_name = 'js/'+ subid + '_formatter.js';
+            //var file_name = 'js/'+ subid + '_formatter.js';
 
-            $.getScript( file_name );
+            //$.getScript( file_name );
 
-            var targetdivid = getTargetdivid(subid);
+            //var targetdivid = getTargetdivid(subid);
             
             try {
-                getviewdata(omsg.records[i],targetdivid);
+                formatter[subid](record);
+                //getviewdata(omsg.records[i]);
             }catch(exception) {
                 console.log(exception);
                 continue;
