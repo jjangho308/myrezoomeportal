@@ -102,6 +102,7 @@ function getTargetdivid(subid) {
     }
     else if(subid=='RCLPT0005') {
         //opic
+        return "spec_forign_lang";
     }
     else if(subid=='RCOGC0008') {
         //inha
