@@ -1,7 +1,7 @@
 import SearchRecordRequestHandler from '../modules/client/record/search_record_handler'
 import Initializer from '../core/initializer';
 
-describe('SearchRecordRequestHandler Test suit', () => {
+describe.skip('SearchRecordRequestHandler Test suit', () => {
     var HD = null;
     before('SearchRecordRequestHandler init', () => {
         Initializer();
@@ -13,9 +13,9 @@ describe('SearchRecordRequestHandler Test suit', () => {
             "mId": "message928936142234",
 
             //token
-            "uId": "UID2",
+            "uId": "UID1",
 
-            "update" : false,
+            "update" : true,
             
             "cmd": "SearchRecord",
 

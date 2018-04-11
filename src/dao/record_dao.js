@@ -15,13 +15,13 @@ class RecordDAO extends AbstractDAO {
         super(connectionPool);
     }
 
-    isSignUp(uid, cb){
-        var query = mysql.format(recordQuery.isSignUp, uid);
+    getStoredDataByUserId(uid, orgid, cb){
+        var query = mysql.format(recordQuery.getStoredDataByUserId, [uid, orgid]);
         this.query(query, (err, result) => {
             if(err){
                 cb(err)
             }else{
-                cb(err, result.length);
+                cb(err, result);
             }
         })
     }
