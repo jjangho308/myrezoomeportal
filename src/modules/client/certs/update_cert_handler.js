@@ -29,7 +29,7 @@ class UpdateCertificateHandler extends AbstractClientRequestHandler {
         }
 
         var certDAO = Managers.db().getCertDAO();
-        certDAO.set({
+        certDAO.setCert({
             certId: requestEntity.certId
         }, requestEntity.cert, (err, affectedRows) => {
             if (!!err) {

@@ -17,7 +17,7 @@ class CreateResumeRequest extends AbstractClientRequestEntity {
     constructor(opt) {
         super(opt);
         this.uId = opt.uId;
-        this.cert = opt.cert;
+        this.resume = opt.resume;
     }
 }
 

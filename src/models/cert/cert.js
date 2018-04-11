@@ -21,7 +21,7 @@ class CertModel extends AbstractModel {
         this.uId = data.uId;
         this.sId = data.sId;
         this.certId = data.certId;
-        this.blcMapId = data.blcMapId;
+        this.txid = data.txid;
         this.shared = data.shared;
         this.lastShared = data.lastShared;
         this.created = data.created;
@@ -43,7 +43,7 @@ class CertModel extends AbstractModel {
             sId: row.S_USR_CERT_ID,
             certId: row.CERT_ID,
             uId: row.UID,
-            blcMapId: row.BLC_MAP_ID,
+            txid: row.BLC_MAP_ID,
             shared: row.SHRD_YN == 'Y',
             deleted: row.DEL_YN == 'Y',
             lastShared: row.LST_SHRD_DT,
@@ -63,7 +63,7 @@ class CertModel extends AbstractModel {
             S_USR_CERT_ID: this.sId,
             CERT_ID: this.certId,
             UID: this.uId,
-            BLC_MAP_ID: this.blcMapId,
+            BLC_MAP_ID: this.txid,
             SHRD_YN: this.shared ? 'Y' : 'N',
             LST_SHRD_DT: this.lastShared,
             CRTD_DT: this.created,

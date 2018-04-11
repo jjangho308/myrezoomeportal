@@ -10,13 +10,17 @@ import app from '../app';
  * @author TACKSU
  */
 describe('/resumes URL test suite', () => {
-    var jwtToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJpZCI6InNlb255ZW9uIn0sImV4cCI6MTUyMTEzOTk1MCwiaWF0IjoxNTIxMDk2NzUwfQ.YFxcC_zN9wNNXVkXIl1KS87ZOdI2qqwPe7Jf8O7rwUI';
+
+    var jwtToken = null;
+
     before('Service initialize', () => {
-        process.env.NODE_ENV = 'development';
+        jwtToken = Managers.token().issueToken({
+            uId: 1
+        })
         chai.use(chaihttp);
     });
 
-    it('HTML Page request', done => {
+    it.skip('HTML Page request', done => {
         chai.request(app)
             .get('/resumes')
             .set('Content-Type', 'text/html')
@@ -27,7 +31,7 @@ describe('/resumes URL test suite', () => {
             });
     });
 
-    it('Resume ajax request', done => {
+    it.skip('Resume ajax request', done => {
         chai.request(app)
             .get('/resumes')
             .set('Content-Type', 'application/json')
@@ -37,5 +41,44 @@ describe('/resumes URL test suite', () => {
             .end((err, res) => {
                 done();
             });
+    })
+
+    it('Create resume request test case', done => {
+        chai.request(app)
+            .post('/resumes')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'Bearer ' + jwtToken)
+            .set('X-Requested-With', 'XMLHttpRequest')
+            .send({
+                resume: {
+                    title: '삼성 이력서',
+                    records: [
+                        'txid1',
+                        'txid2'
+                    ]
+                }
+            })
+            .end((err, res) => {
+                done();
+            })
+    })
+
+    it('Get resume viewer test case', done => {
+        chai.request(app)
+            .get('/resumes')
+            .set('Content-Type', 'text/html')
+            .set('Authorization', 'Bearer ' + jwtToken)
+            .send({
+                resume: {
+                    title: '삼성 이력서',
+                    records: [
+                        'txid1',
+                        'txid2'
+                    ]
+                }
+            })
+            .end((err, res) => {
+                done();
+            })
     })
 });
