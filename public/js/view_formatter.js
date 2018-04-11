@@ -10,7 +10,7 @@ var formatter= {
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="box-2" />';
             htmldiv = htmldiv + '<label for="box-2"><label/>';
-            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<span>'+ jsonobject[0].date +'</span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/myresume/user-photo@2x.png" alt="">';
@@ -18,8 +18,8 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>OPIC</p>';
-            htmldiv = htmldiv + '<p>'+jsonobject+'</p>';
-            htmldiv = htmldiv + '<p>'+record.grade+'</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject[0].testid +'</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject[0].grade+'</p>';
             htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
