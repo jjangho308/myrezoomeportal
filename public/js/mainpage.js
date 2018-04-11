@@ -81,12 +81,13 @@ function clientsocket_listener() {
             try {
                 formatter[subid](omsg.records[i]);
                 //getviewdata(omsg.records[i]);
+                setData(omsg.records[i]);
             }catch(exception) {
                 console.log(exception);
                 continue;
             }
             //save localstorage
-            setData(records[i]);
+            
 
 
         }
