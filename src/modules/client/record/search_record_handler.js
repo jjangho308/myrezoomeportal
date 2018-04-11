@@ -1,4 +1,22 @@
+import Managers from '../../../core/managers'
 
+import DataManager from '../../db/db';
+import PushManager from '../../push/push';
+
+import AbstractClientRequestHandler from '../abstract_client_request_handler';
+
+import ClientRequestManager from '../client_request'
+import SearchRecordPush from '../../push/message/search';
+
+import NexledgerService from '../../blockchain/nexledgerservice';
+
+/**
+ * Handler for SearchRecordRequest. <br />
+ * 이력 검색 요청 핸들러.
+ * 
+ * @author JJANGHO
+ * @since 180313
+ */
 class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     constructor(opt) {
         super(opt);
