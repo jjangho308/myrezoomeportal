@@ -107,21 +107,40 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                             var records = [];
 
-                                            for (var k in storedDatas) {
-                                                (function (k) {
-                                                    nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, (res) => {
-                                                        records.push({
-                                                            subID: storedDatas[k].SUB_ID,
-                                                            hashed: res.result.hash
-                                                        })
+                                            var func = function (k) {
+                                                nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, (res) => {
+                                                    records.push({
+                                                        subID: storedDatas[k].SUB_ID,
+                                                        hashed: res.result.hash
                                                     })
-                                                }).call(this, k);
+                                                    if (k < storedDatas.length - 1) {
+                                                        func(++k);
+                                                    } else {
+                                                        msg.args.records = records;
+
+                                                        console.log(msg);
+                                                        console.log(msg.args.records);
+                                                    }
+                                                });
+                                            };
+                                            if(storedDatas.length > 0){
+                                                func(0);
                                             }
+                                            // for (var k in storedDatas) {
+                                            //     (function (k) {
+                                            //         nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, (res) => {
+                                            //             records.push({
+                                            //                 subID: storedDatas[k].SUB_ID,
+                                            //                 hashed: res.result.hash
+                                            //             })
+                                            //         })
+                                            //     }).call(this, k);
+                                            // }
 
-                                            msg.args.records = records;
+                                            // msg.args.records = records;
 
-                                            console.log(msg);
-                                            console.log(msg.args.records);
+                                            // console.log(msg);
+                                            // console.log(msg.args.records);
                                         })
                                     } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
                                         //console.log("subIDs만 있으면 돼!");
