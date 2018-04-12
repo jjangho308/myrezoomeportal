@@ -56,7 +56,7 @@ export default {
      * @author TACKSU
      */
     post: (req, res, next) => {
-        var userId = req.params.userId;
+        //var userId = req.params.uId;
 
         if (!!req.xhr) {
             Managers.client().request(new CreateResumeRequest(req.body), (err, result) => {

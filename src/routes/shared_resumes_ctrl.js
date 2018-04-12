@@ -1,3 +1,4 @@
+import Managers from '../core/managers';
 import ShareResumeRequest from '../modules/client/resume/share_resume_request';
 
 /**

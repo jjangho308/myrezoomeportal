@@ -7,6 +7,7 @@ import AbstractClientRequestEntity from "../abstract_client_request_entity";
 class ShareResumeRequest extends AbstractClientRequestEntity {
     constructor(opt) {
         super(opt);
+        this.shared_resume=opt.shared_resume;
     }
 }
 

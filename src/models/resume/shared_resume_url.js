@@ -30,6 +30,8 @@ class SharedResumeUrl extends AbstractModel {
         this.expired = opt.expired;
         this.created = opt.created;
         this.modified = opt.modified;
+
+        this.trim(this);
     }
 
     /**

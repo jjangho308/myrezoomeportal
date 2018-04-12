@@ -91,7 +91,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it('Share certificate test case', done => {
+    it.skip('Share certificate test case', done => {
         chai.request(app)
             .post('/shared_certs')
             .set('Content-Type', 'application/json')

@@ -1,5 +1,4 @@
 import Managers from '../core/managers';
-
 import ShareCertRequest from '../modules/client/certs/share_cert_request';
 
 /**
