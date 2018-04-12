@@ -1,6 +1,8 @@
 import chai from 'chai';
 import chaihttp from 'chai-http';
 
+import Managers from '../core/managers';
+
 import app from '../app';
 
 /**
@@ -63,7 +65,7 @@ describe('/resumes URL test suite', () => {
             })
     })
 
-    it('Get resume viewer test case', done => {
+    it.skip('Get resume viewer test case', done => {
         chai.request(app)
             .get('/resumes')
             .set('Content-Type', 'text/html')
@@ -80,5 +82,9 @@ describe('/resumes URL test suite', () => {
             .end((err, res) => {
                 done();
             })
+    })
+
+    it('', done => {
+
     })
 });
