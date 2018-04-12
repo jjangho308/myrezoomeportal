@@ -17,6 +17,8 @@ $(document).ready(function(){
 
         $.post("/signin", param ,function (result) {
             console.log(result);
+            window.location.href = "main";
+
         });
         
     });
