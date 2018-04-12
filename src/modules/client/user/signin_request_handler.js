@@ -31,7 +31,7 @@ class SigninRequestHandler extends AbstractClientRequestHandler {
         }, (err, users) => {
             if (!!err) {
                 console.log(err.toString());
-            } else if (users.length > 0 && users[0].pw == requestEntity.pw) {
+            } else if (users.length > 0 && users[0].pw == requestEntity.password) {
                 var token = Managers.token().issueToken({
                     uId: users[0].uId
                 });
