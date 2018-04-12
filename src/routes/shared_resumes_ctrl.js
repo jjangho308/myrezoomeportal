@@ -1,3 +1,5 @@
+import ShareResumeRequest from '../modules/client/resume/share_resume_request';
+
 /**
  * Controller for '/shared_resumes' URI. <br />
  * 
@@ -16,6 +18,14 @@ export default {
      * Post controller. <br />
      */
     post: (req, res, next) => {
-
+        if (!!req.xhr) {
+            Managers.client().request(new ShareResumeRequest(req.body), (err, result) => {
+                if (!!err) {
+                    res.json(JSON.stringify(err));
+                } else {
+                    res.json(result);
+                }
+            })
+        }
     }
 }

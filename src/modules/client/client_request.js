@@ -31,6 +31,9 @@ import GetResumeHandler from './resume/get_resume_handler';
 import UpdateResumeRequest from './resume/update_resume_request';
 import UpdateResumeHandler from './resume/update_resume_handler';
 
+import ShareResumeRequest from './resume/share_resume_request';
+import ShareResumeRequestHandler from './resume/share_resume_handler';
+
 /**
  * Request job manager from client. <br />
  * 초기화 시 Job map를 생성하며 Client channel의 HTTP Request 발생 시 Job을 생성하여 저장한다.
@@ -72,6 +75,8 @@ class ClientRequestManager extends AbstractManager {
         this.handlerMap.set(CreateResumeRequest, new CreateResumeHandler());
 
         this.handlerMap.set(ShareCertRequest, new ShareCertRequestHandler());
+
+        this.handlerMap.set(ShareResumeRequest, new ShareResumeRequestHandler());
 
         this.setPrepared();
     }
