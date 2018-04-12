@@ -57,8 +57,8 @@ class SharedCertUrl extends AbstractModel {
             url: row.URL,
             password: row.PASSCODE,
             expired: row.EXPIRED_DT,
-            deleted: row.DEL_YN,
-            public: row.PUB_YN
+            deleted: Util.ftb(row.DEL_YN),
+            public: Util.ftb(row.PUB_YN)
         });
     }
 

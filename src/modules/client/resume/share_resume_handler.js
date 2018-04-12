@@ -7,11 +7,20 @@ import AbstractClientRequestHandler from "../abstract_client_request_handler";
  * @author TACKSU
  */
 class ShareResumeRequestHandler extends AbstractClientRequestHandler {
+
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180412
+     * @author TACKSU
+     * 
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
     }
 
-    
+
     request(request, cb) {
 
     }

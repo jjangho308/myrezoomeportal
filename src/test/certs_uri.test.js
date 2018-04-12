@@ -64,7 +64,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it('Update certificate request test', done => {
+    it.skip('Update certificate request test', done => {
         chai.request(app)
             .patch('/certs/3da38796-da33-41ec-8de7-31b9a2ea4e59')
             .set('Content-Type', 'application/json')
@@ -73,6 +73,34 @@ describe('/certs URI Page test suite.', () => {
             .send({
                 cert: {
                     txid: '5',
+                }
+            })
+            .end((err, res) => {
+                done();
+            });
+    })
+
+    it('Share certificate test case', done => {
+        chai.request(app)
+            .post('/shared_certs')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'Bearer ' + jwtToken)
+            .set('X-Requested-With', 'XMLHttpRequest')
+            .send({
+                shared_cert: {
+                    certId: '9b292e8a-b47e-4965-bcb2-c755090bde61',
+                    record: {
+                        subcode: 'SUB1',
+                        data: 'NAME'
+                    },
+                    url: 'https://rzoo.me/jskji45',
+                    password: 'asdfasdf',
+                    emails: [
+                        'asdfasdf@asdfasd.com',
+                        'qwerqwer@qwerqwer.com'
+                    ],
+                    msg: 'Hello World!',
+                    public: false
                 }
             })
             .end((err, res) => {

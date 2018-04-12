@@ -27,8 +27,8 @@ export default (() => {
          * @since 180330
          * @author TACKSU
          */
-        flagToBool: function (ynString) {
-            return ynString == 'Y' ? true : false
+        flagToBool: function (yn) {
+            return yn == 'Y' ? true : false
         },
 
         /**
