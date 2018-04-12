@@ -15,7 +15,7 @@ describe('SearchRecordRequestHandler Test suit', () => {
             //token
             "uId": "UID1",
 
-            "update" : true,
+            "update" : false,
             
             "cmd": "SearchRecord",
 
@@ -23,29 +23,29 @@ describe('SearchRecordRequestHandler Test suit', () => {
 
             "pkey": "ewkrjdsifjcvasdfjkasdkfljjei",
 
-            "orgInfos": [{
-                "orgId": "200",
-                "subIDs": ["RCCNF0001", "RCGOC0002"],
-                "require": ["requirekey1"],
-                "records": [
-                    {
-                        "subID": "RCCNF0001",
-                        "hashed": "hashed1"
-                    },
-                    {
-                        "subID": "RCGOC0002",
-                        "hashed": "hashed2"
-                    }
-                ]
-            },
-            {
-                "orgId": "100",
-                "subIDs": ["RCLPT0006", "RCLPT0005"],
-            }
-        ]
+        //     "orgInfos": [{
+        //         "orgId": "200",
+        //         "subIDs": ["RCCNF0001", "RCGOC0002"],
+        //         "require": ["requirekey1"],
+        //         "records": [
+        //             {
+        //                 "subID": "RCCNF0001",
+        //                 "hashed": "hashed1"
+        //             },
+        //             {
+        //                 "subID": "RCGOC0002",
+        //                 "hashed": "hashed2"
+        //             }
+        //         ]
+        //     },
+        //     {
+        //         "orgId": "100",
+        //         "subIDs": ["RCLPT0006", "RCLPT0005"],
+        //     }
+        // ]
         }, function (res) {
             console.log(res);
-            done();
+            
         });
 
     }).timeout(10000);

@@ -10,6 +10,11 @@ import SearchRecordPush from '../../push/message/search';
 
 import NexledgerService from '../../blockchain/nexledgerservice';
 
+
+import sleep from 'system-sleep';
+
+
+
 /**
  * Handler for SearchRecordRequest. <br />
  * 이력 검색 요청 핸들러.
@@ -89,7 +94,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     db.getOrgDAO().findAll((err, resultOrgIds) => {
                         for (var i in resultOrgIds) {
                             (function (i) {
-
                                 //============================ 1. make subIDs =====================================
                                 db.getRecordDAO().getStoredDataByUserId(uid, resultOrgIds[i].ORG_ID, (err, storedDatas) => {
 
@@ -98,30 +102,39 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                         //console.log("subIDs + records 함께 있어야해 ");
                                         db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
 
-
                                             var subIds = [];
-                                            for (var j in subIDsResult) {
-                                                subIds.push(subIDsResult[j].SUB_ID)
-                                            }
-                                            msg.args.subIDs = subIds;
 
                                             var records = [];
-
                                             for (var k in storedDatas) {
                                                 (function (k) {
-                                                    nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, (res) => {
+
+                                                    console.log(k + " " + storedDatas[k].BLC_MAP_ID)
+                                                    nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, function (res) {
+
                                                         records.push({
                                                             subID: storedDatas[k].SUB_ID,
                                                             hashed: res.result.hash
                                                         })
+
+
+                                                        sleep(50);
+
+                                                        if (k == storedDatas.length - 1) {
+                                                            for (var j in subIDsResult) {
+                                                                subIds.push(subIDsResult[j].SUB_ID)
+                                                            }
+
+                                                            msg.args.subIDs = subIds;
+                                                            msg.args.records = records;
+
+                                                            Managers.push().init();
+                                                            Managers.push().sendMessage(msg, resultOrgIds[i].ORG_ID, err => {
+                                                                !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
+                                                            });
+                                                        }
                                                     })
                                                 }).call(this, k);
                                             }
-
-                                            msg.args.records = records;
-
-                                            console.log(msg);
-                                            console.log(msg.args.records);
                                         })
                                     } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
                                         //console.log("subIDs만 있으면 돼!");
@@ -137,8 +150,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                             msg.args.subIDs = subIds;
 
-                                            //console.log("BLCMAP에 없는 경우 :");
-                                            console.log(msg);
+
+                                            Managers.push().init();
+                                            Managers.push().sendMessage(msg, resultOrgIds[i].ORG_ID, err => {
+                                                !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
+                                            });
 
                                         })
                                     }
@@ -149,44 +165,49 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                 } else {
                     //refresh
+                    db.getRecordDAO().getStoredOrgByUserId(uid, (err, storedOrgs) => {
+                        console.log(storedOrgs);
 
+                        for (var i in storedOrgs) {
+
+                            (function (i) {
+                                db.getRecordDAO().getStoredDataByUserId(uid, storedOrgs[i].ORG_ID,(err, storedDatas) => {
+                                    var records = [];
+
+                                    //console.log(storedDatas);
+
+                                    for (var j in storedDatas) {
+                                        (function (j) {
+                                            nexledgerService.getbytxid(nodeurl, storedDatas[j].TRX_ID, function (res) {
+
+                                                records.push({
+                                                    subID: storedDatas[j].SUB_ID,
+                                                    hashed: res.result.hash
+                                                })
+
+
+                                                sleep(50);
+
+                                                if (j == storedDatas.length - 1) {
+                                                    msg.args.records = records;
+
+                                                    Managers.push().init();
+                                                    Managers.push().sendMessage(msg, storedOrgs[i].ORG_ID, err => {
+                                                        !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
+                                                    });
+                                                }
+
+                                                console.log(msg.args.records);
+                                            })
+                                        }).call(this, j);
+                                    }
+                                })
+
+                            }).call(this, i);
+                        }
+                    })
                 }
             }
-
-            // var targs = {
-            //     familyNameEN: users[0].familyNameEN,
-            //     firstNameEN: users[0].firstNameEN,
-            //     fullNameEN: users[0].fullNameEN,
-            //     familyNameKO: users[0].familyNameKO,
-            //     firstNameKO: users[0].firstNameKO,
-            //     fullNameKO: users[0].fullNameKO,
-            //     birth: users[0].birth,
-            //     gender: users[0].gender,
-            //     phone: users[0].phone,
-            //     email: users[0].email,
-            //     ci: users[0].ci,
-            //     pkey: clientReq.pkey,
-            // }
-
-            // //
-            // for (var i in clientReq.orgInfos) {
-            //     var msg = new SearchRecordPush({
-            //         mid: clientReq.mid,
-            //         sid: clientReq.sid,
-            //         args: targs,
-            //     });
-
-            //     msg.args.subIDs=clientReq.orgInfos[i].subIDs;
-            //     msg.args.require=clientReq.orgInfos[i].require;
-            //     msg.args.records=clientReq.orgInfos[i].records;
-
-            //     //console.log(msg);
-
-            //     Managers.push().init();
-            //     Managers.push().sendMessage(msg, clientReq.orgInfos[i], err => {
-            //         !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
-            //     });
-            // }
         })
     }
 
