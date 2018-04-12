@@ -34,6 +34,7 @@ $(document).ready(function(){
 
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
+    request_agent();
     /*
     $.ajax({
         type: 'POST',
@@ -54,6 +55,30 @@ $(document).ready(function(){
     })
     */
 });
+
+function request_agent() {
+    $.ajax({
+        type: 'POST',
+        url: '/client',
+        headers: {
+            'Authorization': client_authorization
+        },
+        data: JSON.stringify({
+            cmd: 'SearchRecord',
+            
+            args: {
+                pkey: 'asdfasdf',
+                update: false
+            }
+            
+        }),
+        success: function (res) {
+            setSocket(res.mid);
+            clientsocket_listener();
+        },
+        contentType: 'application/json',
+    });
+}
 
 function clientsocket_listener() {
 
