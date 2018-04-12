@@ -8,6 +8,9 @@
     <meta name="description" content="">
     <link rel="stylesheet" href="css/main/main.css">
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="js/intro.js"></script>
+
 </head>
 
 <!------ Include the above in your HEAD tag ---------->
@@ -26,7 +29,7 @@
                     <li class="right">
                         <div class="Button-Shape"><a href="#">무료가입</a></div>
                     </li>
-                    <li class="right"><a href="#">로그인</a></li>
+                    <li id="intro_login" class="right"><a href="#">로그인</a></li>
                     <li class="right"><a href="#">기업 서비스</a></li>
                 </ul>
             </div>
@@ -64,6 +67,12 @@
 
     <div id="footer">
 
+    </div>
+
+    <div id="login_div" style="position: absolute; top: 50px; left:100px; width: 300px; height: 300px; visibility: hidden; background-color: white">
+        <input id="input_id">ID</input>
+        <input id="input_pw">PASSWORD</input>
+        <button id="bt_login">Sign In</button>
     </div>
 
 </body>
