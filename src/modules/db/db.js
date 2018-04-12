@@ -102,7 +102,7 @@ class DatabaseManager extends AbstractManager {
     getOrgAllInfo(cb) {
         var orgDAO1 = new OrgDAO(this.connectionPool);
         orgDAO1.getall(function (res) {
-            cb(res);
+            cb(res);z
         });
     }
 

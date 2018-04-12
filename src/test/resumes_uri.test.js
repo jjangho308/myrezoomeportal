@@ -17,7 +17,7 @@ describe('/resumes URL test suite', () => {
 
     before('Service initialize', () => {
         jwtToken = Managers.token().issueToken({
-            uId: 1
+            uId: 'UUID1'
         })
         chai.use(chaihttp);
     });
@@ -84,7 +84,17 @@ describe('/resumes URL test suite', () => {
             })
     })
 
-    it('', done => {
+
+
+    it.skip('share resume test case', done => {
+        chai.request(app)
+            .post('/shared_resumes')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'Bearer ' + jwtToken)
+            .set('X-Requested-With', 'XMLHttpRequest')
+            .send({
+
+            })
 
     })
 });
