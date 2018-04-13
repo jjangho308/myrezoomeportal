@@ -172,7 +172,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                         for (var i in storedOrgs) {
 
                             (function (i) {
-                                db.getRecordDAO().getStoredDataByUserId(uid, storedOrgs[i].ORG_ID,(err, storedDatas) => {
+                                db.getRecordDAO().getStoredDataByUserId(uid, storedOrgs[i].ORG_ID, (err, storedDatas) => {
                                     var records = [];
 
                                     //console.log(storedDatas);
@@ -213,6 +213,15 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         })
     }
 
+    /**
+     * Send message from agent request to client socket. <br />
+     * 
+     * @since 180313
+     * @author TACKSU
+     * 
+     * @param {*} clientRequest 
+     * @param {*} agentRequest 
+     */
     response(clientRequest, agentRequest) {
         console.log('Socket Push : ');
         var socket = clientRequest.socket;

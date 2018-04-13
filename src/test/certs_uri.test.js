@@ -47,7 +47,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it.skip('Issue certificate request test', done => {
+    it('Issue certificate request test', done => {
 
         chai.request(app)
             .post('/certs')
@@ -59,6 +59,17 @@ describe('/certs URI Page test suite.', () => {
                     txid: Util.uuid()
                 }
             })
+            .end((err, res) => {
+                done();
+            });
+    })
+
+    it('Certificate view page test case', done => {
+        chai.request(app)
+            .get('/certs/3da38796-da33-41ec-8de7-31b9a2ea4e59')
+            .set('Content-Type', 'text/html')
+            .set('Authorization', 'Bearer ' + jwtToken)
+            .send()
             .end((err, res) => {
                 done();
             });
