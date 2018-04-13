@@ -1,10 +1,8 @@
 function setData(record) {
     // dcript data 
-
-    localStorage.setItem('rezoome_record_' + record.hash, record);
-
+    sessionStorage.setItem(record.txid, record);
 }
 
-function getData(record_hash) {
-    return localStorage.getItem('rezoome_record_'+record_hash);
+function getData(record_txid) {
+    return sessionStorage.getItem(record_txid);
 }

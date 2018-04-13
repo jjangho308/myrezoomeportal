@@ -83,3 +83,12 @@ function set_token(temp_token) {
     client_authorization = 'Bearer ' + temp_token;
 
 }
+
+function test_setSessionStorage(testmsg) {
+    sessionStorage.setItem('testmsg',testmsg);
+}
+
+function test_getSessionStorage(testmsg) {
+    var stored_msg = sessionStorage.getItem('testmsg');
+    console.log(stored_msg);
+}
