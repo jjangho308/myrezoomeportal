@@ -26,7 +26,7 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
      * @param {*} cb 
      */
     request(requestEntity, cb) {
-        if (requestEntity.uId != requestEntity.cert.uId) {
+        if (requestEntity.uId != requestEntity.resume.uId) {
             // TODO throw authentication error
             // TODO 이런 취약점 유의할 것.
         }

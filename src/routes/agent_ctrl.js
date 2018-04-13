@@ -12,6 +12,13 @@ import AgentRequestManager from '../modules/agent/agent_request';
  * @param {*} next 
  */
 export default {
+
+    /**
+     * POST method controller. <br />
+     * 
+     * @since 180312
+     * @author TACKSU
+     */
     post: (req, res, next) => {
         console.log('Agent body : ');
         console.log(req.body);

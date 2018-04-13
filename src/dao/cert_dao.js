@@ -111,7 +111,7 @@ class CertificateDAO extends AbstractDAO {
      * @param {SharedCertModel} sharedCert 
      * @param {function(object, number)} cb 
      */
-    shareCert(sharedCert, cb) {
+    putShared(sharedCert, cb) {
         var param = sharedCert.toRow();
 
         delete param.S_CERT_SHR_ID;

@@ -163,12 +163,15 @@ class ResumeDao extends AbstractDAO {
      * @param {*} creteria 
      * @param {*} cb 
      */
-    getShare(creteria, cb) {
-        var condition = {
-            S_RSM_SHR_ID: creteria.sId
+    getShared(creteria, cb) {
+        var condition = {};
+
+        if(!!creteria.rsmId){
+            condition.RSM_ID=creteria.rsmId;
         }
 
-        var query = mysql.format(ResumeQuery.getShare, condition);
+
+        var query = mysql.format(ResumeQuery.getShared, condition);
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);

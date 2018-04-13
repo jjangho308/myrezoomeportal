@@ -15,23 +15,37 @@ class RecordDAO extends AbstractDAO {
         super(connectionPool);
     }
 
-    getStoredDataByUserId(uid, orgid, cb){
-        var query = mysql.format(recordQuery.getStoredDataByUserId, [uid, orgid]);
+    getStoredOrgByUserId(uid, cb) {
+        var query = mysql.format(recordQuery.getStoredOrgByUserId, uid);
         this.query(query, (err, result) => {
-            if(err){
+            if (err) {
                 cb(err)
-            }else{
+            } else {
                 cb(err, result);
             }
         })
     }
 
-    getQueueName(orgid, cb){
+
+    getStoredDataByUserId(uid, orgid, cb) {
+
+        var query = mysql.format(recordQuery.getStoredDataByUserIdAndOrgID, [uid, orgid]);
+        this.query(query, (err, result) => {
+            if (err) {
+                cb(err)
+            } else {
+                cb(err, result);
+            }
+        })
+
+    }
+
+    getQueueName(orgid, cb) {
         var query = mysql.format(recordQuery.getQueuenameByOrgId, orgid);
-        this.query(query, (err,result) => {
-            if(err){
+        this.query(query, (err, result) => {
+            if (err) {
                 cb(err);
-            }else{
+            } else {
                 cb(err, result);
             }
         })

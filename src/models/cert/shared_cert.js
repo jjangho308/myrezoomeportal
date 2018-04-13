@@ -1,5 +1,7 @@
 import AbstractModel from "../abstract_model";
 
+import Util from '../../util/util';
+
 /**
  * Model declaration of Certificate. <br />
  * 
@@ -53,7 +55,10 @@ class SharedCertModel extends AbstractModel {
             /**
              * Delete flag. <br />
              */
-            this.deleted = data.deleted ? data.deleted : 'N';
+            this.deleted = data.deleted ? data.deleted : false;
+
+            this.public = data.public;
+            this.trim(this);
         }
         this.trim(this);
     }
@@ -72,7 +77,7 @@ class SharedCertModel extends AbstractModel {
             certId: row.CERT_ID,
             uId: row.UID,
             encryptedData: row.ENC_CERT_DATA,
-            deleted: row.DEL_YN,
+            deleted: Util.ftb(row.DEL_YN),
             created: row.CRTD_DT,
             modified: row.MDFID_DT
         })
@@ -90,10 +95,11 @@ class SharedCertModel extends AbstractModel {
             CERT_ID: this.certId,
             UID: this.uId,
             ENC_CERT_DATA: this.encryptedData,
-            DEL_YN: this.deleted,
+            DEL_YN: Util.boolToFlag(this.deleted),
             CRTD_DT: this.created,
             MDFID_DT: this.modified
         };
+
         return this.trim(row);
     }
 }

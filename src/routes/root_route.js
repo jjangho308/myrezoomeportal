@@ -8,6 +8,8 @@ import resume_router from './resume_route';
 import main_router from './main_route';
 import client_router from './client_route';
 import intro_router from './intro_route';
+import shared_certs_router from './shared_certs_route';
+import shared_resumes_router from './shared_resumes_route';
 
 /**
  * Root router of all http request channel. <br />
@@ -25,5 +27,7 @@ router.use('/records', records_router);
 router.use('/certs', certs_router);
 router.use('/resumes', resume_router);
 router.use('/client', client_router);
+router.use('/shared_certs', shared_certs_router);
+router.use('/shared_resumes', shared_resumes_router);
 
 export default router;

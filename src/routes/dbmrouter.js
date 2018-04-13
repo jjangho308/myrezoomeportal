@@ -19,10 +19,10 @@ router.post('/', (req, res, next) => {
 
         result.code = '200';
         result.msg = 'success';
-        
+
         var db = Managers.db();
 
-        db.getUserInfo('rezoome', function(res2){
+        db.getUserInfo('rezoome', function (res2) {
             console.log(res2);
             response.result = res2;
             res.send(response);

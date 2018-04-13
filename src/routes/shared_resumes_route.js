@@ -1,8 +1,10 @@
-import ctrl from './shared_cert_ctrl';
+import express from 'express';
+
+import ctrl from './shared_resumes_ctrl';
 import client_auth from '../mw/client_auth';
 
 /**
- * Router for /shared_certs URI. <br />
+ * Router for /shared_resumes URI. <br />
  * 
  * @since 180321
  * @author TACKSU

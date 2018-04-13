@@ -18,6 +18,9 @@ import GetCertificatesHandler from './certs/get_certs_handler';
 import UpdateCertificateRequest from './certs/update_cert_request';
 import UpdateCertificateHandler from './certs/update_cert_handler';
 
+import ShareCertRequest from './certs/share_cert_request';
+import ShareCertRequestHandler from './certs/share_cert_handler';
+
 /**
  * Resume request set. <br />
  */
@@ -27,6 +30,9 @@ import GetResumeRequest from './resume/get_resume_request';
 import GetResumeHandler from './resume/get_resume_handler';
 import UpdateResumeRequest from './resume/update_resume_request';
 import UpdateResumeHandler from './resume/update_resume_handler';
+
+import ShareResumeRequest from './resume/share_resume_request';
+import ShareResumeRequestHandler from './resume/share_resume_handler';
 
 /**
  * Request job manager from client. <br />
@@ -67,6 +73,10 @@ class ClientRequestManager extends AbstractManager {
         this.handlerMap.set(GetResumeRequest, new GetResumeHandler());
         this.handlerMap.set(UpdateResumeRequest, new UpdateResumeHandler());
         this.handlerMap.set(CreateResumeRequest, new CreateResumeHandler());
+
+        this.handlerMap.set(ShareCertRequest, new ShareCertRequestHandler());
+
+        this.handlerMap.set(ShareResumeRequest, new ShareResumeRequestHandler());
 
         this.setPrepared();
     }
