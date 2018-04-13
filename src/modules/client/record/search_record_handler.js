@@ -113,7 +113,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                         records.push({
                                                             subID: storedDatas[k].SUB_ID,
-                                                            hashed: res.result.hash
+                                                            hashed: res.result.hash,
+                                                            txid: storedDatas[j].TRX_ID
                                                         })
 
 
@@ -182,7 +183,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                 records.push({
                                                     subID: storedDatas[j].SUB_ID,
-                                                    hashed: res.result.hash
+                                                    hashed: res.result.hash,
+                                                    txid: storedDatas[j].TRX_ID
                                                 })
 
 
