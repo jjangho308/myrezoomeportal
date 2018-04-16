@@ -242,6 +242,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             for(var i = 0; i< agentRequest.records.length; i++) {
                 //agentRequest.records[i].hash
 
+                console.log("========Search Record FOR===========");
+                console.log(agentRequest.records[i]);
+
                 if(agentRequest.records[i].stored=='N') {
 
                     var data = {
@@ -250,11 +253,15 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                     nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (res) {
                         
+                        console.log("========Search Record nexeldger===========");
+                        console.log(res);
+                        
                         agentRequest.records[i].txid = res;
                                                 
                         if(i == (agentRequest.records.length-1) ) {
                             socket.emit('SearchResult', JSON.stringify(agentRequest));            
                         } 
+
                         
                     });
                 }
