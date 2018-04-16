@@ -12,6 +12,7 @@ import NexledgerService from '../../blockchain/nexledgerservice';
 
 
 import sleep from 'system-sleep';
+import Util from '../../../util/util'
 
 
 
@@ -256,6 +257,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                             var db = Managers.db();
 
                             var blcmapinsertData = [
+                                Util.uuid(),
                                 uid, //uid
                                 nexledgerres.result.txid, //trxid
                                 agentRequest.orgcode, //orgid

@@ -13,7 +13,7 @@ export default {
     getQueuenameByOrgId: "SELECT AMQ_NM FROM rezoome_db.TCUP_ORG_INFO WHERE `ORG_ID` = ?",
     getByCodes : "SELECT ORG_QUEUE_NAME FROM TBL_ORG WHERE ORG_CD IN ( %s )",
     findAll : "SELECT ORG_QUEUE_NAME FROM TBL_ORG",
-    putRecord : "INSERT INTO `rezoome_db`.`TCDA_BLC_MAP` (`UID`, `TRX_ID`,`ORG_ID`, `SUB_ID`) VALUES ( ? , ? , ?, ?)",
+    putRecord : "INSERT INTO `rezoome_db`.`TCDA_BLC_MAP` (`BLC_MAP_ID`,`UID`, `TRX_ID`,`ORG_ID`, `SUB_ID`) VALUES ( ?, ? , ? , ?, ?)",
     set : '',
     del : ''
 }
