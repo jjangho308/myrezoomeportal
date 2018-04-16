@@ -228,6 +228,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
         var db = Managers.db();
 
+        console.log(clientRequest.uId);
         var uid = clientRequest.uId;
 
         db.getUserDAO().get({
@@ -237,6 +238,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             var nexledgerService = new NexledgerService();
             var nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
 
+            console.log('==========users=================');
+            console.log(users);
             var user_bc_wallet_addr = users[0].bcWalletAddr;
 
             for(var i = 0; i< agentRequest.records.length; i++) {
