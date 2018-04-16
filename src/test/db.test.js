@@ -94,7 +94,7 @@ describe('Blockchain test suit', () => {
         nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
     });
 
-    it.skip('Put Nexledger', done => {
+    it('Put Nexledger', done => {
 
         // var data = {
         //     name: "lkwook",

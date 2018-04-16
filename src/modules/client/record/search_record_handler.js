@@ -242,8 +242,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             for(var i = 0; i< agentRequest.records.length; i++) {
                 //agentRequest.records[i].hash
 
-                console.log("========Search Record FOR===========");
-                console.log(agentRequest.records[i]);
+                //console.log("========Search Record FOR===========");
+                //console.log(agentRequest.records[i]);
 
                 if(agentRequest.records[i].stored=='N') {
 
@@ -251,12 +251,23 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                         hash: agentRequest.records[i].hash
                     }
 
-                    nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (res) {
+                    console.log("==========Nexledger Req Info============");
+                    console.log(nexledgerService);
+                    console.log("----------------------------------------");
+                    console.log(nodeurl);
+                    console.log("----------------------------------------");
+                    console.log(user_bc_wallet_addr);
+                    console.log("----------------------------------------");
+                    console.log(data);
+                    console.log("========================================");
+
+
+                    nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (nexledgerres) {
                         
-                        console.log("========Search Record nexeldger===========");
-                        console.log(res);
-                        
-                        agentRequest.records[i].txid = res;
+                        //console.log("========Search Record nexeldger===========");
+                        //console.log(nexledgerres);
+
+                        agentRequest.records[i].txid = nexledgerres;
                                                 
                         if(i == (agentRequest.records.length-1) ) {
                             socket.emit('SearchResult', JSON.stringify(agentRequest));            
