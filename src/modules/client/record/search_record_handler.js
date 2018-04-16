@@ -223,16 +223,60 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      * @param {*} agentRequest 
      */
     response(clientRequest, agentRequest) {
-        console.log('Socket Push : ');
+        console.log('Socket Push : ' + agentRequest);
         var socket = clientRequest.socket;
-        if (!!socket) {
-            console.log('Socket exists');
-            console.log('Socket message : ' + JSON.stringify(agentRequest));
-            socket.emit('SearchResult', JSON.stringify(agentRequest));
-        } else {
-            console.log('Socket is not prepared');
-        }
+
+        var db = Managers.db();
+
+        var uid = clientReq.uId;
+
+        db.getUserDAO().get({
+            uId: uid
+        }, (err, users) => {
+
+            var nexledgerService = new NexledgerService();
+            var nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
+
+            var user_bc_wallet_addr = users[0].BC_WALLET_ADDR;
+
+            for(var i = 0; i< agentRequest.records.length; i++) {
+                //agentRequest.records[i].hash
+
+                if(agentRequest.records[i].stored=='N') {
+
+                    var data = {
+                        hash: agentRequest.records[i].hash
+                    }
+
+                    nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (res) {
+                        
+                        agentRequest.records[i].txid = res;
+                                                
+                        if(i == (agentRequest.records.length-1) ) {
+                            socket.emit('SearchResult', JSON.stringify(agentRequest));            
+                        } 
+                        
+                    });
+                }
+                            
+            }
+
+            /*
+            if (!!socket) {
+                console.log('Socket exists');
+                console.log('Socket message : ' + JSON.stringify(agentRequest));
+                socket.emit('SearchResult', JSON.stringify(agentRequest));
+            } else {
+                console.log('Socket is not prepared');
+            }
+            */
+            
+        
+        });
+        
     }
+
+
 }
 
 export default SearchRecordRequestHandler;

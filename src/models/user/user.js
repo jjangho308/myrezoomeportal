@@ -21,6 +21,7 @@ class User extends AbstractModel {
         this.email = data.email;
         this.pw = data.pw;
         this.ci = data.ci;
+        this.bc_wallet_addr = data.bc_wallet_addr;
 
         this.firstNameKO = data.firstNameKO;
         this.familyNameKO = data.familyNameKO;
@@ -91,6 +92,7 @@ class User extends AbstractModel {
             mcc: row.MCC,
             status: row.STS_CD,
             first: row.FRST_YN,
+            bcWalletAddr : row.BC_WALLET_ADDR,
             created: row.CRTD_DT,
             modified: row.MDFID_DT
         });

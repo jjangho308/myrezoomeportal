@@ -38,9 +38,9 @@ class NexledgerService {
         };
 
         client.post('/', reqformatdata, function (err, res, body) {
-            //console.log("============response function=================");
-            //console.log(body);
-            //console.log("==============================================");
+            console.log("============Nexledger Get function=================");
+            console.log(body);
+            console.log("==============================================");
             callback(body);
         });
 
@@ -55,7 +55,7 @@ class NexledgerService {
             }
         };
         client.post('/', reqformatdata, function (err, res, body) {
-            console.log("============response function=================");
+            console.log("============Nexledger Get function=================");
             console.log(body);
             console.log("==============================================");
             callback(body);
@@ -73,7 +73,7 @@ class NexledgerService {
             }
         };
         client.post('/', reqformatdata, function (err, res, body) {
-            console.log("============response function=================");
+            console.log("============Nexledger Put function=================");
             console.log(body);
             console.log("==============================================");
             callback(body);
