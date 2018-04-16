@@ -239,24 +239,28 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
             var user_bc_wallet_addr = users[0].bcWalletAddr;
 
-            for(var i = 0; i< agentRequest.records.length; i++) {
-                
-                if(agentRequest.records[i].stored=='N') {
+            for (var i = 0; i < agentRequest.records.length; i++) {
 
-                    var data = {
-                        hash: agentRequest.records[i].hash
+                (function (i) {
+
+                    if (agentRequest.records[i].stored == 'N') {
+
+                        var data = {
+                            hash: agentRequest.records[i].hash
+                        }
+
+                        nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (nexledgerres) {
+
+                            agentRequest.records[i].txid = nexledgerres;
+
+                            if (i == (agentRequest.records.length - 1)) {
+                                socket.emit('SearchResult', JSON.stringify(agentRequest));
+                            }
+                        });
                     }
 
-                    nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (nexledgerres) {
 
-                        agentRequest.records[i].txid = nexledgerres;
-                                                
-                        if(i == (agentRequest.records.length-1) ) {
-                            socket.emit('SearchResult', JSON.stringify(agentRequest));            
-                        } 
-                    });
-                }
-                            
+                }).call(this, i);
             }
 
             /*
@@ -268,10 +272,10 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                 console.log('Socket is not prepared');
             }
             */
-            
-        
+
+
         });
-        
+
     }
 
 
