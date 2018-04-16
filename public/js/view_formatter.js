@@ -20,8 +20,8 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>OPIC</p>';
-            htmldiv = htmldiv + '<p>'+jsonobject[0].testid +'</p>';
-            htmldiv = htmldiv + '<p>'+jsonobject[0].grade+'</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject.testid +'</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject.grade+'</p>';
             htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
