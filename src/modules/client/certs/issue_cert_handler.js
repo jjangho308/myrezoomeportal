@@ -35,9 +35,6 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
      * @param {*} cb 
      */
     request(request, cb) {
-
-        // TODO 나중에 진짜 암호화된 데이터로 수정 필요
-        var encrypted = Util.uuid();
         var certModel = new CertModel({
             uId: request.uId,
             blcMapId: request.cert.txid
