@@ -251,15 +251,15 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                         hash: agentRequest.records[i].hash
                     }
 
-                    // console.log("==========Nexledger Req Info============");
-                    // console.log(nexledgerService);
-                    // console.log("----------------------------------------");
-                    // console.log(nodeurl);
-                    // console.log("----------------------------------------");
-                    // console.log(user_bc_wallet_addr);
-                    // console.log("----------------------------------------");
-                    // console.log(data);
-                    // console.log("========================================");
+                    console.log("==========Nexledger Req Info============");
+                    console.log(nexledgerService);
+                    console.log("----------------------------------------");
+                    console.log(nodeurl);
+                    console.log("----------------------------------------");
+                    console.log(user_bc_wallet_addr);
+                    console.log("----------------------------------------");
+                    console.log(data);
+                    console.log("========================================");
 
                     nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (nexledgerres) {
                         
