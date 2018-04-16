@@ -251,7 +251,23 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                         nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (nexledgerres) {
 
-                            agentRequest.records[i].txid = nexledgerres;
+                            agentRequest.records[i].txid = nexledgerres.result.txid;
+
+                            var db = Managers.db();
+
+                            var blcmapinsertData = [
+                                uid, //uid
+                                nexledgerres.result.txid, //trxid
+                                agentRequest.orgcode, //orgid
+                                agentRequest.records[i].subid //subid
+                            ];
+                            console.log("===========blcmapinsertData==============");
+                            console.log(blcmapinsertData);
+                            console.log("=========================================");
+
+                            db.getRecordDAO().putRecord(blcmapinsertData,function(dbres){
+                                console.log(dbres);
+                            });
 
                             if (i == (agentRequest.records.length - 1)) {
                                 socket.emit('SearchResult', JSON.stringify(agentRequest));
