@@ -12,7 +12,7 @@ var formatter= {
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="box-2" />';
             htmldiv = htmldiv + '<label for="box-2"><label/>';
-            htmldiv = htmldiv + '<span>'+ jsonobject[0].date +'</span>';
+            htmldiv = htmldiv + '<span>'+ jsonobject.date +'</span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/myresume/user-photo@2x.png" alt="">';
@@ -42,7 +42,7 @@ var formatter= {
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="box-2" />';
             htmldiv = htmldiv + '<label for="box-2"><label/>';
-            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<span>'+jsonobject.date+'</span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/mktest.png" alt="">';
@@ -50,8 +50,8 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>매경TEST</p>';
-            htmldiv = htmldiv + '<p>'+jsonobject[0] + '</p>';
-            htmldiv = htmldiv + '<p>'+jsonobject[0].grade +' / '+ jsonobject[0].point0+'</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject.userid + '</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject.grade +' / '+ jsonobject.point0+'</p>';
             htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
@@ -71,7 +71,7 @@ var formatter= {
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="box-2" />';
             htmldiv = htmldiv + '<label for="box-2"><label/>';
-            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<span>' + jsonobject.date +'</span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg" alt="">';
@@ -79,8 +79,8 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>인하대학교</p>';
-            htmldiv = htmldiv + '<p>'+ jsonobject[0] +'</p>';
-            htmldiv = htmldiv + '<p>'+jsonobject[0] +'</p>';
+            htmldiv = htmldiv + '<p>'+ jsonobject +'</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject +'</p>';
             htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
