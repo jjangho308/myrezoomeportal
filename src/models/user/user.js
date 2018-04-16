@@ -21,7 +21,7 @@ class User extends AbstractModel {
         this.email = data.email;
         this.pw = data.pw;
         this.ci = data.ci;
-        this.bc_wallet_addr = data.bc_wallet_addr;
+        this.bcWalletAddr = data.bcWalletAddr;
 
         this.firstNameKO = data.firstNameKO;
         this.familyNameKO = data.familyNameKO;
@@ -122,6 +122,7 @@ class User extends AbstractModel {
             PHN_NUM: this.phone,
             CARRIER_NM: this.carrierName,
             MCC: this.mcc,
+            BC_WALLET_ADDR : this.bcWalletAddr,
             CNTY_CD: this.country,
             CNTY_CD_AREA: this.area
         };
