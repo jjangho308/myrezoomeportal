@@ -237,7 +237,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             var nexledgerService = new NexledgerService();
             var nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
 
-            var user_bc_wallet_addr = users[0].BC_WALLET_ADDR;
+            var user_bc_wallet_addr = users[0].bcWalletAddr;
 
             for(var i = 0; i< agentRequest.records.length; i++) {
                 //agentRequest.records[i].hash
@@ -251,16 +251,15 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                         hash: agentRequest.records[i].hash
                     }
 
-                    console.log("==========Nexledger Req Info============");
-                    console.log(nexledgerService);
-                    console.log("----------------------------------------");
-                    console.log(nodeurl);
-                    console.log("----------------------------------------");
-                    console.log(user_bc_wallet_addr);
-                    console.log("----------------------------------------");
-                    console.log(data);
-                    console.log("========================================");
-
+                    // console.log("==========Nexledger Req Info============");
+                    // console.log(nexledgerService);
+                    // console.log("----------------------------------------");
+                    // console.log(nodeurl);
+                    // console.log("----------------------------------------");
+                    // console.log(user_bc_wallet_addr);
+                    // console.log("----------------------------------------");
+                    // console.log(data);
+                    // console.log("========================================");
 
                     nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (nexledgerres) {
                         
