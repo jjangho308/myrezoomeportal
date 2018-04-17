@@ -22,23 +22,24 @@ export default {
      */
     get: (req, res, next) => {
 
-        var userId = req.body.uId;
-
         // /certs AJAX request
         if (!!req.xhr) {
-            Managers.client().request(new GetCertsRequest(req.body), (err, result) => {
-                if (!!err) {
-                    next(err)
-                } else {
-                    res.json(result);
-                }
-            });
+            Managers.client().request(new GetCertsRequest(req.body),
+                (err, result) => {
+                    if (!!err) {
+                        next(err)
+                    } else {
+                        res.json({
+                            result: result
+                        });
+                    }
+                });
         }
 
         // /certs HTML page
         else {
             Managers.db().getUserDAO().get({
-                uId: userId
+                uId: req.body.uId
             }, (err, userModel) => {
                 if (!!err) {
                     next(err);
@@ -81,6 +82,7 @@ export default {
             var arg = req.body;
             arg.certId = req.params.certId;
             arg.uId = req.body.uId;
+
             var request = new UpdateCertRequest(arg);
             Managers.client().request(request, (err, result) => {
                 if (!!err) {
