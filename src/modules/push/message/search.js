@@ -6,16 +6,17 @@ import AbstractPush from "./abstract_message"
  * @since 180313
  * @author TACKSU
  */
-class SearchRecordPush extends AbstractPush{
-    
+class SearchRecordPush extends AbstractPush {
+
     /**
+     * Default constructor. <br />
      * 
      * @param {object} opt
      * @param {Socket} socket
      */
-    constructor(opt){
+    constructor(opt) {
         super(opt);
-        this.cmd    = "SearchRecord";
+        this.cmd = "SearchRecord";
     }
 }
 

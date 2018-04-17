@@ -12,6 +12,13 @@ import Property from "../property/property";
  * @since 180228
  */
 class PushManager extends AbstractManager {
+
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180228
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
     }
@@ -29,9 +36,7 @@ class PushManager extends AbstractManager {
                 login: propertyManager.get(Property.PUSH_HEADER_LOGIN),
                 passcode: propertyManager.get(Property.PUSH_HEADER_PASSCODE)
             }
-        }], (factory) => {
-            //console.log("AMQ Connect Success!");
-        })
+        }]);
     }
 
     /**
@@ -66,7 +71,6 @@ class PushManager extends AbstractManager {
             this.channel = channel;
 
         }.bind(this))
-        cb(this.channelFactory);
     }
 
 
@@ -81,7 +85,7 @@ class PushManager extends AbstractManager {
         var db = Managers.db();
 
         var msgString = JSON.stringify(msg);
-        
+
         // console.log(orgInfos);
         // console.log(msg);
 

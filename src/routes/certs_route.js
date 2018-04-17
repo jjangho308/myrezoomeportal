@@ -21,11 +21,12 @@ router.get('/:certId', tokenAuth);
 router.get('/:certId', ctrl.get);
 //router.get('/:certId', view);
 
-// 증명서 CRUD ajax request controller
+// 증명서 생성 ajax request controller
 router.post('/', tokenAuth);
 router.post('/', ctrl.post);
 //router.post('/', view);
 
+// 증명서 편집 Ajax request controller.
 router.patch('/:certId', tokenAuth);
 router.patch('/:certId', ctrl.patch);
 

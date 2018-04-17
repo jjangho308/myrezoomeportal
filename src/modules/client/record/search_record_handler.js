@@ -29,6 +29,12 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     }
 
     /**
+     * Client 접속한 사용자의 개인정보로부터 Agent에 이력 조회 Push Message를 전송. <br />
+     * Agent로부터 Request가 전달될 때까지 대기하지 않고 <br />
+     * Client Browser에는 mid를 전달하여 Socket Binding을 하게 둠. <br />
+     * 
+     * Agent로부터 Request가 오면 해당 mid로 Client Socket으로. <br />
+     * 응답을 push함. <br />
      * 
      * @param {HttpResponse} httpRes 
      * @param {SearchRecordRequest} clientReq 
@@ -91,15 +97,26 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     }
                 })
             } else {
+                console.log("20180417 test 0");
+                console.log(clientReq);
+                console.log("--------------------------------------------");
                 if (clientReq.update == true) {
+                    console.log("20180417 test 1");
                     db.getOrgDAO().findAll((err, resultOrgIds) => {
+                        console.log("20180417 test 2");
                         for (var i in resultOrgIds) {
                             (function (i) {
                                 //============================ 1. make subIDs =====================================
+                                console.log("20180417 test 3");
+                                console.log(resultOrgIds[i].ORG_ID);
                                 db.getRecordDAO().getStoredDataByUserId(uid, resultOrgIds[i].ORG_ID, (err, storedDatas) => {
+                                    console.log("20180417 test 4");
+                                    console.log(storedDatas);
 
+                                    
                                     //BLC MAP에 저장된 record가 있는경우
                                     if (storedDatas.length > 0) {
+                                        //console.log(storedDatas.length);
                                         //console.log("subIDs + records 함께 있어야해 ");
                                         db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
 
@@ -108,14 +125,13 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                             var records = [];
                                             for (var k in storedDatas) {
                                                 (function (k) {
-
                                                     console.log(k + " " + storedDatas[k].BLC_MAP_ID)
                                                     nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, function (res) {
 
                                                         records.push({
                                                             subID: storedDatas[k].SUB_ID,
                                                             hashed: res.result.hash,
-                                                            txid: storedDatas[j].TRX_ID
+                                                            txid: storedDatas[k].TRX_ID
                                                         })
 
 
@@ -129,6 +145,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                             msg.args.subIDs = subIds;
                                                             msg.args.records = records;
 
+                                                            
+
                                                             Managers.push().init();
                                                             Managers.push().sendMessage(msg, resultOrgIds[i].ORG_ID, err => {
                                                                 !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
@@ -140,9 +158,16 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                         })
                                     } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
                                         //console.log("subIDs만 있으면 돼!");
+
+                                        console.log("20180417 test 5");
+                                        console.log(storedDatas);
+
                                         db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
                                             delete msg.args.subIDs;
                                             delete msg.args.records;
+
+                                            console.log("20180417 test 6");
+                                            console.log(subIDsResult);
 
                                             var subIds = [];
 
@@ -151,6 +176,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                             }
 
                                             msg.args.subIDs = subIds;
+
+                                            //console.log(msg);
 
 
                                             Managers.push().init();
@@ -168,7 +195,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                 } else {
                     //refresh
                     db.getRecordDAO().getStoredOrgByUserId(uid, (err, storedOrgs) => {
-                        console.log(storedOrgs);
+                        //console.log(storedOrgs);
 
                         for (var i in storedOrgs) {
 
@@ -193,6 +220,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                 if (j == storedDatas.length - 1) {
                                                     msg.args.records = records;
+                                                    //console.log("Active MQ");
 
                                                     Managers.push().init();
                                                     Managers.push().sendMessage(msg, storedOrgs[i].ORG_ID, err => {
@@ -200,7 +228,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     });
                                                 }
 
-                                                console.log(msg.args.records);
+                                                //console.log(msg.args.records);
                                             })
                                         }).call(this, j);
                                     }
@@ -271,10 +299,20 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 console.log(dbres);
                             });
 
+                            db.getUserDAO().setFristYN(uid, function(dbres2) {
+                                console.log(dbres2);
+                            });
+
                             if (i == (agentRequest.records.length - 1)) {
                                 socket.emit('SearchResult', JSON.stringify(agentRequest));
                             }
                         });
+                    }
+                    else {
+                        //BLC MAP stored
+                        if (i == (agentRequest.records.length - 1)) {
+                            socket.emit('SearchResult', JSON.stringify(agentRequest));
+                        }
                     }
 
 

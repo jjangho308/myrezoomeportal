@@ -17,12 +17,16 @@ export default {
 
     /**
      * Post controller. <br />
+     * 
+     * @since 180405
+     * @author TACKSU
      */
     post: (req, res, next) => {
+
         if (!!req.xhr) {
             Managers.client().request(new ShareResumeRequest(req.body), (err, result) => {
                 if (!!err) {
-                    res.json(JSON.stringify(err));
+                    next(err);
                 } else {
                     res.json(result);
                 }

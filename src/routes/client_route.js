@@ -14,6 +14,5 @@ var router = express.Router();
  */
 router.post('/', clientTokenAuth);
 router.post('/', controller.post);
-router.use('/', controller.default);
 
 export default router;

@@ -1,5 +1,7 @@
 import AbstractModel from "../abstract_model";
 
+import Util from '../../util/util';
+
 /**
  * Model declaration of Certificate. <br />
  * 
@@ -64,11 +66,35 @@ class CertModel extends AbstractModel {
             CERT_ID: this.certId,
             UID: this.uId,
             BLC_MAP_ID: this.txid,
-            SHRD_YN: this.shared ? 'Y' : 'N',
+            SHRD_YN: Util.btf(this.shared),
             LST_SHRD_DT: this.lastShared,
             CRTD_DT: this.created,
             MDFID_DT: this.modified
         });
+    }
+
+    /**
+     * Static convert from any object to row object. <br />
+     * 
+     * @since 180417
+     * @author TACKSU
+     * 
+     * @param {*} obj 
+     */
+    static toRow(obj) {
+        if (obj instanceof CertModel) {
+            return obj.toRow();
+        }
+        return Util.trim({
+            S_USR_CERT_ID: obj.sId,
+            CERT_ID: obj.certId,
+            UID: obj.uId,
+            BLC_MAP_ID: obj.txid,
+            SHRD_YN: Util.btf(obj.shared),
+            LST_SHRD_DT: obj.lastShared,
+            CRTD_DT: obj.created,
+            MDFID_DT: obj.modified
+        })
     }
 }
 

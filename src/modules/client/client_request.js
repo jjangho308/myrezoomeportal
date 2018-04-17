@@ -52,7 +52,7 @@ class ClientRequestManager extends AbstractManager {
     /**
      * Default constructor. <br />
      * 
-     * @since 18305
+     * @since 180305
      * @author TACKSU
      * 
      * @param {*} opt 
@@ -61,6 +61,11 @@ class ClientRequestManager extends AbstractManager {
         super(opt);
     }
 
+    /**
+     * Initialization. <br />
+     * 
+     * @author TACKSU
+     */
     init() {
         this.entityMap = new HashMap();
         this.handlerMap = new HashMap();
@@ -87,6 +92,7 @@ class ClientRequestManager extends AbstractManager {
         this.setPrepared();
     }
 
+
     getEntity(code) {
         return this.entityMap.get(code);
     }
@@ -105,11 +111,18 @@ class ClientRequestManager extends AbstractManager {
      * @param {function(object, object)} cb Callback function.
      */
     request(request, cb) {
+
+        // 해당 MessageID에 Request를 저장한다.
         this.requestMap.set(request.mId, request);
+
+
         this.handlerMap.get(request.constructor).request(request, ((resultCode, result) => {
             switch (resultCode) {
+
+                // 에러 발생시에는 Error 객체를 Client에 Response 후 
                 case ClientRequestManager.RESULT_FAILURE:
                     {
+                        this.requestMap.remove(request.mId);
                         // result instanceof Error Retry?
                         cb(result, null);
                         break;
@@ -117,7 +130,7 @@ class ClientRequestManager extends AbstractManager {
 
                 case ClientRequestManager.RESULT_PENDING:
                     {
-                        // result instanceof Object Keep request?
+                        // result instanceof Object and Keep request.
                         this.requestMap.set(request.mId, request);
                         cb(null, result);
                         break;
@@ -125,7 +138,9 @@ class ClientRequestManager extends AbstractManager {
 
                 case ClientRequestManager.RESULT_SUCCESS:
                     {
-                        // Remove request?
+                        this.requestMap.remove(request.mId);
+
+                        // result instanceof Object.
                         cb(null, result);
                         break;
                     }
@@ -135,7 +150,7 @@ class ClientRequestManager extends AbstractManager {
 
     /**
      * 특정 ClientRequest는 바로 Response가 가능한 것이 아닌
-     * 다른 채널로부터 Response를 받아 처리할 경우가 있다.
+     * 다른 경로로부터 Response를 받아 처리할 경우가 있다.
      * 이 경우 Response를 처리할 로직.
      * 
      * @since 180312
@@ -154,6 +169,9 @@ class ClientRequestManager extends AbstractManager {
 
     /**
      * Assign client socket to given mid for WebSocket push. <br />
+     * Client Browser와 연결된 Socket을 특정 MessageID를 가진 Request에
+     * 할당함으로써 Agent로부터 Response가 올때 Socket을 통해 Push를
+     * 할 수 있게 한다.
      * 
      * @since 180312
      * @author TACKSU
@@ -166,8 +184,24 @@ class ClientRequestManager extends AbstractManager {
     }
 }
 
+/**
+ * ClientRequestHandler의 request function의 마지막 callback에서
+ * 아래의 세 값을 첫번째 인자로 사용하여 Request의 결과 처리를 할 수 있도록 한다.
+ */
+
+/**
+ * Result code of success. <br />
+ */
 ClientRequestManager.RESULT_SUCCESS = 0;
+
+/**
+ * Result code of pending
+ */
 ClientRequestManager.RESULT_PENDING = 1;
+
+/**
+ * Result code of failure
+ */
 ClientRequestManager.RESULT_FAILURE = 2;
 
 export default ClientRequestManager

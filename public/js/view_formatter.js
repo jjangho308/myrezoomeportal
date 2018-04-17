@@ -114,6 +114,33 @@ var formatter= {
 
         $('#spec_edu_detail').append(htmldiv);
     },
+
+    "RCLPT0006":function viewformatter(record) {
+        //OPIC ENGlish writing
+
+        var jsonobject = JSON.parse(record.data);
+        console.log(jsonobject);
+
+        var htmldiv = '<div class="spec-body">';
+            htmldiv = htmldiv + '<div class="spec-left">';
+            htmldiv = htmldiv + '<input type="checkbox" id="box-2" />';
+            htmldiv = htmldiv + '<label for="box-2"><label/>';
+            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-center">';
+            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg" alt="">';
+            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-right">';
+            htmldiv = htmldiv + '<p>OPIC</p>';
+            htmldiv = htmldiv + '<p>English Writing</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject +'</p>';
+            htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
+            htmldiv = htmldiv + '</div>';
+        htmldiv = htmldiv + '</div>';
+
+        $('#spec_forign_lang').append(htmldiv);
+    }
 }
 
 

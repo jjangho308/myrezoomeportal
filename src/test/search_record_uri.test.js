@@ -79,6 +79,35 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             });;
     })
 
+    /**
+     * Test case for SearchRecord command on RequiredKey phase. <br />
+     * 
+     * @since 180417
+     * @author TACKSU
+     */
+    it('Required Key phase test case', done => {
+        chai.request(app)
+            .post('/records')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'Bearer ' + token)
+            .set('Cookie', 'jwt=' + token)
+            .set('X-Requested-With', 'XMLHttpRequest')
+            .send({
+                cmd: 'SearchRecord',
+                args: {
+                    pkey: '',
+                    orgcode: 'OPIC',
+                    requiredKey: [
+                        'key1',
+                        'key2'
+                    ]
+                }
+            })
+            .end((err, res) => {
+                done();
+            });;
+    })
+
     it.skip('Agent Search Results Response', done => {
         chai.request(app)
             .post('/agent')
