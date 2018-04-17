@@ -101,6 +101,18 @@ class UserDao extends AbstractDAO {
         })
     }
 
+    setFristYN(userid, cb) {
+
+        var query = mysql.format(userQuery.setFristYN, ["N", userid]);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(err, result.affectedRows);
+            }
+        })
+
+    }
 
     /**
      * Delete specific UserModel entry from User Table by given creteria. <br />
