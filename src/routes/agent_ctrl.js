@@ -23,11 +23,11 @@ export default {
         console.log('Agent body : ');
         console.log(req.body);
         console.log('===========================');
-        
+
         var agentRequestManager = Managers.agent();
         var entity = new(agentRequestManager.getEntity(req.body.cmd))(req.body.args);
         entity.uId = req.body.uId;
-        entity.mid = req.body.mid;
+        entity.mId = req.body.mId;
         entity.cmd = req.body.cmd;
         entity.code = req.body.code;
 

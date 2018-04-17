@@ -17,7 +17,7 @@ class AbstractAgentRequestEntity {
      * @param {*} opt 
      */
     constructor(opt) {
-        this.mid = opt.mid;
+        this.mId = opt.mId;
     }
 }
 

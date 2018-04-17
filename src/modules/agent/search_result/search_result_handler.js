@@ -3,6 +3,8 @@ import AbstractAgentRequestHandler from "../abstract_agent_request_handler";
 
 import SearchResultRequest from './search_result_request';
 
+import AgentRequest from '../agent_request';
+
 /**
  * Handler of {@link SearchResultRequest}. <br />
  * 
@@ -27,17 +29,21 @@ class SearchResultHandler extends AbstractAgentRequestHandler {
 
     /**
      * Agent로부터 전달된 이력 데이터의 처리. <br />
+     * ClientRequest에 pending되어 있는 SearchRecordRequest의 response function으로 전달해준다. <br />
      * 
      * @since 180306
      * @author TACKSU
      * 
      * @param {*} requestEntity
      */
-    request(requestEntity, cb) {
-        // console.log('Search result Agent Request');
-        console.log('search_result_handler mid : ' + requestEntity.mid);
-        Managers.client().response(requestEntity.mid, requestEntity, () => {
-            console.log(requestEntity);
+    request(requestEntity, done) {
+
+        Managers.client().response(requestEntity.mId, requestEntity, (err, result) => {
+            if (!!err) {
+                done(AgentRequest.RESULT_FAILURE, err);
+            } else {
+                done(AgentRequest.RESULT_SUCCESS, result);
+            }
         });
     }
 }

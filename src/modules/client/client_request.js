@@ -150,12 +150,12 @@ class ClientRequestManager extends AbstractManager {
      * @since 180312
      * @author TACKSU
      * 
-     * @param {*} msgId 
+     * @param {*} mId 
      * @param {*} response 
      */
-    response(msgId, response, cb) {
-        console.log('Stored Request :');
-        var entity = this.requestMap.get(msgId);
+    response(mId, response, cb) {
+        
+        var entity = this.requestMap.get(mId);
         if (!!entity) {
             this.handlerMap.get(entity.constructor).response(entity, response);
         }
