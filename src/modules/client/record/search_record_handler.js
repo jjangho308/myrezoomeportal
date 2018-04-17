@@ -193,6 +193,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                 if (j == storedDatas.length - 1) {
                                                     msg.args.records = records;
+                                                    console.log("Active MQ");
 
                                                     Managers.push().init();
                                                     Managers.push().sendMessage(msg, storedOrgs[i].ORG_ID, err => {
@@ -200,7 +201,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     });
                                                 }
 
-                                                console.log(msg.args.records);
+                                                //console.log(msg.args.records);
                                             })
                                         }).call(this, j);
                                     }
