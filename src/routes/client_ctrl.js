@@ -21,18 +21,25 @@ export default {
         if (!req.body) {
             req.body = {};
         }
+        
         console.log('client ctrl req body cmd : ')
         console.log(req.body);
         console.log('==============================================================');
+
+        // Client에서 전달된 CommandName이 매핑된 RequestEntity를 생성.
         var requestEntity = new(clientRequest.getEntity(req.body.cmd))(req.body.args);
+
+        // 모든 요청 객체에 대해 JWT에서 추출한 uId를 injection.
         requestEntity.uId = req.body.uId;
-        clientRequest.request(requestEntity, (err, res) => {});
-        res.json({
-            mid: requestEntity.mId
-        })
-    },
-
-    default: (req, res, next) => {
-
+        clientRequest.request(requestEntity, (err, result) => {
+            if (!!err) {
+                next(err);
+            } else {
+                // TODO 실제 Client의 Respons로 치환 필요.
+                res.json({
+                    mid: requestEntity.mId
+                })
+            }
+        });
     }
 }

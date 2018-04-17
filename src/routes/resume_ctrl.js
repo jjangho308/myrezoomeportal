@@ -23,7 +23,7 @@ export default {
     get: (req, res, next) => {
         var userId = req.body.uId;
 
-        // AJAX request
+        // AJAX request to get resume list.
         if (!!req.xhr) {
             Managers.client().request(new GetResumeRequest(req.body), (err, result) => {
                 if (!!err) {
@@ -33,7 +33,7 @@ export default {
                 }
             })
         }
-        // HTML page
+        // Static request to get HTML Page of /certs URI.
         else {
             Managers.db().getUserDAO().get({
                 uId: userId
@@ -41,9 +41,7 @@ export default {
                 if (!!err) {
                     res.status(500).render('error');
                 } else {
-                    res.render('resumes', userModel, (err, html) => {
-                        res.send(html);
-                    });
+                    res.render('resumes', userModel);
                 }
             });
         }
@@ -56,7 +54,6 @@ export default {
      * @author TACKSU
      */
     post: (req, res, next) => {
-        //var userId = req.params.uId;
 
         if (!!req.xhr) {
             Managers.client().request(new CreateResumeRequest(req.body), (err, result) => {
@@ -79,7 +76,7 @@ export default {
      */
     patch: (req, res, next) => {
         if (!!req.xhr) {
-            Manager.client().request(new UpdateResumeRequest(req, body), (err, result) => {
+            Manager.client().request(new UpdateResumeRequest(req.body), (err, result) => {
                 if (!!err) {
                     res.status(500).json(err);
                 } else {
