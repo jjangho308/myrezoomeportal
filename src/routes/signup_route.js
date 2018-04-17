@@ -1,5 +1,5 @@
 import express from 'express';
-import ctrl from './signin_ctrl';
+import ctrl from './signup_ctrl';
 import view from '../mw/view';
 
 /**
@@ -10,7 +10,7 @@ import view from '../mw/view';
  */
 var router = express.Router();
 
+router.get('/', ctrl.get);
 router.post('/', ctrl.post);
-//router.post('/', view);
 
 export default router;

@@ -14,8 +14,9 @@ class User extends AbstractModel {
      * @since
      * @param {*} data 
      */
-    constructor(data) {
+    constructor(data) {        
         super(data);
+
         this.sId = data.sId;
         this.uId = data.uId;
         this.email = data.email;

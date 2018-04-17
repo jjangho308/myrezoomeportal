@@ -31,11 +31,10 @@ class UserDao extends AbstractDAO {
      * @param {UserModel} userModel 
      * @param {Function(err,result)} cb 
      */
-    put(userModel, cb) {
-
+    put(userModel, cb) {       
         var params = userModel.toRow();
-
         var query = mysql.format(userQuery.put, params);
+        
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);

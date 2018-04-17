@@ -10,6 +10,7 @@ import view from '../mw/view';
  */
 var router = express.Router();
 
+router.get('/', ctrl.get);
 router.post('/', ctrl.post);
 
 export default router;

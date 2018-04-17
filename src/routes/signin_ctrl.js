@@ -17,7 +17,7 @@ export default {
      * @author TACKSU
      */
     get: (req, res, next) => {
-        res.render('main', {});
+        res.render('signin', {});
     },
 
     /**
