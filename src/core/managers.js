@@ -1,13 +1,13 @@
 import PropertyManager from '../modules/property/property';
 import PushManager from '../modules/push/push';
 import KMSManager from '../modules/kms/kms';
-import BlockchainManager from '../modules/blockchain/blockchain';
 import DatabaseManager from '../modules/db/db';
 import TokenManager from '../modules/token/token';
 import PDFManager from '../modules/pdf/pdf';
 import ClientRequestManager from '../modules/client/client_request';
 import AgentRequestManager from '../modules/agent/agent_request';
 import CryptoManager from '../modules/crypto/crypto';
+import NexLedgerManger from '../modules/blockchain/nexledgerservice';
 
 /**
  * Wrapper function to provide singleton instance of each modules. <br />
@@ -21,11 +21,11 @@ export default (() => {
     var dbInstance = null;
     var pushInstance = null;
     var kmsInstance = null;
-    var bcInstance = null;
     var tokenInstance = null;
     var pdfInstance = null;
     var clientRequestInstance = null;
     var agentRequestInstance = null;
+    var nexLedgerInstance = null;
 
 
     return {
@@ -67,6 +67,10 @@ export default (() => {
 
         agent: () => {
             return agentRequestInstance = agentRequestInstance ? agentRequestInstance : new AgentRequestManager();
+        },
+
+        nex: () => {
+            return nexLedgerInstance = nexLedgerInstance ? nexLedgerInstance : new NexLedgerManger();
         }
     }
 })();
