@@ -33,10 +33,5 @@ export default {
         console.log('===========================');
         agentRequestManager.request(entity);
         res.sendStatus(200);
-    },
-
-    default: (req, res, next) => {
-        console.log('Default controller');
-        res.sendStatus(200);
     }
 }
