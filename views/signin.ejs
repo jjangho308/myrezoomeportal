@@ -9,38 +9,38 @@
     <link rel="stylesheet" href="css/main/main.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="js/intro.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/user.js"></script>
 
 </head>
 
 <!------ Include the above in your HEAD tag ---------->
 
 <body>
-
     <div id="header">
-
         <nav class="navbar">
             <div class="grid">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="#"><img src="img/main/black.svg" id="home_icon"></a>
                     </li>
-
                     <li class="right">
                         <div class="Button-Shape"><a id="signup" href="#">무료가입</a></div>
                     </li>
-                    <li id="intro_login" class="right"><a href="#">로그인</a></li>
+                    <li id="signin" class="right"><a href="#">로그인</a></li>
                     <li class="right"><a href="#">기업 서비스</a></li>
                 </ul>
             </div>
         </nav>
-
-        <p id="jombo">나를 증명하는 새로운 방법, 레쥬메</p>
-        <p id="sub-title">세상에서 가장 빠르고 안전한 블록체인 기반 이력관리 서비스를 지금 바로 경험해보세요!</p>
-
-        <button id="resume-start-btn">
-            레쥬메 시작하기
-        </button>
+        <div>
+            <div id="signin_div" style="position: absolute; top: 30%; left: 50%; width: 300px; height: 300px; visibility: visible; background-color: white;">
+                <div>이메일</div>
+                <input id="signin_id" type="text">
+                <div>비밀번호</div>
+                <input id="signin_pw" type="text">
+                <button id="btn_signin">SignIn</button>
+            </div>
+        </div>        
     </div>
 
     <div class="body-div">
@@ -68,13 +68,6 @@
     <div id="footer">
 
     </div>
-
-    <div id="login_div" style="position: absolute; top: 50px; left:100px; width: 300px; height: 300px; visibility: hidden; background-color: white">
-        <input id="input_id">ID</input>
-        <input id="input_pw">PASSWORD</input>
-        <button id="bt_login">Sign In</button>
-    </div>
-
 </body>
 
 </html>

@@ -8,6 +8,7 @@ import AbstractClientRequestEntity from "../abstract_client_request_entity";
 class SignUpRequest extends AbstractClientRequestEntity {
     constructor(opt) {
         super(opt);
+        this.user = opt;
     }
 }
 
