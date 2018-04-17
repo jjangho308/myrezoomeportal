@@ -21,7 +21,7 @@ export default {
         if (!req.body) {
             req.body = {};
         }
-        
+
         console.log('client ctrl req body cmd : ')
         console.log(req.body);
         console.log('==============================================================');
@@ -35,12 +35,10 @@ export default {
             if (!!err) {
                 next(err);
             } else {
-                // TODO 실제 Client의 Respons로 치환 필요.
+                res.json({
+                    mid: requestEntity.mId
+                });
             }
-        });
-
-        res.json({
-            mid: requestEntity.mId
         });
     }
 }
