@@ -29,6 +29,12 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     }
 
     /**
+     * Client 접속한 사용자의 개인정보로부터 Agent에 이력 조회 Push Message를 전송. <br />
+     * Agent로부터 Request가 전달될 때까지 대기하지 않고 <br />
+     * Client Browser에는 mid를 전달하여 Socket Binding을 하게 둠. <br />
+     * 
+     * Agent로부터 Request가 오면 해당 mid로 Client Socket으로. <br />
+     * 응답을 push함. <br />
      * 
      * @param {HttpResponse} httpRes 
      * @param {SearchRecordRequest} clientReq 

@@ -36,7 +36,7 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
      */
     request(request, cb) {
         var certModel = new CertModel({
-            certId : Util.uuid(),
+            certId: Util.uuid(),
             uId: request.uId,
             blcMapId: request.cert.txid
         });
