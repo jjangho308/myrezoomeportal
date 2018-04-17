@@ -28,7 +28,7 @@ export default {
         if (!!req.xhr) {
             Managers.client().request(new GetCertsRequest(req.body), (err, result) => {
                 if (!!err) {
-                    res.status(500).render('error', err);
+                    next(err)
                 } else {
                     res.json(result);
                 }
@@ -41,11 +41,9 @@ export default {
                 uId: userId
             }, (err, userModel) => {
                 if (!!err) {
-                    res.status(500).render('error');
+                    next(err);
                 } else {
-                    res.render('certs', userModel, (err, html) => {
-                        res.send(html);
-                    });
+                    res.render('certs', userModel);
                 }
             });
         }
