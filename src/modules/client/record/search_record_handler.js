@@ -210,6 +210,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     process.nextTick(() => {
                                                         msg.args.records = records;
 
+                                                        console.log("Active MQ");
+                                                        
                                                         Managers.push().init();
                                                         Managers.push().sendMessage(msg, storedOrgs[orgIdx].ORG_ID, err => {
                                                             !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
@@ -217,7 +219,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     });
                                                 }
 
-                                                console.log(msg.args.records);
+                                                //console.log(msg.args.records);
                                             })
                                         })(j);
                                     }
@@ -295,6 +297,12 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 socket.emit('SearchResult', JSON.stringify(agentRequest));
                             }
                         });
+                    }
+                    else {
+                        //BLC MAP stored
+                        if (i == (agentRequest.records.length - 1)) {
+                            socket.emit('SearchResult', JSON.stringify(agentRequest));
+                        }
                     }
 
 

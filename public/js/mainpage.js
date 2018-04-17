@@ -35,6 +35,32 @@ $(document).ready(function(){
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
     request_agent();
+
+    $('#refresh_record').click(function(){
+
+        $.ajax({
+            type: 'POST',
+            url: '/client',
+            headers: {
+                'Authorization': client_authorization
+            },
+            data: JSON.stringify({
+                cmd: 'SearchRecord',
+                
+                args: {
+                    pkey: 'asdfasdf',
+                    update: true
+                }
+                
+            }),
+            success: function (res) {
+                setSocket(res.mid);
+                clientsocket_listener();
+            },
+            contentType: 'application/json',
+        });
+        
+    });
     /*
     $.ajax({
         type: 'POST',
