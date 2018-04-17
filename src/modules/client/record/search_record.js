@@ -30,6 +30,8 @@ class SearchRecordRequest extends AbstractClientRequestEntity {
          * 
          */
         this.pkey = opt.pkey;
+
+        this.update = opt.update;
     }
 }
 
