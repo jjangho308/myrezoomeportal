@@ -56,9 +56,6 @@ export default {
      * @author TACKSU
      */
     post: (req, res, next) => {
-
-        // TODO Insert a new Certificate entity into database.
-
         if (!!req.xhr) {
             Managers.client().request(new IssueNewCertRequest(req.body), (err, result) => {
                 if (!!err) {
@@ -67,6 +64,8 @@ export default {
                     res.json(result);
                 }
             })
+        } else {
+            next(new Error('No Page'));
         }
     },
 
@@ -78,17 +77,20 @@ export default {
      */
     patch: (req, res, next) => {
 
-        var arg = req.body;
-        arg.certId = req.params.certId;
-        arg.uId = req.body.uId;
-
-        var request = new UpdateCertRequest(arg);
-        Managers.client().request(request, (err, result) => {
-            if (!!err) {
-                res.status(500).json(JSON.stringify(err));
-            } else {
-                res.json(result);
-            }
-        })
+        if (!!req.xhr) {
+            var arg = req.body;
+            arg.certId = req.params.certId;
+            arg.uId = req.body.uId;
+            var request = new UpdateCertRequest(arg);
+            Managers.client().request(request, (err, result) => {
+                if (!!err) {
+                    next(err);
+                } else {
+                    res.json(result);
+                }
+            });
+        } else {
+            next(new Error('No Page'));
+        }
     }
 }

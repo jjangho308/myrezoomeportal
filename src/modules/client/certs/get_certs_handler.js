@@ -27,23 +27,24 @@ class GetCertificateHandler extends AbstractClientRequestHandler {
     }
 
     /**
-     * Ge certificates of given user from databse. <br />
+     * Get certificates of given user from databse. <br />
      *
      * @since 180402
      * @author TACKSU
      * 
      * @param {GetCertificateRequest} requestEntity 
-     * @param {function(object, array)} cb 
+     * @param {function(object, array)} done 
      */
-    request(requestEntity, cb) {
+    request(requestEntity, done) {
         var certDAO = Managers.db().getCertDAO();
+
         certDAO.get({
             uId: requestEntity.uId,
         }, (err, result) => {
             if (!!err) {
-                cb(err)
+                done(ClientRequest.RESULT_FAILURE, err);
             } else {
-                cb(ClientRequest.RESULT_SUCCESS, result);
+                done(ClientRequest.RESULT_SUCCESS, result);
             }
         })
     }

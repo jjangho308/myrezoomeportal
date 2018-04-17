@@ -36,10 +36,11 @@ export default {
                 next(err);
             } else {
                 // TODO 실제 Client의 Respons로 치환 필요.
-                res.json({
-                    mid: requestEntity.mId
-                })
             }
+        });
+
+        res.json({
+            mid: requestEntity.mId
         });
     }
 }

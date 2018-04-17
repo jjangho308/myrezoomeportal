@@ -29,7 +29,7 @@ export default {
     post: (req, res, next) => {
         console.log(req.body);
         var signin = new SignInRequest(req.body);
-        Managers.client().request(signin, (err, result) => {
+        Managers.client().request(signin, (err, result) => { 
             if (!!err) {
                 console.log(err.toString());
             } else {
