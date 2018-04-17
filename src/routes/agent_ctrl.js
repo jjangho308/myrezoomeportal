@@ -26,8 +26,7 @@ export default {
 
         var agentRequestManager = Managers.agent();
         var entity = new(agentRequestManager.getEntity(req.body.cmd))(req.body.args);
-        entity.uId = req.body.uId;
-        entity.mId = req.body.mId;
+        entity.mId = req.body.mid;
         entity.cmd = req.body.cmd;
         entity.code = req.body.code;
 

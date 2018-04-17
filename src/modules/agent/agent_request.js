@@ -70,7 +70,6 @@ class AgentRequestManager extends AbstractManager {
                     // 에러 발생시에는 Error 객체를 Client에 Response 후 
                     case ClientRequestManager.RESULT_FAILURE:
                         {
-                            this.requestMap.remove(request.mId);
                             // result instanceof Error Retry?
                             cb(result, null);
                             break;
@@ -86,8 +85,6 @@ class AgentRequestManager extends AbstractManager {
 
                     case ClientRequestManager.RESULT_SUCCESS:
                         {
-                            this.requestMap.remove(request.mId);
-
                             // result instanceof Object.
                             cb(null, result);
                             break;
