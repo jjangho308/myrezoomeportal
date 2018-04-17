@@ -94,7 +94,7 @@ describe('Blockchain test suit', () => {
         nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
     });
 
-    it('Put Nexledger', done => {
+    it.skip('Put Nexledger', done => {
 
         // var data = {
         //     name: "lkwook",
@@ -119,7 +119,7 @@ describe('Blockchain test suit', () => {
 
     it('Get Nexledger', done => {
 
-        var rtxid = "d61f5f9559bf94792f589c517ae46d3829af0b32fba47600f12e9b308b96204e";
+        var rtxid = "ce4437fdaec125c88c694ada6b58a1993cfb411bc08845c11312b3f477cce2c4";
 
         nexledgerService.getbytxid(nodeurl, rtxid, function (res) {
             console.log("==========test get procedure==========");
@@ -129,7 +129,7 @@ describe('Blockchain test suit', () => {
         });
     });
 
-    it('New Account Nexledger', done => {
+    it.skip('New Account Nexledger', done => {
 
         nexledgerService.newaccount(nodeurl, function (res) {
             console.log("==========test get procedure==========");

@@ -132,14 +132,14 @@ var formatter= {
             htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>인하대학교</p>';
-            htmldiv = htmldiv + '<p>'+ jsonobject[0] +'</p>';
-            htmldiv = htmldiv + '<p>'+jsonobject[0] +'</p>';
+            htmldiv = htmldiv + '<p>OPIC</p>';
+            htmldiv = htmldiv + '<p>English Writing</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject +'</p>';
             htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 
-        $('#spec_edu_detail').append(htmldiv);
+        $('#spec_forign_lang').append(htmldiv);
     }
 }
 
