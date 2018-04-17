@@ -22,7 +22,7 @@ export default {
      */
     get: (req, res, next) => {
 
-        var userId = req.params.uId;
+        var userId = req.body.uId;
 
         // /certs AJAX request
         if (!!req.xhr) {
