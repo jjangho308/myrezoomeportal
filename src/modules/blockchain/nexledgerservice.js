@@ -25,7 +25,7 @@ class NexledgerService extends AbstractManager {
     }
 
     newaccount(nodeurl, callback) {
-        var client = request.createClient(!!nodeurl ? nodeUrl : this.url);
+        var client = request.createClient(!!nodeurl ? nodeurl : this.url);
         //var data = args;
         var reqformatdata = {
             cmd: 'newaccount',
@@ -45,7 +45,7 @@ class NexledgerService extends AbstractManager {
 
     getbytxid(nodeurl, txid, callback) {
 
-        var client = request.createClient(!!nodeurl ? nodeUrl : this.url);
+        var client = request.createClient(!!nodeurl ? nodeurl : this.url);
 
         var reqformatdata = {
             cmd: 'getbytxid',
@@ -64,7 +64,7 @@ class NexledgerService extends AbstractManager {
     }
 
     getbyaddress(nodeurl, address, callback) {
-        var client = request.createClient(!!nodeurl ? nodeUrl : this.url);
+        var client = request.createClient(!!nodeurl ? nodeurl : this.url);
         var reqformatdata = {
             cmd: 'getbyaddress',
             args: {
@@ -81,7 +81,7 @@ class NexledgerService extends AbstractManager {
     }
 
     put(nodeurl, address, data, callback) {
-        var client = request.createClient(!!nodeurl ? nodeUrl : this.url);
+        var client = request.createClient(!!nodeurl ? nodeurl : this.url);
         var reqformatdata = {
             cmd: 'put',
             args: {
