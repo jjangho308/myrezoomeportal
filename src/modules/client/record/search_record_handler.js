@@ -56,6 +56,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         }, (err, users) => {
             if (!!err || users.length < 1) {
                 cb(ClientRequestManager.RESULT_FAILURE);
+                return;
             } else {
 
                 var targs = {
@@ -87,12 +88,47 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                 // 사용자가 최초 로그인인 경우
                 if (users[0].first == 'Y') {
+
+                    /**
+                     * RequiredKey를 사용자로부터 입력받은 phase
+                     * 1. 전달된 기관의 정보를 가져오고
+                     * 2. RequiredKey를 실어서 PushMessage 발신.
+                     */
+                    if (!!clientReq.orgcode && !!clientReq.requiredKey) {
+                        db.getOrgDAO().get({
+                            orgcode: clientReq.orgcode
+                        }, (err, foundOrgs) => {
+                            if (!!err) {
+                                // Database error
+                                done(ClientRequestManager.RESULT_FAILURE, err);
+                                return;
+                            } else if (foundOrgs.length == 0) {
+                                // No organization error
+                                done(ClientRequestManager.RESULT_FAILURE, err);
+                                return;
+                            } else {
+                                msg.args.subIDs = [foundOrgs[0].SUB_ID];
+                                msg.args.requiredKey = clientReq.requiredKey;
+
+                                Managers.push().init();
+                                Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
+                                    if (!err && i == resultOrgIds.length - 1) {
+                                        done(ClientRequestManager.RESULT_PENDING, {
+                                            mid: clientReq.mId
+                                        });
+                                    }
+                                });
+                            }
+                        })
+                    }
+
+                    // 전체 기관에 모두 발신할 경우
                     db.getOrgDAO().findAll((err, resultOrgIds) => {
                         for (var i in resultOrgIds) {
                             db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, result) => {
                                 if (!!err) {
                                     done(ClientRequestManager.RESULT_FAILURE, err);
-                                    break;
+                                    return;
                                 } else {
                                     var subIds = [];
                                     for (var j in result) {

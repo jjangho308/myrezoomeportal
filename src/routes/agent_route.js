@@ -15,6 +15,5 @@ router.post('/', controller.post);
  * 해당 path를 통해서도 routing이 되도록 uri를 추가한다.
  */
 router.post('/' + process.argv[2], controller.post);
-router.use('/', controller.default);
 
 export default router;
