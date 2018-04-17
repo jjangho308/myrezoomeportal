@@ -287,6 +287,12 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                             }
                         });
                     }
+                    else {
+                        //BLC MAP stored
+                        if (i == (agentRequest.records.length - 1)) {
+                            socket.emit('SearchResult', JSON.stringify(agentRequest));
+                        }
+                    }
 
 
                 }).call(this, i);
