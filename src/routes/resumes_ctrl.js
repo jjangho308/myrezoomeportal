@@ -27,7 +27,7 @@ export default {
         if (!!req.xhr) {
             Managers.client().request(new GetResumeRequest(req.body), (err, result) => {
                 if (!!err) {
-                    res.status(500).json(result);
+                    next(err)
                 } else {
                     res.json(result);
                 }
@@ -39,7 +39,7 @@ export default {
                 uId: userId
             }, (err, userModel) => {
                 if (!!err) {
-                    res.status(500).render('error');
+                    next(err);
                 } else {
                     res.render('resumes', userModel);
                 }
@@ -58,7 +58,7 @@ export default {
         if (!!req.xhr) {
             Managers.client().request(new CreateResumeRequest(req.body), (err, result) => {
                 if (!!err) {
-                    res.status(500).json(err);
+                    next(err);
                 } else {
                     res.json(result);
                 }
@@ -78,11 +78,13 @@ export default {
         if (!!req.xhr) {
             Manager.client().request(new UpdateResumeRequest(req.body), (err, result) => {
                 if (!!err) {
-                    res.status(500).json(err);
+                    next(err);
                 } else {
                     res.json(result);
                 }
             })
+        } else {
+            next(new Error("No page."));
         }
     }
 }

@@ -1,7 +1,7 @@
 import express from 'express';
 
 import tokenAuth from '../mw/client_auth';
-import ctrl from './resume_ctrl';
+import ctrl from './resumes_ctrl';
 import view from '../mw/view';
 
 var router = express.Router();
