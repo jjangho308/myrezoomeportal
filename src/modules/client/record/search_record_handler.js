@@ -98,11 +98,17 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                 })
             } else {
                 if (clientReq.update == true) {
+                    console.log("20180417 test 1");
                     db.getOrgDAO().findAll((err, resultOrgIds) => {
+                        console.log("20180417 test 2");
                         for (var i in resultOrgIds) {
                             (function (i) {
                                 //============================ 1. make subIDs =====================================
+                                console.log("20180417 test 3");
+                                console.log(resultOrgIds[i].ORG_ID);
                                 db.getRecordDAO().getStoredDataByUserId(uid, resultOrgIds[i].ORG_ID, (err, storedDatas) => {
+                                    console.log("20180417 test 4");
+                                    console.log(storedDatas);
 
                                     
                                     //BLC MAP에 저장된 record가 있는경우
@@ -149,9 +155,16 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                         })
                                     } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
                                         //console.log("subIDs만 있으면 돼!");
+
+                                        console.log("20180417 test 5");
+                                        console.log(storedDatas);
+
                                         db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
                                             delete msg.args.subIDs;
                                             delete msg.args.records;
+
+                                            console.log("20180417 test 6");
+                                            console.log(subIDsResult);
 
                                             var subIds = [];
 
