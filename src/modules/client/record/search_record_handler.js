@@ -24,14 +24,8 @@ import Util from '../../../util/util'
  * @since 180313
  */
 class SearchRecordRequestHandler extends AbstractClientRequestHandler {
-
-    /**
-     * Default constructor. <br />
-     * 
-     * @since 180313
-     */
-    constructor() {
-        super();
+    constructor(opt) {
+        super(opt);
     }
 
     /**
@@ -42,8 +36,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      * Agent로부터 Request가 오면 해당 mid로 Client Socket으로. <br />
      * 응답을 push함. <br />
      * 
-     * @param {SearchRecordRequestEntity} clientReq RequestEntity
-     * @param {functions(object, object)} done Callback of ClientRequestManager.
+     * @param {HttpResponse} httpRes 
+     * @param {SearchRecordRequest} clientReq 
      * 
      */
     request(clientReq, done) {
@@ -54,75 +48,56 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         db.getUserDAO().get({
             uId: uid
         }, (err, users) => {
-            if (!!err || users.length < 1) {
-                cb(ClientRequestManager.RESULT_FAILURE);
-                return;
-            } else {
+            var targs = {
+                familyNameEN: users[0].familyNameEN,
+                firstNameEN: users[0].firstNameEN,
+                fullNameEN: users[0].fullNameEN,
+                familyNameKO: users[0].familyNameKO,
+                firstNameKO: users[0].firstNameKO,
+                fullNameKO: users[0].fullNameKO,
+                birth: users[0].birth,
+                gender: users[0].gender,
+                phone: users[0].phone,
+                email: users[0].email,
+                ci: users[0].ci,
+                pkey: clientReq.pkey,
+            }
+            targs.pkey = clientReq.pkey;
 
-                var targs = {
-                    familyNameEN: users[0].familyNameEN,
-                    firstNameEN: users[0].firstNameEN,
-                    fullNameEN: users[0].fullNameEN,
-                    familyNameKO: users[0].familyNameKO,
-                    firstNameKO: users[0].firstNameKO,
-                    fullNameKO: users[0].fullNameKO,
-                    birth: users[0].birth,
-                    gender: users[0].gender,
-                    phone: users[0].phone,
-                    email: users[0].email,
-                    ci: users[0].ci,
-                    pkey: clientReq.pkey,
-                }
+            var msg = new SearchRecordPush({
+                mid: clientReq.mId,
+                sid: clientReq.sId,
+                cmd: clientReq.cmd,
+                args: targs,
+            });
 
-                targs.pkey = clientReq.pkey;
+            var nexledgerService = new NexledgerService();
+            var nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
 
-                var msg = new SearchRecordPush({
-                    mid: clientReq.mId,
-                    sid: clientReq.sId,
-                    cmd: clientReq.cmd,
-                    args: targs,
-                });
+            if (users[0].first == 'Y') {
+                db.getOrgDAO().findAll((err, resultOrgIds) => {
+                    for (var i in resultOrgIds) {
+                        db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, result) => {
+                            if (err) {
 
-                var nexledgerService = new NexledgerService();
-                var nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
-
-                // 사용자가 최초 로그인인 경우
-                if (users[0].first == 'Y') {
-
-                    /**
-                     * RequiredKey를 사용자로부터 입력받은 phase
-                     * 1. 전달된 기관의 정보를 가져오고
-                     * 2. RequiredKey를 실어서 PushMessage 발신.
-                     */
-                    if (!!clientReq.orgcode && !!clientReq.requiredKey) {
-                        db.getOrgDAO().get({
-                            orgcode: clientReq.orgcode
-                        }, (err, foundOrgs) => {
-                            if (!!err) {
-                                // Database error
-                                done(ClientRequestManager.RESULT_FAILURE, err);
-                                return;
-                            } else if (foundOrgs.length == 0) {
-                                // No organization error
-                                done(ClientRequestManager.RESULT_FAILURE, err);
-                                return;
                             } else {
-                                msg.args.subIDs = [foundOrgs[0].SUB_ID];
-                                msg.args.requiredKey = clientReq.requiredKey;
+                                var subIds = [];
+                                for (var j in result) {
+                                    subIds.push(result[j].SUB_ID);
+                                }
+
+                                msg.args.subIDs = subIds;
 
                                 Managers.push().init();
                                 Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
-                                    if (!err && i == resultOrgIds.length - 1) {
-                                        done(ClientRequestManager.RESULT_PENDING, {
-                                            mid: clientReq.mId
-                                        });
-                                    }
+                                    !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
                                 });
                             }
                         })
                     }
-
-                    // 전체 기관에 모두 발신할 경우
+                })
+            } else {
+                if (clientReq.update == true) {
                     db.getOrgDAO().findAll((err, resultOrgIds) => {
                         for (var i in resultOrgIds) {
                             (function (i) {
@@ -149,16 +124,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                             hashed: res.result.hash,
                                                             txid: storedDatas[k].TRX_ID
                                                         })
-                                                    })(k);
-                                                }
-                                            })
-                                        } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
-                                            //console.log("subIDs만 있으면 돼!");
-                                            db.getOrgDAO().getSubIdByOrgId(resultOrgIds[orgIdx].ORG_ID, (err, subIDsResult) => {
-                                                delete msg.args.subIDs;
-                                                delete msg.args.records;
 
-                                                var subIds = [];
 
                                                         sleep(50);
 
@@ -187,62 +153,50 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                             delete msg.args.subIDs;
                                             delete msg.args.records;
 
-                                                msg.args.subIDs = subIds;
+                                            var subIds = [];
 
-                                                Managers.push().init();
-                                                Managers.push().sendMessage(msg, resultOrgIds[orgIdx].ORG_ID, err => {
-                                                    if (orgIdx == resultOrgIds.length - 1) {
-                                                        !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING, {
-                                                            mid: clientReq.mId
-                                                        });
-                                                    }
-                                                });
-                                            })
-                                        }
-                                    })
-                                })(i);
-                            } //Per orgIDs, Sending AMQ Message
-                        })
+                                            for (var j in subIDsResult) {
+                                                subIds.push(subIDsResult[j].SUB_ID)
+                                            }
 
-                    } else {
-                        //refresh
-                        db.getRecordDAO().getStoredOrgByUserId(uid, (err, storedOrgs) => {
-                            console.log(storedOrgs);
+                                            msg.args.subIDs = subIds;
 
                                             //console.log(msg);
 
 
-                                !(orgIdx => {
-                                    db.getRecordDAO().getStoredDataByUserId(uid, storedOrgs[orgIdx].ORG_ID, (err, storedData) => {
-                                        var records = [];
+                                            Managers.push().init();
+                                            Managers.push().sendMessage(msg, resultOrgIds[i].ORG_ID, err => {
+                                                !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
+                                            });
 
-                                        //console.log(storedData);
+                                        })
+                                    }
+                                })
+                            }).call(this, i);
+                        } //Per orgIDs, Sending AMQ Message
+                    })
 
                 } else {
                     //refresh
                     db.getRecordDAO().getStoredOrgByUserId(uid, (err, storedOrgs) => {
                         //console.log(storedOrgs);
 
-                                                    records.push({
-                                                        subID: storedData[j].SUB_ID,
-                                                        hashed: res.result.hash,
-                                                        txid: storedData[j].TRX_ID
-                                                    })
+                        for (var i in storedOrgs) {
 
-                                                    if (j == storedData.length - 1) {
-                                                        process.nextTick(() => {
-                                                            msg.args.records = records;
+                            (function (i) {
+                                db.getRecordDAO().getStoredDataByUserId(uid, storedOrgs[i].ORG_ID, (err, storedDatas) => {
+                                    var records = [];
 
-                                                            console.log("Active MQ");
+                                    //console.log(storedDatas);
 
-                                                            Managers.push().init();
-                                                            Managers.push().sendMessage(msg, storedOrgs[orgIdx].ORG_ID, err => {
-                                                                !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
-                                                            });
-                                                        });
-                                                    }
+                                    for (var j in storedDatas) {
+                                        (function (j) {
+                                            nexledgerService.getbytxid(nodeurl, storedDatas[j].TRX_ID, function (res) {
 
-                                                    //console.log(msg.args.records);
+                                                records.push({
+                                                    subID: storedDatas[j].SUB_ID,
+                                                    hashed: res.result.hash,
+                                                    txid: storedDatas[j].TRX_ID
                                                 })
 
 
@@ -325,11 +279,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                             console.log(blcmapinsertData);
                             console.log("=========================================");
 
-                            db.getRecordDAO().putRecord(blcmapinsertData, function (dbres) {
+                            db.getRecordDAO().putRecord(blcmapinsertData,function(dbres){
                                 console.log(dbres);
                             });
 
-                            db.getUserDAO().setFristYN(uid, function (dbres2) {
+                            db.getUserDAO().setFristYN(uid, function(dbres2) {
                                 console.log(dbres2);
                             });
 
@@ -337,7 +291,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 socket.emit('SearchResult', JSON.stringify(agentRequest));
                             }
                         });
-                    } else {
+                    }
+                    else {
                         //BLC MAP stored
                         if (i == (agentRequest.records.length - 1)) {
                             socket.emit('SearchResult', JSON.stringify(agentRequest));
