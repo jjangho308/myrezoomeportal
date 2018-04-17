@@ -34,11 +34,11 @@ export default {
         clientRequest.request(requestEntity, (err, result) => {
             if (!!err) {
                 next(err);
-            } else {
-                res.json({
-                    mid: requestEntity.mId
-                });
-            }
+            } else {}
+        });
+
+        res.json({
+            mid: requestEntity.mId
         });
     }
 }
