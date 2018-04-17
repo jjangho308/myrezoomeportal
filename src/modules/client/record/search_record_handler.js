@@ -97,6 +97,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     }
                 })
             } else {
+                console.log("20180417 test 0");
+                console.log(clientReq);
+                console.log("--------------------------------------------");
                 if (clientReq.update == true) {
                     console.log("20180417 test 1");
                     db.getOrgDAO().findAll((err, resultOrgIds) => {
