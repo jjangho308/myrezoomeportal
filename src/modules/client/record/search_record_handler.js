@@ -104,8 +104,10 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 //============================ 1. make subIDs =====================================
                                 db.getRecordDAO().getStoredDataByUserId(uid, resultOrgIds[i].ORG_ID, (err, storedDatas) => {
 
+                                    
                                     //BLC MAP에 저장된 record가 있는경우
                                     if (storedDatas.length > 0) {
+                                        //console.log(storedDatas.length);
                                         //console.log("subIDs + records 함께 있어야해 ");
                                         db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, subIDsResult) => {
 
@@ -114,14 +116,13 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                             var records = [];
                                             for (var k in storedDatas) {
                                                 (function (k) {
-
                                                     console.log(k + " " + storedDatas[k].BLC_MAP_ID)
                                                     nexledgerService.getbytxid(nodeurl, storedDatas[k].TRX_ID, function (res) {
 
                                                         records.push({
                                                             subID: storedDatas[k].SUB_ID,
                                                             hashed: res.result.hash,
-                                                            txid: storedDatas[j].TRX_ID
+                                                            txid: storedDatas[k].TRX_ID
                                                         })
 
 
@@ -134,6 +135,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                             msg.args.subIDs = subIds;
                                                             msg.args.records = records;
+
+                                                            
 
                                                             Managers.push().init();
                                                             Managers.push().sendMessage(msg, resultOrgIds[i].ORG_ID, err => {
@@ -158,6 +161,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                             msg.args.subIDs = subIds;
 
+                                            //console.log(msg);
+
 
                                             Managers.push().init();
                                             Managers.push().sendMessage(msg, resultOrgIds[i].ORG_ID, err => {
@@ -174,7 +179,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                 } else {
                     //refresh
                     db.getRecordDAO().getStoredOrgByUserId(uid, (err, storedOrgs) => {
-                        console.log(storedOrgs);
+                        //console.log(storedOrgs);
 
                         for (var i in storedOrgs) {
 
@@ -199,7 +204,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                 if (j == storedDatas.length - 1) {
                                                     msg.args.records = records;
-                                                    console.log("Active MQ");
+                                                    //console.log("Active MQ");
 
                                                     Managers.push().init();
                                                     Managers.push().sendMessage(msg, storedOrgs[i].ORG_ID, err => {
