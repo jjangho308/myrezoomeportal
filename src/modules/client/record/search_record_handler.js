@@ -277,6 +277,10 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 console.log(dbres);
                             });
 
+                            db.getUserDAO().setFristYN(uid, function(dbres2) {
+                                console.log(dbres2);
+                            });
+
                             if (i == (agentRequest.records.length - 1)) {
                                 socket.emit('SearchResult', JSON.stringify(agentRequest));
                             }

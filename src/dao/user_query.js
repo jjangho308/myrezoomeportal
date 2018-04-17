@@ -20,6 +20,8 @@ export default {
     
     set: 'UPDATE ' + TABLE_NAME + ' SET ? WHERE ?',
 
+    setFristYN: 'UPDATE ' + TABLE_NAME + ' SET FRST_YN = ? WHERE UID = ?',
+
     setById: 'UPDATE TCUP_USR SET ? where S_USR_ID = ?',
 
     setByEmail: 'UPDATE TCUP_USR SET ? where EMAIL = ?',
