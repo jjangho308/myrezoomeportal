@@ -1,18 +1,35 @@
+import AbstractManager from '../abstract_manager';
 import request from 'request-json';
 
-class NexledgerService {
+/**
+ * Manager for IO function on NexLedger. <br />
+ * 
+ * @since
+ * @author
+ */
+class NexledgerService extends AbstractManager {
 
-    constructor() {
-        
+
+    /**
+     * Default constructor. <br />
+     * 
+     * @param {*} opt 
+     */
+    constructor(opt) {
+        super(opt);
+    }
+
+    init(from) {
+        super.init(from);
+        this.url = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
     }
 
     newaccount(nodeurl, callback) {
-        var client = request.createClient(nodeurl);
+        var client = request.createClient(!!nodeurl ? nodeUrl : this.url);
         //var data = args;
         var reqformatdata = {
             cmd: 'newaccount',
-            args: {
-            }
+            args: {}
         };
         client.post('/', reqformatdata, function (err, res, body) {
 
@@ -28,7 +45,7 @@ class NexledgerService {
 
     getbytxid(nodeurl, txid, callback) {
 
-        var client = request.createClient(nodeurl);
+        var client = request.createClient(!!nodeurl ? nodeUrl : this.url);
 
         var reqformatdata = {
             cmd: 'getbytxid',
@@ -47,7 +64,7 @@ class NexledgerService {
     }
 
     getbyaddress(nodeurl, address, callback) {
-        var client = request.createClient(nodeurl);
+        var client = request.createClient(!!nodeurl ? nodeUrl : this.url);
         var reqformatdata = {
             cmd: 'getbyaddress',
             args: {
@@ -64,7 +81,7 @@ class NexledgerService {
     }
 
     put(nodeurl, address, data, callback) {
-        var client = request.createClient(nodeurl);
+        var client = request.createClient(!!nodeurl ? nodeUrl : this.url);
         var reqformatdata = {
             cmd: 'put',
             args: {
