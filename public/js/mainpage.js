@@ -22,22 +22,52 @@ function getCookie(cname) {
     return "";
 }
 
+function setData(record) {
+    // dcript data 
+    sessionStorage.setItem(record.txid, record);
+
+    addTxidList(record.txid);
+}
+
+function getData(record_txid) {
+    return sessionStorage.getItem(record_txid);
+}
+
+function addTxidList(txid) {
+    var txidlist = [getTxidList()];
+    
+    //중복제거 로직 추가해야함
+    txidlist.push(txid);
+    setTxidList(txidlist);
+}
+
+function setTxidList(txidarray) {
+    sessionStorage.setItem(client_token, txidarray);
+}
+
+function getTxidList() {
+    return sessionStorage.getItem(client_token);
+}
+
 $(document).ready(function(){
     
     socket = io();
 
-
     /*
         view init empty set
-    */
-   
+    */   
 
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
+
+    //set txidlist client side
+    var emptyarray = [];
+    setTxidList(emptyarray);
+
     request_agent();
 
     $('#refresh_record').click(function(){
-
+        
         $.ajax({
             type: 'POST',
             url: '/client',
@@ -106,57 +136,41 @@ function request_agent() {
     });
 }
 
+function refreshview() {
+    var txidlist = [getTxidList()];
+    console.log(txidlist);
+
+    for(var i in txidlist) {
+        var viewdata = getData(txidlist[i]);
+        var subid = viewdata.subid;
+        formatter[subid](viewdata);
+    }
+
+}
+
 function clientsocket_listener() {
 
-    $.getScript( 'js/localstorage.js');
-
-    
-
     socket.on('SearchResult', function(msg){
+
         var omsg = JSON.parse(msg);
         console.log('message: ');
         console.log(omsg);
-        
-        /*
-        orgcode	string	Plain text					기관 고유 넘버
-        iv	string	Base64 encoded string					Initialization Vector
-        key	string	RSA_ClientPublic(AES_AgentKey)					
-        records	array						이력 데이터 배열
-        records.hash	string	SHA256(record)					이력 Record의 Hash
-        records.data	string	AES_ClientKey(record)					암호화된 이력
-        records.subid	string	Plain text					자격 증명 분류 코드
-        records.stored	boolean	true/false					Blockchain에 등록되었는지 여부				
-        */
 
         var orgcode = omsg.orgcode;
         
-        
         for(var i=0; i<omsg.records.length ; i++) {
-            /* get formater for view*/
-
-            /*temp get opic eng formatter get*/
             
-            //var cert_code = records[i].certcode;
-            //var subid = 'RCLPT0005';
             var subid = omsg.records[i].subid;
-            //var file_name = 'js/'+ subid + '_formatter.js';
-
-            //$.getScript( file_name );
-
-            //var targetdivid = getTargetdivid(subid);
             
             try {
-                formatter[subid](omsg.records[i]);
+                //formatter[subid](omsg.records[i]);
                 //getviewdata(omsg.records[i]);
                 setData(omsg.records[i]);
+                refreshview();
             }catch(exception) {
                 console.log(exception);
-                continue;
+                //continue;
             }
-            //save localstorage
-            
-
-
         }
 
     });

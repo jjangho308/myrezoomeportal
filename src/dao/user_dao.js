@@ -50,12 +50,38 @@ class UserDao extends AbstractDAO {
      * @since 180327
      * @author TACKSU
      */
+    getByEmail(creteria, cb) {
+        var condition = {
+            EMAIL: creteria.email
+        }
+        // condition = (new UserModel(creteria)).toRow();
+        var query = mysql.format(userQuery.get, condition);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                var result = [];
+
+                for (var i in rows) {
+                    var entry = UserModel.fromRow(rows[i]);
+                    result.push(entry);
+                }
+                cb(err, result);
+            }
+        })
+    }
+
+    /**
+     * Search specific UserModel by given creteria from User Table. <br />
+     * 
+     * @since 180327
+     * @author TACKSU
+     */
     get(creteria, cb) {
-        var condition = null;
-        var sql = null;
-
-        condition = (new UserModel(creteria)).toRow();
-
+        var condition = {
+            UID: creteria.uId
+        }
+        // condition = (new UserModel(creteria)).toRow();
         var query = mysql.format(userQuery.get, condition);
         this.query(query, (err, rows) => {
             if (!!err) {

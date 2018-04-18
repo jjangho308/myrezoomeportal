@@ -27,15 +27,18 @@ export default {
      * @author TACKSU
      */
     post: (req, res, next) => {
-        console.log(req.body);
-        var signin = new SignInRequest(req.body);
-        Managers.client().request(signin, (err, result) => { 
-            if (!!err) {
-                console.log(err.toString());
-            } else {
-                res.set('Set-Cookie', 'JWT=' + result.token);
-                res.json(result);
-            }
-        });
+        if (!!req.xhr) {
+            console.log(req.body);
+            Managers.client().request(new SignInRequest(req.body), (err, result) => {
+                if (!!err) {
+                    res.status(500).json(err);
+                } else {
+                    res.set('Set-Cookie', 'JWT=' + result.token);
+                    res.json(result);
+                }
+            });
+        } else {
+            next(new Error("Not found."));
+        }
     }
 }
