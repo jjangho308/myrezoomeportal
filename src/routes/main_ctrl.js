@@ -1,3 +1,4 @@
+import Mangers from '../core/managers';
 
 /**
  * Controller function of /main uri. <br />
@@ -8,27 +9,26 @@
 export default {
     get: (req, res, next) => {
         var userId = req.body.uId;
-        if(!!userId){
-           var userDAO = Managers.db().getUserDAO();
-           userDAO.get({
-               uId : userId
-           }, (err, userModelList)=>{
-                if(!!err){
+        if (!!userId) {
+            var userDAO = Managers.db().getUserDAO();
+            userDAO.get({
+                uId: userId
+            }, (err, userModelList) => {
+                if (!!err) {
                     next(err);
-                }else if(userModelList.length == 0){
+                } else if (userModelList.length == 0) {
                     next(new Error("No user found"));
-                }else{
+                } else {
                     res.render('main', userModelList[0]);
                 }
-           });
-        }else{
+            });
+        } else {
             res.render('main');
         }
     },
 
     edu: (req, res, next) => {
-        var result = [
-            {
+        var result = [{
                 date: '2018-03-03 ~ 2018-04-04',
                 orglogo: 'https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg',
                 blc_map: true,
@@ -47,7 +47,7 @@ export default {
         ]
 
         res.status(200).json(result);
-        
+
     }
 
 }
