@@ -27,7 +27,7 @@ var formatter= {
         htmldiv = htmldiv + '</div>';
 
         
-        $('#spec_forign_lang_targetdiv').append(htmldiv);
+        $('#spec_forign_lang').append(htmldiv);
     },
 
     "RCCNF0001":function viewformatter(record) {
@@ -56,7 +56,7 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 
-        $('#spec_certification_targetdiv').append(htmldiv);
+        $('#spec_certification').append(htmldiv);
     },
 
     "RCOGC0008":function viewformatter(record) {
@@ -85,7 +85,7 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 
-        $('#spec_edu_detail_targetdiv').append(htmldiv);
+        $('#spec_edu_detail').append(htmldiv);
     },
 
     "RCOGC0009":function viewformatter(record) {
@@ -112,7 +112,7 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 
-        $('#spec_edu_detail_targetdiv').append(htmldiv);
+        $('#spec_edu_detail').append(htmldiv);
     },
 
     "RCLPT0006":function viewformatter(record) {
@@ -139,7 +139,7 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 
-        $('#spec_forign_lang_targetdiv').append(htmldiv);
+        $('#spec_forign_lang').append(htmldiv);
     }
 }
 

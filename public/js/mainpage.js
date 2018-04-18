@@ -110,9 +110,13 @@ function clientsocket_listener() {
 
     socket.on('SearchResult', function(msg){
 
-        $('#spec_certification_targetdiv').empty();
-        $('#spec_edu_detail_targetdiv').empty();
-        $('#spec_forign_lang_targetdiv').empty();
+        // $('#spec_certification_targetdiv').hide();
+        // $('#spec_edu_detail_targetdiv').hide();
+        // $('#spec_forign_lang_targetdiv').hide();
+
+        $('#spec_forign_lang').remove('div');
+        $('#spec_edu_detail').remove('div');
+        $('#spec_certification').remove('div');
 
         var omsg = JSON.parse(msg);
         console.log('message: ');
