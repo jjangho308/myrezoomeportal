@@ -31,7 +31,7 @@ function setData(record) {
 }
 
 function getData(record_txid) {
-    return sessionStorage.getItem(record_txid);
+    return JSON.parse(sessionStorage.getItem(record_txid));
 }
 
 function addTxidList(txid) {
