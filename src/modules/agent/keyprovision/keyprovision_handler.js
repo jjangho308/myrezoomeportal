@@ -35,9 +35,9 @@ class KeyProvisionRequestHandler extends AbstractAgentRequestHandler {
      * @since 180403
      * @author TACKSU
      * @param {*} requestEntity 
-     * @param {*} cb 
+     * @param {*} done Callback function of AgentRequest. <br />
      */
-    request(requestEntity, cb) {
+    request(requestEntity, done) {
         var orgDAO = new OrgDAO();
         var orgDAO = Managers.db().getOrgDAO();
         orgDAO.getOrg({
@@ -67,7 +67,7 @@ class KeyProvisionRequestHandler extends AbstractAgentRequestHandler {
                             // Org info update.
 
                             orgDAO.setInfo({
-                                orgId: orgId
+                                orgId: requestEntity.orgId
                             }, new OrgInfoModel({
                                 publicKey: requestEntity.publicKey
                             }), (err, result) => {
@@ -75,9 +75,7 @@ class KeyProvisionRequestHandler extends AbstractAgentRequestHandler {
                                     done(AgentReqeust.RESULT_FAILURE, err);
                                     return;
                                 } else {
-                                    done(AgentRequest.RESULT_SUCCESS, {
-
-                                    });
+                                    done(AgentRequest.RESULT_SUCCESS, true);
                                     return;
                                 }
                             })

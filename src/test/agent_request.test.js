@@ -79,12 +79,14 @@ describe('Agent channel request test suite.', () => {
             .send({
                 cmd: 'KeyProvision',
                 args: {
-                    orgId: '100',
+                    orgId: 100,
                     pubkey: new Buffer('Hello World', 'utf-8').toString('base64')
                 }
             })
             .end((err, res) => {
-                done();
+                if (res.body.result) {
+                    done();
+                }
             });
     });
 
