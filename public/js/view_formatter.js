@@ -108,8 +108,8 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>인하대학교</p>';
-            htmldiv = htmldiv + '<p>'+ jsonobject[0] +'</p>';
-            htmldiv = htmldiv + '<p>'+jsonobject[0] +'</p>';
+            htmldiv = htmldiv + '<p>'+ jsonobject.list +'</p>';
+            htmldiv = htmldiv + '<p>'+jsonobject +'</p>';
             htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
