@@ -17,16 +17,7 @@ class SignInRequest extends AbstractClientRequestEntity {
      */
     constructor(opt) {
         super(opt);
-
-        /**
-         * UID of user table. <br />
-         */
-        this.email = opt.email;
-
-        /**
-         * Hashed password string. <br />
-         */
-        this.password = opt.password;
+        this.user = opt;        
     }
 }
 
