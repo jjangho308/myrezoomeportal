@@ -24,19 +24,26 @@ function getCookie(cname) {
 
 function setData(record) {
     // dcript data 
-    sessionStorage.setItem(record.txid, record);
+    
+    sessionStorage.setItem(record.txid, JSON.stringify(record));
 
     addTxidList(record.txid);
 }
 
 function getData(record_txid) {
-    return sessionStorage.getItem(record_txid);
+    return JSON.parse(sessionStorage.getItem(record_txid));
 }
 
 function addTxidList(txid) {
-    var txidlist = string.split(",");
+    var txidlist = getTxidList();
     
-    //중복제거 로직 추가해야함
+    //중복제거 로직 
+    for(var i in txidlist) {
+        if(txidlist[i]==txid) {
+            return;
+        }
+    }
+
     txidlist.push(txid);
     setTxidList(txidlist);
 }
@@ -46,7 +53,9 @@ function setTxidList(txidarray) {
 }
 
 function getTxidList() {
-    return sessionStorage.getItem(client_token);
+    var storagedata =  sessionStorage.getItem(client_token);
+    var resultarray = storagedata.split(",");
+    return resultarray;
 }
 
 $(document).ready(function(){
@@ -137,13 +146,24 @@ function request_agent() {
 }
 
 function refreshview() {
-    var txidlist = [getTxidList()];
+    var txidlist = getTxidList();
+
+    //clean view
+    $('.spec-body').remove();
+    //$('#spec_forign_lang').remove('.spec-body');
+    //$('#spec_certification').remove('.spec-body');
+
     console.log(txidlist);
 
     for(var i in txidlist) {
-        var viewdata = getData(txidlist[i]);
-        var subid = viewdata.subid;
-        formatter[subid](viewdata);
+        try {
+            var viewdata = getData(txidlist[i]);
+            var subid = viewdata.subid;
+            formatter[subid](viewdata);
+        }catch(exception) {
+            console.log(exception);
+            continue;
+        }
     }
 
 }

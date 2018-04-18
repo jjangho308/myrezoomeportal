@@ -30,7 +30,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#btn_signup').click(function () {
+    $('#btn_signup').click(function () {        
         if ($('#signup_id').val() == '') {
             alert("id empty");
             return;
@@ -44,10 +44,10 @@ $(document).ready(function () {
         var user_password_confirm = SHA256($('#signup_pw_confirm').val());
         var familyname = $('#signup_familyname').val();
         var firstname = $('#signup_firstname').val();
-        var gender = $('#signup_gender').val();
+        var gender = $(':radio[name="gender"]:checked').val();
         var birth = $('#signup_birth').val();
         var phone = $('#signup_phone').val();
-        var carrier_name = "SKT";
+        var carrier_name = $("#signup_carrierName").val();
 
         if (user_password != user_password_confirm) {
             alert("비밀번호가 다르다");
