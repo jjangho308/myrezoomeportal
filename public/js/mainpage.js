@@ -144,9 +144,14 @@ function refreshview() {
     console.log(txidlist);
 
     for(var i in txidlist) {
-        var viewdata = getData(txidlist[i]);
-        var subid = viewdata.subid;
-        formatter[subid](viewdata);
+        try {
+            var viewdata = getData(txidlist[i]);
+            var subid = viewdata.subid;
+            formatter[subid](viewdata);
+        }catch(exception) {
+            console.log(exception);
+            continue;
+        }
     }
 
 }
