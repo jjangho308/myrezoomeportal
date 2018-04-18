@@ -147,6 +147,12 @@ function request_agent() {
 
 function refreshview() {
     var txidlist = getTxidList();
+
+    //clean view
+    $('#spec_edu_detail').remove('.spec-body');
+    $('#spec_forign_lang').remove('.spec-body');
+    $('#spec_certification').remove('.spec-body');
+
     console.log(txidlist);
 
     for(var i in txidlist) {
