@@ -21,7 +21,7 @@ $(document).ready(function () {
 
         var param = {
             email: user_email,
-            password: user_password
+            pw: user_password
         }
 
         $.post("/signin", param, function (result) {
