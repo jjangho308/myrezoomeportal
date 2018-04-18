@@ -1,7 +1,29 @@
 
+/**
+ * Controller function of /main uri. <br />
+ * 
+ * @since 180304
+ * @author TACKSU
+ */
 export default {
     get: (req, res, next) => {
-        res.render('main', {});
+        var userId = req.body.uId;
+        if(!!userId){
+           var userDAO = Managers.db().getUserDAO();
+           userDAO.get({
+               uId : userId
+           }, (err, userModelList)=>{
+                if(!!err){
+                    next(err);
+                }else if(userModelList.length == 0){
+                    next(new Error("No user found"));
+                }else{
+                    res.render('main', userModelList[0]);
+                }
+           });
+        }else{
+            res.render('main');
+        }
     },
 
     edu: (req, res, next) => {
