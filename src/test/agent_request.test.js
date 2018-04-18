@@ -84,7 +84,9 @@ describe('Agent channel request test suite.', () => {
                 }
             })
             .end((err, res) => {
-                done();
+                if (res.body.result) {
+                    done();
+                }
             });
     });
 

@@ -75,9 +75,7 @@ class KeyProvisionRequestHandler extends AbstractAgentRequestHandler {
                                     done(AgentReqeust.RESULT_FAILURE, err);
                                     return;
                                 } else {
-                                    done(AgentRequest.RESULT_SUCCESS, {
-
-                                    });
+                                    done(AgentRequest.RESULT_SUCCESS, true);
                                     return;
                                 }
                             })

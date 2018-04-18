@@ -37,7 +37,9 @@ export default {
             if (!!err) {
                 next(err);
             } else {
-                res.json(result);
+                res.json({
+                    result: result
+                });
             }
         });
     }
