@@ -102,14 +102,14 @@ class AgentRequestManager extends AbstractManager {
                 switch (resultCode) {
 
                     // 에러 발생시에는 Error 객체를 Client에 Response 후 
-                    case ClientRequestManager.RESULT_FAILURE:
+                    case AgentRequestManager.RESULT_FAILURE:
                         {
                             // result instanceof Error Retry?
                             cb(result, null);
                             break;
                         }
 
-                    case ClientRequestManager.RESULT_PENDING:
+                    case AgentRequestManager.RESULT_PENDING:
                         {
                             // result instanceof Object and Keep request.
                             this.requestMap.set(request.mId, request);
@@ -117,7 +117,7 @@ class AgentRequestManager extends AbstractManager {
                             break;
                         }
 
-                    case ClientRequestManager.RESULT_SUCCESS:
+                    case AgentRequestManager.RESULT_SUCCESS:
                         {
                             // result instanceof Object.
                             cb(null, result);

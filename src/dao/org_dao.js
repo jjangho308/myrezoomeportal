@@ -188,7 +188,7 @@ class OrgDao extends AbstractDAO {
      * @since 180418
      * @author TACKSU
      * 
-     * @param {*} creteria 
+     * @param {*} creteria Where parameter. <br />
      * @param {*} orgInfo 
      * @param {*} cb 
      */
@@ -197,7 +197,7 @@ class OrgDao extends AbstractDAO {
             ORG_ID: creteria.orgId
         };
 
-        var query = mysql.format(orgQuery.setInfo, [condition, orgInfoModel.toRow()]);
+        var query = mysql.format(orgQuery.setInfo, [orgInfoModel.toRow(), condition]);
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err, null);

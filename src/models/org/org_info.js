@@ -1,5 +1,7 @@
 import AbstractModel from "../abstract_model";
 
+import Util from '../../util/util';
+
 /**
  * Model presentation of TCUP_MODE_INFO Table. <br />
  * 
@@ -25,6 +27,8 @@ class OrgInfoModel extends AbstractModel {
         this.publicKey = opt.publicKey;
         this.modified = opt.modified;
         this.created = opt.created;
+
+        Util.trim(this);
     }
 
     /**
@@ -36,14 +40,14 @@ class OrgInfoModel extends AbstractModel {
      * @param {*} row 
      */
     static fromRow(row) {
-        return this.trim(new OrgModelInfo({
+        return new OrgInfoModel({
             sId: row.S_ORG_INFO_ID,
             orgId: row.ORG_ID,
             amqName: row.AMQ_NM,
             publicKey: row.PUB_KEY,
             modified: row.MDFID_DT,
             created: row.CRTD_DT
-        }));
+        });
     }
 
     /**
@@ -55,7 +59,7 @@ class OrgInfoModel extends AbstractModel {
      * @param {*} obj 
      */
     static toRow(obj) {
-        return this.trim({
+        return Util.trim({
             S_ORG_INFO_ID: obj.sId,
             ORG_ID: obj.orgId,
             AMQ_NM: obj.amqName,
