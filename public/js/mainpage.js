@@ -149,7 +149,7 @@ function refreshview() {
     var txidlist = getTxidList();
 
     //clean view
-    $('.spec-body').empty();
+    $('.spec-body').remove();
     //$('#spec_forign_lang').remove('.spec-body');
     //$('#spec_certification').remove('.spec-body');
 
