@@ -37,7 +37,13 @@ function getData(record_txid) {
 function addTxidList(txid) {
     var txidlist = getTxidList();
     
-    //중복제거 로직 추가해야함
+    //중복제거 로직 
+    for(var i in txidlist) {
+        if(txidlist[i]==txid) {
+            return;
+        }
+    }
+
     txidlist.push(txid);
     setTxidList(txidlist);
 }
