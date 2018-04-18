@@ -26,7 +26,7 @@ function setData(record) {
     // dcript data 
     sessionStorage.setItem(record.txid, record);
 
-    var txidlist = getTxidList();
+    var txidlist = [getTxidList()];
     txidlist.push(record.txid);
     setTxidList(txidlist);
 }
