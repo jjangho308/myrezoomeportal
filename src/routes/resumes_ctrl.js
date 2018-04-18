@@ -48,6 +48,19 @@ export default {
     },
 
     /**
+     * Controller funtion for resume viewer. <br />
+     * 
+     * @since 180418
+     * @author TACKSU
+     */
+    getResume : (req, res, next)=>{
+        var resumeId = req.params.rsmId;
+        if(!!resumeId){
+            // TODO 특정 이력서에 대한 뷰 화면으로 넘겨줘야 함.
+        }
+    },
+
+    /**
      * Create new resume entity. <br />
      * 
      * @since 180402
