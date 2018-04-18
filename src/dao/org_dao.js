@@ -104,65 +104,76 @@ class OrgDao extends AbstractDAO {
 
     }
 
-    /**
-     * Create organization info column to database. <br />
-     * 
-     * @since 180418
-     * @author TACKSU
-     * 
-     * @param {*} orgInfoModel 
-     * @param {*} cb 
-     */
-    putInfo(orgInfoModel, cb) {
-        var params = orgInfoModel.toRow();
+    // /**
+    //  * Create organization info column to database. <br />
+    //  * 
+    //  * @since 180418
+    //  * @author TACKSU
+    //  * 
+    //  * @param {*} orgInfoModel 
+    //  * @param {*} cb 
+    //  */
+    // putInfo(orgInfoModel, cb) {
+    //     var params = orgInfoModel.toRow();
 
-        var query = mysql.format(orgQuery.putInfo, params);
-        this.query(query, (err, result) => {
-            if (!!err) {
-                cb(err, null);
-            } else {
-                cb(null, result.insertId);
-            }
-        })
-    }
+    //     var query = mysql.format(orgQuery.putInfo, params);
+    //     this.query(query, (err, result) => {
+    //         if (!!err) {
+    //             cb(err, null);
+    //         } else {
+    //             cb(null, result.insertId);
+    //         }
+    //     })
+    // }
 
-    /**
-     * Select organization information from table. <br />
-     * 
-     * @since 180418
-     * @author TACKSU
-     */
-    getInfo(creteria, cb){
-        var condition = {
-            ORG_ID : creteria.orgcode
-        }
+    // /**
+    //  * Select organization information from table. <br />
+    //  * 
+    //  * @since 180418
+    //  * @author TACKSU
+    //  */
+    // getInfo(creteria, cb) {
+    //     var condition = {
+    //         ORG_ID: creteria.orgcode
+    //     }
 
-        var query = mysql.format(orgQuery.)
-    }
+    //     var query = mysql.format(orgQuery.getInfo, condition);
+    //     this.querys(query, (err, result) => {
+    //         if (!!err) {
+    //             cb(err, null);
+    //         } else {
+    //             var orgInfoList = [];
+    //             for (var i in result) {
+    //                 orgInfoList.push(OrgInfoModel.fromRow(result[i]));
+    //             }
+    //             cb(null, orgInfoList);
+    //         }
+    //     })
+    // }
 
-    /**
-     * Update organization information. <br />
-     * 
-     * @since 180418
-     * @author TACKSU
-     * 
-     * @param {*} creteria 
-     * @param {*} orgInfo 
-     * @param {*} cb 
-     */
-    setInfo(creteria, orgInfoModel, cb) {
-        var condition = {};
-        condition.ORG_ID = creteria.orgcode;
+    // /**
+    //  * Update organization information. <br />
+    //  * 
+    //  * @since 180418
+    //  * @author TACKSU
+    //  * 
+    //  * @param {*} creteria 
+    //  * @param {*} orgInfo 
+    //  * @param {*} cb 
+    //  */
+    // setInfo(creteria, orgInfoModel, cb) {
+    //     var condition = {};
+    //     condition.ORG_ID = creteria.orgcode;
 
-        var query = mysql.format(orgQuery.setInfo, [condition, orgInfoModel.toRow()]);
-        this.query(query, (err, result) => {
-            if (!!err) {
-                cb(err, null);
-            } else {
-                cb(null, result.affectedRows);
-            }
-        });
-    }
+    //     var query = mysql.format(orgQuery.setInfo, [condition, orgInfoModel.toRow()]);
+    //     this.query(query, (err, result) => {
+    //         if (!!err) {
+    //             cb(err, null);
+    //         } else {
+    //             cb(null, result.affectedRows);
+    //         }
+    //     });
+    // }
 }
 
 export default OrgDao;
