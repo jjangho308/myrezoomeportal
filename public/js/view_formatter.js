@@ -91,7 +91,7 @@ var formatter= {
     "RCOGC0009":function viewformatter(record) {
         //inha
 
-        var jsonobject = JSON.parse(record);
+        var jsonobject = JSON.parse(record.data);
         console.log("==========INHA JSON======================");
         console.log(jsonobject);
         console.log("=========================================");
