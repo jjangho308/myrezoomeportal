@@ -35,7 +35,7 @@ class SigninRequestHandler extends AbstractClientRequestHandler {
 
                 cb(ClientRequest.RESULT_SUCCESS, {
                     token: token
-                })
+                });
             }
         });
     }

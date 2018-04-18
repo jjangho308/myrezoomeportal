@@ -16,7 +16,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <body>
-    <div id="header">
+    <div id="header" style="height: 60px">
         <nav class="navbar">
             <div class="grid">
                 <ul class="nav navbar-nav navbar-right">
@@ -31,35 +31,49 @@
                     <li class="right"><a href="#">기업 서비스</a></li>
                 </ul>
             </div>
-        </nav>        
+        </nav>
+    </div>
+
+    <div class="body-div" style="height: 900px; background-color: #f2f5f8">
         <div>
-            <div id="siginup_div" style="position: absolute; top: 30%; left: 50%; width: 300px; height: 500px; visibility: visible; background-color: white;">
+            <h2 style="position: absolute; top: 10%; left: 50%">개인회원 회원가입</h2>
+
+            <div id="siginup_div" style="position: absolute; top: 20%; left: 40%; width: 480px; height: 500px; border-radius: 5px; background-color: #ffffff; border: solid 1px #eff0f4;">
                 <div>이메일</div>
                 <input id="signup_id" type="text">
                 <div>비밀번호</div>
-                <input id="signup_pw" type="text">
+                <input id="signup_pw" type="password">
                 <div>비밀번호 확인</div>
-                <input id="signup_pw_confirm" type="text">
+                <input id="signup_pw_confirm" type="password">
                 <div>성</div>
                 <input id="signup_familyname" type="text">
                 <div>이름</div>
                 <input id="signup_firstname" type="text">
                 <div>생년월일</div>
                 <input id="signup_birth" type="text">
-                <div>성별</div>
-                <input id="signup_gender" type="text">
+                <div>성별</div>                
+                <div id="signup_gender">
+                    <input id="" value="M" type="radio" name="gender" checked="checked"> 남
+                    <input id="" value="F" type="radio" name="gender"> 여
+                </div>
                 <div>휴대폰</div>
+                <select id="signup_carrierName">
+                    <option value="SKT">SKT</option>
+                    <option value="KTF">KTF</option>
+                    <option value="LGT">LGT</option>
+                </select>
                 <input id="signup_phone" type="text">
                 <div>인증번호</div>
                 <input id="signup_confirm_num" type="text">
                 <div>약관</div>                
-                <input id="signup_terms" type="text">
+                <textarea>약관 블라블라~~~~~</textarea><br>
                 <button id="btn_signup">Signup</button>
             </div>
-        </div>
+        </div>        
     </div>
 
     <div id="footer">
+
     </div>
 </body>
 
