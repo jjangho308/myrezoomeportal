@@ -41,12 +41,12 @@ class OrgDao extends AbstractDAO {
         })
     }
 
-    getSubIdByOrgId(orgid, cb){
+    getSubIdByOrgId(orgid, cb) {
         var query = mysql.format(orgQuery.getSubIdsByOrgId, orgid);
-        this.query(query, function(err, rows){
-            if(err){
+        this.query(query, function (err, rows) {
+            if (err) {
                 cb(err)
-            }else{
+            } else {
                 cb(err, rows)
             }
         })
@@ -102,6 +102,66 @@ class OrgDao extends AbstractDAO {
 
     delall(opt, cb) {
 
+    }
+
+    /**
+     * Create organization info column to database. <br />
+     * 
+     * @since 180418
+     * @author TACKSU
+     * 
+     * @param {*} orgInfoModel 
+     * @param {*} cb 
+     */
+    putInfo(orgInfoModel, cb) {
+        var params = orgInfoModel.toRow();
+
+        var query = mysql.format(orgQuery.putInfo, params);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err, null);
+            } else {
+                cb(null, result.insertId);
+            }
+        })
+    }
+
+    /**
+     * Select organization information from table. <br />
+     * 
+     * @since 180418
+     * @author TACKSU
+     */
+    getInfo(creteria, cb){
+        var condition = {
+            ORG_ID : creteria.orgcode
+        }
+
+        var query = mysql.format(orgQuery.)
+    }
+
+    /**
+     * Update organization information. <br />
+     * 
+     * @since 180418
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} orgInfo 
+     * @param {*} cb 
+     */
+    setInfo(creteria, orgInfoModel, cb) {
+        var condition = {};
+        condition.ORG_ID = creteria.orgcode;
+
+        var query = mysql.format(orgQuery.setInfo, [condition, orgInfoModel.toRow()]);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err, null);
+            } else {
+                cb(null, result.affectedRows);
+            }
+        });
     }
 }
 

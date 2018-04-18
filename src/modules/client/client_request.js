@@ -160,7 +160,7 @@ class ClientRequestManager extends AbstractManager {
      * @param {*} response 
      */
     response(mId, response, cb) {
-        
+
         var entity = this.requestMap.get(mId);
         if (!!entity) {
             this.handlerMap.get(entity.constructor).response(entity, response);
