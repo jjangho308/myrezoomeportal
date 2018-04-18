@@ -1,4 +1,4 @@
-import Mangers from '../core/managers';
+import Managers from '../core/managers';
 
 /**
  * Controller function of /main uri. <br />
@@ -7,6 +7,12 @@ import Mangers from '../core/managers';
  * @author TACKSU
  */
 export default {
+
+    /**
+     * GET method controller function. <br />
+     * 
+     * @since 180304
+     */
     get: (req, res, next) => {
         var userId = req.body.uId;
         if (!!userId) {
