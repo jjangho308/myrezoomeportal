@@ -305,6 +305,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
             var user_bc_wallet_addr = users[0].bcWalletAddr;
 
+            var j = 0;
             for (var i = 0; i < agentRequest.records.length; i++) {
 
                 (function (i) {
@@ -340,7 +341,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 console.log(dbres2);
                             });
 
-                            if (i == (agentRequest.records.length - 1)) {
+                            if (j == (agentRequest.records.length - 1)) {
                                 try {
                                     socket.emit('SearchResult', JSON.stringify(agentRequest));
                                 } catch (exception) {
@@ -348,10 +349,12 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                     //continue;
                                 }
                             }
+                            
+                            j++;
                         });
                     } else {
                         //BLC MAP stored
-                        if (i == (agentRequest.records.length - 1)) {
+                        if (j == (agentRequest.records.length - 1)) {
                             try {
                                 socket.emit('SearchResult', JSON.stringify(agentRequest));
                             } catch (exception) {
@@ -359,6 +362,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 //continue;
                             }
                         }
+                        j++;
                     }
 
 

@@ -92,7 +92,9 @@ var formatter= {
         //inha
 
         var jsonobject = JSON.parse(record.data);
+        console.log("==========INHA JSON======================");
         console.log(jsonobject);
+        console.log("=========================================");
 
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
