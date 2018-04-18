@@ -345,7 +345,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                     socket.emit('SearchResult', JSON.stringify(agentRequest));
                                 }catch(exception) {
                                     console.log(exception);
-                                    continue;
+                                    //continue;
                                 }
                             }
                         });
@@ -356,7 +356,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 socket.emit('SearchResult', JSON.stringify(agentRequest));
                             }catch(exception) {
                                 console.log(exception);
-                                continue;
+                                //continue;
                             }
                         }
                     }
