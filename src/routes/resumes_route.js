@@ -18,7 +18,7 @@ router.post('/', view);
  * Route for html page. <br />
  */
 router.get('/:rsmId', tokenAuth);
-router.get('/:rsmId', ctrl.get);
+router.get('/:rsmId', ctrl.getResume);
 router.get('/:rsmId', view);
 
 /**

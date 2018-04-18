@@ -20,13 +20,17 @@ class KeepAliveRequestHandler extends AbstractAgentRequestHandler {
 
     /**
      * Keep aliving. <br />
+     * 
+     * Organization Table의 마지막 통신 시각을 단순히 Update한 뒤. <br />
+     * Response한다. <br />
+     * 
      * @since 180403
      * @author TACKSU
      * 
      * @param {*} requestEntity 
      * @param {*} cb 
      */
-    request(requestEntity, cb) {
+    request(requestEntity, done) {
 
     }
 }
