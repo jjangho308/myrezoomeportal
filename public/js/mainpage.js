@@ -24,7 +24,8 @@ function getCookie(cname) {
 
 function setData(record) {
     // dcript data 
-    sessionStorage.setItem(record.txid, record);
+    
+    sessionStorage.setItem(record.txid, JSON.stringify(record));
 
     addTxidList(record.txid);
 }
