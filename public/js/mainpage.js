@@ -26,18 +26,16 @@ $(document).ready(function(){
     
     socket = io();
 
-
     /*
         view init empty set
-    */
-   
+    */   
 
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
     request_agent();
 
     $('#refresh_record').click(function(){
-
+        
         $.ajax({
             type: 'POST',
             url: '/client',
@@ -110,9 +108,12 @@ function clientsocket_listener() {
 
     $.getScript( 'js/localstorage.js');
 
-    
-
     socket.on('SearchResult', function(msg){
+
+        $('#spec_certification_targetdiv').empty();
+        $('#spec_edu_detail_targetdiv').empty();
+        $('#spec_forign_lang_targetdiv').empty();
+
         var omsg = JSON.parse(msg);
         console.log('message: ');
         console.log(omsg);

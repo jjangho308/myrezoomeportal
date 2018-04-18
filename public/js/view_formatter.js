@@ -2,7 +2,6 @@
 var formatter= {
     "RCLPT0005":function viewformatter(record) {
         //opic
-        $('#spec_forign_lang').empty();
 
         var jsonobject = JSON.parse(record.data);
         console.log("==========OPIC JSON======================");
@@ -28,12 +27,11 @@ var formatter= {
         htmldiv = htmldiv + '</div>';
 
         
-        $('#spec_forign_lang').append(htmldiv);
+        $('#spec_forign_lang_targetdiv').append(htmldiv);
     },
 
     "RCCNF0001":function viewformatter(record) {
         //mktest
-        $('#spec_certification').empty();
 
         var jsonobject = JSON.parse(record.data);
         console.log("==========MK TEST JSON======================");
@@ -58,12 +56,11 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 
-        $('#spec_certification').append(htmldiv);
+        $('#spec_certification_targetdiv').append(htmldiv);
     },
 
     "RCOGC0008":function viewformatter(record) {
         //inha
-        $('#spec_edu_detail').empty();
 
         var jsonobject = JSON.parse(record.data);
         console.log("==========INHA JSON======================");
@@ -88,12 +85,11 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 
-        $('#spec_edu_detail').append(htmldiv);
+        $('#spec_edu_detail_targetdiv').append(htmldiv);
     },
 
     "RCOGC0009":function viewformatter(record) {
         //inha
-        $('#spec_edu_detail').empty();
 
         var jsonobject = JSON.parse(record.data);
         console.log(jsonobject);
@@ -116,12 +112,11 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 
-        $('#spec_edu_detail').append(htmldiv);
+        $('#spec_edu_detail_targetdiv').append(htmldiv);
     },
 
     "RCLPT0006":function viewformatter(record) {
         //OPIC ENGlish writing
-        $('#spec_forign_lang').empty();
 
         var jsonobject = JSON.parse(record.data);
         console.log(jsonobject);
@@ -144,7 +139,7 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 
-        $('#spec_forign_lang').append(htmldiv);
+        $('#spec_forign_lang_targetdiv').append(htmldiv);
     }
 }
 
