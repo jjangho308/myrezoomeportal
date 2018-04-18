@@ -149,9 +149,9 @@ function refreshview() {
     var txidlist = getTxidList();
 
     //clean view
-    $('#spec_edu_detail').remove('.spec-body');
-    $('#spec_forign_lang').remove('.spec-body');
-    $('#spec_certification').remove('.spec-body');
+    $('.spec-body').empty();
+    //$('#spec_forign_lang').remove('.spec-body');
+    //$('#spec_certification').remove('.spec-body');
 
     console.log(txidlist);
 
