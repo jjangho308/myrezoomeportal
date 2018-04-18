@@ -341,13 +341,23 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                             });
 
                             if (i == (agentRequest.records.length - 1)) {
-                                socket.emit('SearchResult', JSON.stringify(agentRequest));
+                                try {
+                                    socket.emit('SearchResult', JSON.stringify(agentRequest));
+                                }catch(exception) {
+                                    console.log(exception);
+                                    //continue;
+                                }
                             }
                         });
                     } else {
                         //BLC MAP stored
                         if (i == (agentRequest.records.length - 1)) {
-                            socket.emit('SearchResult', JSON.stringify(agentRequest));
+                            try {
+                                socket.emit('SearchResult', JSON.stringify(agentRequest));
+                            }catch(exception) {
+                                console.log(exception);
+                                //continue;
+                            }
                         }
                     }
 
