@@ -2,10 +2,10 @@ import AbstractAgentRequestHandler from "../abstract_agent_request_handler";
 
 import Managers from '../../../core/managers';
 import OrgDAO from '../../../dao/org_dao';
-import OrgModel from '../../../models/org/OrgModel';
+import OrgModel from '../../../models/org/org';
+import OrgInfoModel from "../../../models/org/org_info";
 
 import AgentRequest from '../agent_request';
-import { ENGINE_METHOD_NONE } from "constants";
 
 /**
  * Handler of KeyProvisionRequest. <br />
@@ -40,18 +40,53 @@ class KeyProvisionRequestHandler extends AbstractAgentRequestHandler {
     request(requestEntity, cb) {
         var orgDAO = new OrgDAO();
         var orgDAO = Managers.db().getOrgDAO();
-        orgDAO.getByCode({
-            orgcode : requestEntity.orgcode
-        }, (err, result)=>{
-            if(!!err){
+        orgDAO.getOrg({
+            orgId: requestEntity.orgId
+        }, (err, result) => {
+            if (!!err) {
                 // Datbase or system error.
-                done(AgentReqeust.RESULT_FAILURE , err);
-            }else if(result.length == 0){
+                done(AgentReqeust.RESULT_FAILURE, err);
+                return;
+            } else if (result.length == 0) {
                 // No organization error.
-                done(AgentReqeust.RESULT_FAILURE , err);
-            }else{
-                
+                done(AgentReqeust.RESULT_FAILURE, err);
+                return;
+            } else {
+                orgDAO.getInfo({
+                    orgId: requestEntity.orgId
+                }, (err, orgInfoList) => {
+                    if (!!err) {
+                        done(AgentReqeust.RESULT_FAILURE, err);
+                        return;
+                    } else {
+                        if (orgInfoList.length == 0) {
+                            // 존재하지 않는 기관 정보므로 error 처리
+                            done(AgentReqeust.RESULT_FAILURE, null);
+                            return;
+                        } else if (orgInfoList.length == 1) {
+                            // Org info update.
+
+                            orgDAO.setInfo({
+                                orgId: orgId
+                            }, new OrgInfoModel({
+                                publicKey: requestEntity.publicKey
+                            }), (err, result) => {
+                                if (!!err) {
+                                    done(AgentReqeust.RESULT_FAILURE, err);
+                                    return;
+                                } else {
+                                    done(AgentRequest.RESULT_SUCCESS, {
+
+                                    });
+                                    return;
+                                }
+                            })
+                        }
+                    }
+                });
             }
         })
     }
 }
+
+export default KeyProvisionRequestHandler;

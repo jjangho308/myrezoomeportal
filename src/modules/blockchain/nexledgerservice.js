@@ -94,12 +94,12 @@ class NexledgerService extends AbstractManager {
             console.log(body);
             if(body.result.txid=='') {
                 console.log("============Nexledger Retry=================");
-                this.newMethod().put(nodeurl,address,data,callback);
+                this.put(nodeurl,address,data,callback);
             }
 
             console.log("==============================================");
             callback(body);
-        });
+        }.bind(this));
     }
 
     newMethod() {

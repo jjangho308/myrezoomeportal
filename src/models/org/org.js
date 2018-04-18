@@ -6,6 +6,11 @@ import AbstractModel from '../abstract_model'
  * @author TACKSU
  */
 class Org extends AbstractModel {
+
+    /**
+     * Default constructor. <br />
+     * @param {*} data 
+     */
     constructor(data) {
         super(data);
         this.sId = data.sId
@@ -27,6 +32,9 @@ class Org extends AbstractModel {
         this.trim(this);
     }
 
+    /**
+     * Convert model instance to MySQL row. <br />
+     */
     toRow() {
         var row = {
             S_ORG_ID: this.sId,
@@ -49,24 +57,29 @@ class Org extends AbstractModel {
         return this.trim(row);
     }
 
+    /**
+     * Convert row to model instance. <br />
+     * 
+     * @param {*} row 
+     */
     static fromRow(row) {
-        return this.trim(new Org({
-            sId: S_ORG_ID,
-            orgId: ORG_ID,
-            pwd: PWD,
-            name: ORG_NM,
-            corpNum: CORP_NUM,
-            phone: PHN_NUM,
-            domain: DMN,
-            email: EMAIL,
-            code: ORG_CD,
-            state: STS_CD,
-            address: ADDR,
-            imgPath: IMG_1_PATH,
-            thmPath: IMG_2_PATH,
-            modified: MDFID_DT,
-            created: CRTD_DT
-        }))
+        return new Org({
+            sId: row.S_ORG_ID,
+            orgId: row.ORG_ID,
+            pwd: row.PWD,
+            name: row.ORG_NM,
+            corpNum: row.CORP_NUM,
+            phone: row.PHN_NUM,
+            domain: row.DMN,
+            email: row.EMAIL,
+            code: row.ORG_CD,
+            state: row.STS_CD,
+            address: row.ADDR,
+            imgPath: row.IMG_1_PATH,
+            thmPath: row.IMG_2_PATH,
+            modified: row.MDFID_DT,
+            created: row.CRTD_DT
+        })
     }
 }
 

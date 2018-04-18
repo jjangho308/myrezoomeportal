@@ -1,3 +1,5 @@
+import AbstractAgentRequestHandler from '../abstract_agent_request_handler'
+
 /**
  * Handler of KeepAliveRequest. <br />
  * 

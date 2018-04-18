@@ -5,6 +5,7 @@
  * @author KWANGWOOK
  */
 var TABLE_NAME = 'TCUP_ORG';
+var INFO_TABLE = 'TCUP_ORG_INFO';
 export default {
     get : "SELECT * FROM " + TABLE_NAME + " WHERE ?",
     getSubIdsByOrgId : "SELECT * FROM rezoome_db.TCCO_ORG_SUB WHERE ORG_ID = ?",
@@ -15,5 +16,9 @@ export default {
     findAll : "SELECT ORG_ID from rezoome_db.TCUP_ORG",
     put : '',
     set : '',
-    del : ''
+    del : '',
+    putInfo : 'INSERT INTO ' + INFO_TABLE + ' SET ?',
+    getInfo : 'SELECT * FROM ' + INFO_TABLE + ' WHERE ?',
+    setInfo : 'UPDATE ' + INFO_TABLE + ' SET ? WHERE ?',
+    delInfo : '',
 }

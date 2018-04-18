@@ -37,12 +37,12 @@ class OrgInfoModel extends AbstractModel {
      */
     static fromRow(row) {
         return this.trim(new OrgModelInfo({
-            sId: S_ORG_INFO_ID,
-            orgId: ORG_ID,
-            amqName: AMQ_NM,
-            publicKey: PUB_KEY,
-            modified: MDFID_DT,
-            created: CRTD_DT
+            sId: row.S_ORG_INFO_ID,
+            orgId: row.ORG_ID,
+            amqName: row.AMQ_NM,
+            publicKey: row.PUB_KEY,
+            modified: row.MDFID_DT,
+            created: row.CRTD_DT
         }));
     }
 

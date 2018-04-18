@@ -5,6 +5,15 @@ import AbstractManager from "../abstract_manager";
 import SearchResultRequestEntity from './search_result/search_result_request';
 import SearchResultRequestHandler from './search_result/search_result_handler';
 
+import KeepAliveRequestEntity from './keepalive/keepalive_request';
+import KeepAliveRequestHandler from './keepalive/keepalive_handler';
+
+import KeyProvisionRequestEntity from './keyprovision/keyprovision_request';
+import KeyProvisionRequestHandler from './keyprovision/keyprovision_handler';
+
+import AuthenticationRequestEntity from './auth/auth_request';
+import AuthenticationRequestHandler from './auth/auth_handler';
+
 /**
  * Agent request manager. <br />
  * 
@@ -33,13 +42,25 @@ class AgentRequestManager extends AbstractManager {
     /**
      * Initialization function. <br />
      * 
+     * Map command code with RequestEntity class. <br />
+     * Map requestEntity with RequestHandler. <br />
+     * 
      * @since 180403
      * @author TACKSU
      * @param {*} from 
      */
     init(from) {
-        this.entityMap.set("SearchRecord", SearchResultRequestEntity)
+        this.entityMap.set('SearchRecord', SearchResultRequestEntity);
         this.handlerMap.set(SearchResultRequestEntity, new SearchResultRequestHandler());
+
+        this.entityMap.set('KeepAlive', KeepAliveRequestEntity);
+        this.handlerMap.set(KeepAliveRequestEntity, new KeepAliveRequestHandler());
+
+        this.entityMap.set('KeyProvision', KeyProvisionRequestEntity);
+        this.handlerMap.set(KeyProvisionRequestEntity, new KeyProvisionRequestHandler());
+
+        this.entityMap.set('Auth', AuthenticationRequestEntity);
+        this.handlerMap.set(AuthenticationRequestEntity, new AuthenticationRequestHandler());
     }
 
     /**
@@ -52,6 +73,19 @@ class AgentRequestManager extends AbstractManager {
      */
     getEntity(code) {
         return this.entityMap.get(code);
+    }
+
+
+    /**
+     * Obtain current handler of requestEntity. <br />
+     * 
+     * @since 180418
+     * @author TACKSU
+     * 
+     * @param {*} requestCls constructor of requestEntity class.
+     */
+    getHandler(requestCls) {
+        return this.handlerMap.get(requestCls);
     }
 
     /**

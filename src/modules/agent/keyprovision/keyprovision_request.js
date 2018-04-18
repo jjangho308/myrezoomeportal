@@ -19,14 +19,14 @@ class KeyProvisionRequest extends AbstractAgentRequestEntity{
     constructor(opt){
         super(opt)
         /**
-         * Code for organization. <br />
+         * ID of organization. <br />
          */
-        this.orgcode = opt.orgcode;
+        this.orgId = opt.orgId;
 
         /**
          * Base64 encoded RSAPublicKey of organization. <br />
          */
-        this.publicKey = opt.publicKey;
+        this.publicKey = opt.pubkey;
     }
 }
 
