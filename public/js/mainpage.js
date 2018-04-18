@@ -47,7 +47,7 @@ function setTxidList(txidarray) {
 
 function getTxidList() {
     var storagedata =  sessionStorage.getItem(client_token);
-    var resultarray = getTxidList().split(",");
+    var resultarray = storagedata.split(",");
     return resultarray;
 }
 
