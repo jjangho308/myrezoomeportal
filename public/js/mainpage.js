@@ -26,13 +26,19 @@ function setData(record) {
     // dcript data 
     sessionStorage.setItem(record.txid, record);
 
-    var txidlist = [getTxidList()];
-    txidlist.push(record.txid);
-    setTxidList(txidlist);
+    addTxidList(record.txid);
 }
 
 function getData(record_txid) {
     return sessionStorage.getItem(record_txid);
+}
+
+function addTxidList(txid) {
+    var txidlist = [getTxidList()];
+    
+    //중복제거 로직 추가해야함
+    txidlist.push(txid);
+    setTxidList(txidlist);
 }
 
 function setTxidList(txidarray) {
@@ -131,12 +137,18 @@ function request_agent() {
 }
 
 function refreshview() {
+    var txidlist = [getTxidList()];
+    console.log(txidlist);
+
+    for(var i in txidlist) {
+        var viewdata = getData(txidlist[i]);
+        var subid = viewdata.subid;
+        formatter[subid](viewdata);
+    }
 
 }
 
 function clientsocket_listener() {
-
-    $.getScript( 'js/localstorage.js');
 
     socket.on('SearchResult', function(msg){
 
