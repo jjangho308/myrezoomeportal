@@ -22,6 +22,27 @@ function getCookie(cname) {
     return "";
 }
 
+function setData(record) {
+    // dcript data 
+    sessionStorage.setItem(record.txid, record);
+
+    var txidlist = getTxidList();
+    txidlist.push(record.txid);
+    setTxidList(txidlist);
+}
+
+function getData(record_txid) {
+    return sessionStorage.getItem(record_txid);
+}
+
+function setTxidList(txidarray) {
+    sessionStorage.setItem(client_token, txidarray);
+}
+
+function getTxidList() {
+    return sessionStorage.getItem(client_token);
+}
+
 $(document).ready(function(){
     
     socket = io();
@@ -32,6 +53,11 @@ $(document).ready(function(){
 
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
+
+    //set txidlist client side
+    var emptyarray = [];
+    setTxidList(emptyarray);
+
     request_agent();
 
     $('#refresh_record').click(function(){
@@ -104,64 +130,35 @@ function request_agent() {
     });
 }
 
+function refreshview() {
+
+}
+
 function clientsocket_listener() {
 
     $.getScript( 'js/localstorage.js');
 
     socket.on('SearchResult', function(msg){
 
-        // $('#spec_certification_targetdiv').hide();
-        // $('#spec_edu_detail_targetdiv').hide();
-        // $('#spec_forign_lang_targetdiv').hide();
-
-        $('#spec_forign_lang').remove('div');
-        $('#spec_edu_detail').remove('div');
-        $('#spec_certification').remove('div');
-
         var omsg = JSON.parse(msg);
         console.log('message: ');
         console.log(omsg);
-        
-        /*
-        orgcode	string	Plain text					기관 고유 넘버
-        iv	string	Base64 encoded string					Initialization Vector
-        key	string	RSA_ClientPublic(AES_AgentKey)					
-        records	array						이력 데이터 배열
-        records.hash	string	SHA256(record)					이력 Record의 Hash
-        records.data	string	AES_ClientKey(record)					암호화된 이력
-        records.subid	string	Plain text					자격 증명 분류 코드
-        records.stored	boolean	true/false					Blockchain에 등록되었는지 여부				
-        */
 
         var orgcode = omsg.orgcode;
         
-        
         for(var i=0; i<omsg.records.length ; i++) {
-            /* get formater for view*/
-
-            /*temp get opic eng formatter get*/
             
-            //var cert_code = records[i].certcode;
-            //var subid = 'RCLPT0005';
             var subid = omsg.records[i].subid;
-            //var file_name = 'js/'+ subid + '_formatter.js';
-
-            //$.getScript( file_name );
-
-            //var targetdivid = getTargetdivid(subid);
             
             try {
-                formatter[subid](omsg.records[i]);
+                //formatter[subid](omsg.records[i]);
                 //getviewdata(omsg.records[i]);
                 setData(omsg.records[i]);
+                refreshview();
             }catch(exception) {
                 console.log(exception);
-                continue;
+                //continue;
             }
-            //save localstorage
-            
-
-
         }
 
     });
