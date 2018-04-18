@@ -34,7 +34,7 @@ function getData(record_txid) {
 }
 
 function addTxidList(txid) {
-    var txidlist = getTxidList().split(",");
+    var txidlist = getTxidList();
     
     //중복제거 로직 추가해야함
     txidlist.push(txid);
@@ -46,7 +46,9 @@ function setTxidList(txidarray) {
 }
 
 function getTxidList() {
-    return sessionStorage.getItem(client_token);
+    var storagedata =  sessionStorage.getItem(client_token);
+    var resultarray = getTxidList().split(",");
+    return resultarray;
 }
 
 $(document).ready(function(){
@@ -137,7 +139,7 @@ function request_agent() {
 }
 
 function refreshview() {
-    var txidlist = [getTxidList()];
+    var txidlist = getTxidList();
     console.log(txidlist);
 
     for(var i in txidlist) {
