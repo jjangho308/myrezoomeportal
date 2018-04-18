@@ -34,7 +34,7 @@ function getData(record_txid) {
 }
 
 function addTxidList(txid) {
-    var txidlist = [getTxidList()];
+    var txidlist = string.split(",");
     
     //중복제거 로직 추가해야함
     txidlist.push(txid);
