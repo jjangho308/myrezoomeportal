@@ -24,9 +24,22 @@ $(document).ready(function () {
             pw: user_password
         }
 
-        $.post("/signin", param, function (result) {
-            console.log(result);
-            window.location.href = "main";
+        $.ajax({
+            type: "POST",  
+            url: "/signin",   
+            data: param,
+            dataType: "JSON",
+            success: function(response) {
+                console.log(response);
+                window.location.href = "main";
+            },
+            error:function(request, status, error){
+                if(request.responseJSON == "USER_IS_NOT_FOUND") {
+                    alert("등록된 이메일이 없다.");
+                } else if(request.responseJSON == "MISMATCH_PASSWORD") {
+                    alert("비밀번호가 일치하지 않는다.");
+                }
+            }
         });
     });
 
@@ -50,7 +63,7 @@ $(document).ready(function () {
         var carrier_name = $("#signup_carrierName").val();
 
         if (user_password != user_password_confirm) {
-            alert("비밀번호가 다르다");
+            alert("비밀번호가 다르다.");
             return;
         }
 
@@ -66,9 +79,20 @@ $(document).ready(function () {
             carrierName: carrier_name
         }
 
-        $.post("/signup", param, function (result) {
-            console.log(result);
-            window.location.href = "signin";
+        $.ajax({
+            type: "POST",  
+            url: "/signup",   
+            data: param,
+            dataType: "JSON",
+            success: function(response) {
+                console.log(response);
+                window.location.href = "signin";
+            },
+            error:function(request, status, error){
+                if(request.responseJSON.code == "ER_DUP_ENTRY"){
+                    alert("이미 가입된 이메일 정보가 있다.");  
+                }
+            }
         });
     });
 });

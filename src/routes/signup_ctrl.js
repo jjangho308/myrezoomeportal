@@ -15,9 +15,9 @@ export default {
 
     post: (req, res, next) => {
         if (!!req.xhr) {
-            Managers.client().request(new SignUpRequest(req.body), (err, result) => {
+            Managers.client().request(new SignUpRequest(req.body), (err, result) => {               
                 if (!!err) {
-                    res.status(500).json(err);
+                    res.status(500).json(err);                    
                 } else {
                     res.json(result);
                 }

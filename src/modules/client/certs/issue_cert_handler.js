@@ -35,32 +35,60 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
      * @param {*} cb 
      */
     request(request, cb) {
-        var certModel = new CertModel({
-            certId: Util.uuid(),
-            uId: request.uId,
-            blcMapId: request.cert.txid
-        });
-
         var certDAO = Managers.db().getCertDAO();
-        certDAO.putCert(certModel, (err, insertId) => {
+        var recordDAO = Managers.db().getRecordDAO();
+
+        recordDAO.getBlockChainMap({
+            txid: request.cert.txid
+        }, (err, blcMapModels) => {
             if (!!err) {
                 cb(ClientRequest.RESULT_FAILURE, err);
+            } else if (blcMapModels.length == 0) {
+                cb(ClientRequest.RESULT_FAILURE, {
+                    code: 1,
+                    msg: 'No blockchain map'
+                });
             } else {
-                certDAO.getCert({
-                    sId: insertId
-                }, (err, certList) => {
+                var certModel = new CertModel({
+                    certId: Util.uuid(),
+                    uId: request.uId,
+                    blcMapId: blcMapModels[0].blcMapId
+                });
+
+                certDAO.putCert(certModel, (err, insertId) => {
                     if (!!err) {
                         cb(ClientRequest.RESULT_FAILURE, err);
-                    } else if (certList.length > 0) {
-                        cb(ClientRequest.RESULT_SUCCESS, {
-                            certId: certList[0].certId,
-                            txid: certList[0].blcMapId,
-                            date: certList[0].created
-                        });
+                    } else {
+                        certDAO.getCert({
+                            sId: insertId
+                        }, (err, certList) => {
+                            if (!!err) {
+                                cb(ClientRequest.RESULT_FAILURE, err);
+                            } else if (certList.length > 0) {
+                                recordDAO.getBlockChainMap({
+                                    blcMapId: certList[0].blcMapId
+                                }, (err, blcModels) => {
+                                    if (!!err) {
+                                        cb(ClientRequest.RESULT_FAILURE, err);
+                                    } else if (blcModels.length == 0) {
+                                        cb(ClientRequest.RESULT_FAILURE, {
+                                            code: 1,
+                                            msg: 'No Block chain mapId'
+                                        });
+                                    } else if (blcModels.length > 0) {
+                                        cb(ClientRequest.RESULT_SUCCESS, {
+                                            certId: certList[0].certId,
+                                            txid: blcModels[0].txid,
+                                            date: certList[0].created
+                                        });
+                                    }
+                                })
+                            }
+                        })
                     }
-                })
+                });
             }
-        });
+        })
     }
 }
 

@@ -38,7 +38,7 @@ class GetCertificateHandler extends AbstractClientRequestHandler {
     request(requestEntity, done) {
         var certDAO = Managers.db().getCertDAO();
 
-        certDAO.get({
+        certDAO.getCert({
             uId: requestEntity.uId,
         }, (err, result) => {
             if (!!err) {

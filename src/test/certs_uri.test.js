@@ -43,7 +43,11 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send()
             .end((err, res) => {
-                done();
+                if (!!err) {
+                    console.log(err);
+                } else if (res.body.hasOwnProperty('result')) {
+                    done();
+                }
             });
     })
 
@@ -55,7 +59,7 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 cert: {
-                    txid: Util.uuid()
+                    txid: '7646cd4c483f169e9cbc78c29504460733b3e4935842bd93cb02a6eb5258fa24'
                 }
             })
             .end((err, res) => {
@@ -63,7 +67,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it('Certificate view page test case', done => {
+    it.skip('Certificate view page test case', done => {
         chai.request(app)
             .get('/certs/3da38796-da33-41ec-8de7-31b9a2ea4e59')
             .set('Content-Type', 'text/html')

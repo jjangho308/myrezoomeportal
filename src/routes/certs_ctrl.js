@@ -62,7 +62,9 @@ export default {
                 if (!!err) {
                     res.json(JSON.stringify(err));
                 } else {
-                    res.json(result);
+                    res.json({
+                        result: result
+                    });
                 }
             })
         } else {
