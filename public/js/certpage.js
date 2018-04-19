@@ -100,7 +100,7 @@ $(document).ready(function(){
                 var id = this.id;
 
                 var sdata = sessionStorage.getItem(id);
-                var jsondata = JSON.parse(sdata).data;
+                var jsondata = JSON.parse(sdata);
 
                 console.log("cert req param");
                 console.log(id);
