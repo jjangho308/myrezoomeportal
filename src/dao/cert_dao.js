@@ -38,6 +38,11 @@ class CertificateDAO extends AbstractDAO {
      */
     getCert(creteria, cb) {
         var condition = {}
+
+        if (!!creteria.sId) {
+            condition.S_USR_CERT_ID = creteria.sId;
+        }
+
         if (!!creteria.certId) {
             condition.CERT_ID = creteria.certId;
         }

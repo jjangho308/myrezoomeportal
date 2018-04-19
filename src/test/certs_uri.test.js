@@ -35,7 +35,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it('Cert Ajax request', done => {
+    it.skip('Cert Ajax request', done => {
         chai.request(app)
             .get('/certs')
             .set('Content-Type', 'application/json')
@@ -51,7 +51,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it.skip('Issue certificate request test', done => {
+    it('Issue certificate request test', done => {
         chai.request(app)
             .post('/certs')
             .set('Content-Type', 'application/json')
@@ -59,7 +59,7 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 cert: {
-                    txid: Util.uuid()
+                    txid: '7646cd4c483f169e9cbc78c29504460733b3e4935842bd93cb02a6eb5258fa24'
                 }
             })
             .end((err, res) => {

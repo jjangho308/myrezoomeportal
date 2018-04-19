@@ -2,6 +2,9 @@ import mysql from 'mysql';
 import AbstractDAO from './abstract_dao';
 import recordQuery from './record_query';
 
+import BlcMapModel from '../models/record/blc_map';
+import Util from '../util/util';
+
 /**
  * DAO for record. <br />
  * 
@@ -78,8 +81,35 @@ class RecordDAO extends AbstractDAO {
         var recordId = creteria.recordId;
     }
 
-    getBlockChainTxid() {
+    /**
+     * Select transaction id from blockchain map table. <br />s
+     * 
+     * @since 180419
+     * @author TACKSU
+     */
+    getBlockChainMap(creteria, cb) {
+        var condition = {};
+        if (!!creteria.blcMapId) {
+            condition.BLC_MAP_ID = creteria.blcMapId;
+        }
 
+        if(!!creteria.txid){
+            delete condition.BLC_MAP_ID;
+            condition.TRX_ID = creteria.txid;
+        }
+        
+        var query = mysql.format(recordQuery.getTxid, condition);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err, null);
+            } else {
+                var blcMapList = [];
+                for (var i in rows) {
+                    blcMapList.push(BlcMapModel.fromRow(rows[i]));
+                }
+                cb(err, blcMapList);
+            }
+        })
     }
 
     /**
@@ -95,7 +125,6 @@ class RecordDAO extends AbstractDAO {
     del() {
 
     }
-
 }
 
 export default RecordDAO;

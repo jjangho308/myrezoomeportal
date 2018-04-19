@@ -4,7 +4,7 @@
  * @since 180403
  * @author JJANGHO
  */
-
+var BLC_MAP_TABLE = 'TCDA_BLC_MAP';
 export default {
     getStoredDataByUserIdAndOrgID : "SELECT * FROM rezoome_db.TCDA_BLC_MAP WHERE `UID` = ? and `ORG_ID` = ? ",
     getStoredDataByUserId : "SELECT * FROM rezoome_db.TCDA_BLC_MAP WHERE `UID` = ? ",
@@ -15,5 +15,6 @@ export default {
     findAll : "SELECT ORG_QUEUE_NAME FROM TBL_ORG",
     putRecord : "INSERT INTO `rezoome_db`.`TCDA_BLC_MAP` (`BLC_MAP_ID`,`UID`, `TRX_ID`,`ORG_ID`, `SUB_ID`) VALUES ( ?, ? , ? , ?, ?)",
     set : '',
-    del : ''
+    del : '',
+    getTxid : 'SELECT * FROM ' + BLC_MAP_TABLE + ' WHERE ?'
 }
