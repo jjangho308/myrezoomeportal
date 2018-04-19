@@ -1,5 +1,13 @@
 var reqparam = [];
 
+function certckeckboxclick(uniqueid) {
+    var sdata = sessionStorage.getItem(uniqueid);
+    var jsondata = JSON.parse(sdata);
+    reqparam.push(jsondata.data);
+    console.log("Cert REQ PARAM");
+    console.log(reqparam);
+}
+
 $(document).ready(function(){
 
     //출력 가능한 증명서 목록 세팅
@@ -50,7 +58,7 @@ $(document).ready(function(){
                         var htmldiv = '<tr>';
                             htmldiv = htmldiv + '<td>';
                             htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
-                            htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox">';
+                            htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';
                             htmldiv = htmldiv + '<label for='+ addcertcheckboxid +'></label>';
                             htmldiv = htmldiv + '</div>';
                             htmldiv = htmldiv + '</td>';
@@ -60,7 +68,7 @@ $(document).ready(function(){
         
                         $("#add-cert-dialog-table").append(htmldiv);
 
-                        
+                        /*
                         $(addcertcheckboxid).click(function() {
                             var sdata = sessionStorage.getItem(addcertcheckboxid);
                             var jsondata = JSON.parse(sdata);
@@ -68,6 +76,7 @@ $(document).ready(function(){
                             console.log("Cert REQ PARAM");
                             console.log(reqparam);
                         });
+                        */
         
                     }catch(exception) {
                         console.log(exception);
