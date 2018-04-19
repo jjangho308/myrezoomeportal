@@ -19,5 +19,5 @@ export default (socket) => {
     socket.on('SetSocket', msg => {
         var mid = msg.mid;
         clientRequest.assignSocket(mid, socket);
-    })
+    });
 }
