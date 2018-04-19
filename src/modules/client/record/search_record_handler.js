@@ -232,10 +232,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     } else {
                         //refresh
                         db.getRecordDAO().getStoredOrgByUserId(uid, (err, storedOrgs) => {
-                            console.log(storedOrgs);
-
+                            //console.log(storedOrgs);
                             for (var i in storedOrgs) {
-
                                 !(orgIdx => {
                                     db.getRecordDAO().getStoredDataByUserId(uid, storedOrgs[orgIdx].ORG_ID, (err, storedData) => {
                                         var records = [];
@@ -252,7 +250,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                         txid: storedData[j].TRX_ID
                                                     })
 
-                                                    if (j == storedData.length - 1) {
+                                                    if (records.length == storedData.length) {
                                                         process.nextTick(() => {
                                                             msg.args.records = records;
 
