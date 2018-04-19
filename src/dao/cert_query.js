@@ -20,5 +20,6 @@ export default {
     putUrl: 'INSERT INTO ' + SHARED_URL_TABLE + ' SET ?',
     getUrl: 'SELECT * FROM ' + SHARED_URL_TABLE + ' WHERE ?',
     setUrl: 'UPDATE ' + SHARED_URL_TABLE + ' SET ? WHERE ?',
-    delUrl: ''
+    delUrl: '',
+    getSubName: 'SELECT * FROM rezoome_db.TCCO_SUB'
 }

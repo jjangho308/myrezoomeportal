@@ -26,6 +26,10 @@ class ResumeModel extends AbstractModel {
          */
         this.uId = data.uId;
 
+
+        this.updtStatus=data.updtStatus;
+
+
         /**
          * Title text of resume. <br />
          */
@@ -77,6 +81,7 @@ class ResumeModel extends AbstractModel {
             sId: row.S_USR_RSM_ID,
             rsmId: row.RSM_ID,
             uId: row.UID,
+            updtStatus: row.UPDT_STS,
             title: row.TITLE,
             blcMap: row.BLC_MAP_ID_DATA,
             shared: Util.ftb(row.SHRD_YN),
@@ -98,6 +103,7 @@ class ResumeModel extends AbstractModel {
             S_USR_RSM_ID: this.sId,
             RSM_ID: this.rsmId,
             UID: this.uId,
+            UPDT_STS: this.updtStatus,
             TITLE: this.title,
             BLC_MAP_ID_DATA: this.blcMap,
             SHRD_YN: Util.btf(this.shared),

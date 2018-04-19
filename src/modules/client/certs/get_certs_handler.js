@@ -40,11 +40,16 @@ class GetCertificateHandler extends AbstractClientRequestHandler {
 
         certDAO.getCert({
             uId: requestEntity.uId,
-        }, (err, result) => {
+        }, (err, certModels) => {
             if (!!err) {
                 done(ClientRequest.RESULT_FAILURE, err);
-            } else {
-                done(ClientRequest.RESULT_SUCCESS, result);
+            } else if (certModels.length == 0) {
+                done(ClientRequest.RESULT_FAILURE, {
+                    code: 1,
+                    msg: 'No certificate'
+                });
+            } else if (certModels.length > 0) {
+                done(ClientRequest.RESULT_SUCCESS, certModels[0]);
             }
         })
     }

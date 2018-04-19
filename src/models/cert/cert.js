@@ -46,8 +46,8 @@ class CertModel extends AbstractModel {
             certId: row.CERT_ID,
             uId: row.UID,
             blcMapId: row.BLC_MAP_ID,
-            shared: row.SHRD_YN == 'Y',
-            deleted: row.DEL_YN == 'Y',
+            shared: Util.flagToBool(row.SHRD_YN),
+            deleted: Util.flagToBool(row.DEL_YN),
             lastShared: row.LST_SHRD_DT,
             created: row.CRTD_DT,
             modified: row.MDFID_DT
@@ -61,16 +61,7 @@ class CertModel extends AbstractModel {
      * @author TACKSU
      */
     toRow() {
-        return this.trim({
-            S_USR_CERT_ID: this.sId,
-            CERT_ID: this.certId,
-            UID: this.uId,
-            BLC_MAP_ID: this.blcMapId,
-            SHRD_YN: Util.btf(this.shared),
-            LST_SHRD_DT: this.lastShared,
-            CRTD_DT: this.created,
-            MDFID_DT: this.modified
-        });
+        return CertModel.toRow(this);
     }
 
     /**
@@ -82,14 +73,12 @@ class CertModel extends AbstractModel {
      * @param {*} obj 
      */
     static toRow(obj) {
-        if (obj instanceof CertModel) {
-            return obj.toRow();
-        }
         return Util.trim({
             S_USR_CERT_ID: obj.sId,
             CERT_ID: obj.certId,
             UID: obj.uId,
             BLC_MAP_ID: obj.blcMapId,
+            DEL_YN: Util.btf(obj.deleted),
             SHRD_YN: Util.btf(obj.shared),
             LST_SHRD_DT: obj.lastShared,
             CRTD_DT: obj.created,
