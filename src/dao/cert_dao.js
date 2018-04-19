@@ -301,6 +301,18 @@ class CertificateDAO extends AbstractDAO {
             S_CERT_SHR_INFO_ID: creteria.sId
         }
     }
+
+    getSubName(cb) {
+
+        var query = mysql.format(CertQuery.getSubName);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                cb(rows);
+            }
+        })
+    }
 }
 
 export default CertificateDAO;

@@ -94,5 +94,16 @@ export default {
         } else {
             next(new Error('No Page'));
         }
-    }
+    },
+
+    getmapping: (req, res, next) => {
+
+        // /certs AJAX request
+        if (!!req.xhr) {            
+            Managers.db().getCertDAO().getSubName(function(dbres) {
+                console.log(dbres);
+                res.json(dbres);
+            });
+        }
+    },
 }
