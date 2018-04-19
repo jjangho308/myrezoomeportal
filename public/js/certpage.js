@@ -97,7 +97,7 @@ $(document).ready(function(){
 
         $('input:checkbox[name="certcheck"]').each(function() {
             if(this.checked) {
-                var id = this.value;
+                var id = this.id;
 
                 var sdata = sessionStorage.getItem(id);
                 var jsondata = JSON.parse(sdata).data;
