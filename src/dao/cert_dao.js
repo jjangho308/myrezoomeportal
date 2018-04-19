@@ -37,8 +37,14 @@ class CertificateDAO extends AbstractDAO {
      * @param {*} cb 
      */
     getCert(creteria, cb) {
-        var condition = {
-            CERT_ID: creteria.certId
+        var condition = {}
+        if (!!creteria.certId) {
+            condition.CERT_ID = creteria.certId;
+        }
+
+        if (!!creteria.uId) {
+            delete condition.CERT_ID;
+            condition.UID = creteria.uId;
         }
 
         var query = mysql.format(CertQuery.getCert, condition);

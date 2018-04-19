@@ -35,7 +35,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it.skip('Cert Ajax request', done => {
+    it('Cert Ajax request', done => {
         chai.request(app)
             .get('/certs')
             .set('Content-Type', 'application/json')
@@ -43,11 +43,15 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send()
             .end((err, res) => {
-                done();
+                if (!!err) {
+                    console.log(err);
+                } else if (res.body.hasOwnProperty('result')) {
+                    done();
+                }
             });
     })
 
-    it('Issue certificate request test', done => {
+    it.skip('Issue certificate request test', done => {
         chai.request(app)
             .post('/certs')
             .set('Content-Type', 'application/json')
@@ -63,7 +67,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it('Certificate view page test case', done => {
+    it.skip('Certificate view page test case', done => {
         chai.request(app)
             .get('/certs/3da38796-da33-41ec-8de7-31b9a2ea4e59')
             .set('Content-Type', 'text/html')
