@@ -243,19 +243,9 @@ $(document).ready(function(){
       element.css("display","none");
   });
     
-     $(document).on('click', ".add-cert", function() {
-
-         $('#add-cert-dialog').modal('show');
-         
-         
-     });
+     
     
-    $(document).on('click', '#add-cert-dialog .confirm-btn', function() {
-        $("#add-cert-dialog  .close-modal").click();
-       $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
-        $('#alarm-div').css("display","block");
-        
-    });
+    
     $(document).on('click', '.cancel-btn', function() {
         $(".close-modal").click();
         
