@@ -139,7 +139,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                     Managers.push().init();
                                     Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
-                                        if (!err && i == resultOrgIds.length - 1) {
+                                        if (!err && subIds.length == resultOrgIds.length) {
                                             done(ClientRequestManager.RESULT_PENDING, {
                                                 mid: clientReq.mId
                                             });
@@ -179,7 +179,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                             // sleep(50);
 
-                                                            if (dataIdx == storedData.length - 1) {
+                                                            if (records.length == storedData.length) {
                                                                 process.nextTick(() => {
                                                                     for (var j in subIDsResult) {
                                                                         subIds.push(subIDsResult[j].SUB_ID)
@@ -216,8 +216,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                 Managers.push().init();
                                                 Managers.push().sendMessage(msg, resultOrgIds[orgIdx].ORG_ID, err => {
-                                                    if (orgIdx == resultOrgIds.length - 1) {
-                                                        !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING, {
+                                                    if (subIds.length == resultOrgIds.length) {
+                                                        !!err ? done(ClientRequestManager.RESULT_FAILURE, err)
+                                                            : done(ClientRequestManager.RESULT_PENDING, {
                                                             mid: clientReq.mId
                                                         });
                                                     }
@@ -341,20 +342,21 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                             if (j == (agentRequest.records.length - 1)) {
                                 try {
-                                    socket.emit('SearchResult', JSON.stringify(agentRequest));
+                                    if(!!socket)
+                                        socket.emit('SearchResult', JSON.stringify(agentRequest));
                                 } catch (exception) {
                                     console.log(exception);
-                                    //continue;
                                 }
                             }
-                            
+
                             j++;
                         });
                     } else {
                         //BLC MAP stored
                         if (j == (agentRequest.records.length - 1)) {
                             try {
-                                socket.emit('SearchResult', JSON.stringify(agentRequest));
+                                if(!!socket)
+                                    socket.emit('SearchResult', JSON.stringify(agentRequest));
                             } catch (exception) {
                                 console.log(exception);
                                 //continue;
@@ -376,13 +378,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                 console.log('Socket is not prepared');
             }
             */
-
-
         });
-
     }
-
-
 }
 
 export default SearchRecordRequestHandler;
