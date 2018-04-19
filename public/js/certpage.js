@@ -62,7 +62,9 @@ $(document).ready(function(){
 
                         
                         $(addcertcheckboxid).click(function() {
-                            reqparam.push(sessionStorage.getItem(addcertcheckboxid));
+                            var sdata = sessionStorage.getItem(addcertcheckboxid);
+                            var jsondata = JSON.parse(sdata);
+                            reqparam.push(jsondata.data);
                             console.log("Cert REQ PARAM");
                             console.log(reqparam);
                         });
