@@ -13,7 +13,7 @@ describe('SearchRecordRequestHandler Test suit', () => {
             "mId": "message928936142234",
 
             //token
-            "uId": "UID1",
+            "uId": "UID2",
 
             "update" : false,
             

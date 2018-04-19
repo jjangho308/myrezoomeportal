@@ -144,7 +144,7 @@ class ResumeDao extends AbstractDAO {
     putShare(sharedResume, cb) {
         var param = sharedResume.toRow();
 
-        var query = mysql.format(ResumeQuery.putShare, param);
+        var query = mysql.format(ResumeQuery.putShared, param);
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
