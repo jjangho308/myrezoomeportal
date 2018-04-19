@@ -18,8 +18,7 @@ router.get('/', ctrl.get);
 
 // 증명서 뷰 페이지 controller
 router.get('/:certId', tokenAuth);
-router.get('/:certId', ctrl.get);
-//router.get('/:certId', view);
+router.get('/:certId', ctrl.getCertView);
 
 // 증명서 생성 ajax request controller
 router.post('/', tokenAuth);
