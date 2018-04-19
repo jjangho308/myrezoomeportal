@@ -25,9 +25,11 @@ class SigninRequestHandler extends AbstractClientRequestHandler {
 
     request(requestEntity, cb) {
         var userDAO = Managers.db().getUserDAO();
-        userDAO.getByEmail({email: requestEntity.user.email}, (err, users) => {
+        userDAO.getByEmail({email: requestEntity.user.email}, (err, users) => {                        
             if (!!err) {
                 cb(ClientRequest.RESULT_FAILURE, err);
+            } else if(users.length == 0) {
+                cb(ClientRequest.RESULT_FAILURE, "USER_IS_NOT_FOUND");
             } else if (users.length > 0 && users[0].pw == requestEntity.user.pw) {
                 var token = Managers.token().issueToken({
                     uId: users[0].uId
@@ -36,7 +38,9 @@ class SigninRequestHandler extends AbstractClientRequestHandler {
                 cb(ClientRequest.RESULT_SUCCESS, {
                     token: token
                 });
-            }
+            } else if(users.length > 0 && users[0].pw != requestEntity.user.pw) {
+                cb(ClientRequest.RESULT_FAILURE, "MISMATCH_PASSWORD");
+            } 
         });
     }
 }
