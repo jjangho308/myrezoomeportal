@@ -27,8 +27,11 @@ export default (() => {
          * @since 180330
          * @author TACKSU
          */
-        flagToBool: function (yn) {
-            return yn == 'Y' ? true : false
+        flagToBool: (yn) => {
+            if (yn == undefined) {
+                return yn;
+            }
+            return yn == 'Y' ? true : false;
         },
 
         /**
@@ -37,7 +40,10 @@ export default (() => {
          * @since 180330
          * @author TACKSU
          */
-        boolToFlag: function (value) {
+        boolToFlag: (value) => {
+            if (value == undefined) {
+                return undefined;
+            }
             return value ? 'Y' : 'N';
         },
 
@@ -67,6 +73,7 @@ export default (() => {
          * @author TACKSU
          */
         sha256: (obj, cb) => {
+            // TODO Imple here
             if (!!cb) {
                 procss.nextTick(() => {});
             }
@@ -79,7 +86,7 @@ export default (() => {
          * @author TACKSU
          */
         md5: (obj, cb) => {
-
+            // TODO Imple here
         }
     }
 

@@ -29,7 +29,9 @@ export default {
                 if (!!err) {
                     next(err)
                 } else {
-                    res.json(result);
+                    res.json({
+                        result : result
+                    });
                 }
             })
         }
@@ -57,6 +59,8 @@ export default {
         var resumeId = req.params.rsmId;
         if(!!resumeId){
             // TODO 특정 이력서에 대한 뷰 화면으로 넘겨줘야 함.
+
+            res.render('resume_viewer', resumeEntity);
         }
     },
 

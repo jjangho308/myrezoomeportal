@@ -51,7 +51,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it('Issue certificate request test', done => {
+    it.skip('Issue certificate request test', done => {
         chai.request(app)
             .post('/certs')
             .set('Content-Type', 'application/json')
@@ -69,7 +69,7 @@ describe('/certs URI Page test suite.', () => {
 
     it.skip('Certificate view page test case', done => {
         chai.request(app)
-            .get('/certs/3da38796-da33-41ec-8de7-31b9a2ea4e59')
+            .get('/certs/f84f248f-187f-4a71-8e9f-d325bf504c9e')
             .set('Content-Type', 'text/html')
             .set('Authorization', 'Bearer ' + jwtToken)
             .send()
@@ -94,7 +94,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it.skip('Share certificate test case', done => {
+    it('Share certificate test case', done => {
         chai.request(app)
             .post('/shared_certs')
             .set('Content-Type', 'application/json')
@@ -102,7 +102,7 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 shared_cert: {
-                    certId: '9b292e8a-b47e-4965-bcb2-c755090bde61',
+                    certId: 'c73f4619-db3a-4492-8b43-1fe8fb638d4d',
                     record: {
                         subcode: 'SUB1',
                         data: 'NAME'
@@ -114,7 +114,8 @@ describe('/certs URI Page test suite.', () => {
                         'qwerqwer@qwerqwer.com'
                     ],
                     msg: 'Hello World!',
-                    public: false
+                    public: false,
+                    expired: '2018-10-19'
                 }
             })
             .end((err, res) => {

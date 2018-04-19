@@ -51,6 +51,18 @@ export default {
     },
 
     /**
+     * Certificate viewer URI controller function. <br />
+     * 
+     * @since 180419
+     * @author TACKSU
+     */
+    getCertView : (req, res, next)=>{
+        var certId = req.params.certId;
+        
+        // TODO Imple here
+    },
+
+    /**
      * Function to create new certificate entity by given arguments. <br />
      * 
      * @since 180322
