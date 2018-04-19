@@ -58,7 +58,8 @@ $(document).ready(function(){
                         var htmldiv = '<tr>';
                             htmldiv = htmldiv + '<td>';
                             htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
-                            htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';
+                            //htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';
+                            htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" name="certcheck">';
                             htmldiv = htmldiv + '<label for='+ addcertcheckboxid +'></label>';
                             htmldiv = htmldiv + '</div>';
                             htmldiv = htmldiv + '</td>';
@@ -94,25 +95,55 @@ $(document).ready(function(){
        $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
         $('#alarm-div').css("display","block");
 
-        console.log("cert req param");
-        console.log(reqparam);
-        $.ajax({
-            type: 'POST',
-            url: '/certs',
-            headers: {
-                'Authorization': client_authorization
-            },
-            data: JSON.stringify({
-                //uId: 'SearchRecord',
-                //sId: '',
-                cert: reqparam
-            }),
-            success: function (res2) {
-                console.log(res2);
-                //setSocket(res.mid);
-                //clientsocket_listener();
-            },
-            contentType: 'application/json',
+        $('input:checkbox[name="certcheck"]').each(function() {
+            if(this.checked) {
+                var id = this.value;
+
+                var sdata = sessionStorage.getItem(id);
+                var jsondata = JSON.parse(sdata).data;
+
+                console.log("cert req param");
+                console.log(id);
+                $.ajax({
+                    type: 'POST',
+                    url: '/certs',
+                    headers: {
+                        'Authorization': client_authorization
+                    },
+                    data: JSON.stringify({
+                        //uId: 'SearchRecord',
+                        //sId: '',
+                        cert: jsondata
+                    }),
+                    success: function (res2) {
+                        console.log(res2);
+                        //setSocket(res.mid);
+                        //clientsocket_listener();
+                    },
+                    contentType: 'application/json',
+                });
+            }
         });
+
+        // console.log("cert req param");
+        // console.log(reqparam);
+        // $.ajax({
+        //     type: 'POST',
+        //     url: '/certs',
+        //     headers: {
+        //         'Authorization': client_authorization
+        //     },
+        //     data: JSON.stringify({
+        //         //uId: 'SearchRecord',
+        //         //sId: '',
+        //         cert: reqparam
+        //     }),
+        //     success: function (res2) {
+        //         console.log(res2);
+        //         //setSocket(res.mid);
+        //         //clientsocket_listener();
+        //     },
+        //     contentType: 'application/json',
+        // });
     });
 });
