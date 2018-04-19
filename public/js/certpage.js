@@ -16,13 +16,32 @@ $(document).ready(function(){
             data: JSON.stringify({
                 
             }),
-            success: function (res) {
-                console.log(res);
+            success: function (mappingres) {
+                console.log(mappingres);
 
                 for(var i in txidlist) {
                     try {
                         var viewdata = getData(txidlist[i]);
                         var subid = viewdata.subid;
+                        var subname = "";
+                        var category = "";
+
+                        if(subid=="RCCNF0001" || subid=="RCGOC0002" || subid=="RCCNF0003" || subid=="RCGOC0004" || subid=="RCCNF0001" || subid=="RCCNF0001" ) {
+                            //자격 
+                            category = "자격";
+                        }
+                        else if(subid=="RCLPT0005") {
+                            category = "어학";
+                        }
+                        else if(subid=="RCOGC0008" || subid=="RCOGC0009") {
+                            category = "학력";
+                        }
+
+                        for(var j in mappingres) {
+                            if(mappingres[j].SUB_ID==subid) {
+                                subname = mappingres[j].SUB_NM;
+                            }
+                        }
                         //formatter[subid](viewdata);
                         var htmldiv = '<tr>';
                             htmldiv = htmldiv + '<td>';
@@ -31,8 +50,8 @@ $(document).ready(function(){
                             htmldiv = htmldiv + '<label for="add-cert-checkbox-1"></label>';
                             htmldiv = htmldiv + '</div>';
                             htmldiv = htmldiv + '</td>';
-                            htmldiv = htmldiv + '<td>' + viewdata +'</td>';
-                            htmldiv = htmldiv + '<td>' + viewdata +'</td>';
+                            htmldiv = htmldiv + '<td>' + category +'</td>';
+                            htmldiv = htmldiv + '<td>' + subname +'</td>';
                         htmldiv = htmldiv + '</tr>';
         
                         $("#add-cert-dialog-table").append(htmldiv);
