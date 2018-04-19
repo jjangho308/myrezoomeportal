@@ -43,7 +43,7 @@ $(document).ready(function(){
                             }
                         }
                         //formatter[subid](viewdata);
-                        var addcertcheckboxid = "add-cert-checkbox-" + txidlist[i];
+                        var addcertcheckboxid = txidlist[i];
 
                         var htmldiv = '<tr>';
                             htmldiv = htmldiv + '<td>';
