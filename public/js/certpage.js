@@ -1,3 +1,5 @@
+var reqparam = [];
+
 $(document).ready(function(){
 
     //출력 가능한 증명서 목록 세팅
@@ -57,6 +59,13 @@ $(document).ready(function(){
                         htmldiv = htmldiv + '</tr>';
         
                         $("#add-cert-dialog-table").append(htmldiv);
+
+                        
+                        $(addcertcheckboxid).click(function() {
+                            reqparam.push(sessionStorage.getItem(addcertcheckboxid));
+                            console.log("Cert REQ PARAM");
+                            console.log(reqparam);
+                        });
         
                     }catch(exception) {
                         console.log(exception);
@@ -73,5 +82,26 @@ $(document).ready(function(){
         $("#add-cert-dialog  .close-modal").click();
        $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
         $('#alarm-div').css("display","block");
+
+        console.log("cert req param");
+        console.log(reqparam);
+        $.ajax({
+            type: 'POST',
+            url: '/certs',
+            headers: {
+                'Authorization': client_authorization
+            },
+            data: JSON.stringify({
+                //uId: 'SearchRecord',
+                //sId: '',
+                cert: reqparam
+            }),
+            success: function (res2) {
+                console.log(res2);
+                //setSocket(res.mid);
+                //clientsocket_listener();
+            },
+            contentType: 'application/json',
+        });
     });
 });
