@@ -43,11 +43,13 @@ $(document).ready(function(){
                             }
                         }
                         //formatter[subid](viewdata);
+                        var addcertcheckboxid = "add-cert-checkbox-" + txidlist[i];
+
                         var htmldiv = '<tr>';
                             htmldiv = htmldiv + '<td>';
                             htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
-                            htmldiv = htmldiv + '<input id="add-cert-checkbox-1" type="checkbox">';
-                            htmldiv = htmldiv + '<label for="add-cert-checkbox-1"></label>';
+                            htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox">';
+                            htmldiv = htmldiv + '<label for='+ addcertcheckboxid +'></label>';
                             htmldiv = htmldiv + '</div>';
                             htmldiv = htmldiv + '</td>';
                             htmldiv = htmldiv + '<td>' + category +'</td>';
