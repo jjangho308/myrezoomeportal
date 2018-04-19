@@ -28,7 +28,6 @@ export default {
      */
     post: (req, res, next) => {
         if (!!req.xhr) {
-            console.log(req.body);
             Managers.client().request(new SignInRequest(req.body), (err, result) => {
                 if (!!err) {
                     res.status(500).json(err);

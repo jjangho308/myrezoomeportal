@@ -32,20 +32,20 @@ class ShareResumeRequestHandler extends AbstractClientRequestHandler {
         var resumeDAO = Managers.db().getResumeDAO();
 
         resumeDAO.getShared({
-            rsmId: ShareResumeRequestEntity.shared_resume.rsmid
+            rsmId: ShareResumeRequestEntity.shared_resume.rsmId
         }, (err, result) => {
             if(!!err){
                 cb(ClientRequest.RESULT_FAILURE, err);
             }else{
                 //아직 한번도 공유되지 않은 이력서
                 if(result == 0){
-                    var SharedResumeModel = SharedResumeModel({
-                        uId:ShareResumeRequestEntity.uiD,
+                    var sharedResumeModel = new SharedResumeModel({
+                        uId:ShareResumeRequestEntity.uId,
                         rsmId: ShareResumeRequestEntity.shared_resume.rsmId,
                         data: JSON.stringify(ShareResumeRequestEntity.shared_resume.records)
                     });
 
-                    resumeDAO.putShared(SharedResumeModel, (err, result) => {
+                    resumeDAO.putShare(sharedResumeModel, (err, result) => {
                         if(!!err){
                             cb(ClientRequest.RESULT_FAILURE, err);
                         } else{
@@ -54,7 +54,7 @@ class ShareResumeRequestHandler extends AbstractClientRequestHandler {
                                 rsmId: ShareResumeRequestEntity.shared_resume.rsmId,
                                 public: ShareResumeRequestEntity.shared_resume.public,
                                 passcode: ShareResumeRequestEntity.shared_resume.passcode,
-                                expired : ShareResumeRequestEntity.shared_resume.expired
+                                expired : ShareResumeRequestEntity.shared_resume.exp
                             });
 
                             resumeDAO.putSharedUrl(sharedResumeUrl, (err, result)=>{
@@ -70,12 +70,13 @@ class ShareResumeRequestHandler extends AbstractClientRequestHandler {
 
                 //1번 이상 공유된 증명서
                 else{
+                    
                     var sharedResumeUrl = new SharedResumeUrlModel({
                         url: ShareResumeRequestEntity.shared_resume.url,
                         rsmId: ShareResumeRequestEntity.shared_resume.rsmId,
                         public: ShareResumeRequestEntity.shared_resume.public,
-                        passcode: ShareResumeRequestEntity.shared_resume.passcode,
-                        expired : ShareResumeRequestEntity.shared_resume.expired
+                        passcode: ShareResumeRequestEntity.shared_resume.password,
+                        expired : ShareResumeRequestEntity.shared_resume.exp
                     });
 
                     resumeDAO.putSharedUrl(sharedResumeUrl, (err, result) => {

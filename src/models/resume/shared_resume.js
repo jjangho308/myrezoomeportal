@@ -19,14 +19,18 @@ class SharedResumeModel extends AbstractModel {
     constructor(opt) {
         super(opt);
 
-        this.sId = opt.sId;
-        this.rsmId = opt.rsmId;
-        this.uId = opt.uId;
-        this.data = opt.data;
-        this.deleted = opt.deleted;
-        this.modified = opt.modified;
-        this.created = opt.created;
+        if (!!opt) {
 
+            this.sId = opt.sId;
+            this.rsmId = opt.rsmId;
+            this.uId = opt.uId;
+            this.data = opt.data;
+            this.deleted = opt.deleted;
+            this.modified = opt.modified;
+            this.created = opt.created;
+
+            this.trim(this);
+        }
         this.trim(this);
     }
 

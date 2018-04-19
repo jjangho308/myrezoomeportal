@@ -29,4 +29,8 @@ router.post('/', ctrl.post);
 router.patch('/:certId', tokenAuth);
 router.patch('/:certId', ctrl.patch);
 
+//발급가능한 증명서 목록에 맞는 자격명 가져오기
+router.post('/getmapping', tokenAuth);
+router.post('/getmapping',ctrl.getmapping);
+
 export default router;

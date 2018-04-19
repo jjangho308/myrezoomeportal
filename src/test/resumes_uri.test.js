@@ -5,6 +5,10 @@ import Managers from '../core/managers';
 
 import app from '../app';
 
+
+
+import Util from "../util/util";
+
 /**
  * Test suite for /resumes URL. <br />
  * 
@@ -17,7 +21,7 @@ describe('/resumes URL test suite', () => {
 
     before('Service initialize', () => {
         jwtToken = Managers.token().issueToken({
-            uId: 'UUID1'
+            uId: 'UID1'
         })
         chai.use(chaihttp);
     });
@@ -45,6 +49,7 @@ describe('/resumes URL test suite', () => {
             });
     })
 
+    //확인완료
     it('Create resume request test case', done => {
         chai.request(app)
             .post('/resumes')
@@ -53,11 +58,15 @@ describe('/resumes URL test suite', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 resume: {
-                    title: '삼성 이력서',
-                    records: [
-                        'txid1',
-                        'txid2'
-                    ]
+                    title: '엘지 이력서',
+                    records: [{
+                        order: 1,
+                        //
+                        mapId: Util.uuid()
+                    }, {
+                        order: 2,
+                        mapId: Util.uuid()
+                    }]
                 }
             })
             .end((err, res) => {
@@ -86,6 +95,7 @@ describe('/resumes URL test suite', () => {
 
 
 
+    //확인 완료
     it.skip('share resume test case', done => {
         chai.request(app)
             .post('/shared_resumes')
@@ -93,8 +103,29 @@ describe('/resumes URL test suite', () => {
             .set('Authorization', 'Bearer ' + jwtToken)
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
-
+                shared_resume: {
+                    rsmId: '526cf612-110e-4b53-a5a8-5a424d911f87',
+                    records: [{
+                        testid: '6A3135824610',
+                        phone: '01064749282',
+                        name: 'PARKHUNWOOK',
+                        grade: 'IM2',
+                        date: '20180313'
+                    }, {
+                        date: '2018-02-01 ~ 2018-08-01',
+                        entranceDate: '2018-02-01',
+                        graduDate: '2018-08-01',
+                        id: '12060992',
+                        name: "박헌욱",
+                        status: "JAEHAK"
+                    }],
+                    url: 'https://rzoo.me/jskji45',
+                    password: 'changshin',
+                    exp: new Date("2018-04-19")
+                }
             })
-
+            .end((err, res) => {
+                done();
+            })
     })
 });
