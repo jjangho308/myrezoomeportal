@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
     //출력 가능한 증명서 목록 세팅
+    console.log('=====Cert page=====');
     var txidlist = getTxidList();
 
     for(var i in txidlist) {
