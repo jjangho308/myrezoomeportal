@@ -38,7 +38,7 @@ class GetCertificateHandler extends AbstractClientRequestHandler {
     request(requestEntity, done) {
         var certDAO = Managers.db().getCertDAO();
 
-        certDAO.getCert({
+        certDAO.getCertList({
             uId: requestEntity.uId,
         }, (err, certModels) => {
             if (!!err) {
@@ -49,7 +49,7 @@ class GetCertificateHandler extends AbstractClientRequestHandler {
                     msg: 'No certificate'
                 });
             } else if (certModels.length > 0) {
-                done(ClientRequest.RESULT_SUCCESS, certModels[0]);
+                done(ClientRequest.RESULT_SUCCESS, certModels);
             }
         })
     }

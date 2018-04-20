@@ -67,6 +67,45 @@ class CertificateDAO extends AbstractDAO {
     }
 
     /**
+     * Get certificate. <br />
+     * 
+     * @since 180420
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} cb 
+     */
+    getCertList(creteria, cb) {
+        var condition = {
+            'TUC.UID': creteria.uId
+        };
+
+        var query = mysql.format(CertQuery.getCertList, condition);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err, null);
+            } else {
+                var certList = [];
+
+                for (var i in rows) {
+                    certList.push({
+                        certId: rows[i].CERT_ID,
+                        uId: rows[i].UID,
+                        blcMapId: rows[i].BLC_MAP_ID,
+                        txid: rows[i].TRX_ID,
+                        shared: Util.flagToBool(rows[i].SHRD_YN),
+                        subId: rows[i].SUB_ID,
+                        subCode: rows[i].SUB_CD,
+                        title: rows[i].SUB_NM
+                    });
+                }
+
+                cb(err, certList);
+            }
+        })
+    }
+
+    /**
      * Insert new certificate entity to database. <br />
      * 
      * @since 180406
