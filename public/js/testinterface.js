@@ -93,6 +93,21 @@ function test_getSessionStorage(testmsg) {
     console.log(stored_msg);
 }
 
+function test_getcertobj(certid) {
+    $.ajax({
+        type: 'GET',
+        url: '/certs/'+certid,
+        headers: {
+            'Authorization': client_authorization
+        },
+        success: function (res3) {
+            console.log(res3);
+            
+        },
+        contentType: 'application/json',
+    });
+}
+
 function test_setTestData() {
        var record = {
        "mid": "5b57ad01-28f6-4720-a710-f6f9e4785d06",
