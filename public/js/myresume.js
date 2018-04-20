@@ -75,25 +75,49 @@ $(document).ready(function () {
 
 
     $(document).on('click', '#cert-issue-button', function () {
-        $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+        $(".spec-detail-div input:checkbox").each(function(i) {
+            if ($(this).is(':checked')) {                
+                var id = $(this).attr("id");
+                var sdata = sessionStorage.getItem(id);
+                var jsondata = JSON.parse(sdata);
 
-        setTimeout(function () {
-            $('.ko-progress-circle').attr('data-progress', 20);
-        }, 100);
-        setTimeout(function () {
-            $('.ko-progress-circle').attr('data-progress', 50);
-        }, 1000);
-        setTimeout(function () {
-            $('.ko-progress-circle').attr('data-progress', 100);
-        }, 2000);
+                $.ajax({
+                    type: 'POST',
+                    url: '/certs',
+                    headers: {
+                        'Authorization': client_authorization
+                    },
+                    data: JSON.stringify({                
+                        cert: jsondata
+                    }),
+                    beforeSend: function() {
+                        setTimeout(function () {
+                            $('.ko-progress-circle').attr('data-progress', 20);
+                        }, 100);
+                        setTimeout(function () {
+                            $('.ko-progress-circle').attr('data-progress', 50);
+                        }, 1000);
+                        setTimeout(function () {
+                            $('.ko-progress-circle').attr('data-progress', 100);
+                        }, 2000);
+                
+                        setTimeout(function () {
+                            $("#cert-issue-dialog .close-modal").click();
+                            $('#select-footer').css("display", "none");
+                            $('#alarm-div').css("display", "block");
+                
+                            $(".spec-detail-div input:checkbox:checked").click();
+                        }, 3000);
 
-        setTimeout(function () {
-            $("#cert-issue-dialog .close-modal").click();
-            $('#select-footer').css("display", "none");
-            $('#alarm-div').css("display", "block");
-
-            $(".spec-detail-div input:checkbox:checked").click();
-        }, 3000);
+                        $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+                    },
+                    success: function (res) {                        
+                        loadcertlist();                        
+                    },
+                    contentType: 'application/json',
+                });
+            }            
+        });        
     });
 
 
