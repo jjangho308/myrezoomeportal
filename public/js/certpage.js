@@ -15,9 +15,6 @@ function loadcertlist() {
         headers: {
             'Authorization': client_authorization
         },
-        data: JSON.stringify({
-            
-        }),
         success: function (certlistres) {
             console.log("============certlistres========");
             console.log(certlistres);
