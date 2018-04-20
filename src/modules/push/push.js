@@ -47,7 +47,8 @@ class PushManager extends AbstractManager {
      */
     connect(opt, cb) {
         var connections = new stompit.ConnectFailover(opt, {
-            maxReconnects: 1
+            maxReconnects: 1,
+            alwaysConnected: true
         });
 
         connections.on('connecting', function (connector) {

@@ -1,205 +1,190 @@
-$(function(){
-    $("#myresume-modal").load("dialog-myresume.html", function(){
-
+$(function () {
+    $("#myresume-modal").load("dialog-myresume.html", function () {
         $('select').selectize();
-         $( ".study-period" ).datepicker( );
-            $( ".study-period" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-    
-    }); 
-    
-    
-    $("#mycert-div").load("Certs.html"); 
-    
-    $("#resume-store-div").load("Resume.html"); 
-    
+        $(".study-period").datepicker();
+        $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
+
+    });
+
+    $("#mycert-div").load("Certs.html");
+    $("#resume-store-div").load("Resume.html");
 });
 
 
-$(document).ready(function(){
-    $(document).on('click', '.spec-detail-div input:checkbox', function() {
-        
-        console.log($(this).is(':checked'));
-        if ($(this).is(':checked'))
-        {
-            $(this).closest('.spec-body').css({ "border": "solid 1px #4c80f1", "border-radius": "4px", "background-color": "rgba(76, 128, 241, 0.05)"}); 
-          
-        }
-        else
-        { $(this).closest('.spec-body').css({"border": "none", "border-bottom": "solid 1px #dfe5ef", "background-color": "white"});
-        }
-        
-        
-        var numberOfChecked = $('.spec-detail-div input:checkbox:checked').length;
-        
-        if(numberOfChecked == 0){
-            $("#select-footer").hide();  
-            $("#main-footer").css("margin-bottom","0px"); 
-        }else{
-            
-            $( "#select-footer span:nth-child(2)" ).text(numberOfChecked+"건의");
-            
-        $("#select-footer").show();   
-        
-        $("#main-footer").css("margin-bottom","71px"); 
-        }
-        
-    });
+$(document).ready(function () {
+    $(document).on('click', '.spec-detail-div input:checkbox', function () {
+        $(".spec-detail-div input:checkbox").each(function(i) {
+            if ($(this).is(':checked')) {
+                $(this).closest('.spec-body').css({ "border": "solid 1px #4c80f1", "border-radius": "4px", "background-color": "rgba(76, 128, 241, 0.05)" });
+                $(this).closest('.spec-body').children('.spec-right').last().children().eq(3).children().css({"color":"#ffffff", "border": "solid 1px #dfe5ef"});
+            } else {
+                $(this).closest('.spec-body').css({ "border": "none", "border-bottom": "solid 1px #dfe5ef", "background-color": "white" });
+                $(this).closest('.spec-body').children('.spec-right').last().children().eq(3).children().css({"color":"black"});
+            }            
     
+            var numberOfChecked = $('.spec-detail-div input:checkbox:checked').length;
+    
+            if (numberOfChecked == 0) {
+                $("#select-footer").hide();
+                $("#main-footer").css("margin-bottom", "0px");
+            } else {
+                $("#select-footer span:nth-child(2)").text(numberOfChecked + "건의");
+                $("#select-footer").show();
+                $("#main-footer").css("margin-bottom", "71px");
+            }
+        });        
+    });
+
     $("#divSchedule").dialog({
         show: "slide", modal: true, autoOpen: false
 
     });
     $("#btn").click(function () {
-        $("#divSchedule").dialog("open"); 
+        $("#divSchedule").dialog("open");
         return false;
     });
-    
-    
 
-    
-    $('#header-mycert').click(function(){
-        $('#header-myresume').css({"border":"none",  "font-weight": "normal"});
-        $('#header-resume-store').css({"border":"none",  "font-weight": "normal"});
-        $(this).css({"border-bottom":"solid 5px #4c80f1", "font-weight": "bold"});
-         $("#myresume-div").hide();
+    $('#header-mycert').click(function () {
+        $('#header-myresume').css({ "border": "none", "font-weight": "normal" });
+        $('#header-resume-store').css({ "border": "none", "font-weight": "normal" });
+        $(this).css({ "border-bottom": "solid 5px #4c80f1", "font-weight": "bold" });
+        $("#myresume-div").hide();
         $("#mycert-div").show();
         $("#resume-store-div").hide();
 
     });
-    
-    $('#header-resume-store').click(function(){
-        $('#header-myresume').css({"border":"none",  "font-weight": "normal"});
-        $('#header-mycert').css({"border":"none",  "font-weight": "normal"});
-        $(this).css({"border-bottom":"solid 5px #4c80f1", "font-weight": "bold"});
-         $("#myresume-div").hide();
+
+    $('#header-resume-store').click(function () {
+        $('#header-myresume').css({ "border": "none", "font-weight": "normal" });
+        $('#header-mycert').css({ "border": "none", "font-weight": "normal" });
+        $(this).css({ "border-bottom": "solid 5px #4c80f1", "font-weight": "bold" });
+        $("#myresume-div").hide();
         $("#mycert-div").hide();
         $("#resume-store-div").show();
     });
-    
-    $('#header-myresume').click(function(){
-        $('#header-mycert').css({"border":"none",  "font-weight": "normal"});
-        $('#header-resume-store').css({"border":"none",  "font-weight": "normal"});
-        $(this).css({"border-bottom":"solid 5px #4c80f1", "font-weight": "bold"});
-        
-         $("#myresume-div").show();
+
+    $('#header-myresume').click(function () {
+        $('#header-mycert').css({ "border": "none", "font-weight": "normal" });
+        $('#header-resume-store').css({ "border": "none", "font-weight": "normal" });
+        $(this).css({ "border-bottom": "solid 5px #4c80f1", "font-weight": "bold" });
+
+        $("#myresume-div").show();
         $("#mycert-div").hide();
         $("#resume-store-div").hide();
     });
-    
-    
-    $(document).on('click', '#cert-issue-button', function() {
+
+
+    $(document).on('click', '#cert-issue-button', function () {
         $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
-           
-            
-         setTimeout(function() {
-              $('.ko-progress-circle').attr('data-progress', 20);
-         }, 100);
-         setTimeout(function() {
-              $('.ko-progress-circle').attr('data-progress', 50);
-         }, 1000);
-         setTimeout(function() {
-              $('.ko-progress-circle').attr('data-progress', 100);
-         }, 2000);
-        
-         setTimeout(function() {
-             $("#cert-issue-dialog .close-modal").click();
-             $('#select-footer').css("display","none");
-             $('#alarm-div').css("display","block");
-             
-             $(".spec-detail-div input:checkbox:checked").click();
-         }, 3000);
-    
+
+        setTimeout(function () {
+            $('.ko-progress-circle').attr('data-progress', 20);
+        }, 100);
+        setTimeout(function () {
+            $('.ko-progress-circle').attr('data-progress', 50);
+        }, 1000);
+        setTimeout(function () {
+            $('.ko-progress-circle').attr('data-progress', 100);
+        }, 2000);
+
+        setTimeout(function () {
+            $("#cert-issue-dialog .close-modal").click();
+            $('#select-footer').css("display", "none");
+            $('#alarm-div').css("display", "block");
+
+            $(".spec-detail-div input:checkbox:checked").click();
+        }, 3000);
     });
-    
-    
-    $(document).on('click', '#alarm-div img', function() {
-       $("#alarm-div").hide(); 
+
+
+    $(document).on('click', '#alarm-div img', function () {
+        $("#alarm-div").hide();
     });
-    
-    $(document).on('click', '#spec-change-dialog .confirm-btn', function() {
+
+    $(document).on('click', '#spec-change-dialog .confirm-btn', function () {
         $("#spec-change-dialog .close-modal").click();
-       $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
-        $('#alarm-div').css("display","block");
-        
+        $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
+        $('#alarm-div').css("display", "block");
+
     });
-    
-    $(document).on('click', '#education-add-dialog .confirm-btn', function() {
-        
+
+    $(document).on('click', '#education-add-dialog .confirm-btn', function () {
+
         var is_error = false;
-        
-        if($("#school").next().find(".item").text() == ""){
-           $("#school").next().find(".selectize-input").addClass("error");
+
+        if ($("#school").next().find(".item").text() == "") {
+            $("#school").next().find(".selectize-input").addClass("error");
             $("#school").next().next().css("display", "block");
             is_error = true;
-        }else{
+        } else {
             $("#school").next().find(".selectize-input").removeClass("error");
             $("#school").next().next().css("display", "none");
         }
-        
-        
-        $(".major").each(function(){
-               
+
+
+        $(".major").each(function () {
+
             var element = $(this);
-            
-            var range = element.closest(".error-range"); 
-            
-            if(element.val() == ""){
+
+            var range = element.closest(".error-range");
+
+            if (element.val() == "") {
                 element.addClass("error");
                 range.find(".items ").addClass("error");
                 range.find(".error-message").css("display", "block");
                 is_error = true;
-            }else{
-                var range = element.closest(".error-range"); 
+            } else {
+                var range = element.closest(".error-range");
                 element.removeClass("error");
                 range.find(".items ").removeClass("error");
                 range.find(".error-message").css("display", "none");
             }
         })
-        
+
         var period = $("#education-add-dialog .study-period");
-        var range = period.closest(".error-range"); 
-        
-        if((period[0].value == "") || (period[1].value == "")){
-             
-            
+        var range = period.closest(".error-range");
+
+        if ((period[0].value == "") || (period[1].value == "")) {
+
+
             period.addClass("error");
             range.find("button").addClass("error");
             range.find(".items").addClass("error");
             range.find(".error-message").css("display", "block");
             is_error = true;
-            
-        }else{
+
+        } else {
             period.removeClass("error");
             range.find("button").removeClass("error");
             range.find(".items").removeClass("error");
             range.find(".error-message").css("display", "none");
         }
-        
-        
-        var range = $("#score").closest(".error-range"); 
-        if($("#score").val() == ""){
+
+
+        var range = $("#score").closest(".error-range");
+        if ($("#score").val() == "") {
             $("#score").addClass("error");
-           range.find(".items").addClass("error");
+            range.find(".items").addClass("error");
             range.find(".error-message").css("display", "block");
             is_error = true;
-        }else{
+        } else {
             $("#score").removeClass("error");
-           range.find(".items").removeClass("error");
+            range.find(".items").removeClass("error");
             range.find(".error-message").css("display", "none");
         }
-        
-        if(is_error == false){
-        
-        $("#education-add-dialog .close-modal").click();
-       $("#alarm-div span").text("학력이 추가되었습니다.");
-        $('#alarm-div').css("display","block"); 
+
+        if (is_error == false) {
+
+            $("#education-add-dialog .close-modal").click();
+            $("#alarm-div span").text("학력이 추가되었습니다.");
+            $('#alarm-div').css("display", "block");
         }
 
-        
+
     });
-    
-    $(document).on('click', '#education-add-dialog .add-span', function() {
-       $("#major-div").append(` 
+
+    $(document).on('click', '#education-add-dialog .add-span', function () {
+        $("#major-div").append(` 
 <div class="error-range">
                 <div class="select-100">
                     <select name="select-1">
@@ -222,33 +207,33 @@ $(document).ready(function(){
 
 
         `);
-        
+
         $("select").selectize();
     });
-    
-     $(document).on('click', ".more-store-resume", function() {
 
-         
-         var element = $(this).closest(".cert-container").find(".more-store-resume-div"); 
-        element.css("display","block");
-         
-     });
-    
-  $(document).click(function(e) {
-      console.log($(e.target).attr('class'));
-      if($(e.target).attr('class') == "more-store-resume")
-          return;
-      
-    var element = $(".more-store-resume-div"); 
-      element.css("display","none");
-  });
-    
-     
-    
-    
-    $(document).on('click', '.cancel-btn', function() {
+    $(document).on('click', ".more-store-resume", function () {
+
+
+        var element = $(this).closest(".cert-container").find(".more-store-resume-div");
+        element.css("display", "block");
+
+    });
+
+    $(document).click(function (e) {
+        console.log($(e.target).attr('class'));
+        if ($(e.target).attr('class') == "more-store-resume")
+            return;
+
+        var element = $(".more-store-resume-div");
+        element.css("display", "none");
+    });
+
+
+
+
+    $(document).on('click', '.cancel-btn', function () {
         $(".close-modal").click();
-        
+
     });
 
 });
