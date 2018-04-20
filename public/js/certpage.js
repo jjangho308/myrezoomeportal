@@ -8,14 +8,42 @@ function certckeckboxclick(uniqueid) {
     console.log(reqparam);
 }
 
+function loadcertlist() {
+    $.ajax({
+        type: 'GET',
+        url: '/certs',
+        headers: {
+            'Authorization': client_authorization
+        },
+        data: JSON.stringify({
+            
+        }),
+        success: function (certlistres) {
+            console.log("============certlistres========");
+            console.log(certlistres);
+            for(var i in certlistres) {
+                var htmldiv = '<div class="spec-body">';
+                  
+                htmldiv = htmldiv + '</div>';
+
+            }
+        },
+        contentType: 'application/json'
+    });
+}
+
 $(document).ready(function(){
 
+    loadcertlist();
+    
     //출력 가능한 증명서 목록 세팅
     console.log('=====Cert page=====');
     
     $(document).on('click', ".add-cert", function() {
         console.log('증명서 발급 목록 클릭');
         var txidlist = getTxidList();
+
+        $(".certtr").remove();
 
         $.ajax({
             type: 'POST',
@@ -55,7 +83,7 @@ $(document).ready(function(){
                         //formatter[subid](viewdata);
                         var addcertcheckboxid = txidlist[i];
 
-                        var htmldiv = '<tr>';
+                        var htmldiv = '<tr class="certtr">';
                             htmldiv = htmldiv + '<td>';
                             htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
                             //htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';
@@ -119,6 +147,7 @@ $(document).ready(function(){
                         console.log(res2);
                         //setSocket(res.mid);
                         //clientsocket_listener();
+                        loadcertlist();
                     },
                     contentType: 'application/json',
                 });
