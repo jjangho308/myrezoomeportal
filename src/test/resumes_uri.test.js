@@ -37,7 +37,8 @@ describe('/resumes URL test suite', () => {
             });
     });
 
-    it.skip('Resume ajax request', done => {
+    //확인 완료
+    it('Resume ajax request', done => {
         chai.request(app)
             .get('/resumes')
             .set('Content-Type', 'application/json')
@@ -45,12 +46,13 @@ describe('/resumes URL test suite', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send()
             .end((err, res) => {
+                //console.log(res);
                 done();
             });
     })
 
     //확인완료
-    it('Create resume request test case', done => {
+    it.skip('Create resume request test case', done => {
         chai.request(app)
             .post('/resumes')
             .set('Content-Type', 'application/json')

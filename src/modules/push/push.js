@@ -83,6 +83,7 @@ class PushManager extends AbstractManager {
      */
     onTerminate(from){
        // TODO disconnect push channel.
+       this.disconnect();
     }
     /**
      * Send Message to AMQ Server <br />

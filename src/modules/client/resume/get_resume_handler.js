@@ -26,12 +26,13 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
      */
     request(requestEntity, cb) {
         var resumeDAO = Managers.db().getResumeDAO();
-        resumeDAO.get({
+        resumeDAO.getResume({
             uId: requestEntity.uId
         }, (err, resumeList) => {
             if (!!err) {
                 cb(ClientRequest.RESULT_FAILURE, err);
             } else {
+                console.log(resumeList);
                 cb(ClientRequest.RESULT_SUCCESS, resumeList);
             }
         })
