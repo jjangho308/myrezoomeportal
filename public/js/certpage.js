@@ -21,9 +21,18 @@ function loadcertlist() {
         success: function (certlistres) {
             console.log("============certlistres========");
             console.log(certlistres);
-            for(var i in certlistres) {
-                var htmldiv = '<div class="spec-body">';
-                  
+            for(var i in certlistres.result) {
+                var htmldiv = '<div class="cert-container" tabindex="1">';
+                htmldiv = htmldiv + '<p>제 1049-4003호 <img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
+                htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
+                htmldiv = htmldiv + '<p>' + certlistres.result[i].title + '</p>';
+                htmldiv = htmldiv + '<p>발급일시 : ' + certlistres.result[i].date + '</p>';
+                htmldiv = htmldiv + '<div class="more-store-resume-div">';
+                htmldiv = htmldiv + '<p>복사</p>';
+                htmldiv = htmldiv + '<p>삭제</p>';
+                htmldiv = htmldiv + '<p>공유내역</p>';
+                htmldiv = htmldiv + '</div>';
+                
                 htmldiv = htmldiv + '</div>';
 
             }
