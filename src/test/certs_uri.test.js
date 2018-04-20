@@ -10,6 +10,8 @@ import Util from '../util/util';
 
 import Managers from '../core/managers';
 
+import Terminator from '../core/terminator';
+
 /**
  * Test suit to test '/cert' URI. <br />
  * 
@@ -124,7 +126,10 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
+    /**
+     * Terminator
+     */
     after(() => {
-
+        Terminator();
     })
 });

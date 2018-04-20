@@ -101,7 +101,8 @@ class CertificateDAO extends AbstractDAO {
                         shared: Util.flagToBool(rows[i].SHRD_YN),
                         subId: rows[i].SUB_ID,
                         subCode: rows[i].SUB_CD,
-                        title: rows[i].SUB_NM
+                        title: rows[i].SUB_NM,
+                        date: rows[i].CRTD_DT
                     });
                 }
 
