@@ -152,13 +152,13 @@ function refreshview() {
     //$('#spec_forign_lang').remove('.spec-body');
     //$('#spec_certification').remove('.spec-body');
 
-    console.log(txidlist);
-
     for(var i in txidlist) {
         try {
-            var viewdata = getData(txidlist[i]);
-            var subid = viewdata.subid;
-            formatter[subid](viewdata);
+            var viewdata = getData(txidlist[i]);                       
+            var subid = viewdata.subid;         
+            var jsonData = JSON.parse(viewdata.data);   
+            jsonData.chkid = subid + "_" + i;
+            formatter[subid](jsonData);
         }catch(exception) {
             console.log(exception);
             continue;
