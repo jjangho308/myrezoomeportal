@@ -80,7 +80,7 @@ export default {
         if (!!req.xhr) {
             Managers.client().request(new IssueNewCertRequest(req.body), (err, result) => {
                 if (!!err) {
-                    res.json(JSON.stringify(err));
+                    next(err);
                 } else {
                     res.json({
                         result: result

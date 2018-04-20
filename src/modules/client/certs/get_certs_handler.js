@@ -6,6 +6,8 @@ import Managers from '../../../core/managers';
 
 import ClientRequest from '../client_request';
 
+import ErrorContainer from '../../../core/error/error_container';
+
 /**
  * Handler for {GetCertificateRequest}. <br />
  * 
@@ -40,15 +42,12 @@ class GetCertificateHandler extends AbstractClientRequestHandler {
 
         certDAO.getCertList({
             uId: requestEntity.uId,
-            certId : requestEntity.certId
+            certId: requestEntity.certId
         }, (err, certModels) => {
             if (!!err) {
-                done(ClientRequest.RESULT_FAILURE, err);
+                done(ClientRequest.RESULT_FAILURE, ErrorContainer.DB);
             } else if (certModels.length == 0) {
-                done(ClientRequest.RESULT_FAILURE, {
-                    code: 1,
-                    msg: 'No certificate'
-                });
+                done(ClientRequest.RESULT_FAILURE, ErrorContainer.PARAMETER);
             } else if (certModels.length > 0) {
                 done(ClientRequest.RESULT_SUCCESS, certModels);
             }
