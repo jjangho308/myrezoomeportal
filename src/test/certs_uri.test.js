@@ -35,7 +35,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it.skip('Cert Ajax request', done => {
+    it('Cert Ajax request', done => {
         chai.request(app)
             .get('/certs')
             .set('Content-Type', 'application/json')
@@ -44,6 +44,7 @@ describe('/certs URI Page test suite.', () => {
             .send()
             .end((err, res) => {
                 if (!!err) {
+                    console.log(err);
                     console.log(err);
                 } else if (res.body.hasOwnProperty('result')) {
                     done();
@@ -94,7 +95,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it('Share certificate test case', done => {
+    it.skip('Share certificate test case', done => {
         chai.request(app)
             .post('/shared_certs')
             .set('Content-Type', 'application/json')

@@ -1,7 +1,7 @@
 import AbstractClientRequestHandler from "../abstract_client_request_handler";
 
 import ClientRequest from '../client_request';
-
+import UsrResume from '../../../models/resume/resume';
 import SharedResumeModel from '../../../models/resume/shared_resume';
 import SharedResumeUrlModel from '../../../models/resume/shared_resume_url';
 
@@ -53,7 +53,7 @@ class ShareResumeRequestHandler extends AbstractClientRequestHandler {
                                 url: ShareResumeRequestEntity.shared_resume.url,
                                 rsmId: ShareResumeRequestEntity.shared_resume.rsmId,
                                 public: ShareResumeRequestEntity.shared_resume.public,
-                                passcode: ShareResumeRequestEntity.shared_resume.passcode,
+                                passcode: ShareResumeRequestEntity.shared_resume.password,
                                 expired : ShareResumeRequestEntity.shared_resume.exp
                             });
 
@@ -61,7 +61,23 @@ class ShareResumeRequestHandler extends AbstractClientRequestHandler {
                                 if(!!err){
                                     cb(ClientRequest.RESULT_FAILURE, err);
                                 }else{
-                                    cb(ClientRequest.RESULT_SUCCESS, result);
+
+                                    resumeDAO.setResume({
+                                        rsmId: ShareResumeRequestEntity.shared_resume.rsmId
+                                    },new UsrResume({
+                                        shared: true
+                                    }), (err, affectedRows) => {
+                                        if(!!err){
+                                            cb(ClientRequest.RESULT_FAILURE, err);
+                                        } else if(affectedRows == 0){
+                                            cb(ClientRequest.RESULT_FAILURE, {
+                                                code: 0,
+                                                msg : 'No Certificate'
+                                            });
+                                        }
+                                        console.log(affectedRows);
+                                        cb(ClientRequest.RESULT_SUCCESS, result);
+                                    })
                                 }
                             });
                         }

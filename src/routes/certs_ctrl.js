@@ -59,7 +59,7 @@ export default {
     getCertView : (req, res, next)=>{
         var certId = req.params.certId;
         
-        // TODO Imple here
+        Managers.client().request(new GetCertsRequest(req.body))
     },
 
     /**
