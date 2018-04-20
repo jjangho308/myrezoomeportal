@@ -78,7 +78,7 @@ class CertificateDAO extends AbstractDAO {
     getCertList(creteria, cb) {
         var condition = null;
         if (!!creteria.uId) {
-            condition = "TUC.UID = " + creteria.uId;
+            condition = "TUC.UID = '" + creteria.uId + "'";
         }
         if (!!creteria.certId) {
             condition = condition ? condition + ' AND ' : condition;

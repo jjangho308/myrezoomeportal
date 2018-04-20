@@ -19,7 +19,7 @@ describe('/certs URI Page test suite.', () => {
     var jwtToken = null;
     before('Service initialize', () => {
         jwtToken = Managers.token().issueToken({
-            uId: 1
+            uId: 'UID2'
         })
         chai.use(chaihttp);
     });
