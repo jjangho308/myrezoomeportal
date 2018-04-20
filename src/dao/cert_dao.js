@@ -76,11 +76,16 @@ class CertificateDAO extends AbstractDAO {
      * @param {*} cb 
      */
     getCertList(creteria, cb) {
-        var condition = {
-            'TUC.UID': creteria.uId
-        };
+        var condition = null;
+        if (!!creteria.uId) {
+            condition = "TUC.UID = " + creteria.uId;
+        }
+        if (!!creteria.certId) {
+            condition = condition ? condition + ' AND ' : condition;
+            condition += "TUC.CERT_ID = '" + creteria.certId + "'";
+        }
 
-        var query = mysql.format(CertQuery.getCertList, condition);
+        var query = CertQuery.getCertList + condition;
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err, null);

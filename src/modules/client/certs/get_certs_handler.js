@@ -40,6 +40,7 @@ class GetCertificateHandler extends AbstractClientRequestHandler {
 
         certDAO.getCertList({
             uId: requestEntity.uId,
+            certId : requestEntity.certId
         }, (err, certModels) => {
             if (!!err) {
                 done(ClientRequest.RESULT_FAILURE, err);
