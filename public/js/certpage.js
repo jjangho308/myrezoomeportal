@@ -21,12 +21,16 @@ function loadcertlist() {
         success: function (certlistres) {
             console.log("============certlistres========");
             console.log(certlistres);
-            for(var i in certlistres.result) {
+
+            var certlistresult = certlistres.result;
+            $(".cert-container").remove();
+
+            for(var i in certlistresult) {
                 var htmldiv = '<div class="cert-container" tabindex="1">';
                 htmldiv = htmldiv + '<p>제 1049-4003호 <img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
-                htmldiv = htmldiv + '<p>' + certlistres.result[i].title + '</p>';
-                htmldiv = htmldiv + '<p>발급일시 : ' + certlistres.result[i].date + '</p>';
+                htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';
+                htmldiv = htmldiv + '<p>발급일시 : ' + certlistresult[i].date + '</p>';
                 htmldiv = htmldiv + '<div class="more-store-resume-div">';
                 htmldiv = htmldiv + '<p>복사</p>';
                 htmldiv = htmldiv + '<p>삭제</p>';
@@ -34,6 +38,8 @@ function loadcertlist() {
                 htmldiv = htmldiv + '</div>';
                 
                 htmldiv = htmldiv + '</div>';
+
+                $('#cert-grid-div').append(htmldiv);
 
             }
         },
@@ -131,6 +137,7 @@ $(document).ready(function(){
         $("#add-cert-dialog  .close-modal").click();
        $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
         $('#alarm-div').css("display","block");
+        //$('#alarm-div').css("display","none");
 
         $('input:checkbox[name="certcheck"]').each(function() {
             if(this.checked) {
