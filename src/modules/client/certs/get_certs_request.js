@@ -27,6 +27,11 @@ class GetCertificateRequest extends AbstractClientRequest {
          * User ID. <br />
          */
         this.uId = opt.uId;
+
+        /**
+         * Specific certificate id, if given. <br />
+         */
+        this.certId = opt.certId;
     }
 }
 

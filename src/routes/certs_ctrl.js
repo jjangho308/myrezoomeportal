@@ -56,10 +56,18 @@ export default {
      * @since 180419
      * @author TACKSU
      */
-    getCertView : (req, res, next)=>{
-        var certId = req.params.certId;
-        
-        Managers.client().request(new GetCertsRequest(req.body))
+    getCertView: (req, res, next) => {
+        req.body.certId = req.params.certId;
+
+        Managers.client().request(new GetCertsRequest(req.body), (err, result) => {
+            if (!!err) {
+                next(err);
+            } else {
+                res.json({
+                    result: result
+                });
+            }
+        });
     },
 
     /**
@@ -113,8 +121,8 @@ export default {
     getmapping: (req, res, next) => {
 
         // /certs AJAX request
-        if (!!req.xhr) {            
-            Managers.db().getCertDAO().getSubName(function(dbres) {
+        if (!!req.xhr) {
+            Managers.db().getCertDAO().getSubName(function (dbres) {
                 //console.log(dbres);
                 res.json(dbres);
             });
