@@ -8,7 +8,19 @@ class AbstractManager{
         this.context = context;
     }
 
-    init(){
+    init(from){
+
+    }
+
+    /**
+     * Event callback when terminate nodejs server instance. <br />
+     * 
+     * @since 180420
+     * @author TACKSU
+     * 
+     * @param {*} from Termination point. <br />
+     */
+    onTerminate(from){
 
     }
 

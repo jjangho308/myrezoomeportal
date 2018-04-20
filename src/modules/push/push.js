@@ -73,7 +73,17 @@ class PushManager extends AbstractManager {
         }.bind(this))
     }
 
-
+    /**
+     * Termination callback. <br />
+     * 
+     * @since 180420
+     * @author JJANGHO
+     * 
+     * @param {*} from Ignore this argument.
+     */
+    onTerminate(from){
+       // TODO disconnect push channel.
+    }
     /**
      * Send Message to AMQ Server <br />
      * 
