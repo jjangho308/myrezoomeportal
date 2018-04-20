@@ -74,7 +74,7 @@ $(document).ready(function(){
 
     request_agent();
 
-    $('#refresh_record').click(function(){
+    $('#refresh_record').click(function() {
         
         $.ajax({
             type: 'POST',
@@ -156,8 +156,8 @@ function refreshview() {
         try {
             var viewdata = getData(txidlist[i]);                       
             var subid = viewdata.subid;         
-            var jsonData = JSON.parse(viewdata.data);   
-            jsonData.chkid = subid + "_" + i;
+            var jsonData = JSON.parse(viewdata.data);                                   
+            jsonData.chkid = txidlist[i];
             formatter[subid](jsonData);
         }catch(exception) {
             console.log(exception);

@@ -5,9 +5,9 @@ $(document).ready(function () {
 
     $("#signup").click(function () {
         window.location.href = "/signup";
-    });
+    }); 
 
-    $('#btn_signin').click(function () {
+    $('#btn_signin').on('click', function () {
         if ($('#signin_id').val() == '') {
             alert("id empty");
             return;
@@ -29,8 +29,7 @@ $(document).ready(function () {
             url: "/signin",   
             data: param,
             dataType: "JSON",
-            success: function(response) {
-                console.log(response);
+            success: function(response) {                
                 window.location.href = "main";
             },
             error:function(request, status, error){
@@ -41,6 +40,12 @@ $(document).ready(function () {
                 }
             }
         });
+    });
+
+    $("#signin_div").keydown(function(key) {
+        if (key.keyCode == 13) {            
+            $('#btn_signin').trigger('click');
+        }
     });
 
     $('#btn_signup').click(function () {        
@@ -109,8 +114,7 @@ $(document).ready(function () {
             url: "/signin",   
             data: param,
             dataType: "JSON",
-            success: function(response) {
-                console.log(response);
+            success: function(response) {                
                 window.location.href = "main";
             },
             error:function(request, status, error){
@@ -122,4 +126,7 @@ $(document).ready(function () {
             }
         });        
     });
+
+
+
 });
