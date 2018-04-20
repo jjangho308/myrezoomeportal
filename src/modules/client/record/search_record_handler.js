@@ -110,7 +110,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 msg.args.subIDs = [foundOrgs[0].SUB_ID];
                                 msg.args.requiredKey = clientReq.requiredKey;
 
-                                //Managers.push().init();
+                                Managers.push().init();
                                 Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
                                     if (!err && i == resultOrgIds.length - 1) {
                                         done(ClientRequestManager.RESULT_PENDING, {
@@ -137,7 +137,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                     msg.args.subIDs = subIds;
 
-                                    //Managers.push().init();
+                                    Managers.push().init();
                                     Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
                                         if (!err && subIds.length == resultOrgIds.length) {
                                             done(ClientRequestManager.RESULT_PENDING, {
@@ -188,7 +188,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                                     msg.args.subIDs = subIds;
                                                                     msg.args.records = records;
 
-                                                                    //Managers.push().init();
+                                                                    Managers.push().init();
                                                                     Managers.push().sendMessage(msg, resultOrgIds[orgIdx].ORG_ID, err => {
                                                                         !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING, {
                                                                             mid: clientReq.mId
@@ -214,7 +214,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                 msg.args.subIDs = subIds;
 
-                                                //Managers.push().init();
+                                                Managers.push().init();
                                                 Managers.push().sendMessage(msg, resultOrgIds[orgIdx].ORG_ID, err => {
                                                     if (subIds.length == resultOrgIds.length) {
                                                         !!err ? done(ClientRequestManager.RESULT_FAILURE, err)
@@ -257,7 +257,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                             console.log("Active MQ");
 
-                                                            //Managers.push().init();
+                                                            Managers.push().init();
                                                             Managers.push().sendMessage(msg, storedOrgs[orgIdx].ORG_ID, err => {
                                                                 !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
                                                             });
