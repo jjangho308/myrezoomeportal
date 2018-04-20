@@ -47,8 +47,8 @@ class PushManager extends AbstractManager {
      */
     connect(opt, cb) {
         var connections = new stompit.ConnectFailover(opt, {
-            maxReconnects: 1,
-            alwaysConnected: true
+            maxReconnects: 5
+            //alwaysConnected: true
         });
 
         connections.on('connecting', function (connector) {
@@ -64,14 +64,14 @@ class PushManager extends AbstractManager {
         });
 
         this.channelFactory = new stompit.ChannelFactory(connections);
-        this.channelFactory.channel(function (err, channel) {
-            if (err) {
-                console.log('channel factory error: ' + error.message);
-                return;
-            }
-            this.channel = channel;
+        // this.channelFactory.channel(function (err, channel) {
+        //     if (err) {
+        //         console.log('channel factory error: ' + error.message);
+        //         return;
+        //     }
+        //     this.channel = channel;
 
-        }.bind(this))
+        // }.bind(this))
     }
 
     /**
@@ -82,9 +82,9 @@ class PushManager extends AbstractManager {
      * 
      * @param {*} from Ignore this argument.
      */
-    onTerminate(from){
-       // TODO disconnect push channel.
-       this.disconnect();
+    onTerminate(from) {
+        // TODO disconnect push channel.
+        this.disconnect();
     }
     /**
      * Send Message to AMQ Server <br />
@@ -106,16 +106,22 @@ class PushManager extends AbstractManager {
                 cb(err);
             } else {
                 for (var i in queuename) {
-                    //seeting destination at this.destination
-                    this.channel.send(queuename[i].AMQ_NM, msgString, err => {
-                        if (err) {
-                            console.log('send error: ' + err.message);
-                            cb(err)
-                        }
-                        console.log('sent message');
-                        cb(null);
-                    });
-
+                    (function (i) {
+                        this.channelFactory.channel(function (err, channel) {
+                            if (err) {
+                                console.log('channel factory error: ' + error.message);
+                                return;
+                            }
+                            channel.send(queuename[i].AMQ_NM, msgString, err => {
+                                if (err) {
+                                    console.log('send error: ' + err.message);
+                                    cb(err)
+                                }
+                                console.log('sent message');
+                                cb(null);
+                            });
+                        })
+                    }).call(this, i);
                 }
             }
         })
