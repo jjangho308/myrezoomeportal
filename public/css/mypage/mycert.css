@@ -11,13 +11,12 @@
 .cert-container{
     position: relative;
     display: inline-block;
-width: 167px;
-  height: 266px;
-  object-fit: contain;
-  border-radius: 4px;
-  background-color: #fafcfd;
-  border: solid 1px #e2e8f0;
-    
+    width: 167px;
+    height: 266px;
+    object-fit: contain;
+    border-radius: 4px;
+    background-color: #fafcfd;
+    border: solid 1px #e2e8f0;
     margin-right: 20px;
     margin-bottom: 20px;
     padding:0px 30px;
@@ -26,7 +25,22 @@ width: 167px;
     text-align: center;
 }
 
-
+.cert-container-new{
+    position: relative;
+    display: inline-block;
+    width: 167px;
+    height: 266px;
+    object-fit: contain;
+    border-radius: 4px;
+    background-color: #fafcfd;
+    border: solid 1px #e2e8f0;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding:0px 30px;
+    border-radius: 4px;
+    vertical-align: top;
+    text-align: center;
+}
 
 .cert-container:focus   {
    box-shadow: 0 2px 5px 0 rgba(191, 191, 191, 0.5);

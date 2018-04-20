@@ -59,7 +59,7 @@ function getTxidList() {
 }
 
 $(document).ready(function(){
-    
+
     socket = io();
 
     /*
@@ -69,7 +69,6 @@ $(document).ready(function(){
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
 
-    //set txidlist client side
     var emptyarray = [];
     setTxidList(emptyarray);
 

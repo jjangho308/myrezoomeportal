@@ -8,14 +8,57 @@ function certckeckboxclick(uniqueid) {
     console.log(reqparam);
 }
 
+function loadcertlist() {
+    $.ajax({
+        type: 'GET',
+        url: '/certs',
+        headers: {
+            'Authorization': client_authorization
+        },
+        data: JSON.stringify({
+            
+        }),
+        success: function (certlistres) {
+            console.log("============certlistres========");
+            console.log(certlistres);
+
+            var certlistresult = certlistres.result;
+            $(".cert-container").remove();
+
+            for(var i in certlistresult) {
+                var htmldiv = '<div class="cert-container" tabindex="1">';
+                htmldiv = htmldiv + '<p>제 1049-4003호 <img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
+                htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
+                htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';
+                htmldiv = htmldiv + '<p>발급일시 : ' + certlistresult[i].date + '</p>';
+                htmldiv = htmldiv + '<div class="more-store-resume-div">';
+                htmldiv = htmldiv + '<p>복사</p>';
+                htmldiv = htmldiv + '<p>삭제</p>';
+                htmldiv = htmldiv + '<p>공유내역</p>';
+                htmldiv = htmldiv + '</div>';
+                
+                htmldiv = htmldiv + '</div>';
+
+                $('#cert-grid-div').append(htmldiv);
+
+            }
+        },
+        contentType: 'application/json'
+    });
+}
+
 $(document).ready(function(){
 
+    loadcertlist();
+    
     //출력 가능한 증명서 목록 세팅
     console.log('=====Cert page=====');
     
     $(document).on('click', ".add-cert", function() {
         console.log('증명서 발급 목록 클릭');
         var txidlist = getTxidList();
+
+        $(".certtr").remove();
 
         $.ajax({
             type: 'POST',
@@ -55,7 +98,7 @@ $(document).ready(function(){
                         //formatter[subid](viewdata);
                         var addcertcheckboxid = txidlist[i];
 
-                        var htmldiv = '<tr>';
+                        var htmldiv = '<tr class="certtr">';
                             htmldiv = htmldiv + '<td>';
                             htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
                             //htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';
@@ -94,6 +137,7 @@ $(document).ready(function(){
         $("#add-cert-dialog  .close-modal").click();
        $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
         $('#alarm-div').css("display","block");
+        //$('#alarm-div').css("display","none");
 
         $('input:checkbox[name="certcheck"]').each(function() {
             if(this.checked) {
@@ -119,6 +163,7 @@ $(document).ready(function(){
                         console.log(res2);
                         //setSocket(res.mid);
                         //clientsocket_listener();
+                        loadcertlist();
                     },
                     contentType: 'application/json',
                 });
