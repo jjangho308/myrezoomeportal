@@ -1,4 +1,5 @@
 $(function () {
+    /*
     $("#myresume-modal").load("dialog-myresume.html", function () {
         $('select').selectize();
         $(".study-period").datepicker();
@@ -7,6 +8,7 @@ $(function () {
     });
 
     $("#resume-store-div").load("Resume.html");
+    */
 });
 
 
