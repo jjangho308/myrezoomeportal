@@ -6,7 +6,6 @@ $(function () {
 
     });
 
-    $("#mycert-div").load("Certs.html");
     $("#resume-store-div").load("Resume.html");
 });
 
@@ -43,36 +42,6 @@ $(document).ready(function () {
         $("#divSchedule").dialog("open");
         return false;
     });
-
-    $('#header-mycert').click(function () {
-        $('#header-myresume').css({ "border": "none", "font-weight": "normal" });
-        $('#header-resume-store').css({ "border": "none", "font-weight": "normal" });
-        $(this).css({ "border-bottom": "solid 5px #4c80f1", "font-weight": "bold" });
-        $("#myresume-div").hide();
-        $("#mycert-div").show();
-        $("#resume-store-div").hide();
-
-    });
-
-    $('#header-resume-store').click(function () {
-        $('#header-myresume').css({ "border": "none", "font-weight": "normal" });
-        $('#header-mycert').css({ "border": "none", "font-weight": "normal" });
-        $(this).css({ "border-bottom": "solid 5px #4c80f1", "font-weight": "bold" });
-        $("#myresume-div").hide();
-        $("#mycert-div").hide();
-        $("#resume-store-div").show();
-    });
-
-    $('#header-myresume').click(function () {
-        $('#header-mycert').css({ "border": "none", "font-weight": "normal" });
-        $('#header-resume-store').css({ "border": "none", "font-weight": "normal" });
-        $(this).css({ "border-bottom": "solid 5px #4c80f1", "font-weight": "bold" });
-
-        $("#myresume-div").show();
-        $("#mycert-div").hide();
-        $("#resume-store-div").hide();
-    });
-
 
     $(document).on('click', '#cert-issue-button', function () {
         $(".spec-detail-div input:checkbox").each(function(i) {

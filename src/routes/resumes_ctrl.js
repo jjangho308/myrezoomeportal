@@ -37,15 +37,23 @@ export default {
         }
         // Static request to get HTML Page of /certs URI.
         else {
-            Managers.db().getUserDAO().get({
-                uId: userId
-            }, (err, userModel) => {
-                if (!!err) {
-                    next(err);
-                } else {
-                    res.render('resumes', userModel);
-                }
-            });
+            var userId = req.body.uId;
+            if (!!userId) {
+                var userDAO = Managers.db().getUserDAO();
+                userDAO.get({
+                    uId: userId
+                }, (err, userModelList) => {
+                    if (!!err) {
+                        next(err);
+                    } else if (userModelList.length == 0) {
+                        next(new Error("No user found"));
+                    } else {
+                        res.render('resumes', userModelList[0]);
+                    }
+                });
+            } else {
+                res.render('resumes');
+            }
         }
     },
 

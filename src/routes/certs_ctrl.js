@@ -36,17 +36,26 @@ export default {
                 });
         }
 
+        
         // /certs HTML page
         else {
-            Managers.db().getUserDAO().get({
-                uId: req.body.uId
-            }, (err, userModel) => {
-                if (!!err) {
-                    next(err);
-                } else {
-                    res.render('certs', userModel);
-                }
-            });
+            var userId = req.body.uId;
+            if (!!userId) {
+                var userDAO = Managers.db().getUserDAO();
+                userDAO.get({
+                    uId: userId
+                }, (err, userModelList) => {
+                    if (!!err) {
+                        next(err);
+                    } else if (userModelList.length == 0) {
+                        next(new Error("No user found"));
+                    } else {
+                        res.render('certs', userModelList[0]);
+                    }
+                });
+            } else {
+                res.render('certs');
+            }
         }
     },
 

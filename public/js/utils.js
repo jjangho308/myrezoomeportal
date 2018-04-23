@@ -1,3 +1,58 @@
+var socket;
+var client_token;
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function setData(record) {
+    // dcript data 
+    
+    sessionStorage.setItem(record.txid, JSON.stringify(record));
+
+    addTxidList(record.txid);
+}
+
+function getData(record_txid) {
+    return JSON.parse(sessionStorage.getItem(record_txid));
+}
+
+function addTxidList(txid) {
+    var txidlist = getTxidList();
+    
+    //중복제거 로직 
+    for(var i in txidlist) {
+        if(txidlist[i]==txid) {
+            return;
+        }
+    }
+
+    txidlist.push(txid);
+    setTxidList(txidlist);
+}
+
+function setTxidList(txidarray) {
+    sessionStorage.setItem(client_token, txidarray);
+}
+
+function getTxidList() {
+    var storagedata =  sessionStorage.getItem(client_token);
+    var resultarray = storagedata.split(",");
+    return resultarray;
+}
+
 function SHA256(s){      
     var chrsz   = 8;
     var hexcase = 0;
