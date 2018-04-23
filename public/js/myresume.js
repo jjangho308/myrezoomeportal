@@ -96,11 +96,32 @@ $(document).ready(function () {
         $("#alarm-div").hide();
     });
 
-    $(document).on('click', '#spec-change-dialog .confirm-btn', function () {
-        $("#spec-change-dialog .close-modal").click();
-        $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
-        $('#alarm-div').css("display", "block");
-
+    $(document).on('click', '#spec-change-dialog .confirm-btn', function () {  
+        $(".abc-radio input:radio").each(function() {
+            if ($(this).is(':checked')) {
+                var txid = $(this).attr("id").substring(12);
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '/certs/setDefault',
+                    headers: {
+                        'Authorization': client_authorization
+                    },
+                    data: JSON.stringify({                
+                        txid: txid
+                    }),
+                    beforeSend: function() {
+                        
+                    },
+                    success: function (res) {                        
+                        $("#spec-change-dialog .close-modal").click();
+                        $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
+                        $('#alarm-div').css("display", "block");                  
+                    },
+                    contentType: 'application/json',
+                });
+            }
+        });        
     });
 
     $(document).on('click', '#education-add-dialog .confirm-btn', function () {
@@ -118,7 +139,6 @@ $(document).ready(function () {
 
 
         $(".major").each(function () {
-
             var element = $(this);
 
             var range = element.closest(".error-range");
@@ -140,8 +160,6 @@ $(document).ready(function () {
         var range = period.closest(".error-range");
 
         if ((period[0].value == "") || (period[1].value == "")) {
-
-
             period.addClass("error");
             range.find("button").addClass("error");
             range.find(".items").addClass("error");
@@ -154,7 +172,6 @@ $(document).ready(function () {
             range.find(".items").removeClass("error");
             range.find(".error-message").css("display", "none");
         }
-
 
         var range = $("#score").closest(".error-range");
         if ($("#score").val() == "") {
@@ -169,18 +186,15 @@ $(document).ready(function () {
         }
 
         if (is_error == false) {
-
             $("#education-add-dialog .close-modal").click();
             $("#alarm-div span").text("학력이 추가되었습니다.");
             $('#alarm-div').css("display", "block");
         }
-
-
     });
 
     $(document).on('click', '#education-add-dialog .add-span', function () {
         $("#major-div").append(` 
-<div class="error-range">
+            <div class="error-range">
                 <div class="select-100">
                     <select name="select-1">
                             <option value="1">전공</option>
@@ -198,24 +212,17 @@ $(document).ready(function () {
                 <input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">
                 <img src="/img/myresume/close-white.svg"/>
                 <div class="error-message">전공을 입력해주세요.</div>
-</div>
-
-
-        `);
-
+            </div>`);
         $("select").selectize();
     });
 
     $(document).on('click', ".more-store-resume", function () {
-
-
         var element = $(this).closest(".cert-container").find(".more-store-resume-div");
         element.css("display", "block");
 
     });
 
-    $(document).click(function (e) {
-        console.log($(e.target).attr('class'));
+    $(document).click(function (e) {        
         if ($(e.target).attr('class') == "more-store-resume")
             return;
 
@@ -223,12 +230,8 @@ $(document).ready(function () {
         element.css("display", "none");
     });
 
-
-
-
     $(document).on('click', '.cancel-btn', function () {
         $(".close-modal").click();
-
     });
 
 });
