@@ -33,4 +33,8 @@ router.patch('/:certId', ctrl.patch);
 router.post('/getmapping', tokenAuth);
 router.post('/getmapping',ctrl.getmapping);
 
+//대표 증명서 설정
+router.post('/setDefault', tokenAuth);
+router.post('/setDefault',ctrl.getmapping);
+
 export default router;
