@@ -35,7 +35,7 @@ describe('/certs URI Page test suite.', () => {
             .end((err, res) => {
                 done();
             });
-    })
+    });
 
     it('Cert Ajax request', done => {
         chai.request(app)
@@ -52,7 +52,7 @@ describe('/certs URI Page test suite.', () => {
                     done();
                 }
             });
-    })
+    });
 
     it.skip('Issue certificate request test', done => {
         chai.request(app)

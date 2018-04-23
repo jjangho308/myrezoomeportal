@@ -40,6 +40,12 @@ import ShareResumeRequest from './resume/share_resume_request';
 import ShareResumeRequestHandler from './resume/share_resume_handler';
 
 /**
+ * '/client' 'GenerateShortUrl' command request. <br />
+ */
+import GenerateShortUrlRequest from './generate_short_url/generate_short_url_request';
+import GenerateShortUrlHandler from './generate_short_url/generate_short_url_handler';
+
+/**
  * Request job manager from client. <br />
  * 초기화 시 Job map를 생성하며 Client channel의 HTTP Request 발생 시 Job을 생성하여 저장한다.
  * Agent에서 Http 요청이 올 때 여기 저장된 Job을 기반으로 해당 Client에 Socket Push를 전송하도록 한다.
@@ -66,7 +72,7 @@ class ClientRequestManager extends AbstractManager {
      * 
      * @author TACKSU
      */
-    init() {
+    init(from) {
         this.entityMap = new HashMap();
         this.handlerMap = new HashMap();
         this.requestMap = new HashMap();
@@ -76,6 +82,9 @@ class ClientRequestManager extends AbstractManager {
 
         this.entityMap.set('SearchRecord', SearchRecordRequest);
         this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
+
+        this.entityMap.set('GenerateShortUrl', GenerateShortUrlRequest);
+        this.handlerMap.set(GenerateShortUrlRequest, new GenerateShortUrlHandler());
 
         this.handlerMap.set(GetCertificatesRequest, new GetCertificatesHandler());
         this.handlerMap.set(IssueCertificateRequest, new IssueCertificateHandler());
@@ -93,10 +102,20 @@ class ClientRequestManager extends AbstractManager {
     }
 
 
+    /**
+     * Get request code. <br />
+     * 
+     * @param {*} code 
+     */
     getEntity(code) {
         return this.entityMap.get(code);
     }
 
+    /**
+     * Get request handler. <br />
+     * 
+     * @param {*} entity 
+     */
     getHandler(entity) {
         return this.handlerMap.get(entity.prototype);
     }
@@ -114,7 +133,6 @@ class ClientRequestManager extends AbstractManager {
 
         // 해당 MessageID에 Request를 저장한다.
         this.requestMap.set(request.mId, request);
-
 
         this.handlerMap.get(request.constructor).request(request, ((resultCode, result) => {
             switch (resultCode) {
