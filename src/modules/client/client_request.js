@@ -130,17 +130,12 @@ class ClientRequestManager extends AbstractManager {
      * @param {function(object, object)} cb Callback function.
      */
     request(request, cb) {
-
-        // 해당 MessageID에 Request를 저장한다.
-        this.requestMap.set(request.mId, request);
-
         this.handlerMap.get(request.constructor).request(request, ((resultCode, result) => {
             switch (resultCode) {
 
                 // 에러 발생시에는 Error 객체를 Client에 Response 후 
                 case ClientRequestManager.RESULT_FAILURE:
                     {
-                        this.requestMap.remove(request.mId);
                         // result instanceof Error Retry?
                         cb(result, null);
                         break;
@@ -148,7 +143,7 @@ class ClientRequestManager extends AbstractManager {
 
                 case ClientRequestManager.RESULT_PENDING:
                     {
-                        // result instanceof Object and Keep request.
+                        // 해당 MessageID에 Request를 저장한다.
                         this.requestMap.set(request.mId, request);
                         cb(null, result);
                         break;
@@ -156,8 +151,6 @@ class ClientRequestManager extends AbstractManager {
 
                 case ClientRequestManager.RESULT_SUCCESS:
                     {
-                        this.requestMap.remove(request.mId);
-
                         // result instanceof Object.
                         cb(null, result);
                         break;

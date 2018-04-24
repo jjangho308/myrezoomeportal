@@ -30,7 +30,7 @@ export default {
                     next(err)
                 } else {
                     res.json({
-                        result : result
+                        result: result
                     });
                 }
             })
@@ -63,9 +63,9 @@ export default {
      * @since 180418
      * @author TACKSU
      */
-    getResume : (req, res, next)=>{
+    getResume: (req, res, next) => {
         var resumeId = req.params.rsmId;
-        if(!!resumeId){
+        if (!!resumeId) {
             // TODO 특정 이력서에 대한 뷰 화면으로 넘겨줘야 함.
 
             res.render('resume_viewer', resumeEntity);
@@ -85,7 +85,9 @@ export default {
                 if (!!err) {
                     next(err);
                 } else {
-                    res.json(result);
+                    res.json({
+                        result: result
+                    });
                 }
             });
         } else {

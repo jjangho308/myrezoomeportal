@@ -85,7 +85,10 @@ describe('/resumes URL test suite', () => {
                 }
             })
             .end((err, res) => {
-                done();
+                if (!!res.body.result) {
+                    console.log(res.body);
+                    done();
+                }
             })
     })
 
