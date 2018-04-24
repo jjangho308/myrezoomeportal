@@ -155,8 +155,6 @@ top: 49px;
     margin-right: 20px;
 }
 
-
-
 .sub-info p:nth-child(2){
     font-size: 13px;
     line-height: 3;
@@ -164,4 +162,12 @@ top: 49px;
     color: #676767;
     display: inline-block;
     line-height: 47px;
+}
+
+th:nth-child(3) {
+    width: 200px;
+}
+
+.modal table td:nth-child(3), th:nth-child(3) {
+    width: 200px;
 }
