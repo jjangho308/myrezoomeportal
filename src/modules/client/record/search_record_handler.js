@@ -53,7 +53,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             uId: uid
         }, (err, users) => {
             if (!!err || users.length < 1) {
-                cb(ClientRequestManager.RESULT_FAILURE);
+                done(ClientRequestManager.RESULT_FAILURE);
                 return;
             } else {
 
