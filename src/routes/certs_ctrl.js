@@ -128,11 +128,25 @@ export default {
     },
 
     getmapping: (req, res, next) => {
-
         // /certs AJAX request
         if (!!req.xhr) {
             Managers.db().getCertDAO().getSubName(function (dbres) {
                 //console.log(dbres);
+                res.json(dbres);
+            });
+        }
+    },
+
+    setDefault: (req, res, next) => {
+        // /certs AJAX request
+        if (!!req.xhr) {
+            var data = {
+                uid : req.body.uId,
+                txid : req.body.txid,
+                subid : req.body.subid
+            };
+            
+            Managers.db().getRecordDAO().setDefaultYn(data, function (dbres) {
                 res.json(dbres);
             });
         }

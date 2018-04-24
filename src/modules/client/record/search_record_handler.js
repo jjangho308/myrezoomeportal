@@ -290,9 +290,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     response(clientRequest, agentRequest) {
         console.log('Socket Push : ' + agentRequest);
         var socket = clientRequest.socket;
-
         var db = Managers.db();
-
         var uid = clientRequest.uId;
 
         db.getUserDAO().get({
@@ -316,7 +314,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                         }
 
                         nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (nexledgerres) {
-
                             agentRequest.records[i].txid = nexledgerres.result.txid;
 
                             var db = Managers.db();
@@ -338,7 +335,10 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                             db.getUserDAO().setFristYN(uid, function (dbres2) {
                                 console.log(dbres2);
-                            });
+                            });                            
+
+                            // set default N in initially
+                            agentRequest.records[i].dftYn = 'N';
 
                             if (j == (agentRequest.records.length - 1)) {
                                 try {
@@ -351,7 +351,12 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                             j++;
                         });
-                    } else {
+                    } else {                        
+                        // Get BLC MAP Default YN
+                        db.getRecordDAO().getDefaultYN(agentRequest.records[i].txid, function (res) {
+                            agentRequest.records[i].dftYn = res.DFT_YN
+                        });
+
                         //BLC MAP stored
                         if (j == (agentRequest.records.length - 1)) {
                             try {
@@ -364,8 +369,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                         }
                         j++;
                     }
-
-
                 }).call(this, i);
             }
 

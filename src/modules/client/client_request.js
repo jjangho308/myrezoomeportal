@@ -72,10 +72,7 @@ class ClientRequestManager extends AbstractManager {
         this.requestMap = new HashMap();
 
         this.handlerMap.set(SignInRequest, new SignInRequestHandler());
-        this.handlerMap.set(SignUpRequest, new SignUpHandler());
-
-        this.entityMap.set('SearchRecord', SearchRecordRequest);
-        this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
+        this.handlerMap.set(SignUpRequest, new SignUpHandler());        
 
         this.handlerMap.set(GetCertificatesRequest, new GetCertificatesHandler());
         this.handlerMap.set(IssueCertificateRequest, new IssueCertificateHandler());
@@ -86,8 +83,14 @@ class ClientRequestManager extends AbstractManager {
         this.handlerMap.set(CreateResumeRequest, new CreateResumeHandler());
 
         this.handlerMap.set(ShareCertRequest, new ShareCertRequestHandler());
-
         this.handlerMap.set(ShareResumeRequest, new ShareResumeRequestHandler());
+
+        // 기타 등등 cmd 로 관리 되는것들
+        this.entityMap.set('SearchRecord', SearchRecordRequest);
+        this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
+        
+        // this.entityMap.set('SetDefault', SearchRecordRequest);
+        // this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
 
         this.setPrepared();
     }
