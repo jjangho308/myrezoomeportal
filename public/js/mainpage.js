@@ -75,28 +75,43 @@ $(document).ready(function(){
             },
             contentType: 'application/json',
         });
-        
-    });
-    /*
-    $.ajax({
-        type: 'POST',
-        url: '/client',
-        headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVJZCI6IlVJRDEifSwiZXhwIjoxNTIzMDI5NzUzLCJpYXQiOjE1MjI5ODY1NTN9.laM3F1RqDGz636eYkyprR2x5kqYrNZAhzpXXRoNElWE'
-        },
-        data: JSON.stringify({
-            cmd: 'Search',
-            args: {
-                pkey: 'asdfasdf'
-            }
-        }),
-        success: function (res) {
-            setSocket(res.mid);
-        },
-        contentType: 'application/json',
-    })
-    */
+
+    });    
 });
+
+function change_default_cert(subid) {
+    var txidlist = getTxidList();     
+    $(".change_cert").remove();
+    for(var i in txidlist) {
+        try {
+            var viewdata = getData(txidlist[i]);        
+            
+            var subidTmp = viewdata.subid;        
+            var jsonData = JSON.parse(viewdata.data);
+            if(subid == subidTmp) {
+                var htmldiv = '<tr class="change_cert">';
+                htmldiv = htmldiv + '<td>';
+                htmldiv = htmldiv + '<div class="abc-radio">';
+                htmldiv = htmldiv + '<input id=change_cert_'+ viewdata.txid +' type="radio" name="spec-change">';
+                htmldiv = htmldiv + '<label for=change_cert_'+ viewdata.txid +'></label>';
+                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '</td>';
+                htmldiv = htmldiv + '<td>' + jsonData.date +'</td>';
+                htmldiv = htmldiv + '<td>' + jsonData.userid +'</td>';
+                htmldiv = htmldiv + '<td>' + jsonData.name +'</td>';
+                htmldiv = htmldiv + '<td>' + jsonData.subid +'</td>';
+                htmldiv = htmldiv + '<td>' + jsonData.grade +'</td>';
+                htmldiv = htmldiv + '</tr>';            
+                $("#spec-change-table").append(htmldiv);
+            }
+        } catch (exception) {
+            console.log(exception);
+            continue;
+        }
+    }
+    
+    $('#spec-change-dialog').modal('show');
+}
 
 function request_agent() {
     $.ajax({
@@ -127,22 +142,25 @@ function refreshview() {
 
     //clean view
     $('.spec-body').remove();
-    //$('#spec_forign_lang').remove('.spec-body');
-    //$('#spec_certification').remove('.spec-body');
 
-    for(var i in txidlist) {
+    var subid = "";
+    for (var i in txidlist) {
         try {
-            var viewdata = getData(txidlist[i]);                       
-            var subid = viewdata.subid;         
-            var jsonData = JSON.parse(viewdata.data);                                   
-            jsonData.chkid = txidlist[i];
-            formatter[subid](jsonData);
-        }catch(exception) {
+            var viewdata = getData(txidlist[i]);
+            var subidTmp = viewdata.subid;
+
+            if (subid != subidTmp) {                
+                var jsonData = JSON.parse(viewdata.data);
+                jsonData.chkid = txidlist[i];
+                jsonData.subid = subidTmp;
+                formatter[subidTmp](jsonData);
+                subid = subidTmp;                
+            }
+        } catch (exception) {
             console.log(exception);
             continue;
         }
     }
-
 }
 
 function clientsocket_listener() {
