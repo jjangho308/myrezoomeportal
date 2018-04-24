@@ -36,7 +36,7 @@ export default {
                 });
         }
 
-        
+
         // /certs HTML page
         else {
             var userId = req.body.uId;

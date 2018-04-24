@@ -118,6 +118,7 @@ class PushManager extends AbstractManager {
                                     cb(err)
                                 }
                                 console.log('sent message');
+                                channel.close();
                                 cb(null);
                             });
                         })
@@ -128,9 +129,8 @@ class PushManager extends AbstractManager {
     }
 
     disconnect() {
-        this.channel.close();
-    }
 
+    }
 }
 
 export default PushManager;
