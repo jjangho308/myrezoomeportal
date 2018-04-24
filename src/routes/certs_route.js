@@ -35,6 +35,6 @@ router.post('/getmapping',ctrl.getmapping);
 
 //대표 증명서 설정
 router.post('/setDefault', tokenAuth);
-router.post('/setDefault',ctrl.getmapping);
+router.post('/setDefault',ctrl.setDefault);
 
 export default router;

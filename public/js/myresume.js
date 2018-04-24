@@ -100,7 +100,8 @@ $(document).ready(function () {
         $(".abc-radio input:radio").each(function() {
             if ($(this).is(':checked')) {
                 var txid = $(this).attr("id").substring(12);
-                
+                var subid = $(this).parent().attr("id").substring(12);                
+
                 $.ajax({
                     type: 'POST',
                     url: '/certs/setDefault',
@@ -108,15 +109,18 @@ $(document).ready(function () {
                         'Authorization': client_authorization
                     },
                     data: JSON.stringify({                
-                        txid: txid
+                        txid: txid,
+                        subid: subid
                     }),
                     beforeSend: function() {
                         
                     },
-                    success: function (res) {                        
+                    success: function (res) {
                         $("#spec-change-dialog .close-modal").click();
                         $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
-                        $('#alarm-div').css("display", "block");                  
+                        $('#alarm-div').css("display", "block");   
+                        
+                        refreshview();
                     },
                     contentType: 'application/json',
                 });

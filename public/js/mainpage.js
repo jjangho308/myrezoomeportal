@@ -4,10 +4,9 @@ require socket.is
 <script src="/socket.io/socket.io.js"></script>
 */
 
-$(document).ready(function(){
+$(document).ready(function(){   
 
     socket = io();
-
     /*
         view init empty set
     */   
@@ -80,32 +79,37 @@ $(document).ready(function(){
 });
 
 function change_default_cert(subid) {
-    var txidlist = getTxidList();     
     $(".change_cert").remove();
-    for(var i in txidlist) {
+
+    var txidList = getTxidList();         
+    for(var i in txidList) {
         try {
-            var viewdata = getData(txidlist[i]);        
-            
-            var subidTmp = viewdata.subid;        
-            var jsonData = JSON.parse(viewdata.data);
-            if(subid == subidTmp) {
+            var record = getData(txidList[i]);                  
+            var subidTmp = record.subid;
+            var jsonData = record.data;            
+            if(subid == subidTmp) {   
+                console.log("######");
+                console.log(record);
                 var htmldiv = '<tr class="change_cert">';
                 htmldiv = htmldiv + '<td>';
-                htmldiv = htmldiv + '<div class="abc-radio">';
-                htmldiv = htmldiv + '<input id=change_cert_'+ viewdata.txid +' type="radio" name="spec-change">';
-                htmldiv = htmldiv + '<label for=change_cert_'+ viewdata.txid +'></label>';
+                htmldiv = htmldiv + '<div id=change_cert_'+ subid +' class="abc-radio">';
+                if(record.dftYn = "Y") {
+                    htmldiv = htmldiv + '<input id=change_cert_'+ record.txid +' type="radio" name="spec-change" checked>';
+                } else {
+                    htmldiv = htmldiv + '<input id=change_cert_'+ record.txid +' type="radio" name="spec-change">';
+                }
+                htmldiv = htmldiv + '<label for=change_cert_'+ record.txid +'></label>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.date +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.userid +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.name +'</td>';
-                htmldiv = htmldiv + '<td>' + jsonData.subid +'</td>';
+                htmldiv = htmldiv + '<td>' + jsonData.dftYn +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.grade +'</td>';
                 htmldiv = htmldiv + '</tr>';            
                 $("#spec-change-table").append(htmldiv);
             }
         } catch (exception) {
-            console.log(exception);
             continue;
         }
     }
@@ -129,6 +133,10 @@ function request_agent() {
             }
             
         }),
+        beforeSend: function() {
+            //clean view
+            $('.spec-body').remove();
+        },
         success: function (res) {
             setSocket(res.mid);
             clientsocket_listener();
@@ -137,59 +145,98 @@ function request_agent() {
     });
 }
 
-function refreshview() {
-    var txidlist = getTxidList();
+function refreshview(records) {
 
-    //clean view
-    $('.spec-body').remove();
-
+    var recordList = {};
     var subid = "";
-    for (var i in txidlist) {
-        try {
-            var viewdata = getData(txidlist[i]);
-            var subidTmp = viewdata.subid;
 
-            if (subid != subidTmp) {                
-                var jsonData = JSON.parse(viewdata.data);
-                jsonData.chkid = txidlist[i];
-                jsonData.subid = subidTmp;
-                formatter[subidTmp](jsonData);
-                subid = subidTmp;                
+    if(records != null) {
+        for(var i in records) {
+            try {
+                var record = records[i];
+                console.log(record);
+                var subidTmp = record.subid;
+                var dftYn = record.dftYn;
+
+                if(dftYn == "Y") {
+                    var jsonData = record.data;
+                    jsonData.chkid = record.txid;
+                    jsonData.subid = subidTmp;
+                    recordList[subidTmp] = jsonData;
+                    subid = subidTmp;                
+                } else if (subid != subidTmp) {
+                    var jsonData = record.data;
+                    jsonData.chkid = record.txid;
+                    jsonData.subid = subidTmp;
+                    recordList[subidTmp] = jsonData;
+                    subid = subidTmp;
+                }
+            } catch (exception) {
+                continue;
             }
-        } catch (exception) {
-            console.log(exception);
-            continue;
+        }    
+    } else { // 전체 화면 리플레시        
+        $('.spec-body').remove();
+
+        var txidList = getTxidList();
+        for (var i in txidList) {
+            try {
+                var record = getData(txidList[i]);
+                var subidTmp = record.subid;
+                var dftYn = record.dftYn;
+
+                if(dftYn == "Y") {
+                    var jsonData = record.data;
+                    jsonData.chkid = record.txid;
+                    jsonData.subid = subidTmp;
+                    recordList[subidTmp] = jsonData;
+                    subid = subidTmp;                
+                } else if (subid != subidTmp) {
+                    var jsonData = record.data;
+                    jsonData.chkid = record.txid;
+                    jsonData.subid = subidTmp;
+                    recordList[subidTmp] = jsonData;
+                    subid = subidTmp;
+                }
+            } catch (exception) {
+                //console.log(exception);
+                continue;
+            }
         }
     }
+    
+    for(var i in recordList) {
+        try {
+            var record = JSON.parse(recordList[i]);
+            console.log(JSON.parse(recordList[i]));    
+            var subid = record.subid;        
+            formatter[subid](record);
+        } catch (exception) {
+            console.log(exception);
+            continue;            
+        }
+    }
+    
 }
 
 function clientsocket_listener() {
-
     socket.on('SearchResult', function(msg){
-
         var omsg = JSON.parse(msg);
         console.log('message: ');
         console.log(omsg);
 
-        var orgcode = omsg.orgcode;
-        
-        for(var i=0; i<omsg.records.length ; i++) {
-            
-            var subid = omsg.records[i].subid;
-            
-            try {
-                //formatter[subid](omsg.records[i]);
-                //getviewdata(omsg.records[i]);
-                setData(omsg.records[i]);
-                refreshview();
+        var orgcode = omsg.orgcode;        
+        for(var i=0; i<omsg.records.length ; i++) {            
+            var subid = omsg.records[i].subid;            
+            try {                
+                setData(omsg.records[i]);                
             }catch(exception) {
                 console.log(exception);
                 //continue;
             }
         }
-
+        refreshview(omsg.records);
     });
-
 }
 
 function setSocket(mId) {
