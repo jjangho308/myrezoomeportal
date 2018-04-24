@@ -148,7 +148,7 @@ function test_setTestData() {
                    "txid": "c910c7a45583553532dc8c8c4a595835553d8d4e089b2f82f66e24ee4db8ad02",
                    "subid": "RCCNF0001",
                    "stored": "Y",
-                   "dftYn": "N"
+                   "dftYn": "Y"
                },
                {
                    "data": "{\"userid\":\"123456\",\"point0\":\"100\",\"point1\":\"10\",\"point2\":\"50\",\"point3\":\"50\",\"name\":\"박헌욱\",\"grade\":\"병신\",\"date\":\"2018-04-18 17:39:27.0\"}",
@@ -156,7 +156,7 @@ function test_setTestData() {
                    "txid": "e3c02ed226c2ddc9d74dbdc6434e0458c7f9c10156d4b7b04455eb9a4392822c",
                    "subid": "RCCNF0001",
                    "stored": "Y",
-                   "dftYn": "Y"
+                   "dftYn": "N"
                }
            ]
        }

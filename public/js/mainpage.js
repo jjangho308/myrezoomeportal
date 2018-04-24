@@ -84,16 +84,15 @@ function change_default_cert(subid) {
     var txidList = getTxidList();         
     for(var i in txidList) {
         try {
-            var record = getData(txidList[i]);                  
+            var record = getData(txidList[i]);     
+            var dftYn = record.dftYn;             
             var subidTmp = record.subid;
             var jsonData = record.data;            
-            if(subid == subidTmp) {   
-                console.log("######");
-                console.log(record);
+            if(subid == subidTmp) {                   
                 var htmldiv = '<tr class="change_cert">';
                 htmldiv = htmldiv + '<td>';
                 htmldiv = htmldiv + '<div id=change_cert_'+ subid +' class="abc-radio">';
-                if(record.dftYn = "Y") {
+                if(dftYn == "Y") {
                     htmldiv = htmldiv + '<input id=change_cert_'+ record.txid +' type="radio" name="spec-change" checked>';
                 } else {
                     htmldiv = htmldiv + '<input id=change_cert_'+ record.txid +' type="radio" name="spec-change">';
@@ -104,7 +103,7 @@ function change_default_cert(subid) {
                 htmldiv = htmldiv + '<td>' + jsonData.date +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.userid +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.name +'</td>';
-                htmldiv = htmldiv + '<td>' + jsonData.dftYn +'</td>';
+                htmldiv = htmldiv + '<td>' + dftYn +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.grade +'</td>';
                 htmldiv = htmldiv + '</tr>';            
                 $("#spec-change-table").append(htmldiv);
@@ -204,19 +203,12 @@ function refreshview(records) {
             }
         }
     }
-    
+
     for(var i in recordList) {
-        try {
-            var record = JSON.parse(recordList[i]);
-            console.log(JSON.parse(recordList[i]));    
-            var subid = record.subid;        
-            formatter[subid](record);
-        } catch (exception) {
-            console.log(exception);
-            continue;            
-        }
+        console.log(recordList[i]);    
+        var subid = recordList[i].subid;        
+        formatter[subid](recordList[i]);
     }
-    
 }
 
 function clientsocket_listener() {
