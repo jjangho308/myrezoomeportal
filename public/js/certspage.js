@@ -168,7 +168,10 @@ $(document).ready(function(){
                 var id = this.id;
 
                 var sdata = sessionStorage.getItem(id);
-                var jsondata = JSON.parse(sdata);
+                
+                var reqcerts = {};
+                reqcerts.txid = id;
+                reqcerts.record = JSON.parse(sdata);
 
                 console.log("cert req param");
                 console.log(id);
@@ -181,7 +184,7 @@ $(document).ready(function(){
                     data: JSON.stringify({
                         //uId: 'SearchRecord',
                         //sId: '',
-                        cert: jsondata
+                        cert: reqcerts
                     }),
                     success: function (res2) {
                         console.log(res2);

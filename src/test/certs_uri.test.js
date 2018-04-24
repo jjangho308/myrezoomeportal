@@ -35,9 +35,9 @@ describe('/certs URI Page test suite.', () => {
             .end((err, res) => {
                 done();
             });
-    })
+    });
 
-    it('Cert Ajax request', done => {
+    it.skip('Cert Ajax request', done => {
         chai.request(app)
             .get('/certs')
             .set('Content-Type', 'application/json')
@@ -52,9 +52,9 @@ describe('/certs URI Page test suite.', () => {
                     done();
                 }
             });
-    })
+    });
 
-    it.skip('Issue certificate request test', done => {
+    it('Issue certificate request test', done => {
         chai.request(app)
             .post('/certs')
             .set('Content-Type', 'application/json')
@@ -62,15 +62,20 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 cert: {
-                    txid: '7646cd4c483f169e9cbc78c29504460733b3e4935842bd93cb02a6eb5258fa24'
+                    txid: '7c731bfa671da3769414218c1ddd83722e735155bd80a8e0d4e971204f77f7d9',
+                    record: {
+                        subId: 'asdfasdf',
+                        score: 70
+                    }
                 }
             })
             .end((err, res) => {
+                console.log(res.body);
                 done();
             });
     })
 
-    it('Certificate view page test case', done => {
+    it.skip('Certificate view page test case', done => {
         chai.request(app)
             .get('/certs/bfd04148-c918-46c3-99fa-9f1fc0e20122')
             .set('Content-Type', 'text/html')

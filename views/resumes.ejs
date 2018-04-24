@@ -55,33 +55,34 @@ UserModel render용 키 정보 :
 <body>
     <div id = "myresume-modal">
         <!-- Modal HTML embedded directly into document -->
-        <div id="add-cert-dialog" class="modal">
-            <p>증명서 발급<span>레쥬메에서 발급받고 싶은 이력을 선택해주세요.</span></p>
-            <table id="add-cert-dialog-table">
-                <tr>
-                    <th></th>
-                    <th>구분</th>
-                    <th>증명서 종류</th>
-                </tr>
-                <!-- <tr>
-                    <td>
-                        <div class="checkbox checkbox-primary">
-                            <input id="add-cert-checkbox-1" type="checkbox">
-                            <label for="add-cert-checkbox-1"></label>
-                        </div>           
-                    </td>
-                    <td>자격</td>
-                    <td>삼성SDS</td>
-                    <td>SW Certificate 자격증명서(제 38회)</td>
-                </tr> -->
-          
-    
-            </table>
-    
-            <div class="modal-footer">
-                <button class="confirm-btn primary-solid-btn">확인</button>
-                <button class="cancel-btn border-btn">취소</button>
-            </div>
+        <div id="resumes-add-dialog" class="modal">
+                <p>이력서 생성<span>레쥬메에서 발급받고 싶은 이력을 선택해주세요.</span></p>
+                <table id="add-resume-dialog-table">
+                    <tr>
+                        <th></th>
+                        <th>구분</th>
+                        <th>이력명</th>
+                        <th>성적포함</th>
+                    </tr>
+                    <!-- <tr>
+                        <td>
+                            <div class="checkbox checkbox-primary">
+                                <input id="add-cert-checkbox-1" type="checkbox">
+                                <label for="add-cert-checkbox-1"></label>
+                            </div>           
+                        </td>
+                        <td>자격</td>
+                        <td>삼성SDS</td>
+                        <td>SW Certificate 자격증명서(제 38회)</td>
+                    </tr> -->
+              
+        
+                </table>
+        
+                <div class="modal-footer">
+                    <button class="confirm-btn primary-solid-btn">확인</button>
+                    <button class="cancel-btn border-btn">취소</button>
+                </div>
         </div>
     </div>
 
@@ -141,7 +142,7 @@ UserModel render용 키 정보 :
             </div>
             
             <div id="resume-store-div">
-                    <div class="grid mycert-grid">
+                    <div id="resume-grid-div" class="grid mycert-grid">
                             <p>이력서 보관함</p>
                             <p>단순 작성만으로 이력 증빙이 모두 진행되는 새로운 증명서를 작성해보세요.</p>
         
@@ -155,12 +156,12 @@ UserModel render용 키 정보 :
         
                             <img class="" src="" />
         
-                            <div class="cert-container-new">
+                            <div class="cert-container-new add-cert">
                                 <img src="img/mycert/fill-1.png" alt="">
                                 <p>새로운 이력서 생성</p>
         
                             </div>
-                            <div class="cert-container" tabindex="1">
+                            <!-- <div class="cert-container" tabindex="1">
                                 <p>....</p>
                                 <img src="img/resume-store/invalid-name.png" alt="">
                                 <p>이력서</p>
@@ -188,7 +189,7 @@ UserModel render용 키 정보 :
                                 <p>이력서</p>
                                 <p>삼성SDS용</p>
                                 <p>업데이트 : 2018-03-01 11:00</p>
-                            </div>            
+                            </div>             -->
                         </div>    
             </div>
             
