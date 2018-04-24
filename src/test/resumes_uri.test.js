@@ -20,7 +20,7 @@ describe('/resumes URL test suite', () => {
     before('Service initialize', () => {
         jwtToken = Managers.token().issueToken({
             uId: 'UID1'
-        })
+        });
         chai.use(chaihttp);
     });
 
@@ -36,7 +36,7 @@ describe('/resumes URL test suite', () => {
     });
 
     //확인 완료
-    it('Resume ajax request', done => {
+    it.skip('Resume ajax request', done => {
         chai.request(app)
             .get('/resumes')
             .set('Content-Type', 'application/json')
@@ -49,8 +49,14 @@ describe('/resumes URL test suite', () => {
             });
     })
 
-    //확인완료
-    it.skip('Create resume request test case', done => {
+    /**
+     * Create a new resume entity test case. <br />
+     * 
+     * @since 180424
+     * @author JJANGHO
+     */
+    it('Create resume request test case', done => {
+
         chai.request(app)
             .post('/resumes')
             .set('Content-Type', 'application/json')
@@ -59,14 +65,23 @@ describe('/resumes URL test suite', () => {
             .send({
                 resume: {
                     title: '엘지 이력서',
-                    records: [{
-                        order: 1,
-                        //
-                        mapId: Util.uuid()
-                    }, {
-                        order: 2,
-                        mapId: Util.uuid()
-                    }]
+                    data: [{
+                            txid: 'e3c02ed226c2ddc9d74dbdc6434e0458c7f9c10156d4b7b04455eb9a4392822c',
+                            order: 1,
+                            record: {
+                                subId: 'OPIc',
+                                score: 30
+                            }
+                        },
+                        {
+                            txid: '5489c0ebabef028bb6b0915837ce8325371b435722525f5717c47775ab2f6a34',
+                            order: 2,
+                            record: {
+                                subId: 'TOEIC',
+                                score: 900
+                            }
+                        }
+                    ]
                 }
             })
             .end((err, res) => {

@@ -16,12 +16,21 @@ import Util from "../../../util/util"
  * @author TACKSU
  */
 class CreateResumeHandler extends AbstractClientRequestHandler {
+
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180402
+     * @author TACKSU
+     * 
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
     }
 
     /**
-     * Insert new resume model to database. <br />
+     * Create a new resume entity to database. <br />
      * 
      * @since 180402
      * @author TACKSU
@@ -30,41 +39,56 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
      * @param {*} cb 
      */
     request(request, cb) {
-        if (request.uId != request.resume.uId) {
-            // TODO throw authentication error
-            // TODO 이런 취약점 유의할 것.
-        }
+        // TODO 각 이력들의 소유자가 해당 User가 아니라면 Authentication error 발생시킬 것
+        var recordDAO = Managers.db().getRecordDAO();
 
         var resumeModel = new ResumeModel({
-            rsmId:Util.uuid(),
+            rsmId: Util.uuid(),
             uId: request.uId,
             updtStatus: request.updtStatus,
             title: request.resume.title,
-            blcMap: JSON.stringify(request.resume.records),
         });
 
+        var bcIdList = [];
+        for (var i in request.resume.data) {
+            recordDAO.getBlockChainMap({
+                txid: request.resume.data[i].txid
+            }, (err, bcModelList) => {
+                if (!!err) {
+                    cb(ClientRequest.RESULT_FAILURE, err);
+                } else if (bcModelList.length > 0) {
+                    bcIdList.add({
+                        order: request.resume.data[i].order,
+                        mapId: bcModelList[0].blcMapId
+                    });
 
-        // TODO 이력서의 txid가 한 column으로 되어 있는데 이걸 별도의 table로 가져가야 되는게 아닌가? 싶음
+                    // BC Map 완성이 되었으면 아래 로직으로 수행
+                    if (bcIdList.length == request.resume.data.length) {
 
-        var resumeDAO = Managers.db().getResumeDAO();
-        resumeDAO.putResume(resumeModel, (err, insertId) => {
-            if (!!err) {
-                cb(ClientRequest.RESULT_FAILURE, err);
-            } else {
-                resumeDAO.getResume({
-                    sId: insertId
-                },(err, resumeList) => {
-                    if(!!err){
-                        cb(ClientRequest.RESULT_FAILURE, err);
-                    }else if(resumeList.length > 0) {
-                        cb(ClientRequest.RESULT_SUCCESS, {
-                            rsmId: resumeList[0].rsmId,
-                            
+                        resumemodel.blcMap = JSON.stringify(bcIdList);
+                        // TODO 이력서의 txid가 한 column으로 되어 있는데 이걸 별도의 table로 가져가야 되는게 아닌가? 싶음
+                        var resumeDAO = Managers.db().getResumeDAO();
+                        resumeDAO.putResume(resumeModel, (err, insertId) => {
+                            if (!!err) {
+                                cb(ClientRequest.RESULT_FAILURE, err);
+                            } else {
+                                resumeDAO.getResume({
+                                    sId: insertId
+                                }, (err, resumeList) => {
+                                    if (!!err) {
+                                        cb(ClientRequest.RESULT_FAILURE, err);
+                                    } else if (resumeList.length > 0) {
+                                        cb(ClientRequest.RESULT_SUCCESS, {
+                                            rsmId: resumeList[0].rsmId,
+                                        });
+                                    }
+                                });
+                            }
                         });
-                    } 
-                });
-            }
-        })
+                    }
+                }
+            })
+        }
     }
 }
 
