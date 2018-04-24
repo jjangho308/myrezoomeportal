@@ -38,7 +38,7 @@ var formatter= {
             htmldiv = htmldiv + '<p>매경TEST</p>';
             htmldiv = htmldiv + '<p>'+record.userid + '</p>';
             htmldiv = htmldiv + '<p>'+record.grade +' / '+ record.point0+'</p>';
-            htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
+            htmldiv = htmldiv + '<button onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 

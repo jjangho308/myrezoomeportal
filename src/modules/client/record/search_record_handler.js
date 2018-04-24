@@ -10,8 +10,6 @@ import SearchRecordPush from '../../push/message/search';
 
 import NexledgerService from '../../blockchain/nexledgerservice';
 
-
-import sleep from 'system-sleep';
 import Util from '../../../util/util'
 
 
