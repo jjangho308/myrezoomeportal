@@ -60,19 +60,30 @@ class ResumeDao extends AbstractDAO {
      * @param {function(object, array)} cb 
      */
     getResume(creteria, cb) {
-        var condition = {};
 
+        var where;
         if (!!creteria.sId) {
-            condition.S_USR_RSM_ID = creteria.sId;
+            where = "S_USR_RSM_ID = " + creteria.sId
         }
         if (!!creteria.rsmId) {
-            condition.RSM_ID = creteria.rsmId;
+            if (!!where) {
+                where += ' AND '
+                where += "RSM_ID = '" + creteria.rsmId + "'"
+            } else {
+                where = "RSM_ID = '" + creteria.rsmId + "'"
+            }
         }
         if (!!creteria.uId) {
-            condition.UID = creteria.uId;
+            if (!!where) {
+                where += ' AND '
+                where += "UID = '" + creteria.uId + "'"
+            } else {
+                where = "UID = '" + creteria.uId + "'"
+            }
         }
 
-        var query = mysql.format(ResumeQuery.get, condition);
+
+        var query = ResumeQuery.get + where;
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -84,7 +95,6 @@ class ResumeDao extends AbstractDAO {
                 cb(err, returnValue);
             }
         });
-
     }
 
     /**
@@ -166,8 +176,8 @@ class ResumeDao extends AbstractDAO {
     getShared(creteria, cb) {
         var condition = {};
 
-        if(!!creteria.rsmId){
-            condition.RSM_ID=creteria.rsmId;
+        if (!!creteria.rsmId) {
+            condition.RSM_ID = creteria.rsmId;
         }
 
 

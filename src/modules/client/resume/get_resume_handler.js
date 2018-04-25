@@ -11,6 +11,15 @@ import Managers from '../../../core/managers';
  * @author TACKSU
  */
 class GetResumeRequestHandler extends AbstractClientRequestHandler {
+
+    /**
+     * Default constructor. <br />
+     * 
+     * @since 180402
+     * @author TACKSU
+     * 
+     * @param {*} opt 
+     */
     constructor(opt) {
         super(opt);
     }
@@ -27,13 +36,40 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
     request(requestEntity, cb) {
         var resumeDAO = Managers.db().getResumeDAO();
         resumeDAO.getResume({
-            uId: requestEntity.uId
+            uId: requestEntity.uId,
+            rsmId: requestEntity.rsmId
         }, (err, resumeList) => {
             if (!!err) {
                 cb(ClientRequest.RESULT_FAILURE, err);
             } else {
-                console.log(resumeList);
-                cb(ClientRequest.RESULT_SUCCESS, resumeList);
+                var recordDAO = Managers.db().getRecordDAO();
+                for (var i in resumeList) {
+                    !((idx) => {
+
+                        // 이력서가 담고 있는 Records의 Blc MAP IDs
+                        var recordsMap = JSON.parse(resumeList[idx].blcMap)
+                        for (var j in recordsMap) {
+                            var bcMapIds = [];
+                            !((jdx) => {
+                                recordDAO.getBlockChainMap({
+                                    blcMapId: recordsMap[jdx].mapId
+                                }, (err, bcModels) => {
+                                    if (bcModels.length > 0) {
+                                        bcMapIds.push({
+                                            order: recordsMap[jdx].order,
+                                            txid: bcModels[0].txid
+                                        });
+
+                                        // 모든 Blockchain id 수집 완료
+                                        if (bcMapIds.length == resumeList.length) {
+                                            cb(ClientRequest.RESULT_SUCCESS, resumeList);
+                                        }
+                                    }
+                                })
+                            })(j);
+                        }
+                    })(i);
+                }
             }
         })
     }

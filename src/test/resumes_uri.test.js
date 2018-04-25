@@ -35,7 +35,7 @@ describe('/resumes URL test suite', () => {
             });
     });
 
-    //확인 완료
+
     it.skip('Resume ajax request', done => {
         chai.request(app)
             .get('/resumes')
@@ -55,7 +55,7 @@ describe('/resumes URL test suite', () => {
      * @since 180424
      * @author JJANGHO
      */
-    it('Create resume request test case', done => {
+    it.skip('Create resume request test case', done => {
 
         chai.request(app)
             .post('/resumes')
@@ -64,9 +64,9 @@ describe('/resumes URL test suite', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 resume: {
-                    title: '엘지 이력서',
+                    title: '안택수 테스트용 이력서',
                     data: [{
-                            txid: 'e3c02ed226c2ddc9d74dbdc6434e0458c7f9c10156d4b7b04455eb9a4392822c',
+                            txid: '3d923e81f96d0c34a5cd75f804aceaeefc0c7512b17a863b69b2196afb08bbeb',
                             order: 1,
                             record: {
                                 subId: 'OPIc',
@@ -74,7 +74,7 @@ describe('/resumes URL test suite', () => {
                             }
                         },
                         {
-                            txid: '5489c0ebabef028bb6b0915837ce8325371b435722525f5717c47775ab2f6a34',
+                            txid: 'e18970b7c70b33a80a974059c2d981bb384edc5c5fe56c63ebc01b6393f42b66',
                             order: 2,
                             record: {
                                 subId: 'TOEIC',
@@ -92,25 +92,19 @@ describe('/resumes URL test suite', () => {
             })
     })
 
-    it.skip('Get resume viewer test case', done => {
+    /**
+     * Test case of specific resume viewer. <br />
+     */
+    it('Get resume viewer test case', done => {
         chai.request(app)
-            .get('/resumes')
+            .get('/resumes/884394b8-b2eb-4c58-a707-e2cda423f16f')
             .set('Content-Type', 'text/html')
             .set('Authorization', 'Bearer ' + jwtToken)
-            .send({
-                resume: {
-                    title: '삼성 이력서',
-                    records: [
-                        'txid1',
-                        'txid2'
-                    ]
-                }
-            })
+            .send()
             .end((err, res) => {
                 done();
             })
     })
-
 
 
     //확인 완료

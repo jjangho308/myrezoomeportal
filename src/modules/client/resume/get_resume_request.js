@@ -25,6 +25,11 @@ class GetResumeRequestEntity extends AbstractClientRequestEntity {
          * SID of user. <br />
          */
         this.sId = opt.sId;
+
+        /**
+         * Resume ID if given. <br />
+         */
+        this.rsmId = opt.rsmId;
     }
 }
 
