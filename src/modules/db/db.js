@@ -49,7 +49,7 @@ class DatabaseManager extends AbstractManager {
             password: propertyManager.get(Property.MySQL_PW),
             database: propertyManager.get(Property.MySQL_DATABASE),
             multipleStatements: true,
-            connectionLimit: 500,
+            connectionLimit: propertyManager.get(Property.MySQL_TIMEOUT),
             waitForConnections: false
         });
 
@@ -92,7 +92,7 @@ class DatabaseManager extends AbstractManager {
         });
     }
 
-     /**
+    /**
      * Obtain RecordDAO. <br />
      */
     getRecordDAO() {
@@ -109,7 +109,7 @@ class DatabaseManager extends AbstractManager {
     getUserDAO() {
         return new UserDAO(this.connectionPool);
     }
-    
+
 
     getOrgDAO() {
         return new OrgDAO(this.connectionPool);
@@ -125,9 +125,6 @@ class DatabaseManager extends AbstractManager {
     getResumeDAO() {
         return new ResumeDAO(this.connectionPool);
     }
-
-
-
 
     /**
      * Disconnect all connection and close session. <br />

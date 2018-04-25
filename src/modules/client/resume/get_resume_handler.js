@@ -30,24 +30,30 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
      * @since 180403
      * @author TACKSU
      * 
-     * @param {GetResumeRequestEntity} requestEntity 
-     * @param {*} cb 
+     * @param {GetResumeRequestEntity} requestEntity GetResumeRequestEntity
+     * @param {function(number, object)} done callback function.
      */
-    request(requestEntity, cb) {
+    request(requestEntity, done) {
         var resumeDAO = Managers.db().getResumeDAO();
         resumeDAO.getResume({
             uId: requestEntity.uId,
             rsmId: requestEntity.rsmId
         }, (err, resumeList) => {
             if (!!err) {
-                cb(ClientRequest.RESULT_FAILURE, err);
+                done(ClientRequest.RESULT_FAILURE, err);
             } else {
                 var recordDAO = Managers.db().getRecordDAO();
+                var completedResume = 0;
                 for (var i in resumeList) {
                     !((idx) => {
 
+                        // Remove 'sId' field.
+                        delete resumeList[idx].sId;
+
                         // 이력서가 담고 있는 Records의 Blc MAP IDs
                         var recordsMap = JSON.parse(resumeList[idx].blcMap)
+                        // Remove 'blcMap' Field
+                        delete resumeList[idx].blcMap;
                         for (var j in recordsMap) {
                             var bcMapIds = [];
                             !((jdx) => {
@@ -60,9 +66,18 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
                                             txid: bcModels[0].txid
                                         });
 
-                                        // 모든 Blockchain id 수집 완료
-                                        if (bcMapIds.length == resumeList.length) {
-                                            cb(ClientRequest.RESULT_SUCCESS, resumeList);
+                                        // 하나 이력서의 blockchain mapId 구성 완료
+                                        if (bcMapIds.length == recordsMap.length) {
+                                            bcMapIds.sort((a, b) => {
+                                                return a.order - b.order;
+                                            });
+
+                                            resumeList[idx].records = bcMapIds;
+                                            completedResume++;
+
+                                            if (completedResume == resumeList.length) {
+                                                done(ClientRequest.RESULT_SUCCESS, resumeList);
+                                            }
                                         }
                                     }
                                 })

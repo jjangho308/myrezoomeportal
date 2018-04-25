@@ -40,15 +40,15 @@ class PropertyManager extends AbstractManager {
      * @param {*} defValue 
      */
     get(key, defValue) {
-        if (!this.properties){
+        if (!this.properties) {
             throw new ReferenceError("Failed to load property file.");
         }
-        
+
         var value = this.properties.get(key);
         return value ? value : defValue;
     }
 
-    set(key, value){
+    set(key, value) {
         if (!this.properties)
             throw new ReferenceError("Failed to load property file.");
 

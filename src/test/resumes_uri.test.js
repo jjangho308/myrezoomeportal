@@ -72,7 +72,7 @@ describe('/resumes URL test suite', () => {
                 resume: {
                     title: '안택수 테스트용 이력서',
                     data: [{
-                            txid: '3d923e81f96d0c34a5cd75f804aceaeefc0c7512b17a863b69b2196afb08bbeb',
+                            txid: '35bdf8182ef912f1971efa1b367e69fc8dfa819f94c46d2afc352fe3316893b7',
                             order: 1,
                             record: {
                                 subId: 'OPIc',
@@ -80,7 +80,7 @@ describe('/resumes URL test suite', () => {
                             }
                         },
                         {
-                            txid: 'e18970b7c70b33a80a974059c2d981bb384edc5c5fe56c63ebc01b6393f42b66',
+                            txid: '02f7bae31e7fbced794621aa517b2df5321776a24a02d7305eb1bdbf1e13cb8b',
                             order: 2,
                             record: {
                                 subId: 'TOEIC',
