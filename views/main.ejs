@@ -91,8 +91,7 @@ UserModel render용 키 정보 :
 
             <div>
                 <p><%= fullNameKO %></p>
-                <p><%= email %></p>
-
+                <p><%= email %></p>                
             </div>
         </div>
     </div>
@@ -121,8 +120,7 @@ UserModel render용 키 정보 :
                     <p>My레쥬메</p>
                     <p>연계된 기관들로부터 불러온 이력사항을 클릭하여, 증명서 발급 및 이력서를 쉽게 생성할수 있습니다.</p>
                     <img id="refresh_record" src="img/myresume/reload.svg" />
-                    <p>업데이트 : 2018.03.09 (금) 18:07</p>                    
-
+                    <p id="updateTime">업데이트 : <script>currentDate('<%= modified %>')</script></p>                                        
                     <div class="spec-div">
                         <div id="spec_edu_detail" class="spec-detail-div">
                             <div class="spec-title">
