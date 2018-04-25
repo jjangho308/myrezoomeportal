@@ -351,7 +351,12 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                         });
                     } else {                  
                         // Get BLC MAP Default YN
-                        db.getRecordDAO().getDefaultYn(agentRequest.records[i].txid, function (dbres) {
+                        var data = {
+                            uid : uid,
+                            txid : agentRequest.records[i].txid
+                        };
+
+                        db.getRecordDAO().getDefaultYn(data, function (dbres) {
                             agentRequest.records[i].dftYn = dbres.DFT_YN;
                         });
 
