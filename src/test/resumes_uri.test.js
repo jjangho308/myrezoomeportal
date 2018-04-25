@@ -36,7 +36,13 @@ describe('/resumes URL test suite', () => {
     });
 
 
-    it.skip('Resume ajax request', done => {
+    /**
+     * Get all resumes of given user. <br />
+     * 
+     * @since 180425
+     * @author TACKSU
+     */
+    it('Resume ajax request', done => {
         chai.request(app)
             .get('/resumes')
             .set('Content-Type', 'application/json')
@@ -95,7 +101,7 @@ describe('/resumes URL test suite', () => {
     /**
      * Test case of specific resume viewer. <br />
      */
-    it('Get resume viewer test case', done => {
+    it.skip('Get resume viewer test case', done => {
         chai.request(app)
             .get('/resumes/884394b8-b2eb-4c58-a707-e2cda423f16f')
             .set('Content-Type', 'text/html')
