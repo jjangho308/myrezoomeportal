@@ -100,7 +100,8 @@ $(document).ready(function () {
         $(".abc-radio input:radio").each(function() {
             if ($(this).is(':checked')) {
                 var txid = $(this).attr("id").substring(12);
-                
+                var subid = $(this).parent().attr("id").substring(12);                
+
                 $.ajax({
                     type: 'POST',
                     url: '/certs/setDefault',
@@ -108,15 +109,40 @@ $(document).ready(function () {
                         'Authorization': client_authorization
                     },
                     data: JSON.stringify({                
-                        txid: txid
+                        txid: txid,
+                        subid: subid
                     }),
                     beforeSend: function() {
                         
                     },
-                    success: function (res) {                        
+                    success: function (res) {
                         $("#spec-change-dialog .close-modal").click();
                         $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
-                        $('#alarm-div').css("display", "block");                  
+                        $('#alarm-div').css("display", "block");   
+                        
+                        // sessionStrage update
+                        var txidList = getTxidList();         
+                        for(var i in txidList) {
+                            try {
+                                var record = getData(txidList[i]);
+                                var dftYn = record.dftYn;             
+                                var subidTmp = record.subid;
+                                var jsonData = record.data;            
+                                if(subid == subidTmp) {
+                                    if(txid == record.txid) {
+                                        record.dftYn = "Y";
+                                    } else {
+                                        record.dftYn = "N";
+                                    }
+                                    record.data = JSON.stringify(record.data);
+                                    setData(record);
+                                }
+                            } catch (exception) {
+                                console.log(exception);
+                                continue;
+                            }
+                        }
+                        refreshview();
                     },
                     contentType: 'application/json',
                 });

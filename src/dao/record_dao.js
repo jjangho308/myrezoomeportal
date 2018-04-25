@@ -125,6 +125,35 @@ class RecordDAO extends AbstractDAO {
     del() {
 
     }
+
+    getDefaultYn(creteria, cb) {                
+        var query = mysql.format(recordQuery.getDefaultYn, [creteria.uid, creteria.txid]);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else {            
+                cb(rows[0]);
+            }
+        });
+    }
+
+    setDefaultYn(creteria, cb) {
+        var query = mysql.format(recordQuery.setDefaultYnInit, [creteria.subid]);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                query = mysql.format(recordQuery.setDefaultYn, [creteria.uid, creteria.txid]);
+                this.query(query, (err, rows) => {
+                    if (!!err) {
+                        cb(err);
+                    } else {                
+                        cb(rows);
+                    }
+                });
+            }
+        });
+    }
 }
 
 export default RecordDAO;

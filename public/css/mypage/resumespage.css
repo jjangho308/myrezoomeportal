@@ -92,14 +92,14 @@ margin-bottom: 20px;
 .cert-container p:nth-child(3){
     font-size: 15px;
     color: #676767;
+    white-space: initial;
 }
 
 .cert-container p:nth-child(4){
-    font-size: 20px;
-    color: #676767;
-    margin-bottom: 15px;
-    height: 33px;
-
+    font-size: 10px;
+    padding-top: 14px;
+    border-top: solid 1px #dfe5ef;
+    color: #a9afb3;
 }
 
 .cert-container p:nth-child(5){
@@ -155,8 +155,6 @@ top: 49px;
     margin-right: 20px;
 }
 
-
-
 .sub-info p:nth-child(2){
     font-size: 13px;
     line-height: 3;
@@ -164,4 +162,16 @@ top: 49px;
     color: #676767;
     display: inline-block;
     line-height: 47px;
+}
+
+th:nth-child(3) {
+    width: 200px;
+}
+
+.modal table td:nth-child(3), th:nth-child(3) {
+    width: 200px;
+}
+
+.more-store-resume-div {
+    display: none;
 }

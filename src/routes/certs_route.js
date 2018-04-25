@@ -16,6 +16,9 @@ var router = express.Router();
 router.get('/', tokenAuth);
 router.get('/', ctrl.get);
 
+router.get('/list', tokenAuth);
+router.get('/list', ctrl.get);
+
 // 증명서 뷰 페이지 controller
 router.get('/:certId', tokenAuth);
 router.get('/:certId', ctrl.getCertView);
@@ -35,6 +38,6 @@ router.post('/getmapping',ctrl.getmapping);
 
 //대표 증명서 설정
 router.post('/setDefault', tokenAuth);
-router.post('/setDefault',ctrl.getmapping);
+router.post('/setDefault',ctrl.setDefault);
 
 export default router;
