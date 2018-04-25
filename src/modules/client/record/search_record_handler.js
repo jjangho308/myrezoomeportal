@@ -358,19 +358,18 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                         db.getRecordDAO().getDefaultYn(data, function (dbres) {
                             agentRequest.records[i].dftYn = dbres.DFT_YN;
-                        });
-
-                        //BLC MAP stored
-                        if (j == (agentRequest.records.length - 1)) {
-                            try {
-                                if(!!socket)
-                                    socket.emit('SearchResult', JSON.stringify(agentRequest));
-                            } catch (exception) {
-                                console.log(exception);
-                                //continue;
+                            //BLC MAP stored
+                            if (j == (agentRequest.records.length - 1)) {
+                                try {
+                                    if(!!socket)
+                                        socket.emit('SearchResult', JSON.stringify(agentRequest));
+                                } catch (exception) {
+                                    console.log(exception);
+                                    //continue;
+                                }
                             }
-                        }
-                        j++;
+                            j++;
+                        });
                     }
                 }).call(this, i);
             }
