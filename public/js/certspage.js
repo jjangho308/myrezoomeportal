@@ -17,7 +17,7 @@ function certredirect(certId) {
 function loadcertlist() {
     $.ajax({
         type: 'GET',
-        url: '/certs',
+        url: '/certs/list',
         headers: {
             'Authorization': client_authorization
         },

@@ -21,7 +21,6 @@ export default {
      * @author TACKSU
      */
     get: (req, res, next) => {
-
         // /certs AJAX request
         if (!!req.xhr) {
             Managers.client().request(new GetCertsRequest(req.body),
@@ -34,11 +33,7 @@ export default {
                         });
                     }
                 });
-        }
-
-
-        // /certs HTML page
-        else {
+        } else { // /certs HTML page
             var userId = req.body.uId;
             if (!!userId) {
                 var userDAO = Managers.db().getUserDAO();

@@ -16,6 +16,9 @@ var router = express.Router();
 router.get('/', tokenAuth);
 router.get('/', ctrl.get);
 
+router.get('/list', tokenAuth);
+router.get('/list', ctrl.get);
+
 // 증명서 뷰 페이지 controller
 router.get('/:certId', tokenAuth);
 router.get('/:certId', ctrl.getCertView);
