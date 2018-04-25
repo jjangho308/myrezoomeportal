@@ -93,6 +93,7 @@ class User extends AbstractModel {
             mcc: row.MCC,
             status: row.STS_CD,
             first: row.FRST_YN,
+            imgsrc: row.IMG_PATH,
             bcWalletAddr : row.BC_WALLET_ADDR,
             created: row.CRTD_DT,
             modified: row.MDFID_DT
