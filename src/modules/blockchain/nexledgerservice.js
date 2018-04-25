@@ -56,6 +56,7 @@ class NexledgerService extends AbstractManager {
 
         client.post('/', reqformatdata, function (err, res, body) {
             console.log("============Nexledger Get function=================");
+            console.log(body);
             try {
                 if(body.result.hash=='') {
                     console.log("============Nexledger Retry=================");
