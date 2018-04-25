@@ -21,7 +21,7 @@ function loadresumelist() {
 
             for(var i in certlistresult) {
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=resumeredirect("'+certlistresult[i].rsmId+'")>';
-                htmldiv = htmldiv + '<p>제 1049-4003호 <img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
+                htmldiv = htmldiv + '<p>'+ certlistresult[i].rsmId +'<img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
                 htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + certlistresult[i].date + '</p>';
