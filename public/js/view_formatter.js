@@ -16,7 +16,7 @@ var formatter= {
             htmldiv = htmldiv + '<p>OPIC</p>';
             htmldiv = htmldiv + '<p>'+record.testid +'</p>';
             htmldiv = htmldiv + '<p>'+record.grade+'</p>';
-            htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
+            htmldiv = htmldiv + '<button onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';        
         $('#spec_forign_lang').append(htmldiv);
@@ -61,7 +61,7 @@ var formatter= {
             htmldiv = htmldiv + '<p>인하대학교</p>';
             htmldiv = htmldiv + '<p>'+ record +'</p>';
             htmldiv = htmldiv + '<p>'+record +'</p>';
-            htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
+            htmldiv = htmldiv + '<button onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 
@@ -84,7 +84,7 @@ var formatter= {
             htmldiv = htmldiv + '<p>인하대학교</p>';
             htmldiv = htmldiv + '<p>'+ record.list +'</p>';
             htmldiv = htmldiv + '<p>'+record +'</p>';
-            htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
+            htmldiv = htmldiv + '<button onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 
@@ -107,7 +107,7 @@ var formatter= {
             htmldiv = htmldiv + '<p>OPIC</p>';
             htmldiv = htmldiv + '<p>English Writing</p>';
             htmldiv = htmldiv + '<p>'+record +'</p>';
-            htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
+            htmldiv = htmldiv + '<button onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
 

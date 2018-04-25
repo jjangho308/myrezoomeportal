@@ -153,7 +153,6 @@ function refreshview(records) {
         for(var i in records) {
             try {
                 var record = records[i];
-                console.log(record);
                 var subidTmp = record.subid;
                 var dftYn = record.dftYn;
 
@@ -204,8 +203,7 @@ function refreshview(records) {
         }
     }
 
-    for(var i in recordList) {
-        console.log(recordList[i]);    
+    for(var i in recordList) {        
         var subid = recordList[i].subid;        
         formatter[subid](recordList[i]);
     }
@@ -219,7 +217,8 @@ function clientsocket_listener() {
 
         var orgcode = omsg.orgcode;        
         for(var i=0; i<omsg.records.length ; i++) {            
-            var subid = omsg.records[i].subid;            
+            var subid = omsg.records[i].subid;                 
+
             try {                
                 setData(omsg.records[i]);                
             }catch(exception) {
