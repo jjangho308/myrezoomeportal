@@ -92,10 +92,16 @@ class NexledgerService extends AbstractManager {
         client.post('/', reqformatdata, function (err, res, body) {
             console.log("============Nexledger Put function=================");
             console.log(body);
-            if(body.result.txid=='') {
-                console.log("============Nexledger Retry=================");
+            try {
+                if(body.result.txid=='') {
+                    console.log("============Nexledger Retry=================");
+                    this.put(nodeurl,address,data,callback);
+                    return;
+                }
+            }catch(nexledgerexception) {
+                console.log(nexledgerexception);
                 this.put(nodeurl,address,data,callback);
-                return;
+                return;    
             }
 
             console.log("==============================================");
