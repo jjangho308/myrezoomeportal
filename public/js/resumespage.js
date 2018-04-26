@@ -8,7 +8,7 @@ function resumeredirect(resumeId) {
 function loadresumelist() {
     $.ajax({
         type: 'GET',
-        url: '/resumes',
+        url: '/resumes/list',
         headers: {
             'Authorization': client_authorization
         },
