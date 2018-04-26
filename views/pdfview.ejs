@@ -1,0 +1,22 @@
+<html>
+
+<head>
+  <title>레주메 증명서</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    //location.reload();
+  });
+</script>
+
+<body>
+  <h3>레주메</h3>
+  <br>
+  <object width="600" height="850" data='<%= pdf %>' type="application/pdf">
+    <embed width="600" height="850" src='<%= pdf %>' type="application/pdf" />
+  </object>
+</body>
+
+</html>

@@ -1,0 +1,519 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+button:hover{
+    cursor: pointer;
+}
+input{
+    
+    padding: 13px 16px;
+    color: #676767;
+     font-size: 13px;
+      border-radius: 3px;
+  background-color: #ffffff;
+  border: solid 1px #ced3d6;
+    
+}
+
+.error{
+    border: solid 1px #f59188!important;
+}
+
+.error-message{
+  font-size: 11px;
+  font-weight: normal;
+  text-align: left;
+  color: #ee4b3c;
+        margin-top: -14px;
+    margin-bottom: 4px;
+    display: none;
+}
+input:focus{
+    border: solid 1px #4c80f1;
+}
+
+input:-moz-read-only { /* For Firefox */
+    background-color: #f8fafb;
+}
+
+input:read-only { 
+    background-color: #f8fafb;
+}
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #d0d0d0;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #d0d0d0;
+}
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #d0d0d0;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: #d0d0d0;
+}
+
+textarea::-webkit-input-placeholder {
+color: #d0d0d0;
+}
+
+textarea:-moz-placeholder { /* Firefox 18- */
+color: #d0d0d0;  
+}
+
+textarea::-moz-placeholder {  /* Firefox 19+ */
+color: #d0d0d0;  
+}
+
+textarea:-ms-input-placeholder {
+color: #d0d0d0;  
+}
+
+
+/*
+select{
+  height: 40px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: solid 1px #ced3d6;
+    padding: 10px 15px;
+    padding-right: 35px;
+    
+    line-height: 20px;
+     color: #676767;
+    font-size: 13px;
+    -webkit-appearance: none; 
+   -moz-appearance: none;  
+   appearance: none;
+    background: url(/img/certviewer/test.png) no-repeat 100% 30%;
+    background-size: 34px;
+}
+
+
+
+select::-ms-expand {
+   display: none;            
+}
+
+select:after{
+    background-color: black;
+}
+
+select:before{
+    background-color: black;
+}
+
+select option{
+  color: #676767;
+    font-size: 13px;
+}
+
+*/
+
+/*
+
+
+
+
+select{
+      width: 95px;
+  height: 40px;
+    font-size: 13px;
+    color: #676767;
+    font-weight: normal;
+    line-height: 1.08;
+    
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: solid 1px #ced3d6;
+    padding: 10px 15px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, blue 50%),
+    linear-gradient(135deg, blue 50%, transparent 50%),
+    linear-gradient(to right, skyblue, skyblue);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+
+select:focus {
+  background-image:
+    linear-gradient(45deg, white 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, white 50%),
+    linear-gradient(to right, gray, gray);
+  background-position:
+    calc(100% - 15px) 1em,
+    calc(100% - 20px) 1em,
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+  border-color: grey;
+  outline: 0;
+}
+
+*/
+
+
+.border-btn{
+    border-radius: 3px;
+  background-color: #ffffff;
+  border: solid 1px #ced3d6;
+    font-size: 12px;
+    color: #676767;
+}
+
+.border-btn:hover{
+  background-color: #eaeeef;
+}
+
+.border-btn:disabled{
+  background-color: #ffffff;
+  border: solid 1px #dfe5ef;
+color: #ecf2fd;
+}
+
+.primary-solid-btn{
+  border-radius: 3px;
+    font-size: 15px;
+  background-color: #4c80f1;
+    border: none;
+    color:white;
+}
+
+.primary-solid-btn:hover{
+  background-color: #2c5ae9;
+    color: #ced3d6;
+    color: #ffffff;
+
+}
+
+.primary-solid-btn:disabled{
+    color: #ffffff;
+    background-color: #ecf2fd;
+}
+
+
+p{
+    white-space: nowrap;
+    overflow: hidden;
+    
+    text-overflow: ellipsis;
+    
+}
+input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    border-radius: 3px;
+    border: solid 1px #ced3d6;
+    vertical-align: middle;
+}
+
+
+/* Base for label styling */
+
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+    vertical-align: middle;
+    position: relative;
+    padding-left: 1.95em;
+    cursor: pointer;
+}
+
+
+/* checkbox aspect */
+
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 19px;
+    height: 19px;
+    border: 0.5px solid #ccc;
+    background: #fff;
+    border-radius: 4px;
+}
+
+
+/* checked mark aspect */
+
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+    content: '✔' !important;
+    position: absolute;
+    top: 0px;
+    height: 19px;
+    width: 19px;
+    left: 0px;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.8;
+    color: white;
+    background-color: #4778d9;
+    transition: all .2s;
+    border: 0.5px solid #4778d9;
+    font-family: Helvetica, Arial, sans-serif !important;
+    ;
+    ;
+}
+
+
+/* checked mark aspect changes */
+
+[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+
+[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+/* disabled checkbox */
+
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+}
+
+[type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+}
+
+[type="checkbox"]:disabled + label {
+    color: #aaa;
+}
+
+
+.modal {
+    max-width: 570px!important;
+    padding: 0px!important;
+    width: 570px;
+}
+
+.modal > p:nth-child(1){
+
+      
+}
+.modal > p {
+    color: #676767;
+    font-size: 18px;
+    line-height: 1.22;
+    margin-top: 24px;
+    font-weight: bold;  
+    margin-left: 39px;
+}
+
+.modal > p> span {
+    color: #a9afb3;
+    font-size: 10px;
+    margin-left: 11px;
+    font-weight: normal;
+}
+
+.modal table {
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 4px;
+    max-width: 800px;
+    width: 100%;
+    border-top: solid 1px #ced3d6;
+    margin-top: 20px;
+    height: 300px;
+}
+
+.modal table td,
+table th {
+    padding-left: 8px;
+}
+
+.modal table tr {
+    height: 100px;
+    display: block;
+}
+
+.modal table tbody {
+    overflow-y: scroll;
+    display: block;
+    height: 300px;
+}
+
+.modal table tbody tr {
+    height: 48px;
+    border-bottom: solid 1px #dfe5ef;
+}
+
+.modal table th {
+    font-weight: bold;
+}
+
+.modal table td,
+table th {
+    text-align: left;
+    font-size: 12px;
+    color: #676767;
+    height: 45px;
+    vertical-align: middle;
+}
+
+.modal table td:nth-child(1),
+th:nth-child(1) {
+    width: 88px;
+    text-align: center;
+}
+
+.modal table td:nth-child(2),
+th:nth-child(2) {
+    width: 78px;
+}
+
+.modal table td:nth-child(3),
+th:nth-child(3) {
+    width: 60px;
+}
+
+.modal table td:nth-child(4),
+th:nth-child(4) {
+    width: 50px;
+}
+
+.modal table td:nth-child(5),
+th:nth-child(5) {
+    width: 50px;
+}
+
+.modal table td:nth-child(6),
+th:nth-child(6) {
+    width: 90px;
+}
+
+.modal table td:nth-child(7),
+th:nth-child(6) {
+    padding-right:10px
+}
+
+
+.modal a.close-modal {
+    position: absolute;
+    top: 21.5px!important;
+    right: 24.5px!important;
+    
+      width: 22px;
+  height: 22px;
+        background-size: 19px!important;
+    background-image: url("/img/myresume/close-gray.svg")!important;
+}
+
+.modal-footer {
+    background-color: #f2f5f8;
+    height: 70px;
+    border-radius: 4px;
+}
+
+.modal button {
+        font-size: 13px;
+    width: 115px;
+    height: 40px;
+    line-height: 1.08;
+    vertical-align: top;
+}
+
+.modal .cancel-btn {
+    float: right;
+    margin: 15px 10px 0px 0px;
+}
+
+.modal .confirm-btn {
+    float: right;
+    margin: 15px 36px 0px 0px;
+}
+
+.modal-body {
+    margin-top: 24px;
+    padding: 30px 40px;
+    border: solid 1px #ced3d6;
+}
+
+.modal-body p {
+    color: #676767;
+    line-height: 1;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 16px 0px;
+}
+
+.modal-body input {
+    color: #676767;
+    font-size: 13px;
+    font-weight: normal;
+    margin-bottom: 10px;
+    height: 32px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #ced3d6;
+    padding: 3px 11px;
+    vertical-align: top;
+}
+
+/*
+.modal-body select {
+    color: #676767;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    vertical-align: middle;
+    height: 47px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #ced3d6;
+    padding: 3px 16px;
+}
+
+*/
+
+.calendar{
+        border-bottom-left-radius: 4px 4px!important;
+    border-top-left-radius: 4px 4px!important;
+    border-bottom-right-radius: 0px 0px!important;
+    border-top-right-radius: 0px 0px!important;
+    background: white!important;
+    border: 1px solid #ced3d6;
+    width: 40px!important;
+    height: 40px!important;
+}
+
+
+

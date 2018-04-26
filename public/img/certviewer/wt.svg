@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="41" height="41" viewBox="0 0 41 41">
+    <defs>
+        <path id="a" d="M0 0h1680v70H0z"/>
+        <rect id="b" width="100" height="40" rx="4"/>
+        <rect id="c" width="80" height="40" rx="4"/>
+        <rect id="d" width="40" height="40" rx="4"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(-102 -19)">
+            <use fill="#FFF" xlink:href="#a"/>
+            <path stroke="#DFE5EF" d="M-.5-.5h1681v71H-.5z"/>
+        </g>
+        <g fill="#676767">
+            <text font-family="SpoqaHanSans-Bold, SpoqaHanSans" font-size="15" font-weight="bold" transform="translate(58 -6)">
+                <tspan x="0" y="17">증명서 상세보기</tspan>
+            </text>
+            <text font-family="SpoqaHanSans-Regular, SpoqaHanSans" font-size="13" transform="translate(58 -6)">
+                <tspan x="0" y="38">인하대학교 졸업증명서(학사)</tspan>
+            </text>
+        </g>
+        <path fill="#676767" d="M21.678 7.67l-8.006 7.938A.536.536 0 0 0 13.5 16a.54.54 0 0 0 .172.392l8.006 7.938a.55.55 0 0 0 .396.17c.149 0 .28-.057.395-.17l.859-.852a.537.537 0 0 0 .172-.392.54.54 0 0 0-.172-.392L16.576 16l6.752-6.695a.532.532 0 0 0 0-.783l-.859-.852a.545.545 0 0 0-.79 0z"/>
+        <g transform="translate(1201 -4)">
+            <use fill="#FFF" xlink:href="#b"/>
+            <rect width="99" height="39" x=".5" y=".5" stroke="#CED3D6" rx="4"/>
+        </g>
+        <text fill="#676767" font-family="SpoqaHanSans-Regular, SpoqaHanSans" font-size="14" transform="translate(1201 -4)">
+            <tspan x="24.24" y="26">다운로드</tspan>
+        </text>
+        <g transform="translate(1111 -4)">
+            <use fill="#FFF" xlink:href="#c"/>
+            <rect width="79" height="39" x=".5" y=".5" stroke="#CED3D6" rx="4"/>
+        </g>
+        <text fill="#676767" font-family="SpoqaHanSans-Regular, SpoqaHanSans" font-size="14" transform="translate(1111 -4)">
+            <tspan x="27.12" y="26">인쇄</tspan>
+        </text>
+        <g transform="translate(1311 -4)">
+            <rect width="100" height="40" fill="#4C80F1" rx="4"/>
+            <text fill="#FFF" font-family="SpoqaHanSans-Bold, SpoqaHanSans" font-size="14" font-weight="bold">
+                <tspan x="37.12" y="26">전송</tspan>
+            </text>
+        </g>
+        <g>
+            <g transform="translate(1424 -4)">
+                <use fill="#FFF" xlink:href="#d"/>
+                <rect width="39" height="39" x=".5" y=".5" stroke="#CED3D6" rx="4"/>
+            </g>
+            <g fill="#676767" transform="translate(1436 14)">
+                <circle cx="1.5" cy="1.5" r="1.5"/>
+                <circle cx="8.5" cy="1.5" r="1.5"/>
+                <circle cx="15.5" cy="1.5" r="1.5"/>
+            </g>
+        </g>
+    </g>
+</svg>

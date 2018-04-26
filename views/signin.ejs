@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="css/main/main.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/user.js"></script>
+
+</head>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<body>
+    <div id="header" style="height: 60px">
+        <nav class="navbar">
+            <div class="grid">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#"><img src="img/main/black.svg" id="home_icon"></a>
+                    </li>
+                    <li class="right">
+                        <div class="Button-Shape"><a id="signup" href="#">무료가입</a></div>
+                    </li>
+                    <li id="signin" class="right"><a href="#">로그인</a></li>
+                    <li class="right"><a href="#">기업 서비스</a></li>
+                </ul>
+            </div>
+        </nav>        
+    </div>
+
+    <div class="body-div" style="height: 900px; background-color: #f2f5f8">
+        <div>
+            <h2 style="position: absolute; top: 20%; left: 50%">개인회원 로그인</h2>
+
+            <div id="signin_div" style="position: absolute; top: 30%; left: 40%; width: 400px; height: 300px; border-radius: 5px; background-color: #ffffff; border: solid 1px #eff0f4; padding: 30px 40px;">
+                <p style="color: #676767; line-height: 1; font-size: 14px; font-weight: bold; margin: 16px 0px;">이메일</p>
+                <input style="color: #676767; font-size: 13px; font-weight: normal; margin-bottom: 10px; height: 32px; border-radius: 3px; background-color: #ffffff; border: solid 1px #ced3d6; padding: 3px 11px; vertical-align: top; width: 95%;" id="signin_id" type="text">
+                <p style="color: #676767; line-height: 1; font-size: 14px; font-weight: bold; margin: 16px 0px;">비밀번호</p>
+                <input style="color: #676767; font-size: 13px; font-weight: normal; margin-bottom: 10px; height: 32px; border-radius: 3px; background-color: #ffffff; border: solid 1px #ced3d6; padding: 3px 11px; vertical-align: top; width: 95%;" id="signin_pw" type="password"><br>
+                <button style="cursor:pointer; margin-top: 50px;width: 100%;height: 40px;line-height: 1.08;vertical-align: top;border-radius: 3px;font-size: 15px;background-color: #4c80f1;border: none;color: white;" id="btn_signin">SignIn</button>
+            </div>
+        </div>        
+    </div>
+
+    <div id="footer">
+
+    </div>
+</body>
+
+</html>
