@@ -2,7 +2,7 @@
 function resumeredirect(resumeId) {
     console.log("######## certdirect ###########");
     //console.log(getData(txid));
-    window.location.href = "/certs/"+resumeId;
+    window.location.href = "/resumes/"+resumeId;
 }
 
 function loadresumelist() {
