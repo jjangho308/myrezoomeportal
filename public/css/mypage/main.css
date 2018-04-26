@@ -178,6 +178,10 @@ li a {
     width: 147px;
     height: 147px;
     object-fit: contain;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px 0 rgba(151, 151, 151, 0.32);
+    background-color: #efefef;
+    border: solid 3px #f8f8f8;
 }
 
 #header-2 li {

@@ -53,7 +53,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             uId: uid
         }, (err, users) => {
             if (!!err || users.length < 1) {
-                cb(ClientRequestManager.RESULT_FAILURE);
+                done(ClientRequestManager.RESULT_FAILURE);
                 return;
             } else {
 
@@ -288,9 +288,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     response(clientRequest, agentRequest) {
         console.log('Socket Push : ' + agentRequest);
         var socket = clientRequest.socket;
-
         var db = Managers.db();
-
         var uid = clientRequest.uId;
 
         db.getUserDAO().get({
@@ -314,7 +312,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                         }
 
                         nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (nexledgerres) {
-
                             agentRequest.records[i].txid = nexledgerres.result.txid;
 
                             var db = Managers.db();
@@ -336,7 +333,10 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                             db.getUserDAO().setFristYN(uid, function (dbres2) {
                                 console.log(dbres2);
-                            });
+                            });                            
+
+                            // set default N in initially
+                            agentRequest.records[i].dftYn = 'N';
 
                             if (j == (agentRequest.records.length - 1)) {
                                 try {
@@ -349,21 +349,28 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                             j++;
                         });
-                    } else {
-                        //BLC MAP stored
-                        if (j == (agentRequest.records.length - 1)) {
-                            try {
-                                if(!!socket)
-                                    socket.emit('SearchResult', JSON.stringify(agentRequest));
-                            } catch (exception) {
-                                console.log(exception);
-                                //continue;
+                    } else {                  
+                        // Get BLC MAP Default YN
+                        var data = {
+                            uid : uid,
+                            txid : agentRequest.records[i].txid
+                        };
+
+                        db.getRecordDAO().getDefaultYn(data, function (dbres) {
+                            agentRequest.records[i].dftYn = dbres.DFT_YN;
+                            //BLC MAP stored
+                            if (j == (agentRequest.records.length - 1)) {
+                                try {
+                                    if(!!socket)
+                                        socket.emit('SearchResult', JSON.stringify(agentRequest));
+                                } catch (exception) {
+                                    console.log(exception);
+                                    //continue;
+                                }
                             }
-                        }
-                        j++;
+                            j++;
+                        });
                     }
-
-
                 }).call(this, i);
             }
 

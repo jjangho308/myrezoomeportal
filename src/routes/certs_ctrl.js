@@ -21,7 +21,6 @@ export default {
      * @author TACKSU
      */
     get: (req, res, next) => {
-
         // /certs AJAX request
         if (!!req.xhr) {
             Managers.client().request(new GetCertsRequest(req.body),
@@ -34,11 +33,7 @@ export default {
                         });
                     }
                 });
-        }
-
-        
-        // /certs HTML page
-        else {
+        } else { // /certs HTML page
             var userId = req.body.uId;
             if (!!userId) {
                 var userDAO = Managers.db().getUserDAO();
@@ -128,11 +123,25 @@ export default {
     },
 
     getmapping: (req, res, next) => {
-
         // /certs AJAX request
         if (!!req.xhr) {
             Managers.db().getCertDAO().getSubName(function (dbres) {
                 //console.log(dbres);
+                res.json(dbres);
+            });
+        }
+    },
+
+    setDefault: (req, res, next) => {
+        // /certs AJAX request
+        if (!!req.xhr) {
+            var data = {
+                uid : req.body.uId,
+                txid : req.body.txid,
+                subid : req.body.subid
+            };
+            
+            Managers.db().getRecordDAO().setDefaultYn(data, function (dbres) {
                 res.json(dbres);
             });
         }

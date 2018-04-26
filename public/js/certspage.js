@@ -17,7 +17,7 @@ function certredirect(certId) {
 function loadcertlist() {
     $.ajax({
         type: 'GET',
-        url: '/certs',
+        url: '/certs/list',
         headers: {
             'Authorization': client_authorization
         },
@@ -30,7 +30,7 @@ function loadcertlist() {
 
             for(var i in certlistresult) {
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+certlistresult[i].certId+'")>';
-                htmldiv = htmldiv + '<p>제 1049-4003호 <img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
+                htmldiv = htmldiv + '<p>'+ certlistresult[i].certId +'<img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
                 htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + certlistresult[i].date + '</p>';
@@ -168,7 +168,10 @@ $(document).ready(function(){
                 var id = this.id;
 
                 var sdata = sessionStorage.getItem(id);
-                var jsondata = JSON.parse(sdata);
+                
+                var reqcerts = {};
+                reqcerts.txid = id;
+                reqcerts.record = JSON.parse(sdata);
 
                 console.log("cert req param");
                 console.log(id);
@@ -181,7 +184,7 @@ $(document).ready(function(){
                     data: JSON.stringify({
                         //uId: 'SearchRecord',
                         //sId: '',
-                        cert: jsondata
+                        cert: reqcerts
                     }),
                     success: function (res2) {
                         console.log(res2);

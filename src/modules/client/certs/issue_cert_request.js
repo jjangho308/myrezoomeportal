@@ -20,8 +20,20 @@ class IssueCertificateRequest extends AbstractClientRequesEntity {
      */
     constructor(opt) {
         super(opt);
+
+        /**
+         * User ID of owner of certificate. <br />
+         */
         this.uId = opt.uId;
+
+        /**
+         * Server id of instance. <br />
+         */
         this.sId = opt.sId;
+        
+        /**
+         * Certificate entity. <br />
+         */
         this.cert = opt.cert;
     }
 }

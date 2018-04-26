@@ -1,6 +1,6 @@
 
 var formatter= {    
-    "RCLPT0005":function viewformatter(record) {      
+    "RCLPT0005":function viewformatter(record) {              
         // opic
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
@@ -16,10 +16,11 @@ var formatter= {
             htmldiv = htmldiv + '<p>OPIC</p>';
             htmldiv = htmldiv + '<p>'+record.testid +'</p>';
             htmldiv = htmldiv + '<p>'+record.grade+'</p>';
-            htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
+            htmldiv = htmldiv + '<button onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';        
         $('#spec_forign_lang').append(htmldiv);
+        $('#spec_forign_lang > .spec-body-default').hide();
     },
 
     "RCCNF0001":function viewformatter(record) {
@@ -41,8 +42,8 @@ var formatter= {
             htmldiv = htmldiv + '<button onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
-
         $('#spec_certification').append(htmldiv);
+        $('#spec_certification > .spec-body-default').hide();
     },
 
     "RCOGC0008":function viewformatter(record) {
@@ -61,11 +62,11 @@ var formatter= {
             htmldiv = htmldiv + '<p>인하대학교</p>';
             htmldiv = htmldiv + '<p>'+ record +'</p>';
             htmldiv = htmldiv + '<p>'+record +'</p>';
-            htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
+            htmldiv = htmldiv + '<button onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
-
         $('#spec_edu_detail').append(htmldiv);
+        $('#spec_edu_detail > .spec-body-default').hide();
     },
 
     "RCOGC0009":function viewformatter(record) {
@@ -84,11 +85,11 @@ var formatter= {
             htmldiv = htmldiv + '<p>인하대학교</p>';
             htmldiv = htmldiv + '<p>'+ record.list +'</p>';
             htmldiv = htmldiv + '<p>'+record +'</p>';
-            htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
+            htmldiv = htmldiv + '<button onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
-
         $('#spec_edu_detail').append(htmldiv);
+        $('#spec_edu_detail > .spec-body-default').hide();
     },
 
     "RCLPT0006":function viewformatter(record) {
@@ -107,11 +108,11 @@ var formatter= {
             htmldiv = htmldiv + '<p>OPIC</p>';
             htmldiv = htmldiv + '<p>English Writing</p>';
             htmldiv = htmldiv + '<p>'+record +'</p>';
-            htmldiv = htmldiv + '<button><a href="#spec-change-dialog" rel="modal:open">변경</a></button>';
+            htmldiv = htmldiv + '<button onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
-
         $('#spec_forign_lang').append(htmldiv);
+        $('#spec_forign_lang > .spec-body-default').hide();
     }
 }
 
