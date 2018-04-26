@@ -61,7 +61,7 @@ describe('/resumes URL test suite', () => {
      * @since 180424
      * @author JJANGHO
      */
-    it.skip('Create resume request test case', done => {
+    it('Create resume request test case', done => {
 
         chai.request(app)
             .post('/resumes')
