@@ -80,6 +80,7 @@ class CertificateDAO extends AbstractDAO {
         if (!!creteria.uId) {
             condition = "TUC.UID = '" + creteria.uId + "'";
         }
+        
         if (!!creteria.certId) {
             condition = condition ? condition + ' AND ' : condition;
             condition += "TUC.CERT_ID = '" + creteria.certId + "'";

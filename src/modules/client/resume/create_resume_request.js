@@ -16,7 +16,14 @@ class CreateResumeRequest extends AbstractClientRequestEntity {
      */
     constructor(opt) {
         super(opt);
+        /**
+         * User id of owner of resume entity. <br />
+         */
         this.uId = opt.uId;
+
+        /**
+         * Resume entity. <br />
+         */
         this.resume = opt.resume;
     }
 }
