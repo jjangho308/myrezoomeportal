@@ -49,7 +49,7 @@ $(document).ready(function(){
     });
 
     //request to agent for get user info
-    request_agent();
+    request_agent();    
 
     $('#refresh_record').click(function() {
         
@@ -58,6 +58,10 @@ $(document).ready(function(){
             url: '/client',
             headers: {
                 'Authorization': client_authorization
+            },
+            beforeSend: function() {
+                //clean view
+                $('.spec-body').remove();
             },
             data: JSON.stringify({
                 cmd: 'SearchRecord',
