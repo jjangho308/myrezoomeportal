@@ -78,7 +78,7 @@ class ClientRequestManager extends AbstractManager {
         this.requestMap = new HashMap();
 
         this.handlerMap.set(SignInRequest, new SignInRequestHandler());
-        this.handlerMap.set(SignUpRequest, new SignUpHandler());        
+        this.handlerMap.set(SignUpRequest, new SignUpHandler());
 
         this.entityMap.set('GenerateShortUrl', GenerateShortUrlRequest);
         this.handlerMap.set(GenerateShortUrlRequest, new GenerateShortUrlHandler());
@@ -97,7 +97,7 @@ class ClientRequestManager extends AbstractManager {
         // 기타 등등 cmd 로 관리 되는것들
         this.entityMap.set('SearchRecord', SearchRecordRequest);
         this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
-        
+
         // this.entityMap.set('SetDefault', SearchRecordRequest);
         // this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
 
@@ -133,6 +133,7 @@ class ClientRequestManager extends AbstractManager {
      * @param {function(object, object)} cb Callback function.
      */
     request(request, cb) {
+        this.requestMap.set(request.mId, request);
         this.handlerMap.get(request.constructor).request(request, ((resultCode, result) => {
             switch (resultCode) {
 
@@ -140,6 +141,7 @@ class ClientRequestManager extends AbstractManager {
                 case ClientRequestManager.RESULT_FAILURE:
                     {
                         // result instanceof Error Retry?
+                        this.requestMap.remove(request.mId);
                         cb(result, null);
                         break;
                     }
@@ -147,7 +149,6 @@ class ClientRequestManager extends AbstractManager {
                 case ClientRequestManager.RESULT_PENDING:
                     {
                         // 해당 MessageID에 Request를 저장한다.
-                        this.requestMap.set(request.mId, request);
                         cb(null, result);
                         break;
                     }
@@ -155,6 +156,7 @@ class ClientRequestManager extends AbstractManager {
                 case ClientRequestManager.RESULT_SUCCESS:
                     {
                         // result instanceof Object.
+                        this.requestMap.remove(request.mId);
                         cb(null, result);
                         break;
                     }

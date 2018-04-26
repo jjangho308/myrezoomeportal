@@ -68,7 +68,7 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
                                             txid: bcModels[0].txid
                                         });
 
-                                        // 하나 이력서의 blockchain mapId 구성 완료
+                                        // 하나 이력서의 blockchain mapId 구성 완료함.
                                         if (bcMapIds.length == recordsMap.length) {
                                             bcMapIds.sort((a, b) => {
                                                 return a.order - b.order;
