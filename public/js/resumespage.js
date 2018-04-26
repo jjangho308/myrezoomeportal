@@ -19,6 +19,8 @@ function loadresumelist() {
             var certlistresult = certlistres.result;
             $(".cert-container").remove();
 
+            $('#resumelistcount').text(certlistresult.length + '건');
+
             for(var i in certlistresult) {
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=resumeredirect("'+certlistresult[i].rsmId+'")>';
                 htmldiv = htmldiv + '<p>'+ certlistresult[i].rsmId +'<img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
