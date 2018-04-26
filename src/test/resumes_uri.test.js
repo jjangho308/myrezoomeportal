@@ -20,7 +20,7 @@ describe('/resumes URL test suite', () => {
     before('Service initialize', () => {
         jwtToken = Managers.token().issueToken({
             uId: 'UID1'
-        })
+        });
         chai.use(chaihttp);
     });
 
@@ -35,8 +35,14 @@ describe('/resumes URL test suite', () => {
             });
     });
 
-    //확인 완료
-    it('Resume ajax request', done => {
+
+    /**
+     * Get all resumes of given user. <br />
+     * 
+     * @since 180425
+     * @author TACKSU
+     */
+    it.skip('Resume ajax request', done => {
         chai.request(app)
             .get('/resumes')
             .set('Content-Type', 'application/json')
@@ -44,13 +50,19 @@ describe('/resumes URL test suite', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send()
             .end((err, res) => {
-                //console.log(res);
+                console.log(JSON.stringify(res.body));
                 done();
             });
-    })
+    });
 
-    //확인완료
-    it.skip('Create resume request test case', done => {
+    /**
+     * Create a new resume entity test case. <br />
+     * 
+     * @since 180424
+     * @author JJANGHO
+     */
+    it('Create resume request test case', done => {
+
         chai.request(app)
             .post('/resumes')
             .set('Content-Type', 'application/json')
@@ -58,41 +70,48 @@ describe('/resumes URL test suite', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 resume: {
-                    title: '엘지 이력서',
-                    records: [{
-                        order: 1,
-                        //
-                        mapId: Util.uuid()
-                    }, {
-                        order: 2,
-                        mapId: Util.uuid()
-                    }]
-                }
-            })
-            .end((err, res) => {
-                done();
-            })
-    })
-
-    it.skip('Get resume viewer test case', done => {
-        chai.request(app)
-            .get('/resumes')
-            .set('Content-Type', 'text/html')
-            .set('Authorization', 'Bearer ' + jwtToken)
-            .send({
-                resume: {
-                    title: '삼성 이력서',
-                    records: [
-                        'txid1',
-                        'txid2'
+                    title: '안택수 테스트용 이력서',
+                    data: [{
+                            txid: '35bdf8182ef912f1971efa1b367e69fc8dfa819f94c46d2afc352fe3316893b7',
+                            order: 1,
+                            record: {
+                                subId: 'OPIc',
+                                score: 30
+                            }
+                        },
+                        {
+                            txid: '02f7bae31e7fbced794621aa517b2df5321776a24a02d7305eb1bdbf1e13cb8b',
+                            order: 2,
+                            record: {
+                                subId: 'TOEIC',
+                                score: 900
+                            }
+                        }
                     ]
                 }
             })
             .end((err, res) => {
+                if (!!res.body.result) {
+                    console.log(res.body);
+                    done();
+                }
+            })
+    });
+
+    /**
+     * Test case of specific resume viewer. <br />
+     */
+    it('Get resume viewer test case', done => {
+        chai.request(app)
+            .get('/resumes/c765f105-4a09-4b19-9300-a5e8a7b84840')
+            .set('Content-Type', 'text/html')
+            .set('Authorization', 'Bearer ' + jwtToken)
+            .send()
+            .end((err, res) => {
+                console.log(res.body);
                 done();
             })
     })
-
 
 
     //확인 완료
