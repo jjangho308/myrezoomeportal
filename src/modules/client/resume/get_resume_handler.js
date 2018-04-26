@@ -47,6 +47,8 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
                 for (var i in resumeList) {
                     !((idx) => {
 
+                        console.log(resumeList[idx].blcMap);
+
                         // Remove 'sId' field.
                         delete resumeList[idx].sId;
 
