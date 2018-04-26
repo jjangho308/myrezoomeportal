@@ -133,6 +133,7 @@ class ClientRequestManager extends AbstractManager {
      * @param {function(object, object)} cb Callback function.
      */
     request(request, cb) {
+        this.requestMap.set(request.mId, request);
         this.handlerMap.get(request.constructor).request(request, ((resultCode, result) => {
             switch (resultCode) {
 
