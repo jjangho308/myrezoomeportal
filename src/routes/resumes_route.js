@@ -14,6 +14,11 @@ router.post('/', tokenAuth);
 router.post('/', ctrl.post);
 router.post('/', view);
 
+
+
+router.get('/list', tokenAuth);
+router.get('/list', ctrl.get);
+
 /**
  * Route for html page. <br />
  */
@@ -21,8 +26,6 @@ router.get('/:rsmId', tokenAuth);
 router.get('/:rsmId', ctrl.getResume);
 router.get('/:rsmId', view);
 
-router.get('/list', tokenAuth);
-router.get('/list', ctrl.get);
 
 /**
  * Route for /:rsmId. <br />
