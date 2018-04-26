@@ -64,11 +64,17 @@ export default {
      * @author TACKSU
      */
     getResume: (req, res, next) => {
-        var resumeId = req.params.rsmId;
-        if (!!resumeId) {
-            // TODO 특정 이력서에 대한 뷰 화면으로 넘겨줘야 함.
-
-            res.render('resume_viewer', resumeEntity);
+        req.body.rsmId = req.params.rsmId;
+        if (!!req.body.rsmId) {
+            Managers.client().request(new GetResumeRequest(req.body), (err, result) => {
+                if (!!err) {
+                    next(err);
+                } else {
+                    res.json({
+                        result: result
+                    });
+                }
+            });
         }
     },
 

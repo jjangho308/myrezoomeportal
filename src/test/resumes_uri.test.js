@@ -42,7 +42,7 @@ describe('/resumes URL test suite', () => {
      * @since 180425
      * @author TACKSU
      */
-    it('Resume ajax request', done => {
+    it.skip('Resume ajax request', done => {
         chai.request(app)
             .get('/resumes')
             .set('Content-Type', 'application/json')
@@ -50,10 +50,10 @@ describe('/resumes URL test suite', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send()
             .end((err, res) => {
-                //console.log(res);
+                console.log(JSON.stringify(res.body));
                 done();
             });
-    })
+    });
 
     /**
      * Create a new resume entity test case. <br />
@@ -61,7 +61,7 @@ describe('/resumes URL test suite', () => {
      * @since 180424
      * @author JJANGHO
      */
-    it.skip('Create resume request test case', done => {
+    it('Create resume request test case', done => {
 
         chai.request(app)
             .post('/resumes')
@@ -96,18 +96,19 @@ describe('/resumes URL test suite', () => {
                     done();
                 }
             })
-    })
+    });
 
     /**
      * Test case of specific resume viewer. <br />
      */
-    it.skip('Get resume viewer test case', done => {
+    it('Get resume viewer test case', done => {
         chai.request(app)
-            .get('/resumes/884394b8-b2eb-4c58-a707-e2cda423f16f')
+            .get('/resumes/c765f105-4a09-4b19-9300-a5e8a7b84840')
             .set('Content-Type', 'text/html')
             .set('Authorization', 'Bearer ' + jwtToken)
             .send()
             .end((err, res) => {
+                console.log(res.body);
                 done();
             })
     })

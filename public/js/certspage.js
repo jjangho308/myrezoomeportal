@@ -28,6 +28,8 @@ function loadcertlist() {
             var certlistresult = certlistres.result;
             $(".cert-container").remove();
 
+            $('#certlistcount').text(certlistresult.length + '건');
+
             for(var i in certlistresult) {
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+certlistresult[i].certId+'")>';
                 htmldiv = htmldiv + '<p>'+ certlistresult[i].certId +'<img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';

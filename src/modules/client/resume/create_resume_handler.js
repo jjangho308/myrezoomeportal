@@ -45,7 +45,7 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
         var resumeModel = new ResumeModel({
             rsmId: Util.uuid(),
             uId: request.uId,
-            updtStatus: request.updtStatus,
+            status: request.resume.status,
             title: request.resume.title,
         });
 

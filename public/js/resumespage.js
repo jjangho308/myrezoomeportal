@@ -2,13 +2,13 @@
 function resumeredirect(resumeId) {
     console.log("######## certdirect ###########");
     //console.log(getData(txid));
-    window.location.href = "/certs/"+resumeId;
+    window.location.href = "/resumes/"+resumeId;
 }
 
 function loadresumelist() {
     $.ajax({
         type: 'GET',
-        url: '/resumes',
+        url: '/resumes/list',
         headers: {
             'Authorization': client_authorization
         },
@@ -18,6 +18,8 @@ function loadresumelist() {
 
             var certlistresult = certlistres.result;
             $(".cert-container").remove();
+
+            $('#resumelistcount').text(certlistresult.length + '건');
 
             for(var i in certlistresult) {
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=resumeredirect("'+certlistresult[i].rsmId+'")>';
