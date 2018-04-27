@@ -49,8 +49,7 @@ $(document).ready(function(){
     });
 
     //request to agent for get user info
-    request_agent();   
-    //test_setTestData();
+    request_agent();
     getPrivateRecords();
 
     $('#refresh_record').click(function() {
@@ -128,11 +127,10 @@ function getPrivateRecords() {
         url: '/record/list',
         headers: {
             'Authorization': client_authorization
-        },
-        //data: JSON.stringify(),
+        },        
         beforeSend: function() {
             //clean view
-            //$('.spec-body').remove();
+            $('.private-spec-body').remove();
         },
         success: function (res) {
             for(var i in res) {  
@@ -240,8 +238,6 @@ function refreshview(records) {
 function clientsocket_listener() {
     socket.on('SearchResult', function(msg){
         var omsg = JSON.parse(msg);
-        console.log('message: ');
-        console.log(omsg);
 
         var orgcode = omsg.orgcode;        
         for(var i=0; i<omsg.records.length ; i++) {            

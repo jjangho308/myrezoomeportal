@@ -116,9 +116,8 @@ var formatter= {
     },
 
     "ETC":function viewformatter(record) {
-        console.log(record);
         // Private record
-        var htmldiv = '<div class="spec-body">';
+        var htmldiv = '<div class="private-spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<span></span>';
             htmldiv = htmldiv + '<span></span>';
@@ -126,7 +125,7 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+            htmldiv = htmldiv + '';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>사용자입력</p>';

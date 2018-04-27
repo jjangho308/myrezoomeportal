@@ -328,6 +328,22 @@ li a {
     border-bottom: solid 1px #dfe5ef;
 }
 
+.private-spec-body-default{
+    height: 102px;
+    border-bottom: solid 1px #dfe5ef;
+    color: #a9afb3;
+    font-size: 13px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 102px;
+    
+}
+
+.private-spec-body {
+    padding: 20px 10px;
+    border-bottom: solid 1px #dfe5ef;
+}
+
 .spec-left {
     display: inline-block;
     width: 220px;

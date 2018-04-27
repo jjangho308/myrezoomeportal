@@ -284,29 +284,8 @@ $(document).ready(function () {
                 $("#alarm-div span").text("사용자 이력 수기 입력했다.");
                 $('#alarm-div').css("display", "block");
                 
-                // // sessionStrage update
-                // var txidList = getTxidList();         
-                // for(var i in txidList) {
-                //     try {
-                //         var record = getData(txidList[i]);
-                //         var dftYn = record.dftYn;             
-                //         var subidTmp = record.subid;
-                //         var jsonData = record.data;            
-                //         if(subid == subidTmp) {
-                //             if(txid == record.txid) {
-                //                 record.dftYn = "Y";
-                //             } else {
-                //                 record.dftYn = "N";
-                //             }
-                //             record.data = JSON.stringify(record.data);
-                //             setData(record);
-                //         }
-                //     } catch (exception) {
-                //         console.log(exception);
-                //         continue;
-                //     }
-                // }
-                // refreshview();
+                //clean view
+                 $('.private-spec-body').remove();
             },
             contentType: 'application/json',
         });
