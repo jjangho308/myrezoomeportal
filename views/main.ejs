@@ -306,29 +306,28 @@ UserModel render용 키 정보 :
 
             <p>자격명</p>
             
-            <input type="text" id="cert-name" placeholder="자격증의 이름을 입력해주세요. EX) 정보처리기사">
+            <input type="text" id="certadd_name" placeholder="자격증의 이름을 입력해주세요. EX) 정보처리기사">
             
 
             <p>성적</p>
 
-                <input type="text" id="cert-grade" placeholder="성적을 입력해주세요. EX) 취득">
+                <input type="text" id="certadd_grade" placeholder="성적을 입력해주세요. EX) 취득">
             
             <p>유효 기간</p>
 
             <div>
                 <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
-                <input type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
+                <input id="certadd_startdate" type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
                 <span id="study-period-span">~</span>
                 <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
-                <input type="text" class="form-control study-period" placeholder="YYYY-MM-DD" />
+                <input id="certadd_enddate" type="text" class="form-control study-period" placeholder="YYYY-MM-DD" />
 
                 <div id="expire-checkbox">
                     <input id="cert-checkbox" class="styled" type="checkbox">
                     <label for="cert-checkbox">
                         만료기간 없음
                     </label>
-                </div>
-                    
+                </div>                    
             </div>
 
         </div>

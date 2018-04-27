@@ -1,9 +1,7 @@
 import Managers from '../core/managers';
-
-
 import SearchRecordsRequest from '../modules/client/record/search_record';
-import GetRecordsRequest from '../modules/client/record/get_records_request'
-import CreatePrivateRecordRequest from '../modules/client/record/create_record';
+import GetPrivateRecordsRequest from '../modules/client/record/get_records_request'
+import CreatePrivateRecordRequest from '../modules/client/record/create_record_request';
 import UpdatePrivateRecordRequest from '../modules/client/record/update_record';
 
 /**
@@ -20,20 +18,17 @@ export default {
      * @since 180402
      * @author TACKSU
      */
-    get: (req, res, next) => {
-        var userId = req.params.uId;
-
-        if (!!req.xhr) {
-            req.body.uId = userId;
-            Managers.client().request(new SearchRecordsRequest(req.body), (err, result) => {
+    get: (req, res, next) => {        
+        if (!!req.xhr) {            
+            Managers.client().request(new GetPrivateRecordsRequest(req.body.uId), (err, result) => {                
                 if (!!err) {
                     res.status(500).json(err);
-                } else {
+                } else {                    
                     res.json(result);
                 }
-            })
+            });
         }
-        next();
+        //next();
     },
 
     /**
@@ -44,7 +39,7 @@ export default {
      */
     post: (req, res, next) => {
         if (!!req.xhr) {
-            Mangers.client().request(new CreatePrivateRecordRequest(req.body), (err, result) => {
+            Managers.client().request(new CreatePrivateRecordRequest(req.body), (err, result) => {
                 if (!!err) {
                     res.status(500).json(err);
                 } else {
@@ -65,7 +60,7 @@ export default {
     patch: (req, res, next) => {
         var recordId = req.params.recordId;
         req.body.recordId = req.params.recordId;
-        Manager.client().request(new UpdatePrivateRecordRequest(req.body), (err, result) => {
+        Managers.client().request(new UpdatePrivateRecordRequest(req.body), (err, result) => {
             if (!!err) {
                 res.status(500).json(err);
             } else {

@@ -11,13 +11,17 @@ import view from '../mw/view';
  */
 var router = express.Router();
 
-router.get('/', tokenAuth);
-router.get('/', ctrl.get);
-router.get('/', view);
+// router.get('/', tokenAuth);
+// router.get('/', ctrl.get);
+// router.get('/', view);
 
 router.post('/', tokenAuth);
 router.post('/', ctrl.post);
 router.post('/', view);
+
+router.get('/list', tokenAuth);
+router.get('/list', ctrl.get);
+router.get('/list', view);
 
 router.patch('/:recordId', tokenAuth);
 router.patch('/:recordId', ctrl.patch);

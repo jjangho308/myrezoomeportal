@@ -9,7 +9,7 @@ import AbstractClientRequestEntity from "../abstract_client_request_entity";
 class GetRecordRequest extends AbstractClientRequestEntity {
     constructor(opt) {
         super(opt);
-        this.uId = opt.userId;
+        this.uId = opt;
     }
 }
 

@@ -5,6 +5,8 @@
  * @author JJANGHO
  */
 var BLC_MAP_TABLE = 'TCDA_BLC_MAP';
+var CERT_PRVT_TABLE = 'rezoome_db.TCDA_USR_CERT_PRVT';
+
 export default {
     getStoredDataByUserIdAndOrgID : "SELECT * FROM rezoome_db.TCDA_BLC_MAP WHERE `UID` = ? and `ORG_ID` = ? ",
     getStoredDataByUserId : "SELECT * FROM rezoome_db.TCDA_BLC_MAP WHERE `UID` = ? ",
@@ -19,5 +21,9 @@ export default {
     getTxid : 'SELECT * FROM ' + BLC_MAP_TABLE + ' WHERE ?',
     getDefaultYn : "SELECT DFT_YN FROM " + BLC_MAP_TABLE + " WHERE `UID` = ? AND `TRX_ID` = ?",
     setDefaultYnInit : "UPDATE " + BLC_MAP_TABLE + " SET `DFT_YN` = 'N' WHERE `SUB_ID` = ?",
-    setDefaultYn : "UPDATE " + BLC_MAP_TABLE + " SET `DFT_YN` = 'Y' WHERE `UID` = ? AND `TRX_ID` = ?"
+    setDefaultYn : "UPDATE " + BLC_MAP_TABLE + " SET `DFT_YN` = 'Y' WHERE `UID` = ? AND `TRX_ID` = ?",
+
+    issuePrivateRecord : "INSERT INTO " + CERT_PRVT_TABLE + " SET ?",
+    getPrivateRecord : "SELECT * FROM " + CERT_PRVT_TABLE + " WHERE `DEL_YN` = 'N' AND `UID` = ?",
+    delPrivateRecord : ""
 }

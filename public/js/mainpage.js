@@ -49,7 +49,9 @@ $(document).ready(function(){
     });
 
     //request to agent for get user info
-    request_agent();    
+    request_agent();   
+    //test_setTestData();
+    getPrivateRecords();
 
     $('#refresh_record').click(function() {
         
@@ -118,6 +120,28 @@ function change_default_cert(subid) {
     }
     
     $('#spec-change-dialog').modal('show');
+}
+
+function getPrivateRecords() {
+    $.ajax({
+        type: 'GET',
+        url: '/record/list',
+        headers: {
+            'Authorization': client_authorization
+        },
+        //data: JSON.stringify(),
+        beforeSend: function() {
+            //clean view
+            //$('.spec-body').remove();
+        },
+        success: function (res) {
+            for(var i in res) {  
+                var data = JSON.parse(res[i].data);
+                data.certPrvtId = res[i].certPrvtId;
+                formatter[res[i].certCd](data);
+            }            
+        }
+    });
 }
 
 function request_agent() {
