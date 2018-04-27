@@ -40,7 +40,7 @@ class CreateRecordRequestHandler extends AbstractClientRequestHandler {
             if (!!err) {                
                 cb(ClientRequest.RESULT_FAILURE, err);
             } else {
-                console.log(result);
+                cb(ClientRequest.RESULT_FAILURE, result);
             }
         });
     }

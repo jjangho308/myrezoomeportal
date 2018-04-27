@@ -182,6 +182,17 @@ class RecordDAO extends AbstractDAO {
             }
         });
     }
+
+    deletePrivateRecord(creteria, cb) {       
+        var query = mysql.format(recordQuery.delPrivateRecord, [creteria.uId, creteria.prvtId]);     
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err, null);
+            } else {                    
+                cb(err, rows);
+            }
+        });
+    }
 }
 
 export default RecordDAO;

@@ -131,7 +131,7 @@ var formatter= {
             htmldiv = htmldiv + '<p>사용자입력</p>';
             htmldiv = htmldiv + '<p>'+record.name +'</p>';
             htmldiv = htmldiv + '<p>'+record.grade +'</p>';
-            htmldiv = htmldiv + '<button onclick=delete_default_cert("' + record.certPrvtId + '")>삭제</button>';
+            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
         $('#spec_certification').append(htmldiv);

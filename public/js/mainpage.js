@@ -49,7 +49,7 @@ $(document).ready(function(){
     });
 
     //request to agent for get user info
-    request_agent();
+    request_agent();    
     getPrivateRecords();
 
     $('#refresh_record').click(function() {
@@ -119,6 +119,23 @@ function change_default_cert(subid) {
     }
     
     $('#spec-change-dialog').modal('show');
+}
+
+function delete_private_record(prvtId) {
+    $.ajax({
+        type: 'POST',
+        url: '/record/'+prvtId,
+        headers: {
+            'Authorization': client_authorization
+        },        
+        beforeSend: function() {
+            //clean view
+            $('.private-spec-body').remove();
+        },
+        success: function (res) {
+            getPrivateRecords();          
+        }
+    });
 }
 
 function getPrivateRecords() {

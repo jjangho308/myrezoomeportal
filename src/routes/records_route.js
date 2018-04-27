@@ -23,6 +23,10 @@ router.get('/list', tokenAuth);
 router.get('/list', ctrl.get);
 router.get('/list', view);
 
+router.post('/:prvtId', tokenAuth);
+router.post('/:prvtId', ctrl.del);
+router.post('/:prvtId', view);
+
 router.patch('/:recordId', tokenAuth);
 router.patch('/:recordId', ctrl.patch);
 router.patch('/:recordId', view);

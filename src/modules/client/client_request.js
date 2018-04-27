@@ -47,6 +47,9 @@ import CreatePrivateRecordRequest from './record/create_record_request';
 import CreatePrivateRecordHandler from './record/create_record_handler';
 import GetPrivateRecordsRequest from './record/get_records_request';
 import GetPrivateRecordsHandler from './record/get_records_handler';
+import DeletePrivateRecordRequest from './record/delete_record_request';
+import DeletePrivateRecordHandler from './record/delete_record_handler';
+
 
 /**
  * '/client' 'GenerateShortUrl' command request. <br />
@@ -105,6 +108,7 @@ class ClientRequestManager extends AbstractManager {
 
         this.handlerMap.set(CreatePrivateRecordRequest, new CreatePrivateRecordHandler());
         this.handlerMap.set(GetPrivateRecordsRequest, new GetPrivateRecordsHandler());
+        this.handlerMap.set(DeletePrivateRecordRequest, new DeletePrivateRecordHandler());
 
         // 기타 등등 cmd 로 관리 되는것들
         this.entityMap.set('SearchRecord', SearchRecordRequest);

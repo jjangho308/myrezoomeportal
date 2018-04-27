@@ -25,5 +25,5 @@ export default {
 
     issuePrivateRecord : "INSERT INTO " + CERT_PRVT_TABLE + " SET ?",
     getPrivateRecord : "SELECT * FROM " + CERT_PRVT_TABLE + " WHERE `DEL_YN` = 'N' AND `UID` = ?",
-    delPrivateRecord : ""
+    delPrivateRecord : "UPDATE " + CERT_PRVT_TABLE + " SET `DEL_YN` = 'Y' WHERE `UID` = ? AND `CERT_PRVT_ID` = ?"
 }
