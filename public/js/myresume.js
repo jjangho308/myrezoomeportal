@@ -248,6 +248,50 @@ $(document).ready(function () {
 
     });
 
+    $(document).on('click', '#cert-add-dialog .confirm-btn', function () {        
+        
+        var name = $("#certadd_name").val();
+        var grade = $("#certadd_grade").val();        
+        var start_date = $("#certadd_startdate").val();
+        var end_date = $("#certadd_enddate").val();
+
+        // cert format
+        var param = {
+            name: name,
+            grade: grade,
+            startdate: start_date,
+            enddate: end_date
+        }
+
+        // cert encryption
+        var enc_record = JSON.stringify(param);
+
+        $.ajax({
+            type: 'POST',
+            url: '/record',
+            headers: {
+                'Authorization': client_authorization
+            },
+            data: JSON.stringify({                
+                certCd: "ETC", // 자격 코드 입력하는 구분자가 필요할 듯
+                data: enc_record
+            }),
+            beforeSend: function() {
+                
+            },
+            success: function (res) {
+                $("#cert-add-dialog .close-modal").click();
+                $("#alarm-div span").text("사용자 이력 수기 입력했다.");
+                $('#alarm-div').css("display", "block");
+                
+                //clean view
+                 $('.private-spec-body').remove();
+            },
+            contentType: 'application/json',
+        });
+
+    });
+
     $(document).click(function (e) {        
         if ($(e.target).attr('class') == "more-store-resume")
             return;
