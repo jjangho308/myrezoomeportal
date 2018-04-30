@@ -23,6 +23,7 @@ router.use('/', intro_router);
 router.use('/signin', signin_router);
 router.use('/signup', signup_router);
 router.use('/main', main_router);
+router.use('/record', records_router);
 router.use('/records', records_router);
 router.use('/certs', certs_router);
 router.use('/resumes', resumes_router);

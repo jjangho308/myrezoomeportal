@@ -50,6 +50,7 @@ $(document).ready(function(){
 
     //request to agent for get user info
     request_agent();    
+    getPrivateRecords();
 
     $('#refresh_record').click(function() {
         
@@ -118,6 +119,44 @@ function change_default_cert(subid) {
     }
     
     $('#spec-change-dialog').modal('show');
+}
+
+function delete_private_record(prvtId) {
+    $.ajax({
+        type: 'POST',
+        url: '/record/'+prvtId,
+        headers: {
+            'Authorization': client_authorization
+        },        
+        beforeSend: function() {
+            //clean view
+            $('.private-spec-body').remove();
+        },
+        success: function (res) {
+            getPrivateRecords();          
+        }
+    });
+}
+
+function getPrivateRecords() {
+    $.ajax({
+        type: 'GET',
+        url: '/record/list',
+        headers: {
+            'Authorization': client_authorization
+        },        
+        beforeSend: function() {
+            //clean view
+            $('.private-spec-body').remove();
+        },
+        success: function (res) {
+            for(var i in res) {  
+                var data = JSON.parse(res[i].data);
+                data.certPrvtId = res[i].certPrvtId;
+                formatter[res[i].certCd](data);
+            }            
+        }
+    });
 }
 
 function request_agent() {
@@ -216,8 +255,6 @@ function refreshview(records) {
 function clientsocket_listener() {
     socket.on('SearchResult', function(msg){
         var omsg = JSON.parse(msg);
-        console.log('message: ');
-        console.log(omsg);
 
         var orgcode = omsg.orgcode;        
         for(var i=0; i<omsg.records.length ; i++) {            

@@ -5,6 +5,7 @@ import Env from '../core/environment';
 import GetCertsRequest from '../modules/client/certs/get_certs_request';
 import IssueNewCertRequest from '../modules/client/certs/issue_cert_request';
 import UpdateCertRequest from '../modules/client/certs/update_cert_request';
+import DeleteCertRequest from '';
 
 /**
  * Controller for /certs URI. <br />
@@ -146,4 +147,23 @@ export default {
             });
         }
     },
+
+
+    deleteCert: (req, res, next) => {
+        //
+        if(!!req.xhr) {
+            var data = {                
+                certId : req.body.certId
+            }
+            Managers.client().request(new DeleteCertRequest(data), (err, result) => {
+                if(!!err){
+                    next(err);
+                }else{
+                    res.json(result);
+                }
+            })
+
+        } ;
+
+    }
 }
