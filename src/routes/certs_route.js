@@ -40,4 +40,8 @@ router.post('/getmapping',ctrl.getmapping);
 router.post('/setDefault', tokenAuth);
 router.post('/setDefault',ctrl.setDefault);
 
+// 증명서 삭제 Ajax request controller.
+router.delete('/deleteCert', tokenAuth);
+router.delete('/deleteCert', ctrl.deleteCert);
+
 export default router;

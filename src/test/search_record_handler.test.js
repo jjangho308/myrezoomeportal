@@ -12,36 +12,16 @@ describe('SearchRecordRequestHandler Test suit', () => {
     it('1. SearchRecordRequestHandler process TEST', (done) => {
         HD.request({
             "mId": "message928936142234",
-
             //token
-            "uId": "UID2",
-
-            "update" : false,
-            
+            "uId": "UID1",
+            "update" : true,
             "cmd": "SearchRecord",
-
             "sid": "svr1",
-
             "pkey": "ewkrjdsifjcvasdfjkasdkfljjei",
+            "n": 'nnnnnnnnnnnnnnnnnnnnnnnnn',
+            "e": 'eeeeeeeeeeeeeeeeeeeeeeeee'
         }, function (res) {
-            console.log(res);
-            HD.request({
-                "mId": "message928936142234",
-    
-                //token
-                "uId": "UID2",
-    
-                "update" : false,
-                
-                "cmd": "SearchRecord",
-    
-                "sid": "svr1",
-    
-                "pkey": "ewkrjdsifjcvasdfjkasdkfljjei",
-            }, function(res){
-                console.log(res);
-            })
-            
+            console.log(res);            
         });
 
     }).timeout(10000);
