@@ -1,5 +1,6 @@
 var socket;
 var client_token;
+var rsaKeypair;
 
 function leadingZeros(n, digits) {
     var zero = '';
