@@ -79,6 +79,18 @@ class CryptoManager extends AbstractManager {
     }
 
     /**
+     * Generate initialization vector. <br />
+     * 
+     * @since 180430
+     * @author TACKSU
+     * 
+     * @param {*} cb
+     */
+    generateIV(cb) {
+        crypto.randomBytes(this.spec.ivLength, cb);
+    }
+
+    /**
      * Generate Symmetric key by cryptographic specification. <br />
      * 
      * @since 180305
