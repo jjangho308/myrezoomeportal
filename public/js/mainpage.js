@@ -167,6 +167,12 @@ function getPrivateRecords() {
 }
 
 function request_agent() {
+
+    rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
+    console.log(rsaKeypair);
+    var pubkeyn = rsaKeypair.pubKeyObj.n.toString();
+    var pubkeye = rsaKeypair.pubKeyObj.e.toString(); 
+
     $.ajax({
         type: 'POST',
         url: '/client',
@@ -178,7 +184,9 @@ function request_agent() {
             
             args: {
                 pkey: 'asdfasdf',
-                update: false
+                update: false,
+                n : pubkeyn,
+                e : pubkeye
             }
             
         }),
