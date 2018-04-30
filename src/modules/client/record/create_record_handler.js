@@ -40,7 +40,7 @@ class CreateRecordRequestHandler extends AbstractClientRequestHandler {
             if (!!err) {                
                 cb(ClientRequest.RESULT_FAILURE, err);
             } else {
-                cb(ClientRequest.RESULT_FAILURE, result);
+                cb(ClientRequest.RESULT_SUCCESS, result);
             }
         });
     }

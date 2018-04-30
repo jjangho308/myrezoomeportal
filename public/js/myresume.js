@@ -286,6 +286,7 @@ $(document).ready(function () {
                 
                 //clean view
                  $('.private-spec-body').remove();
+                 getPrivateRecords();
             },
             contentType: 'application/json',
         });

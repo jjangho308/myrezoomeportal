@@ -5,7 +5,7 @@ import Env from '../core/environment';
 import GetCertsRequest from '../modules/client/certs/get_certs_request';
 import IssueNewCertRequest from '../modules/client/certs/issue_cert_request';
 import UpdateCertRequest from '../modules/client/certs/update_cert_request';
-import DeleteCertRequest from '';
+import DeleteCertRequest from '../modules/client/certs/delete_cert_request';
 
 /**
  * Controller for /certs URI. <br />
