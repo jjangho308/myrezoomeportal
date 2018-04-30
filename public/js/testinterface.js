@@ -248,3 +248,22 @@ record = {
    }
    refreshview(record.args.records);
 }
+
+function test_genrsakey() {
+    var rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
+    console.log(rsaKeypair);
+    var jwkPub1 = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj);
+    console.log(jwkPub1);
+}
+
+function test_aestest() {
+        var IV  = "F27D5C9927726BCEFE7510B1BDD3D137";
+        //var salt = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
+        var SALT = "3FF2EC019C627B945225DEBAD71A01B6985FE84C95A70EB132882F88C0A59A55";
+        var aesUtil = new AesUtil(128, 10000);
+        var PASSPHRASE = "passPhrase passPhrase aes encoding algorithm";
+        
+        //var key = aesUtil.generateKey(SALT, PASSPHRASE)
+        var decrypted = aesUtil.decrypt(SALT, IV, PASSPHRASE, "TUp70t3jlLdSoslEp9Kl8ig0VWqvczLyTRjHQbnkNpw=")
+        console.log(decrypted);
+}
