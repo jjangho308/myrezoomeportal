@@ -33,9 +33,11 @@ class CryptoManager extends AbstractManager {
      */
     init(from) {
         this.setDefaultSpec({
-            symLength: 64,
-            asmLength: 64,
-            encode: 'base64'
+            ivLength: 16,
+            symLength: 32,
+            asmLength: 32,
+            encode: 'base64',
+            symAlg: 'aes256'
         })
     }
 
@@ -73,7 +75,7 @@ class CryptoManager extends AbstractManager {
      * @param {function} cb Callback.
      */
     generatePRN(length, cb) {
-        crypto.randomBytes(length, cb);
+        crypto.randomBytes(!!length ? length : this.spec.ivLength, cb);
     }
 
     /**
@@ -85,12 +87,12 @@ class CryptoManager extends AbstractManager {
      * @param {function(object, string)} cb 
      */
     generateAESKey(cb) {
-        crypto.randomBytes(this.spec.symLength, (err, key) => {
+        crypto.randomBytes(this.spec.symLength, ((err, key) => {
             if (err) {
                 cb(err);
             }
             cb(null, key.toString(this.spec.encode));
-        });
+        }).bind(this));
     }
 
     /**
@@ -119,11 +121,16 @@ class CryptoManager extends AbstractManager {
      */
     encryptAES(plain, key, cb) {
         this.generatePRN(this.spec.ivLength, ((err, iv) => {
-            var cipher = crypto.createCipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), iv);
-            cipher.setAutoPadding(true);
-            var encrypted = cipher.update(plain, 'utf8', this.spec.encode);
-            encrypted += cipher.final(this.spec.encode);
-            cb(null, iv.toString(this.spec.encode), encrypted);
+            try {
+                var cipher = crypto.createCipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), iv);
+                cipher.setAutoPadding(true);
+                var encrypted = cipher.update(plain, 'utf8', this.spec.encode);
+                encrypted += cipher.final(this.spec.encode);
+                cb(null, iv.toString(this.spec.encode), encrypted);
+            } catch (e) {
+                console.log(e);
+            }
+
         }).bind(this));
     }
 
