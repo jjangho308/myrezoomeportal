@@ -254,14 +254,18 @@ $(document).ready(function () {
         var grade = $("#certadd_grade").val();        
         var start_date = $("#certadd_startdate").val();
         var end_date = $("#certadd_enddate").val();
+        var expireYn = $("#certadd_expireYn").is(':checked');
 
         // cert format
         var param = {
             name: name,
             grade: grade,
             startdate: start_date,
-            enddate: end_date
+            enddate: end_date,
+            expireYn: expireYn
         }
+
+        console.log(param);
 
         // cert encryption
         var enc_record = JSON.stringify(param);
@@ -281,6 +285,55 @@ $(document).ready(function () {
             },
             success: function (res) {
                 $("#cert-add-dialog .close-modal").click();
+                $("#alarm-div span").text("사용자 이력 수기 입력했다.");
+                $('#alarm-div').css("display", "block");
+                
+                //clean view
+                 $('.private-spec-body').remove();
+                 getPrivateRecords();
+            },
+            contentType: 'application/json',
+        });
+
+    });
+
+    $(document).on('click', '#language-add-dialog .confirm-btn', function () {        
+        
+        var lang = $("#langadd_lang").val();
+        var name = $("#langadd_name").val();
+        var grade = $("#langadd_grade").val();        
+        var start_date = $("#langadd_startdate").val();
+        var end_date = $("#langadd_enddate").val();
+        var expireYn = $("#langadd_expireYn").is(':checked');
+
+        // cert format
+        var param = {
+            lang: lang,
+            name: name,
+            grade: grade,
+            startdate: start_date,
+            enddate: end_date,
+            expireYn: expireYn
+        }
+
+        // cert encryption
+        var enc_record = JSON.stringify(param);
+
+        $.ajax({
+            type: 'POST',
+            url: '/record',
+            headers: {
+                'Authorization': client_authorization
+            },
+            data: JSON.stringify({                
+                certCd: "LANG", // 자격 코드 입력하는 구분자가 필요할 듯
+                data: enc_record
+            }),
+            beforeSend: function() {
+                
+            },
+            success: function (res) {
+                $("#language-add-dialog .close-modal").click();
                 $("#alarm-div span").text("사용자 이력 수기 입력했다.");
                 $('#alarm-div').css("display", "block");
                 

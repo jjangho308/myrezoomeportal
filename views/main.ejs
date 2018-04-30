@@ -326,8 +326,8 @@ UserModel render용 키 정보 :
                 <input id="certadd_enddate" type="text" class="form-control study-period" placeholder="YYYY-MM-DD" />
 
                 <div id="expire-checkbox">
-                    <input id="cert-checkbox" class="styled" type="checkbox">
-                    <label for="cert-checkbox">
+                    <input id="certadd_expireYn" class="styled" type="checkbox">
+                    <label for="certadd_expireYn">
                         만료기간 없음
                     </label>
                 </div>                    
@@ -347,31 +347,29 @@ UserModel render용 키 정보 :
             <p>시험명</p>
             
                 <div class="select-100">
-                <select name="select-1">
-                        <option value="volvo">영어</option>
-                        <option value="saab">중국어</option>
-                        <option value="awdaw">기타</option>
+                <select id="langadd_lang" name="select-1">
+                        <option value="eng">영어</option>
+                        <option value="chn">중국어</option>
+                        <option value="etc">기타</option>
                 </select>
             </div>
-            <input type="text" id="language-name" placeholder="어학 시험명을 입력해주세요. EX) OPIc">
+            <input type="text" id="langadd_name" placeholder="어학 시험명을 입력해주세요. EX) OPIc">
             
 
             <p>성적</p>
-
-                <input type="text" id="language-grade" placeholder="성적을 입력해주세요. EX) Advanced Low">
-            
+                <input type="text" id="langadd_grade" placeholder="성적을 입력해주세요. EX) Advanced Low">            
             <p>유효 기간</p>
 
             <div>
                 <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
-                <input type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
+                <input type="text" id="langadd_startdate" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
                 <span id="study-period-span">~</span>
                 <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
-                <input type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
+                <input type="text" id="langadd_enddate" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
 
                 <div id="expire-checkbox">
-                    <input id="checkbox2" class="styled" type="checkbox" checked="">
-                    <label for="checkbox2">
+                    <input id="langadd_expireYn" class="styled" type="checkbox">
+                    <label for="langadd_expireYn">
                         만료기간 없음
                     </label>
                 </div>                    
