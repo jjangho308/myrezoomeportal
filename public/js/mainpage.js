@@ -54,8 +54,9 @@ $(document).ready(function(){
 
     rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
     console.log(rsaKeypair);
-    var pubkeyn = rsaKeypair.pubKeyObj.n.toString();
-    var pubkeye = rsaKeypair.pubKeyObj.e.toString(); 
+    //var pubkeyn = rsaKeypair.pubKeyObj.n.toString();
+    //var pubkeye = rsaKeypair.pubKeyObj.e.toString(); 
+    var jwkPub2 = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj); 
 
     $('#refresh_record').click(function() {
         
@@ -75,8 +76,8 @@ $(document).ready(function(){
                 args: {
                     pkey: 'asdfasdf',
                     update: true,
-                    n : pubkeyn,
-                    e : pubkeye
+                    n : jwkPub2.n,
+                    e : jwkPub2.e
                 }
                 
             }),
@@ -170,8 +171,9 @@ function request_agent() {
 
     rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
     console.log(rsaKeypair);
-    var pubkeyn = rsaKeypair.pubKeyObj.n.toString();
-    var pubkeye = rsaKeypair.pubKeyObj.e.toString(); 
+    //var pubkeyn = rsaKeypair.pubKeyObj.n.toString();
+    //var pubkeye = rsaKeypair.pubKeyObj.e.toString(); 
+    var jwkPub2 = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj);
 
     $.ajax({
         type: 'POST',
@@ -185,8 +187,8 @@ function request_agent() {
             args: {
                 pkey: 'asdfasdf',
                 update: false,
-                n : pubkeyn,
-                e : pubkeye
+                n : jwkPub2.n,
+                e : jwkPub2.e
             }
             
         }),
