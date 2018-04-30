@@ -39,6 +39,18 @@ import UpdateResumeHandler from './resume/update_resume_handler';
 import ShareResumeRequest from './resume/share_resume_request';
 import ShareResumeRequestHandler from './resume/share_resume_handler';
 
+
+/**
+ * Private Record request set. <br />
+ */
+import CreatePrivateRecordRequest from './record/create_record_request';
+import CreatePrivateRecordHandler from './record/create_record_handler';
+import GetPrivateRecordsRequest from './record/get_records_request';
+import GetPrivateRecordsHandler from './record/get_records_handler';
+import DeletePrivateRecordRequest from './record/delete_record_request';
+import DeletePrivateRecordHandler from './record/delete_record_handler';
+
+
 /**
  * '/client' 'GenerateShortUrl' command request. <br />
  */
@@ -94,6 +106,10 @@ class ClientRequestManager extends AbstractManager {
         this.handlerMap.set(ShareCertRequest, new ShareCertRequestHandler());
         this.handlerMap.set(ShareResumeRequest, new ShareResumeRequestHandler());
 
+        this.handlerMap.set(CreatePrivateRecordRequest, new CreatePrivateRecordHandler());
+        this.handlerMap.set(GetPrivateRecordsRequest, new GetPrivateRecordsHandler());
+        this.handlerMap.set(DeletePrivateRecordRequest, new DeletePrivateRecordHandler());
+
         // 기타 등등 cmd 로 관리 되는것들
         this.entityMap.set('SearchRecord', SearchRecordRequest);
         this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
@@ -137,7 +153,7 @@ class ClientRequestManager extends AbstractManager {
         this.handlerMap.get(request.constructor).request(request, ((resultCode, result) => {
             switch (resultCode) {
 
-                // 에러 발생시에는 Error 객체를 Client에 Response 후 
+                // 에러 발생시에는 Error 객체를 Client에 Response 후
                 case ClientRequestManager.RESULT_FAILURE:
                     {
                         // result instanceof Error Retry?

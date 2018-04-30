@@ -61,7 +61,7 @@ describe('/resumes URL test suite', () => {
      * @since 180424
      * @author JJANGHO
      */
-    it('Create resume request test case', done => {
+    it.skip('Create resume request test case', done => {
 
         chai.request(app)
             .post('/resumes')
@@ -72,7 +72,7 @@ describe('/resumes URL test suite', () => {
                 resume: {
                     title: '안택수 테스트용 이력서',
                     data: [{
-                            txid: '35bdf8182ef912f1971efa1b367e69fc8dfa819f94c46d2afc352fe3316893b7',
+                            txid: '5e88e9ad40fe9a6d633cf63035c0ff2267d06c38a012422654577e9f559c6329',
                             order: 1,
                             record: {
                                 subId: 'OPIc',
@@ -80,7 +80,7 @@ describe('/resumes URL test suite', () => {
                             }
                         },
                         {
-                            txid: '02f7bae31e7fbced794621aa517b2df5321776a24a02d7305eb1bdbf1e13cb8b',
+                            txid: '51b3818477c837a0856127d9bb1f47bade824f0a3bd8a128d599e852fd93cdc3',
                             order: 2,
                             record: {
                                 subId: 'TOEIC',
@@ -101,7 +101,7 @@ describe('/resumes URL test suite', () => {
     /**
      * Test case of specific resume viewer. <br />
      */
-    it('Get resume viewer test case', done => {
+    it.skip('Get resume viewer test case', done => {
         chai.request(app)
             .get('/resumes/c765f105-4a09-4b19-9300-a5e8a7b84840')
             .set('Content-Type', 'text/html')

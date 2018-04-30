@@ -3,6 +3,7 @@ import AbstractDAO from './abstract_dao';
 import recordQuery from './record_query';
 
 import BlcMapModel from '../models/record/blc_map';
+import PrivateRecord from '../models/record/private_record';
 import Util from '../util/util';
 
 /**
@@ -151,6 +152,44 @@ class RecordDAO extends AbstractDAO {
                         cb(rows);
                     }
                 });
+            }
+        });
+    }
+
+    issuePrivateRecord(privateRecord, cb) {
+        var param = privateRecord.toRow();
+        var query = mysql.format(recordQuery.issuePrivateRecord, param);
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err, null);
+            } else {
+                cb(err, result);
+            }
+        });
+    }
+
+    getPrivateRecord(creteria, cb) {        
+        var query = mysql.format(recordQuery.getPrivateRecord, creteria.uId);        
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err, null);
+            } else {    
+                var recordList = [];
+                for (var i in rows) {
+                    recordList.push(PrivateRecord.fromRow(rows[i]));
+                }
+                cb(err, recordList);
+            }
+        });
+    }
+
+    deletePrivateRecord(creteria, cb) {       
+        var query = mysql.format(recordQuery.delPrivateRecord, [creteria.uId, creteria.prvtId]);     
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err, null);
+            } else {                    
+                cb(err, rows);
             }
         });
     }

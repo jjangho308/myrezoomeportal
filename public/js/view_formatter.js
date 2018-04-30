@@ -113,6 +113,29 @@ var formatter= {
         htmldiv = htmldiv + '</div>';
         $('#spec_forign_lang').append(htmldiv);
         $('#spec_forign_lang > .spec-body-default').hide();
+    },
+
+    "ETC":function viewformatter(record) {
+        // Private record
+        var htmldiv = '<div class="private-spec-body">';
+            htmldiv = htmldiv + '<div class="spec-left">';
+            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-center">';
+            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
+            htmldiv = htmldiv + '';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-right">';
+            htmldiv = htmldiv + '<p>사용자입력</p>';
+            htmldiv = htmldiv + '<p>'+record.name +'</p>';
+            htmldiv = htmldiv + '<p>'+record.grade +'</p>';
+            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
+            htmldiv = htmldiv + '</div>';
+        htmldiv = htmldiv + '</div>';
+        $('#spec_certification').append(htmldiv);
+        $('#spec_certification > .spec-body-default').hide();
     }
 }
 

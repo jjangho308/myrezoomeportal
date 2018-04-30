@@ -228,6 +228,162 @@ UserModel render용 키 정보 :
             <button class="cancel-btn border-btn">취소</button>
         </div>
     </div>    
-</body>
 
+    <div id="education-add-dialog" class="modal">
+        <p>이력 추가 - 학력<span>레쥬메 서비스를 통해 사용하고 싶은 이력을 추가할 수 있습니다.</span></p>
+        <div class="modal-body">
+
+            <p>학교명</p>            
+            <div class="error-range">
+                <div class="error-message" >학교명을 입력해주세요.</div>
+                <input type="text" placeholder="교육기관의 이름을 입력해주세요. Ex) 한양대학교">                                    
+            </div>
+            <p>전공 <a class="add-span">+추가</a></p>
+            
+            <div id="major-div">
+                <div class="error-range">
+                    <div class="select-100">
+                        <select name="select-1">
+                                <option value="1">전공</option>
+                                <option value="2">부전공</option>
+                                <option value="3">복수전공</option>
+                        </select>
+                    </div>
+                    <div class="select-100">
+                        <select name="select-2">
+                                <option value="volvo">학사</option>
+                                <option value="saab">석사</option>
+                        </select>
+                    </div>
+
+                    <input type="text" class="major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">
+                    <div class="error-message">전공을 입력해주세요.</div>
+                </div>
+            </div>
+            
+            <p>재학 기간</p>
+
+            <div class="error-range">
+                <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
+                <input type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
+                <span id="study-period-span">~</span>
+                <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
+                <input type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
+
+                <div id="is-graduate" class="select-100 study-field-div">
+                    <select name="select-3" id="study-field">
+                            <option value="volvo">졸업</option>
+                            <option value="qwd">졸업예정</option>
+                            <option value="awdwa">수료</option>
+                    </select>
+                </div>
+                
+                <div class="error-message">재학기간을 입력해주세요.</div>
+            </div>
+            
+
+            <p>학점</p>
+            
+            <div class="error-range">
+                <input type="text" id="score" placeholder="Ex) 4.0">
+
+                <span id="grade-span">/</span>
+                <div class="select-100">
+                    <select name="select-4">
+
+                        <option value="saab">4.5</option>
+                        <option value="volvo">4.3</option>
+                    </select>
+
+                </div>
+
+                <div class="error-message">학점을 입력해주세요.</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="confirm-btn primary-solid-btn">확인</button>
+            <button class="cancel-btn border-btn">취소</button>
+        </div>
+    </div>
+
+    <div id="cert-add-dialog" class="modal">
+        <p>이력 추가 - 자격<span>레쥬메 서비스를 통해 사용하고 싶은 이력을 추가할 수 있습니다.</span></p>
+        <div class="modal-body">
+
+            <p>자격명</p>
+            
+            <input type="text" id="certadd_name" placeholder="자격증의 이름을 입력해주세요. EX) 정보처리기사">
+            
+
+            <p>성적</p>
+
+                <input type="text" id="certadd_grade" placeholder="성적을 입력해주세요. EX) 취득">
+            
+            <p>유효 기간</p>
+
+            <div>
+                <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
+                <input id="certadd_startdate" type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
+                <span id="study-period-span">~</span>
+                <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
+                <input id="certadd_enddate" type="text" class="form-control study-period" placeholder="YYYY-MM-DD" />
+
+                <div id="expire-checkbox">
+                    <input id="cert-checkbox" class="styled" type="checkbox">
+                    <label for="cert-checkbox">
+                        만료기간 없음
+                    </label>
+                </div>                    
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="confirm-btn primary-solid-btn">확인</button>
+            <button class="cancel-btn border-btn">취소</button>
+        </div>
+    </div>
+
+    <div id="language-add-dialog" class="modal">
+        <p>이력 추가 - 외국어<span>레쥬메 서비스를 통해 사용하고 싶은 이력을 추가할 수 있습니다.</span></p>
+        <div class="modal-body">
+
+            <p>시험명</p>
+            
+                <div class="select-100">
+                <select name="select-1">
+                        <option value="volvo">영어</option>
+                        <option value="saab">중국어</option>
+                        <option value="awdaw">기타</option>
+                </select>
+            </div>
+            <input type="text" id="language-name" placeholder="어학 시험명을 입력해주세요. EX) OPIc">
+            
+
+            <p>성적</p>
+
+                <input type="text" id="language-grade" placeholder="성적을 입력해주세요. EX) Advanced Low">
+            
+            <p>유효 기간</p>
+
+            <div>
+                <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
+                <input type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
+                <span id="study-period-span">~</span>
+                <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
+                <input type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
+
+                <div id="expire-checkbox">
+                    <input id="checkbox2" class="styled" type="checkbox" checked="">
+                    <label for="checkbox2">
+                        만료기간 없음
+                    </label>
+                </div>                    
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="confirm-btn primary-solid-btn">확인</button>
+            <button class="cancel-btn border-btn">취소</button>
+        </div>
+    </div>
+</body>
 </html>
