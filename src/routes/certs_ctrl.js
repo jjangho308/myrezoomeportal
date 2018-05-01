@@ -152,9 +152,11 @@ export default {
     deleteCert: (req, res, next) => {
         //
         if(!!req.xhr) {
-            var data = {                
-                certId : req.body.certId
-            }
+             var data = {
+                 uId : req.body.uId,         
+                 certId : req.params.certId
+             }
+
             Managers.client().request(new DeleteCertRequest(data), (err, result) => {
                 if(!!err){
                     next(err);

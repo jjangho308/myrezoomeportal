@@ -54,7 +54,7 @@ describe('/certs URI Page test suite.', () => {
             });
     });
 
-    it('Issue certificate request test', done => {
+    it.skip('Issue certificate request test', done => {
         chai.request(app)
             .post('/certs')
             .set('Content-Type', 'application/json')
@@ -62,7 +62,7 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 cert: {
-                    txid: '7c731bfa671da3769414218c1ddd83722e735155bd80a8e0d4e971204f77f7d9',
+                    txid: '7571dc60cbb265a3ee04be243ba7c4f7d46af29c2af001bfea10b5899ca09ced',
                     record: {
                         subId: 'asdfasdf',
                         score: 70
@@ -102,6 +102,19 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
+    it.skip('Delete certificate request test', done => {
+        chai.request(app)
+            .delete('/certs/e58a799f-dcf9-4dc4-829e-bb3507c3fa8b')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'Bearer ' + jwtToken)
+            .set('X-Requested-With', 'XMLHttpRequest')
+            .send()
+            .end((err, res) => {
+                console.log(res);
+                done();
+            });
+    })
+
     it.skip('Share certificate test case', done => {
         chai.request(app)
             .post('/shared_certs')
@@ -110,12 +123,12 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 shared_cert: {
-                    certId: 'c73f4619-db3a-4492-8b43-1fe8fb638d4d',
+                    certId: 'e58a799f-dcf9-4dc4-829e-bb3507c3fa8b',
                     record: {
                         subcode: 'SUB1',
                         data: 'NAME'
                     },
-                    url: 'https://rzoo.me/jskji45',
+                    url: 'https://rzoo.me/asdf4ecvvv',
                     password: 'asdfasdf',
                     emails: [
                         'asdfasdf@asdfasd.com',

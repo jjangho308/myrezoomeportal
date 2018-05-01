@@ -22,6 +22,9 @@ import GetCertificatesRequest from './certs/get_certs_request';
 import GetCertificatesHandler from './certs/get_certs_handler';
 import UpdateCertificateRequest from './certs/update_cert_request';
 import UpdateCertificateHandler from './certs/update_cert_handler';
+import DeleteCertificateRequest from './certs/delete_cert_request';
+import DeleteCertificateHandler from './certs/delete_cert_handler';
+
 
 import ShareCertRequest from './certs/share_cert_request';
 import ShareCertRequestHandler from './certs/share_cert_handler';
@@ -98,6 +101,8 @@ class ClientRequestManager extends AbstractManager {
         this.handlerMap.set(GetCertificatesRequest, new GetCertificatesHandler());
         this.handlerMap.set(IssueCertificateRequest, new IssueCertificateHandler());
         this.handlerMap.set(UpdateCertificateRequest, new UpdateCertificateHandler());
+        this.handlerMap.set(DeleteCertificateRequest, new DeleteCertificateHandler());
+
 
         this.handlerMap.set(GetResumeRequest, new GetResumeHandler());
         this.handlerMap.set(UpdateResumeRequest, new UpdateResumeHandler());
