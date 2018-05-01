@@ -46,7 +46,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      */
     request(clientReq, done) {
         var db = Managers.db();
-        
+
         var uid = clientReq.uId;
 
         db.getUserDAO().get({
@@ -70,8 +70,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     email: users[0].email,
                     ci: users[0].ci,
                     pkey: clientReq.pkey,
-                    n : clientReq.n,
-                    e : clientReq.e
+                    n: clientReq.n,
+                    e: clientReq.e
                 }
 
                 targs.pkey = clientReq.pkey;
@@ -150,6 +150,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     })
                 } else {
                     if (clientReq.update == true) {
+                        
                         db.getOrgDAO().findAll((err, resultOrgIds) => {
                             for (var i in resultOrgIds) {
                                 !(orgIdx => {
@@ -185,11 +186,24 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                                     msg.args.records = records;
 
                                                                     //console.log(msg);
-                                                                    
+
                                                                     Managers.push().sendMessage(msg, resultOrgIds[orgIdx].ORG_ID, err => {
-                                                                        !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING, {
-                                                                            mid: clientReq.mId
-                                                                        });
+                                                                        if (!!err) {
+                                                                            done(ClientRequestManager.RESULT_FAILURE, err);
+                                                                        } else {
+                                                                            
+                                                                            //Todo TCUP_USR MDFID_DT column update
+                                                                            db.getUserDAO().setMDFIDT({
+                                                                                uId: uid
+                                                                            }, (err, result) => {
+                                                                                if (!!err) {
+                                                                                    done(ClientRequestManager.RESULT_FAILURE, err);
+                                                                                } else {
+                                                                                    //console.log("sucess");
+                                                                                    done(ClientRequestManager.RESULT_PENDING, { mid: clientReq.mId });
+                                                                                }
+                                                                            })
+                                                                        }
                                                                     });
                                                                 });
                                                             }
@@ -216,10 +230,21 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                 //Managers.push().init();
                                                 Managers.push().sendMessage(msg, resultOrgIds[orgIdx].ORG_ID, err => {
                                                     if (subIds.length == resultOrgIds.length) {
-                                                        !!err ? done(ClientRequestManager.RESULT_FAILURE, err)
-                                                            : done(ClientRequestManager.RESULT_PENDING, {
-                                                            mid: clientReq.mId
-                                                        });
+                                                        if (!!err) {
+                                                            done(ClientRequestManager.RESULT_FAILURE, err);
+                                                        } else {
+                                                            //Todo TCUP_USR MDFID_DT column update
+                                                            db.getUserDAO().setMDFIDT({
+                                                                uId: uid
+                                                            }, (err, result) => {
+                                                                if (!!err) {
+                                                                    done(ClientRequestManager.RESULT_FAILURE, err);
+                                                                } else {
+                                                                    //console.log("sucess");
+                                                                    done(ClientRequestManager.RESULT_PENDING, { mid: clientReq.mId });
+                                                                }
+                                                            })
+                                                        }
                                                     }
                                                 });
                                             })
@@ -228,12 +253,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 })(i);
                             } //Per orgIDs, Sending AMQ Message
                         })
-
-                        //Todo TCUP_USR MDFID_DT column update
-
-                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-                        
                     } else {
                         //refresh
                         db.getRecordDAO().getStoredOrgByUserId(uid, (err, storedOrgs) => {
@@ -339,14 +358,14 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                             db.getUserDAO().setFristYN(uid, function (dbres2) {
                                 //console.log(dbres2);
-                            });                            
+                            });
 
                             // set default N in initially
                             agentRequest.records[i].dftYn = 'N';
 
                             if (j == (agentRequest.records.length - 1)) {
                                 try {
-                                    if(!!socket)
+                                    if (!!socket)
                                         socket.emit('SearchResult', JSON.stringify(agentRequest));
                                 } catch (exception) {
                                     console.log(exception);
@@ -355,11 +374,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                             j++;
                         });
-                    } else {                  
+                    } else {
                         // Get BLC MAP Default YN
                         var data = {
-                            uid : uid,
-                            txid : agentRequest.records[i].txid
+                            uid: uid,
+                            txid: agentRequest.records[i].txid
                         };
 
                         db.getRecordDAO().getDefaultYn(data, function (dbres) {
@@ -367,7 +386,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                             //BLC MAP stored
                             if (j == (agentRequest.records.length - 1)) {
                                 try {
-                                    if(!!socket)
+                                    if (!!socket)
                                         socket.emit('SearchResult', JSON.stringify(agentRequest));
                                 } catch (exception) {
                                     console.log(exception);
