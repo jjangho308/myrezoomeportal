@@ -72,6 +72,7 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                                     var cryptoManager = Managers.crypto();
                                     
                                     var sharedCert = new SharedCertModel({
+                                        uId: request.uId,
                                         certId: certList[0].certId,
                                         encryptedData: JSON.stringify(request.cert.record)
                                     });

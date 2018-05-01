@@ -166,7 +166,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                 var records = [];
                                                 for (var k in storedData) {
                                                     !(dataIdx => {
-                                                        console.log(dataIdx + " " + storedData[dataIdx].BLC_MAP_ID)
+                                                        //console.log(dataIdx + " " + storedData[dataIdx].BLC_MAP_ID)
                                                         nexledgerService.getbytxid(nodeurl, storedData[dataIdx].TRX_ID, function (res) {
 
                                                             records.push({
@@ -184,7 +184,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                                     msg.args.subIDs = subIds;
                                                                     msg.args.records = records;
 
-                                                                    console.log(msg);
+                                                                    //console.log(msg);
                                                                     
                                                                     Managers.push().sendMessage(msg, resultOrgIds[orgIdx].ORG_ID, err => {
                                                                         !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING, {
@@ -211,7 +211,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                 msg.args.subIDs = subIds;
 
-                                                console.log(msg);
+                                                //console.log(msg);
 
                                                 //Managers.push().init();
                                                 Managers.push().sendMessage(msg, resultOrgIds[orgIdx].ORG_ID, err => {
@@ -229,6 +229,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                             } //Per orgIDs, Sending AMQ Message
                         })
 
+                        //Todo TCUP_USR MDFID_DT column update
+
+                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                        
                     } else {
                         //refresh
                         db.getRecordDAO().getStoredOrgByUserId(uid, (err, storedOrgs) => {
@@ -254,9 +259,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                         process.nextTick(() => {
                                                             msg.args.records = records;
 
-                                                            console.log("Active MQ");
+                                                            //console.log("Active MQ");
 
-                                                            console.log(msg);
+                                                            //console.log(msg);
                                                             Managers.push().sendMessage(msg, storedOrgs[orgIdx].ORG_ID, err => {
                                                                 !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
                                                             });
@@ -287,7 +292,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      * @param {*} agentRequest 
      */
     response(clientRequest, agentRequest) {
-        console.log('Socket Push : ' + agentRequest);
+        //console.log('Socket Push : ' + agentRequest);
         var socket = clientRequest.socket;
         var db = Managers.db();
         var uid = clientRequest.uId;
@@ -324,16 +329,16 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 agentRequest.orgcode, //orgid
                                 agentRequest.records[i].subid //subid
                             ];
-                            console.log("===========blcmapinsertData==============");
-                            console.log(blcmapinsertData);
-                            console.log("=========================================");
+                            //console.log("===========blcmapinsertData==============");
+                            //console.log(blcmapinsertData);
+                            //console.log("=========================================");
 
                             db.getRecordDAO().putRecord(blcmapinsertData, function (dbres) {
-                                console.log(dbres);
+                                //console.log(dbres);
                             });
 
                             db.getUserDAO().setFristYN(uid, function (dbres2) {
-                                console.log(dbres2);
+                                //console.log(dbres2);
                             });                            
 
                             // set default N in initially
@@ -374,16 +379,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     }
                 }).call(this, i);
             }
-
-            /*
-            if (!!socket) {
-                console.log('Socket exists');
-                console.log('Socket message : ' + JSON.stringify(agentRequest));
-                socket.emit('SearchResult', JSON.stringify(agentRequest));
-            } else {
-                console.log('Socket is not prepared');
-            }
-            */
         });
     }
 }

@@ -80,18 +80,29 @@ class CertificateDAO extends AbstractDAO {
         if (!!creteria.uId) {
             condition = "TUC.UID = '" + creteria.uId + "'";
         }
-        
+
         if (!!creteria.certId) {
             condition = condition ? condition + ' AND ' : condition;
             condition += "TUC.CERT_ID = '" + creteria.certId + "'";
         }
 
+        condition = condition + " AND TUC.DEL_YN = 'N'";
+
         var query = CertQuery.getCertList + condition;
+
+        console.log(query);
+
+        //SELECT TUC.CERT_ID, TUC.UID, TUC.BLC_MAP_ID, TBM.TRX_ID, TUC.SHRD_YN, TUC.CRTD_DT, TS.SUB_ID, TS.SUB_CD, TS.SUB_NM FROM rezoome_db.TCDA_USR_CERT AS TUC
+        //INNER JOIN TCDA_BLC_MAP AS TBM ON (TBM.BLC_MAP_ID = TUC.BLC_MAP_ID) INNER JOIN TCCO_SUB AS TS ON (TBM.SUB_ID = TS.SUB_ID) WHERE TUC.UID = 'UID2'
+        
+
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err, null);
             } else {
                 var certList = [];
+
+                
 
                 for (var i in rows) {
                     certList.push({
@@ -107,6 +118,7 @@ class CertificateDAO extends AbstractDAO {
                     });
                 }
 
+                
                 cb(err, certList);
             }
         })
@@ -155,6 +167,92 @@ class CertificateDAO extends AbstractDAO {
                 cb(err);
             } else {
                 cb(err, result.affectedRows);
+            }
+        })
+    }
+
+    delCert(creteria, cb) {
+        var certId = creteria.certId;
+
+        this.connectionPool.getConnection((err, connection) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                connection.beginTransaction(function (err) {
+                    if (err) {
+                        cb(err);
+                    } else {
+                        var condition = {};
+                        //make query
+                        //var certId=creteria.certId;
+                        condition.CERT_ID = creteria.certId;
+
+                        console.log(certId);
+
+                        var usrCertDelQuery = mysql.format(CertQuery.delCert, condition);
+
+                        connection.query(usrCertDelQuery, (err, result) => {
+                            if (!!err) {
+                                connection.release();
+                                console.log(err);
+                            }
+                            else if (result.affectedRows > 0) {
+                                var usrCertSharedDelQuery = mysql.format(CertQuery.delShaed, [condition,  {DEL_YN:'N'}]);
+                                //console.log(usrCertSharedDelQuery);
+                                connection.query(usrCertSharedDelQuery, (err, result) => {
+                                    if (!!err) {
+                                        connection.release();
+                                        console.log(err);
+                                    } else if (result.affectedRows > 0) {
+                                        var delflag = {};
+                                        delflag.DEL_YN = 'N';
+                                        var selectCERTSharedINFO = mysql.format(CertQuery.getUrl, [condition, delflag]);
+                                        //console.log(selectCERTSharedINFO);
+                                        connection.query(selectCERTSharedINFO, (err, result) => {
+                                            //console.log(result);
+                                            if (!!err) {
+                                                connection.release();
+                                                console.log(err);
+                                            }else if(result.length > 0){
+                                                var deleteCERTSharedInfoQuery = mysql.format(CertQuery.delUrl, [condition, {DEL_YN:'N'}]);
+                                                //console.log(deleteCERTSharedInfoQuery);
+                                                connection.query(deleteCERTSharedInfoQuery, (err, result)=>{
+                                                    if(!!err){
+                                                        connection.release()
+                                                        console.log(err);
+                                                    }else if(result.affectedRows > 0){
+                                                        connection.commit(function(err){
+                                                            if(!!err){
+                                                                connection.release();
+                                                                console.log(err);
+                                                            }
+                                                            //정상처리
+                                                            console.log("tranaction sucess")
+                                                            connection.release();
+                                                            cb(200, "sucess");
+                                                        })
+                                                    }
+                                                })
+
+                                            }else{
+                                                console.log("=====")
+                                                connection.commit(function(err){
+                                                    if(!!err){
+                                                        connection.release();
+                                                        console.log(err);
+                                                    }
+                                                    //정상처리
+                                                    cb(200, "sucess");
+                                                })
+                                            }
+                                        })
+
+                                    }
+                                })
+                            }
+                        })
+                    }
+                });
             }
         })
     }
@@ -215,7 +313,10 @@ class CertificateDAO extends AbstractDAO {
             condition.S_CERT_SHR_ID = creteria.sId;
         }
 
-        var query = mysql.format(CertQuery.getShared, condition);
+
+
+        var query = mysql.format(CertQuery.getShared, [condition, {DEL_YN:'N'}]);
+
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);
