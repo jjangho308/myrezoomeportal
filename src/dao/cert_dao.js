@@ -86,15 +86,23 @@ class CertificateDAO extends AbstractDAO {
             condition += "TUC.CERT_ID = '" + creteria.certId + "'";
         }
 
+        condition = condition + " AND TUC.DEL_YN = 'N'";
+
         var query = CertQuery.getCertList + condition;
 
         console.log(query);
+
+        //SELECT TUC.CERT_ID, TUC.UID, TUC.BLC_MAP_ID, TBM.TRX_ID, TUC.SHRD_YN, TUC.CRTD_DT, TS.SUB_ID, TS.SUB_CD, TS.SUB_NM FROM rezoome_db.TCDA_USR_CERT AS TUC
+        //INNER JOIN TCDA_BLC_MAP AS TBM ON (TBM.BLC_MAP_ID = TUC.BLC_MAP_ID) INNER JOIN TCCO_SUB AS TS ON (TBM.SUB_ID = TS.SUB_ID) WHERE TUC.UID = 'UID2'
+        
 
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err, null);
             } else {
                 var certList = [];
+
+                
 
                 for (var i in rows) {
                     certList.push({
@@ -110,6 +118,7 @@ class CertificateDAO extends AbstractDAO {
                     });
                 }
 
+                
                 cb(err, certList);
             }
         })
@@ -188,7 +197,7 @@ class CertificateDAO extends AbstractDAO {
                                 console.log(err);
                             }
                             else if (result.affectedRows > 0) {
-                                var usrCertSharedDelQuery = mysql.format(CertQuery.delShaed, condition);
+                                var usrCertSharedDelQuery = mysql.format(CertQuery.delShaed, [condition,  {DEL_YN:'N'}]);
                                 //console.log(usrCertSharedDelQuery);
                                 connection.query(usrCertSharedDelQuery, (err, result) => {
                                     if (!!err) {
@@ -304,7 +313,10 @@ class CertificateDAO extends AbstractDAO {
             condition.S_CERT_SHR_ID = creteria.sId;
         }
 
-        var query = mysql.format(CertQuery.getShared, condition);
+
+
+        var query = mysql.format(CertQuery.getShared, [condition, {DEL_YN:'N'}]);
+
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);
