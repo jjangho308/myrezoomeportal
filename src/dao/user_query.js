@@ -22,6 +22,8 @@ export default {
 
     setFristYN: 'UPDATE ' + TABLE_NAME + ' SET FRST_YN = ? WHERE UID = ?',
 
+    setMDFIDDT: 'UPDATE rezoome_db.TCUP_USR SET MDFID_DT = CURRENT_TIMESTAMP() WHERE ?',
+
     setById: 'UPDATE TCUP_USR SET ? where S_USR_ID = ?',
 
     setByEmail: 'UPDATE TCUP_USR SET ? where EMAIL = ?',

@@ -126,6 +126,20 @@ class UserDao extends AbstractDAO {
         })
     }
 
+    setMDFIDT(creteria, cb){
+        
+        var query = mysql.format(userQuery.setMDFIDDT, {UID:creteria.uId});
+        //console.log(query);
+        this.query(query,(err, result)=>{
+            if(!!err){
+                cb(err);
+            }else{
+                cb(err, result.affectedRows);
+            }
+        })
+
+    }
+
     setFristYN(userid, cb) {
 
         var query = mysql.format(userQuery.setFristYN, ["N", userid]);

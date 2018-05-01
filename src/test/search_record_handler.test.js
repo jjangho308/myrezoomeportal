@@ -13,14 +13,15 @@ describe('SearchRecordRequestHandler Test suit', () => {
         HD.request({
             "mId": "message928936142234",
             //token
-            "uId": "UID1",
+            "uId": "UID2",
             "update" : true,
             "cmd": "SearchRecord",
             "sid": "svr1",
             "pkey": "ewkrjdsifjcvasdfjkasdkfljjei",
             "n": 'nnnnnnnnnnnnnnnnnnnnnnnnn',
             "e": 'eeeeeeeeeeeeeeeeeeeeeeeee'
-        }, function (res) {
+        }, function (err, res) {
+            console.log(err);
             console.log(res);            
         });
 
