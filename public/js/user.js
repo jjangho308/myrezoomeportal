@@ -29,7 +29,9 @@ $(document).ready(function () {
             url: "/signin",   
             data: param,
             dataType: "JSON",
-            success: function(response) {                
+            success: function(response) {
+                genRsaKey();
+
                 window.location.href = "main";
             },
             error:function(request, status, error){
@@ -116,7 +118,7 @@ $(document).ready(function () {
             dataType: "JSON",
             success: function(response) {
                 genRsaKey();
-                                
+
                 window.location.href = "main";
             },
             error:function(request, status, error){
