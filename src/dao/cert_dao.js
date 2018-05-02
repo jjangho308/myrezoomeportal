@@ -90,7 +90,7 @@ class CertificateDAO extends AbstractDAO {
 
         var query = CertQuery.getCertList + condition;
 
-        console.log(query);
+        //console.log(query);
 
         //SELECT TUC.CERT_ID, TUC.UID, TUC.BLC_MAP_ID, TBM.TRX_ID, TUC.SHRD_YN, TUC.CRTD_DT, TS.SUB_ID, TS.SUB_CD, TS.SUB_NM FROM rezoome_db.TCDA_USR_CERT AS TUC
         //INNER JOIN TCDA_BLC_MAP AS TBM ON (TBM.BLC_MAP_ID = TUC.BLC_MAP_ID) INNER JOIN TCCO_SUB AS TS ON (TBM.SUB_ID = TS.SUB_ID) WHERE TUC.UID = 'UID2'
