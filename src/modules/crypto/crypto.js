@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import NodeRSA from 'node-rsa';
 
 import AbstractManager from '../abstract_manager';
 
@@ -161,12 +162,53 @@ class CryptoManager extends AbstractManager {
         return decrypted;
     }
 
-    encryptRSA(plain, key, cb) {
-
+    /**
+     * Encrypt data with RSA Key. <br />
+     * 
+     * @since 180502
+     * @author TACKSU
+     * 
+     * @param {Buffer} dataBuffer Plain text data to encrypt.
+     * @param {Buffer} publicKey Buffer of public or private key. <br />
+     * @param {function(err, buffer)} cb Callback
+     * 
+     * @returns Base64 encoded encrypted data string.
+     */
+    encryptRSAPublic(dataBuffer, publicKey, cb) {
+        process.nextTick(() => {
+            try {
+                var rsa = new NodeRSA();
+                publicKey = '-----BEGIN PUBLIC KEY-----\n' + publicKey + '\n-----END PUBLIC KEY-----';
+                rsa.importKey(publicKey, 'pkcs8-public-pem');
+                var encrypted = rsa.encrypt(dataBuffer);
+                cb(null, encrypted);
+            } catch (e) {
+                cb(er);
+            }
+        });
     }
 
-    decryptRSA(encrypted, key, cb) {
-
+    /**
+     * Decrypt data with RSA Private Key. <br />
+     * 
+     * @since 180502
+     * @author TACKSU
+     * 
+     * @param {*} encryptedBuffer Base64 encoded encrypted string to decrypt.
+     * @param {*} privateKey Base64 encoded raw RSA private key string.
+     */
+    decryptRSAPrivate(encryptedBuffer, privateKey, cb) {
+        process.nextTick(() => {
+            try {
+                var rsa = new NodeRSA();
+                privateKey = '-----BEGIN PRIVATE KEY-----\n' + privateKey + '\n-----END PRIVATE KEY-----';
+                rsa.importKey(privateKey, 'pkcs8-private-pem');
+                var decrypted = rsa.decrypt(encryptedBuffer);
+                cb(null, decrypted);
+            } catch (e) {
+                cb(er);
+            }
+        });
     }
 }
 
