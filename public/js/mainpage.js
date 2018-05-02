@@ -14,9 +14,6 @@ $(document).ready(function(){
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
 
-    var emptyarray = [];
-    setTxidList(emptyarray);
-
     // set event for element main page
     $('#header-mycert').click(function () {
         $('#header-myresume').css({ "border": "none", "font-weight": "normal" });
@@ -49,12 +46,35 @@ $(document).ready(function(){
     });
 
     //request to agent for get user info
-    request_agent();    
+    var pagetxidlist = getTxidList();
+
+    if(pagetxidlist.length > 1) {
+        //sessing storage have user info (txid list)
+
+        var oridata = [];
+
+        for(var i=0; i< pagetxidlist.length ; i++) {            
+            try {                
+                var objuserdata = getData(pagetxidlist[i]);
+                refreshview(objuserdata);
+            }catch(exception) {
+                console.log(exception);
+                //continue;
+            }
+        }
+    }
+    else {
+        //session storage dont have user info(txid list)
+        request_agent();
+    }
+
     getPrivateRecords();
 
     var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 
     $('#refresh_record').click(function() {
+        var emptyarray = [];
+        setTxidList(emptyarray);
         
         $.ajax({
             type: 'POST',
@@ -164,6 +184,8 @@ function getPrivateRecords() {
 }
 
 function request_agent() {
+    var emptyarray = [];
+    setTxidList(emptyarray);
 
     getRSAKey();
 
