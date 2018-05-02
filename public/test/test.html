@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <title>테스트 용</title>
+    <script src="./bower_components/crypto-js/crypto-js.js"></script>
+</head>
+
+<script type="text/javascript">
+    function encryptDecrypt(){
+        var encrypted = CryptoJS.AES.encrypt('Hello, World!', 'asdfasdf');
+        var decrypted = CryptoJS.AES.decrypt(encrypted.toString(), 'asdfasdf');
+        console.log(decrypted.toString(CryptoJS.enc.Utf8));
+    }
+    function decryptTest() {
+        var decrypted = CryptoJS.AES.decrypt("x/IklTi+cog6Jmnet0MeqA==", CryptoJS.enc.Base64.parse(
+            'WJpt1KLQe4SKOgH9ytjvBVMMIU5gRC0RWdGWEpxh6H0='), {
+            iv: CryptoJS.enc.Base64.parse('S2bQC5cOOPcN8YzXHRXrqg==')
+        });
+        console.log(decrypted.toString(CryptoJS.enc.Utf8));
+    }
+</script>
+
+</html>
