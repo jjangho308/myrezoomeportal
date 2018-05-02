@@ -52,11 +52,7 @@ $(document).ready(function(){
     request_agent();    
     getPrivateRecords();
 
-    rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
-    console.log(rsaKeypair);
-    //var pubkeyn = rsaKeypair.pubKeyObj.n.toString();
-    //var pubkeye = rsaKeypair.pubKeyObj.e.toString(); 
-    var jwkPub2 = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj); 
+    var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 
     $('#refresh_record').click(function() {
         
