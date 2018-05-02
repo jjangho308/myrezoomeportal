@@ -14,6 +14,20 @@ function certredirect(certId) {
     window.location.href = "/certs/"+certId;
 }
 
+function certmore(certId) {
+    $.ajax({
+        type: 'DELETE',
+        url: '/certs/'+ certId,
+        headers: {
+            'Authorization': client_authorization
+        },
+        success: function (result) {
+            loadcertlist();
+        },
+        contentType: 'application/json'
+    });
+}
+
 function loadcertlist() {
     $.ajax({
         type: 'GET',
@@ -22,17 +36,12 @@ function loadcertlist() {
             'Authorization': client_authorization
         },
         success: function (certlistres) {
-            console.log("============certlistres========");
-            console.log(certlistres);
-
             var certlistresult = certlistres.result;
             $(".cert-container").remove();
-
             $('#certlistcount').text(certlistresult.length + '건');
-
             for(var i in certlistresult) {
-                var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+certlistresult[i].certId+'")>';
-                htmldiv = htmldiv + '<p>'+ certlistresult[i].certId +'<img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
+                var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+ certlistresult[i].certId +'")>';
+                htmldiv = htmldiv + '<p>'+ certlistresult[i].certId +'<img style="z-index:999" src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=certmore("'+ certlistresult[i].certId +'")></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
                 htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + certlistresult[i].date + '</p>';
@@ -40,12 +49,9 @@ function loadcertlist() {
                 htmldiv = htmldiv + '<p>복사</p>';
                 htmldiv = htmldiv + '<p>삭제</p>';
                 htmldiv = htmldiv + '<p>공유내역</p>';
+                htmldiv = htmldiv + '</div>';                
                 htmldiv = htmldiv + '</div>';
-                
-                htmldiv = htmldiv + '</div>';
-
                 $('#cert-grid-div').append(htmldiv);
-
             }
         },
         contentType: 'application/json'

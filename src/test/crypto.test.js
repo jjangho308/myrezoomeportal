@@ -62,7 +62,7 @@ describe('Crypto test suit', () => {
     /**
      * AES Encrypt decrypt with given key test case.
      */
-    it.skip('AES Encrypt decrypt with given key', done => {
+    it('AES Encrypt decrypt with given key', done => {
         var plainText = 'Hello, World!';
         crypto.generateAESKey((err, encodedKey) => {
             console.log('AES Key : ' + encodedKey);
@@ -79,7 +79,7 @@ describe('Crypto test suit', () => {
     /**
      * 
      */
-    it('RSA Public Key Parsing', done => {
+    it.skip('RSA Public Key Parsing', done => {
         try {
             var publicEncoded = '-----BEGIN PUBLIC KEY-----\n' +
                 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkQNKGV6/rAS1RpU1HNjzUeAsKHpFqVGEwga9eMI6Q7mXOox5dod1OOcutb1XoW18MCqqpFJZqsLtVMFjBEvlwiz6+CVq/Ij5DE19wOOzQknM5Ct4JFeCQqgQ3bNW/YMi7g1iORMx68aUpUaotqdggq+r3PCVrsrrb1DyUUknJWabElWLAI26Xez8fKQa8ltyR8yi1W7urUzV3kKAVp3Y3vn/h6W+nPVJjsfWdhemJUWFBI5DBgsrNitiGk0Nk195WSjH1OUImVnmslJdecAf8wBtm8XOzzGVOIlyRZjKMoDiLH/eNSqB4kU9NJ76t8XjcOSkxaBfsIS8t3ni1twEWQIDAQAB\n' +
@@ -92,14 +92,39 @@ describe('Crypto test suit', () => {
             var plainText = Buffer.from('0123456789abcdef');
             var rsaPair = new NodeRSA();
             rsaPair.importKey(publicEncoded, 'pkcs8-public-pem');
-            rsaPair.importKey(privateEncoded, 'pkcs8-private-pem');
 
-            var encrypted = rsaPair.encrypt(plainText);
+            var encrypted = rsaPair.encrypt(Buffer.from(plainText, 'utf-8'));
+
+            rsaPair.importKey(privateEncoded, 'pkcs8-private-pem');
             var decrypted = rsaPair.decrypt(encrypted);
             console.log(decrypted.toString('utf-8'));
         } catch (e) {
             console.log(e);
         }
+    })
+
+    /**
+     * RSA Encrypt/Decrypt test case. <br />
+     * 
+     * @since 180502
+     * @author TACKSU
+     */
+    it.skip('RSA Encrypt decrypt test with crypto manager.', done => {
+        var crypto = Managers.crypto();
+
+        var data = 'Hello, World!';
+        var publicEncoded = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkQNKGV6/rAS1RpU1HNjzUeAsKHpFqVGEwga9eMI6Q7mXOox5dod1OOcutb1XoW18MCqqpFJZqsLtVMFjBEvlwiz6+CVq/Ij5DE19wOOzQknM5Ct4JFeCQqgQ3bNW/YMi7g1iORMx68aUpUaotqdggq+r3PCVrsrrb1DyUUknJWabElWLAI26Xez8fKQa8ltyR8yi1W7urUzV3kKAVp3Y3vn/h6W+nPVJjsfWdhemJUWFBI5DBgsrNitiGk0Nk195WSjH1OUImVnmslJdecAf8wBtm8XOzzGVOIlyRZjKMoDiLH/eNSqB4kU9NJ76t8XjcOSkxaBfsIS8t3ni1twEWQIDAQAB';
+
+        var privateEncoded = 'MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCRA0oZXr+sBLVGlTUc2PNR4CwoekWpUYTCBr14wjpDuZc6jHl2h3U45y61vVehbXwwKqqkUlmqwu1UwWMES+XCLPr4JWr8iPkMTX3A47NCSczkK3gkV4JCqBDds1b9gyLuDWI5EzHrxpSlRqi2p2CCr6vc8JWuyutvUPJRSSclZpsSVYsAjbpd7Px8pBryW3JHzKLVbu6tTNXeQoBWndje+f+Hpb6c9UmOx9Z2F6YlRYUEjkMGCys2K2IaTQ2TX3lZKMfU5QiZWeayUl15wB/zAG2bxc7PMZU4iXJFmMoygOIsf941KoHiRT00nvq3xeNw5KTFoF+whLy3eeLW3ARZAgMBAAECggEAcT2qXcl50HEUxnu6MD7TNDrlAO8K+0AndgUhbO3v5fdGO3h7Wa5KQhd2iIHFrs/6zPpkq1GLqCf0gd1K344Na+cITUObGn40TgEtlLW7xKYxFHVFqsuTc04fbaGg6vO/ETruWze8Iiy+45ocIhbu7N8WTMCrgwX/eLwznnqL0U3znFcPF9E4sk5S6NtYmsUacqKNuhOyspUZqymcuGM1u/wXtBjIXoB4m9EMOssxFpc/BZeJcHQrTM7fA4qaKuzDvbDKsQwmaaPtDkOaZuqD5TYgjgKMFaWQtLPNSYtkFsN41N/WG6hRt4gunvdTBL0HijipySximsXZm03l//FliQKBgQDMBdkk6b8T65g8Ng6560yxvsj36UUIAGNeBVJYg6rMHCu91MG3SqD/2dAM9rEi9HumqPIZ3djdU+D9cQCP8m/NxDJ6oQaAklgexVBfr3OP/6S94YLOan+4jUcwWDzWs7MU2/6YCZvzbnn1IjM9OGmKhVwyMWtqh8HpNFQ4JQ8ezwKBgQC19N9YGURHNUJ8tfXIez+/PveuQsOF8UW5/pkPCIr0WsB45sz008VKec3g/RE8hXQInKAJiyGHO9QF8tUSJRQNc6AIWAVFTLw3s/ChbY38gjWceodhZOBpBJg8CbU9yVaQE5DBfuP57eMUu/GoaHsMlLwUaMcAY2TanAzhLcG0VwKBgG571EV7F3CQKpagp4Ti+Vtf97DY7/sPSsBFnXw1gS6bKszYBDdgAKPMri/2/6HwR23PG5wKWUAyBir5INbS8Ny7HKLvxHenyHSRYZ8PgkM+q1XwY0eowJWOXDi/7+JM2fO31r06putCrmSjKqBChlTvNygvPv4nmkjRf7IPz4pdAoGAPlxPU4VNVk5VnCJMu0oqXeQ5xNqS4kv/hrBQSsu1u+uCfa00X1BZFJ5MRijViHWAgBcV7k9lzVBe6S8BgXd9uOKA3Xs1SzvyYfDkrp66g+kocJm53lJRawytFB6LpEJlzXk3KmnPvm+eXRPQzdQJIBW1pBUI5wQpo5bJ/z7MXX8CgYEAgB2Dy0xVHxau4YgXM2eNHkjpP7+HF+q7NaeHetnaEBeM4+xJ/dV45KvxqptZzymVbzZFLUTKHFGGZT7ZsX76KL2IAe2gC98ik5twhqht/rhp/kfBuvb2GsFc5q8d9MTOLzS0YnyBq75hXt7urUi0XSmoz2s1qdKVoMQ1n6LPfq4='
+
+        crypto.encryptRSAPublic(Buffer.from(data, 'utf-8'), publicEncoded, (err, encrypted) => {
+            crypto.decryptRSAPrivate(encrypted, privateEncoded, (err, decrypted) => {
+                console.log(decrypted.toString());
+                if(data == decrypted.toString()){
+                    done();
+                }
+            });
+        });
     })
 
     it.skip('RSA Key generate', done => {
