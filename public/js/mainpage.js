@@ -70,9 +70,10 @@ $(document).ready(function(){
 
     getPrivateRecords();
 
-    var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
-
     $('#refresh_record').click(function() {
+        getRSAKey();
+        var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+
         var emptyarray = [];
         setTxidList(emptyarray);
         
