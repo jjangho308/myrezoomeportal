@@ -115,7 +115,8 @@ $(document).ready(function () {
             data: param,
             dataType: "JSON",
             success: function(response) {
-                genRsaKey();                
+                genRsaKey();
+                                
                 window.location.href = "main";
             },
             error:function(request, status, error){
