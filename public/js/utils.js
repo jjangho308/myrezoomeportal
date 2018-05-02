@@ -1,6 +1,7 @@
 var socket;
 var client_token;
-var rsaKeypair;
+var rsakey_prv;
+var rsakey_pub;
 
 function leadingZeros(n, digits) {
     var zero = '';
@@ -53,6 +54,33 @@ function setData(record) {
     sessionStorage.setItem(record.txid, JSON.stringify(record));
 
     addTxidList(record.txid);
+}
+
+function genRsaKey() {
+    rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
+    console.log(rsaKeypair);
+    setRSAKey(rsaKeypair);
+}
+
+function setRSAKey(rsaKeypair) {
+    rsakey_prv = KEYUTIL.getJWKFromKey(rsaKeypair.prvKeyObj);
+    rsakey_pub = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj);
+
+    sessionStorage.setItem("rsa_prv", JSON.stringify(rsakey_prv));
+    sessionStorage.setItem("rsa_pub", JSON.stringify(rsakey_pub));
+    
+}
+
+function getRSAKey() {
+    
+    var session_rsa_pub = sessionStorage.getItem("rsa_pub");
+    var session_rsa_prv = sessionStorage.getItem("rsa_prv");
+
+    var json_rsa_prv = JSON.parse(session_rsa_prv); 
+    var json_rsa_pub = JSON.parse(session_rsa_pub); 
+
+    rsakey_prv = KEYUTIL.getKey(json_rsa_prv);
+    rsakey_pub = KEYUTIL.getKey(json_rsa_pub);
 }
 
 function getData(record_txid) {

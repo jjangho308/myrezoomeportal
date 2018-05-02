@@ -169,11 +169,9 @@ function getPrivateRecords() {
 
 function request_agent() {
 
-    rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
-    console.log(rsaKeypair);
-    //var pubkeyn = rsaKeypair.pubKeyObj.n.toString();
-    //var pubkeye = rsaKeypair.pubKeyObj.e.toString(); 
-    var jwkPub2 = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj);
+    getRSAKey();
+
+    var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 
     $.ajax({
         type: 'POST',
@@ -272,6 +270,9 @@ function refreshview(records) {
 function clientsocket_listener() {
     socket.on('SearchResult', function(msg){
         var omsg = JSON.parse(msg);
+
+        //get aes key
+
 
         var orgcode = omsg.orgcode;        
         for(var i=0; i<omsg.records.length ; i++) {            
