@@ -62,7 +62,7 @@ describe('Crypto test suit', () => {
     /**
      * AES Encrypt decrypt with given key test case.
      */
-    it('AES Encrypt decrypt with given key', done => {
+    it.skip('AES Encrypt decrypt with given key', done => {
         var plainText = 'Hello, World!';
         crypto.generateAESKey((err, encodedKey) => {
             console.log('AES Key : ' + encodedKey);
@@ -208,7 +208,18 @@ describe('Crypto test suit', () => {
         console.log(decrypted.toString(CryptoJS.enc.Utf8));
     });
 
-    it.skip('Native crypto RSA test', done => {
-
+    /**
+     * Generate RSA2048 KeyPair test case. <br />
+     * 
+     * @since 180502
+     * @author TACKSU
+     */
+    it('Generate RSA2048 Key pair', done => {
+        var crypto = Managers.crypto();
+        crypto.generateRSAKeyPair((err, keyPair)=>{
+            console.log('Public Key : ' + keyPair.public.toString('base64'));
+            console.log('Private Key : ' + keyPair.private.toString('base64'));
+            done();
+        });
     })
-})
+});

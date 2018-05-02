@@ -8,20 +8,32 @@ import Initializer from '../core/initializer';
 import Util from '../util/util';
 import CryptoManager from '../modules/crypto/crypto';
 
+/**
+ * Test suit for '/client' SearchRecords command test. <br />
+ * 
+ * @since
+ * @author TACKSU
+ */
 describe('Portal <-> Agent Search Record interpolation test suite.', () => {
 
     var token = null;
 
+    /**
+     * Prepare test scenaio. <br />
+     */
     before('Initialize', () => {
         Initializer();
         token = Managers.token().issueToken({
             uId: 'UID1'
         })
-        console.log(token);
-
         chai.use(chaihttp);
     })
 
+    /**
+     * First contact test case. <br />
+     * 
+     * @author TACKSU
+     */
     it('First search records', done => {
         var cryptoManager = new CryptoManager();
         cryptoManager = Managers.crypto();
@@ -85,7 +97,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
      * @since 180417
      * @author TACKSU
      */
-    it('Required Key phase test case', done => {
+    it.skip('Required Key phase test case', done => {
         chai.request(app)
             .post('/records')
             .set('Content-Type', 'application/json')
@@ -105,7 +117,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             })
             .end((err, res) => {
                 done();
-            });;
+            });
     })
 
     it.skip('Agent Search Results Response', done => {

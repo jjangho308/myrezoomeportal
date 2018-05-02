@@ -117,12 +117,20 @@ class CryptoManager extends AbstractManager {
      * @param {*} cb 
      */
     generateRSAKeyPair(cb) {
-        var dh = crypto.createDiffieHellman(this.spec.asmLength);
-        dh.generateKeys(this.spec.encode);
-        return {
-            public: dh.getPublicKey(this.spec.encode),
-            private: dh.getPrivateKey(this.spec.encode)
-        };
+
+        process.nextTick(() => {
+            try {
+                var key = new NodeRSA({
+                    b: 2048
+                });
+                cb(null, {
+                    public: key.exportKey('pkcs8-public-der'),
+                    private: key.exportKey('pkcs8-private-der')
+                });
+            } catch (e) {
+                cb(e, null);
+            }
+        });
     }
 
     /**
