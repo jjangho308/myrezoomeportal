@@ -62,7 +62,7 @@ describe('Crypto test suit', () => {
     /**
      * AES Encrypt decrypt with given key test case.
      */
-    it.skip('AES Encrypt decrypt with given key', done => {
+    it('AES Encrypt decrypt with given key', done => {
         var plainText = 'Hello, World!';
         crypto.generateAESKey((err, encodedKey) => {
             console.log('AES Key : ' + encodedKey);
@@ -79,7 +79,7 @@ describe('Crypto test suit', () => {
     /**
      * 
      */
-    it('RSA Public Key Parsing', done => {
+    it.skip('RSA Public Key Parsing', done => {
         try {
             var publicEncoded = '-----BEGIN PUBLIC KEY-----\n' +
                 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkQNKGV6/rAS1RpU1HNjzUeAsKHpFqVGEwga9eMI6Q7mXOox5dod1OOcutb1XoW18MCqqpFJZqsLtVMFjBEvlwiz6+CVq/Ij5DE19wOOzQknM5Ct4JFeCQqgQ3bNW/YMi7g1iORMx68aUpUaotqdggq+r3PCVrsrrb1DyUUknJWabElWLAI26Xez8fKQa8ltyR8yi1W7urUzV3kKAVp3Y3vn/h6W+nPVJjsfWdhemJUWFBI5DBgsrNitiGk0Nk195WSjH1OUImVnmslJdecAf8wBtm8XOzzGVOIlyRZjKMoDiLH/eNSqB4kU9NJ76t8XjcOSkxaBfsIS8t3ni1twEWQIDAQAB\n' +
@@ -109,7 +109,7 @@ describe('Crypto test suit', () => {
      * @since 180502
      * @author TACKSU
      */
-    it('RSA Encrypt decrypt test with crypto manager.', done => {
+    it.skip('RSA Encrypt decrypt test with crypto manager.', done => {
         var crypto = Managers.crypto();
 
         var data = 'Hello, World!';

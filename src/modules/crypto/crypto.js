@@ -97,7 +97,7 @@ class CryptoManager extends AbstractManager {
      * @since 180305
      * @author TACKSU
      * 
-     * @param {function(object, string)} cb 
+     * @param {function(object, string)} cb Callback function Base64 encoded AES Key data.
      */
     generateAESKey(cb) {
         crypto.randomBytes(this.spec.symLength, ((err, key) => {
@@ -133,33 +133,40 @@ class CryptoManager extends AbstractManager {
      * @param {function(err, iv, encrypted)} cb Callback function
      */
     encryptAES(plain, key, cb) {
-        this.generatePRN(this.spec.ivLength, ((err, iv) => {
-            try {
-                var cipher = crypto.createCipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), iv);
-                cipher.setAutoPadding(true);
-                var encrypted = cipher.update(plain, 'utf8', this.spec.encode);
-                encrypted += cipher.final(this.spec.encode);
-                cb(null, iv.toString(this.spec.encode), encrypted);
-            } catch (e) {
-                console.log(e);
-            }
-
-        }).bind(this));
+        process.nextTick(() => {
+            this.generatePRN(this.spec.ivLength, ((err, iv) => {
+                try {
+                    var cipher = crypto.createCipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), iv);
+                    cipher.setAutoPadding(true);
+                    var encrypted = cipher.update(plain, 'utf8', this.spec.encode);
+                    encrypted += cipher.final(this.spec.encode);
+                    cb(null, iv.toString(this.spec.encode), encrypted);
+                } catch (e) {
+                    console.log(e);
+                }
+            }).bind(this));
+        });
     }
 
     /**
      * Decrypt string with symmetric key and iv.
      * 
-     * @param {*} encrypted 
-     * @param {*} key 
-     * @param {*} iv 
-     * @param {*} cb 
+     * @param {string} encrypted Encoded encrypted string.
+     * @param {string} key Encoded AES key string.
+     * @param {string} iv Encoded IV buffer.
+     * @param {function(object, string)} cb 
      */
     decryptAES(encrypted, key, iv, cb) {
-        var decipher = crypto.createDecipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), Buffer.from(iv, this.spec.encode));
-        var decrypted = decipher.update(encrypted, this.spec.encode, 'utf8');
-        decrypted += decipher.final('utf8');
-        return decrypted;
+        process.nextTick(() => {
+            try {
+                var decipher = crypto.createDecipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), Buffer.from(iv, this.spec.encode));
+                var decrypted = decipher.update(encrypted, this.spec.encode, 'utf8');
+                decrypted += decipher.final('utf8');
+                cb(null, decrypted);
+            } catch (e) {
+                cb(e, null);
+            }
+        })
     }
 
     /**
