@@ -10,6 +10,24 @@
 
     <%- include('base_header') -%>
 
+    <!-- Modal HTML embedded directly into document -->
+    <div id="add-cert-dialog" class="modal">
+        <p>이력서 발급<span>이력서에 포함시킬 이력을 선택해주세요.</span></p>
+        <table id="add-cert-dialog-table">
+            <tr>
+                <th></th>
+                <th>구분</th>
+                <th>주체</th>
+                <th>증명서 종류</th>
+            </tr>
+        </table>
+
+        <div class="modal-footer">
+            <button class="confirm-btn primary-solid-btn">확인</button>
+            <button class="cancel-btn border-btn">취소</button>
+        </div>
+    </div>
+
     <div id="main-body">
         <div class="container">
             <div id="resume-store-div">
