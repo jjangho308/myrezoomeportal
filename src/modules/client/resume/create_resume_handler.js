@@ -7,6 +7,9 @@ import Managers from '../../../core/managers';
 
 
 import ResumeModel from '../../../models/resume/resume';
+
+import SharedResumeModel from "../../../models/resume/shared_resume"
+
 import Util from "../../../util/util"
 
 /**
@@ -84,20 +87,34 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                                             cb(ClientRequest.RESULT_FAILURE, err);
                                         } else if (resumeList.length > 0) {
 
+                                            //console.log(resumeList);
+
                                             //TODO plain text를 암호화 된 message로 변환할 것.
-                                            if(!!request.resume.record){
+                                            if(!!request.resume.data){
+                                                var cryptoManager = Managers.crypto();
 
+                                                var sharedResume = new SharedResumeModel({
+                                                    uId: request.uId,
+                                                    rsmId: resumeList[0].rsmId,
+                                                    data: JSON.stringify(request.resume.record)
+                                                });
+
+                                                console.log(sharedResume);
+
+                                                resumeDAO.putShare(sharedResume, (err, insertSharedId)=>{
+                                                    if(!!err){
+                                                        cb(ClientRequest.RESULT_FAILURE, err);
+                                                    }else{
+                                                        cb(ClientRequest.RESULT_SUCCESS, {
+                                                            rsmId: resumeList[0].rsmId,
+                                                            txid: bcModelList[0].txid,
+                                                            date: resumeList[0].createdDate
+                                                        });
+                                                    }
+
+                                                })
+                                                
                                             }
-
-
-
-                                            cb(ClientRequest.RESULT_SUCCESS, {
-                                                rsmId: resumeList[0].rsmId,
-                                                date: resumeList[0].modifiedDate,
-                                                shared: resumeList[0].shared,
-                                                status: resumeList[0].status,
-                                                title: resumeList[0].title
-                                            });
                                         }
                                     });
                                 }
