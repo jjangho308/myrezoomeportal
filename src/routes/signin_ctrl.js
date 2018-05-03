@@ -30,7 +30,7 @@ export default {
         if (!!req.xhr) {
             Managers.client().request(new SignInRequest(req.body), (err, result) => {
                 if (!!err) {
-                    res.status(500).json(err);
+                    next(err);
                 } else {
                     res.set('Set-Cookie', 'JWT=' + result.token);
                     res.json(result);
