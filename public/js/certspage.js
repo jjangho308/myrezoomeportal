@@ -195,10 +195,13 @@ $(document).ready(function(){
                 var id = this.id;
 
                 var sdata = sessionStorage.getItem(id);
+
+                var json_session_record = JSON.parse(sdata);
+                var jsondata = json_session_record.data;
                 
                 var reqcerts = {};
                 reqcerts.txid = id;
-                reqcerts.record = JSON.parse(sdata);
+                reqcerts.record = jsondata;
 
                 console.log("cert req param");
                 console.log(id);
