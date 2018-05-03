@@ -6,7 +6,7 @@ require socket.is
 
 $(document).ready(function(){   
     // comment by hyunsu for running
-    // socket = io();
+    socket = io();
     /*
         view init empty set
     */   
@@ -16,8 +16,6 @@ $(document).ready(function(){
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
 
-    var emptyarray = [];
-    setTxidList(emptyarray);
 
     // set event for element main page
     $('#header-mycert').click(function () {
@@ -44,6 +42,29 @@ $(document).ready(function(){
         window.location = "main";
     });
 
+    //request to agent for get user info
+    var pagetxidlist = getTxidList();
+
+    if(pagetxidlist.length > 1) {
+        //sessing storage have user info (txid list)
+        var oridata = [];
+        
+        for(var i=0; i< pagetxidlist.length ; i++) {            
+            try {                
+                var objuserdata = getData(pagetxidlist[i]);
+                refreshview(objuserdata);
+            }catch(exception) {
+                console.log(exception);
+                continue;
+            }
+        }
+    }
+    else {
+        //session storage dont have user info(txid list)
+        request_agent();        
+    }
+
+    getPrivateRecords();
 
     $('#education-add-dialog .add-span').click(function () {
         console.log("#education-add-dialog .add-span clicked");
@@ -394,20 +415,13 @@ $(document).ready(function(){
         });        
     });
 
-    //request to agent for get user info
-    // comment by hyunsu for running
-    // request_agent();    
-    // comment by hyunsu for running
-    // getPrivateRecords();
-
-    rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
-    console.log(rsaKeypair);
-    //var pubkeyn = rsaKeypair.pubKeyObj.n.toString();
-    //var pubkeye = rsaKeypair.pubKeyObj.e.toString(); 
-    var jwkPub2 = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj); 
-
     $('#refresh_record').click(function() {
-        
+        getRSAKey();
+        var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+
+        var emptyarray = [];
+        setTxidList(emptyarray);
+
         $.ajax({
             type: 'POST',
             url: '/client',
@@ -516,6 +530,9 @@ function getPrivateRecords() {
 }
 
 function request_agent() {
+
+    var emptyarray = [];
+    setTxidList(emptyarray);
 
     getRSAKey();
 

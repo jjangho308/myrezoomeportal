@@ -107,8 +107,13 @@ function setTxidList(txidarray) {
 
 function getTxidList() {
     var storagedata = sessionStorage.getItem(client_token);
-    var resultarray = storagedata.split(",");
-    return resultarray;
+    if(storagedata==null) {
+        var emptyarray = [];
+        setTxidList(emptyarray);
+        storagedata = sessionStorage.getItem(client_token);
+    }
+     var resultarray = storagedata.split(",");
+     return resultarray;
 }
 
 function SHA256(s) {
