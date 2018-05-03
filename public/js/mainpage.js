@@ -291,7 +291,11 @@ function clientsocket_listener() {
         var omsg = JSON.parse(msg);
 
         //get aes key
-
+        //var rev_aeskey = omsg.key;
+        // temp key 
+        var rev_aeskey = 'JSh3WbI+1bpxtziPGiUwdAPRw1iTQeoKpMYY3+lnGkBhl/x3MPQSGH/O2iBWiTfwEGNF7164mNc1bFrNE/GndpuYDDi+uncIPGJd3hl1uMOugxIp2udPpog4/KLCP4KZ9dq0OMy4sZWW0v4M7ytHAjHtDK+ljrlrRjPk2l/+aHNaQuXRUiLIBcD0qGPe+1eRAVSW9XidyWplyZR0NCVe0tUA1dxM31uif1qxy7aAegmuNgQy74M6vhy1oSNY/fKrHGuGq4XW3fYrIemNEUgVFVwAky3QbMOLPVY+QIAyhbbiAoBKYrccwqb9xvwwhX49d1ZyEakZ0KPfumvO/sCgtA==';
+        var aeskey_hex = base64ToHex(rev_aeskey);
+        var decryptedKey = KJUR.crypto.Cipher.decrypt(aeskey_hex, rsakey_prv);
 
         var orgcode = omsg.orgcode;        
         for(var i=0; i<omsg.records.length ; i++) {            
