@@ -41,4 +41,9 @@ router.patch('/:rsmId', tokenAuth);
 router.patch('/:rsmId', ctrl.patch);
 router.patch('/:rsmId', view);
 
+router.delete('/:rsmId', tokenAuth);
+router.delete('/:rsmId', ctrl.deleteResum);
+
+
+
 export default router;

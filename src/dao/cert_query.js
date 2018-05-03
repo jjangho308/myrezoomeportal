@@ -28,7 +28,7 @@ export default {
     setShared: 'UPDATE ' + SHARED_CERT_TABLE + ' SET ? WHERE ?',
     
     //완료 del_yn
-    delShaed: 'UPDATE ' + SHARED_CERT_TABLE + " SET DEL_YN = 'Y' WHERE ? and ?",
+    delShared: 'UPDATE ' + SHARED_CERT_TABLE + " SET DEL_YN = 'Y' WHERE ? and ?",
 
     
     

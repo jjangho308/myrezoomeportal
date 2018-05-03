@@ -54,7 +54,7 @@ describe('/certs URI Page test suite.', () => {
             });
     });
 
-    it.skip('Issue certificate request test', done => {
+    it('Issue certificate request test', done => {
         chai.request(app)
             .post('/certs')
             .set('Content-Type', 'application/json')
