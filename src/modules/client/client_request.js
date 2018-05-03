@@ -39,6 +39,10 @@ import GetResumeHandler from './resume/get_resume_handler';
 import UpdateResumeRequest from './resume/update_resume_request';
 import UpdateResumeHandler from './resume/update_resume_handler';
 
+import DeleteResumeRequest from './resume/delete_resume_request';
+import DeleteResumeHandler from './resume/delete_resume_handler';
+
+
 import ShareResumeRequest from './resume/share_resume_request';
 import ShareResumeRequestHandler from './resume/share_resume_handler';
 
@@ -107,6 +111,8 @@ class ClientRequestManager extends AbstractManager {
         this.handlerMap.set(GetResumeRequest, new GetResumeHandler());
         this.handlerMap.set(UpdateResumeRequest, new UpdateResumeHandler());
         this.handlerMap.set(CreateResumeRequest, new CreateResumeHandler());
+        this.handlerMap.set(DeleteResumeRequest, new DeleteResumeHandler());
+
 
         this.handlerMap.set(ShareCertRequest, new ShareCertRequestHandler());
         this.handlerMap.set(ShareResumeRequest, new ShareResumeRequestHandler());
