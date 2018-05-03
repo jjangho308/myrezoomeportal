@@ -198,7 +198,7 @@ class CryptoManager extends AbstractManager {
                 var encrypted = rsa.encrypt(dataBuffer);
                 cb(null, encrypted);
             } catch (e) {
-                cb(er);
+                cb(e);
             }
         });
     }
@@ -221,7 +221,7 @@ class CryptoManager extends AbstractManager {
                 var decrypted = rsa.decrypt(encryptedBuffer);
                 cb(null, decrypted);
             } catch (e) {
-                cb(er);
+                cb(e);
             }
         });
     }
