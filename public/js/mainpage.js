@@ -163,8 +163,8 @@ $(document).ready(function(){
     $('#language-add-dialog .confirm-btn').click(function () {        
         
         var lang = $("#langadd_lang").val();
-        var name = $("#langadd_name").val();
-        var grade = $("#langadd_grade").val();        
+        var name = $("#language-name").val();
+        var grade = $("#language-grade").val();        
         var start_date = $("#langadd_startdate").val();
         var end_date = $("#langadd_enddate").val();
         var expireYn = $("#langadd_expireYn").is(':checked');
@@ -212,8 +212,8 @@ $(document).ready(function(){
 
     $('#cert-add-dialog .confirm-btn').click(function () {  
         
-        var name = $("#certadd_name").val();
-        var grade = $("#certadd_grade").val();        
+        var name = $("#cert-name").val();
+        var grade = $("#cert-grade").val();        
         var start_date = $("#certadd_startdate").val();
         var end_date = $("#certadd_enddate").val();
         var expireYn = $("#certadd_expireYn").is(':checked');
@@ -226,8 +226,6 @@ $(document).ready(function(){
             enddate: end_date,
             expireYn: expireYn
         }
-
-        console.log(param);
 
         // cert encryption
         var enc_record = JSON.stringify(param);
