@@ -123,7 +123,9 @@ class PushManager extends AbstractManager {
                                         if (!!err) {
                                             console.log(err);
                                         } else {
-                                            crypto.encryptRSAPublic(Buffer.from(aesKey, 'base64'), orgPublicKey, (err, encryptedKey) => {
+                                            // Base64 Encoded된 키를 UTF-8 문자열로 Decode하여 전달함.
+                                            // 즉 Decrypt시 UTF-8 StringByte Array를 얻어 Base64Decode 할 수 있도록
+                                            crypto.encryptRSAPublic(Buffer.from(aesKey), orgPublicKey, (err, encryptedKey) => {
                                                 if (!!err) {
                                                     console.log(err);
                                                 } else {
