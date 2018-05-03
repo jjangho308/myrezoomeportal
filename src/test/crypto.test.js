@@ -127,13 +127,14 @@ describe('Crypto test suit', () => {
         });
     });
 
-    it.skip('Encrypt with organization publicKey', done => {
+    it('Encrypt with organization publicKey', done => {
         var publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjwgV2L4NBYzJ2UMeEU2cgSWLsLFb8SUsVgFWMNkyFHUpIscMVE8MEvvomfW3dISuj5JEtAfUpCaEESoDLhjK8ut7xjG3rkiAn2URLJzhAi1CczLmVVN+WZFS2WD+9hJchHM65DNOWbvZMJdD/yDPn+1Ep8sKBI/ufFYXondkpfdBSm1JgaRA0lqAOx6FxaWfpVShLkQyAqhtdhdoN7i+7jrR/PjZL+z0mfdMRfbyAd39r3Lj9kARDmcWCs0mAqxweCg9eAWhaX/S0A/kxepG320oOqx9hb549rHLjaQSeGRDvzR5M7yj/msN9FELZiIJDYlM4FCps1MgJR17MKbl+QIDAQAB";
 
         var privateKey = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCPCBXYvg0FjMnZQx4RTZyBJYuwsVvxJSxWAVYw2TIUdSkixwxUTwwS++iZ9bd0hK6PkkS0B9SkJoQRKgMuGMry63vGMbeuSICfZREsnOECLUJzMuZVU35ZkVLZYP72ElyEczrkM05Zu9kwl0P/IM+f7USnywoEj+58Vheid2Sl90FKbUmBpEDSWoA7HoXFpZ+lVKEuRDICqG12F2g3uL7uOtH8+Nkv7PSZ90xF9vIB3f2vcuP2QBEOZxYKzSYCrHB4KD14BaFpf9LQD+TF6kbfbSg6rH2Fvnj2scuNpBJ4ZEO/NHkzvKP+aw30UQtmIgkNiUzgUKmzUyAlHXswpuX5AgMBAAECggEAOEHU3fA6jPFIPyUwAVxGb2GGJRRNdnbJjnZuIT58fSFr8Zra1ZpVxG3CmjPUWYcKZbwBO9JMp9fiYCHnKE1mHc/TWiwZ8/neZVNKQwLdWY7VsRvXDr6NVstbC9cj0UN9kjcEdddcPN0u2vbULtgH8f5P37NzmEHIaq0uFJ/jPYd9HFRNH3MN9JfJd6OkGiaeZ5RMDD6kRp40KbF7Dv40vRE0PT3q47vT6OsWqA1wKjexhaX94UuQWGZFC/Zj/M/gtXGEqIFdegznZIbrkWxLLUsMyyrdwtgSe9+1BZX18+oVxNgMQULLNsPVTMVR1H7QhnLoNIyVoBiUcPgQjgp/JQKBgQDy0B5uDsmXba5GHpKXoZ03J+O/CMQ1tMuZv6Bh/a8pHaGFUXRxY/2vRVSCnEVwIsni0+MmotoYlGqDs7/plptnZFseSP+5hyG47H3JV9ohyVrsGtlfQmlbv5EOENtS974t0SeVi6I6qWEMyQ3yaAx6q0Ex/R2utGbIAPS6wV0HewKBgQCWzK8yVJdzzB6+nv5clEobvRqQXdLY8i6Dr+TY9HnKxqNliJtlKxRjRCPUbVHi4lPWPRoY/8McOEFDIqZO5HScnTLyX46pEwmKld/ysC1liOUixHg/SZ7kCAB24fb7pd78RJ0Z6JElUR2g1DzTMmp6lAX+3d48Ea508lQi8UyUGwKBgBV4Z6htsE+uiCF1JJs51DADW/URbmAdW3993U2s4+cr0pN6T2STZeQwqjdeYBl5Sga/m69X6RcRUJXSuB6MjbNHwXLdG5epJkc2yiyakxQ3vM1x1lTBB5XwS4BF507fzzY371se3Lp5Lba2tIAByVCzgfFMo2pGU2xOAVXeMT6vAoGACN0G/yJRtJCuze1ybeaZZH/867dYCUBS05KnFMlpzy1VtUYOPCgIDr2WjYnPYlKDMvhsbEO8KBB2ZYfH1qM+52Wl9PEA5Zck3GxquUz5nhopvZ1mo/Gj0StXO6WUar4ZGSK/SSKORW87GpTe7lrsP0AsCgroYQd5BY6ou1ULdzkCgYBM+XE+beamQWR78I8PKyTFRB4eqj7NGABANGywqC31CKf960FfopSA292AthALd7GQ5yMvfmIsheffVgCWTlAmpdXMHsMf20JrKwn9driXAbW4hHCGN9CDiO4Bwq2Vsbz68sigX7ReLlrnrj6Pl4w49jlpTDEwZ/wsmgXdXJTf+w=="
         var plain = "giemncc3LqXT+o8MWucPqkGQPCmsBliHCwCOlxoHY6k=";
         var crypto = Managers.crypto();
         crypto.encryptRSAPublic(Buffer.from(plain, 'base64'), publicKey, (err, encrypted) => {
+            console.log('Encrypted : ' + encrypted.toString('base64'));
             crypto.decryptRSAPrivate(encrypted, privateKey, (err, result) => {
                 console.log(result.toString('base64'));
                 if (plain == result.toString('base64')) {
@@ -143,7 +144,7 @@ describe('Crypto test suit', () => {
         })
     });
 
-    it('RSA Decrypt Test', done => {
+    it.skip('RSA Decrypt Test', done => {
         var privateKey = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCPCBXYvg0FjMnZQx4RTZyBJYuwsVvxJSxWAVYw2TIUdSkixwxUTwwS++iZ9bd0hK6PkkS0B9SkJoQRKgMuGMry63vGMbeuSICfZREsnOECLUJzMuZVU35ZkVLZYP72ElyEczrkM05Zu9kwl0P/IM+f7USnywoEj+58Vheid2Sl90FKbUmBpEDSWoA7HoXFpZ+lVKEuRDICqG12F2g3uL7uOtH8+Nkv7PSZ90xF9vIB3f2vcuP2QBEOZxYKzSYCrHB4KD14BaFpf9LQD+TF6kbfbSg6rH2Fvnj2scuNpBJ4ZEO/NHkzvKP+aw30UQtmIgkNiUzgUKmzUyAlHXswpuX5AgMBAAECggEAOEHU3fA6jPFIPyUwAVxGb2GGJRRNdnbJjnZuIT58fSFr8Zra1ZpVxG3CmjPUWYcKZbwBO9JMp9fiYCHnKE1mHc/TWiwZ8/neZVNKQwLdWY7VsRvXDr6NVstbC9cj0UN9kjcEdddcPN0u2vbULtgH8f5P37NzmEHIaq0uFJ/jPYd9HFRNH3MN9JfJd6OkGiaeZ5RMDD6kRp40KbF7Dv40vRE0PT3q47vT6OsWqA1wKjexhaX94UuQWGZFC/Zj/M/gtXGEqIFdegznZIbrkWxLLUsMyyrdwtgSe9+1BZX18+oVxNgMQULLNsPVTMVR1H7QhnLoNIyVoBiUcPgQjgp/JQKBgQDy0B5uDsmXba5GHpKXoZ03J+O/CMQ1tMuZv6Bh/a8pHaGFUXRxY/2vRVSCnEVwIsni0+MmotoYlGqDs7/plptnZFseSP+5hyG47H3JV9ohyVrsGtlfQmlbv5EOENtS974t0SeVi6I6qWEMyQ3yaAx6q0Ex/R2utGbIAPS6wV0HewKBgQCWzK8yVJdzzB6+nv5clEobvRqQXdLY8i6Dr+TY9HnKxqNliJtlKxRjRCPUbVHi4lPWPRoY/8McOEFDIqZO5HScnTLyX46pEwmKld/ysC1liOUixHg/SZ7kCAB24fb7pd78RJ0Z6JElUR2g1DzTMmp6lAX+3d48Ea508lQi8UyUGwKBgBV4Z6htsE+uiCF1JJs51DADW/URbmAdW3993U2s4+cr0pN6T2STZeQwqjdeYBl5Sga/m69X6RcRUJXSuB6MjbNHwXLdG5epJkc2yiyakxQ3vM1x1lTBB5XwS4BF507fzzY371se3Lp5Lba2tIAByVCzgfFMo2pGU2xOAVXeMT6vAoGACN0G/yJRtJCuze1ybeaZZH/867dYCUBS05KnFMlpzy1VtUYOPCgIDr2WjYnPYlKDMvhsbEO8KBB2ZYfH1qM+52Wl9PEA5Zck3GxquUz5nhopvZ1mo/Gj0StXO6WUar4ZGSK/SSKORW87GpTe7lrsP0AsCgroYQd5BY6ou1ULdzkCgYBM+XE+beamQWR78I8PKyTFRB4eqj7NGABANGywqC31CKf960FfopSA292AthALd7GQ5yMvfmIsheffVgCWTlAmpdXMHsMf20JrKwn9driXAbW4hHCGN9CDiO4Bwq2Vsbz68sigX7ReLlrnrj6Pl4w49jlpTDEwZ/wsmgXdXJTf+w=="
         var encrypted = "bveNiFuSC7cF4JMUtTzsaIKGABQeSj/TLr2Zfau9E5D2C0igj5C0vh80ToMccll9MPgXaotRJ0SJMnZwnuWZHZN0ETcx8isknPgEHZ/eR7rKFLBDBsY9SpDVLCGkXtrzBCBZ9o5IoAF3RxPwMv8txM9/fpat0PoQ1i3D/5ozjw2uuJVKZVXLluc8rBfxTrDLhqxWCvSdY3VfRHBVwCnAnrPYji60w2ULjP164XVoBO/aIMnyEoELFFWr4fpytB2lyEFv1ICQiT/ppfxzNtdhIlPfvc9EepRiRDLFd3aGgRO7bDn9G/1+Zsa0vN9qZb9aoyKZkyyiHBHBz4lvimScWw==";
 
@@ -153,9 +154,8 @@ describe('Crypto test suit', () => {
             if ("giemncc3LqXT+o8MWucPqkGQPCmsBliHCwCOlxoHY6k=" == decrypted.toString('base64')) {
                 done();
             }
-        })
-
-    })
+        });
+    });
 
     it.skip('RSA Key generate', done => {
         var nodeRSA = new NodeRSA({

@@ -112,37 +112,43 @@ class PushManager extends AbstractManager {
                         var orgDao = Managers.db().getOrgDAO().getInfo({
                             orgId: orgInfos
                         }, (err, orgInfoModel) => {
-                            var orgPublicKey = orgInfoModel.publicKey;
+                            var orgPublicKey = orgInfoModel[0].publicKey;
                             var crypto = Managers.crypto();
 
                             crypto.generateAESKey((err, aesKey) => {
                                 if (!!err) {
                                     console.log(err);
                                 } else {
-                                    crypto.encryptAES(msgString, aesKey, (err, iv, encrypted) => {
+                                    crypto.encryptAES(msgString, aesKey, (err, encodedIV, encryptedMsg) => {
                                         if (!!err) {
                                             console.log(err);
                                         } else {
-                                            var cryptPushMessage = {
-                                                key: aesKey,
-                                                iv: iv,
-                                                msg: encrypted
-                                            };
+                                            crypto.encryptRSAPublic(Buffer.from(aesKey, 'base64'), orgPublicKey, (err, encryptedKey) => {
+                                                if (!!err) {
+                                                    console.log(err);
+                                                } else {
+                                                    var cryptPushMessage = {
+                                                        key: encryptedKey.toString('base64'),
+                                                        iv: encodedIV,
+                                                        msg: encryptedMsg
+                                                    };
 
-                                            this.channelFactory.channel(function (err, channel) {
-                                                if (err) {
-                                                    console.log('channel factory error: ' + error.message);
-                                                    return;
+                                                    this.channelFactory.channel(function (err, channel) {
+                                                        if (err) {
+                                                            console.log('channel factory error: ' + error.message);
+                                                            return;
+                                                        }
+                                                        channel.send(queuename[i].AMQ_NM, JSON.stringify(cryptPushMessage), err => {
+                                                            if (err) {
+                                                                console.log('send error: ' + err.message);
+                                                                cb(err)
+                                                            }
+                                                            console.log('sent message');
+                                                            channel.close();
+                                                            cb(null);
+                                                        });
+                                                    });
                                                 }
-                                                channel.send(queuename[i].AMQ_NM, JSON.stringify(cryptPushMessage), err => {
-                                                    if (err) {
-                                                        console.log('send error: ' + err.message);
-                                                        cb(err)
-                                                    }
-                                                    console.log('sent message');
-                                                    channel.close();
-                                                    cb(null);
-                                                });
                                             });
                                         }
                                     });

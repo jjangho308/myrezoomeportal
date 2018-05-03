@@ -37,7 +37,24 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
     it('First search records', done => {
         var cryptoManager = new CryptoManager();
         cryptoManager = Managers.crypto();
-        var keyPair = cryptoManager.generateRSAKeyPair();
+        // cryptoManager.generateRSAKeyPair((err, keyPair) => {
+        //     chai.request(app)
+        //         .post('/client')
+        //         .set('Content-Type', 'application/json')
+        //         .set('Authorization', 'Bearer ' + token)
+        //         .set('Cookie', 'jwt=' + token)
+        //         .set('X-Requested-With', 'XMLHttpRequest')
+        //         .send({
+        //             cmd: 'SearchRecord',
+        //             args: {
+        //                 pkey: keyPair.public
+        //             }
+        //         })
+        //         .end((err, res) => {
+        //             done();
+        //         });
+        // });
+
         chai.request(app)
             .post('/client')
             .set('Content-Type', 'application/json')
@@ -47,13 +64,14 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
             .send({
                 cmd: 'SearchRecord',
                 args: {
-                    pkey: keyPair.public
+                    pkey: 'asdfasdf'
                 }
             })
             .end((err, res) => {
                 done();
-            });;
+            });
     })
+
 
     it.skip('Refresh search records', done => {
         chai.request(app)
