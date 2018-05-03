@@ -45,11 +45,15 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
         var resumeModel = new ResumeModel({
             rsmId: Util.uuid(),
             uId: request.uId,
+            //수정 여부!
             status: request.resume.status,
+
             title: request.resume.title,
         });
 
         var bcIdList = [];
+
+
         for (var i in request.resume.data) {
             !((idx) => {
                 recordDAO.getBlockChainMap({
@@ -79,6 +83,14 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                                         if (!!err) {
                                             cb(ClientRequest.RESULT_FAILURE, err);
                                         } else if (resumeList.length > 0) {
+
+                                            //TODO plain text를 암호화 된 message로 변환할 것.
+                                            if(!!request.resume.record){
+
+                                            }
+
+
+
                                             cb(ClientRequest.RESULT_SUCCESS, {
                                                 rsmId: resumeList[0].rsmId,
                                                 date: resumeList[0].modifiedDate,
