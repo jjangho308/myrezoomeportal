@@ -187,7 +187,7 @@ class CertificateDAO extends AbstractDAO {
                         //var certId=creteria.certId;
                         condition.CERT_ID = creteria.certId;
 
-                        console.log(certId);
+                        //console.log(certId);
 
                         var usrCertDelQuery = mysql.format(CertQuery.delCert, condition);
 
@@ -197,7 +197,7 @@ class CertificateDAO extends AbstractDAO {
                                 console.log(err);
                             }
                             else if (result.affectedRows > 0) {
-                                var usrCertSharedDelQuery = mysql.format(CertQuery.delShaed, [condition,  {DEL_YN:'N'}]);
+                                var usrCertSharedDelQuery = mysql.format(CertQuery.delShared, [condition,  {DEL_YN:'N'}]);
                                 //console.log(usrCertSharedDelQuery);
                                 connection.query(usrCertSharedDelQuery, (err, result) => {
                                     if (!!err) {

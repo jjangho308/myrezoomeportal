@@ -1,146 +1,35 @@
-<%#
-UserModel render용 키 정보 :
-{
-    sId : 회원 SID(integer)
-    uId : 회원 UID(uuid string),
-    firstNameKO : 한국 이름 ex),
-    familyNameKO : 한국 성,
-    fullNameKO : 한국 전체 이름,
-    firstNameEN : 영문 이름
-    familyNameEN : 영문 성,
-    fullNameEN : 영문 전체 이름,
-    gender : 성별 ('M'/'F'),
-    phone : 핸드폰 번호(+821047472727),
-    email : E-Mail 주소,
-    birth : 생년월일 (yyyymmdd),
-    imgsrc : 프로필 사진 주소,
-}
-%>
-<!DOCTYPE html>
-<html>
+<%- include('base_head_import') -%>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-
-    <link rel="stylesheet" href="css/selectize.css">
-    <meta name="description" content="">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/mypage/main.css">
+    <link rel="stylesheet" href="css/mypage/base_mycert_resumespage.css">
     <link rel="stylesheet" href="css/mypage/resumespage.css">
-    <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css" />
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
-
-    <script src="js/selectize.js"></script>
-    <link rel="stylesheet" href="css/datepicker.css">
-    <link rel="stylesheet" href="css/progressbar.css">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/view_formatter.js"></script>
     <script src="js/resumespage.js"></script>
-    <script src="js/testinterface.js"></script>
-
 </head>
 
 <body>
-    <div id = "myresume-modal">
-        <!-- Modal HTML embedded directly into document -->
-        <div id="resumes-add-dialog" class="modal">
-                <p>이력서 생성<span>레쥬메에서 발급받고 싶은 이력을 선택해주세요.</span></p>
-                <table id="add-resume-dialog-table">
-                    <tr>
-                        <th></th>
-                        <th>구분</th>
-                        <th>이력명</th>
-                        <th>성적포함</th>
-                    </tr>
-                    <!-- <tr>
-                        <td>
-                            <div class="checkbox checkbox-primary">
-                                <input id="add-cert-checkbox-1" type="checkbox">
-                                <label for="add-cert-checkbox-1"></label>
-                            </div>           
-                        </td>
-                        <td>자격</td>
-                        <td>삼성SDS</td>
-                        <td>SW Certificate 자격증명서(제 38회)</td>
-                    </tr> -->
-              
-        
-                </table>
-        
-                <div class="modal-footer">
-                    <button class="confirm-btn primary-solid-btn">확인</button>
-                    <button class="cancel-btn border-btn">취소</button>
-                </div>
-        </div>
-    </div>
 
-    
-    <nav class="navbar">
-        <div class="container">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#"><img src="img/myresume/logo@3x.png" id="home_icon"></a>
-                </li>
+    <%- include('base_header') -%>
 
-                <li class="right">
-                    <a href="#"><img id="user-small-icon" src="img/myresume/user-photo.png" /><span><%= email %></span><img class="check-icon" src="img/myresume/shape@3x.png" /></a>
-                </li>
-                <li class="right"><a href="#">기업 서비스</a></li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Modal HTML embedded directly into document -->
+    <div id="add-cert-dialog" class="modal">
+        <p>이력서 발급<span>이력서에 포함시킬 이력을 선택해주세요.</span></p>
+        <table id="add-cert-dialog-table">
+            <tr>
+                <th></th>
+                <th>구분</th>
+                <th>주체</th>
+                <th>증명서 종류</th>
+            </tr>
+        </table>
 
-    <div class="container">
-        <div id="header-1" class="grid">
-            <div>
-                <img id="user-big-icon" src=<%= imgsrc %> />
-            </div>
-
-            <div>
-                <p><%= fullNameKO %></p>
-                <p><%= email %></p>
-
-            </div>
-        </div>
-    </div>
-
-    <div id="header-2">
-        <div class="container">
-            <div class="grid">
-                <ul>
-                    <li id="header-resume-store">이력서 보관함</li>
-                    <li id="header-mycert">
-                        증명서 보관함
-                    </li>
-                    <li id="header-myresume">My 레쥬메</li>
-
-                </ul>
-
-            </div>
-
+        <div class="modal-footer">
+            <button class="confirm-btn primary-solid-btn">확인</button>
+            <button class="cancel-btn border-btn">취소</button>
         </div>
     </div>
 
     <div id="main-body">
         <div class="container">
-            <div id="myresume-div">
-                    
-            </div>
-            <div id="mycert-div">
-            </div>
-            
             <div id="resume-store-div">
                     <div id="resume-grid-div" class="grid mycert-grid">
                             <p>이력서 보관함</p>
@@ -160,68 +49,15 @@ UserModel render용 키 정보 :
                                 <img src="img/mycert/fill-1.png" alt="">
                                 <p>새로운 이력서 생성</p>
         
-                            </div>
-                            <!-- <div class="cert-container" tabindex="1">
-                                <p>....</p>
-                                <img src="img/resume-store/invalid-name.png" alt="">
-                                <p>이력서</p>
-                                <p>삼성전자용_2018 어쩌구</p>
-                                <p>업데이트 : 2018-03-01 11:00</p>
-                            </div>
-        
-                            <div class="cert-container" tabindex="1">
-                                <p>....</p>
-                                <img src="img/resume-store/invalid-name.png" alt="">
-                                <p>이력서</p>
-                                <p>No Name #2</p>
-                                <p>업데이트 : 2018-03-01 11:00</p>
-                            </div>          
-                            <div class="cert-container" tabindex="1">
-                                <p>....</p>
-                                <img src="img/resume-store/invalid-name.png" alt="">
-                                <p>이력서</p>
-                                <p>이수지_중소기업용</p>
-                                <p>업데이트 : 2018-03-01 11:00</p>
-                            </div>
-                            <div class="cert-container" tabindex="1">
-                                <p>....</p>
-                                <img src="img/resume-store/invalid-name.png" alt="">
-                                <p>이력서</p>
-                                <p>삼성SDS용</p>
-                                <p>업데이트 : 2018-03-01 11:00</p>
-                            </div>             -->
-                        </div>    
+                            </div>        
+                    </div>    
             </div>
             
 
         </div>
     </div>
     
-    <div id="alarm-div">
-        <span></span>
-        <img src="/img/myresume/close-white.svg" alt="">
-    </div>
-    
-    <div id="main-footer">
-        <span>© REZOOME</span>
-        <span>All rights reserved.</span>
-        
-        <span>이용약관</span>
-        <span>|</span>
-        <span>개인정보처리방침</span>
-        
-    </div>
-    
-    <div id="select-footer">
-        <img src="img/myresume/on.png" alt="">
-        <span>2건의</span>
-        <span>이력이 선택되었습니다.</span>
-        
-        <button>···</button>
-        
-        <button>이력서 생성</button>
-        <button id="cert-issue-button"><a href="#cert-issue-dialog" rel="modal:open">증명서 발급</a></button>
-    </div>    
+    <%- include('base_footer') -%>   
 </body>
 
 </html>

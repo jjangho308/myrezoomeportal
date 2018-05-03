@@ -138,7 +138,59 @@ class ResumeDao extends AbstractDAO {
      * @param {*} resumeid 
      * @param {*} cb 
      */
-    delResume(resumeid, cb) {
+    delResume(creteria, cb) {
+        var rsmId = creteria.rsmId;
+
+        this.connectionPool.getConnection((err, connection)=>{
+            if(!!err){
+                console.log(err);
+                cb(err);
+            } else{
+                connection.beginTransaction(function(err){
+                    if(err){
+                        console.log(err);
+                        cb(err)
+                    } else{
+                        var condition={};
+
+                        //e6b88a3e-da49-4ee8-badf-a49e21bc1e86
+                        condition.RSM_ID=creteria.rsmId;
+
+                        var usrResumeDelQuery = mysql.format(ResumeQuery.delResume, condition);
+
+                        connection.query(usrResumeDelQuery, (err,result)=>{
+
+                            if(!!err){
+
+                            }else if(result.affectedRows > 0){
+                                var usrResumeSharedDelQuery = mysql.format(ResumeQuery.delShared, [condition, {DEL_YN:'N'}]);
+                                connection.query(usrResumeSharedDelQuery, (err, result) => {
+                                    if(!!err){
+                                        connection.release();
+                                        console.log(err);
+                                    } else if(result.affectedRows > 0){
+                                        var selectResumeSharedInfo = mysql. format(ResumeQuery.getUrl, [condition, {DEL_YN:'N'}]);
+                                        connection.query(selectResumeSharedInfo, (err, result)=> {
+                                            if(!!err){
+                                                connection.release();
+                                                console.log(err);
+                                            }else{
+                                                console.log(result);
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+
+                        })
+
+
+
+                    }
+                })
+            }
+
+        })
 
     }
 

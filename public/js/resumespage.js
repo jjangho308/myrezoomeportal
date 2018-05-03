@@ -66,7 +66,9 @@ $(document).ready(function () {
     });
 
     loadresumelist();
+    // comment by hyunsu for running
 
+    // it will change to add resume
     $(document).on('click', ".add-cert", function () {
         console.log('이력서 생성 목록 클릭');
         var txidlist = getTxidList();
@@ -124,7 +126,7 @@ $(document).ready(function () {
                         htmldiv = htmldiv + '<td>' + subname + '</td>';
                         htmldiv = htmldiv + '</tr>';
 
-                        $("#add-resume-dialog-table").append(htmldiv);
+                        $("#add-cert-dialog-table").append(htmldiv);
 
                         /*
                         $(addcertcheckboxid).click(function() {
@@ -164,7 +166,8 @@ $(document).ready(function () {
 
                 var sdata = sessionStorage.getItem(id);
                 
-                var jsondata = JSON.parse(sdata);
+                var json_session_record = JSON.parse(sdata);
+                var jsondata = json_session_record.data;
                 var objresumedata = {};
                 objresumedata.record = jsondata;
                 objresumedata.txid = id;

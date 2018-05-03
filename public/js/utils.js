@@ -1,6 +1,7 @@
 var socket;
 var client_token;
-var rsaKeypair;
+var rsakey_prv;
+var rsakey_pub;
 
 function leadingZeros(n, digits) {
     var zero = '';
@@ -55,6 +56,33 @@ function setData(record) {
     addTxidList(record.txid);
 }
 
+function genRsaKey() {
+    rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
+    console.log(rsaKeypair);
+    setRSAKey(rsaKeypair);
+}
+
+function setRSAKey(rsaKeypair) {
+    rsakey_prv = KEYUTIL.getJWKFromKey(rsaKeypair.prvKeyObj);
+    rsakey_pub = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj);
+
+    sessionStorage.setItem("rsa_prv", JSON.stringify(rsakey_prv));
+    sessionStorage.setItem("rsa_pub", JSON.stringify(rsakey_pub));
+    
+}
+
+function getRSAKey() {
+    
+    var session_rsa_pub = sessionStorage.getItem("rsa_pub");
+    var session_rsa_prv = sessionStorage.getItem("rsa_prv");
+
+    var json_rsa_prv = JSON.parse(session_rsa_prv); 
+    var json_rsa_pub = JSON.parse(session_rsa_pub); 
+
+    rsakey_prv = KEYUTIL.getKey(json_rsa_prv);
+    rsakey_pub = KEYUTIL.getKey(json_rsa_pub);
+}
+
 function getData(record_txid) {
     return JSON.parse(sessionStorage.getItem(record_txid));
 }
@@ -79,8 +107,13 @@ function setTxidList(txidarray) {
 
 function getTxidList() {
     var storagedata = sessionStorage.getItem(client_token);
-    var resultarray = storagedata.split(",");
-    return resultarray;
+    if(storagedata==null) {
+        var emptyarray = [];
+        setTxidList(emptyarray);
+        storagedata = sessionStorage.getItem(client_token);
+    }
+     var resultarray = storagedata.split(",");
+     return resultarray;
 }
 
 function SHA256(s) {
@@ -252,4 +285,19 @@ function currentDate(time) {
     String.prototype.string = function (len) { var s = '', i = 0; while (i++ < len) { s += this; } return s; };
     String.prototype.zf = function (len) { return "0".string(len - this.length) + this; };
     Number.prototype.zf = function (len) { return this.toString().zf(len); };
+}
+
+function base64toHEX(base64) {
+    var raw = atob(base64);
+
+    var HEX = '';
+
+    for (i = 0; i < raw.length; i++) {
+
+        var _hex = raw.charCodeAt(i).toString(16)
+
+        HEX += (_hex.length == 2 ? _hex : '0' + _hex);
+
+    }
+    return HEX.toUpperCase();
 }

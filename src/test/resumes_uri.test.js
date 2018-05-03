@@ -61,7 +61,7 @@ describe('/resumes URL test suite', () => {
      * @since 180424
      * @author JJANGHO
      */
-    it.skip('Create resume request test case', done => {
+    it('Create resume request test case', done => {
 
         chai.request(app)
             .post('/resumes')
@@ -70,27 +70,42 @@ describe('/resumes URL test suite', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 resume: {
-                    title: '안택수 테스트용 이력서',
+                    title: '신창호 테스트용 이력서',
                     data: [{
-                            txid: '5e88e9ad40fe9a6d633cf63035c0ff2267d06c38a012422654577e9f559c6329',
+                            txid: 'ce4dc6b9ba8bbeca1ea7ecf0a5fb84347ada49a716067dfe4214e114a2b084c5',
+                            subid: 'RCLPT0005',
                             order: 1,
                             record: {
-                                subId: 'OPIc',
-                                score: 30
+                                "testid":"6A3135824610",
+                                "phone":"01064749282",
+                                "name":"PARKHUNWOOK",
+                                "grade":"IM2",
+                                "date":"20180313"
                             }
                         },
                         {
-                            txid: '51b3818477c837a0856127d9bb1f47bade824f0a3bd8a128d599e852fd93cdc3',
+                            txid: '134607a780fe8e7f0136aaabaa6d72e6593d4bf0f1666394b8ea17dc2ccc9bcf',
+                            subid: 'RCCNF0001',
                             order: 2,
                             record: {
-                                subId: 'TOEIC',
-                                score: 900
+                                "userid":"123456",
+                                "point0":"800",
+                                "point1":"95",
+                                "point2":"500",
+                                "point3":"300",
+                                "name":"박헌욱",
+                                "grade":"우수",
+                                "date":"2018-04-10 05:18:29.0"
                             }
                         }
                     ]
                 }
             })
             .end((err, res) => {
+                if(!!err){
+                    console.log(err);
+                }
+
                 if (!!res.body.result) {
                     console.log(res.body);
                     done();
@@ -111,6 +126,19 @@ describe('/resumes URL test suite', () => {
                 console.log(res.body);
                 done();
             })
+    })
+
+    it.skip('Delete Resumes request test', done => {
+        chai.request(app)
+            .delete('/resumes/e6b88a3e-da49-4ee8-badf-a49e21bc1e86')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'Bearer ' + jwtToken)
+            .set('X-Requested-With', 'XMLHttpRequest')
+            .send()
+            .end((err, res) => {
+                console.log(res);
+                done();
+            });
     })
 
 

@@ -5,6 +5,7 @@ import GetResumeRequest from '../modules/client/resume/get_resume_request';
 import CreateResumeRequest from '../modules/client/resume/create_resume_request';
 import UpdatResumeRequest from '../modules/client/resume/update_resume_request';
 import UpdateResumeRequest from '../modules/client/resume/update_resume_request';
+import DeleteResumeRequest from '../modules/client/resume/delete_resume_request'
 
 /**
  * Controller for /resumes URI. <br />
@@ -119,5 +120,25 @@ export default {
         } else {
             next(new Error("No page."));
         }
+    },
+
+    deleteResum: (req, res, next) => {
+        if (!!req.xhr) {
+            
+            var data = {
+                uID: req.body.uId,
+                rsmId: req.params.rsmId
+            }
+
+            Managers.client().request(new DeleteResumeRequest(data), (err, result)=>{
+                if(!!err){
+                    next(err);
+                }else{
+                    res.json(result);
+                }
+            })
+        }
+
+
     }
 }
