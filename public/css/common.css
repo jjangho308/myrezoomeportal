@@ -266,7 +266,7 @@ input[type="checkbox"] {
 
 [type="checkbox"]:not(:checked) + label:after,
 [type="checkbox"]:checked + label:after {
-    content: '✔' !important;
+    content: url("/img/myresume/shape.png") !important;
     position: absolute;
     top: 0px;
     height: 19px;
@@ -366,7 +366,7 @@ table th {
 }
 
 .modal table tbody {
-    overflow-y: scroll;
+    overflow-y: auto;
     display: block;
     height: 300px;
 }

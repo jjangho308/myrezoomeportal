@@ -66,87 +66,89 @@ $(document).ready(function () {
     });
 
     loadresumelist();
+    // comment by hyunsu for running
 
-    $(document).on('click', ".add-cert", function () {
-        console.log('이력서 생성 목록 클릭');
-        var txidlist = getTxidList();
+    // it will change to add resume
+    // $(document).on('click', ".add-cert", function () {
+    //     console.log('이력서 생성 목록 클릭');
+    //     var txidlist = getTxidList();
 
-        $('#resumes-add-dialog').modal('show');
-        // $(".certtr").remove();
+    //     $('#resumes-add-dialog').modal('show');
+    //     // $(".certtr").remove();
 
-        $.ajax({
-            type: 'POST',
-            url: '/certs/getmapping',
-            headers: {
-                'Authorization': client_authorization
-            },
-            data: JSON.stringify({
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/certs/getmapping',
+    //         headers: {
+    //             'Authorization': client_authorization
+    //         },
+    //         data: JSON.stringify({
 
-            }),
-            success: function (mappingres) {
-                console.log(mappingres);
+    //         }),
+    //         success: function (mappingres) {
+    //             console.log(mappingres);
 
-                for (var i in txidlist) {
-                    try {
-                        var viewdata = getData(txidlist[i]);
-                        var subid = viewdata.subid;
-                        var subname = "";
-                        var category = "";
+    //             for (var i in txidlist) {
+    //                 try {
+    //                     var viewdata = getData(txidlist[i]);
+    //                     var subid = viewdata.subid;
+    //                     var subname = "";
+    //                     var category = "";
 
-                        if (subid == "RCCNF0001" || subid == "RCGOC0002" || subid == "RCCNF0003" || subid == "RCGOC0004" || subid == "RCCNF0001" || subid == "RCCNF0001") {
-                            //자격 
-                            category = "자격";
-                        }
-                        else if (subid == "RCLPT0005") {
-                            category = "어학";
-                        }
-                        else if (subid == "RCOGC0008" || subid == "RCOGC0009") {
-                            category = "학력";
-                        }
+    //                     if (subid == "RCCNF0001" || subid == "RCGOC0002" || subid == "RCCNF0003" || subid == "RCGOC0004" || subid == "RCCNF0001" || subid == "RCCNF0001") {
+    //                         //자격 
+    //                         category = "자격";
+    //                     }
+    //                     else if (subid == "RCLPT0005") {
+    //                         category = "어학";
+    //                     }
+    //                     else if (subid == "RCOGC0008" || subid == "RCOGC0009") {
+    //                         category = "학력";
+    //                     }
 
-                        for (var j in mappingres) {
-                            if (mappingres[j].SUB_ID == subid) {
-                                subname = mappingres[j].SUB_NM;
-                            }
-                        }
-                        //formatter[subid](viewdata);
-                        var addcertcheckboxid = txidlist[i];
+    //                     for (var j in mappingres) {
+    //                         if (mappingres[j].SUB_ID == subid) {
+    //                             subname = mappingres[j].SUB_NM;
+    //                         }
+    //                     }
+    //                     //formatter[subid](viewdata);
+    //                     var addcertcheckboxid = txidlist[i];
 
-                        var htmldiv = '<tr class="certtr">';
-                        htmldiv = htmldiv + '<td>';
-                        htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
-                        //htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';
-                        htmldiv = htmldiv + '<input id=' + addcertcheckboxid + ' type="checkbox" name="certcheck">';
-                        htmldiv = htmldiv + '<label for=' + addcertcheckboxid + '></label>';
-                        htmldiv = htmldiv + '</div>';
-                        htmldiv = htmldiv + '</td>';
-                        htmldiv = htmldiv + '<td>' + category + '</td>';
-                        htmldiv = htmldiv + '<td>' + subname + '</td>';
-                        htmldiv = htmldiv + '</tr>';
+    //                     var htmldiv = '<tr class="certtr">';
+    //                     htmldiv = htmldiv + '<td>';
+    //                     htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
+    //                     //htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';
+    //                     htmldiv = htmldiv + '<input id=' + addcertcheckboxid + ' type="checkbox" name="certcheck">';
+    //                     htmldiv = htmldiv + '<label for=' + addcertcheckboxid + '></label>';
+    //                     htmldiv = htmldiv + '</div>';
+    //                     htmldiv = htmldiv + '</td>';
+    //                     htmldiv = htmldiv + '<td>' + category + '</td>';
+    //                     htmldiv = htmldiv + '<td>' + subname + '</td>';
+    //                     htmldiv = htmldiv + '</tr>';
 
-                        $("#add-resume-dialog-table").append(htmldiv);
+    //                     $("#add-resume-dialog-table").append(htmldiv);
 
-                        /*
-                        $(addcertcheckboxid).click(function() {
-                            var sdata = sessionStorage.getItem(addcertcheckboxid);
-                            var jsondata = JSON.parse(sdata);
-                            reqparam.push(jsondata.data);
-                            console.log("Cert REQ PARAM");
-                            console.log(reqparam);
-                        });
-                        */
+    //                     /*
+    //                     $(addcertcheckboxid).click(function() {
+    //                         var sdata = sessionStorage.getItem(addcertcheckboxid);
+    //                         var jsondata = JSON.parse(sdata);
+    //                         reqparam.push(jsondata.data);
+    //                         console.log("Cert REQ PARAM");
+    //                         console.log(reqparam);
+    //                     });
+    //                     */
 
-                    } catch (exception) {
-                        console.log(exception);
-                        continue;
-                    }
-                }
-                $('#add-cert-dialog').modal('show');
-            },
-            contentType: 'application/json',
-        });
+    //                 } catch (exception) {
+    //                     console.log(exception);
+    //                     continue;
+    //                 }
+    //             }
+    //             $('#add-cert-dialog').modal('show');
+    //         },
+    //         contentType: 'application/json',
+    //     });
 
-    });
+    // });
 
 
     $(document).on('click', '#resumes-add-dialog .confirm-btn', function() {

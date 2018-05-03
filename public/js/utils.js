@@ -49,7 +49,7 @@ function getCookie(cname) {
 
 function setData(record) {
     // dcript data
-    record.data = JSON.parse(record.data);
+    record.data = JSON.parse(record.data); 
 
     sessionStorage.setItem(record.txid, JSON.stringify(record));
 
@@ -63,23 +63,21 @@ function genRsaKey() {
 }
 
 function setRSAKey(rsaKeypair) {
-    rsakey_prv = rsaKeypair.prvKeyObj;
-    rsakey_pub = rsaKeypair.pubKeyObj;
-    var jwk_rsakey_prv = KEYUTIL.getJWKFromKey(rsaKeypair.prvKeyObj);
-    var jwk_rsakey_pub = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj);
+    rsakey_prv = KEYUTIL.getJWKFromKey(rsaKeypair.prvKeyObj);
+    rsakey_pub = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj);
 
-    sessionStorage.setItem("rsa_prv", JSON.stringify(jwk_rsakey_prv));
-    sessionStorage.setItem("rsa_pub", JSON.stringify(jwk_rsakey_pub));
-
+    sessionStorage.setItem("rsa_prv", JSON.stringify(rsakey_prv));
+    sessionStorage.setItem("rsa_pub", JSON.stringify(rsakey_pub));
+    
 }
 
 function getRSAKey() {
-
+    
     var session_rsa_pub = sessionStorage.getItem("rsa_pub");
     var session_rsa_prv = sessionStorage.getItem("rsa_prv");
 
-    var json_rsa_prv = JSON.parse(session_rsa_prv);
-    var json_rsa_pub = JSON.parse(session_rsa_pub);
+    var json_rsa_prv = JSON.parse(session_rsa_prv); 
+    var json_rsa_pub = JSON.parse(session_rsa_pub); 
 
     rsakey_prv = KEYUTIL.getKey(json_rsa_prv);
     rsakey_pub = KEYUTIL.getKey(json_rsa_pub);
@@ -109,11 +107,6 @@ function setTxidList(txidarray) {
 
 function getTxidList() {
     var storagedata = sessionStorage.getItem(client_token);
-    if (storagedata == null) {
-        var emptyarray = [];
-        setTxidList(emptyarray);
-        storagedata = sessionStorage.getItem(client_token);
-    }
     var resultarray = storagedata.split(",");
     return resultarray;
 }
@@ -249,7 +242,7 @@ function SHA256(s) {
 }
 
 
-function currentDate(time) {
+function currentDate(time) {    
     var time = new Date(time.toString().replace(/GMT.*/, "") + " UTC");
     $("#updateTime").html("업데이트 : " + time.format('yyyy-MM-dd(KS) HH:mm'));
     //return time.format('yyyy-MM-dd(KS) HH:mm');
@@ -287,19 +280,4 @@ function currentDate(time) {
     String.prototype.string = function (len) { var s = '', i = 0; while (i++ < len) { s += this; } return s; };
     String.prototype.zf = function (len) { return "0".string(len - this.length) + this; };
     Number.prototype.zf = function (len) { return this.toString().zf(len); };
-}
-
-function base64toHEX(base64) {
-    var raw = atob(base64);
-
-    var HEX = '';
-
-    for (i = 0; i < raw.length; i++) {
-
-        var _hex = raw.charCodeAt(i).toString(16)
-
-        HEX += (_hex.length == 2 ? _hex : '0' + _hex);
-
-    }
-    return HEX.toUpperCase();
 }
