@@ -97,34 +97,40 @@ class AgentRequestManager extends AbstractManager {
      * @param {AbstractAgentRequest} agentRequest 
      */
     request(requestEntity, cb) {
-        this.handlerMap.get(requestEntity.constructor)
-            .request(requestEntity, ((resultCode, result) => {
-                switch (resultCode) {
+        try {
+            this.handlerMap.get(requestEntity.constructor)
+                .request(requestEntity, ((resultCode, result) => {
+                    switch (resultCode) {
 
-                    // 에러 발생시에는 Error 객체를 Client에 Response 후 
-                    case AgentRequestManager.RESULT_FAILURE:
-                        {
-                            // result instanceof Error Retry?
-                            cb(result, null);
-                            break;
-                        }
+                        // 에러 발생시에는 Error 객체를 Client에 Response 후 
+                        case AgentRequestManager.RESULT_FAILURE:
+                            {
+                                // result instanceof Error Retry?
+                                cb(result, null);
+                                break;
+                            }
 
-                    case AgentRequestManager.RESULT_PENDING:
-                        {
-                            // result instanceof Object and Keep request.
-                            this.requestMap.set(request.mId, request);
-                            cb(null, result);
-                            break;
-                        }
+                        case AgentRequestManager.RESULT_PENDING:
+                            {
+                                // result instanceof Object and Keep request.
+                                this.requestMap.set(request.mId, request);
+                                cb(null, result);
+                                break;
+                            }
 
-                    case AgentRequestManager.RESULT_SUCCESS:
-                        {
-                            // result instanceof Object.
-                            cb(null, result);
-                            break;
-                        }
-                }
-            }).bind(this));
+                        case AgentRequestManager.RESULT_SUCCESS:
+                            {
+                                // result instanceof Object.
+                                cb(null, result);
+                                break;
+                            }
+                    }
+                }).bind(this));
+        } catch (e) {
+            console.log(e);
+            cb(e, null);
+        }
+
     }
 }
 
