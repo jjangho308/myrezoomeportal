@@ -673,6 +673,9 @@ function clientsocket_listener() {
 }
 
 function setSocket(mId) {
+    socket.close();
+    socket = io();
+
     socket.emit('SetSocket', {
         mid: mId
     });
