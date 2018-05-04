@@ -141,41 +141,72 @@ class ResumeDao extends AbstractDAO {
     delResume(creteria, cb) {
         var rsmId = creteria.rsmId;
 
-        this.connectionPool.getConnection((err, connection)=>{
-            if(!!err){
+        this.connectionPool.getConnection((err, connection) => {
+            if (!!err) {
                 console.log(err);
                 cb(err);
-            } else{
-                connection.beginTransaction(function(err){
-                    if(err){
+            } else {
+                connection.beginTransaction(function (err) {
+                    if (err) {
                         console.log(err);
                         cb(err)
-                    } else{
-                        var condition={};
+                    } else {
+                        var condition = {};
 
                         //e6b88a3e-da49-4ee8-badf-a49e21bc1e86
-                        condition.RSM_ID=creteria.rsmId;
+                        condition.RSM_ID = creteria.rsmId;
 
                         var usrResumeDelQuery = mysql.format(ResumeQuery.delResume, condition);
 
-                        connection.query(usrResumeDelQuery, (err,result)=>{
+                        connection.query(usrResumeDelQuery, (err, result) => {
 
-                            if(!!err){
+                            if (!!err) {
+                                connection.release();
+                                console.log(err);
 
-                            }else if(result.affectedRows > 0){
-                                var usrResumeSharedDelQuery = mysql.format(ResumeQuery.delShared, [condition, {DEL_YN:'N'}]);
+                            } else if (result.affectedRows > 0) {
+                                var usrResumeSharedDelQuery = mysql.format(ResumeQuery.delShared, [condition, { DEL_YN: 'N' }]);
                                 connection.query(usrResumeSharedDelQuery, (err, result) => {
-                                    if(!!err){
+                                    if (!!err) {
                                         connection.release();
                                         console.log(err);
-                                    } else if(result.affectedRows > 0){
-                                        var selectResumeSharedInfo = mysql. format(ResumeQuery.getUrl, [condition, {DEL_YN:'N'}]);
-                                        connection.query(selectResumeSharedInfo, (err, result)=> {
-                                            if(!!err){
+                                    } else if (result.affectedRows > 0) {
+                                        var selectResumeSharedInfo = mysql.format(ResumeQuery.getUrl, [condition, { DEL_YN: 'N' }]);
+                                        connection.query(selectResumeSharedInfo, (err, result) => {
+                                            if (!!err) {
                                                 connection.release();
                                                 console.log(err);
-                                            }else{
+                                            } else if (result.length > 0) {
+                                                var deleteResumeSharedInfoQuery = mysql.format(ResumeQuery.delUrl, [condition, { DEL_YN: 'N' }]);
+
+                                                connection.query(deleteResumeSharedInfoQuery, (err, result) => {
+                                                    if (!!err) {
+                                                        connection.release();
+                                                        console.log(err);
+                                                    }else if(result.affectedRows>0){
+                                                        connection.commit(function(err){
+                                                            if(!!err){
+                                                                connection.release();
+                                                                console.log(err);
+                                                            }
+
+                                                            console.log("tranaction sucess");
+                                                            consnection.release();
+                                                            cb(200, "sucess");
+                                                        })
+                                                    }
+                                                })
                                                 console.log(result);
+                                            } else {
+                                                console.log("=====")
+                                                connection.commit(function (err) {
+                                                    if (!!err) {
+                                                        connection.release();
+                                                        console.log(err);
+                                                    }
+                                                    //정상처리
+                                                    cb(200, "sucess");
+                                                })
                                             }
                                         })
                                     }

@@ -20,5 +20,5 @@ export default {
     putUrl: 'INSERT INTO ' + SHARED_INFO_TABLE_NAME + ' SET ?',
     getUrl: 'SELECT * FROM ' + SHARED_INFO_TABLE_NAME + ' WHERE ? and ?',
     setUrl: 'UPDATE ' + SHARED_INFO_TABLE_NAME + ' SET ? WHERE ?',
-    delUrl: 'UPDATE ' + SHARED_INFO_TABLE_NAME + " SET DEL_YN = 'Y' WHERE ?"
+    delUrl: 'UPDATE ' + SHARED_INFO_TABLE_NAME + " SET DEL_YN = 'Y' WHERE ? and ?"
 }

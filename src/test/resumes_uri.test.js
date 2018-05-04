@@ -61,7 +61,7 @@ describe('/resumes URL test suite', () => {
      * @since 180424
      * @author JJANGHO
      */
-    it('Create resume request test case', done => {
+    it.skip('Create resume request test case', done => {
 
         chai.request(app)
             .post('/resumes')
@@ -128,9 +128,9 @@ describe('/resumes URL test suite', () => {
             })
     })
 
-    it.skip('Delete Resumes request test', done => {
+    it('Delete Resumes request test', done => {
         chai.request(app)
-            .delete('/resumes/e6b88a3e-da49-4ee8-badf-a49e21bc1e86')
+            .delete('/resumes/e1fa3a6f-8d24-4706-9220-1e9e733d4721')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + jwtToken)
             .set('X-Requested-With', 'XMLHttpRequest')
