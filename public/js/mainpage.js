@@ -638,7 +638,6 @@ function clientsocket_listener() {
         var omsg = JSON.parse(msg);
 
         //get aes key
-        /*
         var recv_key = msg.key;
         var recv_iv = msg.iv;
 
@@ -646,20 +645,20 @@ function clientsocket_listener() {
 
         var aeskey_hex = base64toHEX(recv_key);
         var decryptedKey = KJUR.crypto.Cipher.decrypt(aeskey_hex, rsakey_prv);
-        */
+        
 
         var orgcode = omsg.orgcode;        
         for(var i=0; i<omsg.records.length ; i++) {            
             var subid = omsg.records[i].subid;
 
-            /*
+            
             var decrypted = CryptoJS.AES.decrypt(omsg.records[i].data, CryptoJS.enc.Base64.parse(
             decryptedKey), {
             iv: CryptoJS.enc.Base64.parse(recv_iv)
             });
             console.log(decrypted.toString(CryptoJS.enc.Utf8));
             omgs.records[i].data = decrypted.toString(CryptoJS.enc.Utf8);
-            */
+            
 
             try {                
                 setData(omsg.records[i]);                
