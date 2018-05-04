@@ -2,19 +2,15 @@ import Managers from '../core/managers';
 import AgentRequestManager from '../modules/agent/agent_request';
 
 /**
- * Controller function for /agent URI channle. <br />
+ * Controller function set for /agent URI Request with command arguments. <br />
  * 
  * @since 180313
  * @author TACKSU
- * 
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
  */
 export default {
 
     /**
-     * POST method controller. <br />
+     * POST method controller to process ajax request. <br />
      * 
      * @since 180312
      * @author TACKSU
@@ -33,6 +29,7 @@ export default {
         console.log('Agent entity');
         console.log(entity);
         console.log('===========================');
+        
         agentRequestManager.request(entity, (err, result) => {
             if (!!err) {
                 next(err);

@@ -12,8 +12,6 @@ import NexledgerService from '../../blockchain/nexledgerservice';
 
 import Util from '../../../util/util'
 
-
-
 /**
  * Handler for SearchRecordRequest. <br />
  * 이력 검색 요청 핸들러.
@@ -150,7 +148,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     })
                 } else {
                     if (clientReq.update == true) {
-                        
+
                         db.getOrgDAO().findAll((err, resultOrgIds) => {
                             for (var i in resultOrgIds) {
                                 !(orgIdx => {
@@ -191,7 +189,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                                         if (!!err) {
                                                                             done(ClientRequestManager.RESULT_FAILURE, err);
                                                                         } else {
-                                                                            
+
                                                                             //Todo TCUP_USR MDFID_DT column update
                                                                             db.getUserDAO().setMDFIDT({
                                                                                 uId: uid
@@ -200,7 +198,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                                                     done(ClientRequestManager.RESULT_FAILURE, err);
                                                                                 } else {
                                                                                     //console.log("sucess");
-                                                                                    done(ClientRequestManager.RESULT_PENDING, { mid: clientReq.mId });
+                                                                                    done(ClientRequestManager.RESULT_PENDING, {
+                                                                                        mid: clientReq.mId
+                                                                                    });
                                                                                 }
                                                                             })
                                                                         }
@@ -241,7 +241,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                                     done(ClientRequestManager.RESULT_FAILURE, err);
                                                                 } else {
                                                                     //console.log("sucess");
-                                                                    done(ClientRequestManager.RESULT_PENDING, { mid: clientReq.mId });
+                                                                    done(ClientRequestManager.RESULT_PENDING, {
+                                                                        mid: clientReq.mId
+                                                                    });
                                                                 }
                                                             })
                                                         }

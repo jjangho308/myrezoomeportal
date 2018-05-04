@@ -632,10 +632,20 @@ function refreshview(records) {
 
 function clientsocket_listener() {
     socket.on('SearchResult', function(msg){
+        console.log("=============clientsocket_listener=================");
+        console.log(msg);
+        console.log("===================================================");
         var omsg = JSON.parse(msg);
 
         //get aes key
+        /*
+        var recv_key = msg.key;
 
+        var jwkPub1 = KEYUTIL.getJWKFromKey(pubkey);
+
+        var aeskey_hex = base64toHEX(recv_key);
+        var decryptedKey = KJUR.crypto.Cipher.decrypt(aeskey_hex, rsakey_prv);
+        */
 
         var orgcode = omsg.orgcode;        
         for(var i=0; i<omsg.records.length ; i++) {            

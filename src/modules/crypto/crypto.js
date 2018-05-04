@@ -109,31 +109,6 @@ class CryptoManager extends AbstractManager {
     }
 
     /**
-     * Generate Asymmetric key pair. <br />
-     * 
-     * @since 180313
-     * @author TACKSU
-     * 
-     * @param {*} cb 
-     */
-    generateRSAKeyPair(cb) {
-
-        process.nextTick(() => {
-            try {
-                var key = new NodeRSA({
-                    b: 2048
-                });
-                cb(null, {
-                    public: key.exportKey('pkcs8-public-der'),
-                    private: key.exportKey('pkcs8-private-der')
-                });
-            } catch (e) {
-                cb(e, null);
-            }
-        });
-    }
-
-    /**
      * Encrypt data with symmetric key and iv. <br />
      * 
      * @param {string} plain Plain text.
@@ -175,6 +150,33 @@ class CryptoManager extends AbstractManager {
                 cb(e, null);
             }
         })
+    }
+
+    /**
+     * Generate RSA Key pair. <br />
+     * 
+     * @since 180313
+     * @author TACKSU
+     * 
+     * @param {*} cb 
+     */
+    generateRSAKeyPair(cb) {
+        process.nextTick(() => {
+            try {
+                var rsa = new NodeRSA({
+
+                    // TODO Change to property.
+                    b: 2048
+                });
+
+                cb(null, {
+                    public: rsa.exportKey('pkcs8-public-der'),
+                    private: rsa.exportKey('pkcs8-private-der')
+                });
+            } catch (e) {
+                cb(e, null);
+            }
+        });
     }
 
     /**

@@ -151,8 +151,8 @@ $(document).ready(function () {
     });
 
 
-    $(document).on('click', '#resumes-add-dialog .confirm-btn', function() {
-        $("#resumes-add-dialog  .close-modal").click();
+    $(document).on('click', '#add-cert-dialog .confirm-btn', function() {
+        $("#add-cert-dialog  .close-modal").click();
        $("#alarm-div span").text('이력서 발급이 완료되었습니다.  "이력서보관함"에서 확인해주세요.');
         $('#alarm-div').css("display","block");
         //$('#alarm-div').css("display","none");
@@ -171,6 +171,7 @@ $(document).ready(function () {
                 var objresumedata = {};
                 objresumedata.record = jsondata;
                 objresumedata.txid = id;
+                objresumedata.sudid = json_session_record.subid;
                 resumesdata.data.push(objresumedata);
 
                 console.log("cert req param");
