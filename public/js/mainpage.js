@@ -655,7 +655,7 @@ function clientsocket_listener() {
             iv: CryptoJS.enc.Base64.parse(recv_iv)
             });
             console.log(decrypted.toString(CryptoJS.enc.Utf8));
-            omgs.records[i].data = decrypted.toString(CryptoJS.enc.Utf8);
+            omsg.records[i].data = decrypted.toString(CryptoJS.enc.Utf8);
             
 
             try {                
