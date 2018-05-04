@@ -638,8 +638,8 @@ function clientsocket_listener() {
         var omsg = JSON.parse(msg);
 
         //get aes key
-        var recv_key = msg.key;
-        var recv_iv = msg.iv;
+        var recv_key = omsg.key;
+        var recv_iv = omsg.iv;
 
         var aeskey_hex = base64toHEX(recv_key);
         var decryptedKey = KJUR.crypto.Cipher.decrypt(aeskey_hex, rsakey_prv);
