@@ -218,7 +218,7 @@ class CertificateDAO extends AbstractDAO {
                                                 //console.log(deleteCERTSharedInfoQuery);
                                                 connection.query(deleteCERTSharedInfoQuery, (err, result)=>{
                                                     if(!!err){
-                                                        connection.release()
+                                                        connection.release();
                                                         console.log(err);
                                                     }else if(result.affectedRows > 0){
                                                         connection.commit(function(err){
