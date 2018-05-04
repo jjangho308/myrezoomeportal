@@ -119,6 +119,7 @@ class PushManager extends AbstractManager {
                                 if (!!err) {
                                     console.log(err);
                                 } else {
+                                    console.log("AES Key : " + aesKey);
                                     crypto.encryptAES(msgString, aesKey, (err, encodedIV, encryptedMsg) => {
                                         if (!!err) {
                                             console.log(err);

@@ -24,7 +24,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
     before('Initialize', () => {
         Initializer();
         token = Managers.token().issueToken({
-            uId: 'UID1'
+            uId: 'UID2'
         })
         chai.use(chaihttp);
     })
