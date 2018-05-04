@@ -97,7 +97,7 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                                                     uId: request.uId,
                                                     rsmId: resumeList[0].rsmId,
                                                     data: JSON.stringify(request.resume.data),
-                                                    deleted:'N'
+                                                    deleted: false
                                                 });
 
                                                 
