@@ -34,17 +34,23 @@ class SearchResultHandler extends AbstractAgentRequestHandler {
      * @since 180306
      * @author TACKSU
      * 
-     * @param {*} requestEntity
+     * @param {AgentRequestEntity} requestEntity
+     * @param {function(object, boolean)} done Callback function to response.
      */
     request(requestEntity, done) {
 
-        Managers.client().response(requestEntity.mId, requestEntity, (err, result) => {
-            if (!!err) {
-                done(AgentRequest.RESULT_FAILURE, err);
-            } else {
-                done(AgentRequest.RESULT_SUCCESS, result);
-            }
+        // Client socket push는 call stack에 쌓고 Response는 바로 전달.
+        process.nextTick(() => {
+            Managers.client().response(requestEntity.mId, requestEntity, (err, result) => {
+                if (!!err) {
+                    done(AgentRequest.RESULT_FAILURE, err);
+                } else {
+                    done(AgentRequest.RESULT_SUCCESS, result);
+                }
+            });
         });
+
+        done(AgentRequest.RESULT_SUCCESS, true);
     }
 }
 
