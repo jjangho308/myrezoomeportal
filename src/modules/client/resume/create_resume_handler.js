@@ -96,10 +96,11 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                                                 var sharedResume = new SharedResumeModel({
                                                     uId: request.uId,
                                                     rsmId: resumeList[0].rsmId,
-                                                    data: JSON.stringify(request.resume.data)
+                                                    data: JSON.stringify(request.resume.data),
+                                                    deleted:'N'
                                                 });
 
-                                                console.log(sharedResume);
+                                                
 
                                                 resumeDAO.putShare(sharedResume, (err, insertSharedId)=>{
                                                     if(!!err){
