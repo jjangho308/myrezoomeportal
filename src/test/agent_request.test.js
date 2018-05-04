@@ -7,6 +7,8 @@ import app from '../app';
 
 import Util from '../util/util';
 
+import Managers from '../core/managers';
+
 /**
  * Test suite for /agent HTTP Request method. <br />
  * 
@@ -15,8 +17,13 @@ import Util from '../util/util';
  */
 describe('Agent channel request test suite.', () => {
 
+    /**
+     * Service Initialization. <br />
+     * 
+     * @since 180504
+     * @author TACKSU
+     */
     before('Service initialization.', done => {
-
         chai.use(chaiHttp);
         done();
     });
@@ -73,21 +80,23 @@ describe('Agent channel request test suite.', () => {
      * @author TACKSU
      */
     it('Key Provision test case', done => {
-        chai.request(app)
-            .post('/agent')
-            .set('Content-Type', 'application/json')
-            .send({
-                cmd: 'KeyProvision',
-                args: {
-                    orgId: 100,
-                    pubkey: new Buffer('Hello World', 'utf-8').toString('base64')
-                }
-            })
-            .end((err, res) => {
-                if (res.body.result) {
-                    done();
-                }
-            });
+        var keyPair = Managers.crypto().generateRSAKeyPair((err, keyPair) => {
+            chai.request(app)
+                .post('/agent')
+                .set('Content-Type', 'application/json')
+                .send({
+                    cmd: 'KeyProvision',
+                    args: {
+                        orgId: 100,
+                        pubkey: keyPair.public.toString('base64')
+                    }
+                })
+                .end((err, res) => {
+                    if (res.body.result) {
+                        done();
+                    }
+                });
+        });
     });
 
     after('Terminate server', () => {
