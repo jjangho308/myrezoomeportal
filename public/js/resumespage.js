@@ -171,6 +171,7 @@ $(document).ready(function () {
                 var objresumedata = {};
                 objresumedata.record = jsondata;
                 objresumedata.txid = id;
+                objresumedata.sudid = json_session_record.subid;
                 resumesdata.data.push(objresumedata);
 
                 console.log("cert req param");
