@@ -62,7 +62,7 @@ describe('Crypto test suit', () => {
     /**
      * AES Encrypt decrypt with given key test case.
      */
-    it('AES Encrypt decrypt with given key', done => {
+    it.skip('AES Encrypt decrypt with given key', done => {
         var plainText = 'Hello, World!';
         crypto.generateAESKey((err, encodedKey) => {
             console.log('AES Key : ' + encodedKey);
@@ -113,19 +113,56 @@ describe('Crypto test suit', () => {
         var crypto = Managers.crypto();
 
         var data = 'Hello, World!';
-        var publicEncoded = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkQNKGV6/rAS1RpU1HNjzUeAsKHpFqVGEwga9eMI6Q7mXOox5dod1OOcutb1XoW18MCqqpFJZqsLtVMFjBEvlwiz6+CVq/Ij5DE19wOOzQknM5Ct4JFeCQqgQ3bNW/YMi7g1iORMx68aUpUaotqdggq+r3PCVrsrrb1DyUUknJWabElWLAI26Xez8fKQa8ltyR8yi1W7urUzV3kKAVp3Y3vn/h6W+nPVJjsfWdhemJUWFBI5DBgsrNitiGk0Nk195WSjH1OUImVnmslJdecAf8wBtm8XOzzGVOIlyRZjKMoDiLH/eNSqB4kU9NJ76t8XjcOSkxaBfsIS8t3ni1twEWQIDAQAB';
+        var publicEncoded = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh+t28y1H3534QQYhIz2BZZ0YfGHopH3SDdtb9WkRHXA51ZYvo7O6b1Me00EEH4s6zK8G466Sn4i7R74kahxuTBkJK33zvsTfKke4iOhEu88sZOOKKhe7hGVKWKRRXQEsqYBE5/9iPRSx+eKOQIlfkUwiIpOLnVjilH8RlyCR4DYumf1LB/6GE5CoudfAQaMTujO5lznj/lWXxPTsRs5tv7ii32DqR91ueksMt23HlpTRHh8X1SoftvdwBNF263EgwIR+5rTQ38Nmkh+CqcqJuYAjLaGKuvNfXH+uUX+A3HsbKL8qfDTdWZKY0HLOHhs5dth73wF9uDauytiUNP1tMQIDAQAB';
 
-        var privateEncoded = 'MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCRA0oZXr+sBLVGlTUc2PNR4CwoekWpUYTCBr14wjpDuZc6jHl2h3U45y61vVehbXwwKqqkUlmqwu1UwWMES+XCLPr4JWr8iPkMTX3A47NCSczkK3gkV4JCqBDds1b9gyLuDWI5EzHrxpSlRqi2p2CCr6vc8JWuyutvUPJRSSclZpsSVYsAjbpd7Px8pBryW3JHzKLVbu6tTNXeQoBWndje+f+Hpb6c9UmOx9Z2F6YlRYUEjkMGCys2K2IaTQ2TX3lZKMfU5QiZWeayUl15wB/zAG2bxc7PMZU4iXJFmMoygOIsf941KoHiRT00nvq3xeNw5KTFoF+whLy3eeLW3ARZAgMBAAECggEAcT2qXcl50HEUxnu6MD7TNDrlAO8K+0AndgUhbO3v5fdGO3h7Wa5KQhd2iIHFrs/6zPpkq1GLqCf0gd1K344Na+cITUObGn40TgEtlLW7xKYxFHVFqsuTc04fbaGg6vO/ETruWze8Iiy+45ocIhbu7N8WTMCrgwX/eLwznnqL0U3znFcPF9E4sk5S6NtYmsUacqKNuhOyspUZqymcuGM1u/wXtBjIXoB4m9EMOssxFpc/BZeJcHQrTM7fA4qaKuzDvbDKsQwmaaPtDkOaZuqD5TYgjgKMFaWQtLPNSYtkFsN41N/WG6hRt4gunvdTBL0HijipySximsXZm03l//FliQKBgQDMBdkk6b8T65g8Ng6560yxvsj36UUIAGNeBVJYg6rMHCu91MG3SqD/2dAM9rEi9HumqPIZ3djdU+D9cQCP8m/NxDJ6oQaAklgexVBfr3OP/6S94YLOan+4jUcwWDzWs7MU2/6YCZvzbnn1IjM9OGmKhVwyMWtqh8HpNFQ4JQ8ezwKBgQC19N9YGURHNUJ8tfXIez+/PveuQsOF8UW5/pkPCIr0WsB45sz008VKec3g/RE8hXQInKAJiyGHO9QF8tUSJRQNc6AIWAVFTLw3s/ChbY38gjWceodhZOBpBJg8CbU9yVaQE5DBfuP57eMUu/GoaHsMlLwUaMcAY2TanAzhLcG0VwKBgG571EV7F3CQKpagp4Ti+Vtf97DY7/sPSsBFnXw1gS6bKszYBDdgAKPMri/2/6HwR23PG5wKWUAyBir5INbS8Ny7HKLvxHenyHSRYZ8PgkM+q1XwY0eowJWOXDi/7+JM2fO31r06putCrmSjKqBChlTvNygvPv4nmkjRf7IPz4pdAoGAPlxPU4VNVk5VnCJMu0oqXeQ5xNqS4kv/hrBQSsu1u+uCfa00X1BZFJ5MRijViHWAgBcV7k9lzVBe6S8BgXd9uOKA3Xs1SzvyYfDkrp66g+kocJm53lJRawytFB6LpEJlzXk3KmnPvm+eXRPQzdQJIBW1pBUI5wQpo5bJ/z7MXX8CgYEAgB2Dy0xVHxau4YgXM2eNHkjpP7+HF+q7NaeHetnaEBeM4+xJ/dV45KvxqptZzymVbzZFLUTKHFGGZT7ZsX76KL2IAe2gC98ik5twhqht/rhp/kfBuvb2GsFc5q8d9MTOLzS0YnyBq75hXt7urUi0XSmoz2s1qdKVoMQ1n6LPfq4='
+        var privateEncoded = 'MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCH63bzLUffnfhBBiEjPYFlnRh8YeikfdIN21v1aREdcDnVli+js7pvUx7TQQQfizrMrwbjrpKfiLtHviRqHG5MGQkrffO+xN8qR7iI6ES7zyxk44oqF7uEZUpYpFFdASypgETn/2I9FLH54o5AiV+RTCIik4udWOKUfxGXIJHgNi6Z/UsH/oYTkKi518BBoxO6M7mXOeP+VZfE9OxGzm2/uKLfYOpH3W56Swy3bceWlNEeHxfVKh+293AE0XbrcSDAhH7mtNDfw2aSH4Kpyom5gCMtoYq6819cf65Rf4Dcexsovyp8NN1ZkpjQcs4eGzl22HvfAX24Nq7K2JQ0/W0xAgMBAAECggEAVkpYJ0S9F6vLu0Rv71aR+vgEXpsuPpgermtwc1pz4jOolAAYWJ63IwwrSsVBH+Gdv+ryvcPMFHqTI5YEulU4dRmD59e70oZchBQqhMipMm7x6U9IHTcZ9pDz5VjUyu3+89GabYuGS+8CmvmJhFFymeUy2q6/eXK/zrTpbv/ffO8btPw6u+ZmGP1+VDYuYvX1eVyv0xb1w9R1VLKHvLJMrs+2c/HWHZUtLtd/ub6STmnupxa5bVcJQ6r/XnXQVil3FAw7Unt/LHT4bBXN6K32wBUQFyT63npjnT9TeXcnYEQGa3BU4M/wKPVgW4gDFnSWbuXwr5JA3BoSht1pcdvGAQKBgQDH7GxVPb5mL2/KVvZFr7ARjsic+Hc7aeCh7ffOIfZ9XulUYg1FOQrQdO4s7VZrPAI6cpX4fDNXK6bKDl+bD/0uILX+Td9pP/kG1ZDlyMOt06INfHswaCOlUefRxx2lKjYMRnB3xwaObZa18N3l4mQfUtUIZblyaeUi6ryOeVLhoQKBgQCuCzsbA4Ug3GJv7sx4K23SckkV6jtqGwYMey76OoNz0FbgQgYvyGIwOuZ9mF/tO++xRlHPyP3Ureq1UswdmzgDAYrJ0sgqgjNlpJWXEu1HcuKLYbXfipQ0MHCEFsqsG6JZV6x+6AXPh0vI4NjMs+TZVIOH0WVtZePvtIX4zeoBkQKBgQCjv0Nj9fRy4bugcOW5YhLF7rrlxqRx52BzgOOM1Eh9mzVlRgI0hmoTHxLNfX9gyX/Ru3SWV7P9W+V6bZdk/A2UsHof1kx8ekdPj7DkZDHRuBttDF4h4coAaDuFmJ7xXsdx+me30y3Njnj4gFZfKbRz63ZNMHRZ/94LYVQbJcf6wQKBgF5n7yanESaTBL5MnRKuFAMsROKjTJkwkWZhx0iqRrWilA1PIwX2PvSEbpQ//AC2Gz1gtG3uS2l68S5r/BYvJQHUa1Ewia0tNO30icQJ2zV/Zs1OMhZQmDV69P1hU4xp7PVjbkjkWIqKjBwpgs/+4KrWggZBGjBuLWbP2D/uiflRAoGBAL9FQUHvwT+WARnKam1qnwXyf3aSZIrtMB+1wS9XAQms6E95Ai08ox6fIIlhD1gPRwxqMlMFwex4TaJ+F5xmNV9lv2U6N0AXv+OwzOaY45WNYGq6Hsjy1QSJlwiRotjiieV0X5aYCQ642j3j/LMAIo+v0uyw5gnXn6+tNk4Hkb+9'
 
         crypto.encryptRSAPublic(Buffer.from(data, 'utf-8'), publicEncoded, (err, encrypted) => {
             crypto.decryptRSAPrivate(encrypted, privateEncoded, (err, decrypted) => {
                 console.log(decrypted.toString());
-                if(data == decrypted.toString()){
+                if (data == decrypted.toString()) {
                     done();
                 }
             });
         });
-    })
+    });
+
+    /**
+     * CryptoManager encrypt decrypt test case. <br />
+     * 
+     * @since 180503
+     * @author TACKSU
+     */
+    it('Encrypt with organization publicKey', done => {
+        var publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAysQGoArHW2Cf9p5WjEvv+bqMTw0KhI+TCeSup3TB0lMMA3N12jT34KN+Pr0uZHZ79XtiaNYMf/hY3mS28Gn7WzDPy9QYsVLAW56jNUEn83I4vz9QQBQv9dbNUuUzg40yyydobdw9o1DUejbRjhWy7OwJOlkA9hdlkZgg2Q6KewLCEXLdx1JIe6i5x0uQkYKoNfT0oURk4dm82RKrqsnK9p47Cp19Xyqx/J5V2gE505bHlWyhVQvyfyrcpuv4WNwe6qcfB2HLbINFj92Kjrstp9jxz/+ejCN6d/lCgYjO/BL9ROOLgGIi8CSwVswaD0znlDIn0MDZDooZKTvLIeVytQIDAQAB";
+        var privateKey = "MIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQDKxAagCsdbYJ/2nlaMS+/5uoxPDQqEj5MJ5K6ndMHSUwwDc3XaNPfgo34+vS5kdnv1e2Jo1gx/+FjeZLbwaftbMM/L1BixUsBbnqM1QSfzcji/P1BAFC/11s1S5TODjTLLJ2ht3D2jUNR6NtGOFbLs7Ak6WQD2F2WRmCDZDop7AsIRct3HUkh7qLnHS5CRgqg19PShRGTh2bzZEquqycr2njsKnX1fKrH8nlXaATnTlseVbKFVC/J/Ktym6/hY3B7qpx8HYctsg0WP3YqOuy2n2PHP/56MI3p3+UKBiM78Ev1E44uAYiLwJLBWzBoPTOeUMifQwNkOihkpO8sh5XK1AgMBAAECggEBAMJ+G1jCXg1xdp7prFzwriRd4x4khTU4PrNbrogjv5LOZBSfWKlQ63+Hc54cevaUjDyg+HlU8DKD9kKEWtHq5tbG0FtUe8cDeE2psiVv9TFYG8Sep4x/kK2AN/zOq4YBF3q0tz/B5UHVU6pTENj4SWNm2Uclfn2PXba1NLTfdMed3KSZqHgXSiwxqyacu+HfrSdYZJGbjE42H2Td6qygorGhwrdy4xZM1oEffN3mZ74QyR8DpvewaW3br89msgjZOlD5gBVGm9ROaLwCbhOrvGEGQC8+nTjSvUE4C/ePe865OPRvmertiTFhJQFqdLgceGVPXJGyGzBqNUhnUk6MIFUCgYEA8y2wpPvAUKwpvjxcPtHN4qgVdhTE6yzdNDqXDFZrCmzeisKeQwVnt+VCcLNAFSwAubW6kX6uAOeZ39gwM6PunD8N6JuiswEhM7hcTpTgcVLe+5yGa/8pK4l3d3C7yWXm01cLL2ypwCba6V1+2iRX1AtprQh9H+5RCjb1t5Lo7osCgYEA1XTdBILneVmV/ng2+GQTd0RtDsE1vvRD0lx2/WtAWtN27jyxmkxnlgmzSanavUWoABHCAl5k4OHSMgANNqxauumlQRhtb62R6mEKIDsNsViBK8RHXtHEnTXj1IXxtlFI2L11lmcyjT++RwOp/BDsTWpdGbasXui2Cjtwa/6Ci78CgYEA4ru6FMoKEO3E6fO7inLyBR/1CqjoxeGJyfXK+hzlJs5FXJmDGDhE8WhX316yJEtnzb+MWbYEpSFMDjKzFqMFijccT8I1G7O08lU186rJ7b932p+hkbZR+57rfbjlzi0t3+Urr6cgSuGvgKDE8r2qCjIt8MCWcZwxgVWnGudmOWsCgYEAiULn6UHAVcFs+cEWIC5Ccjx3ILjPteZfQoOhJJ72ODGpVdODpaQiLFI6j1EBTxreyISizGEk35N3Vh3AYXr9sRoT4UMzBFCJ9zzFhSpUSMmP7rP97RRZKXsA8aXcZA/rFyzl03yy/i+STRonEedT/Qg7rBBS0Yk1nmjQhzGXgwMCgYEApGQRXiJH1ylCvJuWIeQQvqF2u5oSnElLdAUVtYFnMl/cS5eqVxn/KNf9xKVnJKZ0pr7ZEgoAoOiTwJf9Zcf39ZM8F8QoNWNpxXTlBCzLfkKRn7BwZKGYmoLLoGp8NkixfbFU0SoIB8s4h4QT3Y7JWsbnjQDMcZKXWX8xe2K2Z50=";
+        var plain = "giemncc3LqXT+o8MWucPqkGQPCmsBliHCwCOlxoHY6k=";
+
+        var crypto = Managers.crypto();
+
+        crypto.encryptRSAPublic(Buffer.from(plain, 'base64'), publicKey, (err, encrypted) => {
+            console.log('Encrypted : ' + encrypted.toString('base64'));
+            crypto.decryptRSAPrivate(encrypted, privateKey, (err, result) => {
+                console.log(result.toString('base64'));
+                if (plain == result.toString('base64')) {
+                    done();
+                }
+            });
+        });
+    });
+
+    it.skip('RSA Decrypt Test', done => {
+        var privateKey = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCH63bzLUffnfhBBiEjPYFlnRh8YeikfdIN21v1aREdcDnVli+js7pvUx7TQQQfizrMrwbjrpKfiLtHviRqHG5MGQkrffO+xN8qR7iI6ES7zyxk44oqF7uEZUpYpFFdASypgETn/2I9FLH54o5AiV+RTCIik4udWOKUfxGXIJHgNi6Z/UsH/oYTkKi518BBoxO6M7mXOeP+VZfE9OxGzm2/uKLfYOpH3W56Swy3bceWlNEeHxfVKh+293AE0XbrcSDAhH7mtNDfw2aSH4Kpyom5gCMtoYq6819cf65Rf4Dcexsovyp8NN1ZkpjQcs4eGzl22HvfAX24Nq7K2JQ0/W0xAgMBAAECggEAVkpYJ0S9F6vLu0Rv71aR+vgEXpsuPpgermtwc1pz4jOolAAYWJ63IwwrSsVBH+Gdv+ryvcPMFHqTI5YEulU4dRmD59e70oZchBQqhMipMm7x6U9IHTcZ9pDz5VjUyu3+89GabYuGS+8CmvmJhFFymeUy2q6/eXK/zrTpbv/ffO8btPw6u+ZmGP1+VDYuYvX1eVyv0xb1w9R1VLKHvLJMrs+2c/HWHZUtLtd/ub6STmnupxa5bVcJQ6r/XnXQVil3FAw7Unt/LHT4bBXN6K32wBUQFyT63npjnT9TeXcnYEQGa3BU4M/wKPVgW4gDFnSWbuXwr5JA3BoSht1pcdvGAQKBgQDH7GxVPb5mL2/KVvZFr7ARjsic+Hc7aeCh7ffOIfZ9XulUYg1FOQrQdO4s7VZrPAI6cpX4fDNXK6bKDl+bD/0uILX+Td9pP/kG1ZDlyMOt06INfHswaCOlUefRxx2lKjYMRnB3xwaObZa18N3l4mQfUtUIZblyaeUi6ryOeVLhoQKBgQCuCzsbA4Ug3GJv7sx4K23SckkV6jtqGwYMey76OoNz0FbgQgYvyGIwOuZ9mF/tO++xRlHPyP3Ureq1UswdmzgDAYrJ0sgqgjNlpJWXEu1HcuKLYbXfipQ0MHCEFsqsG6JZV6x+6AXPh0vI4NjMs+TZVIOH0WVtZePvtIX4zeoBkQKBgQCjv0Nj9fRy4bugcOW5YhLF7rrlxqRx52BzgOOM1Eh9mzVlRgI0hmoTHxLNfX9gyX/Ru3SWV7P9W+V6bZdk/A2UsHof1kx8ekdPj7DkZDHRuBttDF4h4coAaDuFmJ7xXsdx+me30y3Njnj4gFZfKbRz63ZNMHRZ/94LYVQbJcf6wQKBgF5n7yanESaTBL5MnRKuFAMsROKjTJkwkWZhx0iqRrWilA1PIwX2PvSEbpQ//AC2Gz1gtG3uS2l68S5r/BYvJQHUa1Ewia0tNO30icQJ2zV/Zs1OMhZQmDV69P1hU4xp7PVjbkjkWIqKjBwpgs/+4KrWggZBGjBuLWbP2D/uiflRAoGBAL9FQUHvwT+WARnKam1qnwXyf3aSZIrtMB+1wS9XAQms6E95Ai08ox6fIIlhD1gPRwxqMlMFwex4TaJ+F5xmNV9lv2U6N0AXv+OwzOaY45WNYGq6Hsjy1QSJlwiRotjiieV0X5aYCQ642j3j/LMAIo+v0uyw5gnXn6+tNk4Hkb+9"
+        var encrypted = "XwwpPHhK7yATU4DFP4vi5ZQd7uRKnR9wu9ueOJfK11iK3hZ91RfvyfnQqxaw+Js0DPR7RfJSsHapquUmCgcROQVd2pE3Aedtdx47gGMM73lDGZyz7bvuUKOioAp0r01Zw9oV/fNa69ANUX2H1uYXVh0EGG2m5AJEqW4NPScMvaIRv+E4/ID50SoPHRLloRCi2Aco6oe2YbpJBK8ItUtd8KDvhBcUYqD08Z5JnaVcrEVslGx0Ok6A6FKAOhrfCI2TYo+iBjbJIAFHsPvvEl/CLFZlmV/t6OVTunFR1wM2YHQiZEjQoYhQCTwqlIm2JVyTtpiFtqZAGf0aQThfnuYbvg==";
+
+        var crypto = Managers.crypto();
+        crypto.decryptRSAPrivate(Buffer.from(encrypted, 'base64'), privateKey, (err, decrypted) => {
+            console.log(decrypted.toString('base64'));
+            if ("giemncc3LqXT+o8MWucPqkGQPCmsBliHCwCOlxoHY6k=" == decrypted.toString('base64')) {
+                done();
+            }
+        });
+    });
 
     it.skip('RSA Key generate', done => {
         var nodeRSA = new NodeRSA({
@@ -139,9 +176,9 @@ describe('Crypto test suit', () => {
 
     it.skip('RSA Encrypt/Decrypt', done => {
         var plain = "Hello, world!";
-        crypto.generateAESKey((keypair) => {
-            crypto.encryptRSA(plain, keypair.pub, (encrypted) => {
-                crypto.decryptRSA(encrypted, keypair.pri, (decrypted) => {
+        crypto.generateRSAKeyPair((keypair) => {
+            crypto.encryptRSAPublic(plain, keypair.public, (encrypted) => {
+                crypto.decryptRSAPrivate(encrypted, keypair.private, (decrypted) => {
                     if (plain == decrypted)
                         done();
                 })
@@ -208,7 +245,18 @@ describe('Crypto test suit', () => {
         console.log(decrypted.toString(CryptoJS.enc.Utf8));
     });
 
-    it.skip('Native crypto RSA test', done => {
-
+    /**
+     * Generate RSA2048 KeyPair test case. <br />
+     * 
+     * @since 180502
+     * @author TACKSU
+     */
+    it.skip('Generate RSA2048 Key pair', done => {
+        var crypto = Managers.crypto();
+        crypto.generateRSAKeyPair((err, keyPair) => {
+            console.log('Public Key : ' + keyPair.public.toString('base64'));
+            console.log('Private Key : ' + keyPair.private.toString('base64'));
+            done();
+        });
     })
-})
+});

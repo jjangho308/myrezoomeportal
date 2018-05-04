@@ -107,21 +107,57 @@ class PushManager extends AbstractManager {
             } else {
                 for (var i in queuename) {
                     (function (i) {
-                        this.channelFactory.channel(function (err, channel) {
-                            if (err) {
-                                console.log('channel factory error: ' + error.message);
-                                return;
-                            }
-                            channel.send(queuename[i].AMQ_NM, msgString, err => {
-                                if (err) {
-                                    console.log('send error: ' + err.message);
-                                    cb(err)
+
+                        // Organization db에서 public key 조회
+                        var orgDao = Managers.db().getOrgDAO().getInfo({
+                            orgId: orgInfos
+                        }, (err, orgInfoModel) => {
+                            var orgPublicKey = orgInfoModel[0].publicKey;
+                            var crypto = Managers.crypto();
+
+                            crypto.generateAESKey((err, aesKey) => {
+                                if (!!err) {
+                                    console.log(err);
+                                } else {
+                                    console.log("AES Key : " + aesKey);
+                                    crypto.encryptAES(msgString, aesKey, (err, encodedIV, encryptedMsg) => {
+                                        if (!!err) {
+                                            console.log(err);
+                                        } else {
+                                            // Base64 Encoded된 키를 UTF-8 문자열로 Decode하여 전달함.
+                                            // 즉 Decrypt시 UTF-8 StringByte Array를 얻어 Base64Decode 할 수 있도록
+                                            crypto.encryptRSAPublic(Buffer.from(aesKey), orgPublicKey, (err, encryptedKey) => {
+                                                if (!!err) {
+                                                    console.log(err);
+                                                } else {
+                                                    var cryptPushMessage = {
+                                                        key: encryptedKey.toString('base64'),
+                                                        iv: encodedIV,
+                                                        msg: encryptedMsg
+                                                    };
+
+                                                    this.channelFactory.channel(function (err, channel) {
+                                                        if (err) {
+                                                            console.log('channel factory error: ' + error.message);
+                                                            return;
+                                                        }
+                                                        channel.send(queuename[i].AMQ_NM, JSON.stringify(cryptPushMessage), err => {
+                                                            if (err) {
+                                                                console.log('send error: ' + err.message);
+                                                                cb(err)
+                                                            }
+                                                            console.log('sent message');
+                                                            channel.close();
+                                                            cb(null);
+                                                        });
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
                                 }
-                                console.log('sent message');
-                                channel.close();
-                                cb(null);
                             });
-                        })
+                        });
                     }).call(this, i);
                 }
             }

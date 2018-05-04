@@ -109,23 +109,6 @@ class CryptoManager extends AbstractManager {
     }
 
     /**
-     * Generate Asymmetric key pair. <br />
-     * 
-     * @since 180313
-     * @author TACKSU
-     * 
-     * @param {*} cb 
-     */
-    generateRSAKeyPair(cb) {
-        var dh = crypto.createDiffieHellman(this.spec.asmLength);
-        dh.generateKeys(this.spec.encode);
-        return {
-            public: dh.getPublicKey(this.spec.encode),
-            private: dh.getPrivateKey(this.spec.encode)
-        };
-    }
-
-    /**
      * Encrypt data with symmetric key and iv. <br />
      * 
      * @param {string} plain Plain text.
@@ -170,6 +153,33 @@ class CryptoManager extends AbstractManager {
     }
 
     /**
+     * Generate RSA Key pair. <br />
+     * 
+     * @since 180313
+     * @author TACKSU
+     * 
+     * @param {*} cb 
+     */
+    generateRSAKeyPair(cb) {
+        process.nextTick(() => {
+            try {
+                var rsa = new NodeRSA({
+
+                    // TODO Change to property.
+                    b: 2048
+                });
+
+                cb(null, {
+                    public: rsa.exportKey('pkcs8-public-der'),
+                    private: rsa.exportKey('pkcs8-private-der')
+                });
+            } catch (e) {
+                cb(e, null);
+            }
+        });
+    }
+
+    /**
      * Encrypt data with RSA Key. <br />
      * 
      * @since 180502
@@ -184,13 +194,14 @@ class CryptoManager extends AbstractManager {
     encryptRSAPublic(dataBuffer, publicKey, cb) {
         process.nextTick(() => {
             try {
-                var rsa = new NodeRSA();
                 publicKey = '-----BEGIN PUBLIC KEY-----\n' + publicKey + '\n-----END PUBLIC KEY-----';
-                rsa.importKey(publicKey, 'pkcs8-public-pem');
+                var rsa = new NodeRSA(publicKey, 'pkcs8-public-pem', {
+                    encryptionScheme: 'pkcs1'
+                });
                 var encrypted = rsa.encrypt(dataBuffer);
                 cb(null, encrypted);
             } catch (e) {
-                cb(er);
+                cb(e);
             }
         });
     }
@@ -207,13 +218,14 @@ class CryptoManager extends AbstractManager {
     decryptRSAPrivate(encryptedBuffer, privateKey, cb) {
         process.nextTick(() => {
             try {
-                var rsa = new NodeRSA();
                 privateKey = '-----BEGIN PRIVATE KEY-----\n' + privateKey + '\n-----END PRIVATE KEY-----';
-                rsa.importKey(privateKey, 'pkcs8-private-pem');
+                var rsa = new NodeRSA(privateKey, 'pkcs8-private-pem', {
+                    encryptionScheme: 'pkcs1'
+                });
                 var decrypted = rsa.decrypt(encryptedBuffer);
                 cb(null, decrypted);
             } catch (e) {
-                cb(er);
+                cb(e);
             }
         });
     }
