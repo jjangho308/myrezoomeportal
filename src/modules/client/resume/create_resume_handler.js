@@ -96,7 +96,7 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                                                 var sharedResume = new SharedResumeModel({
                                                     uId: request.uId,
                                                     rsmId: resumeList[0].rsmId,
-                                                    data: JSON.stringify(request.resume.record)
+                                                    data: JSON.stringify(request.resume.data)
                                                 });
 
                                                 console.log(sharedResume);
