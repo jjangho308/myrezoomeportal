@@ -288,7 +288,7 @@ function currentDate(time) {
 }
 
 function base64toHEX(base64) {
-    var raw = atob(base64);
+    var raw = window.atob(base64);
 
     var HEX = '';
 
