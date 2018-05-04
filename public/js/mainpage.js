@@ -641,8 +641,6 @@ function clientsocket_listener() {
         var recv_key = msg.key;
         var recv_iv = msg.iv;
 
-        var jwkPub1 = KEYUTIL.getJWKFromKey(pubkey);
-
         var aeskey_hex = base64toHEX(recv_key);
         var decryptedKey = KJUR.crypto.Cipher.decrypt(aeskey_hex, rsakey_prv);
         
