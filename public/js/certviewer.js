@@ -200,35 +200,35 @@ function setCertViewer(sub_id, tx_id) {
     alert("subid : " + sub_id + " / txid" + tx_id);
 
     var record = getData(tx_id);
-    certformatter[sub_id](record);
+    certformatter[sub_id](record.data);
 
 
 }
 
 var certformatter= {    
-    "RCLPT0005":function viewformatter(record) {              
+    "RCLPT0005":function viewformatter(record_data) {              
         // opic
         var htmldiv = '<div>';
-            htmldiv = htmldiv + "<div> 이름 : " +record.name + '</div>';
-            htmldiv = htmldiv + "<div>Grade : " +record.grade + '</div>';
-            htmldiv = htmldiv + "<div>총점 : " +record.point0 + '</div>';
-            htmldiv = htmldiv + "<div>과목1 : " +record.point1 + '</div>';
-            htmldiv = htmldiv + "<div>과목2 : " +record.point2 + '</div>';
-            htmldiv = htmldiv + "<div>과목3 : " +record.point3 + '</div>';
+            htmldiv = htmldiv + "<div> 이름 : " +record_data.name + '</div>';
+            htmldiv = htmldiv + "<div>Grade : " +record_data.grade + '</div>';
+            htmldiv = htmldiv + "<div>총점 : " +record_data.point0 + '</div>';
+            htmldiv = htmldiv + "<div>과목1 : " +record_data.point1 + '</div>';
+            htmldiv = htmldiv + "<div>과목2 : " +record_data.point2 + '</div>';
+            htmldiv = htmldiv + "<div>과목3 : " +record_data.point3 + '</div>';
             
         htmldiv = htmldiv + '</div>';
         $('#cert-body-div').append(htmldiv);
     },
 
-    "RCCNF0001":function viewformatter(record) {
+    "RCCNF0001":function viewformatter(record_data) {
         //mktest
         var htmldiv = '<div>';
-            htmldiv = htmldiv + "<div>이름 : " +record.name + '</div>';
-            htmldiv = htmldiv + "<div>Grade : " +record.grade + '</div>';
-            htmldiv = htmldiv + "<div>총점 : " +record.point0 + '</div>';
-            htmldiv = htmldiv + "<div>과목1 : " +record.point1 + '</div>';
-            htmldiv = htmldiv + "<div>과목2 : " +record.point2 + '</div>';
-            htmldiv = htmldiv + "<div>과목3 : " +record.point3 + '</div>';
+            htmldiv = htmldiv + "<div>이름 : " +record_data.name + '</div>';
+            htmldiv = htmldiv + "<div>Grade : " +record_data.grade + '</div>';
+            htmldiv = htmldiv + "<div>총점 : " +record_data.point0 + '</div>';
+            htmldiv = htmldiv + "<div>과목1 : " +record_data.point1 + '</div>';
+            htmldiv = htmldiv + "<div>과목2 : " +record_data.point2 + '</div>';
+            htmldiv = htmldiv + "<div>과목3 : " +record_data.point3 + '</div>';
             
         htmldiv = htmldiv + '</div>';
         $('#cert-body-div').append(htmldiv);
