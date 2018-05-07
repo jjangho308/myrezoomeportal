@@ -106,7 +106,7 @@ class PushManager extends AbstractManager {
                 cb(err);
             } else {
                 for (var i in queuename) {
-                    (function (i) {
+                    !((qIdx) => {
 
                         // Organization db에서 public key 조회
                         var orgDao = Managers.db().getOrgDAO().getInfo({
@@ -141,7 +141,7 @@ class PushManager extends AbstractManager {
                                                             console.log('channel factory error: ' + error.message);
                                                             return;
                                                         }
-                                                        channel.send(queuename[i].AMQ_NM, JSON.stringify(cryptPushMessage), err => {
+                                                        channel.send(queuename[qIdx].AMQ_NM, JSON.stringify(cryptPushMessage), err => {
                                                             if (err) {
                                                                 console.log('send error: ' + err.message);
                                                                 cb(err)
