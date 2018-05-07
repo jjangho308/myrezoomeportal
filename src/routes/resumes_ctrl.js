@@ -74,7 +74,8 @@ export default {
                     // res.json({
                     //     result: result
                     // });
-                    res.render('resumesviewer', result);
+                    console.log(result[0]);                    
+                    res.render('resumesviewer', {resumeModel: result[0]});
                 }
             });
         }
