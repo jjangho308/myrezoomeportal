@@ -1,3 +1,5 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+
 body{
     margin: 0;
 }
@@ -66,20 +68,6 @@ p{
   height: 40px;
 }
 
-.header  button:nth-child(4){
-  width: 100px;
-  height: 40px;
-  font-weight: bold;
-    color: #ffffff;
-    background-color: #4c80f1;
-    border: none;
-    
-}
-.header  button:nth-child(4) a{
-    text-decoration: none;
-    color: white;
-    font-weight: normal;
-}
 .header  button:nth-child(3){
     font-weight: bold;
     font-size: 18px;
@@ -117,22 +105,115 @@ p{
 .main-body{
   background-color: #f2f5f8;
     padding: 35px 0px;
+    margin: 0;
     
 }
 
-.main-body .container{
+.outer-container{
     margin: auto;
   width: 870px;
   height: 1230px;
   background-color: #ffffff;
-/*  border: solid 1px #dfe5ef;*/
+  padding-top: 27px;
     
 }
 
-.modal-body{
-    
-    margin: 0;
+.outer-container > p{
+  font-size: 12px;
+  line-height: 2.08;
+  color: #676767;
+  padding: 10px 24px;
 }
+.inner-container{
+    margin: auto;
+    position: relative;
+  width: 820px;
+  height: 1070px;
+  border: solid 2px #2b2c2c;
+    
+}
+
+.cert-title{
+  width:100%;
+  height: 254px;
+  font-family: 'Nanum Myeongjo';
+  font-size: 34px;
+  text-align: center;
+  letter-spacing: 35px;
+      line-height: 254px;
+      font-weight: bold;
+  color: #2b2c2c;
+}
+
+.cert-body{
+  width: 446px;
+  margin: auto;
+  height: 500px;
+  font-size: 17px;
+  letter-spacing: 4.3px;  
+  text-align: left;
+} 
+
+.cert-body > div > div{
+    display: inline-block;
+        padding: 10px 0px;
+}
+.cert-body > div > div:nth-child(1){
+  text-align: left;
+  width: 124px;
+}
+
+.cert-body > div > div:nth-child(2){
+  width: 35px;
+  text-align: center;
+      margin-right: 26px;
+}
+
+.cert-body > div > div:nth-child(3){
+  text-align: left;
+  letter-spacing: 4.3px;
+}
+
+.two-word-interval{
+  display: inline-block;
+
+  width:81px;
+}
+
+
+.four-word-interval{
+  display: inline-block;
+
+  width:12px;
+}
+
+.cert-footer{
+
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+  font-weight: bold;  
+  letter-spacing: 10px;
+  text-align: center;
+    position: absolute;
+    bottom: 235px;
+    left: 50%;
+    width: 400px;
+    margin-left: -200px;
+}
+
+.cert-reference{
+  font-family: 'Nanum Myeongjo';
+  font-size: 34px;
+  font-weight: bold;
+  letter-spacing: 30px;
+  text-align: center;  
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    width: 600px;
+    margin-left: -300px;
+}
+
 .modal-sub-header{
     height: 47px;
     border-top: solid 2px #dfe5ef;

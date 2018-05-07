@@ -68,9 +68,12 @@ export default {
             if (!!err) {
                 next(err);
             } else {
+                /*
                 res.json({
                     result: result
                 });
+                */
+               res.render('certviewer');
             }
         });
     },
