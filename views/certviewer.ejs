@@ -7,9 +7,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <body>
-<script>
-    setCertViewer('<%= subId %>', '<%= txid %>');
-</script>
+
 
 <div class="header">
    
@@ -41,7 +39,7 @@
         </div>  
 
         <div id="cert-body-div" class = "cert-body">
-          <div>
+          <!-- <div>
             <div>성<span class="two-word-interval"></span>명</div>
             <div>:</div>
             <div>이수지</div>
@@ -50,7 +48,7 @@
             <div>생<span class="four-word-interval"></span>년<span class="four-word-interval"></span>월<span class="four-word-interval"></span>일</div>
             <div>:</div>
             <div>1986년 3월 9일</div>
-          </div>
+          </div> -->
           
 
         </div>  
@@ -199,7 +197,9 @@
     </div>
 </div>
     
-
+<script>
+    setCertViewer('<%= subId %>', '<%= txid %>');
+</script>
 </body>
     
    
