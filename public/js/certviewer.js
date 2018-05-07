@@ -199,7 +199,7 @@ $(document).ready(function(){
 function setCertViewer(sub_id, tx_id) {
     alert("subid : " + sub_id + " / txid" + tx_id);
 
-    var record = getdata(tx_id);
+    var record = getData(tx_id);
     certformatter[sub_id](record);
 
 
