@@ -65,15 +65,22 @@ $(document).ready(function () {
         window.location = "main";
     });
 
-    loadresumelist();
-    // comment by hyunsu for running
 
-    // it will change to add resume
-    $(document).on('click', ".add-cert", function () {
+
+    $('.resumes-container').click(function () {
+        window.location = "/resumeseditor";
+    });
+
+    loadresumelist();
+
+    $(".add-resumes").click(function () {
         console.log('이력서 생성 목록 클릭');
+
+        // add by hyunsu for running
+        $('#add-resumes-dialog').modal('show');
+
         var txidlist = getTxidList();
 
-        $('#resumes-add-dialog').modal('show');
         // $(".certtr").remove();
 
         $.ajax({
@@ -126,7 +133,7 @@ $(document).ready(function () {
                         htmldiv = htmldiv + '<td>' + subname + '</td>';
                         htmldiv = htmldiv + '</tr>';
 
-                        $("#add-cert-dialog-table").append(htmldiv);
+                        $("#add-resume-dialog-table").append(htmldiv);
 
                         /*
                         $(addcertcheckboxid).click(function() {
@@ -151,10 +158,33 @@ $(document).ready(function () {
     });
 
 
-    $(document).on('click', '#add-cert-dialog .confirm-btn', function() {
-        $("#add-cert-dialog  .close-modal").click();
-       $("#alarm-div span").text('이력서 발급이 완료되었습니다.  "이력서보관함"에서 확인해주세요.');
-        $('#alarm-div').css("display","block");
+    $(document).on('click', '#add-resumes-dialog .confirm-btn', function() {
+        $("#add-resumes-dialog  .close-modal").click();
+
+
+        var current_active = 0;
+        
+        $(`#resumes-line-dialog #circle-${current_active}`).css("background-color","#4a90e2");
+        
+        setInterval(function(){
+            $(`#resumes-line-dialog #circle-${current_active}`).css("background-color","#dadada");
+            current_active += 1;
+            
+            if(current_active > 5){
+                current_active = 0;
+            }
+            $(`#resumes-line-dialog #circle-${current_active}`).css("background-color","#4a90e2");
+                               
+                              
+         }, 1000);
+
+        setTimeout(function() {
+            $("#resumes-line-dialog  .close-modal").click();
+            window.location = "/resumeseditor?data=new";
+
+        }, 3000);
+
+
         //$('#alarm-div').css("display","none");
         var resumesdata = {};
         resumesdata.data = [];
@@ -166,12 +196,10 @@ $(document).ready(function () {
 
                 var sdata = sessionStorage.getItem(id);
                 
-                var json_session_record = JSON.parse(sdata);
-                var jsondata = json_session_record.data;
+                var jsondata = JSON.parse(sdata);
                 var objresumedata = {};
                 objresumedata.record = jsondata;
                 objresumedata.txid = id;
-                objresumedata.sudid = json_session_record.subid;
                 resumesdata.data.push(objresumedata);
 
                 console.log("cert req param");

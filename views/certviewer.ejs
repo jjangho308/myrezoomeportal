@@ -1,0 +1,232 @@
+<%- include('base_head_import') -%>
+<head>
+    <link rel="stylesheet" href="css/mypage/certviewer.css">
+    <script src="js/certviewer.js"></script>
+</head>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<body>
+
+<div class="header">
+   
+   <a href="/certs"><img src="img/certviewer/wt.png" alt=""></a>
+   <div>
+       <p>증명서 상세보기</p>
+       <p>인하대학교 졸업증명서(학사)</p>
+       
+   </div>
+   <button id="more-button">···</button>
+   <button>    <a href="#cert-add-dialog" rel="modal:open">전송</a>
+    </button>
+   <button>다운로드</button>
+   <button>인쇄</button>
+   
+    <div id="more-button-div">
+       <p>항목#1</p>
+       <p>항목#2</p>
+       <p>항목#3</p>
+    </div> 
+    
+</div>
+
+<div class="main-body">
+    <div class="outer-container">
+      <div class="inner-container">
+        <div class = "cert-title">
+          졸업증명서
+        </div>  
+
+        <div class = "cert-body">
+          <div>
+            <div>성<span class="two-word-interval"></span>명</div>
+            <div>:</div>
+            <div>이수지</div>
+          </div>
+          <div>
+            <div>생<span class="four-word-interval"></span>년<span class="four-word-interval"></span>월<span class="four-word-interval"></span>일</div>
+            <div>:</div>
+            <div>1986년 3월 9일</div>
+          </div>
+          <div>
+            <div>성<span class="two-word-interval"></span>명</div>
+            <div>:</div>
+            <div>이수지</div>
+          </div>
+          <div>
+            <div>생<span class="four-word-interval"></span>년<span class="four-word-interval"></span>월<span class="four-word-interval"></span>일</div>
+            <div>:</div>
+            <div>1986년 3월 9일</div>
+          </div>
+          <div>
+            <div>성<span class="two-word-interval"></span>명</div>
+            <div>:</div>
+            <div>이수지</div>
+          </div>
+          <div>
+            <div>생<span class="four-word-interval"></span>년<span class="four-word-interval"></span>월<span class="four-word-interval"></span>일</div>
+            <div>:</div>
+            <div>1986년 3월 9일</div>
+          </div>
+          <div>
+            <div>성<span class="two-word-interval"></span>명</div>
+            <div>:</div>
+            <div>이수지</div>
+          </div>
+          <div>
+            <div>생<span class="four-word-interval"></span>년<span class="four-word-interval"></span>월<span class="four-word-interval"></span>일</div>
+            <div>:</div>
+            <div>1986년 3월 9일</div>
+          </div>
+
+        </div>  
+        <div class = "cert-footer">
+          위의 사실을증명합니다.
+        </div> 
+        <div class = "cert-reference">
+          인하대학교교무처장
+        </div> 
+
+
+      </div>
+      <p>본 증명서는 레쥬메 서비스를 통해 인터넷으로 발급되었으며 우측 QR코드를 이용하여 증명서 내용의 진위여부를 확인할 수 있습니다.</p>
+
+
+    </div>
+</div>
+
+<div id="cert-add-dialog" class="modal">
+    <p>증명서 전송<span>증명서를 레쥬메 서비스를 통해 보다 편리하게 전송해보세요.</span></p>
+    
+       
+    <div class="modal-sub-header">
+        <span>증명서 링크 생성</span>
+        <span>이메일로 전송</span>
+        
+    </div>
+      
+       
+    <div class="modal-body">
+     
+        <div class="cert-create-div">
+          
+           <input type="text" id="cert-url-input" placeholder="생성된 링크가 없습니다. 링크 생성 버튼을 클릭해주세요.">
+            <button  id="create-link-button">링크 생성</button>
+
+            <div class = "open-range-div">
+                <span>공개 대상</span>
+                <div class="abc-radio">
+                    <input type="radio" id="radio1" name="open-range-1" value="">
+                    <label for="radio1" class="default-password-label" class="default-label">
+                        링크 소유자
+                    </label>
+                </div>
+                <div class="abc-radio">
+                    <input type="radio"  id="radio2" name="open-range-1"value="">
+                    <label for="radio2" class="aware-password-label">
+                       비밀번호를 알고있는 사람
+                    </label>
+                </div>
+
+
+                   <div class="password-div">
+                       <input type="text"  placeholder="비밀번호를 설정해주세요." />
+                       <button>설정</button>
+                    </div>
+
+            </div>
+            <div class = "expire-date-div">
+                <span>만료일 설정</span>
+                <div class="abc-radio">
+                    <input type="radio" id="radio3" name="expire-date-1" value="">
+                    <label for="radio3" class="default-period-label" class="default-label">
+                        기한 없음
+                    </label>
+                </div>
+                <div class="abc-radio">
+                    <input type="radio" id="radio4" name="expire-date-1" value="">
+                    <label for="radio4" class="expire-period-label">
+                       특정 기간까지 공유
+                    </label>
+                </div>
+
+                <div class="period-div">
+                  <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
+                <input type="text" class="form-control expire-period"  placeholder="2018-04-04"/>
+
+                   <button>설정</button>
+                </div>
+
+            </div>
+
+        </div>
+        
+        <div class="email-send-div">
+            <input type="text" id="email-send-input" placeholder="증명서를 전송할 이메일주소를 입력하고, 엔터키를 눌러주세요.">
+            
+<!--        <textarea name="" id="" cols="30" rows="10" valign='middle' placeholder="메일 본문 메시지 추가(선택 사항)"></textarea>-->
+        <div id="wrap">
+          <div class="area dummy"></div>
+          <textarea class="area"></textarea>
+        </div>
+            <div class = "open-range-div">
+                <span>공개 대상</span>
+                <div class="abc-radio">
+                    <input type="radio" id="radio5" name="open-range-2" value="">
+                    <label for="radio5" class="default-password-label" class="default-label">
+                        링크 소유자
+                    </label>
+                </div>
+                <div class="abc-radio">
+                    <input type="radio"  id="radio6" name="open-range-2"value="">
+                    <label for="radio6" class="aware-password-label">
+                       비밀번호를 알고있는 사람
+                    </label>
+                </div>
+
+
+                   <div class="password-div">
+                       <input type="text"  placeholder="비밀번호를 설정해주세요." />
+                       <button>설정</button>
+                    </div>
+
+            </div>
+            <div class = "expire-date-div">
+                <span>만료일 설정</span>
+                <div class="abc-radio">
+                    <input type="radio" id="radio7" name="expire-date-2" value="">
+                    <label for="radio7" class="default-period-label" class="default-label">
+                        기한 없음
+                    </label>
+                </div>
+                <div class="abc-radio">
+                    <input type="radio" id="radio8" name="expire-date-2" value="">
+                    <label for="radio8" class="expire-period-label">
+                       특정 기간까지 공유
+                    </label>
+                </div>
+
+                <div class="period-div">
+                  <button class="calendar"><img src="img/myresume/on.png" alt=""></button>
+                <input type="text" class="form-control expire-period"  placeholder="2018-04-04"/>
+
+                   <button>설정</button>
+                </div>
+
+            </div>
+            
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+       <a>URL 링크삭제</a>
+        <button class="confirm-btn primary-solid-btn">확인</button>
+        <button class="cancel-btn border-btn">취소</button>
+    </div>
+</div>
+    
+
+</body>
+    
+   
+  

@@ -36,6 +36,7 @@ function loadcertlist() {
             'Authorization': client_authorization
         },
         success: function (certlistres) {
+            console.log(certlistres);
             var certlistresult = certlistres.result;
             $(".cert-container").remove();
             $('#certlistcount').text(certlistresult.length + '건');
@@ -83,13 +84,21 @@ $(document).ready(function(){
         window.location = "main";
     });
     
-
+    $('.cert-container').click(function () {
+        window.location = "/certviewer";
+    });
+    
 
     //출력 가능한 증명서 목록 세팅
     console.log('=====Cert page=====');
     
     $(".add-cert").click(function() {
         console.log('증명서 발급 목록 클릭');
+
+        // add by hyunsu for running
+        $('#add-cert-dialog').modal('show');
+
+
         var txidlist = getTxidList();
 
         $(".certtr").remove();
@@ -186,8 +195,31 @@ $(document).ready(function(){
 
     $('#add-cert-dialog .confirm-btn').click(function() {
         $("#add-cert-dialog  .close-modal").click();
-       $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
-        $('#alarm-div').css("display","block");
+
+
+        var current_active = 0;
+        
+        $(`#cert-line-dialog #circle-${current_active}`).css("background-color","#4a90e2");
+        
+        setInterval(function(){
+            $(`#cert-line-dialog #circle-${current_active}`).css("background-color","#dadada");
+            current_active += 1;
+            
+            if(current_active > 5){
+                current_active = 0;
+            }
+            $(`#cert-line-dialog #circle-${current_active}`).css("background-color","#4a90e2");
+                               
+                              
+         }, 1000);
+
+        setTimeout(function() {
+            $("#cert-line-dialog  .close-modal").click();
+            $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
+            $('#alarm-div').css("display","block");       
+        }, 3000);
+
+
         //$('#alarm-div').css("display","none");
 
         $('input:checkbox[name="certcheck"]').each(function() {
@@ -195,13 +227,10 @@ $(document).ready(function(){
                 var id = this.id;
 
                 var sdata = sessionStorage.getItem(id);
-
-                var json_session_record = JSON.parse(sdata);
-                var jsondata = json_session_record.data;
                 
                 var reqcerts = {};
                 reqcerts.txid = id;
-                reqcerts.record = jsondata;
+                reqcerts.record = JSON.parse(sdata);
 
                 console.log("cert req param");
                 console.log(id);
