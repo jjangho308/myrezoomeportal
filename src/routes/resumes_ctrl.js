@@ -74,7 +74,7 @@ export default {
                     // res.json({
                     //     result: result
                     // });
-                    res.render('resumesviewer');
+                    res.render('resumesviewer', result);
                 }
             });
         }
