@@ -140,7 +140,7 @@ p{
   font-size: 34px;
   text-align: center;
   letter-spacing: 35px;
-      line-height: 254px;
+      /* line-height: 254px; */
       font-weight: bold;
   color: #2b2c2c;
 }

@@ -195,3 +195,42 @@ $(document).ready(function(){
     
     
 });
+
+function setCertViewer(sub_id, tx_id) {
+    alert("subid : " + sub_id + " / txid" + tx_id);
+
+    var record = getdata(tx_id);
+    certformatter[sub_id](record);
+
+
+}
+
+var certformatter= {    
+    "RCLPT0005":function viewformatter(record) {              
+        // opic
+        var htmldiv = '<div>';
+            htmldiv = htmldiv + "<div> 이름 : " +record.name + '</div>';
+            htmldiv = htmldiv + "<div>Grade : " +record.grade + '</div>';
+            htmldiv = htmldiv + "<div>총점 : " +record.point0 + '</div>';
+            htmldiv = htmldiv + "<div>과목1 : " +record.point1 + '</div>';
+            htmldiv = htmldiv + "<div>과목2 : " +record.point2 + '</div>';
+            htmldiv = htmldiv + "<div>과목3 : " +record.point3 + '</div>';
+            
+        htmldiv = htmldiv + '</div>';
+        $('#cert-body-div').append(htmldiv);
+    },
+
+    "RCCNF0001":function viewformatter(record) {
+        //mktest
+        var htmldiv = '<div>';
+            htmldiv = htmldiv + "<div>이름 : " +record.name + '</div>';
+            htmldiv = htmldiv + "<div>Grade : " +record.grade + '</div>';
+            htmldiv = htmldiv + "<div>총점 : " +record.point0 + '</div>';
+            htmldiv = htmldiv + "<div>과목1 : " +record.point1 + '</div>';
+            htmldiv = htmldiv + "<div>과목2 : " +record.point2 + '</div>';
+            htmldiv = htmldiv + "<div>과목3 : " +record.point3 + '</div>';
+            
+        htmldiv = htmldiv + '</div>';
+        $('#cert-body-div').append(htmldiv);
+    },
+}
