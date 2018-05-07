@@ -29,6 +29,9 @@ $(document).ready(function () {
             url: "/signin",   
             data: param,
             dataType: "JSON",
+            beforeSend: function() {
+                $('#loading').show();
+            },
             success: function(response) {
                 genRsaKey();
 
@@ -110,7 +113,6 @@ $(document).ready(function () {
             email: $('#signup_id').val(),
             pw: SHA256($('#signup_pw').val()),
         }
-        
         $.ajax({
             type: "POST",  
             url: "/signin",   
