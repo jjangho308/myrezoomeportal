@@ -29,12 +29,16 @@ export default {
         console.log('Agent entity');
         console.log(entity);
         console.log('===========================');
-        
+
         agentRequestManager.request(entity, (err, result) => {
             if (!!err) {
-                next(err);
+                res.json({
+                    cmd: req.body.cmd,
+                    err: err
+                });
             } else {
                 res.json({
+                    cmd: req.body.cmd,
                     result: result
                 });
             }

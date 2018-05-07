@@ -2,6 +2,8 @@ import assert from 'assert';
 
 import managers from '../core/managers';
 
+import Cluster from 'cluster';
+
 /**
  * Instance test suit. <br />
  * 
@@ -18,8 +20,23 @@ describe('Instant test suit', () => {
         managers.db().init();
     });
 
-    it('Error log test case.', done=>{
+    it.skip('Error log test case.', done => {
         var asdf = undefined;
-        console.log(asdf.asdf);
-    })
+    });
+
+    it('Promise test case', done => {
+        console.log("Script start");
+        var promise = new Promise((resolve, reject) => {
+            resolve(1);
+            reject("Error");
+        }).then((result) => {
+            console.log('Result 1: ' + result);
+            return 2;
+        }).then((result) => {
+            console.log('Result 2: ' + result);
+            throw new Error("My Error!");
+        }).catch(err => {
+            console.log('Error ' + err);
+        });
+    });
 });

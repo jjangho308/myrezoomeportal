@@ -195,3 +195,52 @@ $(document).ready(function(){
     
     
 });
+
+function setCertViewer(sub_id, tx_id) {
+    //alert("subid : " + sub_id + " / txid" + tx_id);
+
+    var record = getData(tx_id);
+    certformatter[sub_id](record.data);
+
+
+}
+
+var certformatter= {    
+    "RCLPT0005":function viewformatter(record_data) {              
+        // opic
+        var htmldiv = '<div>';
+            htmldiv = htmldiv + "<p>이름 : " +record_data.name + '</p>';
+            htmldiv = htmldiv + "<p>Grade : " +record_data.grade + '</p>';
+            htmldiv = htmldiv + "<p>총점 : " +record_data.point0 + '</p>';
+            htmldiv = htmldiv + "<p>과목1 : " +record_data.point1 + '</p>';
+            htmldiv = htmldiv + "<p>과목2 : " +record_data.point2 + '</p>';
+            htmldiv = htmldiv + "<p>과목3 : " +record_data.point3 + '</p>';
+            
+        htmldiv = htmldiv + '</div>';
+        $('#cert-body-div').append(htmldiv);
+    },
+
+    "RCCNF0001":function viewformatter(record_data) {
+        //mktest
+        var htmldiv = '<div>';
+            htmldiv = htmldiv + "<p>이름 : " +record_data.name + '</p>';
+            htmldiv = htmldiv + "<p>Grade : " +record_data.grade + '</p>';
+            htmldiv = htmldiv + "<p>총점 : " +record_data.point0 + '</p>';
+            htmldiv = htmldiv + "<p>과목1 : " +record_data.point1 + '</p>';
+            htmldiv = htmldiv + "<p>과목2 : " +record_data.point2 + '</p>';
+            htmldiv = htmldiv + "<p>과목3 : " +record_data.point3 + '</p>';
+            
+        htmldiv = htmldiv + '</div>';
+        $('#cert-body-div').append(htmldiv);
+    },
+}
+
+function test0507() {
+    var temp_sub_id = "RCCNF0001";
+    var temp_tx_id = "1b8ec94a79ab02fb09d5a0e8595d6b0f488a7c7b7cc59c66b393bccbbb2909cb";
+
+    var record = '{"data":{"userid":"123456","point0":"999","point1":"99","point2":"600","point3":"399","name":"박헌욱","grade":"짱","date":"2018-04-18 08:39:03.0"},"hash":"8e031d8fb7711ad6dbccbce85913b01ecec3643543da8e1245c8f232a63d3f1c","txid":"1b8ec94a79ab02fb09d5a0e8595d6b0f488a7c7b7cc59c66b393bccbbb2909cb","subid":"RCCNF0001","stored":"Y","dftYn":"Y"}';
+    var json_record = JSON.parse(record);
+
+    certformatter[temp_sub_id](json_record.data);
+}

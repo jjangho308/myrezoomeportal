@@ -50,7 +50,9 @@ class SearchResultHandler extends AbstractAgentRequestHandler {
             });
         });
 
-        done(AgentRequest.RESULT_SUCCESS, true);
+        done(AgentRequest.RESULT_SUCCESS, {
+            value : true
+        });
     }
 }
 
