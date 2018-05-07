@@ -1,4 +1,5 @@
 <%- include('base_head_import') -%>
+<%- include('base_all_dialog') -%>
 <head>
     
     <link rel="stylesheet" href="css/mypage/base_mycert_resumespage.css">
@@ -10,7 +11,8 @@
 
     
     <%- include('base_header') -%>
-    
+
+
     <!-- Modal HTML embedded directly into document -->
     <div id="add-cert-dialog" class="modal">
         <p>증명서 발급<span>레쥬메에서 발급받고 싶은 이력을 선택해주세요.</span></p>
@@ -21,13 +23,27 @@
                 <th>주체</th>
                 <th>증명서 종류</th>
             </tr>
+            <!-- <tr>
+                <td>
+                    <div class="checkbox checkbox-primary">
+                        <input id="add-cert-checkbox-1" type="checkbox">
+                        <label for="add-cert-checkbox-1"></label>
+                    </div>   
+                </td>
+                <td>자격</td>
+                <td>삼성SDS</td>
+                <td>SW Certificate 자격증명서(제 38회)</td>
+            </tr> -->
         </table>
 
         <div class="modal-footer">
-            <button class="confirm-btn primary-solid-btn">확인</button>
+            <a href="#cert-line-dialog" rel="modal:open">
+                <button class="confirm-btn primary-solid-btn">확인</button>
+            </a>
             <button class="cancel-btn border-btn">취소</button>
         </div>
     </div>
+
 
     <div id="main-body">
         <div class="container">
@@ -47,13 +63,30 @@
         
                             <img class="" src="" />
         
-                            <div class="cert-container-new add-cert">
+                            <div class="cert-container-new add-cert add-div ">
                                 <img src="img/mycert/fill-1.png" alt="">
         
                                 <p>새로운 증명서 발급</p>
                                 
                             </div>
-                    </div>      
+
+                            <!-- <div class="cert-container" tabindex="1">
+                                <p>제 1049-4001호 <img src="/img/resume-store/more.svg" alt=""  class="more-store-resume"/></p>
+                                <img src="img/mycert/color.png" alt="" class="more-store-resume">
+                                <p>서울대학교</p>
+                                <p>졸업 증명서</p>
+                                <p>발급일시 : 2018-03-21 11:00</p>
+                                <div class="more-store-resume-div">
+                                   <p>복사</p>
+                                   <p>삭제</p>
+                                   <p>공유내역</p>
+                                </div> 
+                            </div>   -->
+
+                        </div>      
+
+                    
+
             </div>
         </div>
     </div>

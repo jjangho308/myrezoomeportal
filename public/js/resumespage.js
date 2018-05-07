@@ -22,7 +22,7 @@ function loadresumelist() {
             $('#resumelistcount').text(certlistresult.length + '건');
 
             for(var i in certlistresult) {
-                var htmldiv = '<div class="cert-container" tabindex="1" onclick=resumeredirect("'+certlistresult[i].rsmId+'")>';
+                var htmldiv = '<div class="resumes-container" tabindex="1" onclick=resumeredirect("'+certlistresult[i].rsmId+'")>';
                 htmldiv = htmldiv + '<p>'+ certlistresult[i].rsmId +'<img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
                 htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';

@@ -1,4 +1,5 @@
 <%- include('base_head_import') -%>
+<%- include('base_all_dialog') -%>
 
 <head>
     <link rel="stylesheet" href="css/mypage/base_mycert_resumespage.css">
@@ -10,20 +11,41 @@
 
     <%- include('base_header') -%>
 
-    <!-- Modal HTML embedded directly into document -->
-    <div id="add-cert-dialog" class="modal">
-        <p>이력서 발급<span>이력서에 포함시킬 이력을 선택해주세요.</span></p>
-        <table id="add-cert-dialog-table">
+    <div id="add-resumes-dialog" class="modal">
+        <p>이력서 생성<span>이력서에 포함하고 싶은 이력을 선택해주세요.</span></p>
+        <table id="add-resumes-dialog-table">
             <tr>
                 <th></th>
                 <th>구분</th>
                 <th>주체</th>
-                <th>증명서 종류</th>
+                <th>이력명</th>
+                <th>성적포함</th>
             </tr>
+            <!-- <tr>
+                <td>
+                  <div class="checkbox checkbox-primary">
+                    <input id="add-resumes-checkbox-1" type="checkbox">
+                    <label for="add-resumes-checkbox-1"></label>
+                  </div>
+               
+                </td>
+                <td>학력</td>
+                <td>인하대학교</td>
+                <td>학사,공과대학 컴퓨터공학 전공,졸업</td>
+                <td>
+                    <label class="toggle">
+                      <input type="checkbox">
+                      <div class="slide-toggle"></div>
+                    </label>
+                </td>
+            </tr> -->
         </table>
-
         <div class="modal-footer">
-            <button class="confirm-btn primary-solid-btn">확인</button>
+
+            <a>건너뛰기</a>
+            <a href="#resumes-line-dialog" rel="modal:open">
+                <button class="confirm-btn primary-solid-btn">확인</button>
+            </a>
             <button class="cancel-btn border-btn">취소</button>
         </div>
     </div>
@@ -31,7 +53,7 @@
     <div id="main-body">
         <div class="container">
             <div id="resume-store-div">
-                    <div id="resume-grid-div" class="grid mycert-grid">
+                    <div id="resume-grid-div" class="grid myresume-grid">
                             <p>이력서 보관함</p>
                             <p>단순 작성만으로 이력 증빙이 모두 진행되는 새로운 증명서를 작성해보세요.</p>
         
@@ -45,11 +67,19 @@
         
                             <img class="" src="" />
         
-                            <div class="cert-container-new add-cert">
+                            <div class="resumes-container-new add-resumes add-div">
                                 <img src="img/mycert/fill-1.png" alt="">
                                 <p>새로운 이력서 생성</p>
         
-                            </div>        
+                            </div>
+                            
+                            <!-- <div class="resumes-container" tabindex="1">
+                                <p>....</p>
+                                <img src="img/resume-store/invalid-name.png" alt="">
+                                <p>이력서</p>
+                                <p>삼성SDS용</p>
+                                <p>업데이트 : 2018-03-01 11:00</p>
+                            </div>   -->
                     </div>    
             </div>
             

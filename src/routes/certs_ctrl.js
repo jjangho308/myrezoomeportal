@@ -73,7 +73,8 @@ export default {
                     result: result
                 });
                 */
-               res.render('certviewer');
+               console.log(result);
+               res.render('certviewer',result[0]);
             }
         });
     },
