@@ -155,7 +155,7 @@
   background-color: #fff; }
 
 .abc-radio {
-        height: 100%;
+        /*height: 100%;*/
     vertical-align: middle;
      }
 .abc-radio label {
@@ -258,7 +258,7 @@
 input[type="checkbox"].styled:checked + label:after,
 input[type="radio"].styled:checked + label:after {
   font-family: "FontAwesome";
-  content: ""; }
+  content: ""; }
 
 input[type="checkbox"] .styled:checked + label::before,
 input[type="radio"] .styled:checked + label::before {
