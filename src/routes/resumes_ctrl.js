@@ -71,9 +71,10 @@ export default {
                 if (!!err) {
                     next(err);
                 } else {
-                    res.json({
-                        result: result
-                    });
+                    // res.json({
+                    //     result: result
+                    // });
+                    res.render('resumesviewer');
                 }
             });
         }
