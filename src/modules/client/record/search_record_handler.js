@@ -328,79 +328,86 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             var user_bc_wallet_addr = users[0].bcWalletAddr;
 
             var j = 0;
-            for (var i = 0; i < agentRequest.records.length; i++) {
+            try {
+                for (var i = 0; i < agentRequest.records.length; i++) {
 
-                (function (i) {
+                    (function (i) {
 
-                    if (agentRequest.records[i].stored == 'N') {
+                        if (agentRequest.records[i].stored == 'N') {
 
-                        var data = {
-                            hash: agentRequest.records[i].hash
+                            var data = {
+                                hash: agentRequest.records[i].hash
+                            }
+
+                            nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (nexledgerres) {
+                                agentRequest.records[i].txid = nexledgerres.result.txid;
+
+                                var db = Managers.db();
+
+                                var blcmapinsertData = [
+                                    Util.uuid(),
+                                    uid, //uid
+                                    nexledgerres.result.txid, //trxid
+                                    agentRequest.orgcode, //orgid
+                                    agentRequest.records[i].subid //subid
+                                ];
+                                //console.log("===========blcmapinsertData==============");
+                                //console.log(blcmapinsertData);
+                                //console.log("=========================================");
+
+                                db.getRecordDAO().putRecord(blcmapinsertData, function (dbres) {
+                                    //console.log(dbres);
+                                });
+
+                                db.getUserDAO().setFristYN(uid, function (dbres2) {
+                                    //console.log(dbres2);
+                                });
+
+                                // set default N in initially
+                                agentRequest.records[i].dftYn = 'N';
+
+                                if (j == (agentRequest.records.length - 1)) {
+                                    try {
+                                        if (!!socket)
+                                            socket.emit('SearchResult', JSON.stringify(agentRequest));
+                                    } catch (exception) {
+                                        console.log(exception);
+                                    }
+                                }
+
+                                j++;
+                            });
+                        } else {
+                            // Get BLC MAP Default YN
+                            var data = {
+                                uid: uid,
+                                txid: agentRequest.records[i].txid
+                            };
+
+                            db.getRecordDAO().getDefaultYn(data, function (dbres) {
+                                agentRequest.records[i].dftYn = dbres.DFT_YN;
+                                //BLC MAP stored
+                                if (j == (agentRequest.records.length - 1)) {
+                                    try {
+                                        if (!!socket)
+                                            socket.emit('SearchResult', JSON.stringify(agentRequest));
+                                    } catch (exception) {
+                                        console.log(exception);
+                                        //continue;
+                                    }
+                                }
+                                j++;
+                            });
                         }
+                    }).call(this, i);
+                }
+            }
+            catch (exception) {
+                console.log(exception);
 
-                        nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (nexledgerres) {
-                            agentRequest.records[i].txid = nexledgerres.result.txid;
-
-                            var db = Managers.db();
-
-                            var blcmapinsertData = [
-                                Util.uuid(),
-                                uid, //uid
-                                nexledgerres.result.txid, //trxid
-                                agentRequest.orgcode, //orgid
-                                agentRequest.records[i].subid //subid
-                            ];
-                            //console.log("===========blcmapinsertData==============");
-                            //console.log(blcmapinsertData);
-                            //console.log("=========================================");
-
-                            db.getRecordDAO().putRecord(blcmapinsertData, function (dbres) {
-                                //console.log(dbres);
-                            });
-
-                            db.getUserDAO().setFristYN(uid, function (dbres2) {
-                                //console.log(dbres2);
-                            });
-
-                            // set default N in initially
-                            agentRequest.records[i].dftYn = 'N';
-
-                            if (j == (agentRequest.records.length - 1)) {
-                                try {
-                                    if (!!socket)
-                                        socket.emit('SearchResult', JSON.stringify(agentRequest));
-                                } catch (exception) {
-                                    console.log(exception);
-                                }
-                            }
-
-                            j++;
-                        });
-                    } else {
-                        // Get BLC MAP Default YN
-                        var data = {
-                            uid: uid,
-                            txid: agentRequest.records[i].txid
-                        };
-
-                        db.getRecordDAO().getDefaultYn(data, function (dbres) {
-                            agentRequest.records[i].dftYn = dbres.DFT_YN;
-                            //BLC MAP stored
-                            if (j == (agentRequest.records.length - 1)) {
-                                try {
-                                    if (!!socket)
-                                        socket.emit('SearchResult', JSON.stringify(agentRequest));
-                                } catch (exception) {
-                                    console.log(exception);
-                                    //continue;
-                                }
-                            }
-                            j++;
-                        });
-                    }
-                }).call(this, i);
             }
         });
+
     }
 }
 
