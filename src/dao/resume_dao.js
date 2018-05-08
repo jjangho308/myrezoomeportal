@@ -76,9 +76,9 @@ class ResumeDao extends AbstractDAO {
         if (!!creteria.uId) {
             if (!!where) {
                 where += ' AND '
-                where += "UID = '" + creteria.uId + "'"
+                where += "UID = '" + creteria.uId + "'" +"AND DEL_YN = 'N'"
             } else {
-                where = "UID = '" + creteria.uId + "'"
+                where = "UID = '" + creteria.uId + "'" +"AND DEL_YN = 'N'"
             }
         }
 
