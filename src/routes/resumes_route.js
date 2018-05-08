@@ -4,18 +4,31 @@ import tokenAuth from '../mw/client_auth';
 import ctrl from './resumes_ctrl';
 import view from '../mw/view';
 
+/**
+ * Router for '/resume' URI Request gateway. <br />
+ * 
+ * @since 180321
+ * @author TACKSU
+ */
 var router = express.Router();
 
+/**
+ * Get Resume list page or json data list. <br />
+ */
 router.get('/', tokenAuth);
 router.get('/', ctrl.get);
 router.get('/', view);
 
+/**
+ * Create new resume request. <br />
+ */
 router.post('/', tokenAuth);
 router.post('/', ctrl.post);
 router.post('/', view);
 
-
-
+/**
+ * Router for get resume list. <br />
+ */
 router.get('/list', tokenAuth);
 router.get('/list', ctrl.get);
 
@@ -46,7 +59,5 @@ router.patch('/:rsmId', view);
 
 router.delete('/:rsmId', tokenAuth);
 router.delete('/:rsmId', ctrl.deleteResum);
-
-
 
 export default router;
