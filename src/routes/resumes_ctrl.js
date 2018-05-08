@@ -70,17 +70,18 @@ export default {
             Managers.client().request(new GetResumeRequest(req.body), (err, result) => {
                 if (!!err) {
                     next(err);
-                } else {                    
+                } else {
                     var userDAO = Managers.db().getUserDAO();
                     userDAO.get({
-                        uId:req.body.uId
-                    }, (err, userResult)=>{
-                        if(!!err){
+                        uId: req.body.uId
+                    }, (err, userResult) => {
+                        if (!!err) {
                             console.log("getResume ERROR!!!");
-                        }else{
-                            
-                            res.render('resumesviewer', {resumeModel: result[0]
-                                , userModel : userResult[0]
+                        } else {
+
+                            res.render('resumesviewer', {
+                                resumeModel: result[0],
+                                userModel: userResult[0]
                             });
                         }
                     })
@@ -101,15 +102,18 @@ export default {
             Managers.client().request(new GetResumeRequest(req.body), (err, result) => {
                 if (!!err) {
                     next(err);
-                } else {            
+                } else {
                     var userDAO = Managers.db().getUserDAO();
                     userDAO.get({
-                        uId:req.body.uId
-                    }, (err, userResult)=>{
-                        if(!!err){
+                        uId: req.body.uId
+                    }, (err, userResult) => {
+                        if (!!err) {
                             console.log("getResume ERROR!!!");
-                        }else{                           
-                            res.render('resumeseditor', {resumeModel: result[0], userModel : userResult[0]});
+                        } else {
+                            res.render('resumeseditor', {
+                                resumeModel: result[0],
+                                userModel: userResult[0]
+                            });
                         }
                     });
                 }
@@ -162,19 +166,19 @@ export default {
 
     deleteResum: (req, res, next) => {
         if (!!req.xhr) {
-            
+
             var data = {
                 uID: req.body.uId,
                 rsmId: req.params.rsmId
             }
 
-            Managers.client().request(new DeleteResumeRequest(data), (err, result)=>{
-                if(!!err){
+            Managers.client().request(new DeleteResumeRequest(data), (err, result) => {
+                if (!!err) {
                     next(err);
-                }else{
+                } else {
                     res.json(result);
                 }
             })
         }
-    }    
+    }
 }
