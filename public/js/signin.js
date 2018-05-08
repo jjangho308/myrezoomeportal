@@ -44,10 +44,9 @@ $(document).ready(function () {
             dataType: "JSON",
             beforeSend: function() {
 				$(".error-message").css("display", "none");
-                $('#loading').show();
             },
             success: function(response) {
-                genRsaKey();
+                //genRsaKey();
                 window.location.href = "main";
             },
             error:function(request, status, error){
