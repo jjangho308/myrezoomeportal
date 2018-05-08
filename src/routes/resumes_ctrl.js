@@ -70,11 +70,7 @@ export default {
             Managers.client().request(new GetResumeRequest(req.body), (err, result) => {
                 if (!!err) {
                     next(err);
-                } else {
-                    // res.json({
-                    //     result: result
-                    // });
-                    //console.log(result[0]);
+                } else {                    
                     var userDAO = Managers.db().getUserDAO();
                     userDAO.get({
                         uId:req.body.uId
@@ -88,6 +84,34 @@ export default {
                             });
                         }
                     })
+                }
+            });
+        }
+    },
+
+    /**
+     * Controller funtion for resume editor. <br />
+     * 
+     * @since 180418
+     * @author TACKSU
+     */
+    getEditor: (req, res, next) => {
+        req.body.rsmId = req.params.rsmId;
+        if (!!req.body.rsmId) {
+            Managers.client().request(new GetResumeRequest(req.body), (err, result) => {
+                if (!!err) {
+                    next(err);
+                } else {            
+                    var userDAO = Managers.db().getUserDAO();
+                    userDAO.get({
+                        uId:req.body.uId
+                    }, (err, userResult)=>{
+                        if(!!err){
+                            console.log("getResume ERROR!!!");
+                        }else{                           
+                            res.render('resumeseditor', {resumeModel: result[0], userModel : userResult[0]});
+                        }
+                    });
                 }
             });
         }
@@ -152,7 +176,5 @@ export default {
                 }
             })
         }
-
-
-    }
+    }    
 }
