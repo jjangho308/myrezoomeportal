@@ -29,7 +29,7 @@ function certdelete(certId) {
     });
 }
 
-function certmore(divname, event) {
+function certmore(divname) {
     var jquerydiv = "#" + divname;
     $(jquerydiv).css('display','block');
     window.event.stopPropagation();
