@@ -432,6 +432,7 @@ $(document).ready(function(){
 });
 
 window.onload = function() {
+    socket = io();
     //request to agent for get user info
     var pagetxidlist = getTxidList();
 
