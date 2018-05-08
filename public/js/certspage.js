@@ -10,11 +10,12 @@ function certckeckboxclick(uniqueid) {
 
 function certredirect(certId) {
     console.log("######## certdirect ###########");
-    console.log(getData(txid));
+    //console.log(getData(txid));
     window.location.href = "/certs/"+certId;
 }
 
 function certdelete(certId) {
+    window.event.stopPropagation();
     $.ajax({
         type: 'DELETE',
         url: '/certs/'+ certId,
