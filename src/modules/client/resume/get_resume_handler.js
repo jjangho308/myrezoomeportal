@@ -43,13 +43,13 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
             if (!!err) {
                 done(ClientRequest.RESULT_FAILURE, err);
             } else {
-                console.log(resumeList);
+                //console.log(resumeList);
                 var recordDAO = Managers.db().getRecordDAO();
                 var completedResume = 0;
                 for (var i in resumeList) {
                     !((idx) => {
 
-                        console.log(resumeList[idx].blcMap);
+                        //console.log(resumeList[idx].blcMap);
 
                         // Remove 'sId' field.
                         delete resumeList[idx].sId;
@@ -80,7 +80,6 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
                                             completedResume++;
 
                                             if (completedResume == resumeList.length) {
-                                                //console.log(resumeList);
                                                 done(ClientRequest.RESULT_SUCCESS, resumeList);
                                             }
                                         }
