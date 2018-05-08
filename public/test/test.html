@@ -71,4 +71,21 @@
     }
 </script>
 
+
+
+<body>
+    <script>
+        var certSomething = (div, event)=>{
+            div.innerHTML = 'FOO';
+            event.stopPropagation();
+        }
+    </script>
+    <div id="div-id"></div>
+    <button text="hello world!" onclick="
+
+        var targetDiv = document.getElementById('div-id');
+
+        certSomething(targetDiv, event)">Hello World!</button>
+</body>
+
 </html>

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import socketHandler from '../src/core/socket'
+import socketHandler from '../src/core/socket_handler'
 import SocketIO from 'socket.io';
 
 /**

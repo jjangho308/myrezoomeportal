@@ -73,8 +73,8 @@ export default {
                     result: result
                 });
                 */
-               console.log(result);
-               res.render('certviewer',result[0]);
+                console.log(result);
+                res.render('certviewer', result[0]);
             }
         });
     },
@@ -141,11 +141,11 @@ export default {
         // /certs AJAX request
         if (!!req.xhr) {
             var data = {
-                uid : req.body.uId,
-                txid : req.body.txid,
-                subid : req.body.subid
+                uid: req.body.uId,
+                txid: req.body.txid,
+                subid: req.body.subid
             };
-            
+
             Managers.db().getRecordDAO().setDefaultYn(data, function (dbres) {
                 res.json(dbres);
             });
@@ -155,21 +155,19 @@ export default {
 
     deleteCert: (req, res, next) => {
         //
-        if(!!req.xhr) {
-             var data = {
-                 uId : req.body.uId,         
-                 certId : req.params.certId
-             }
+        if (!!req.xhr) {
+            var data = {
+                uId: req.body.uId,
+                certId: req.params.certId
+            }
 
             Managers.client().request(new DeleteCertRequest(data), (err, result) => {
-                if(!!err){
+                if (!!err) {
                     next(err);
-                }else{
+                } else {
                     res.json(result);
                 }
-            })
-
-        } ;
-
+            });
+        };
     }
 }
