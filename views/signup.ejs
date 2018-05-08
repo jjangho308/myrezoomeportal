@@ -2,10 +2,9 @@
 <%- include('base_all_dialog') -%>
 
 <head>
-    <script src="js/signup.js"></script>
-
+    <script src="js/utils.js"></script>
+    <script src="js/signup.js"></script>    
     <link rel="stylesheet" href="css/navbar-default.css">
-
     <link rel="stylesheet" href="css/signup.css">
 </head>
 
@@ -16,40 +15,39 @@
 
     <div class="signup-container">
         <p class="title">이메일</p>
-        <input placeholder="로그인에 사용할 이메일을 입력해주세요." />
+        <input id="signup_id"  placeholder="로그인에 사용할 이메일을 입력해주세요." />
         <div class="error-message">이미 가입되어 있는 이메일입니다.</div>
 
         <p class="title">비밀번호</p>
-        <input type="password" placeholder="영문자, 숫자, 특수문자 조합 8~12자" />
+        <input id="signup_pw" type="password" placeholder="영문자, 숫자, 특수문자 조합 8~12자" />
         <div class="error-message">영문자, 숫자, 특수문자 조합 8~12자로 입력해주세요.</div>
 
         <p class="title">비밀번호 확인</p>
-        <input  type="password"  placeholder="위의 비밀번호를 다시 입력해주세요." />
+        <input id="signup_pw_confirm" type="password"  placeholder="위의 비밀번호를 다시 입력해주세요." />
         <div class="error-message">비밀번호가 일치하지 않습니다.</div>
 
         <div class="last-name">
-
             <p class="title">성</p>
-            <input placeholder="홍" />
+            <input id="signup_familyname" placeholder="홍" />
         </div>
 
         <div class="first-name">
 
             <p class="title">이름</p>
-            <input placeholder="길동" />
+            <input id="signup_firstname" placeholder="길동" />
         </div>
         <p class="title">생년월일</p>
-        <input  placeholder="8자리 숫자만 입력해주세요 ex) 20180401" />
+        <input id="signup_birth"  placeholder="8자리 숫자만 입력해주세요 ex) 20180401" />
         
         <p class="title">성별</p>
 
         <div class="abc-radio">
-            <input type="radio" name="spec-change" id="radio-male" value="">
+            <input type="radio" name="gender" id="radio-male" value="M" checked>
             <label for="radio-male">
                 남
             </label>
 
-            <input type="radio" name="spec-change" id="radio-female" value="">
+            <input type="radio" name="gender" id="radio-female" value="F">
             <label for="radio-female">
                 여
             </label>
@@ -57,28 +55,22 @@
 
         <p class="title">휴대폰</p>
         <div class="phone-select">
-            <select>
-                <option value="" disabled selected>통신사</option>
-
-                    <option value="1">LG</option>
-                    <option value="2">SKT</option>
-                    <option value="3">KT</option>
+            <select id="signup_carrierName">
+                <option value="" disabled selected>통신사</option>                    
+                <option value="SKT">SKT</option>
+                <option value="LGT">LG</option>                
+                <option value="KTF">KT</option>
             </select>
-
         </div>
 
-
         <div class="phone-input">
-            <input  placeholder="010-0000-0000" />
-
+            <input id="signup_phone" placeholder="010-0000-0000" />
             <div class="error-message">이미 가입된 번호입니다.</div>
             <div class="info-message-1">인증번호가 발송되었습니다. (2:00)</div>
         </div>
         <button class="phone-send border-btn">인증번호 발송</button>
 
-
         <p class="title">인증번호 확인</p>
-
 
         <div class="confirm-phone-input">
             <input  placeholder="8자리 숫자만 입력해주세요 ex) 20180401" />
@@ -147,10 +139,7 @@
 
         </div>
 
-        <a href="#/signup-success"><button class="signup-button">회원가입</button>
-        </a>
-
-
+        <button id="btn_signup" class="signup-button">회원가입</button>        
     </div>
 </body>
 
