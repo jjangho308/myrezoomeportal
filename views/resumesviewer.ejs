@@ -7,6 +7,7 @@
 
     <script>
         setResumeModel('<%- JSON.stringify(resumeModel) %>');
+        setUserModel('<%- JSON.stringify(userModel) %>');
     </script>
 
     <!------ Include the above in your HEAD tag ---------->
@@ -14,14 +15,12 @@
 
     <body>
         <div class="header">
-
             <a href="/resumes">
                 <img src="/img/certviewer/wt.png" alt="">
             </a>
             <div>
                 <p>이력서 생성하기</p>
-                <p>Noname_1_20180302</p>
-
+                <p id="resume_title">Noname_1_20180302</p>
             </div>
             <button id="more-button">···</button>
             <button>전송</button>
@@ -114,6 +113,7 @@
                     </div>
 
                     <div id="resumes-cert-body">
+                        
                     </div>
                 </div>
 
@@ -123,8 +123,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <div id="rename-dialog" class="modal">
             <p>이름 변경
@@ -141,9 +139,6 @@
             </div>
         </div>
 
-
-
         <%- include('base_footer') -%>
-
 
     </body>

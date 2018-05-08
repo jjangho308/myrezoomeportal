@@ -164,8 +164,10 @@ export default {
             Managers.client().request(new DeleteCertRequest(data), (err, result) => {
                 if (!!err) {
                     next(err);
-                } else {
-                    res.json(result);
+                }else{
+                    res.json({
+                        result : result
+                    });
                 }
             });
         };

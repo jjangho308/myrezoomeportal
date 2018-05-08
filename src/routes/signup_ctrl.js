@@ -13,6 +13,10 @@ export default {
         res.render('signup', {});
     },
 
+    signup_success: (req, res, next) => {
+        res.render('signup-success', {});
+    },
+
     post: (req, res, next) => {
         if (!!req.xhr) {
             Managers.client().request(new SignUpRequest(req.body), (err, result) => {               

@@ -94,7 +94,7 @@ class CertificateDAO extends AbstractDAO {
 
         //SELECT TUC.CERT_ID, TUC.UID, TUC.BLC_MAP_ID, TBM.TRX_ID, TUC.SHRD_YN, TUC.CRTD_DT, TS.SUB_ID, TS.SUB_CD, TS.SUB_NM FROM rezoome_db.TCDA_USR_CERT AS TUC
         //INNER JOIN TCDA_BLC_MAP AS TBM ON (TBM.BLC_MAP_ID = TUC.BLC_MAP_ID) INNER JOIN TCCO_SUB AS TS ON (TBM.SUB_ID = TS.SUB_ID) WHERE TUC.UID = 'UID2'
-        
+
 
         this.query(query, (err, rows) => {
             if (!!err) {
@@ -102,7 +102,7 @@ class CertificateDAO extends AbstractDAO {
             } else {
                 var certList = [];
 
-                
+
 
                 for (var i in rows) {
                     certList.push({
@@ -118,7 +118,7 @@ class CertificateDAO extends AbstractDAO {
                     });
                 }
 
-                
+
                 cb(err, certList);
             }
         })
@@ -197,7 +197,7 @@ class CertificateDAO extends AbstractDAO {
                                 console.log(err);
                             }
                             else if (result.affectedRows > 0) {
-                                var usrCertSharedDelQuery = mysql.format(CertQuery.delShared, [condition,  {DEL_YN:'N'}]);
+                                var usrCertSharedDelQuery = mysql.format(CertQuery.delShared, [condition, { DEL_YN: 'N' }]);
                                 //console.log(usrCertSharedDelQuery);
                                 connection.query(usrCertSharedDelQuery, (err, result) => {
                                     if (!!err) {
@@ -213,36 +213,37 @@ class CertificateDAO extends AbstractDAO {
                                             if (!!err) {
                                                 connection.release();
                                                 console.log(err);
-                                            }else if(result.length > 0){
-                                                var deleteCERTSharedInfoQuery = mysql.format(CertQuery.delUrl, [condition, {DEL_YN:'N'}]);
+                                            } else if (result.length > 0) {
+                                                var deleteCERTSharedInfoQuery = mysql.format(CertQuery.delUrl, [condition, { DEL_YN: 'N' }]);
                                                 //console.log(deleteCERTSharedInfoQuery);
-                                                connection.query(deleteCERTSharedInfoQuery, (err, result)=>{
-                                                    if(!!err){
+                                                connection.query(deleteCERTSharedInfoQuery, (err, result) => {
+                                                    if (!!err) {
                                                         connection.release();
                                                         console.log(err);
-                                                    }else if(result.affectedRows > 0){
-                                                        connection.commit(function(err){
-                                                            if(!!err){
+                                                    } else if (result.affectedRows > 0) {
+                                                        connection.commit(function (err) {
+                                                            if (!!err) {
                                                                 connection.release();
                                                                 console.log(err);
                                                             }
                                                             //정상처리
                                                             console.log("tranaction sucess")
                                                             connection.release();
-                                                            cb(200, "sucess");
+                                                            cb(null, result.affectedRows);
                                                         })
                                                     }
                                                 })
 
-                                            }else{
+                                            } else {
                                                 console.log("=====")
-                                                connection.commit(function(err){
-                                                    if(!!err){
+                                                connection.commit(function (err) {
+                                                    if (!!err) {
                                                         connection.release();
                                                         console.log(err);
                                                     }
-                                                    //정상처리
-                                                    cb(200, "sucess");
+                                                    console.log("tranaction sucess")
+                                                    connection.release();
+                                                    cb(null, result.affectedRows);
                                                 })
                                             }
                                         })
@@ -315,7 +316,7 @@ class CertificateDAO extends AbstractDAO {
 
 
 
-        var query = mysql.format(CertQuery.getShared, [condition, {DEL_YN:'N'}]);
+        var query = mysql.format(CertQuery.getShared, [condition, { DEL_YN: 'N' }]);
 
         this.query(query, (err, rows) => {
             if (!!err) {

@@ -26,6 +26,9 @@ router.get('/:rsmId', tokenAuth);
 router.get('/:rsmId', ctrl.getResume);
 router.get('/:rsmId', view);
 
+router.get('/editor/:rsmId', tokenAuth);
+router.get('/editor/:rsmId', ctrl.getEditor);
+router.get('/editor/:rsmId', view);
 
 /**
  * Route for /:rsmId. <br />

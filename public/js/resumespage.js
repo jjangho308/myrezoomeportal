@@ -5,6 +5,27 @@ function resumeredirect(resumeId) {
     window.location.href = "/resumes/"+resumeId;
 }
 
+function resumemore(divname) {
+    var jquerydiv = "#" + divname;
+    $(jquerydiv).css('display','block');
+    window.event.stopPropagation();
+}
+
+function resumedelete(rsmId) {
+    window.event.stopPropagation();
+    $.ajax({
+        type: 'DELETE',
+        url: '/resumes/'+ rsmId,
+        headers: {
+            'Authorization': client_authorization
+        },
+        success: function (result) {
+            loadresumelist();
+        },
+        contentType: 'application/json'
+    });
+}
+
 function loadresumelist() {
     $.ajax({
         type: 'GET',
@@ -23,14 +44,16 @@ function loadresumelist() {
 
             for(var i in certlistresult) {
                 var htmldiv = '<div class="resumes-container" tabindex="1" onclick=resumeredirect("'+certlistresult[i].rsmId+'")>';
-                htmldiv = htmldiv + '<p>'+ certlistresult[i].rsmId +'<img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
+                htmldiv = htmldiv + '<p>'+ certlistresult[i].rsmId +'<img src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=resumemore("more-div-'+ certlistresult[i].rsmId +'") /></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
                 htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + certlistresult[i].date + '</p>';
-                htmldiv = htmldiv + '<div class="more-store-resume-div">';
-                htmldiv = htmldiv + '<p>복사</p>';
-                htmldiv = htmldiv + '<p>삭제</p>';
-                htmldiv = htmldiv + '<p>공유내역</p>';
+                htmldiv = htmldiv + '<div id="more-div-'+ certlistresult[i].rsmId +'" class="more-store-resume-div">';
+                htmldiv = htmldiv + '<ul class="more-store-resume-ul">';
+                htmldiv = htmldiv + '<li class="more-store-resume-li">복사</li>';
+                htmldiv = htmldiv + '<li class="more-store-resume-li" onclick=resumedelete("'+ certlistresult[i].rsmId +'")>삭제</li>';
+                htmldiv = htmldiv + '<li class="more-store-resume-li">공유내역</li>';
+                htmldiv = htmldiv + '</ul>';
                 htmldiv = htmldiv + '</div>';
                 
                 htmldiv = htmldiv + '</div>';
@@ -133,7 +156,7 @@ $(document).ready(function () {
                         htmldiv = htmldiv + '<td>' + subname + '</td>';
                         htmldiv = htmldiv + '</tr>';
 
-                        $("#add-resume-dialog-table").append(htmldiv);
+                        $("#add-resumes-dialog-table").append(htmldiv);
 
                         /*
                         $(addcertcheckboxid).click(function() {

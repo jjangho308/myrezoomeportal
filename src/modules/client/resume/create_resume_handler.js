@@ -99,9 +99,7 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                                                     data: JSON.stringify(request.resume.data),
                                                     deleted: false
                                                 });
-
                                                 
-
                                                 resumeDAO.putShare(sharedResume, (err, insertSharedId)=>{
                                                     if(!!err){
                                                         cb(ClientRequest.RESULT_FAILURE, err);
