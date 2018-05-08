@@ -74,8 +74,20 @@ export default {
                     // res.json({
                     //     result: result
                     // });
-                    console.log(result[0]);                    
-                    res.render('resumesviewer', {resumeModel: result[0]});
+                    //console.log(result[0]);
+                    var userDAO = Managers.db().getUserDAO();
+                    userDAO.get({
+                        uId:req.body.uId
+                    }, (err, userResult)=>{
+                        if(!!err){
+                            console.log("getResume ERROR!!!");
+                        }else{
+                            
+                            res.render('resumesviewer', {resumeModel: result[0]
+                                , userModel : userResult[0]
+                            });
+                        }
+                    })
                 }
             });
         }
