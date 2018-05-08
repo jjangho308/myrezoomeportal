@@ -229,7 +229,7 @@ class CertificateDAO extends AbstractDAO {
                                                             //정상처리
                                                             console.log("tranaction sucess")
                                                             connection.release();
-                                                            cb(200, "sucess");
+                                                            cb(null, result.affectedRows);
                                                         })
                                                     }
                                                 })

@@ -9,10 +9,6 @@ class DeleteCertificateHandler extends AbstractClientRequestHandler{
     }
 
     request(requestEntity, cb){
-        console.log("==============================");
-        console.log(requestEntity);
-
-
         // DeleteCertificateRequest {
         //     mId: '8eb8498e-e025-4c99-b0e3-24570cc8ae6d',
         //     uId: 'UID2',
@@ -21,10 +17,14 @@ class DeleteCertificateHandler extends AbstractClientRequestHandler{
         var certDAO = Managers.db().getCertDAO();
         certDAO.delCert(requestEntity, 
             (err, result)=> {
-            console.log(result);
+                if(!!err){
+                    cb(ClientRequest.RESULT_FAILURE, err);
+                }else{
+                    cb(ClientRequest.RESULT_SUCCESS, {
+                        value : true
+                    });
+                }
         })  
-
-
     }
 }
 
