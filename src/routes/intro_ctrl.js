@@ -1,7 +1,7 @@
 
 export default {
     get: (req, res, next) => {
-        res.render('intro', {});
+        res.render('index', {});
     },
 
     edu: (req, res, next) => {

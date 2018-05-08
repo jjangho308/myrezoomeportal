@@ -1,4 +1,5 @@
 var resumeModel;
+var userModel;
 
 $(document).ready(function(){
 	rendering();
@@ -10,20 +11,27 @@ $(document).ready(function(){
 });
 
 function setResumeModel(_resumeModel) {
-	resumeModel = _resumeModel;
+	resumeModel = JSON.parse(_resumeModel);	
+}
+
+function setUserModel(_userModel) {
+	userModel = JSON.parse(_userModel);	
 }
 
 function rendering() {
-	console.log(resumeModel);	
+	console.log(resumeModel);
+	console.log(userModel);
 
-	$("#resume-user").children().eq(0).html("이름 들어가고");
-	$("#resume-user").children().eq(1).html("전화번호 들어가고");
-	$("#resume-user").children().eq(2).html("이메일 들어가고");	
-	$("#resume-user").children().eq(3).html("생년월일 들어가고");
+	$("#resume_title").html(resumeModel.title);
 
-	$("#resume-intro").html("자기소개 블라블라블라~");
+	$("#resume-user").children().eq(0).html(userModel.fullNameKO);
+	$("#resume-user").children().eq(1).html(userModel.phone);
+	$("#resume-user").children().eq(2).html(userModel.email);	
+	$("#resume-user").children().eq(3).html(userModel.birth);
 
-	var records = JSON.parse(resumeModel).records;
+	//$("#resume-intro").html("자기소개 블라블라블라~");
+
+	var records = resumeModel.records;
 	for(var i in records) {
 		try {
 			var record = getData(records[i].txid);			

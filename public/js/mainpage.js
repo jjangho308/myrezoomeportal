@@ -61,7 +61,7 @@ $(document).ready(function(){
     }
     else {
         //session storage dont have user info(txid list)
-        request_agent();        
+        //request_agent();        
     }
 
     getPrivateRecords();

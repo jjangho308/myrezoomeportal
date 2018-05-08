@@ -65,12 +65,13 @@ h1{
 .signup-container{
     display: block;
     width: 390px;
-  height: 1208px;
+  height: 1250px;
   border-radius: 5px;
   background-color: #ffffff;
   border: solid 1px #eff0f4;
   margin:auto;
   padding: 42px 45px 30px 45px;
+      margin-bottom: 40px;
   }
 
   .title{
@@ -81,7 +82,7 @@ h1{
   }
 
 input{
-
+  position: relative;
       width: calc(100% - 32px);
     margin-bottom: 34px;
 } 
@@ -116,3 +117,181 @@ input{
   width: 280px;
 }
 
+.phone-select{
+
+    display: inline-block;
+}
+
+.phone-input{
+    width:167px;
+    display: inline-block;
+    margin:0px 5px;
+
+     vertical-align: top;
+}
+
+.border-btn{
+    width: 105px;
+    padding: 10px 0px;
+    vertical-align: top;
+}
+
+.confirm-phone-input{
+    display: inline-block;
+    width: 275px;
+    margin-right: 6px;
+}
+
+.agreement-div span{
+
+      padding-left: 6px;
+}
+
+.agreement-top div{
+
+  font-size: 14px;
+}
+
+.agreement-top{
+  color: #676767;
+  font-weight: bold;
+
+     padding: 10px 0 20px 0;
+
+  border-bottom: solid 1px #ced3d6;
+}
+
+
+
+.agreement-body{
+  color: #676767;
+  font-weight: normal;
+  padding: 11px 11px 27px;
+}
+
+.agreement-body a{
+
+    float: right;
+  color: #a9afb3;
+  text-decoration: underline;
+}
+
+.agreement-body > div{
+    margin-bottom: 13px; 
+}
+
+.signup-button{
+  width: 390px;
+  height: 50px;
+  border-radius: 3px;
+  background-color: #4c80f1;
+    font-size: 15px;
+  font-weight: bold;
+text-align: center;
+  color: #ffffff;
+  border: none;
+}
+
+input[type="password"]{
+    font-family: caption;
+/*    font-size: 50px;
+    height: 26px;
+    letter-spacing: -6px;
+    padding-top: 0px;
+    font-weight: bold;
+
+  line-height: 26px;*/
+}
+
+input[type="password"]::-webkit-input-placeholder {
+
+/*  font-family: SpoqaHanSans;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 16px;
+  letter-spacing: normal;
+  text-align: left;
+  color: #d0d0d0;
+  vertical-align: 21px;*/
+}
+
+.signup-success-container{
+  width: 550px;
+  height: 301px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border: solid 1px #eff0f4;
+  display: block;
+  margin: 300px auto;
+  text-align: center;
+}
+
+.signup-success-container h2{
+font-size: 31px;
+  font-weight: normal;
+  text-align: center;
+  color: #4a4a4a;
+
+     margin: 41px 0 20px 0;
+}
+
+.signup-success-container p{
+  text-align: center;
+  color: #4a4a4a;
+  font-size: 15px;
+  line-height: 1.87;
+}
+
+
+.signup-success-container span{
+  color: #4a90e2;
+
+}
+
+.signup-success-container button{
+  width: 450px;
+  height: 50px;
+  border-radius: 3px;
+  background-color: #4c80f1;
+  text-align: center;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+      border: none;
+
+     margin-top: 39px;
+}
+
+
+.phone-input .error-message{
+  left: -107px;
+}
+
+
+.info-message-1{
+    position: relative;
+    font-size: 11px;
+    font-weight: normal;
+    text-align: left;
+    color: #4a90e2;
+    top: -28px;
+    left: -107px;
+
+    display: none;
+    height: 0;
+}
+
+.info-message-2{
+    position: relative;
+    font-size: 11px;
+    font-weight: normal;
+    text-align: left;
+    color: #4a90e2;
+    top: -28px;
+    left: -0px;
+
+    display: none;
+    height: 0;
+  }
