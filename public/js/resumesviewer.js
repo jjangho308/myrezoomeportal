@@ -5,8 +5,19 @@ $(document).ready(function(){
 	rendering();
 
 	$("#edit-button").click(function() {
-		window.location ="/resumes/editor/"+resumeModel.rsmId;
+		location.href = "/resumes/editor/"+resumeModel.rsmId;
 	});	
+
+	$("#btn_print").click(function() {		
+
+		$(".header").hide();
+		$("#footer").hide();
+
+		window.print();
+		
+		$(".header").show();
+		$("#footer").show();
+	});
 });
 
 function setResumeModel(_resumeModel) {

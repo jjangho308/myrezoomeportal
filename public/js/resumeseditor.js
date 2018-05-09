@@ -1,5 +1,8 @@
 var resumeModel;
 var userModel;
+var deletedTxIds = [];
+var deletedPrvtIds = [];
+var addedPrvtRecord;
 
 $(document).ready(function(){
 
@@ -50,7 +53,42 @@ $(document).ready(function(){
                 <div class="error-message">전공을 입력해주세요.</div>
             </div>`);
         $("select").selectize();
-    });
+	});
+	
+
+	$("#btn_save").click(function(){
+
+		var param = {            
+            title: title,
+            intro: intro,
+			deletedTxIds: deletedTxIds,
+			prvtIds: prvtIds
+		}
+		
+		$.ajax({
+            type: 'POST',
+            url: '/record',
+            headers: {
+                'Authorization': client_authorization
+            },
+            data: JSON.stringify({                
+                data: param
+            }),
+            beforeSend: function() {
+                
+            },
+            success: function (res) {
+                $("#cert-add-dialog .close-modal").click();
+                $("#alarm-div span").text("사용자 이력 수기 입력했다.");
+                $('#alarm-div').css("display", "block");
+                
+                //clean view
+                 $('.private-spec-body').remove();
+                 getPrivateRecords();
+            },
+            contentType: 'application/json',
+        });
+	});
 });
 
 function setResumeModel(_resumeModel) {
@@ -77,7 +115,8 @@ function rendering() {
 	var records = resumeModel.records;
 	for(var i in records) {
 		try {
-			var record = getData(records[i].txid);			
+			var record = getData(records[i].txid);	
+			console.log(record);		
 			formatter(record);
 		} catch (exception) {
 			console.log(exception);
@@ -105,7 +144,7 @@ function formatter(record) {
 		break;
 
 		case "RCLPT0005" :			
-			var htmldiv = '<div class="resumes-body">';
+			var htmldiv = '<div id="' + record.txid + '" class="resumes-body">';
 			htmldiv = htmldiv + '<div class="resumes-left">';
 			htmldiv = htmldiv + '<span>' + record.data.date + '</span>';
 			htmldiv = htmldiv + '</div>';
@@ -116,14 +155,14 @@ function formatter(record) {
 			htmldiv = htmldiv + '<div class="resumes-right">';
 			htmldiv = htmldiv + '<p>오픽</p>';
 			htmldiv = htmldiv + '<p>'+record.data.grade +'</p>';
-			htmldiv = htmldiv + '<img src="/img/common/close.svg"/>';
+			htmldiv = htmldiv + '<img src="/img/common/close.svg" onclick=deleteCert("'+ record.txid +'"); />';
 			htmldiv = htmldiv + '</div>';
 			htmldiv = htmldiv + '</div>';
 			$('#resumes-lang-body').append(htmldiv);
 		break;
 
 		case "RCCNF0001" :			
-			var htmldiv = '<div class="resumes-body">';
+			var htmldiv = '<div id="' + record.txid + '" class="resumes-body">';
 			htmldiv = htmldiv + '<div class="resumes-left">';
 			htmldiv = htmldiv + '<span>' + record.data.date + '</span>';
 			htmldiv = htmldiv + '</div>';
@@ -134,10 +173,15 @@ function formatter(record) {
 			htmldiv = htmldiv + '<div class="resumes-right">';
 			htmldiv = htmldiv + '<p>매경TEST</p>';
 			htmldiv = htmldiv + '<p>'+record.data.grade +'</p>';
-			htmldiv = htmldiv + '<img src="/img/common/close.svg"/>';
+			htmldiv = htmldiv + '<img src="/img/common/close.svg" onclick=deleteCert("'+ record.txid +'"); />';
 			htmldiv = htmldiv + '</div>';
 			htmldiv = htmldiv + '</div>';
 			$('#resumes-cert-body').append(htmldiv);
 		break;
 	}
+}
+
+function deleteCert(txid) {
+	deletedTxIds.push(txid);
+	$("#"+txid).remove();
 }
