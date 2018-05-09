@@ -138,6 +138,54 @@ $(document).ready(function(){
         }
     });
 
+    $('#career-add-dialog .confirm-btn').click(function () {        
+        
+        var company = $("#career-company").val();
+        var position = $("#career-position").val();
+        var role = $("#career-role").val();        
+        var start_date = $("#career-startdate").val();
+        var end_date = $("#career-enddate").val();
+        var status = $("#career-status").val();
+
+        // cert format
+        var param = {
+            company: company,
+            position: position,
+            role: role,
+            startdate: start_date,
+            enddate: end_date,
+            status: status
+        }
+
+        // cert encryption
+        var enc_record = JSON.stringify(param);
+
+        $.ajax({
+            type: 'POST',
+            url: '/record',
+            headers: {
+                'Authorization': client_authorization
+            },
+            data: JSON.stringify({                
+                certCd: "CAR", // 자격 코드 입력하는 구분자가 필요할 듯
+                data: enc_record
+            }),
+            beforeSend: function() {
+                
+            },
+            success: function (res) {
+                $("#career-add-dialog .close-modal").click();
+                $("#alarm-div span").text("사용자 이력 수기 입력했다.");
+                $('#alarm-div').css("display", "block");
+                
+                //clean view
+                 $('.private-spec-body').remove();
+                 getPrivateRecords();
+            },
+            contentType: 'application/json',
+        });
+    });
+
     $('#language-add-dialog .confirm-btn').click(function () {        
         
         var lang = $("#langadd_lang").val();
@@ -186,7 +234,6 @@ $(document).ready(function(){
         });
 
     });
-
 
     $('#cert-add-dialog .confirm-btn').click(function () {  
         
