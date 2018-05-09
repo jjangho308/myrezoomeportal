@@ -39,27 +39,25 @@ class GenerateShortUrlHandler extends AbstractAgentRequestHandler {
     request(requestEntity, done) {
         var prefix = requestEntity.prefix;
         if (!prefix) {
-            // TODO Invalid parameter no-prefix error. <br />
             done(ClientRequest.RESULT_FAILURE, {
                 code: ErrroCodes.INVALID_PARAMETER,
                 msg: '접두어가 존재하지 않습니다.'
             });
         } else {
+            var shortUrlString = randomstring.generate({
+                length: 6,
+                charset: 'alphanumeric'
+            });
             switch (prefix) {
                 case 'r':
                 case 'c':
                     {
-                        var shortUrlString = randomstring.generate({
-                            length: 6,
-                            charset: 'alphanumeric'
-                        });
-
+                        // TODO 이력서나 증명서에 따라서 중복이 되지 않도록 반복 생성 로직 필요
                         done(ClientRequest.RESULT_SUCCESS, prefix + shortUrlString);
                         break;
                     }
                 default:
                     {
-                        // TODO Invalid prefix error. <br />
                         done(ClientRequest.RESULT_FAILURE, {
                             code: ErrroCodes.INVALID_PARAMETER,
                             msg: '허용된 접두어가 아닙니다.'
