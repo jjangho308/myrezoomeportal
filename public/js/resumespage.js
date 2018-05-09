@@ -246,7 +246,12 @@ $(document).ready(function () {
                 console.log(res2);
                 //setSocket(res.mid);
                 //clientsocket_listener();
-                loadresumelist();
+                setTimeout(function() {
+                    $("#resumes-line-dialog  .close-modal").click();
+                    window.location = "/resumes/editor/" + res2.result.rsmId;
+                }, 2000);
+                
+                //loadresumelist();
             },
             contentType: 'application/json',
         });
