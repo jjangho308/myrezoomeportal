@@ -392,6 +392,8 @@ $(document).ready(function(){
     });
 
     $('#refresh_record').click(function() {
+        $('.timeline').show();
+        $('.spec-body-default').hide();    
         getRSAKey();
         var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 
@@ -422,6 +424,10 @@ $(document).ready(function(){
             success: function (res) {
                 setSocket(res.mid);
                 clientsocket_listener();
+                setTimeout(() => {
+                    $('.timeline').hide();
+                    $('.spec-body-default').show();    
+                }, 1500);
             },
             contentType: 'application/json',
         });
