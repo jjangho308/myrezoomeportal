@@ -6,7 +6,7 @@ require socket.is
 
 $(document).ready(function(){   
     // comment by hyunsu for running
-    socket = io();
+    //socket = io();
     /*
         view init empty set
     */   
@@ -42,30 +42,7 @@ $(document).ready(function(){
         window.location = "main";
     });
 
-    //request to agent for get user info
-    var pagetxidlist = getTxidList();
-
-    if(pagetxidlist.length > 1) {
-        //sessing storage have user info (txid list)
-        var oridata = [];
-        
-        for(var i=0; i< pagetxidlist.length ; i++) {            
-            try {                
-                var objuserdata = getData(pagetxidlist[i]);
-                refreshview(objuserdata);
-            }catch(exception) {
-                console.log(exception);
-                continue;
-            }
-        }
-    }
-    else {
-        //session storage dont have user info(txid list)
-        genRsaKey();
-        request_agent();        
-    }
-
-    getPrivateRecords();
+    
 
     $('#education-add-dialog .add-span').click(function () {
         console.log("#education-add-dialog .add-span clicked");
@@ -450,7 +427,37 @@ $(document).ready(function(){
         });
 
     });    
+
+    
 });
+
+window.onload = function() {
+    socket = io();
+    //request to agent for get user info
+    var pagetxidlist = getTxidList();
+
+    if(pagetxidlist.length > 1) {
+        //sessing storage have user info (txid list)
+        var oridata = [];
+        
+        for(var i=0; i< pagetxidlist.length ; i++) {            
+            try {                
+                var objuserdata = getData(pagetxidlist[i]);
+                refreshview(objuserdata);
+            }catch(exception) {
+                console.log(exception);
+                continue;
+            }
+        }
+    }
+    else {
+        //session storage dont have user info(txid list)
+        genRsaKey();
+        request_agent();        
+    }
+
+    getPrivateRecords();
+};
 
 function change_default_cert(subid) {
     $(".change_cert").remove();

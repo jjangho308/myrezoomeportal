@@ -40,6 +40,7 @@ class KeyProvisionRequestHandler extends AbstractAgentRequestHandler {
     request(requestEntity, done) {
         var orgDAO = new OrgDAO();
         var orgDAO = Managers.db().getOrgDAO();
+
         orgDAO.getOrg({
             orgId: requestEntity.orgId
         }, (err, result) => {

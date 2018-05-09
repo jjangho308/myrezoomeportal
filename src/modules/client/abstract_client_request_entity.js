@@ -1,4 +1,4 @@
-import util from '../../util/util';
+import Util from '../../util/util';
 
 /**
  * Abstract request class. <br />
@@ -18,7 +18,7 @@ class AbstractClientRequestEntity {
         /**
          * Auto generated message id. <br />
          */
-        this.mId = util.uuid();
+        this.mId = Util.uuid();
 
         /**
          * User UID by token parsing. <br />

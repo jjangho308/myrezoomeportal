@@ -26,19 +26,29 @@ class SignupRequestHandler extends AbstractClientRequestHandler {
         super(opt);
     }
 
-    request(requestEntity, cb) {        
+    /**
+     * Insert UserModel to database. <br />
+     * 
+     * @since 180410
+     * @author PKINGKONG
+     * 
+     * @param {*} requestEntity 
+     * @param {*} cb 
+     */
+    request(requestEntity, cb) {
+        
         var userModel = new UserModel({
-            uId : Util.uuid(),
-            email : requestEntity.user.email,
-            pw : requestEntity.user.pw,
-            ci : requestEntity.user.ci,
-            familyNameKO : requestEntity.user.familyNameKO,
-            firstNameKO : requestEntity.user.firstNameKO,
-            fullNameKO : requestEntity.user.fullNameKO,
-            birth : requestEntity.user.birth,
-            phone : requestEntity.user.phone,
-            gender : requestEntity.user.gender,
-            carrierName : requestEntity.user.carrierName
+            uId: Util.uuid(),
+            email: requestEntity.user.email,
+            pw: requestEntity.user.pw,
+            ci: requestEntity.user.ci,
+            familyNameKO: requestEntity.user.familyNameKO,
+            firstNameKO: requestEntity.user.firstNameKO,
+            fullNameKO: requestEntity.user.fullNameKO,
+            birth: requestEntity.user.birth,
+            phone: requestEntity.user.phone,
+            gender: requestEntity.user.gender,
+            carrierName: requestEntity.user.carrierName
         });
 
         var userDAO = Managers.db().getUserDAO();

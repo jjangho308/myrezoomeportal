@@ -65,9 +65,12 @@ import GenerateShortUrlRequest from './generate_short_url/generate_short_url_req
 import GenerateShortUrlHandler from './generate_short_url/generate_short_url_handler';
 
 /**
- * Request job manager from client. <br />
- * 초기화 시 Job map를 생성하며 Client channel의 HTTP Request 발생 시 Job을 생성하여 저장한다.
- * Agent에서 Http 요청이 올 때 여기 저장된 Job을 기반으로 해당 Client에 Socket Push를 전송하도록 한다.
+ * Request manager from client. <br />
+ * 
+ * 초기화 시 RequestMap를 생성하며 Client channel의 <br />
+ * HTTP Request 발생 시 Job을 생성하여 저장한다. <br />
+ * Agent에서 Http 요청이 올 때 여기 저장된 Job을 기반으로 <br />
+ * 해당 Client에 Socket Push를 전송하도록 한다. <br />
  * 
  * @since 180228
  * @author TACKSU
@@ -92,15 +95,13 @@ class ClientRequestManager extends AbstractManager {
      * @author TACKSU
      */
     init(from) {
+
         this.entityMap = new HashMap();
         this.handlerMap = new HashMap();
         this.requestMap = new HashMap();
 
         this.handlerMap.set(SignInRequest, new SignInRequestHandler());
         this.handlerMap.set(SignUpRequest, new SignUpHandler());
-
-        this.entityMap.set('GenerateShortUrl', GenerateShortUrlRequest);
-        this.handlerMap.set(GenerateShortUrlRequest, new GenerateShortUrlHandler());
 
         this.handlerMap.set(GetCertificatesRequest, new GetCertificatesHandler());
         this.handlerMap.set(IssueCertificateRequest, new IssueCertificateHandler());
@@ -124,6 +125,9 @@ class ClientRequestManager extends AbstractManager {
         // 기타 등등 cmd 로 관리 되는것들
         this.entityMap.set('SearchRecord', SearchRecordRequest);
         this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
+
+        this.entityMap.set('GenerateShortUrl', GenerateShortUrlRequest);
+        this.handlerMap.set(GenerateShortUrlRequest, new GenerateShortUrlHandler());
 
         // this.entityMap.set('SetDefault', SearchRecordRequest);
         // this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
@@ -161,7 +165,7 @@ class ClientRequestManager extends AbstractManager {
      */
     request(request, cb) {
         this.requestMap.set(request.mId, request);
-        this.handlerMap.get(request.constructor).request(request, ((resultCode, result) => {
+        this.handlerMap.get(request.constructor).request(request, ((resultCode, errorOrResult) => {
             switch (resultCode) {
 
                 // 에러 발생시에는 Error 객체를 Client에 Response 후
@@ -169,14 +173,14 @@ class ClientRequestManager extends AbstractManager {
                     {
                         // result instanceof Error Retry?
                         this.requestMap.remove(request.mId);
-                        cb(result, null);
+                        cb(errorOrResult, null);
                         break;
                     }
 
                 case ClientRequestManager.RESULT_PENDING:
                     {
                         // 해당 MessageID에 Request를 저장한다.
-                        cb(null, result);
+                        cb(null, errorOrResult);
                         break;
                     }
 
@@ -184,7 +188,7 @@ class ClientRequestManager extends AbstractManager {
                     {
                         // result instanceof Object.
                         this.requestMap.remove(request.mId);
-                        cb(null, result);
+                        cb(null, errorOrResult);
                         break;
                     }
             }
