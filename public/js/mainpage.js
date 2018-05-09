@@ -580,6 +580,7 @@ function request_agent() {
 }
 
 function refreshview(records) {
+    $('.timeline').hide();
 
     var recordList = {};
     var subid = "";
