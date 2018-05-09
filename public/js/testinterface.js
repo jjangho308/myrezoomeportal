@@ -217,11 +217,12 @@ record = {
        "iv": "ENCRYPTED_IV",
        "records": [
            {
-           "data": "{\"list\":[{\"id\":\"12060992\",\"sub\":\"화학2\",\"name\":\"박헌욱\",\"grade\":\"A+\",\"date\":\"null ~ null\"},{\"id\":\"12060992\",\"sub\":\"일반수학2\",\"name\":\"박헌욱\",\"grade\":\"A+\",\"date\":\"null ~ null\"},{\"id\":\"12060992\",\"sub\":\"노    래하기\",\"name\":\"박헌욱\",\"grade\":\"A+\",\"date\":\"null ~ null\"},{\"id\":\"12060992\",\"sub\":\"성교육 심화\",\"name\":\"박헌욱\",\"grade\":\"B+\",\"date\":\"null ~ null\"}]}",
-           "hash": "f1b9d789ac9ef7343b03c79d331230d7aa99be4b035c91c056bddd750da7dbfc",
-           "txid": "59ffd792b8440758b3aea9a3669f8987198b1026617ec154f6875d8fd99ab06d",
-           "subid": "RCOGC0009",
-           "stored": "Y"
+            "data":"{\"id\":\"12060992\",\"sub\":\"일반수학2\",\"name\":\"박헌욱\",\"grade\":\"A+\",\"date\":\"null ~ null\"}",
+            "hash":"971d23e9c0791d8cd83cd0bf074f3d0dec132aa38bf7a75015d190f717fd70a4",
+            "txid":"e35bea0fba0fca040194ae8045338341b3df88152e0e85a4f5f8c125849bf3cf",
+            "subid":"RCOGC0009",
+            "stored":"Y",
+            "dftYn":"N"
            },
            {
            "data": "{\"id\":\"12060992\",\"status\":\"JAEHAK\",\"entranceDate\":\"2018-02-01\",\"graduDate\":\"2018-08-01\",\"name\":\"박헌욱\",\"date\":\"2018-02-01 ~ 2018-08-01\"}",

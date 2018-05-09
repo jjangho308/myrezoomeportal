@@ -203,7 +203,7 @@ $(document).ready(function () {
 
         setTimeout(function() {
             $("#resumes-line-dialog  .close-modal").click();
-            window.location = "/resumeseditor?data=new";
+            //window.location = "/resumes/editor/";
 
         }, 3000);
 
