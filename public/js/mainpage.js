@@ -142,19 +142,19 @@ $(document).ready(function(){
         
         var lang = $("#langadd_lang").val();
         var name = $("#language-name").val();
-        var grade = $("#language-grade").val();        
+        var score = $("#language-grade").val();        
         var start_date = $("#langadd_startdate").val();
         var end_date = $("#langadd_enddate").val();
-        var expireYn = $("#langadd_expireYn").is(':checked');
+        var expiry = $("#langadd_expireYn").is(':checked');
 
         // cert format
         var param = {
             lang: lang,
             name: name,
-            grade: grade,
+            score: score,
             startdate: start_date,
             enddate: end_date,
-            expireYn: expireYn
+            expiry: expiry
         }
 
         // cert encryption
@@ -194,7 +194,7 @@ $(document).ready(function(){
         var grade = $("#cert-grade").val();        
         var start_date = $("#certadd_startdate").val();
         var end_date = $("#certadd_enddate").val();
-        var expireYn = $("#certadd_expireYn").is(':checked');
+        var expiry = $("#certadd_expireYn").is(':checked');
 
         // cert format
         var param = {
@@ -202,7 +202,7 @@ $(document).ready(function(){
             grade: grade,
             startdate: start_date,
             enddate: end_date,
-            expireYn: expireYn
+            expiry: expiry
         }
 
         // cert encryption
@@ -481,11 +481,12 @@ function change_default_cert(subid) {
                 htmldiv = htmldiv + '<label for=change_cert_'+ record.txid +'></label>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</td>';
-                htmldiv = htmldiv + '<td>' + jsonData.date +'</td>';
+                htmldiv = htmldiv + '<td>' + formatDate(jsonData.date) +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.userid +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.name +'</td>';
                 htmldiv = htmldiv + '<td>' + dftYn +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.grade +'</td>';
+                htmldiv = htmldiv + '<td></td>';
                 htmldiv = htmldiv + '</tr>';            
                 $("#spec-change-table").append(htmldiv);
             }
