@@ -38,26 +38,24 @@ function loadresumelist() {
             console.log(certlistres);
 
             var certlistresult = certlistres.result;
-            $(".cert-container").remove();
-
+            $(".resumes-container").remove();
             $('#resumelistcount').text(certlistresult.length + '건');
 
             for(var i in certlistresult) {
-                var htmldiv = '<div class="resumes-container" tabindex="1" onclick=resumeredirect("'+certlistresult[i].rsmId+'")>';
-                htmldiv = htmldiv + '<p>'+ certlistresult[i].rsmId +'<img src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=resumemore("more-div-'+ certlistresult[i].rsmId +'") /></p>';
-                htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
+                var htmldiv = '<div class="resumes-container" tabindex="1" onclick=resumeredirect("'+certlistresult[i].rsmId+'")>';                
+                htmldiv = htmldiv + '<p><img src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=resumemore("more-div-'+ certlistresult[i].rsmId +'") /></p>';
+                htmldiv = htmldiv + '<img src="img/resume-store/invalid-name.png" alt="">';
+                htmldiv = htmldiv + '<p>이력서</p>';
                 htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';
-                htmldiv = htmldiv + '<p>발급일시 : ' + certlistresult[i].date + '</p>';
-                htmldiv = htmldiv + '<div id="more-div-'+ certlistresult[i].rsmId +'" class="more-store-resume-div">';
-                htmldiv = htmldiv + '<ul class="more-store-resume-ul">';
-                htmldiv = htmldiv + '<li class="more-store-resume-li">복사</li>';
-                htmldiv = htmldiv + '<li class="more-store-resume-li" onclick=resumedelete("'+ certlistresult[i].rsmId +'")>삭제</li>';
-                htmldiv = htmldiv + '<li class="more-store-resume-li">공유내역</li>';
-                htmldiv = htmldiv + '</ul>';
-                htmldiv = htmldiv + '</div>';
-                
-                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '<p>업데이트 : ' + certlistresult[i].modifiedDate + '</p>';
 
+                htmldiv = htmldiv + '<div id="more-div-'+ certlistresult[i].rsmId +'" class="more-store-resume-div">';
+                htmldiv = htmldiv + '<p>복사</p>';
+                htmldiv = htmldiv + '<p onclick=resumedelete("'+ certlistresult[i].rsmId +'")>삭제</p>';
+                htmldiv = htmldiv + '<p>공유내역</p>';                
+                htmldiv = htmldiv + '</div>';                
+
+                htmldiv = htmldiv + '</div>';
                 $('#resume-grid-div').append(htmldiv);
 
             }

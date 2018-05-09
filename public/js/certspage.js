@@ -48,18 +48,19 @@ function loadcertlist() {
             $(".cert-container").remove();
             $('#certlistcount').text(certlistresult.length + '건');
             for(var i in certlistresult) {
-                var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+ certlistresult[i].certId +'")>';
-                htmldiv = htmldiv + '<p>'+ certlistresult[i].certId +'<img style="z-index:999" src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=certmore("more-div-'+ certlistresult[i].certId +'")></p>';
+                var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+ certlistresult[i].certId +'")>';                
+                htmldiv = htmldiv + '<p>'+ certlistresult[i].certId.substring(0,25) + '..<img style="z-index:999" src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=certmore("more-div-'+ certlistresult[i].certId +'")></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
                 htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';
+                htmldiv = htmldiv + '<p>증명서</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + certlistresult[i].date + '</p>';
-                htmldiv = htmldiv + '<div id="more-div-'+ certlistresult[i].certId +'" class="more-store-resume-div">';
-                htmldiv = htmldiv + '<ul class="more-store-resume-ul">';
-                htmldiv = htmldiv + '<li class="more-store-resume-li">복사</li>';
-                htmldiv = htmldiv + '<li class="more-store-resume-li" onclick=certdelete("'+ certlistresult[i].certId +'")>삭제</li>';
-                htmldiv = htmldiv + '<li class="more-store-resume-li">공유내역</li>';
-                htmldiv = htmldiv + '</ul>';
+                
+                htmldiv = htmldiv + '<div id="more-div-'+ certlistresult[i].certId +'" class="more-store-resume-div">';                
+                htmldiv = htmldiv + '<p>복사</p>';
+                htmldiv = htmldiv + '<p onclick=certdelete("'+ certlistresult[i].certId +'")>삭제</p>';
+                htmldiv = htmldiv + '<p>공유내역</p>';
                 htmldiv = htmldiv + '</div>';
+
                 htmldiv = htmldiv + '</div>';
                 $('#cert-grid-div').append(htmldiv);
             }
