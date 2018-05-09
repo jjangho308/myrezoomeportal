@@ -126,7 +126,7 @@ class ClientRequestManager extends AbstractManager {
         this.entityMap.set('SearchRecord', SearchRecordRequest);
         this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
 
-        this.entityMap.set('GenerateShortUrl', GenerateShortUrlRequest);
+        this.entityMap.set('GenerateShortURL', GenerateShortUrlRequest);
         this.handlerMap.set(GenerateShortUrlRequest, new GenerateShortUrlHandler());
 
         // this.entityMap.set('SetDefault', SearchRecordRequest);

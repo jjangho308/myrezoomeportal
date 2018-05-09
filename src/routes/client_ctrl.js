@@ -17,7 +17,7 @@ export default {
     post: (req, res, next) => {
         var clientRequest = Managers.client();
 
-        // TODO Request body undefined일 경우 정의해줌
+        // Request body undefined일 경우 정의해줌
         if (!req.body) {
             req.body = {};
         }
@@ -34,11 +34,16 @@ export default {
         clientRequest.request(requestEntity, (err, result) => {
             if (!!err) {
                 next(err);
-            } else {}
+            } else {
+                res.json({
+                    mid: requestEntity.mId,
+                    result : result
+                });
+            }
         });
 
-        res.json({
-            mid: requestEntity.mId
-        });
+        // res.json({
+        //     mid: requestEntity.mId
+        // });
     }
 }

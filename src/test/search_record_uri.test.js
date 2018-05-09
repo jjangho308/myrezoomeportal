@@ -34,7 +34,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
      * 
      * @author TACKSU
      */
-    it.skip('First search records', done => {
+    it('First search records', done => {
         var cryptoManager = new CryptoManager();
         cryptoManager = Managers.crypto();
         // cryptoManager.generateRSAKeyPair((err, keyPair) => {

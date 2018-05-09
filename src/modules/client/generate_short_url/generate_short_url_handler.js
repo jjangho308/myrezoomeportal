@@ -4,6 +4,8 @@ import AbstractAgentRequestHandler from "../../agent/abstract_agent_request_hand
 
 import ClientRequest from '../client_request';
 
+import ErrroCodes from '../../../core/error/error_code';
+
 /**
  * Handler of GenerateShortUrlRequest. <br />
  * 
@@ -35,12 +37,35 @@ class GenerateShortUrlHandler extends AbstractAgentRequestHandler {
      * @param {*} done 
      */
     request(requestEntity, done) {
-        var shortUrlString = randomstring.generate({
-            lenght: 6,
-            charset: 'alphanumeric'
-        });
-
-        done(ClientRequest.RESULT_SUCCESS, shortUrlString);
+        var prefix = requestEntity.prefix;
+        if (!prefix) {
+            done(ClientRequest.RESULT_FAILURE, {
+                code: ErrroCodes.INVALID_PARAMETER,
+                msg: '접두어가 존재하지 않습니다.'
+            });
+        } else {
+            var shortUrlString = randomstring.generate({
+                length: 6,
+                charset: 'alphanumeric'
+            });
+            switch (prefix) {
+                case 'r':
+                case 'c':
+                    {
+                        // TODO 이력서나 증명서에 따라서 중복이 되지 않도록 반복 생성 로직 필요
+                        done(ClientRequest.RESULT_SUCCESS, prefix + shortUrlString);
+                        break;
+                    }
+                default:
+                    {
+                        done(ClientRequest.RESULT_FAILURE, {
+                            code: ErrroCodes.INVALID_PARAMETER,
+                            msg: '허용된 접두어가 아닙니다.'
+                        });
+                        break;
+                    }
+            }
+        }
     }
 }
 
