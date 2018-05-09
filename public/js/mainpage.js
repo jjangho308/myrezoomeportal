@@ -568,6 +568,12 @@ function request_agent() {
         success: function (res) {
             setSocket(res.mid);
             clientsocket_listener();
+            // loading css start
+            setTimeout(() => {
+                $('.timeline').hide();
+                $('.spec-body-default').show();    
+            }, 1500);
+            
         },
         contentType: 'application/json',
     });
@@ -674,6 +680,7 @@ function clientsocket_listener() {
             }
         }
         refreshview(omsg.records);
+
     });
 }
 
