@@ -58,7 +58,11 @@ $(document).ready(function () {
                     $("input").css("border", "solid 1px #f59188");
 					$(".error-message").css("display", "block");
 					$(".error-message").html("PW를 잘못입력했다.");
-                }
+				}
+				
+				$("input").css("border", "solid 1px #f59188");
+				$(".error-message").css("display", "block");
+				$(".error-message").html("뭔가가 잘못됬다");
             }
         });
     });

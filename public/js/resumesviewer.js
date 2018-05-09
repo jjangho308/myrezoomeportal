@@ -5,9 +5,8 @@ $(document).ready(function(){
 	rendering();
 
 	$("#edit-button").click(function() {
-		window.location ="/resumeseditor";
-	});
-	
+		window.location ="/resumes/editor/"+resumeModel.rsmId;
+	});	
 });
 
 function setResumeModel(_resumeModel) {
@@ -25,9 +24,9 @@ function rendering() {
 	$("#resume_title").html(resumeModel.title);
 
 	$("#resume-user").children().eq(0).html(userModel.fullNameKO);
-	$("#resume-user").children().eq(1).html(userModel.phone);
-	$("#resume-user").children().eq(2).html(userModel.email);	
-	$("#resume-user").children().eq(3).html(userModel.birth);
+	$("#resume-user").children().eq(1).html("<strong>Email</strong> : " + userModel.phone);
+	$("#resume-user").children().eq(2).html("<strong>Mobile</strong> : " + userModel.email);	
+	$("#resume-user").children().eq(3).html("<strong>Birth</strong> : " + userModel.birth);
 
 	//$("#resume-intro").html("자기소개 블라블라블라~");
 
@@ -71,7 +70,7 @@ function formatter(record) {
 			htmldiv = htmldiv + '<span>영어</span>';
 			htmldiv = htmldiv + '</div>';
 			htmldiv = htmldiv + '<div class="resumes-right">';
-			htmldiv = htmldiv + '<p>매경TEST</p>';
+			htmldiv = htmldiv + '<p>오픽</p>';
 			htmldiv = htmldiv + '<p>'+record.data.grade +'</p>';
 			htmldiv = htmldiv + '</div>';
 			htmldiv = htmldiv + '</div>';

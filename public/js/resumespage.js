@@ -156,7 +156,7 @@ $(document).ready(function () {
                         htmldiv = htmldiv + '<td>' + subname + '</td>';
                         htmldiv = htmldiv + '</tr>';
 
-                        $("#add-resume-dialog-table").append(htmldiv);
+                        $("#add-resumes-dialog-table").append(htmldiv);
 
                         /*
                         $(addcertcheckboxid).click(function() {

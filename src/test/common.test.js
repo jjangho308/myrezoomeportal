@@ -28,15 +28,37 @@ describe('Instant test suit', () => {
         console.log("Script start");
         var promise = new Promise((resolve, reject) => {
             resolve(1);
-            reject("Error");
         }).then((result) => {
             console.log('Result 1: ' + result);
             return 2;
-        }).then((result) => {
-            console.log('Result 2: ' + result);
-            throw new Error("My Error!");
-        }).catch(err => {
-            console.log('Error ' + err);
+        });
+
+        process.nextTick(() => {
+            promise.then((result) => {
+                console.log('Result 2: ' + result);
+                throw new Error("My Error!");
+            }).catch(err => {
+                console.log('Error ' + err);
+                done();
+            });
         });
     });
+
+    it('for each promise test', done => {
+        var array = [1, 2, 3, 4, 5];
+        var promiseList = [];
+        array.forEach((item, index, array) => {
+            promiseList.push(new Promise((resolved, rejected) => {
+                console.log('Resul')
+                resolved(item);
+            }).then(result => {
+                console.log(result);
+                return 'complete';
+            }));
+        });
+
+        Promise.all(promiseList).then((something) => {
+            console.log(something);
+        })
+    })
 });

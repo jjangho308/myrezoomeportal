@@ -71,23 +71,51 @@ export default {
                 if (!!err) {
                     next(err);
                 } else {
-                    // res.json({
-                    //     result: result
-                    // });
-                    //console.log(result[0]);
                     var userDAO = Managers.db().getUserDAO();
                     userDAO.get({
-                        uId:req.body.uId
+                        uId: result[0].uId
                     }, (err, userResult)=>{
                         if(!!err){
                             console.log("getResume ERROR!!!");
-                        }else{
-                            
-                            res.render('resumesviewer', {resumeModel: result[0]
-                                , userModel : userResult[0]
+                        } else {
+
+                            res.render('resumesviewer', {
+                                resumeModel: result[0],
+                                userModel: userResult[0]
                             });
                         }
                     })
+                }
+            });
+        }
+    },
+
+    /**
+     * Controller funtion for resume editor. <br />
+     * 
+     * @since 180418
+     * @author TACKSU
+     */
+    getEditor: (req, res, next) => {
+        req.body.rsmId = req.params.rsmId;
+        if (!!req.body.rsmId) {
+            Managers.client().request(new GetResumeRequest(req.body), (err, result) => {
+                if (!!err) {
+                    next(err);
+                } else {
+                    var userDAO = Managers.db().getUserDAO();
+                    userDAO.get({
+                        uId: result[0].uId
+                    }, (err, userResult) => {
+                        if (!!err) {
+                            console.log("getResume ERROR!!!");
+                        } else {
+                            res.render('resumeseditor', {
+                                resumeModel: result[0],
+                                userModel: userResult[0]
+                            });
+                        }
+                    });
                 }
             });
         }
@@ -138,21 +166,19 @@ export default {
 
     deleteResum: (req, res, next) => {
         if (!!req.xhr) {
-            
+
             var data = {
                 uID: req.body.uId,
                 rsmId: req.params.rsmId
             }
 
-            Managers.client().request(new DeleteResumeRequest(data), (err, result)=>{
-                if(!!err){
+            Managers.client().request(new DeleteResumeRequest(data), (err, result) => {
+                if (!!err) {
                     next(err);
-                }else{
+                } else {
                     res.json(result);
                 }
             })
         }
-
-
     }
 }
