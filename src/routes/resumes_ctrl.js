@@ -105,7 +105,7 @@ export default {
                 } else {
                     var userDAO = Managers.db().getUserDAO();
                     userDAO.get({
-                        uId: req.body.uId
+                        uId: result[0].uId
                     }, (err, userResult) => {
                         if (!!err) {
                             console.log("getResume ERROR!!!");
