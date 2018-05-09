@@ -35,12 +35,15 @@ export default {
             if (!!err) {
                 next(err);
             } else {
-
+                res.json({
+                    mid: requestEntity.mId,
+                    result : result
+                });
             }
         });
 
-        res.json({
-            mid: requestEntity.mId
-        });
+        // res.json({
+        //     mid: requestEntity.mId
+        // });
     }
 }

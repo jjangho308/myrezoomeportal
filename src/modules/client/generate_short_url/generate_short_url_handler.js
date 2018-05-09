@@ -4,6 +4,8 @@ import AbstractAgentRequestHandler from "../../agent/abstract_agent_request_hand
 
 import ClientRequest from '../client_request';
 
+import ErrroCodes from '../../../core/error/error_code';
+
 /**
  * Handler of GenerateShortUrlRequest. <br />
  * 
@@ -35,12 +37,37 @@ class GenerateShortUrlHandler extends AbstractAgentRequestHandler {
      * @param {*} done 
      */
     request(requestEntity, done) {
-        var shortUrlString = randomstring.generate({
-            lenght: 6,
-            charset: 'alphanumeric'
-        });
+        var prefix = requestEntity.prefix;
+        if (!prefix) {
+            // TODO Invalid parameter no-prefix error. <br />
+            done(ClientRequest.RESULT_FAILURE, {
+                code: ErrroCodes.INVALID_PARAMETER,
+                msg: '접두어가 존재하지 않습니다.'
+            });
+        } else {
+            switch (prefix) {
+                case 'r':
+                case 'c':
+                    {
+                        var shortUrlString = randomstring.generate({
+                            length: 6,
+                            charset: 'alphanumeric'
+                        });
 
-        done(ClientRequest.RESULT_SUCCESS, shortUrlString);
+                        done(ClientRequest.RESULT_SUCCESS, prefix + shortUrlString);
+                        break;
+                    }
+                default:
+                    {
+                        // TODO Invalid prefix error. <br />
+                        done(ClientRequest.RESULT_FAILURE, {
+                            code: ErrroCodes.INVALID_PARAMETER,
+                            msg: '허용된 접두어가 아닙니다.'
+                        });
+                        break;
+                    }
+            }
+        }
     }
 }
 

@@ -1,29 +1,55 @@
-import assert from 'assert';
+import app from '../app';
+
 import Initializer from '../core/initializer';
 import Managers from '../core/managers';
 import ClientRequestManager from '../modules/client/client_request';
 
-describe.skip('Client request test suite', () => {
-    var clientRequestManager = null;
+import chai from 'chai';
+import chaihttp from 'chai-http';
+
+/**
+ * Test suit for /client command request. <br />
+ * 
+ * @since 180509
+ * @author TACKSU
+ */
+describe('Client request test suite', () => {
+    var token = null;
 
     before('Service init', () => {
         Initializer();
-        clientRequestManager = Managers.clientRequest();
+        token = Managers.token().issueToken({
+            uId: 'UID2'
+        })
+        chai.use(chaihttp);
     })
 
-    it('Search record command', done => {
-        var requestEntity = {
-            userid : 'asdf',
-            orgs : [
-                {
-                    name : 'OPIc',
-                    code : 'aasdf'
-                }
-            ]
-        }
+    /**
+     * 'GenerateShortURL' command test case. <br />
+     * 
+     * @since 180509
+     * @author TACKSU
+     */
+    it('Generate ShortURL', done => {
 
-        var requestResult = clientRequestManager.processRequest(requestEntity);
-        assert.equals(requestResult, ClientRequestManager.RESULT_PENDING);
+        chai.request(app)
+            .post('/client')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'Bearer ' + token)
+            .set('X-Requested-With', 'XMLHttpRequest')
+            .set('Cookie', 'jwt=' + token)
+            .send({
+                cmd: 'GenerateShortURL',
+                args: {
+                    prefix: 'c'
+                }
+            })
+            .end((err, res) => {
+                if (!!res.body.result) {
+                    console.log('ShortURL : ' + res.body.result);
+                    done();
+                }
+            });
     });
 
     after('Clean up', () => {
