@@ -138,23 +138,71 @@ $(document).ready(function(){
         }
     });
 
+    $('#career-add-dialog .confirm-btn').click(function () {        
+        
+        var company = $("#career-company").val();
+        var position = $("#career-position").val();
+        var role = $("#career-role").val();        
+        var start_date = $("#career-startdate").val();
+        var end_date = $("#career-enddate").val();
+        var status = $("#career-status").val();
+
+        // cert format
+        var param = {
+            company: company,
+            position: position,
+            role: role,
+            startdate: start_date,
+            enddate: end_date,
+            status: status
+        }
+
+        // cert encryption
+        var enc_record = JSON.stringify(param);
+
+        $.ajax({
+            type: 'POST',
+            url: '/record',
+            headers: {
+                'Authorization': client_authorization
+            },
+            data: JSON.stringify({                
+                certCd: "CAR", // 자격 코드 입력하는 구분자가 필요할 듯
+                data: enc_record
+            }),
+            beforeSend: function() {
+                
+            },
+            success: function (res) {
+                $("#career-add-dialog .close-modal").click();
+                $("#alarm-div span").text("사용자 이력 수기 입력했다.");
+                $('#alarm-div').css("display", "block");
+                
+                //clean view
+                 $('.private-spec-body').remove();
+                 getPrivateRecords();
+            },
+            contentType: 'application/json',
+        });
+    });
+
     $('#language-add-dialog .confirm-btn').click(function () {        
         
         var lang = $("#langadd_lang").val();
         var name = $("#language-name").val();
-        var grade = $("#language-grade").val();        
+        var score = $("#language-grade").val();        
         var start_date = $("#langadd_startdate").val();
         var end_date = $("#langadd_enddate").val();
-        var expireYn = $("#langadd_expireYn").is(':checked');
+        var expiry = $("#langadd_expireYn").is(':checked');
 
         // cert format
         var param = {
             lang: lang,
             name: name,
-            grade: grade,
+            score: score,
             startdate: start_date,
             enddate: end_date,
-            expireYn: expireYn
+            expiry: expiry
         }
 
         // cert encryption
@@ -187,14 +235,13 @@ $(document).ready(function(){
 
     });
 
-
     $('#cert-add-dialog .confirm-btn').click(function () {  
         
         var name = $("#cert-name").val();
         var grade = $("#cert-grade").val();        
         var start_date = $("#certadd_startdate").val();
         var end_date = $("#certadd_enddate").val();
-        var expireYn = $("#certadd_expireYn").is(':checked');
+        var expiry = $("#certadd_expireYn").is(':checked');
 
         // cert format
         var param = {
@@ -202,7 +249,7 @@ $(document).ready(function(){
             grade: grade,
             startdate: start_date,
             enddate: end_date,
-            expireYn: expireYn
+            expiry: expiry
         }
 
         // cert encryption
@@ -392,6 +439,8 @@ $(document).ready(function(){
     });
 
     $('#refresh_record').click(function() {
+        $('.timeline').show();
+        $('.spec-body-default').hide();    
         getRSAKey();
         var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 
@@ -422,6 +471,10 @@ $(document).ready(function(){
             success: function (res) {
                 setSocket(res.mid);
                 clientsocket_listener();
+                setTimeout(() => {
+                    $('.timeline').hide();
+                    $('.spec-body-default').show();    
+                }, 1500);
             },
             contentType: 'application/json',
         });
@@ -481,11 +534,12 @@ function change_default_cert(subid) {
                 htmldiv = htmldiv + '<label for=change_cert_'+ record.txid +'></label>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</td>';
-                htmldiv = htmldiv + '<td>' + jsonData.date +'</td>';
+                htmldiv = htmldiv + '<td>' + formatDate(jsonData.date) +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.userid +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.name +'</td>';
                 htmldiv = htmldiv + '<td>' + dftYn +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.grade +'</td>';
+                htmldiv = htmldiv + '<td></td>';
                 htmldiv = htmldiv + '</tr>';            
                 $("#spec-change-table").append(htmldiv);
             }
@@ -568,12 +622,19 @@ function request_agent() {
         success: function (res) {
             setSocket(res.mid);
             clientsocket_listener();
+            // loading css start
+            setTimeout(() => {
+                $('.timeline').hide();
+                $('.spec-body-default').show();    
+            }, 1500);
+            
         },
         contentType: 'application/json',
     });
 }
 
 function refreshview(records) {
+    $('.timeline').hide();
 
     var recordList = {};
     var subid = "";
@@ -674,6 +735,7 @@ function clientsocket_listener() {
             }
         }
         refreshview(omsg.records);
+
     });
 }
 
