@@ -116,7 +116,7 @@ var formatter= {
         $('#spec_forign_lang > .spec-body-default').hide();
     },
 
-    "CAR":function viewformatter(record) {
+    "CPR":function viewformatter(record) {
         // Private record
         var htmldiv = '<div class="private-spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
@@ -139,7 +139,7 @@ var formatter= {
         $('#spec_career_detail > .spec-body-default').hide();
     },
 
-    "ETC":function viewformatter(record) {
+    "OGC":function viewformatter(record) {
         // Private record
         var htmldiv = '<div class="private-spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
@@ -162,7 +162,7 @@ var formatter= {
         $('#spec_certification > .spec-body-default').hide();
     }, 
 
-    "LANG":function viewformatter(record) {
+    "LPT":function viewformatter(record) {
         // Private record
         var htmldiv = '<div class="private-spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';

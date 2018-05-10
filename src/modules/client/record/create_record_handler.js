@@ -30,7 +30,8 @@ class CreateRecordRequestHandler extends AbstractClientRequestHandler {
         var privateRecord = new PrivateRecord({
             certPrvtId : Util.uuid(),
             uId : requestEntity.record.uId,
-            certCd : requestEntity.record.certCd,
+            orgCd : requestEntity.record.orgCd,
+            subCd : requestEntity.record.subCd,
             data : requestEntity.record.data
         });
 

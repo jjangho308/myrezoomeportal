@@ -17,8 +17,10 @@ class PrivateRecord extends AbstractModel {
         this.sId = opt.sId;        
         this.certPrvtId = opt.certPrvtId;        
         this.uId = opt.uId;
-        this.certCd = opt.certCd;        
+        this.orgCd = opt.orgCd;        
+        this.subCd = opt.subCd;        
         this.data = opt.data;
+        this.order = opt.order;
         this.dsplYn = opt.dsplYn;
         this.delYn = opt.delYn;        
         this.modified = opt.modified;
@@ -39,8 +41,10 @@ class PrivateRecord extends AbstractModel {
             sId: row.S_USR_CERT_PRVT_ID,
             certPrvtId: row.CERT_PRVT_ID,
             uId: row.UID,
-            certCd: row.CERT_CD,
+            orgCd: row.ORG_CD,
+            subCd: row.SUB_CD,
             data: row.ENC_PRVT_DATA,
+            order: row.ORDER,
             dsplYn: row.DSPL_YN,
             delYn: row.DEL_YN,            
             modified: row.MDFID_DT,
@@ -60,8 +64,10 @@ class PrivateRecord extends AbstractModel {
             S_USR_CERT_PRVT_ID: this.sId,
             CERT_PRVT_ID: this.certPrvtId,
             UId: this.uId,
-            CERT_CD: this.certCd,
+            ORG_CD: this.orgCd,
+            SUB_CD: this.subCd,
             ENC_PRVT_DATA: this.data,
+            ORDER: this.order,
             DSPL_YN: this.dsplYn,
             DEL_YN: this.delYn,            
             MDFID_DT: this.modified,

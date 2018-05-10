@@ -167,7 +167,8 @@ $(document).ready(function(){
                 'Authorization': client_authorization
             },
             data: JSON.stringify({                
-                certCd: "CAR", // 자격 코드 입력하는 구분자가 필요할 듯
+                orgCd: "ETC", // 코드 분기 필요
+                subCd: "CPR", // 코드 분기 필요
                 data: enc_record
             }),
             beforeSend: function() {
@@ -215,7 +216,8 @@ $(document).ready(function(){
                 'Authorization': client_authorization
             },
             data: JSON.stringify({                
-                certCd: "LANG", // 자격 코드 입력하는 구분자가 필요할 듯
+                orgCd: "EDI", // 코드 분기 필요
+                subCd: "LPT", // 코드 분기 필요
                 data: enc_record
             }),
             beforeSend: function() {
@@ -262,7 +264,8 @@ $(document).ready(function(){
                 'Authorization': client_authorization
             },
             data: JSON.stringify({                
-                certCd: "ETC", // 자격 코드 입력하는 구분자가 필요할 듯
+                orgCd: "STI", // 코드 분기 필요
+                subCd: "OGC", // 코드 분기 필요
                 data: enc_record
             }),
             beforeSend: function() {
@@ -583,7 +586,7 @@ function getPrivateRecords() {
             for(var i in res) {  
                 var data = JSON.parse(res[i].data);
                 data.certPrvtId = res[i].certPrvtId;
-                formatter[res[i].certCd](data);
+                formatter[res[i].subCd](data);
             }            
         }
     });

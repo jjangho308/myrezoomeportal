@@ -5,7 +5,7 @@
  * @author JJANGHO
  */
 var BLC_MAP_TABLE = 'TCDA_BLC_MAP';
-var CERT_PRVT_TABLE = 'rezoome_db.TCDA_USR_CERT_PRVT';
+var CERT_PRVT_TABLE = 'rezoome_db.TCDA_CERT_PRVT';
 
 export default {
     getStoredDataByUserIdAndOrgID : "SELECT * FROM rezoome_db.TCDA_BLC_MAP WHERE `UID` = ? and `ORG_ID` = ? ",
