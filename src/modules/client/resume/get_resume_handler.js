@@ -48,12 +48,17 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
                 var completedResume = 0;
                 for (var i in resumeList) {
                     !((idx) => {
-
-                        //console.log(resumeList[idx].blcMap);
-
                         // Remove 'sId' field.
                         delete resumeList[idx].sId;
+                        console.log(resumeList);
 
+                        completedResume++;
+                        if (completedResume == resumeList.length) {
+                            done(ClientRequest.RESULT_SUCCESS, resumeList);
+                        }
+
+
+                        /*
                         // 이력서가 담고 있는 Records의 Blc MAP IDs
                         var recordsMap = JSON.parse(resumeList[idx].blcMap)
                         // Remove 'blcMap' Field
@@ -85,8 +90,9 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
                                         }
                                     }
                                 })
-                            })(j);
+                            })(j);                            
                         }
+                        */
                     })(i);
                 }
             }

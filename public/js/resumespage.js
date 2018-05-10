@@ -222,10 +222,6 @@ $(document).ready(function () {
                 objresumedata.record = jsondata;
                 objresumedata.txid = id;
                 resumesdata.data.push(objresumedata);
-
-                console.log("cert req param");
-                console.log(id);
-                
             }
         });
 

@@ -62,6 +62,8 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                 recordDAO.getBlockChainMap({
                     txid: request.resume.data[idx].txid
                 }, (err, bcModelList) => {
+                    console.log("#################");
+                    console.log(bcModelList);
                     if (!!err) {
                         cb(ClientRequest.RESULT_FAILURE, err);
                     } else if (bcModelList.length > 0) {
@@ -76,43 +78,43 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                             resumeModel.blcMap = JSON.stringify(bcIdList);
                             // TODO 이력서의 txid가 한 column으로 되어 있는데 이걸 별도의 table로 가져가야 되는게 아닌가? 싶음
                             var resumeDAO = Managers.db().getResumeDAO();
-                            resumeDAO.putResume(resumeModel, (err, insertId) => {
+                            resumeDAO.putResume(resumeModel, (err, insertId) => {                               
                                 if (!!err) {
                                     cb(ClientRequest.RESULT_FAILURE, err);
                                 } else {
                                     resumeDAO.getResume({
                                         sId: insertId
-                                    }, (err, resumeList) => {
+                                    }, (err, resumeList) => {                                        
                                         if (!!err) {
                                             cb(ClientRequest.RESULT_FAILURE, err);
-                                        } else if (resumeList.length > 0) {
-
-                                            //console.log(resumeList);
-
+                                        } else if (resumeList.length > 0) {                                     
                                             //TODO plain text를 암호화 된 message로 변환할 것.
                                             if(!!request.resume.data){
                                                 var cryptoManager = Managers.crypto();
 
-                                                var sharedResume = new SharedResumeModel({
-                                                    uId: request.uId,
-                                                    rsmId: resumeList[0].rsmId,
-                                                    data: JSON.stringify(request.resume.data),
-                                                    deleted: false
-                                                });
-                                                
-                                                resumeDAO.putShare(sharedResume, (err, insertSharedId)=>{
-                                                    if(!!err){
-                                                        cb(ClientRequest.RESULT_FAILURE, err);
-                                                    }else{
-                                                        cb(ClientRequest.RESULT_SUCCESS, {
+                                                for(var j in request.resume.data) {
+                                                    !((idx) => {
+                                                        var sharedResume = new SharedResumeModel({
+                                                            uId: request.uId,
                                                             rsmId: resumeList[0].rsmId,
-                                                            txid: bcModelList[0].txid,
-                                                            date: resumeList[0].createdDate
+                                                            trxId: request.resume.data[idx].txid,
+                                                            data: JSON.stringify(request.resume.data[idx]),
+                                                            deleted: false
                                                         });
-                                                    }
-
-                                                })
-                                                
+                                                        
+                                                        resumeDAO.putShare(sharedResume, (err, insertSharedId)=>{                                                           
+                                                            if(!!err){
+                                                                cb(ClientRequest.RESULT_FAILURE, err);
+                                                            }else{                                                               
+                                                                cb(ClientRequest.RESULT_SUCCESS, {
+                                                                    rsmId: resumeList[0].rsmId,
+                                                                    txid: bcModelList[0].txid,
+                                                                    date: resumeList[0].createdDate
+                                                                });
+                                                            }        
+                                                        });
+                                                    })(j);                                                
+                                                }
                                             }
                                         }
                                     });

@@ -38,7 +38,8 @@ class ResumeModel extends AbstractModel {
         /**
          * Blockchain map. <br />
          */
-        this.blcMap = data.blcMap;
+       // this.blcMap = data.blcMap;
+        this.intro = data.intro;
 
         /**
          * Shared flag. <br />
@@ -83,7 +84,8 @@ class ResumeModel extends AbstractModel {
             uId: row.UID,
             status: row.UPDT_STS,
             title: row.TITLE,
-            blcMap: row.BLC_MAP_ID_DATA,
+            //blcMap: row.BLC_MAP_ID_DATA,
+            intro: row.INTRO,
             shared: Util.ftb(row.SHRD_YN),
             deleted: Util.ftb(row.DEL_YN),
             lastSharedDate: row.LST_SHRD_DT,
@@ -105,7 +107,8 @@ class ResumeModel extends AbstractModel {
             UID: this.uId,
             UPDT_STS: this.status,
             TITLE: this.title,
-            BLC_MAP_ID_DATA: this.blcMap,
+            //BLC_MAP_ID_DATA: this.blcMap,
+            INTRO: this.intro,
             SHRD_YN: Util.btf(this.shared),
             DEL_YN: Util.btf(this.deleted),
             LST_SHRD_DT: this.lastSharedDate,

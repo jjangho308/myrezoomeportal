@@ -65,7 +65,7 @@ export default {
      * @author TACKSU
      */
     getResume: (req, res, next) => {
-        req.body.rsmId = req.params.rsmId;
+        req.body.rsmId = req.params.rsmId;       
         if (!!req.body.rsmId) {
             Managers.client().request(new GetResumeRequest(req.body), (err, result) => {
                 if (!!err) {
@@ -127,13 +127,14 @@ export default {
      * @since 180402
      * @author TACKSU
      */
-    post: (req, res, next) => {
-
+    post: (req, res, next) => {        
+        console.log(req.body);
         if (!!req.xhr) {
-            Managers.client().request(new CreateResumeRequest(req.body), (err, result) => {
+            Managers.client().request(new CreateResumeRequest(req.body), (err, result) => {               
                 if (!!err) {
                     next(err);
                 } else {
+                    console.log(result);
                     res.json({
                         result: result
                     });

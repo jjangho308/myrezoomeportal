@@ -4,7 +4,7 @@
  * @since 180403
  * @author JJANGHO
  */
-var BLC_MAP_TABLE = 'TCDA_BLC_MAP';
+var BLC_MAP_TABLE = 'rezoome_db.TCDA_BLC_MAP';
 var CERT_PRVT_TABLE = 'rezoome_db.TCDA_CERT_PRVT';
 
 export default {

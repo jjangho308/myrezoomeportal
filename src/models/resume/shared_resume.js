@@ -24,7 +24,9 @@ class SharedResumeModel extends AbstractModel {
             this.sId = opt.sId;
             this.rsmId = opt.rsmId;
             this.uId = opt.uId;
+            this.trxId = opt.trxId;
             this.data = opt.data;
+            this.order = opt.order;
             this.deleted = opt.deleted;
             this.modified = opt.modified;
             this.created = opt.created;
@@ -38,8 +40,9 @@ class SharedResumeModel extends AbstractModel {
         return new SharedResumeModel({
             sId: row.S_RSM_SHR_ID,
             rsmId: row.RSM_ID,
-            uId: row.UID,
+            trxId: row.TRX_ID,
             data: row.ENC_RSM_DATA,
+            order: row.ORDER,
             deleted: Util.ftb(row.DEL_YN),
             modified: row.MDFID_DT,
             created: row.CRTD_DT
@@ -50,8 +53,9 @@ class SharedResumeModel extends AbstractModel {
         return this.trim({
             S_RSM_SHR_ID: this.sId,
             RSM_ID: this.rsmId,
-            UID: this.uId,
+            TRX_ID: this.trxId,
             ENC_RSM_DATA: this.data,
+            ORDER: this.order,
             DEL_YN: Util.btf(this.deleted),
             MDFID_DT: this.modified,
             CRTD_DT: this.created
