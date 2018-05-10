@@ -76,17 +76,22 @@ class CertificateDAO extends AbstractDAO {
      * @param {*} cb 
      */
     getCertList(creteria, cb) {
+        
         var condition = null;
         if (!!creteria.uId) {
-            condition = "TUC.UID = '" + creteria.uId + "'";
+            condition = "TCD.UID = '" + creteria.uId + "'";
         }
 
         if (!!creteria.certId) {
+            
             condition = condition ? condition + ' AND ' : condition;
-            condition += "TUC.CERT_ID = '" + creteria.certId + "'";
+            condition += "TCD.CERT_ID = '" + creteria.certId + "'";
         }
 
-        condition = condition + " AND TUC.DEL_YN = 'N'";
+        condition = condition + " AND TCD.DEL_YN = 'N'";
+
+
+        //console.log(condition);
 
         var query = CertQuery.getCertList + condition;
 
@@ -100,10 +105,8 @@ class CertificateDAO extends AbstractDAO {
             if (!!err) {
                 cb(err, null);
             } else {
+                
                 var certList = [];
-
-
-
                 for (var i in rows) {
                     certList.push({
                         certId: rows[i].CERT_ID,
@@ -117,8 +120,6 @@ class CertificateDAO extends AbstractDAO {
                         date: rows[i].CRTD_DT
                     });
                 }
-
-
                 cb(err, certList);
             }
         })

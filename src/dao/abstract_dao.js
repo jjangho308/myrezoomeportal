@@ -34,6 +34,9 @@ class AbstractDAO {
             } else {
                 connection.query(query, (err, result) => {
                     connection.release();
+
+                    //console.log(err);
+                    //console.log(result);
                     cb(err, result);
                 })
             }
