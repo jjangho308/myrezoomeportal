@@ -219,7 +219,7 @@ record = {
            {
             "data":"{\"id\":\"12060992\",\"sub\":\"일반수학2\",\"name\":\"박헌욱\",\"grade\":\"A+\",\"date\":\"null ~ null\"}",
             "hash":"971d23e9c0791d8cd83cd0bf074f3d0dec132aa38bf7a75015d190f717fd70a4",
-            "txid":"e35bea0fba0fca040194ae8045338341b3df88152e0e85a4f5f8c125849bf3cf",
+            "txid":"4329f322d166c503dd6f6e750c1e57915c8b8cfff16f43742a7b65baa1fe32c0",
             "subid":"RCOGC0009",
             "stored":"Y",
             "dftYn":"N"
@@ -227,7 +227,7 @@ record = {
            {
            "data": "{\"id\":\"12060992\",\"status\":\"JAEHAK\",\"entranceDate\":\"2018-02-01\",\"graduDate\":\"2018-08-01\",\"name\":\"박헌욱\",\"date\":\"2018-02-01 ~ 2018-08-01\"}",
            "hash": "34ccbc51eccd9bd3944f7f092b7c8b324c5af9f63cf9bac2b9d59df5d0d7dce0",
-           "txid": "a27b49d5087e9d7e7c28ae9654dfa33311e5e830c724af2d51324c6d86789379",
+           "txid": "785267710bde9decc12cf503f3a8f1accd58dc2fd30891ae443fca5a2bf637ab",
            "subid": "RCOGC0008",
            "stored": "Y",
            "dftYn": "N"
