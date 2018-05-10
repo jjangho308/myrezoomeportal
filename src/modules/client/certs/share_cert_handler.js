@@ -44,11 +44,11 @@ class ShareCertRequestHandler extends AbstractClientRequestHandler {
             } else {
                 // 아직 한번도 공유되지 않은 증명서
                 if (result == 0) {
-                    var sharedCertModel = new SharedCertModel({
-                        uId: requestEntity.uId,
-                        certId: requestEntity.shared_cert.certId,
-                        encryptedData: JSON.stringify(requestEntity.shared_cert.record)
-                    });
+                    // var sharedCertModel = new SharedCertModel({
+                    //     uId: requestEntity.uId,
+                    //     certId: requestEntity.shared_cert.certId,
+                    //     encryptedData: JSON.stringify(requestEntity.shared_cert.record)
+                    // });
                     certDAO.setCert({
                         certId: requestEntity.shared_cert.certId
                     }, new CertModel({

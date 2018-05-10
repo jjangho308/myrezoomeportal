@@ -54,7 +54,7 @@ describe('/certs URI Page test suite.', () => {
             });
     });
 
-    it('Issue certificate request test', done => {
+    it.skip('Issue certificate request test', done => {
         chai.request(app)
             .post('/certs')
             .set('Content-Type', 'application/json')
@@ -123,11 +123,7 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 shared_cert: {
-                    certId: 'e58a799f-dcf9-4dc4-829e-bb3507c3fa8b',
-                    record: {
-                        subcode: 'SUB1',
-                        data: 'NAME'
-                    },
+                    certId: 'f3aaad3c-5344-4836-8ac5-5ced02b054e8',
                     url: 'https://rzoo.me/asdf4ecvvv',
                     password: 'asdfasdf',
                     emails: [

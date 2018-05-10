@@ -16,6 +16,7 @@ var router = express.Router();
 router.get('/', tokenAuth);
 router.get('/', ctrl.get);
 
+//get cert list ajax request
 router.get('/list', tokenAuth);
 router.get('/list', ctrl.get);
 
