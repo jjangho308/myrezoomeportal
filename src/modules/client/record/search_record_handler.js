@@ -47,14 +47,17 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
         var uid = clientReq.uId;
 
+        console.log("Search Record hendler 0");
         db.getUserDAO().get({
             uId: uid
         }, (err, users) => {
+            console.log("Search Record hendler 1");
             if (!!err || users.length < 1) {
                 done(ClientRequestManager.RESULT_FAILURE);
+                console.log("Search Record hendler 2");
                 return;
             } else {
-
+                console.log("Search Record hendler 3");
                 var targs = {
                     familyNameEN: users[0].familyNameEN,
                     firstNameEN: users[0].firstNameEN,
@@ -73,7 +76,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                 }
 
                 targs.pkey = clientReq.pkey;
-
+                console.log("Search Record hendler 4");
                 var msg = new SearchRecordPush({
                     mid: clientReq.mId,
                     sid: clientReq.sId,
@@ -83,6 +86,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                 var nexledgerService = new NexledgerService();
                 var nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
+
+                console.log("Search Record hendler 5");
 
                 // 사용자가 최초 로그인인 경우
                 if (users[0].first == 'Y') {
@@ -147,9 +152,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                         }
                     })
                 } else {
+                    console.log("Search Record hendler 6");
                     if (clientReq.update == true) {
-
+                        console.log("Search Record hendler 7");
                         db.getOrgDAO().findAll((err, resultOrgIds) => {
+                            console.log("Search Record hendler 8");
                             for (var i in resultOrgIds) {
                                 !(orgIdx => {
                                     //============================ 1. make subIDs =====================================
@@ -214,6 +221,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                         } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
                                             //console.log("subIDs만 있으면 돼!");
                                             db.getOrgDAO().getSubIdByOrgId(resultOrgIds[orgIdx].ORG_ID, (err, subIDsResult) => {
+                                                console.log("Search Record hendler 10");
                                                 delete msg.args.subIDs;
                                                 delete msg.args.records;
 
@@ -254,11 +262,14 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                     })
                                 })(i);
                             } //Per orgIDs, Sending AMQ Message
+                            console.log("Search Record hendler 11");
                         })
                     } else {
                         //refresh
+                        console.log("Search Record hendler 12");
                         db.getRecordDAO().getStoredOrgByUserId(uid, (err, storedOrgs) => {
                             //console.log(storedOrgs);
+                            console.log("Search Record hendler 13");
                             for (var i in storedOrgs) {
                                 !(orgIdx => {
                                     db.getRecordDAO().getStoredDataByUserId(uid, storedOrgs[orgIdx].ORG_ID, (err, storedData) => {
@@ -269,7 +280,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                         for (var j in storedData) {
                                             !(j => {
                                                 nexledgerService.getbytxid(nodeurl, storedData[j].TRX_ID, function (res) {
-
+                                                    console.log("Search Record hendler 14");
                                                     records.push({
                                                         subID: storedData[j].SUB_ID,
                                                         hashed: res.result.hash,
