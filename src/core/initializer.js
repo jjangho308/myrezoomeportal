@@ -20,8 +20,8 @@ var initializer = (from) => {
     }
 }
 
-initializer.DEBUG = 0;
-initializer.UNIT_TEST = 1;
-initializer.RUNTIME = 2
+initializer.FROM_DEBUG = 0;
+initializer.FROM_UNITTEST = 1;
+initializer.FROM_RUNTIME = 2
 
 export default initializer;

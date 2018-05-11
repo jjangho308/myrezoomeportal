@@ -24,7 +24,7 @@ describe('Instant test suit', () => {
         var asdf = undefined;
     });
 
-    it('Promise test case', done => {
+    it.skip('Promise test case', done => {
         console.log("Script start");
         var promise = new Promise((resolve, reject) => {
             resolve(1);
@@ -49,16 +49,21 @@ describe('Instant test suit', () => {
         var promiseList = [];
         array.forEach((item, index, array) => {
             promiseList.push(new Promise((resolved, rejected) => {
-                console.log('Resul')
-                resolved(item);
+                
+                setTimeout((result) => {
+                    console.log("Result : " + result);
+                    resolved(result);
+                }, 1000 * index, true);
+                
             }).then(result => {
                 console.log(result);
                 return 'complete';
             }));
         });
 
-        Promise.all(promiseList).then((something) => {
-            console.log(something);
-        })
-    })
+        Promise.all(promiseList).then((values) => {
+            console.log(values);
+            done();
+        });
+    }).timeout(10000);
 });
