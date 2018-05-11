@@ -35,6 +35,8 @@ export default {
             if (!!err) {
                 next(err);
             } else {
+                console.log("====client_ctrl=====")
+                console.log(result);
                 res.json({
                     mid: requestEntity.mId,
                     result : result
