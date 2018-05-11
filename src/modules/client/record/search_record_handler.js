@@ -381,11 +381,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                 if (j == (agentRequest.records.length - 1)) {
                                     try {
-                                        console.log("######################");
-                                        console.log(agentRequest);
-                                        console.log("######################");
-                                        console.log(socket);
-                                        console.log("######################");
+
                                         if (!!socket)
                                             socket.emit('SearchResult', JSON.stringify(agentRequest));
                                     } catch (exception) {
@@ -408,10 +404,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 if (j == (agentRequest.records.length - 1)) {
                                     try {
                                         console.log("@@@@@@@@@@@@@@@@@@@@@@@");
-                                        console.log(agentRequest);
-                                        console.log("@@@@@@@@@@@@@@@@@@@@@@@");
                                         console.log(socket);
-                                        console.log("@@@@@@@@@@@@@@@@@@@@@@@");
                                         if (!!socket)
                                             socket.emit('SearchResult', JSON.stringify(agentRequest));
                                     } catch (exception) {
