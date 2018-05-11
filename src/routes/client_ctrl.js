@@ -32,13 +32,20 @@ export default {
         // 모든 요청 객체에 대해 JWT에서 추출한 uId를 injection.
         requestEntity.uId = req.body.uId;
         clientRequest.request(requestEntity, (err, result) => {
-            if (!!err) {
-                next(err);
+
+            // 아직 Sent 안됐을때만 response
+            if (!res.headersSent) {
+                if (!!err) {
+                    next(err);
+                } else {
+                    res.json({
+                        mid: requestEntity.mId,
+                        result: result
+                    });
+                }
             } else {
-                res.json({
-                    mid: requestEntity.mId,
-                    result : result
-                });
+                // 이 경우가 발생하지 않도록 수정 필요
+                // TODO Error 처리
             }
         });
 
