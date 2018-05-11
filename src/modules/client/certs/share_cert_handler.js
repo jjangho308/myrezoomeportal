@@ -34,23 +34,22 @@ class ShareCertRequestHandler extends AbstractClientRequestHandler {
      * @param {*} cb 
      */
     request(requestEntity, cb) {
+        //console.log(requestEntity);
+
         var certDAO = Managers.db().getCertDAO();
 
         certDAO.getShared({
-            certId: requestEntity.shared_cert.certId
+            certId: requestEntity.shared_cert.certid
         }, (err, result) => {
             if (!!err) {
                 cb(ClientRequest.RESULT_FAILURE, err);
             } else {
                 // 아직 한번도 공유되지 않은 증명서
                 if (result == 0) {
-                    // var sharedCertModel = new SharedCertModel({
-                    //     uId: requestEntity.uId,
-                    //     certId: requestEntity.shared_cert.certId,
-                    //     encryptedData: JSON.stringify(requestEntity.shared_cert.record)
-                    // });
+
+                    //SHRD_YN Column Set='Y'
                     certDAO.setCert({
-                        certId: requestEntity.shared_cert.certId
+                        certId: requestEntity.shared_cert.certid
                     }, new CertModel({
                         shared: true
                     }), (err, affectedRows) => {
@@ -62,25 +61,32 @@ class ShareCertRequestHandler extends AbstractClientRequestHandler {
                                 msg: 'No certificate'
                             });
                         } else if (affectedRows > 0) {
-                            certDAO.putShared(sharedCertModel, (err, result) => {
+                            certDAO.putShared(new SharedCertModel({
+                                url: requestEntity.shared_cert.url,
+                                certId: requestEntity.shared_cert.certid,
+                                public: requestEntity.shared_cert.public,
+                                password: requestEntity.shared_cert.password,
+                                expired: requestEntity.shared_cert.exp
+                            }), (err, result) => {
                                 if (!!err) {
                                     cb(ClientRequest.RESULT_FAILURE, err);
                                 } else {
-                                    var sharedCertUrl = new SharedCertUrlModel({
-                                        url: requestEntity.shared_cert.url,
-                                        certId: requestEntity.shared_cert.certId,
-                                        public: requestEntity.shared_cert.public,
-                                        password: requestEntity.shared_cert.password,
-                                        expired: requestEntity.shared_cert.expired
-                                    });
+                                    cb(ClientRequest.RESULT_SUCCESS, result);
+                                    // var sharedCertUrl = new SharedCertUrlModel({
+                                    //     url: requestEntity.shared_cert.url,
+                                    //     certId: requestEntity.shared_cert.certid,
+                                    //     public: requestEntity.shared_cert.public,
+                                    //     password: requestEntity.shared_cert.password,
+                                    //     expired: requestEntity.shared_cert.exp
+                                    // });
 
-                                    certDAO.putSharedUrl(sharedCertUrl, (err, result) => {
-                                        if (!!err) {
-                                            cb(ClientRequest.RESULT_FAILURE, err);
-                                        } else {
-                                            cb(ClientRequest.RESULT_SUCCESS, result);
-                                        }
-                                    });
+                                    // certDAO.putSharedUrl(sharedCertUrl, (err, result) => {
+                                    //     if (!!err) {
+                                    //         cb(ClientRequest.RESULT_FAILURE, err);
+                                    //     } else {
+                                    //         cb(ClientRequest.RESULT_SUCCESS, result);
+                                    //     }
+                                    // });
                                 }
                             });
                         }
@@ -88,21 +94,19 @@ class ShareCertRequestHandler extends AbstractClientRequestHandler {
                 }
                 // 1번 이상 공유된 증명서
                 else {
-                    var sharedCertUrl = new SharedCertUrlModel({
+                    certDAO.putShared(new SharedCertModel({
                         url: requestEntity.shared_cert.url,
-                        certId: requestEntity.shared_cert.certId,
+                        certId: requestEntity.shared_cert.certid,
                         public: requestEntity.shared_cert.public,
                         password: requestEntity.shared_cert.password,
-                        expired: requestEntity.shared_cert.expired
-                    })
-
-                    certDAO.putSharedUrl(sharedCertUrl, (err, result) => {
+                        expired: requestEntity.shared_cert.exp
+                    }), (err, result) => {
                         if (!!err) {
                             cb(ClientRequest.RESULT_FAILURE, err);
                         } else {
                             cb(ClientRequest.RESULT_SUCCESS, result);
                         }
-                    })
+                    });
                 }
             }
         });

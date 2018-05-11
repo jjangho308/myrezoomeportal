@@ -37,10 +37,11 @@ class CertificateDAO extends AbstractDAO {
      * @param {*} cb 
      */
     getCert(creteria, cb) {
+        
         var condition = {}
 
         if (!!creteria.sId) {
-            condition.S_USR_CERT_ID = creteria.sId;
+            condition.S_CERT_DATA_ID = creteria.sId;
         }
 
         if (!!creteria.certId) {
@@ -51,6 +52,8 @@ class CertificateDAO extends AbstractDAO {
             delete condition.CERT_ID;
             condition.UID = creteria.uId;
         }
+
+        console.log(condition);
 
         var query = mysql.format(CertQuery.getCert, condition);
         this.query(query, (err, rows) => {
@@ -137,10 +140,14 @@ class CertificateDAO extends AbstractDAO {
     putCert(certModel, cb) {
         var param = certModel.toRow();
         var query = mysql.format(CertQuery.issueCert, param);
+
+        
+
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
             } else {
+                //console.log(result);
                 cb(err, result.insertId);
             }
         })
@@ -319,7 +326,12 @@ class CertificateDAO extends AbstractDAO {
 
         var query = mysql.format(CertQuery.getShared, [condition, { DEL_YN: 'N' }]);
 
+        
+
+
         this.query(query, (err, rows) => {
+            
+
             if (!!err) {
                 cb(err);
             } else {
@@ -327,7 +339,7 @@ class CertificateDAO extends AbstractDAO {
                 for (var i in rows) {
                     certList.push(SharedCertModel.fromRow(rows[i]));
                 }
-                cb(err, certList);
+                cb(err, certList.length);
             }
         })
     }

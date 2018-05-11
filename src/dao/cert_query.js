@@ -4,9 +4,9 @@
  * @since 180326
  * @author TACKSU
  */
-var CERT_TABLE = 'rezoome_db.TCDA_USR_CERT';
-var SHARED_CERT_TABLE = 'rezoome_db.TCDA_CERT_SHR';
-var SHARED_URL_TABLE = 'rezoome_db.TCDA_CERT_SHR_INFO';
+var CERT_TABLE = 'rezoome_db.TCDA_CERT_DATA';
+var SHARED_CERT_TABLE = 'rezoome_db.TCDA_CERT_SHR_INFO';
+// var SHARED_URL_TABLE = 'rezoome_db.TCDA_CERT_SHR_INFO';
 export default {
     issueCert: 'INSERT INTO ' + CERT_TABLE + ' SET ?',
     
@@ -32,16 +32,16 @@ export default {
 
     
     
-    putUrl: 'INSERT INTO ' + SHARED_URL_TABLE + ' SET ?',
+    //putUrl: 'INSERT INTO ' + SHARED_URL_TABLE + ' SET ?',
     
     //완료 del_yn
-    getUrl: 'SELECT * FROM ' + SHARED_URL_TABLE + ' WHERE ? and ?',
+    //getUrl: 'SELECT * FROM ' + SHARED_URL_TABLE + ' WHERE ? and ?',
 
     //-> 애초에 del_yn가 y인 cert가 set될 수 없다
-    setUrl: 'UPDATE ' + SHARED_URL_TABLE + ' SET ? WHERE ?',
+    //setUrl: 'UPDATE ' + SHARED_URL_TABLE + ' SET ? WHERE ?',
     
     //완료 del_yn
-    delUrl: 'UPDATE ' + SHARED_URL_TABLE+ " SET DEL_YN = 'Y' WHERE ? and ?",
+    //delUrl: 'UPDATE ' + SHARED_URL_TABLE+ " SET DEL_YN = 'Y' WHERE ? and ?",
 
     getSubName: 'SELECT * FROM rezoome_db.TCCO_SUB',
     
