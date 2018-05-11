@@ -7,6 +7,6 @@
  */
 export default {
     get: (req, res, next) => {
-        
+        console.log(req.body);
     }
 }

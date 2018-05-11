@@ -8,7 +8,7 @@ import AbstractAgentRequestHandler from "../../agent/abstract_agent_request_hand
  * @since 180509
  * @author TACKSU
  */
-class VerifyRequestHandler extends AbstractAgentRequestHandler {
+class VerifyHandler extends AbstractAgentRequestHandler {
 
     /**
      * Default constructor. <br />
@@ -41,3 +41,5 @@ class VerifyRequestHandler extends AbstractAgentRequestHandler {
         })
     }
 }
+
+export default VerifyHandler;

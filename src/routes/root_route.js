@@ -10,6 +10,7 @@ import client_router from './client_route';
 import intro_router from './intro_route';
 import shared_certs_router from './shared_certs_route';
 import shared_resumes_router from './shared_resumes_route';
+import verify_router from './verify_route';
 
 /**
  * Root router of all http request channel. <br />
@@ -30,5 +31,6 @@ router.use('/resumes', resumes_router);
 router.use('/client', client_router);
 router.use('/shared_certs', shared_certs_router);
 router.use('/shared_resumes', shared_resumes_router);
+router.use('/v', verify_router);
 
 export default router;
