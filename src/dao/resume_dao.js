@@ -68,9 +68,9 @@ class ResumeDao extends AbstractDAO {
         if (!!creteria.rsmId) {
             if (!!where) {
                 where += ' AND '
-                where += "RSM_ID = '" + creteria.rsmId + "'"
+                where += "RSM_ID = '" + creteria.rsmId + "'"+"AND DEL_YN = 'N'"
             } else {
-                where = "RSM_ID = '" + creteria.rsmId + "'"
+                where = "RSM_ID = '" + creteria.rsmId + "'"+"AND DEL_YN = 'N'"
             }
         }
         if (!!creteria.uId) {
@@ -234,10 +234,10 @@ class ResumeDao extends AbstractDAO {
      * @param {*} sharedResume 
      * @param {*} cb 
      */
-    putShare(sharedResume, cb) {
+    putResumeRecords(sharedResume, cb) {
         var param = sharedResume.toRow();
 
-        var query = mysql.format(ResumeQuery.putShared, param);
+        var query = mysql.format(ResumeQuery.putResumeRecords, param);
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -256,7 +256,7 @@ class ResumeDao extends AbstractDAO {
      * @param {*} creteria 
      * @param {*} cb 
      */
-    getShared(creteria, cb) {
+    getResumeRecords(creteria, cb) {
         var condition = {};
 
         if (!!creteria.rsmId) {
@@ -264,7 +264,8 @@ class ResumeDao extends AbstractDAO {
         }
 
 
-        var query = mysql.format(ResumeQuery.getShared, condition);
+        var query = mysql.format(ResumeQuery.getResumeRecords, condition);
+        console.log(query);
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);
@@ -288,12 +289,12 @@ class ResumeDao extends AbstractDAO {
      * @param {*} sharedResume 
      * @param {*} cb 
      */
-    setShare(creteria, sharedResume, cb) {
+    setResumeRecords(creteria, sharedResume, cb) {
         var condition = {
             S_RSM_SHR_ID: creteria.sId
         }
 
-        var query = mysql.format(ResumeQuery.setShare, [sharedResume.toRow(), condition]);
+        var query = mysql.format(ResumeQuery.setResumeRecords, [sharedResume.toRow(), condition]);
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -312,7 +313,7 @@ class ResumeDao extends AbstractDAO {
      * @param {*} creteria 
      * @param {*} cb 
      */
-    delShare(creteria, cb) {
+    delResumeRecords(creteria, cb) {
 
     }
 

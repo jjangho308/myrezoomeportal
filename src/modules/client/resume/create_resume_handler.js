@@ -62,8 +62,6 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                 recordDAO.getBlockChainMap({
                     txid: request.resume.data[idx].txid
                 }, (err, bcModelList) => {
-                    console.log("#################");
-                    console.log(bcModelList);
                     if (!!err) {
                         cb(ClientRequest.RESULT_FAILURE, err);
                     } else if (bcModelList.length > 0) {
@@ -102,7 +100,7 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                                                             deleted: false
                                                         });
                                                         
-                                                        resumeDAO.putShare(sharedResume, (err, insertSharedId)=>{                                                           
+                                                        resumeDAO.putResumeRecords(sharedResume, (err, insertSharedId)=>{                                                           
                                                             if(!!err){
                                                                 cb(ClientRequest.RESULT_FAILURE, err);
                                                             }else{                                                               

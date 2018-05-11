@@ -2,6 +2,7 @@ import Env from '../core/environment';
 import Managers from '../core/managers';
 
 import GetResumeRequest from '../modules/client/resume/get_resume_request';
+import GetResumeDetailRequest from '../modules/client/resume/get_resume_detail_request';
 import CreateResumeRequest from '../modules/client/resume/create_resume_request';
 import UpdatResumeRequest from '../modules/client/resume/update_resume_request';
 import UpdateResumeRequest from '../modules/client/resume/update_resume_request';
@@ -67,20 +68,20 @@ export default {
     getResume: (req, res, next) => {
         req.body.rsmId = req.params.rsmId;       
         if (!!req.body.rsmId) {
-            Managers.client().request(new GetResumeRequest(req.body), (err, result) => {
+            Managers.client().request(new GetResumeDetailRequest(req.body), (err, result) => {
                 if (!!err) {
                     next(err);
-                } else {
+                } else {                    
                     var userDAO = Managers.db().getUserDAO();
                     userDAO.get({
-                        uId: result[0].uId
+                        uId: result.uId
                     }, (err, userResult)=>{
                         if(!!err){
                             console.log("getResume ERROR!!!");
                         } else {
 
                             res.render('resumesviewer', {
-                                resumeModel: result[0],
+                                resumeModel: result,
                                 userModel: userResult[0]
                             });
                         }
@@ -99,7 +100,7 @@ export default {
     getEditor: (req, res, next) => {
         req.body.rsmId = req.params.rsmId;
         if (!!req.body.rsmId) {
-            Managers.client().request(new GetResumeRequest(req.body), (err, result) => {
+            Managers.client().request(new GetResumeDetailRequest(req.body), (err, result) => {
                 if (!!err) {
                     next(err);
                 } else {
