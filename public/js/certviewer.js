@@ -1,11 +1,16 @@
 $(document).ready(function(){
+
+    //common
+    client_token = getCookie("JWT");
+    client_authorization = 'Bearer ' + client_token;
    
     $('#create-link-button').click(function(){
         $('.abc-radio label').css("color","#676767");
-        $("#cert-url-input").val("http://rezoome.io/d/20194011003A");
+        //$("#cert-url-input").val("http://rezoome.io/d/20194011003A");
         $('.abc-radio .default-label').click();
         
         $(".modal-footer a").css("display","inline-block");
+        generateURL();
     });
     
     
@@ -234,12 +239,26 @@ var certformatter= {
     },
 }
 
-function test0507() {
-    var temp_sub_id = "RCCNF0001";
-    var temp_tx_id = "1b8ec94a79ab02fb09d5a0e8595d6b0f488a7c7b7cc59c66b393bccbbb2909cb";
+function generateURL() {
 
-    var record = '{"data":{"userid":"123456","point0":"999","point1":"99","point2":"600","point3":"399","name":"박헌욱","grade":"짱","date":"2018-04-18 08:39:03.0"},"hash":"8e031d8fb7711ad6dbccbce85913b01ecec3643543da8e1245c8f232a63d3f1c","txid":"1b8ec94a79ab02fb09d5a0e8595d6b0f488a7c7b7cc59c66b393bccbbb2909cb","subid":"RCCNF0001","stored":"Y","dftYn":"Y"}';
-    var json_record = JSON.parse(record);
+    $.ajax({
+        type: 'POST',
+        url: '/client',
+        headers: {
+            'Authorization': client_authorization
+        },
+        data: JSON.stringify({
+            cmd: 'GenerateShortURL',
+            
+            args: {
+               prefix: 'c'
+            }
+            
+        }),
+        success: function (result) {
+            $("#cert-url-input").val(result.result);
+        },
+        contentType: 'application/json'
+    });
 
-    certformatter[temp_sub_id](json_record.data);
 }

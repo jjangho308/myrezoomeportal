@@ -59,6 +59,15 @@ p{
     margin-left: 10px;
 }
 
+.header button:nth-child(2) {
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #4c80f1;
+    border: none;
+}
+
 .header  button:nth-child(6){
   width: 80px;
   height: 40px;
