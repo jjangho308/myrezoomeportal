@@ -106,13 +106,13 @@ export default {
                 } else {
                     var userDAO = Managers.db().getUserDAO();
                     userDAO.get({
-                        uId: result[0].uId
+                        uId: result.uId
                     }, (err, userResult) => {
                         if (!!err) {
                             console.log("getResume ERROR!!!");
                         } else {
                             res.render('resumeseditor', {
-                                resumeModel: result[0],
+                                resumeModel: result,
                                 userModel: userResult[0]
                             });
                         }

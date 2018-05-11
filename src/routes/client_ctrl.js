@@ -34,7 +34,7 @@ export default {
         clientRequest.request(requestEntity, (err, result) => {
 
             // 아직 Sent 안됐을때만 response
-            if(!res.headersSent){
+            if (!res.headersSent) {
                 if (!!err) {
                     next(err);
                 } else {
@@ -43,11 +43,10 @@ export default {
                         result: result
                     });
                 }
-            }else{
+            } else {
                 // 이 경우가 발생하지 않도록 수정 필요
                 // TODO Error 처리
             }
-            
         });
 
         // res.json({
