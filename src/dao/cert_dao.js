@@ -140,12 +140,7 @@ class CertificateDAO extends AbstractDAO {
     putCert(certModel, cb) {
         var param = certModel.toRow();
         var query = mysql.format(CertQuery.issueCert, param);
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 028d58e2121893c89fbd71d22e8c933258740a78
+        
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
