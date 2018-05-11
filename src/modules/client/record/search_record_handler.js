@@ -51,7 +51,10 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             uId: uid
         }, (err, users) => {
             if (!!err || users.length < 1) {
-                done(ClientRequestManager.RESULT_FAILURE);
+                done(ClientRequestManager.RESULT_FAILURE, {
+                    code: 200,
+                    msg: 'No user exists.'
+                });
                 return;
             } else {
 
@@ -93,51 +96,27 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                      * 2. RequiredKey를 실어서 PushMessage 발신.
                      */
                     if (!!clientReq.orgcode && !!clientReq.requiredKey) {
-                        db.getOrgDAO().get({
-                            orgcode: clientReq.orgcode
-                        }, (err, foundOrgs) => {
-                            if (!!err) {
-                                // Database error
-                                done(ClientRequestManager.RESULT_FAILURE, err);
-                                return;
-                            } else if (foundOrgs.length == 0) {
-                                // No organization error
-                                done(ClientRequestManager.RESULT_FAILURE, err);
-                                return;
-                            } else {
-                                msg.args.subIDs = [foundOrgs[0].SUB_ID];
-                                msg.args.requiredKey = clientReq.requiredKey;
+                        new Promise((resolve, reject) => {
 
-                                //Managers.push().init();
-                                Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
-                                    if (!err && i == resultOrgIds.length - 1) {
-                                        done(ClientRequestManager.RESULT_PENDING, {
-                                            mid: clientReq.mId
-                                        });
-                                        return;
-                                    }
-                                });
-                            }
-                        })
-                    }
-
-                    // 전체 기관에 모두 발신할 경우
-                    db.getOrgDAO().findAll((err, resultOrgIds) => {
-                        for (var i in resultOrgIds) {
-                            db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, result) => {
+                        }).then(result => {
+                            db.getOrgDAO().get({
+                                orgcode: clientReq.orgcode
+                            }, (err, foundOrgs) => {
                                 if (!!err) {
+                                    // Database error
+                                    done(ClientRequestManager.RESULT_FAILURE, err);
+                                    return;
+                                } else if (foundOrgs.length == 0) {
+                                    // No organization error
                                     done(ClientRequestManager.RESULT_FAILURE, err);
                                     return;
                                 } else {
-                                    var subIds = [];
-                                    for (var j in result) {
-                                        subIds.push(result[j].SUB_ID);
-                                    }
-
-                                    msg.args.subIDs = subIds;
-
+                                    msg.args.subIDs = [foundOrgs[0].SUB_ID];
+                                    msg.args.requiredKey = clientReq.requiredKey;
+    
+                                    //Managers.push().init();
                                     Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
-                                        if (!err && subIds.length == resultOrgIds.length) {
+                                        if (!err && i == resultOrgIds.length - 1) {
                                             done(ClientRequestManager.RESULT_PENDING, {
                                                 mid: clientReq.mId
                                             });
@@ -145,9 +124,78 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                         }
                                     });
                                 }
-                            })
-                        }
-                    })
+                            });
+                        }).catch(err => {
+
+                        });
+                    }
+
+                    // 전체 기관에 모두 발신할 경우
+                    db.getOrgDAO().findAll((err, resultOrgIds) => {
+
+                        var defferedFunctions = [];
+                        resultOrgIds.forEach((item, idx, array) => {
+
+                            defferedFunctions.push(new Promise((resolve, reject) => {
+
+                                db.getOrgDAO().getSubIdByOrgId(item.ORG_ID, (err, result) => {
+                                    if (!!err) {
+                                        reject(err);
+                                    } else {
+                                        var subIds = [];
+                                        result.forEach((resultItem, resultItemIdx, resultArray) => {
+                                            subIds.push(resultItem.SUB_ID);
+                                        });
+
+                                        msg.args.subIDs = subIds;
+
+                                        Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
+                                            if (!!err) {
+                                                reject(err);
+                                            } else {
+                                                resolve();
+                                            }
+                                        });
+                                    }
+                                });
+                            }));
+                        });
+
+                        Promise.all(defferedFunctions).then((result) => {
+                            done(ClientRequestManager.RESULT_PENDING, true);
+                        }).catch(err => {
+                            // FIXME 에러 코드로 변경 필요
+                            done(ClientRequestManager.RESULT_FAILURE, {
+                                code: 100,
+                                msg: 'Error'
+                            });
+                        });
+
+                        // for (var i in resultOrgIds) {
+                        //     db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, result) => {
+                        //         if (!!err) {
+                        //             done(ClientRequestManager.RESULT_FAILURE, err);
+                        //             return;
+                        //         } else {
+                        //             var subIds = [];
+                        //             result.forEach((item, idx, array) => {
+                        //                 subIds.push(item.SUB_ID);
+                        //             });
+
+                        //             msg.args.subIDs = subIds;
+
+                        //             Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
+                        //                 if (!err && subIds.length == resultOrgIds.length) {
+                        //                     done(ClientRequestManager.RESULT_PENDING, {
+                        //                         mid: clientReq.mId
+                        //                     });
+                        //                     return;
+                        //                 }
+                        //             });
+                        //         }
+                        //     });
+                        // }
+                    });
                 } else {
                     if (clientReq.update == true) {
 
@@ -417,8 +465,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                         }
                     }).call(this, i);
                 }
-            }
-            catch (exception) {
+            } catch (exception) {
                 console.log(exception);
 
             }
