@@ -392,7 +392,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 if (j == (agentRequest.records.length - 1)) {
                                     try {
                                         console.log("@@@@@@@@@@@@@@@@@@@@@@@");
-                                        console.log(agentRequest);
+                                        console.log(socket);
                                         if (!!socket)
                                             socket.emit('SearchResult', JSON.stringify(agentRequest));
                                     } catch (exception) {
