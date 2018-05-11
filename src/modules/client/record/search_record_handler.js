@@ -403,11 +403,8 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 //BLC MAP stored
                                 if (j == (agentRequest.records.length - 1)) {
                                     try {
-<<<<<<< HEAD
                                         console.log("@@@@@@@@@@@@@@@@@@@@@@@");
                                         console.log(socket);
-=======
->>>>>>> 4f20dafec48994cb0cf5d6b60c20a6182d191485
                                         if (!!socket)
                                             socket.emit('SearchResult', JSON.stringify(agentRequest));
                                     } catch (exception) {
