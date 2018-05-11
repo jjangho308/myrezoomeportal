@@ -70,8 +70,8 @@ import GenerateShortUrlHandler from './generate_short_url/generate_short_url_han
  * '/v/' Verification request. <br />
  * 
  */
-import VerifyRequestEntity from './verify/verify_request_entity';
-import VerifyRequestHandler from './verify/verify_request_handler';
+import VerifyRequest from './verify/verify_request';
+import VerifyHandler from './verify/verify_handler';
 
 /**
  * Request manager from client. <br />
@@ -133,8 +133,7 @@ class ClientRequestManager extends AbstractManager {
         this.handlerMap.set(DeletePrivateRecordRequest, new DeletePrivateRecordHandler());
 
         // Verification request
-        this.handlerMap.set(VerifyRequestEntity, new VerifyRequestHandler());
-
+        this.handlerMap.set(VerifyRequest, new VerifyHandler());
 
         // 기타 등등 cmd 로 관리 되는것들
         this.entityMap.set('SearchRecord', SearchRecordRequest);

@@ -6,7 +6,7 @@ import AbstractClientRequestEntity from '../abstract_client_request_entity';
  * @since 180509
  * @author TACKSU
  */
-class VerifyRequestEntity extends AbstractClientRequestEntity {
+class VerifyRequest extends AbstractClientRequestEntity {
 
     /**
      * Default constructor. <br />
@@ -26,4 +26,4 @@ class VerifyRequestEntity extends AbstractClientRequestEntity {
     }
 }
 
-export default VerifyRequestEntity;
+export default VerifyRequest;
