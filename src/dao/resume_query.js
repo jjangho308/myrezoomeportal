@@ -18,7 +18,7 @@ export default {
     setResumeRecords: 'UPDATE ' + RESUME_DATA_TABLE_NAME + ' SET ? WHERE ?',
     delResumeRecords: "UPDATE " + RESUME_DATA_TABLE_NAME + " SET DEL_YN = 'Y' WHERE ? and ?",
     putUrl: 'INSERT INTO ' + SHARED_INFO_TABLE_NAME + ' SET ?',
-    getUrl: 'SELECT * FROM ' + SHARED_INFO_TABLE_NAME + ' WHERE ? and ?',
+    getUrl: 'SELECT * FROM ' + SHARED_INFO_TABLE_NAME + " WHERE DEL_YN = 'N' and ?",
     setUrl: 'UPDATE ' + SHARED_INFO_TABLE_NAME + ' SET ? WHERE ?',
     delUrl: 'UPDATE ' + SHARED_INFO_TABLE_NAME + " SET DEL_YN = 'Y' WHERE ? and ?"
 }

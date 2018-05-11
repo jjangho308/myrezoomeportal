@@ -22,7 +22,7 @@ export default {
     putShared: 'INSERT INTO ' + SHARED_CERT_TABLE + ' SET ?',
     
     // del_yn 처리 완료
-    getShared: 'SELECT * FROM ' + SHARED_CERT_TABLE + ' WHERE ? and ?',
+    getShared: 'SELECT * FROM ' + SHARED_CERT_TABLE + " WHERE DEL_YN = 'N' and ?",
     
     //del_yn 처리 필요 없는것같음(검토필요)
     setShared: 'UPDATE ' + SHARED_CERT_TABLE + ' SET ? WHERE ?',

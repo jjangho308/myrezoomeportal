@@ -141,8 +141,6 @@ class CertificateDAO extends AbstractDAO {
         var param = certModel.toRow();
         var query = mysql.format(CertQuery.issueCert, param);
 
-        
-
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -305,43 +303,21 @@ class CertificateDAO extends AbstractDAO {
      * }
      * @param {*} cb 
      */
-    getShared(creteria, cb) {
-        var condition = {};
-        if (!!creteria.uId) {
-            condition.UID = creteria.uId;
-        }
+    getShared(creteria, cb) {        
+        var condition = {
+            URL: creteria.url
+        };
 
-        if (!!creteria.certId) {
-            delete condition.UID;
-            condition.CERT_ID = creteria.certId;
-        }
-
-        if (!!creteria.sId) {
-            delete condition.UID;
-            delete condition.CERT_ID;
-            condition.S_CERT_SHR_ID = creteria.sId;
-        }
-
-
-
-        var query = mysql.format(CertQuery.getShared, [condition, { DEL_YN: 'N' }]);
-
-        
-
-
+        console.log("######3");
+        var query = mysql.format(CertQuery.getShared, condition);
+        console.log(query);
         this.query(query, (err, rows) => {
-            
-
             if (!!err) {
                 cb(err);
-            } else {
-                var certList = [];
-                for (var i in rows) {
-                    certList.push(SharedCertModel.fromRow(rows[i]));
-                }
-                cb(err, certList.length);
+            } else {                
+                cb(err, SharedCertModel.fromRow(rows[0]));
             }
-        })
+        });
     }
 
     /**
@@ -442,10 +418,10 @@ class CertificateDAO extends AbstractDAO {
      */
     getSharedUrl(creteria, cb) {
         var condition = {
-            S_CERT_SHR_INFO_ID: creteria.sId
+            URL: creteria.url
         }
 
-        var query = mysql.format(CertQuery.getUrl, condition);
+        var query = mysql.format(CertQuery.getShared, condition);
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);

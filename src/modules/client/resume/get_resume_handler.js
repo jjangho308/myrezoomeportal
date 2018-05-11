@@ -56,43 +56,6 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
                         if (completedResume == resumeList.length) {
                             done(ClientRequest.RESULT_SUCCESS, resumeList);
                         }
-
-
-                        /*
-                        // 이력서가 담고 있는 Records의 Blc MAP IDs
-                        var recordsMap = JSON.parse(resumeList[idx].blcMap)
-                        // Remove 'blcMap' Field
-                        delete resumeList[idx].blcMap;
-                        for (var j in recordsMap) {
-                            var bcMapIds = [];
-                            !((jdx) => {
-                                recordDAO.getBlockChainMap({
-                                    blcMapId: recordsMap[jdx].mapId
-                                }, (err, bcModels) => {
-                                    if (bcModels.length > 0) {
-                                        bcMapIds.push({
-                                            order: recordsMap[jdx].order,
-                                            txid: bcModels[0].txid
-                                        });
-
-                                        // 하나 이력서의 blockchain mapId 구성 완료함.
-                                        if (bcMapIds.length == recordsMap.length) {
-                                            bcMapIds.sort((a, b) => {
-                                                return a.order - b.order;
-                                            });
-
-                                            resumeList[idx].records = bcMapIds;
-                                            completedResume++;
-
-                                            if (completedResume == resumeList.length) {
-                                                done(ClientRequest.RESULT_SUCCESS, resumeList);
-                                            }
-                                        }
-                                    }
-                                })
-                            })(j);                            
-                        }
-                        */
                     })(i);
                 }
             }

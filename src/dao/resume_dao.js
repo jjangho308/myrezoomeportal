@@ -341,7 +341,7 @@ class ResumeDao extends AbstractDAO {
 
     getSharedUrl(creteria, cb) {
         var condition = {
-            S_RSM_SHR_INFO_ID: creteria.sId
+            URL: creteria.url
         };
 
         var query = mysql.format(ResumeQuery.getUrl, condition);
@@ -349,11 +349,7 @@ class ResumeDao extends AbstractDAO {
             if (!!err) {
                 cb(err);
             } else {
-                var result = [];
-                for (var i in rows) {
-                    result.push(SharedResumeUrlModel.fromRow(rows[i]));
-                }
-                cb(err, result);
+                cb(err, SharedResumeUrlModel.fromRow(rows[0]));
             }
         });
     }
