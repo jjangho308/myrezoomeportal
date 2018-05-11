@@ -114,6 +114,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                         done(ClientRequestManager.RESULT_PENDING, {
                                             mid: clientReq.mId
                                         });
+                                        return;
                                     }
                                 });
                             }
@@ -140,6 +141,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                             done(ClientRequestManager.RESULT_PENDING, {
                                                 mid: clientReq.mId
                                             });
+                                            return;
                                         }
                                     });
                                 }
@@ -188,19 +190,21 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                                     Managers.push().sendMessage(msg, resultOrgIds[orgIdx].ORG_ID, err => {
                                                                         if (!!err) {
                                                                             done(ClientRequestManager.RESULT_FAILURE, err);
+                                                                            return;
                                                                         } else {
-
                                                                             //Todo TCUP_USR MDFID_DT column update
                                                                             db.getUserDAO().setMDFIDT({
                                                                                 uId: uid
                                                                             }, (err, result) => {
                                                                                 if (!!err) {
                                                                                     done(ClientRequestManager.RESULT_FAILURE, err);
+                                                                                    return;
                                                                                 } else {
                                                                                     //console.log("sucess");
                                                                                     done(ClientRequestManager.RESULT_PENDING, {
                                                                                         mid: clientReq.mId
                                                                                     });
+                                                                                    return;
                                                                                 }
                                                                             })
                                                                         }
@@ -232,6 +236,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     if (subIds.length == resultOrgIds.length) {
                                                         if (!!err) {
                                                             done(ClientRequestManager.RESULT_FAILURE, err);
+                                                            return;
                                                         } else {
                                                             //Todo TCUP_USR MDFID_DT column update
                                                             db.getUserDAO().setMDFIDT({
@@ -239,11 +244,13 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                             }, (err, result) => {
                                                                 if (!!err) {
                                                                     done(ClientRequestManager.RESULT_FAILURE, err);
+                                                                    return;
                                                                 } else {
                                                                     //console.log("sucess");
                                                                     done(ClientRequestManager.RESULT_PENDING, {
                                                                         mid: clientReq.mId
                                                                     });
+                                                                    return;
                                                                 }
                                                             })
                                                         }
@@ -284,7 +291,13 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                                             //console.log(msg);
                                                             Managers.push().sendMessage(msg, storedOrgs[orgIdx].ORG_ID, err => {
-                                                                !!err ? done(ClientRequestManager.RESULT_FAILURE, err) : done(ClientRequestManager.RESULT_PENDING);
+                                                                if (!!err) {
+                                                                    done(ClientRequestManager.RESULT_FAILURE, err);
+                                                                    return;
+                                                                } else {
+                                                                    done(ClientRequestManager.RESULT_PENDING);
+                                                                    return;
+                                                                }
                                                             });
                                                         });
                                                     }
@@ -368,8 +381,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                                 if (j == (agentRequest.records.length - 1)) {
                                     try {
-                                        console.log("######################");
-                                        console.log(agentRequest);
+
                                         if (!!socket)
                                             socket.emit('SearchResult', JSON.stringify(agentRequest));
                                     } catch (exception) {
@@ -391,8 +403,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 //BLC MAP stored
                                 if (j == (agentRequest.records.length - 1)) {
                                     try {
+<<<<<<< HEAD
                                         console.log("@@@@@@@@@@@@@@@@@@@@@@@");
                                         console.log(socket);
+=======
+>>>>>>> 4f20dafec48994cb0cf5d6b60c20a6182d191485
                                         if (!!socket)
                                             socket.emit('SearchResult', JSON.stringify(agentRequest));
                                     } catch (exception) {
