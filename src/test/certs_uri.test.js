@@ -115,7 +115,7 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it.skip('Share certificate test case', done => {
+    it('Share certificate test case', done => {
         chai.request(app)
             .post('/shared_certs')
             .set('Content-Type', 'application/json')
@@ -123,8 +123,8 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 shared_cert: {
-                    certId: 'f3aaad3c-5344-4836-8ac5-5ced02b054e8',
-                    url: 'https://rzoo.me/asdf4ecvvv',
+                    certid: '3c8a1b06-49a0-4f68-852e-20ddb058faad',
+                    url: 'https://rzoo.me/afefefev',
                     password: 'asdfasdf',
                     emails: [
                         'asdfasdf@asdfasd.com',
@@ -132,10 +132,11 @@ describe('/certs URI Page test suite.', () => {
                     ],
                     msg: 'Hello World!',
                     public: false,
-                    expired: '2018-10-19'
+                    exp: '2018-10-19'
                 }
             })
             .end((err, res) => {
+                console.log(res);
                 done();
             });
     })

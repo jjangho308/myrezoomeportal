@@ -39,6 +39,8 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
         var certDAO = Managers.db().getCertDAO();
         var recordDAO = Managers.db().getRecordDAO();
 
+        //console.log(request);
+
         recordDAO.getBlockChainMap({
             txid: request.cert.txid
         }, (err, blcMapModels) => {
@@ -50,48 +52,23 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                     msg: 'No blockchain map'
                 });
             } else {
+                //TODO Plain text를 암호화 된 message로 변환할 것.
+                var cryptoManager = Managers.crypto();
+                
                 var certModel = new CertModel({
                     certId: Util.uuid(),
                     uId: request.uId,
-                    blcMapId: blcMapModels[0].blcMapId
+                    txId: blcMapModels[0].txid,
+                    encryptedData: JSON.stringify(request.cert.record)
                 });
 
                 certDAO.putCert(certModel, (err, insertId) => {
                     if (!!err) {
                         cb(ClientRequest.RESULT_FAILURE, err);
                     } else {
-                        certDAO.getCert({
-                            sId: insertId
-                        }, (err, certList) => {
-                            if (!!err) {
-                                cb(ClientRequest.RESULT_FAILURE, err);
-                            } else if (certList.length > 0) {
-
-                                // TODO Plain text를 암호화 된 message로 변환할 것.
-                                if (!!request.cert.record) {
-                                    var cryptoManager = Managers.crypto();
-                                    
-                                    var sharedCert = new SharedCertModel({
-                                        uId: request.uId,
-                                        certId: certList[0].certId,
-                                        encryptedData: JSON.stringify(request.cert.record)
-                                    });
-
-                                    certDAO.putShared(sharedCert, (err, insertSharedId) => {
-                                        if (!!err) {
-                                            cb(ClientRequest.RESULT_FAILURE, err);
-                                        } else {
-                                            cb(ClientRequest.RESULT_SUCCESS, {
-                                                certId: certList[0].certId,
-                                                txid: blcMapModels[0].txid,
-                                                date: certList[0].created
-                                            });
-                                        }
-                                    })
-                                }
-                            }
-
-                        })
+                        cb(ClientRequest.RESULT_SUCCESS, {
+                            result:"success" 
+                        });
                     }
                 });
             }

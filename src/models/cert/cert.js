@@ -21,14 +21,17 @@ class CertModel extends AbstractModel {
     constructor(data) {
         super(data);
         this.uId = data.uId;
+
+        //sequence ID
         this.sId = data.sId;
         this.certId = data.certId;
-        this.blcMapId = data.blcMapId;
+        this.txId = data.txId;
         this.shared = data.shared;
         this.lastShared = data.lastShared;
         this.created = data.created;
         this.modified = data.modified;
         this.deleted = data.deleted;
+        this.encryptedData=data.encryptedData;
         this.trim(this);
     }
 
@@ -45,12 +48,13 @@ class CertModel extends AbstractModel {
             sId: row.S_USR_CERT_ID,
             certId: row.CERT_ID,
             uId: row.UID,
-            blcMapId: row.BLC_MAP_ID,
+            txId: row.TRX_ID,
             shared: Util.flagToBool(row.SHRD_YN),
             deleted: Util.flagToBool(row.DEL_YN),
             lastShared: row.LST_SHRD_DT,
             created: row.CRTD_DT,
-            modified: row.MDFID_DT
+            modified: row.MDFID_DT,
+            encryptedData: row.ENC_CERT_DATA
         });
     }
 
@@ -77,12 +81,13 @@ class CertModel extends AbstractModel {
             S_USR_CERT_ID: obj.sId,
             CERT_ID: obj.certId,
             UID: obj.uId,
-            BLC_MAP_ID: obj.blcMapId,
+            TRX_ID: obj.txId,
             DEL_YN: Util.btf(obj.deleted),
             SHRD_YN: Util.btf(obj.shared),
             LST_SHRD_DT: obj.lastShared,
             CRTD_DT: obj.created,
-            MDFID_DT: obj.modified
+            MDFID_DT: obj.modified,
+            ENC_CERT_DATA:obj.encryptedData
         })
     }
 }
