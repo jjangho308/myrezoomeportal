@@ -102,20 +102,20 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it.skip('Delete certificate request test', done => {
+    it('Delete certificate request test', done => {
         chai.request(app)
-            .delete('/certs/e58a799f-dcf9-4dc4-829e-bb3507c3fa8b')
+            .delete('/certs/3c8a1b06-49a0-4f68-852e-20ddb058faad')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + jwtToken)
             .set('X-Requested-With', 'XMLHttpRequest')
             .send()
             .end((err, res) => {
-                console.log(res);
+                
                 done();
             });
     })
 
-    it('Share certificate test case', done => {
+    it.skip('Share certificate test case', done => {
         chai.request(app)
             .post('/shared_certs')
             .set('Content-Type', 'application/json')
@@ -123,8 +123,8 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send({
                 shared_cert: {
-                    certid: '3c8a1b06-49a0-4f68-852e-20ddb058faad',
-                    url: 'https://rzoo.me/afefefev',
+                    certid: '400e8968-3119-42be-8769-59ddd9eac9f0',
+                    url: 'https://rzoo.me/122838fev',
                     password: 'asdfasdf',
                     emails: [
                         'asdfasdf@asdfasd.com',
@@ -136,7 +136,6 @@ describe('/certs URI Page test suite.', () => {
                 }
             })
             .end((err, res) => {
-                console.log(res);
                 done();
             });
     })
