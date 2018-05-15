@@ -2,6 +2,11 @@ body {
     margin: 0;
 }
 
+.landing-navbar{
+  background-color:transparent!important;
+  border: none!important;
+}
+
 #header {
     height: 850px;
     object-fit: contain;
@@ -52,7 +57,8 @@ margin: auto;
 }
 
 .body-div {
-    height: 790px;
+  overflow-y: hidden;
+    height: 797px;
     background-color: #ffffff;
     border-bottom: solid 1px #d7dde3;
 }
@@ -78,12 +84,27 @@ margin: auto;
     margin: 0;
     margin-bottom: 0px;
 }
+
+.title-2{
+    font-size: 35px;
+    color: #2b2c2c;
+    margin-top: 87px;
+    margin-bottom: 28px;
+}
+
+.sub-title-2{
+    font-size: 15px;
+    line-height: 1.8;
+    color: #7c848a;
+    margin: 0;
+    margin-bottom: 0px;
+}
+
 .body-div:nth-child(2) img{
     display: block;
-
-      margin: auto;
-  width: 1000px;
-  height: 586px;
+    margin-left: -16px;
+ /* width: 1000px;
+height: 535px;*/
 }
 
 .body-div:nth-child(2) p{
@@ -122,14 +143,14 @@ left: 0;
   height: 486px;
 }
 
-.body-div:nth-child(4) .title{
+.body-div:nth-child(4) .title-2{
     position: absolute;
     top: 68px;
 
     left: 577px;
 }
 
-.body-div:nth-child(4) .sub-title{
+.body-div:nth-child(4) .sub-title-2{
     position: absolute;
 top: 229px;
     left: 577px;

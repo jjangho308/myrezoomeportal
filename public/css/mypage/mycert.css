@@ -12,6 +12,16 @@
     display: none;
 }
 
+
+#add-cert-dialog{
+  width: 490px;
+}
+
+#add-cert-dialog tbody{
+  
+height: 380px;  
+}
+
 #add-cert-dialog th:nth-child(1){
     width: 61px;
     text-align: center;
@@ -19,17 +29,17 @@
 }
 
 #add-cert-dialog td:nth-child(1){
-    width: 61px;
+    width: 66px;
     text-align: center;
-    padding-left: 22px;
+    padding-left: 16px;
 }
 
 #add-cert-dialog th:nth-child(2) {
-    width: 53px;
+    width: 40px;
 }
 
 #add-cert-dialog th:nth-child(3) {
-    width: 83px;
+    width: 64px;
 }
 
 
@@ -38,11 +48,11 @@
 }
 
 #add-cert-dialog td:nth-child(2) {
-    width: 53px;
+    width: 40px;
 }
 
 #add-cert-dialog td:nth-child(3) {
-    width: 83px;
+    width: 64px;
 }
 
 
@@ -52,22 +62,30 @@
 }
 
 
-
+.cert-container{
+    position: relative;
+}
 .cert-container:nth-child(4n) {
 margin-right:0;
 }
 
 .cert-container p:nth-child(1) {
-font-size:9px;
+    font-size: 10px;
+transform: scale(calc(9/10));
 color:#a9afb3;
 margin-top:22px;
 margin-bottom:20px;
+    width: 221px;
+    margin-left: -30px;
 }
 
 .cert-container p:nth-child(1)>img {
-float:right;
-width:5px;
-cursor:pointer;
+position: absolute;
+    width: 4px;
+    top: -24px;
+    right: -10px;
+    cursor: pointer;
+    padding: 24px;
 }
 
 .cert-container img:nth-child(2) {
@@ -107,9 +125,13 @@ border:solid 1px #ced3d6;
 position:absolute;
 top:49px;
 right:26px;
+transform: none;
 }
 
 .cert-container div:nth-child(6)>p {
+
+      width: auto;
+      transform: initial;
 font-size:13px;
 text-align:left;
 line-height:38px;
@@ -118,250 +140,43 @@ margin:0;
 padding:0 15px;
 }
 
+.cert-container div:nth-child(7){
+    position: absolute;
+    top: 21px;
+    left: 24px;
+  width: 40px;
+  height: 15px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  border: solid 1px #a9afb3;
+    font-size: 10px;
+transform: scale(calc(9/10));
+  font-weight: normal;
+  text-align: center;
+  color: #7c848a;
+
+}
+
 .cert-container,.cert-container-new {
 position:relative;
 display:inline-block;
-width:167px;
+width:160px;
 height:266px;
 object-fit:contain;
 background-color:#fafcfd;
 border:solid 1px #e2e8f0;
-margin-right:20px;
-margin-bottom:20px;
+margin-right:13px;
+margin-bottom:15px;
 border-radius:4px;
 vertical-align:top;
 text-align:center;
 padding:0 30px;
 }
+.cert-container-new {
 
+background: url("/img/mycert/rectangle-6.svg");
+}
 .cert-container:focus,.cert-container:hover {
 box-shadow:0 2px 5px 0 rgba(191,191,191,0.5);
 border:solid 1px #c3cdd8;
-}
-
-/* loading timeline 추가 부분  */
-
-.timeline {
-    background: #fff;
-    margin: 5px auto;
-    border-radius: 3px;
-    max-width: 440px;
-    height: 104px;
-    padding: 12px 12px 0;
-}
-.animated-bg {
-    height: 104px;
-    overflow: hidden;
-    position: relative;
-    background: linear-gradient(to right, #e9ebee 0%, #d8d8d8 20%, #e9ebee 40%, #e9ebee 100%);
-    background-size: 800px 104px;
-    animation: loading 1s linear infinite forwards
-}
-@keyframes loading {
-    0% {
-        background-position-x: -800px;
-    }
-}
-.p01 {
-    background-color: transparent;
-    border: 8px solid #fff;
-    border-radius: 50%;
-    height: 40px;
-    left: -8px;
-    top: -8px;
-    position: absolute;
-    width: 40px;
-}
-.p02 {
-    height: 48px;
-    left: 40px;
-    right: auto;
-    top: 0;
-    background: #ffffff;
-    width: 8px;
-    position: absolute;
-}
-.p04 {
-    background: #ffffff;
-    position: absolute;
-    top: 0;
-    left: 48px;
-    height: 8px;
-    right: 0;
-}
-.p05 {
-    background: #ffffff;
-    position: absolute;
-    top: 8px;
-    right: 0;
-    left: 136px;
-    height: 6px;
-}
-.p06 {
-    background: #ffffff;
-    position: absolute;
-    height: 13px;
-    right: 0;
-    left: 48px;
-    top: 13px;
-}
-.p07 {
-    background: #ffffff;
-    position: absolute;
-    top: 26px;
-    right: 0;
-    left: 100px;
-    height: 6px;
-}
-.p08 {
-    background: #ffffff;
-    position: absolute;
-    height: 10px;
-    right: 0;
-    left: 48px;
-    top: 32px;
-}
-.p09 {
-    height: 20px;
-    right: 0;
-    left: 0;
-    position: absolute;
-    background: #fff;
-    top: 42px;
-}
-.p11 {
-    position: absolute;
-    background: #fff;
-    right: 0;
-    top: 62px;
-    left: 410px;
-    height: 6px;
-}
-.p12 {
-    background: #fff;
-    position: absolute;
-    right: 0;
-    left: 0;
-    height: 13px;
-    top: 68px;
-}
-.p13 {
-    position: absolute;
-    background: #fff;
-    right: 0;
-    top: 81px;
-    left: 375px;
-    height: 6px;
-}
-.p14 {
-    background: #fff;
-    position: absolute;
-    right: 0;
-    left: 0;
-    height: 13px;
-    top: 86px;
-}
-.fp15 {
-    position: absolute;
-    background: #fff;
-    right: 0;
-    top: 98px;
-    left: 275px;
-    height: 6px;
-}
-/* no need for the following lines */
-
-.fail {
-    text-align: center;
-    margin: 10px auto 0 auto;
-    padding: 12px 12px 0;
-    max-width: 440px;
-}
-.fail img {
-    animation: pop .3s cubic-bezier(0.18, 0.89, 0.32, 1.28) 1;
-    -webkit-animation: pop .3s cubic-bezier(0.18, 0.89, 0.32, 1.28) 1;
-    -moz-animation: pop .3s cubic-bezier(0.18, 0.89, 0.32, 1.28) 1;
-    -ms-animation: pop .3s cubic-bezier(0.18, 0.89, 0.32, 1.28) 1;
-    -o-animation: pop .3s cubic-bezier(0.18, 0.89, 0.32, 1.28) 1;
-    cursor: pointer;
-    transition: transform .3s ease-out;
-}
-@keyframes pop {
-    0% {
-        transform: scale(0);
-        opacity: .3;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-.fail img:active,
-.fail img:hover {
-    transform: scale(.9,.9);
-}
-.fail span {
-    position: relative;
-    font-weight: bold;
-    display: none;
-    font-family: Corbel, sans-serif;
-}
-.fail span:before {
-    position: absolute;
-    content: 'Tap to Retry';
-    line-height: 18px;
-    cursor: pointer;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    right: 0;
-    font-size: 13px;
-    bottom: -36px;
-    background: #d8dce0;
-    color: rgba(255, 255, 255, 0.91);
-    animation: up .4s ease 1;
-}
-@keyframes up {
-    0% {
-        opacity: 0
-    }
-}
-.fail span:after {
-    content: '';
-    position: absolute;
-    bottom: -17.88px;
-    left: 35.99px;
-    right: 0px;
-    height: 0;
-    width: 0;
-    border-width: 0px 5px 5px 5px;
-    border-style: solid;
-    border-color: transparent transparent #d8dce0 transparent;
-    animation: slide .8s ease 1;
-}
-@keyframes slide {
-    0% {
-        left: 0%;
-        opacity: .5 
-    }
-}
-/*responsive w kda
-for both lines and the timeline
-*/
-
-@media screen and (max-width: 500px) {
-    .p13 {
-        left: 310px;
-    }
-    .fp15 {
-        left: 200px;
-    }
-}
-@media screen and (max-width: 320px) {
-    .p13 {
-        left: 180px;
-    }
-    .fp15 {
-        left: 123px;
-    }
 }
