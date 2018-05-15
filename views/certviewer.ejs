@@ -18,10 +18,13 @@
        
    </div>
    <button id="more-button">···</button>
-   <button>    <a href="#cert-add-dialog" rel="modal:open">전송</a>
+    <a href="#cert-add-dialog" rel="modal:open">
+   <button class="primary-solid-btn">   전송
     </button>
-   <button>다운로드</button>
-   <button>인쇄</button>
+    </a>
+
+   <button class="border-btn">다운로드</button>
+   <button class="border-btn">인쇄</button>
    
     <div id="more-button-div">
        <p>항목#1</p>
@@ -59,6 +62,8 @@
           인하대학교교무처장
         </div> 
 
+          <img class = "stamp" src="/img/certviewer/stamp.png">
+          <img class = "qrcode" src="/img/certviewer/qrcode.png">
 
       </div>
       <p>본 증명서는 레쥬메 서비스를 통해 인터넷으로 발급되었으며 우측 QR코드를 이용하여 증명서 내용의 진위여부를 확인할 수 있습니다.</p>
@@ -83,7 +88,7 @@
         <div class="cert-create-div">
           
            <input type="text" id="cert-url-input" placeholder="생성된 링크가 없습니다. 링크 생성 버튼을 클릭해주세요.">
-            <button  id="create-link-button">링크 생성</button>
+            <button class="border-btn" id="create-link-button">링크 생성</button>
 
             <div class = "open-range-div">
                 <span>공개 대상</span>
@@ -103,7 +108,7 @@
 
                    <div class="password-div">
                        <input type="text"  placeholder="비밀번호를 설정해주세요." />
-                       <button>설정</button>
+                       <button class="border-btn">설정</button>
                     </div>
 
             </div>
@@ -124,9 +129,9 @@
 
                 <div class="period-div">
                   <button class="calendar"><img src="../img/myresume/icon-calendar.svg" alt=""></button>
-                <input type="text" class="form-control expire-period"  placeholder="2018-04-04"/>
+                <input type="text" class="form-control expire-period"  placeholder="YYYY-MM-DD"/>
 
-                   <button>설정</button>
+                   <button  class="border-btn">설정</button>
                 </div>
 
             </div>
@@ -139,7 +144,7 @@
 <!--        <textarea name="" id="" cols="30" rows="10" valign='middle' placeholder="메일 본문 메시지 추가(선택 사항)"></textarea>-->
         <div id="wrap">
           <div class="area dummy"></div>
-          <textarea class="area"></textarea>
+          <textarea class="area" placeholder="메일 본문 메시지 추가(선택 사항)"></textarea>
         </div>
             <div class = "open-range-div">
                 <span>공개 대상</span>
