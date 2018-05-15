@@ -38,328 +38,382 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      * Agent로부터 Request가 오면 해당 mid로 Client Socket으로. <br />
      * 응답을 push함. <br />
      * 
-     * @param {SearchRecordRequestEntity} clientReq RequestEntity
+     * @param {SearchRecordRequestEntity} clientRequestEntity RequestEntity
      * @param {functions(object, object)} done Callback of ClientRequestManager.
      * 
      */
-    request(clientReq, done) {
+    request(clientRequestEntity, done) {
         var db = Managers.db();
 
-        var uid = clientReq.uId;
+        var uId = clientRequestEntity.uId;
 
         db.getUserDAO().get({
-            uId: uid
-        }, (err, users) => {
-            if (!!err || users.length < 1) {
+            uId: uId
+        }, (err, userModels) => {
+
+            // 회원 정보가 없다면 즉시 Failure
+            if (!!err || userModels.length <= 0) {
                 done(ClientRequestManager.RESULT_FAILURE, {
                     code: 200,
                     msg: 'No user exists.'
                 });
                 return;
             } else {
+                // FIXME 1회만 Done을 호출하기 위해서 여기서 호출
+                // 최종적으로는 전체 promise가 resolve 된 뒤에 수행되도록 수정이 필요함
+                done(ClientRequestManager.RESULT_PENDING, true);
 
-                var targs = {
-                    familyNameEN: users[0].familyNameEN,
-                    firstNameEN: users[0].firstNameEN,
-                    fullNameEN: users[0].fullNameEN,
-                    familyNameKO: users[0].familyNameKO,
-                    firstNameKO: users[0].firstNameKO,
-                    fullNameKO: users[0].fullNameKO,
-                    birth: users[0].birth,
-                    gender: users[0].gender,
-                    phone: users[0].phone,
-                    email: users[0].email,
-                    ci: users[0].ci,
-                    pkey: clientReq.pkey,
-                    n: clientReq.n,
-                    e: clientReq.e
-                }
+                /**
+                 * SearchRecord가 수행하는 전체 로직을 감싼 Promise 객체
+                 */
+                var finalPrms = new Promise((finalResolve, finalReject) => {
 
-                targs.pkey = clientReq.pkey;
+                        var targetUser = {
+                            familyNameEN: userModels[0].familyNameEN,
+                            firstNameEN: userModels[0].firstNameEN,
+                            fullNameEN: userModels[0].fullNameEN,
+                            familyNameKO: userModels[0].familyNameKO,
+                            firstNameKO: userModels[0].firstNameKO,
+                            fullNameKO: userModels[0].fullNameKO,
+                            birth: userModels[0].birth,
+                            gender: userModels[0].gender,
+                            phone: userModels[0].phone,
+                            email: userModels[0].email,
+                            ci: userModels[0].ci,
+                            pkey: clientRequestEntity.pkey,
+                            n: clientRequestEntity.n,
+                            e: clientRequestEntity.e
+                        }
 
-                var msg = new SearchRecordPush({
-                    mid: clientReq.mId,
-                    sid: clientReq.sId,
-                    cmd: clientReq.cmd,
-                    args: targs,
-                });
+                        targetUser.pkey = clientRequestEntity.pkey;
 
-                var nexledgerService = new NexledgerService();
-                var nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
+                        /**
+                         * AMQ로 전달할 Push message의 basis format. <br />
+                         */
+                        var pushMessage = new SearchRecordPush({
+                            mid: clientRequestEntity.mId,
+                            sid: clientRequestEntity.sId,
+                            cmd: clientRequestEntity.cmd,
+                            args: targetUser,
+                        });
 
-                // 사용자가 최초 로그인인 경우
-                if (users[0].first == 'Y') {
+                        // FIXME NexLedger module의 일반적인 초기화 쪽으로 로직 변경 필요
+                        var nexledgerService = new NexledgerService();
+                        var nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
 
-                    /**
-                     * RequiredKey를 사용자로부터 입력받은 phase
-                     * 1. 전달된 기관의 정보를 가져오고
-                     * 2. RequiredKey를 실어서 PushMessage 발신.
-                     */
-                    if (!!clientReq.orgcode && !!clientReq.requiredKey) {
-                        new Promise((resolve, reject) => {
+                        /**
+                         * Case.1 Rezoome 사용자가 최초 로그인 시 <br />
+                         * Rezoome와 연계된 모든 기관으로부터 사용자의 이력을 조회 함. <br />
+                         */
+                        if (userModels[0].first == 'Y') {
 
-                        }).then(result => {
-                            db.getOrgDAO().get({
-                                orgcode: clientReq.orgcode
-                            }, (err, foundOrgs) => {
-                                if (!!err) {
-                                    // Database error
-                                    done(ClientRequestManager.RESULT_FAILURE, err);
-                                    return;
-                                } else if (foundOrgs.length == 0) {
-                                    // No organization error
-                                    done(ClientRequestManager.RESULT_FAILURE, err);
-                                    return;
-                                } else {
-                                    msg.args.subIDs = [foundOrgs[0].SUB_ID];
-                                    msg.args.requiredKey = clientReq.requiredKey;
-    
-                                    //Managers.push().init();
-                                    Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
-                                        if (!err && i == resultOrgIds.length - 1) {
-                                            done(ClientRequestManager.RESULT_PENDING, {
-                                                mid: clientReq.mId
+                            /**
+                             * Case.1-1 첫 데이터 조회 도중 RequiredKey phase
+                             * RequiredKey를 사용자로부터 입력받은 phase
+                             * 특정 1개의 기관에만 SearchRecord 전송
+                             * 
+                             * 1. 전달된 기관의 정보를 가져오고
+                             * 2. RequiredKey를 실어서 PushMessage 발신.
+                             */
+                            if (!!clientRequestEntity.orgcode && !!clientRequestEntity.requiredKey) {
+                                var requiredPhasePromise = new Promise((resolve, reject) => {
+                                    db.getOrgDAO().get({
+                                        orgcode: clientRequestEntity.orgcode
+                                    }, (dbError, foundOrgs) => {
+                                        if (!!dbError) {
+                                            reject({
+                                                code: 200,
+                                                msg: 'Error'
                                             });
                                             return;
+                                        } else if (foundOrgs.length == 0) {
+                                            reject({
+                                                code: 200,
+                                                msg: 'No organization'
+                                            });
+                                            return;
+                                        } else {
+                                            pushMessage.args.subIDs = [foundOrgs[0].SUB_ID];
+                                            pushMessage.args.requiredKey = clientRequestEntity.requiredKey;
+
+                                            Managers.push().sendMessage(pushMessage, result[0].ORG_ID, pushError => {
+                                                if (!!pushError) {
+                                                    reject({
+                                                        code: 200,
+                                                        msg: 'Push message error'
+                                                    });
+                                                } else {
+                                                    resolve(true);
+                                                }
+                                            });
                                         }
                                     });
-                                }
-                            });
-                        }).catch(err => {
-
-                        });
-                    }
-
-                    // 전체 기관에 모두 발신할 경우
-                    db.getOrgDAO().findAll((err, resultOrgIds) => {
-
-                        var defferedFunctions = [];
-                        resultOrgIds.forEach((item, idx, array) => {
-
-                            defferedFunctions.push(new Promise((resolve, reject) => {
-
-                                db.getOrgDAO().getSubIdByOrgId(item.ORG_ID, (err, result) => {
-                                    if (!!err) {
-                                        reject(err);
-                                    } else {
-                                        var subIds = [];
-                                        result.forEach((resultItem, resultItemIdx, resultArray) => {
-                                            subIds.push(resultItem.SUB_ID);
-                                        });
-
-                                        msg.args.subIDs = subIds;
-
-                                        Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
-                                            if (!!err) {
-                                                reject(err);
-                                            } else {
-                                                resolve();
-                                            }
-                                        });
-                                    }
+                                }).then(result => {
+                                    // 전체 Resolve로 전파
+                                    finalResolve(result);
+                                }).catch(err => {
+                                    // 전체 Reject로 전파
+                                    finalReject(err);
                                 });
-                            }));
-                        });
+                                return;
+                            }
 
-                        Promise.all(defferedFunctions).then((result) => {
-                            done(ClientRequestManager.RESULT_PENDING, true);
-                        }).catch(err => {
-                            // FIXME 에러 코드로 변경 필요
-                            done(ClientRequestManager.RESULT_FAILURE, {
-                                code: 100,
-                                msg: 'Error'
-                            });
-                        });
 
-                        // for (var i in resultOrgIds) {
-                        //     db.getOrgDAO().getSubIdByOrgId(resultOrgIds[i].ORG_ID, (err, result) => {
-                        //         if (!!err) {
-                        //             done(ClientRequestManager.RESULT_FAILURE, err);
-                        //             return;
-                        //         } else {
-                        //             var subIds = [];
-                        //             result.forEach((item, idx, array) => {
-                        //                 subIds.push(item.SUB_ID);
-                        //             });
+                            /**
+                             * Case.1-2 완전한 최초 Record 수집
+                             */
+                            else {
+                                db.getOrgDAO().findAll((err, resultOrgIds) => {
 
-                        //             msg.args.subIDs = subIds;
+                                    var defferedPromises = [];
+                                    resultOrgIds.forEach((item, idx, array) => {
 
-                        //             Managers.push().sendMessage(msg, result[0].ORG_ID, err => {
-                        //                 if (!err && subIds.length == resultOrgIds.length) {
-                        //                     done(ClientRequestManager.RESULT_PENDING, {
-                        //                         mid: clientReq.mId
-                        //                     });
-                        //                     return;
-                        //                 }
-                        //             });
-                        //         }
-                        //     });
-                        // }
-                    });
-                } else {
-                    if (clientReq.update == true) {
+                                        defferedPromises.push(new Promise((resolve, reject) => {
 
-                        db.getOrgDAO().findAll((err, resultOrgIds) => {
-                            for (var i in resultOrgIds) {
-                                !(orgIdx => {
-                                    //============================ 1. make subIDs =====================================
-                                    db.getRecordDAO().getStoredDataByUserId(uid, resultOrgIds[orgIdx].ORG_ID, (err, storedData) => {
+                                            db.getOrgDAO().getSubIdByOrgId(item.ORG_ID, (err, subIdQueryResult) => {
+                                                if (!!err) {
+                                                    reject(err);
+                                                } else {
+                                                    var subIds = [];
+                                                    subIdQueryResult.forEach((resultItem, resultItemIdx, resultArray) => {
+                                                        subIds.push(resultItem.SUB_ID);
+                                                    });
 
-                                        //BLC MAP에 저장된 record가 있는경우
-                                        if (storedData.length > 0) {
-                                            //console.log("subIDs + records 함께 있어야해 ");
-                                            db.getOrgDAO().getSubIdByOrgId(resultOrgIds[orgIdx].ORG_ID, (err, subIDsResult) => {
+                                                    pushMessage.args.subIDs = subIds;
 
-                                                var subIds = [];
+                                                    // 모든 기관마다 Push Message를 한번씩 발신한 뒤 Result.
+                                                    Managers.push().sendMessage(pushMessage, subIdQueryResult[0].ORG_ID, err => {
+                                                        if (!!err) {
+                                                            reject(err);
+                                                        } else {
+                                                            resolve();
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }));
+                                    });
 
-                                                var records = [];
-                                                for (var k in storedData) {
-                                                    !(dataIdx => {
-                                                        //console.log(dataIdx + " " + storedData[dataIdx].BLC_MAP_ID)
-                                                        nexledgerService.getbytxid(nodeurl, storedData[dataIdx].TRX_ID, function (res) {
+                                    Promise.all(defferedPromises).then((result) => {
+                                        finalResolve(result);
+                                    }).catch(err => {
+                                        finalReject(err);
+                                    });
+                                });
+                            }
+                        }
+                        /**
+                         * Case.2 사용자가 최초 페이즈를 모두 마친 뒤, <br />
+                         * 재 로그인 시 타는 루트. <br />
+                         */
+                        else {
 
-                                                            records.push({
-                                                                subID: storedData[dataIdx].SUB_ID,
-                                                                hashed: res.result.hash,
-                                                                txid: storedData[dataIdx].TRX_ID
-                                                            })
+                            /**
+                             * Case.2-1 Update Phase. <br />
+                             * 사용자가 두번째 로그인 한 이후 명시적인 Update를 통해
+                             * 기관이 보유중인 데이터를 새롭게 재구축하는 경우.
+                             */
+                            if (clientRequestEntity.update == true) {
+                                var defferedPromises = [];
 
-                                                            if (records.length == storedData.length) {
-                                                                process.nextTick(() => {
-                                                                    for (var j in subIDsResult) {
-                                                                        subIds.push(subIDsResult[j].SUB_ID)
-                                                                    }
+                                db.getOrgDAO().findAll((err, resultOrgIds) => {
 
-                                                                    msg.args.subIDs = subIds;
-                                                                    msg.args.records = records;
+                                    resultOrgIds.forEach((resultOrgIdsItem) => {
+
+                                        defferedPromises.push(new Promise((resolve, reject) => {
+                                            //============================ 1. make subIDs =====================================
+                                            db.getRecordDAO().getStoredDataByUserId(uId, resultOrgIdsItem.ORG_ID, (err, storedData) => {
+                                                if (!!err) {
+                                                    reject({
+                                                        code: 200,
+                                                        msg: 'DB Error'
+                                                    });
+                                                } else {
+                                                    //BLC MAP에 저장된 record가 있는경우
+                                                    if (storedData.length > 0) {
+
+                                                        //console.log("subIDs + records 함께 있어야해 ");
+                                                        db.getOrgDAO().getSubIdByOrgId(resultOrgIdsItem.ORG_ID, (err, subIDsResult) => {
+
+                                                            var subIds = [];
+
+                                                            var records = [];
+
+                                                            var defferedStoredDataPromises = [];
+
+                                                            storedData.forEach((storedDataItem, storedDataIdx) => {
+
+                                                                defferedStoredDataPromises.push(new Promised((resolve, reject) => {
+                                                                        nexledgerService.getbytxid(nodeurl, storedDataItem.TRX_ID, (res) => {
+                                                                            resolve(res);
+                                                                        });
+                                                                    })
+                                                                    .then(res => {
+                                                                        return {
+                                                                            subID: storedDataItem.SUB_ID,
+                                                                            hashed: res.result.hash,
+                                                                            txid: storedDataItem.TRX_ID
+                                                                        };
+                                                                    }));
+                                                            });
+
+                                                            // 
+                                                            Promise.all(defferedStoredDataPromises)
+                                                                .catch(err => {
+
+                                                                })
+                                                                .then(records => {
+                                                                    subIDsResult.forEach((item, idx) => {
+                                                                        subIds.push(sitem.SUB_ID)
+                                                                    });
+
+                                                                    pushMessage.args.subIDs = subIds;
+                                                                    pushMessage.args.records = records;
 
                                                                     //console.log(msg);
 
-                                                                    Managers.push().sendMessage(msg, resultOrgIds[orgIdx].ORG_ID, err => {
+                                                                    Managers.push().sendMessage(pushMessage, resultOrgIdsItem.ORG_ID, err => {
                                                                         if (!!err) {
-                                                                            done(ClientRequestManager.RESULT_FAILURE, err);
-                                                                            return;
+                                                                            reject(err);
                                                                         } else {
-                                                                            //Todo TCUP_USR MDFID_DT column update
+                                                                            // TODO TCUP_USR MDFID_DT column update
                                                                             db.getUserDAO().setMDFIDT({
-                                                                                uId: uid
+                                                                                uId: uId
                                                                             }, (err, result) => {
                                                                                 if (!!err) {
-                                                                                    done(ClientRequestManager.RESULT_FAILURE, err);
+                                                                                    reject(err);
                                                                                     return;
                                                                                 } else {
-                                                                                    //console.log("sucess");
-                                                                                    done(ClientRequestManager.RESULT_PENDING, {
-                                                                                        mid: clientReq.mId
-                                                                                    });
+                                                                                    resolve();
                                                                                     return;
                                                                                 }
                                                                             })
                                                                         }
                                                                     });
                                                                 });
-                                                            }
-                                                        })
-                                                    })(k);
-                                                }
-                                            })
-                                        } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
-                                            //console.log("subIDs만 있으면 돼!");
-                                            db.getOrgDAO().getSubIdByOrgId(resultOrgIds[orgIdx].ORG_ID, (err, subIDsResult) => {
-                                                delete msg.args.subIDs;
-                                                delete msg.args.records;
+                                                        });
+                                                    } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
+                                                        //console.log("subIDs만 있으면 돼!");
+                                                        db.getOrgDAO().getSubIdByOrgId(item.ORG_ID, (err, subIDsResult) => {
+                                                            delete pushMessage.args.subIDs;
+                                                            delete pushMessage.args.records;
 
-                                                var subIds = [];
+                                                            var subIds = [];
 
-                                                for (var j in subIDsResult) {
-                                                    subIds.push(subIDsResult[j].SUB_ID);
-                                                }
+                                                            subIDsResult.forEach((item, idx) => {
+                                                                subIds.push(item.SUB_ID);
+                                                            });
 
-                                                msg.args.subIDs = subIds;
-
-                                                //console.log(msg);
-
-                                                //Managers.push().init();
-                                                Managers.push().sendMessage(msg, resultOrgIds[orgIdx].ORG_ID, err => {
-                                                    if (subIds.length == resultOrgIds.length) {
-                                                        if (!!err) {
-                                                            done(ClientRequestManager.RESULT_FAILURE, err);
-                                                            return;
-                                                        } else {
-                                                            //Todo TCUP_USR MDFID_DT column update
-                                                            db.getUserDAO().setMDFIDT({
-                                                                uId: uid
-                                                            }, (err, result) => {
-                                                                if (!!err) {
-                                                                    done(ClientRequestManager.RESULT_FAILURE, err);
-                                                                    return;
-                                                                } else {
-                                                                    //console.log("sucess");
-                                                                    done(ClientRequestManager.RESULT_PENDING, {
-                                                                        mid: clientReq.mId
-                                                                    });
-                                                                    return;
-                                                                }
-                                                            })
-                                                        }
-                                                    }
-                                                });
-                                            })
-                                        }
-                                    })
-                                })(i);
-                            } //Per orgIDs, Sending AMQ Message
-                        })
-                    } else {
-                        //refresh
-                        db.getRecordDAO().getStoredOrgByUserId(uid, (err, storedOrgs) => {
-                            //console.log(storedOrgs);
-                            for (var i in storedOrgs) {
-                                !(orgIdx => {
-                                    db.getRecordDAO().getStoredDataByUserId(uid, storedOrgs[orgIdx].ORG_ID, (err, storedData) => {
-                                        var records = [];
-
-                                        //console.log(storedData);
-
-                                        for (var j in storedData) {
-                                            !(j => {
-                                                nexledgerService.getbytxid(nodeurl, storedData[j].TRX_ID, function (res) {
-
-                                                    records.push({
-                                                        subID: storedData[j].SUB_ID,
-                                                        hashed: res.result.hash,
-                                                        txid: storedData[j].TRX_ID
-                                                    })
-
-                                                    if (records.length == storedData.length) {
-                                                        process.nextTick(() => {
-                                                            msg.args.records = records;
-
-                                                            //console.log("Active MQ");
+                                                            pushMessage.args.subIDs = subIds;
 
                                                             //console.log(msg);
-                                                            Managers.push().sendMessage(msg, storedOrgs[orgIdx].ORG_ID, err => {
-                                                                if (!!err) {
-                                                                    done(ClientRequestManager.RESULT_FAILURE, err);
-                                                                    return;
-                                                                } else {
-                                                                    done(ClientRequestManager.RESULT_PENDING);
-                                                                    return;
+
+                                                            //Managers.push().init();
+                                                            Managers.push().sendMessage(pushMessage, item.ORG_ID, err => {
+                                                                if (subIds.length == resultOrgIds.length) {
+                                                                    if (!!err) {
+                                                                        reject(err);
+                                                                        return;
+                                                                    } else {
+                                                                        //Todo TCUP_USR MDFID_DT column update
+                                                                        db.getUserDAO().setMDFIDT({
+                                                                            uId: uId
+                                                                        }, (err, result) => {
+                                                                            if (!!err) {
+                                                                                reject(err);
+                                                                                return;
+                                                                            } else {
+                                                                                resolve();
+                                                                                return;
+                                                                            }
+                                                                        })
+                                                                    }
                                                                 }
                                                             });
                                                         });
                                                     }
+                                                }
+                                            });
+                                        }));
+                                    });
 
-                                                    //console.log(msg.args.records);
-                                                })
-                                            })(j);
-                                        }
-                                    })
-                                })(i);
+                                    Promise.all(defferedPromises)
+                                        .catch(err => {
+                                            finalReject(err);
+                                        }).then(result => {
+                                            finalResolve(result);
+                                        });
+                                });
                             }
-                        })
-                    }
-                }
+
+                            /**
+                             * Case.2-2 Refresh Phase. <br />
+                             * 현재 BlockChain에 저장된 해쉬값에 해당하는 원본 데이터만 <br />
+                             * Agent로부터 Refresh 하는 경우 <br />
+                             */
+                            else {
+                                db.getRecordDAO().getStoredOrgByUserId(uId, (err, storedOrgs) => {
+
+                                    var defferedOrgPromises = [];
+                                    storedOrgs.forEach((storedOrgItem, storedOrgIdx) => {
+                                        defferedOrgPromises.push(new Promise((orgResolve, orgReject) => {
+                                            db.getRecordDAO().getStoredDataByUserId(uId, storedOrgItem.ORG_ID, (err, storedData) => {
+
+                                                var defferedStoredDataFunctions = [];
+
+                                                // BlockChain에 저장된 hash값을 실어서 전송함.
+                                                storedData.forEach((storedDataItem, storedDataIdx) => {
+                                                    defferedStoredDataFunctions.push(new Promised((resolve, reject) => {
+                                                            nexledgerService.getbytxid(nodeurl, storedDataItem.TRX_ID, function (res) {
+                                                                resolve(res);
+                                                            });
+                                                        })
+                                                        .then(result => {
+                                                            return {
+                                                                subID: storedDataItem.SUB_ID,
+                                                                hashed: result.result.hash,
+                                                                txid: storedDataItem.TRX_ID
+                                                            };
+                                                        }));
+                                                });
+
+                                                // 1개의 기관에 보낼 Message 구성이 완료된 시점의 promise
+                                                Promise.all(defferedStoredDataFunctions).then((records) => {
+                                                    pushMessage.args.records = records;
+
+                                                    Managers.push().sendMessage(pushMessage, storedOrgItem.ORG_ID, err => {
+                                                        if (!!err) {
+                                                            orgReject(err);
+                                                        } else {
+                                                            orgResolve();
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        }));
+                                    });
+
+                                    // 모든 기관에 Push 보낸 후의 Promise
+                                    Promise.all(defferedOrgPromises)
+                                        .catch(err => {
+                                            finalReject(err);
+                                        })
+                                        .then(result => {
+                                            finalResolve(result);
+                                        });
+                                });
+                            }
+                        }
+                    })
+                    // Overall promise reject
+                    .catch(err => {
+                        // TODO 여기서 RESULT_FAILURE를 호출해야 함
+                    })
+
+                    // Overall promise resolve
+                    .then(result => {
+                        // TODO 여기서 RESULT_PENDING을 호출해야 함.
+                    });
             }
         })
     }
@@ -389,88 +443,75 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             var user_bc_wallet_addr = users[0].bcWalletAddr;
 
             var j = 0;
-            try {
-                for (var i = 0; i < agentRequest.records.length; i++) {
+            var defferedPromise = [];
+            agentRequest.records.forEach((recordsItem, recordsIdx) => {
 
-                    (function (i) {
 
-                        if (agentRequest.records[i].stored == 'N') {
-
+                if (recordsItem.stored == 'N') {
+                    defferedPromises.push(new Promise((resolve, reject) => {
                             var data = {
-                                hash: agentRequest.records[i].hash
+                                hash: recordsItem.hash
                             }
 
-                            nexledgerService.put(nodeurl, user_bc_wallet_addr, data, function (nexledgerres) {
-                                agentRequest.records[i].txid = nexledgerres.result.txid;
-
-                                var db = Managers.db();
-
-                                var blcmapinsertData = [
-                                    Util.uuid(),
-                                    uid, //uid
-                                    nexledgerres.result.txid, //trxid
-                                    agentRequest.orgcode, //orgid
-                                    agentRequest.records[i].subid //subid
-                                ];
-                                //console.log("===========blcmapinsertData==============");
-                                //console.log(blcmapinsertData);
-                                //console.log("=========================================");
-
-                                db.getRecordDAO().putRecord(blcmapinsertData, function (dbres) {
-                                    //console.log(dbres);
-                                });
-
-                                db.getUserDAO().setFristYN(uid, function (dbres2) {
-                                    //console.log(dbres2);
-                                });
-
-                                // set default N in initially
-                                agentRequest.records[i].dftYn = 'N';
-
-                                if (j == (agentRequest.records.length - 1)) {
-                                    try {
-
-                                        if (!!socket)
-                                            socket.emit('SearchResult', JSON.stringify(agentRequest));
-                                    } catch (exception) {
-                                        console.log(exception);
-                                    }
-                                }
-
-                                j++;
+                            nexledgerService.put(nodeurl, user_bc_wallet_addr, data, (nexledgerResponse) => {
+                                resolve(nexledgerResponse);
                             });
-                        } else {
-                            // Get BLC MAP Default YN
-                            var data = {
-                                uid: uid,
-                                txid: agentRequest.records[i].txid
-                            };
+                        })
+                        .then(nexledgerResponse => {
+                            recordsItem.txid = nexledgerResponse.result.txid;
 
-                            db.getRecordDAO().getDefaultYn(data, function (dbres) {
-                                agentRequest.records[i].dftYn = dbres.DFT_YN;
-                                //BLC MAP stored
-                                if (j == (agentRequest.records.length - 1)) {
-                                    try {
-                                        console.log("@@@@@@@@@@@@@@@@@@@@@@@");
-                                        console.log(socket);
-                                        if (!!socket)
-                                            socket.emit('SearchResult', JSON.stringify(agentRequest));
-                                    } catch (exception) {
-                                        console.log(exception);
-                                        //continue;
-                                    }
-                                }
-                                j++;
+                            var db = Managers.db();
+
+                            var blcmapinsertData = [
+                                Util.uuid(),
+                                uid, //uid
+                                nexledgerResponse.result.txid, //trxid
+                                agentRequest.orgcode, //orgid
+                                recordsItem.subid //subid
+                            ];
+                            //console.log("===========blcmapinsertData==============");
+                            //console.log(blcmapinsertData);
+                            //console.log("=========================================");
+
+                            db.getRecordDAO().putRecord(blcmapinsertData, (dbres) => {
+                                //console.log(dbres);
                             });
-                        }
-                    }).call(this, i);
+
+                            db.getUserDAO().setFristYN(uid, (dbres2) => {
+                                //console.log(dbres2);
+                            });
+
+                            // set default N in initially
+                            recordsItem.dftYn = 'N';
+
+                            return;
+                        }));
+                } else {
+                    defferedPromises.push(new Promise((resolve, reject) => {
+                        // Get BLC MAP Default YN
+                        var data = {
+                            uid: uid,
+                            txid: recordsItem.txid
+                        };
+
+                        db.getRecordDAO().getDefaultYn(data, function (dbres) {
+                            recordsItem.dftYn = dbres.DFT_YN;
+                            resolve();
+                        });
+                    }));
                 }
-            } catch (exception) {
-                console.log(exception);
+            });
 
-            }
+            // Response의 모든 처리가 완료된 후 Client socket으로 Response push.
+            Promise.all(defferedPromises)
+                .catch(err => {
+                    // TODO Send error message to client socket. 
+                })
+                .then(result => {
+                    if (!!socket)
+                        socket.emit('SearchResult', JSON.stringify(agentRequest));
+                });
         });
-
     }
 }
 
