@@ -2252,9 +2252,17 @@
 	
 			// add "selected" class to selected options
 			if (!self.settings.hideSelected) {
+
 				for (i = 0, n = self.items.length; i < n; i++) {
+					self.getOption(self.items[i]).siblings().removeClass('selected');
+				}
+				for (i = 0, n = self.items.length; i < n; i++) {
+					console.log(i);
+					console.log("log");
 					self.getOption(self.items[i]).addClass('selected');
 				}
+
+
 			}
 	
 			// add create option

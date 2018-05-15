@@ -14,8 +14,7 @@ function certredirect(certId) {
     window.location.href = "/certs/"+certId;
 }
 
-function certdelete(certId) {
-    window.event.stopPropagation();
+function certmore(certId) {
     $.ajax({
         type: 'DELETE',
         url: '/certs/'+ certId,
@@ -27,12 +26,6 @@ function certdelete(certId) {
         },
         contentType: 'application/json'
     });
-}
-
-function certmore(divname) {
-    var jquerydiv = "#" + divname;
-    $(jquerydiv).css('display','block');
-    window.event.stopPropagation();
 }
 
 function loadcertlist() {
@@ -48,19 +41,16 @@ function loadcertlist() {
             $(".cert-container").remove();
             $('#certlistcount').text(certlistresult.length + '건');
             for(var i in certlistresult) {
-                var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+ certlistresult[i].certId +'")>';                
-                htmldiv = htmldiv + '<p>'+ certlistresult[i].certId.substring(0,25) + '..<img style="z-index:999" src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=certmore("more-div-'+ certlistresult[i].certId +'")></p>';
+                var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+ certlistresult[i].certId +'")>';
+                htmldiv = htmldiv + '<p>'+ certlistresult[i].certId +'<img style="z-index:999" src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=certmore("'+ certlistresult[i].certId +'")></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
                 htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';
-                htmldiv = htmldiv + '<p>증명서</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + certlistresult[i].date + '</p>';
-                
-                htmldiv = htmldiv + '<div id="more-div-'+ certlistresult[i].certId +'" class="more-store-resume-div">';                
+                htmldiv = htmldiv + '<div class="more-store-resume-div">';
                 htmldiv = htmldiv + '<p>복사</p>';
-                htmldiv = htmldiv + '<p onclick=certdelete("'+ certlistresult[i].certId +'")>삭제</p>';
+                htmldiv = htmldiv + '<p>삭제</p>';
                 htmldiv = htmldiv + '<p>공유내역</p>';
-                htmldiv = htmldiv + '</div>';
-
+                htmldiv = htmldiv + '</div>';                
                 htmldiv = htmldiv + '</div>';
                 $('#cert-grid-div').append(htmldiv);
             }
@@ -72,6 +62,8 @@ function loadcertlist() {
 $(document).ready(function(){
 
     //get client token
+
+    $(".modal tbody").mCustomScrollbar({"theme":"minimal-dark"});
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
 
@@ -94,8 +86,10 @@ $(document).ready(function(){
         window.location = "main";
     });
     
-    $('.cert-container').click(function () {
-        window.location = "/certviewer";
+    $('.cert-container').click(function (event ) {
+        console.log($(event.target));
+        if(($(event.target).prop("class") != 'more-store-resume') && ($(event.target).prop("class") != 'more-store-resume-p') )
+            window.location = "/certviewer";
     });
     
 
@@ -189,19 +183,49 @@ $(document).ready(function(){
 
     $(document).on('click', ".more-store-resume", function () {
         var element = $(this).closest(".cert-container").find(".more-store-resume-div");
-        element.css("display", "block");
+
+
+        if(element.css("display") == "none")
+            element.css("display", "block");
+        else
+            element.css("display", "none");
+
+    });
+
+    $(".option-open").click(function () {
+        var element = $(".sub-info-select-div");
+
+
+        if(element.css("display") == "none")
+            element.css("display", "block");
+        else
+            element.css("display", "none");
+
+        element = $(".sub-info img:nth-child(2)");
+        console.log(element.attr("src"));
+        if(element.attr("src").indexOf("path-2") >= 0){
+            console.log("sadasd");
+            element.attr("src", element.attr("src").replace("path-2","path-1"));
+        }
+        else if(element.attr("src").indexOf("path-1") >= 0){
+            console.log("sada2sd");
+            element.attr("src", element.attr("src").replace("path-1","path-2")); 
+        }
+
+
+    });
+
+    $(".sub-info-select-p").click(function () {
+        $(".sub-info-select-p").removeClass("active");
+        $(this).addClass("active");
+
+        $(".sub-info-select-div").css("display", "none");
+
+        $("p.option-open").text($(this).text());
 
     });
 
 
-
-    $(document).click(function (e) {        
-        if ($(e.target).attr('class') == "more-store-resume")
-            return;
-
-        var element = $(".more-store-resume-div");
-        element.css("display", "none");
-    });
 
     $('#add-cert-dialog .confirm-btn').click(function() {
         $("#add-cert-dialog  .close-modal").click();
@@ -224,6 +248,27 @@ $(document).ready(function(){
          }, 1000);
 
         setTimeout(function() {
+
+            $(".cert-container-new").after(` 
+                    <div class="cert-container" tabindex="1" style="border: 1px solid rgb(76, 128, 241);">
+                                <p>제 1049-4001호 <img src="/img/resume-store/more.svg" alt="" class="more-store-resume"></p>
+                                <img src="img/mycert/color.png" alt="" class="more-store-resume">
+                                <p>서울대학교</p>
+                                <p>졸업 증명서</p>
+                                <p>발급일시 : 2018-03-21 11:00</p>
+                                <div class="more-store-resume-div">
+                                   <p class="more-store-resume-p">복사</p>
+                                   <p class="more-store-resume-p">삭제</p>
+                                   <p class="more-store-resume-p">공유내역</p>
+                                </div> 
+                            </div>
+                `);
+
+            setTimeout(function() {
+            $(".cert-container").css("border", "solid 1px #e2e8f0");
+            }, 3000);
+
+
             $("#cert-line-dialog  .close-modal").click();
             $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
             $('#alarm-div').css("display","block");       

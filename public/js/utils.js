@@ -107,13 +107,8 @@ function setTxidList(txidarray) {
 
 function getTxidList() {
     var storagedata = sessionStorage.getItem(client_token);
-    if(storagedata==null) {
-        var emptyarray = [];
-        setTxidList(emptyarray);
-        storagedata = sessionStorage.getItem(client_token);
-    }
-     var resultarray = storagedata.split(",");
-     return resultarray;
+    var resultarray = storagedata.split(",");
+    return resultarray;
 }
 
 function SHA256(s) {
@@ -286,36 +281,3 @@ function currentDate(time) {
     String.prototype.zf = function (len) { return "0".string(len - this.length) + this; };
     Number.prototype.zf = function (len) { return this.toString().zf(len); };
 }
-
-function base64toHEX(base64) {
-    var raw = window.atob(base64);
-
-    var HEX = '';
-
-    for (i = 0; i < raw.length; i++) {
-
-        var _hex = raw.charCodeAt(i).toString(16)
-
-        HEX += (_hex.length == 2 ? _hex : '0' + _hex);
-
-    }
-    return HEX.toUpperCase();
-}
-
-
-function formatDate(date) { 
-    var d = new Date(date), 
-    month = '' + (d.getMonth() + 1), 
-    day = '' + d.getDate(), 
-    year = d.getFullYear(); 
-    
-    if (month.length < 2) {
-        month = '0' + month; 
-    } 
-    if (day.length < 2) {
-        day = '0' + day; 
-    }
-    
-    return [year, month, day].join('-'); 
-}
-

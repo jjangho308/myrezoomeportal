@@ -3,17 +3,17 @@ $(document).ready(function(){
     //common
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
-   
+
     $('#create-link-button').click(function(){
         $('.abc-radio label').css("color","#676767");
-        //$("#cert-url-input").val("http://rezoome.io/d/20194011003A");
-        $('.abc-radio .default-label').click();
+        $("#cert-url-input").val("http://rezoome.io/d/20194011003A");
+        $('.abc-radio .default-password-label').click();
+        $('.abc-radio .default-period-label').click();
         
         $(".modal-footer a").css("display","inline-block");
         generateURL();
     });
-    
-    
+        
     $('.cert-create-div .default-password-label').click(function(){
         $('.cert-create-div  .password-div').hide();
     });

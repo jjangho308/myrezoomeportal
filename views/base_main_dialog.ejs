@@ -1,18 +1,131 @@
 <div id="spec-change-dialog" class="modal">
     <p>이력 변경<span>My레쥬메에 반영하고자 하는 1건의 성적을 선택해주세요.</span></p>
     <div>
-    <table id="spec-change-table" >        
+    <table id="spec-change-table" >
+        
         <tbody class="scroll-div">
-            <tr>
-                <th></th>
-                <th>응시일자</th>
-                <th>회차</th>
-                <th>시험명</th>
-                <th>언어</th>
-                <th>성적</th>
-                <th></th>
-            </tr>        
-        </tbody>
+        <tr>
+            <th></th>
+            <th>응시일자</th>
+            <th>회차</th>
+            <th>시험명</th>
+            <th>언어</th>
+            <th>성적</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+
+                <div class="abc-radio">
+                    <input type="radio" name="spec-change" id="radio1" value="">
+                    <label for="radio1">
+                    </label>
+                </div>
+
+            </td>
+            <td>2018-03-12</td>
+            <td>301회</td>
+            <td>OPIc</td>
+            <td>영어</td>
+            <td>Advanced low</td>
+            
+        </tr>
+        <tr>
+            <td>
+                <div class="abc-radio">
+                    <input type="radio" name="spec-change" id="radio2" value="">
+                    <label for="radio2">
+                    </label>
+
+                </div>
+            </td>
+            <td>2018-03-12</td>
+            <td>301회</td>
+            <td>OPIc</td>
+            <td>영어</td>
+            <td>Advanced low</td>
+            <td><span class="expire">만료예정</span></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="abc-radio">
+                    <input type="radio" name="spec-change" id="radio3" value="">
+                    <label for="radio3">
+                    </label>
+
+                </div>
+            </td>
+            <td>2018-03-12</td>
+            <td>301회</td>
+            <td>OPIc</td>
+            <td>영어</td>
+            <td>Advanced low</td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="abc-radio">
+                    <input type="radio" name="spec-change" id="radio4" value="">
+                    <label for="radio4">
+                    </label>
+                </div>
+
+            </td>
+            <td>2018-03-12</td>
+            <td>301회</td>
+            <td>OPIc</td>
+            <td>영어</td>
+            <td>Advanced low</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="abc-radio">
+                    <input type="radio" name="spec-change" id="radio5" value="">
+                    <label for="radio5">
+                    </label>
+
+                </div>
+            </td>
+            <td>2018-03-12</td>
+            <td>301회</td>
+            <td>OPIc</td>
+            <td>영어</td>
+            <td>Advanced low</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="abc-radio">
+                    <input type="radio" name="spec-change" id="radio6" value="">
+                    <label for="radio6">
+                    </label>
+
+                </div>
+            </td>
+            <td>2018-03-12</td>
+            <td>301회</td>
+            <td>OPIc</td>
+            <td>영어</td>
+            <td>Advanced low</td>
+        </tr>
+
+        <tr>
+            <td>
+
+                <div class="abc-radio">
+                    <input type="radio" name="spec-change" id="radio7" value="">
+                    <label for="radio7">
+                    </label>
+                </div>
+
+            </td>
+            <td>2018-03-12</td>
+            <td>301회</td>
+            <td>OPIc</td>
+            <td>영어</td>
+            <td>Advanced low</td>
+        </tr>
+            </tbody>
+
     </table>
         </div>
     
@@ -62,10 +175,10 @@
         <p>재학 기간</p>
 
         <div class="error-range">
-            <button class="calendar"><img src="/img/myresume/icon-calendar.svg" alt=""></button>
+            <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
             <input type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
             <span id="study-period-span">~</span>
-            <button class="calendar"><img src="/img/myresume/icon-calendar.svg" alt=""></button>
+            <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
             <input type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
 
             <div id="is-graduate" class="select-100 study-field-div">
@@ -104,40 +217,6 @@
     </div>
 </div>
 
-<div id="career-add-dialog" class="modal">
-    <p>경력 추가<span>레쥬메 서비스를 통해 사용하고 싶은 경력을 추가할 수 있습니다.</span></p>
-    <div class="modal-body">
-        <p>회사명</p>        
-        <input type="text" id="career-company" placeholder="소속되었던 회사명을 입력해주세요. Ex) 삼성SDS">        
-
-        <p>직급</p>
-        <input type="text" id="career-position" placeholder="직급을 입력해주세요. EX) 대리">        
-
-        <p>담당업무</p>
-        <input type="text" id="career-role" placeholder="담당업무를 입력해주세요. EX) SW개발 및 운영">        
-        
-        <p>재직 기간</p>
-        <div>
-            <button class="calendar"><img src="/img/myresume/icon-calendar.svg" alt=""></button>
-            <input id="career-startdate" type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
-            <span id="study-period-span">~</span>
-            <button class="calendar"><img src="/img/myresume/icon-calendar.svg" alt=""></button>
-            <input id="career-enddate" type="text" class="form-control study-period" placeholder="YYYY-MM-DD" />
-
-            <div id="is-status" class="select-100 study-field-div">
-                <select name="select-2" id="career-status">
-                        <option value="재직">재직중</option>
-                        <option value="퇴사">퇴사</option>
-                </select>
-            </div>                    
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button class="confirm-btn primary-solid-btn">확인</button>
-        <button class="cancel-btn border-btn">취소</button>
-    </div>
-</div>
-
 <div id="cert-add-dialog" class="modal">
     <p>이력 추가 - 자격<span>레쥬메 서비스를 통해 사용하고 싶은 이력을 추가할 수 있습니다.</span></p>
     <div class="modal-body">
@@ -154,10 +233,10 @@
         <p>유효 기간</p>
 
         <div>
-            <button class="calendar"><img src="/img/myresume/icon-calendar.svg" alt=""></button>
+            <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
             <input id="certadd_startdate" type="text" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
             <span id="study-period-span">~</span>
-            <button class="calendar"><img src="/img/myresume/icon-calendar.svg" alt=""></button>
+            <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
             <input id="certadd_enddate" type="text" class="form-control study-period" placeholder="YYYY-MM-DD" />
 
             <div id="expire-checkbox">
@@ -196,10 +275,10 @@
         <p>유효 기간</p>
 
         <div>
-            <button class="calendar"><img src="/img/myresume/icon-calendar.svg" alt=""></button>
+            <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
             <input type="text" id="langadd_startdate" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
             <span id="study-period-span">~</span>
-            <button class="calendar"><img src="/img/myresume/icon-calendar.svg" alt=""></button>
+            <button class="calendar"><img src="img/myresume/icon-calendar.svg" alt=""></button>
             <input type="text" id="langadd_enddate" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
 
             <div id="expire-checkbox">
@@ -217,75 +296,3 @@
 </div>
 
 
-<div id="cert-circle-dialog" class="modal">
-
-    <div class="ko-progress-circle" data-progress="0">
-       <img src="/img/myresume/off@3x.png" alt="">
-        <div class="ko-circle">
-            <div class="full ko-progress-circle__slice">
-                <div class="ko-progress-circle__fill"></div>
-            </div>
-            <div class="ko-progress-circle__slice">
-                <div class="ko-progress-circle__fill"></div>
-                <div class="ko-progress-circle__fill ko-progress-circle__bar"></div>
-            </div>
-        </div>
-        <div class="ko-progress-circle__overlay"></div>
-    </div>
-
-    <p>증명서를 발급중입니다.</p>
-    <p>증명서 발급을 위해 발급기관에 요청하고 있습니다.<br/>
-잠시만 기다려주세요.</p>
-</div>
-
-<div id="cert-line-dialog" class="modal" >
-    <div>
-         <img src="/img/myresume/server-3.png" alt="">
-            
-        <span id="circle-0"></span>
-        <span id="circle-1"></span>
-        <span id="circle-2"></span>
-        <span id="circle-3"></span>
-        <span id="circle-4"></span>
-        
-         <img src="/img/myresume/group-8.png" alt="">
-    </div>
-
-        <p>증명서를 발급중입니다.</p>
-        <p>증명서 발급을 위해 발급기관에 요청하고 있습니다.<br/>
-잠시만 기다려주세요.</p>
-    </div>
-
-
-
-<!-- Modal HTML embedded directly into document -->
-<div id="add-cert-dialog" class="modal">
-    <p>증명서 발급<span>레쥬메에서 발급받고 싶은 이력을 선택해주세요.</span></p>
-    <table id="add-cert-dialog-table">
-        <tr>
-            <th></th>
-            <th>구분</th>
-            <th>주체</th>
-            <th>증명서 종류</th>
-        </tr>
-        <tr>
-            <td>
-      <div class="checkbox checkbox-primary">
-        <input id="add-cert-checkbox-1" type="checkbox">
-        <label for="add-cert-checkbox-1"></label>
-      </div>
-           
-            </td>
-            <td>자격</td>
-            <td>삼성SDS</td>
-            <td>SW Certificate 자격증명서(제 38회)</td>
-        </tr>
-  
-
-    </table>
-
-    <div class="modal-footer">
-        <button class="confirm-btn primary-solid-btn">확인</button>
-        <button class="cancel-btn border-btn">취소</button>
-    </div>
-</div>

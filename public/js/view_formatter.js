@@ -116,30 +116,7 @@ var formatter= {
         $('#spec_forign_lang > .spec-body-default').hide();
     },
 
-    "CPR":function viewformatter(record) {
-        // Private record
-        var htmldiv = '<div class="private-spec-body">';
-            htmldiv = htmldiv + '<div class="spec-left">';
-            htmldiv = htmldiv + '<span></span>';
-            htmldiv = htmldiv + '<span></span>';
-            htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
-            htmldiv = htmldiv + '';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>'+record.company +'</p>';
-            htmldiv = htmldiv + '<p>'+record.position +'</p>';
-            htmldiv = htmldiv + '<p>'+record.role +'</p>';
-            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
-            htmldiv = htmldiv + '</div>';
-        htmldiv = htmldiv + '</div>';
-        $('#spec_career_detail').append(htmldiv);
-        $('#spec_career_detail > .spec-body-default').hide();
-    },
-
-    "OGC":function viewformatter(record) {
+    "ETC":function viewformatter(record) {
         // Private record
         var htmldiv = '<div class="private-spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
@@ -162,7 +139,7 @@ var formatter= {
         $('#spec_certification > .spec-body-default').hide();
     }, 
 
-    "LPT":function viewformatter(record) {
+    "LANG":function viewformatter(record) {
         // Private record
         var htmldiv = '<div class="private-spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';

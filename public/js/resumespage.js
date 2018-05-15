@@ -5,27 +5,6 @@ function resumeredirect(resumeId) {
     window.location.href = "/resumes/"+resumeId;
 }
 
-function resumemore(divname) {
-    var jquerydiv = "#" + divname;
-    $(jquerydiv).css('display','block');
-    window.event.stopPropagation();
-}
-
-function resumedelete(rsmId) {
-    window.event.stopPropagation();
-    $.ajax({
-        type: 'DELETE',
-        url: '/resumes/'+ rsmId,
-        headers: {
-            'Authorization': client_authorization
-        },
-        success: function (result) {
-            loadresumelist();
-        },
-        contentType: 'application/json'
-    });
-}
-
 function loadresumelist() {
     $.ajax({
         type: 'GET',
@@ -38,24 +17,24 @@ function loadresumelist() {
             console.log(certlistres);
 
             var certlistresult = certlistres.result;
-            $(".resumes-container").remove();
+            $(".cert-container").remove();
+
             $('#resumelistcount').text(certlistresult.length + '건');
 
             for(var i in certlistresult) {
-                var htmldiv = '<div class="resumes-container" tabindex="1" onclick=resumeredirect("'+certlistresult[i].rsmId+'")>';                
-                htmldiv = htmldiv + '<p><img src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=resumemore("more-div-'+ certlistresult[i].rsmId +'") /></p>';
-                htmldiv = htmldiv + '<img src="img/resume-store/invalid-name.png" alt="">';
-                htmldiv = htmldiv + '<p>이력서</p>';
+                var htmldiv = '<div class="cert-container" tabindex="1" onclick=resumeredirect("'+certlistresult[i].rsmId+'")>';
+                htmldiv = htmldiv + '<p>'+ certlistresult[i].rsmId +'<img src="/img/resume-store/more.svg" alt="" class="more-store-resume"/></p>';
+                htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
                 htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';
-                htmldiv = htmldiv + '<p>업데이트 : ' + certlistresult[i].modifiedDate + '</p>';
-
-                htmldiv = htmldiv + '<div id="more-div-'+ certlistresult[i].rsmId +'" class="more-store-resume-div">';
+                htmldiv = htmldiv + '<p>발급일시 : ' + certlistresult[i].date + '</p>';
+                htmldiv = htmldiv + '<div class="more-store-resume-div">';
                 htmldiv = htmldiv + '<p>복사</p>';
-                htmldiv = htmldiv + '<p onclick=resumedelete("'+ certlistresult[i].rsmId +'")>삭제</p>';
-                htmldiv = htmldiv + '<p>공유내역</p>';                
-                htmldiv = htmldiv + '</div>';                
-
+                htmldiv = htmldiv + '<p>삭제</p>';
+                htmldiv = htmldiv + '<p>공유내역</p>';
                 htmldiv = htmldiv + '</div>';
+                
+                htmldiv = htmldiv + '</div>';
+
                 $('#resume-grid-div').append(htmldiv);
 
             }
@@ -65,7 +44,8 @@ function loadresumelist() {
 }
 
 $(document).ready(function () {
-
+    
+    $(".modal tbody").mCustomScrollbar({"theme":"minimal-dark"});
     //get client token
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
@@ -88,8 +68,21 @@ $(document).ready(function () {
 
 
 
-    $('.resumes-container').click(function () {
-        window.location = "/resumeseditor";
+    $('.resumes-container').click(function (event ) {
+        console.log($(event.target));
+        if(($(event.target).prop("class") != 'more-store-resume') && ($(event.target).prop("class") != 'more-store-resume-p') )
+           window.location = "/resumeseditor";
+     });
+
+    $(document).on('click', ".more-store-resume", function () {
+        var element = $(this).closest(".resumes-container").find(".more-store-resume-div");
+
+
+        if(element.css("display") == "none")
+            element.css("display", "block");
+        else
+            element.css("display", "none");
+
     });
 
     loadresumelist();
@@ -154,7 +147,7 @@ $(document).ready(function () {
                         htmldiv = htmldiv + '<td>' + subname + '</td>';
                         htmldiv = htmldiv + '</tr>';
 
-                        $("#add-resumes-dialog-table").append(htmldiv);
+                        $("#add-resume-dialog-table").append(htmldiv);
 
                         /*
                         $(addcertcheckboxid).click(function() {
@@ -175,6 +168,50 @@ $(document).ready(function () {
             },
             contentType: 'application/json',
         });
+
+    });
+
+    $(document).on('click', ".more-store-resume", function () {
+        var element = $(this).closest(".cert-container").find(".more-store-resume-div");
+
+
+        if(element.css("display") == "none")
+            element.css("display", "block");
+        else
+            element.css("display", "none");
+
+    });
+
+    $(".option-open").click(function () {
+        var element = $(".sub-info-select-div");
+
+
+        if(element.css("display") == "none")
+            element.css("display", "block");
+        else
+            element.css("display", "none");
+
+        element = $(".sub-info img:nth-child(2)");
+        console.log(element.attr("src"));
+        if(element.attr("src").indexOf("path-2") >= 0){
+            console.log("sadasd");
+            element.attr("src", element.attr("src").replace("path-2","path-1"));
+        }
+        else if(element.attr("src").indexOf("path-1") >= 0){
+            console.log("sada2sd");
+            element.attr("src", element.attr("src").replace("path-1","path-2")); 
+        }
+
+
+    });
+
+    $(".sub-info-select-p").click(function () {
+        $(".sub-info-select-p").removeClass("active");
+        $(this).addClass("active");
+
+        $(".sub-info-select-div").css("display", "none");
+
+        $("p.option-open").text($(this).text());
 
     });
 
@@ -201,7 +238,7 @@ $(document).ready(function () {
 
         setTimeout(function() {
             $("#resumes-line-dialog  .close-modal").click();
-            //window.location = "/resumes/editor/";
+            window.location = "/resumeseditor?data=new";
 
         }, 3000);
 
@@ -222,6 +259,10 @@ $(document).ready(function () {
                 objresumedata.record = jsondata;
                 objresumedata.txid = id;
                 resumesdata.data.push(objresumedata);
+
+                console.log("cert req param");
+                console.log(id);
+                
             }
         });
 
@@ -240,12 +281,7 @@ $(document).ready(function () {
                 console.log(res2);
                 //setSocket(res.mid);
                 //clientsocket_listener();
-                setTimeout(function() {
-                    $("#resumes-line-dialog  .close-modal").click();
-                    window.location = "/resumes/editor/" + res2.result.rsmId;
-                }, 2000);
-                
-                //loadresumelist();
+                loadresumelist();
             },
             contentType: 'application/json',
         });

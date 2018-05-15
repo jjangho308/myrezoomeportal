@@ -21,7 +21,7 @@
                 <th>이력명</th>
                 <th>성적포함</th>
             </tr>
-            <!-- <tr>
+            <tr>
                 <td>
                   <div class="checkbox checkbox-primary">
                     <input id="add-resumes-checkbox-1" type="checkbox">
@@ -38,7 +38,28 @@
                       <div class="slide-toggle"></div>
                     </label>
                 </td>
-            </tr> -->
+            </tr>
+            <tr>
+                <td>
+                  <div class="checkbox checkbox-primary">
+                    <input id="add-resumes-checkbox-2" type="checkbox">
+                    <label for="add-resumes-checkbox-2"></label>
+                  </div>
+               
+                </td>
+                <td>학력</td>
+                <td>인하대학교</td>
+                <td>석사,언론정보대학원 인터랙션디자인 전공, 졸업석사,언론정보대학원 인터랙션디자인 전공, 졸석사,언론정보대학원 인터랙션디자인 전공, 졸</td>
+                <td>
+                    <label class="toggle">
+                      <input type="checkbox">
+                      <div class="slide-toggle"></div>
+                    </label>
+                </td>
+            </tr>
+      
+
+
         </table>
         <div class="modal-footer">
 
@@ -58,11 +79,20 @@
                             <p>단순 작성만으로 이력 증빙이 모두 진행되는 새로운 증명서를 작성해보세요.</p>
         
                             <div class="sub-info">
-        
-                                <p>최신 생성일 순</p>
-        
-                                <p>총 <strong id="resumelistcount">0건</strong>의 증명서를 보관중입니다.</p>
-        
+
+                                <p class="option-open">최신 생성일 순</p>
+                                <img class="option-open" src="/img/resume-store/path-2.svg" alt="">
+                                <p>총 <strong id="resumelistcount">0건</strong>의 이력서를 보관중입니다.</p>
+
+                                <div class="sub-info-select-div">
+                                   <div class="sub-info-select-p">항목#1</div>
+                                   <div class="sub-info-select-p">항목#2</div>
+                                   <div class="sub-info-select-p">항목#3</div>
+                                </div> 
+
+
+
+
                             </div>
         
                             <img class="" src="" />
@@ -72,15 +102,41 @@
                                 <p>새로운 이력서 생성</p>
         
                             </div>
-                            
-                            <!-- <div class="resumes-container" tabindex="1">
-                                <p>....</p>
+                            <div class="resumes-container" tabindex="1">
+                                <p><img src="/img/resume-store/more.svg" alt="" class="more-store-resume"></p>
+                                <img src="img/resume-store/invalid-name.png" alt="">
+                                <p>이력서</p>
+                                <p>삼성전자용_2018 어쩌구</p>
+                                <p>업데이트 : 2018-03-01 11:00</p>
+                                <div class="more-store-resume-div">
+                                   <p class="more-store-resume-p">복사</p>
+                                   <p class="more-store-resume-p">삭제</p>
+                                   <p class="more-store-resume-p">공유내역</p>
+                                </div> 
+                            </div>
+
+                            <div class="resumes-container" tabindex="1">
+                                <p>작성중<img src="/img/resume-store/more.svg" alt="" class="more-store-resume"></p>
+                                <img src="img/resume-store/invalid-name.png" alt="">
+                                <p>이력서</p>
+                                <p>No Name #2</p>
+                                <p>업데이트 : 2018-03-01 11:00</p>
+                            </div>          
+                            <div class="resumes-container" tabindex="1">
+                                <p></p>
+                                <img src="img/resume-store/invalid-name.png" alt="">
+                                <p>이력서</p>
+                                <p>이수지_중소기업용</p>
+                                <p>업데이트 : 2018-03-01 11:00</p>
+                            </div>
+                            <div class="resumes-container" tabindex="1">
+                                <p></p>
                                 <img src="img/resume-store/invalid-name.png" alt="">
                                 <p>이력서</p>
                                 <p>삼성SDS용</p>
                                 <p>업데이트 : 2018-03-01 11:00</p>
-                            </div>   -->
-                    </div>    
+                            </div>  
+                                </div>    
             </div>
             
 

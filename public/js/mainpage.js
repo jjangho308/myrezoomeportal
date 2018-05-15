@@ -6,16 +6,21 @@ require socket.is
 
 $(document).ready(function(){   
     // comment by hyunsu for running
-    //socket = io();
+    // socket = io();
     /*
         view init empty set
     */   
+
+
+$(".modal tbody").mCustomScrollbar({"theme":"minimal-dark"});
     $(".study-period").datepicker();
     $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
 
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
 
+    var emptyarray = [];
+    setTxidList(emptyarray);
 
     // set event for element main page
     $('#header-mycert').click(function () {
@@ -42,12 +47,10 @@ $(document).ready(function(){
         window.location = "main";
     });
 
-    
-
     $('#education-add-dialog .add-span').click(function () {
         console.log("#education-add-dialog .add-span clicked");
         $("#major-div").append(` 
-            <div class="error-range">
+            <div class="error-range major-div">
                 <div class="select-100">
                     <select name="select-1">
                             <option value="1">전공</option>
@@ -67,6 +70,12 @@ $(document).ready(function(){
                 <div class="error-message">전공을 입력해주세요.</div>
             </div>`);
         $("select").selectize();
+
+        $(`.major-div img`).click(function(){
+
+            $(this).closest(".major-div" ).css("display","none");
+        });
+
     });
 
 
@@ -135,75 +144,27 @@ $(document).ready(function(){
             $("#education-add-dialog .close-modal").click();
             $("#alarm-div span").text("학력이 추가되었습니다.");
             $('#alarm-div').css("display", "block");
+            $('#alarm-div').css("margin-right", "-108px");
         }
-    });
-
-    $('#career-add-dialog .confirm-btn').click(function () {        
-        
-        var company = $("#career-company").val();
-        var position = $("#career-position").val();
-        var role = $("#career-role").val();        
-        var start_date = $("#career-startdate").val();
-        var end_date = $("#career-enddate").val();
-        var status = $("#career-status").val();
-
-        // cert format
-        var param = {
-            company: company,
-            position: position,
-            role: role,
-            startdate: start_date,
-            enddate: end_date,
-            status: status
-        }
-
-        // cert encryption
-        var enc_record = JSON.stringify(param);
-
-        $.ajax({
-            type: 'POST',
-            url: '/record',
-            headers: {
-                'Authorization': client_authorization
-            },
-            data: JSON.stringify({                
-                orgCd: "ETC", // 코드 분기 필요
-                subCd: "CPR", // 코드 분기 필요
-                data: enc_record
-            }),
-            beforeSend: function() {
-                
-            },
-            success: function (res) {
-                $("#career-add-dialog .close-modal").click();
-                $("#alarm-div span").text("사용자 이력 수기 입력했다.");
-                $('#alarm-div').css("display", "block");
-                
-                //clean view
-                 $('.private-spec-body').remove();
-                 getPrivateRecords();
-            },
-            contentType: 'application/json',
-        });
     });
 
     $('#language-add-dialog .confirm-btn').click(function () {        
         
         var lang = $("#langadd_lang").val();
-        var name = $("#language-name").val();
-        var score = $("#language-grade").val();        
+        var name = $("#langadd_name").val();
+        var grade = $("#langadd_grade").val();        
         var start_date = $("#langadd_startdate").val();
         var end_date = $("#langadd_enddate").val();
-        var expiry = $("#langadd_expireYn").is(':checked');
+        var expireYn = $("#langadd_expireYn").is(':checked');
 
         // cert format
         var param = {
             lang: lang,
             name: name,
-            score: score,
+            grade: grade,
             startdate: start_date,
             enddate: end_date,
-            expiry: expiry
+            expireYn: expireYn
         }
 
         // cert encryption
@@ -216,8 +177,7 @@ $(document).ready(function(){
                 'Authorization': client_authorization
             },
             data: JSON.stringify({                
-                orgCd: "EDI", // 코드 분기 필요
-                subCd: "LPT", // 코드 분기 필요
+                certCd: "LANG", // 자격 코드 입력하는 구분자가 필요할 듯
                 data: enc_record
             }),
             beforeSend: function() {
@@ -237,13 +197,14 @@ $(document).ready(function(){
 
     });
 
+
     $('#cert-add-dialog .confirm-btn').click(function () {  
         
-        var name = $("#cert-name").val();
-        var grade = $("#cert-grade").val();        
+        var name = $("#certadd_name").val();
+        var grade = $("#certadd_grade").val();        
         var start_date = $("#certadd_startdate").val();
         var end_date = $("#certadd_enddate").val();
-        var expiry = $("#certadd_expireYn").is(':checked');
+        var expireYn = $("#certadd_expireYn").is(':checked');
 
         // cert format
         var param = {
@@ -251,8 +212,10 @@ $(document).ready(function(){
             grade: grade,
             startdate: start_date,
             enddate: end_date,
-            expiry: expiry
+            expireYn: expireYn
         }
+
+        console.log(param);
 
         // cert encryption
         var enc_record = JSON.stringify(param);
@@ -264,8 +227,7 @@ $(document).ready(function(){
                 'Authorization': client_authorization
             },
             data: JSON.stringify({                
-                orgCd: "STI", // 코드 분기 필요
-                subCd: "OGC", // 코드 분기 필요
+                certCd: "ETC", // 자격 코드 입력하는 구분자가 필요할 듯
                 data: enc_record
             }),
             beforeSend: function() {
@@ -307,7 +269,10 @@ $(document).ready(function(){
                     success: function (res) {
                         $("#spec-change-dialog .close-modal").click();
                         $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
-                        $('#alarm-div').css("display", "block");   
+                        $('#alarm-div').css("display", "block"); 
+                        $('#alarm-div').css("margin-right", "-142px");   
+
+                        
                         
                         // sessionStrage update
                         var txidList = getTxidList();         
@@ -356,12 +321,24 @@ $(document).ready(function(){
             var numberOfChecked = $('.spec-detail-div input:checkbox:checked').length;
     
             if (numberOfChecked == 0) {
-                $("#select-footer").hide();
+                // $("#select-footer").hide();
+                $("input").prop("disabled", "true");
+
+                $("#select-footer").animateCss("fadeOutDown", function() {
+                        $("#select-footer").hide();
+                        $("input").removeAttr("disabled");
+                    });
+                $
                 $("#main-footer").css("margin-bottom", "0px");
             } else {
                 $("#select-footer span:nth-child(2)").text(numberOfChecked + "건의");
+
+
                 $("#select-footer").show();
+                $("#select-footer").animateCss("fadeInUp");  
+
                 $("#main-footer").css("margin-bottom", "71px");
+                
             }
         });        
     });
@@ -386,26 +363,6 @@ $(document).ready(function(){
                     beforeSend: function() {
 
 
-                        $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
-                    // don't delete!!!!!  
-                        //version 1 dialog. progress circle      
-                        //         setTimeout(function() {
-                        //              $('.ko-progress-circle').attr('data-progress', 20);
-                        //         }, 100);
-                        //         setTimeout(function() {
-                        //              $('.ko-progress-circle').attr('data-progress', 50);
-                        //         }, 1000);
-                        //         setTimeout(function() {
-                        //              $('.ko-progress-circle').attr('data-progress', 100);
-                        //         }, 2000);
-                        //        
-                        //         setTimeout(function() {
-                        //             $("#cert-circle-dialog .close-modal").click();
-                        //             $('#select-footer').css("display","none");
-                        //             $('#alarm-div').css("display","block");
-                        //             
-                        //             $(".spec-detail-div input:checkbox:checked").click();
-                        //         }, 3000);
                                 
                                 var current_active = 0;
                                 
@@ -415,21 +372,29 @@ $(document).ready(function(){
                                     $(`#cert-line-dialog #circle-${current_active}`).css("background-color","#dadada");
                                     current_active += 1;
                                     
-                                    if(current_active > 4){
+                                    if(current_active > 5){
                                         current_active = 0;
                                     }
                                     $(`#cert-line-dialog #circle-${current_active}`).css("background-color","#4a90e2");
-                                                       
-                                                      
+                                                   
+                                                          
                                  }, 1000);
+
+
+
+
                                 
-                        //        setTimeout(function() {
-                        //             $("#cert-line-dialog .close-modal").click();
-                        //             $('#select-footer').css("display","none");
-                        //             $('#alarm-div').css("display","block");
-                        //             
-                        //             $(".spec-detail-div input:checkbox:checked").click();
-                        //         }, 3000);
+                               setTimeout(function() {
+                                    
+                                    $("#alarm-div").css("display", "block");
+                                    $("#alarm-div").css("margin-right", "-224px");
+
+                                    $("#select-footer").animateCss("fadeOutDown");
+
+                                    $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+                                    
+                                     $("#cert-line-dialog .close-modal").click();    
+                                }, 3000);
 
                     },
                     success: function (res) {                        
@@ -441,15 +406,20 @@ $(document).ready(function(){
         });        
     });
 
+    //request to agent for get user info
+    // comment by hyunsu for running
+    // request_agent();    
+    // comment by hyunsu for running
+    // getPrivateRecords();
+
+    rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
+    console.log(rsaKeypair);
+    //var pubkeyn = rsaKeypair.pubKeyObj.n.toString();
+    //var pubkeye = rsaKeypair.pubKeyObj.e.toString(); 
+    var jwkPub2 = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj); 
+
     $('#refresh_record').click(function() {
-        $('.timeline').show();
-        $('.spec-body-default').hide();    
-        getRSAKey();
-        var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
-
-        var emptyarray = [];
-        setTxidList(emptyarray);
-
+        
         $.ajax({
             type: 'POST',
             url: '/client',
@@ -459,6 +429,11 @@ $(document).ready(function(){
             beforeSend: function() {
                 //clean view
                 $('.spec-body').remove();
+                $('.spec-body-default').css("display", "none");
+                $('.spec-body-loading').css("display", "block");
+
+
+
             },
             data: JSON.stringify({
                 cmd: 'SearchRecord',
@@ -474,46 +449,12 @@ $(document).ready(function(){
             success: function (res) {
                 setSocket(res.mid);
                 clientsocket_listener();
-                setTimeout(() => {
-                    $('.timeline').hide();
-                    $('.spec-body-default').show();    
-                }, 1500);
             },
             contentType: 'application/json',
         });
 
     });    
-
-    
 });
-
-window.onload = function() {
-    socket = io();
-    //request to agent for get user info
-    var pagetxidlist = getTxidList();
-
-    if(pagetxidlist.length > 1) {
-        //sessing storage have user info (txid list)
-        var oridata = [];
-        
-        for(var i=0; i< pagetxidlist.length ; i++) {            
-            try {                
-                var objuserdata = getData(pagetxidlist[i]);
-                refreshview(objuserdata);
-            }catch(exception) {
-                console.log(exception);
-                continue;
-            }
-        }
-    }
-    else {
-        //session storage dont have user info(txid list)
-        genRsaKey();
-        request_agent();        
-    }
-
-    getPrivateRecords();
-};
 
 function change_default_cert(subid) {
     $(".change_cert").remove();
@@ -537,12 +478,11 @@ function change_default_cert(subid) {
                 htmldiv = htmldiv + '<label for=change_cert_'+ record.txid +'></label>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</td>';
-                htmldiv = htmldiv + '<td>' + formatDate(jsonData.date) +'</td>';
+                htmldiv = htmldiv + '<td>' + jsonData.date +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.userid +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.name +'</td>';
                 htmldiv = htmldiv + '<td>' + dftYn +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.grade +'</td>';
-                htmldiv = htmldiv + '<td></td>';
                 htmldiv = htmldiv + '</tr>';            
                 $("#spec-change-table").append(htmldiv);
             }
@@ -586,16 +526,13 @@ function getPrivateRecords() {
             for(var i in res) {  
                 var data = JSON.parse(res[i].data);
                 data.certPrvtId = res[i].certPrvtId;
-                formatter[res[i].subCd](data);
+                formatter[res[i].certCd](data);
             }            
         }
     });
 }
 
 function request_agent() {
-
-    var emptyarray = [];
-    setTxidList(emptyarray);
 
     getRSAKey();
 
@@ -625,19 +562,12 @@ function request_agent() {
         success: function (res) {
             setSocket(res.mid);
             clientsocket_listener();
-            // loading css start
-            setTimeout(() => {
-                $('.timeline').hide();
-                $('.spec-body-default').show();    
-            }, 1500);
-            
         },
         contentType: 'application/json',
     });
 }
 
 function refreshview(records) {
-    $('.timeline').hide();
 
     var recordList = {};
     var subid = "";
@@ -704,31 +634,14 @@ function refreshview(records) {
 
 function clientsocket_listener() {
     socket.on('SearchResult', function(msg){
-        console.log("=============clientsocket_listener=================");
-        console.log(msg);
-        console.log("===================================================");
         var omsg = JSON.parse(msg);
 
         //get aes key
-        var recv_key = omsg.key;
-        var recv_iv = omsg.iv;
 
-        var aeskey_hex = base64toHEX(recv_key);
-        var decryptedKey = KJUR.crypto.Cipher.decrypt(aeskey_hex, rsakey_prv);
-        
 
         var orgcode = omsg.orgcode;        
         for(var i=0; i<omsg.records.length ; i++) {            
-            var subid = omsg.records[i].subid;
-
-            
-            var decrypted = CryptoJS.AES.decrypt(omsg.records[i].data, CryptoJS.enc.Base64.parse(
-            decryptedKey), {
-            iv: CryptoJS.enc.Base64.parse(recv_iv)
-            });
-            console.log(decrypted.toString(CryptoJS.enc.Utf8));
-            omsg.records[i].data = decrypted.toString(CryptoJS.enc.Utf8);
-            
+            var subid = omsg.records[i].subid;                 
 
             try {                
                 setData(omsg.records[i]);                
@@ -738,14 +651,10 @@ function clientsocket_listener() {
             }
         }
         refreshview(omsg.records);
-
     });
 }
 
 function setSocket(mId) {
-    socket.close();
-    socket = io();
-
     socket.emit('SetSocket', {
         mid: mId
     });
