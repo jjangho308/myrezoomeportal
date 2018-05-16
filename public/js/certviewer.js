@@ -207,11 +207,15 @@ $(document).ready(function(){
 function summitform() {
     var cert_id = window.location.href.split('/')[4];
     var cert_url = $('#cert-url-input').val();
-    var cert_password;
+    var cert_password = SHA256($('#shared_password').val());
     var cert_exp = 20501231;
     var cert_emails =[];
     var cert_msg;
-    var cert_public;
+    var cert_public = 'N';
+
+    if(cert_password == '' || cert_password == null) {
+        var cert_public = 'Y';
+    }
 
     $.ajax({
         type: 'POST',
