@@ -1,7 +1,7 @@
 function setData(data) {
     var verifyData = JSON.parse(data);
 
-    var passcode = 'asdfasdf';
+    var passcode = '43214321';
     var passcodehash = SHA256(passcode);
 
     if(verifyData.encrypted) {

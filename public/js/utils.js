@@ -287,6 +287,12 @@ function currentDate(time) {
     Number.prototype.zf = function (len) { return this.toString().zf(len); };
 }
 
+function hexToBase64(str) {
+    return btoa(String.fromCharCode.apply(null,
+      str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
+    );
+  }
+
 function base64toHEX(base64) {
     var raw = window.atob(base64);
 

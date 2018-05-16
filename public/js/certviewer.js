@@ -207,7 +207,7 @@ $(document).ready(function(){
 function summitform() {
     var cert_id = window.location.href.split('/')[4];
     var cert_url = $('#cert-url-input').val();
-    var cert_password = SHA256($('#shared_password').val());
+    var cert_password = hexToBase64(SHA256($('#shared_password').val()));
     var cert_exp = 20501231;
     var cert_emails =[];
     var cert_msg;
