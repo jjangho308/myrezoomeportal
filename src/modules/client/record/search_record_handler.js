@@ -359,36 +359,44 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                         defferedOrgPromises.push(new Promise((orgResolve, orgReject) => {
                                             db.getRecordDAO().getStoredDataByUserId(uId, storedOrgItem.ORG_ID, (err, storedData) => {
 
-                                                var defferedStoredDataFunctions = [];
+                                                if (!!err) {
+                                                    console.log(err.toString());
+                                                    orgReject(err);
+                                                } else {
+                                                    var defferedStoredDataFunctions = [];
 
-                                                // BlockChain에 저장된 hash값을 실어서 전송함.
-                                                storedData.forEach((storedDataItem, storedDataIdx) => {
-                                                    defferedStoredDataFunctions.push(new Promised((resolve, reject) => {
-                                                            nexledgerService.getbytxid(nodeurl, storedDataItem.TRX_ID, function (res) {
-                                                                resolve(res);
-                                                            });
-                                                        })
-                                                        .then(result => {
-                                                            return {
-                                                                subID: storedDataItem.SUB_ID,
-                                                                hashed: result.result.hash,
-                                                                txid: storedDataItem.TRX_ID
-                                                            };
-                                                        }));
-                                                });
-
-                                                // 1개의 기관에 보낼 Message 구성이 완료된 시점의 promise
-                                                Promise.all(defferedStoredDataFunctions).then((records) => {
-                                                    pushMessage.args.records = records;
-
-                                                    Managers.push().sendMessage(pushMessage, storedOrgItem.ORG_ID, err => {
-                                                        if (!!err) {
-                                                            orgReject(err);
-                                                        } else {
-                                                            orgResolve();
-                                                        }
+                                                    // BlockChain에 저장된 hash값을 실어서 전송함.
+                                                    storedData.forEach((storedDataItem, storedDataIdx) => {
+                                                        defferedStoredDataFunctions.push(new Promise((storedDataResolve, storedDataReject) => {
+                                                                nexledgerService.getbytxid(nodeurl, storedDataItem.TRX_ID, function (res) {
+                                                                    storedDataResolve(res);
+                                                                });
+                                                            })
+                                                            .then(result => {
+                                                                return {
+                                                                    subID: storedDataItem.SUB_ID,
+                                                                    hashed: result.result.hash,
+                                                                    txid: storedDataItem.TRX_ID
+                                                                };
+                                                            }));
                                                     });
-                                                });
+
+                                                    // 1개의 기관에 보낼 Message 구성이 완료된 시점의 promise
+                                                    Promise.all(defferedStoredDataFunctions)
+                                                        .catch(err => {
+                                                            orgReject(err);
+                                                        }).then((records) => {
+                                                            pushMessage.args.records = records;
+
+                                                            Managers.push().sendMessage(pushMessage, storedOrgItem.ORG_ID, err => {
+                                                                if (!!err) {
+                                                                    orgReject(err);
+                                                                } else {
+                                                                    orgResolve();
+                                                                }
+                                                            });
+                                                        });
+                                                }
                                             });
                                         }));
                                     });
@@ -445,7 +453,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             var j = 0;
             var defferedPromise = [];
             agentRequest.records.forEach((recordsItem, recordsIdx) => {
-
 
                 if (recordsItem.stored == 'N') {
                     defferedPromises.push(new Promise((resolve, reject) => {
