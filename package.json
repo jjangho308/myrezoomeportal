@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "babel-node": "babel-node --presets es2015",
-    "start": "nodemon --exec npm run babel-node -- ./bin/www",
+    "babel-trans": "babel-node --presets es2015",
+    "start": "nodemon --exec npm run babel-trans -- ./bin/www",
+    "debug": "nodemon --exec npm run babel-trans --inspect-brk ./bin/www",
     "test": "mocha --require babel-core/register ./src/test/*.test.js",
-    "build": "./node_modules/.bin/babel ./src/**/*.js --out-dir dist --source-maps",
-    "debug": "node --nolazy --inspect-brk=9229 ./bin/www"
+    "build": "./node_modules/.bin/babel ./src/**/*.js --out-dir dist --source-maps"
   },
   "dependencies": {
     "args": "^3.0.8",
