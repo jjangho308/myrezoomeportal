@@ -199,8 +199,43 @@ $(document).ready(function(){
     });
 
     
-    
+    $('.confirm-btn').click(function(){
+        summitform();     
+    });
 });
+
+function summitform() {
+    var cert_id = window.location.href.split('/')[4];
+    var cert_url = $('#cert-url-input').val();
+    var cert_password;
+    var cert_exp = 20501231;
+    var cert_emails =[];
+    var cert_msg;
+    var cert_public;
+
+    $.ajax({
+        type: 'POST',
+        url: '/shared_certs',
+        headers: {
+            'Authorization': client_authorization
+        },
+        data: JSON.stringify({
+            shared_cert: {
+                certid: cert_id,
+                url: cert_url,
+                password: cert_password,
+                exp: cert_exp,
+                emails: cert_emails,            
+                msg: cert_msg,
+                public: cert_public
+            }
+        }),
+        success: function (result) {
+            console.log(result);
+        },
+        contentType: 'application/json'
+    });
+}
 
 function setCertViewer(sub_id, tx_id) {
     //alert("subid : " + sub_id + " / txid" + tx_id);
