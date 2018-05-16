@@ -73,7 +73,7 @@ export default (() => {
          * @author TACKSU
          */
         sha256: (obj, cb) => {
-            // TODO Imple here
+            var hash = crypto.createHash
             if (!!cb) {
                 procss.nextTick(() => {});
             }
@@ -84,9 +84,35 @@ export default (() => {
          * 
          * @since 180404
          * @author TACKSU
+         * 
+         * @param {Buffer|string} obj Data to be hashed.
+         * @param {function} cb Callback function.
          */
         md5: (obj, cb) => {
-            // TODO Imple here
+            var md5 = crypto.createHash('md5');
+            var hashedData = null;
+            if (!!cb) {
+                process.nextTick(() => {
+                    try {
+                        if (obj instanceof string) {
+                            hashedData = md5.update(obj, 'base64').digest('base64');
+                        } else {
+                            hashedData = md5.update(obj).digest('base64');
+                        }
+                        cb(null, hashedData);
+                    } catch (e) {
+                        cb(e, null);
+                    }
+                });
+            } else {
+                if (obj instanceof string) {
+                    hashedData = md5.update(obj, 'base64').digest('base64');
+                } else {
+                    hashedData = md5.update(obj).digest('base64');
+                }
+
+                return hashedData;
+            }
         }
     }
 
