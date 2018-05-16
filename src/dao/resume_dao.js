@@ -348,8 +348,18 @@ class ResumeDao extends AbstractDAO {
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);
-            } else {
-                cb(err, SharedResumeUrlModel.fromRow(rows[0]));
+            } else {                
+                cb(err, {
+                    txId: rows[0].TRX_ID,
+                    passcode:rows[0].PASSCODE,
+                    certId: rows[0].CERT_ID,
+                    url: rows[0].URL,
+                    sharedYn: rows[0].SHRD_YN,
+                    pubYn: rows[0].PUB_YN,
+                    expired: rows[0].EXPIRED_DT,
+                    created: rows[0].CRTD_DT,
+                    encData: rows[0].ENC_CERT_DATA
+                });
             }
         });
     }

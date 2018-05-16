@@ -44,30 +44,41 @@
     width: 234px;
     max-width: 234px;
 }
-
-
+.resumes-container{
+    position: relative;
+}
 
 .resumes-container:nth-child(4n) {
 margin-right:0;
 }
 
 .resumes-container p:nth-child(1) {
-font-size:9px;
-color:#a9afb3;
-margin-top:22px;
-margin-bottom:20px;
+    font-size: 13px;
+    color: #4c80f1;
+    margin-top: 22px;
+    margin-bottom: 20px;
+    width: 221px;
+    margin-left: -30px;
 }
 
 .resumes-container p:nth-child(1)>img {
-float:right;
-width:5px;
-cursor:pointer;
+position: absolute;
+    font-size: 10px;
+    transform: scale(calc(9/10));
+    width: 4px;
+    top: -0px;
+    right: -2px;
+
+    cursor: pointer;
+    padding: 24px;
 }
+
 
 .resumes-container img:nth-child(2) {
 width:67px;
 height:67px;
 margin-bottom:18px;
+transform: none;
 }
 
 .resumes-container p:nth-child(3) {
@@ -104,6 +115,8 @@ right:26px;
 }
 
 .resumes-container div:nth-child(6)>p {
+          width: auto;
+      transform: initial;
 font-size:13px;
 text-align:left;
 line-height:38px;
@@ -115,19 +128,23 @@ padding:0 15px;
 .resumes-container,.resumes-container-new {
 position:relative;
 display:inline-block;
-width:167px;
+width:160px;
 height:266px;
 object-fit:contain;
 background-color:#fafcfd;
 border:solid 1px #e2e8f0;
-margin-right:20px;
-margin-bottom:20px;
+margin-right:13px;
+margin-bottom:15px;
 border-radius:4px;
 vertical-align:top;
 text-align:center;
 padding:0 30px;
 }
 
+.resumes-container-new {
+
+background: url("/img/mycert/rectangle-6.svg");
+}
 .resumes-container:focus,.resumes-container:hover {
 box-shadow:0 2px 5px 0 rgba(191,191,191,0.5);
 border:solid 1px #c3cdd8;
