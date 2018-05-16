@@ -71,13 +71,31 @@ export default (() => {
          * 
          * @since 180404
          * @author TACKSU
+         * 
+         * @param {string} obj UTF-8 plain text.
+         * @param {function} cb Callback function.
          */
         sha256: (obj, cb) => {
-            var hash = crypto.createHash
+            var sha256 = crypto.createHash('sha256');
+            var hashedData = null;
             if (!!cb) {
-                procss.nextTick(() => {});
+                process.nextTick(() => {
+                    if (obj instanceof string) {
+                        hashedData = sha256.update(obj, 'utf8').digest('base64');
+                    } else {
+                        hashedData = sha256.update(obj).digest('base64');
+                    }
+                    cb(hashedData);
+                });
+            } else {
+                if (obj instanceof string) {
+                    hashedData = sha256.update(obj, 'utf8').digest('base64');
+                } else {
+                    hashedData = sha256.update(obj).digest('base64');
+                }
+
+                return hashedData;
             }
-            cb(crypto.createHash('sha256').update(obj).digest('base64'));
         },
 
         /**
