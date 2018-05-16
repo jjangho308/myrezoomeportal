@@ -116,7 +116,7 @@ $(document).ready(function () {
 
         var txidlist = getTxidList();
 
-        // $(".certtr").remove();
+        $(".resumetr").remove();
 
         $.ajax({
             type: 'POST',
@@ -156,7 +156,7 @@ $(document).ready(function () {
                         //formatter[subid](viewdata);
                         var addcertcheckboxid = txidlist[i];
 
-                        var htmldiv = '<tr class="certtr">';
+                        var htmldiv = '<tr class="resumetr">';
                         htmldiv = htmldiv + '<td>';
                         htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
                         //htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';

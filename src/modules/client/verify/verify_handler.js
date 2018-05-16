@@ -49,8 +49,8 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                     var decrypted = shareModel.encData;
                     
                     if("Y" == shareModel.pubYn) { // aes encrypt with user's passcode when pubYn is Y     
-                        Util.sha256(passcode, (hashed) =>{                                          
-                            crypto.encryptAES(decrypted, util.sha256(shareModel.passcode), (err, encodedIV, encryptedData) => {
+                        Util.sha256(shareModel.passcode, (hashedKey) =>{                                          
+                            crypto.encryptAES(decrypted, hashedKey, (err, encodedIV, encryptedData) => {
                                 if (!!err) {
                                     console.log(err);
                                 } else {
