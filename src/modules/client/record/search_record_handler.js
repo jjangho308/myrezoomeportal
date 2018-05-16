@@ -98,8 +98,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                         });
 
                         // FIXME NexLedger module의 일반적인 초기화 쪽으로 로직 변경 필요
-                        var nexledgerService = new NexledgerService();
-                        var nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
+                        var nexledgerService = Managers.nex();
 
                         /**
                          * Case.1 Rezoome 사용자가 최초 로그인 시 <br />
@@ -244,7 +243,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                             storedData.forEach((storedDataItem, storedDataIdx) => {
 
                                                                 defferedStoredDataPromises.push(new Promised((resolve, reject) => {
-                                                                        nexledgerService.getbytxid(nodeurl, storedDataItem.TRX_ID, (res) => {
+                                                                        nexledgerService.getbytxid(storedDataItem.TRX_ID, (res) => {
                                                                             resolve(res);
                                                                         });
                                                                     })
@@ -262,13 +261,13 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                                 .catch(err => {
 
                                                                 })
-                                                                .then(records => {
+                                                                .then(mergedRecords => {
                                                                     subIDsResult.forEach((item, idx) => {
-                                                                        subIds.push(sitem.SUB_ID)
+                                                                        subIds.push(item.SUB_ID)
                                                                     });
 
                                                                     pushMessage.args.subIDs = subIds;
-                                                                    pushMessage.args.records = records;
+                                                                    pushMessage.args.records = mergedRecords;
 
                                                                     //console.log(msg);
 
@@ -294,13 +293,13 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                         });
                                                     } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
                                                         //console.log("subIDs만 있으면 돼!");
-                                                        db.getOrgDAO().getSubIdByOrgId(item.ORG_ID, (err, subIDsResult) => {
+                                                        db.getOrgDAO().getSubIdByOrgId(item.ORG_ID, (err, subIdResult) => {
                                                             delete pushMessage.args.subIDs;
                                                             delete pushMessage.args.records;
 
                                                             var subIds = [];
 
-                                                            subIDsResult.forEach((item, idx) => {
+                                                            subIdResult.forEach((item, idx) => {
                                                                 subIds.push(item.SUB_ID);
                                                             });
 
@@ -315,7 +314,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                                         reject(err);
                                                                         return;
                                                                     } else {
-                                                                        //Todo TCUP_USR MDFID_DT column update
+                                                                        // TODO TCUP_USR MDFID_DT column update
                                                                         db.getUserDAO().setMDFIDT({
                                                                             uId: uId
                                                                         }, (err, result) => {
@@ -368,7 +367,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     // BlockChain에 저장된 hash값을 실어서 전송함.
                                                     storedData.forEach((storedDataItem, storedDataIdx) => {
                                                         defferedStoredDataFunctions.push(new Promise((storedDataResolve, storedDataReject) => {
-                                                                nexledgerService.getbytxid(nodeurl, storedDataItem.TRX_ID, function (res) {
+                                                                nexledgerService.getbytxid(storedDataItem.TRX_ID, function (res) {
                                                                     storedDataResolve(res);
                                                                 });
                                                             })
@@ -445,8 +444,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             uId: uid
         }, (err, users) => {
 
-            var nexledgerService = new NexledgerService();
-            var nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
+            var nexledgerService = Managers.nex();
 
             var user_bc_wallet_addr = users[0].bcWalletAddr;
 
@@ -460,7 +458,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 hash: recordsItem.hash
                             }
 
-                            nexledgerService.put(nodeurl, user_bc_wallet_addr, data, (nexledgerResponse) => {
+                            nexledgerService.put(user_bc_wallet_addr, data, (nexledgerResponse) => {
                                 resolve(nexledgerResponse);
                             });
                         })
