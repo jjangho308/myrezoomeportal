@@ -11,6 +11,7 @@ import AbstractManager from '../abstract_manager';
  */
 class CryptoManager extends AbstractManager {
 
+
     /**
      * Default constructor. <br />
      * 
@@ -39,7 +40,9 @@ class CryptoManager extends AbstractManager {
             asmLength: 32,
             encode: 'base64',
             symAlg: 'aes256'
-        })
+        });
+
+        this.defaultKey = this.getSystemSymmetricKey();
     }
 
     /**
@@ -57,13 +60,23 @@ class CryptoManager extends AbstractManager {
     }
 
     /**
-     * Obtain system default symmetric key from system keystore. <br />
+     * Retrieve system default symmetric key from system keystore. <br />
+     * 
      * 
      * @since 180404
      * @author TACKU
+     * 
+     * @return 32bytes Base64 encoded string.
      */
     getSystemSymmetricKey() {
-        // TODO Implements here
+
+        // TODO 제대로 된 로직으로 수정 필요함.
+        if (!!this.defaultKey) {
+            return this.defaultKey;
+        } else {
+            this.defaultKey = crypto.createHash('sha256').update('rezoomedefaultsecret').digest('base64');
+            return this.defaultKey;
+        }
     }
 
     /**
@@ -132,6 +145,53 @@ class CryptoManager extends AbstractManager {
     }
 
     /**
+     * Encrypt data in AES256ECB mode. <br />
+     * 
+     * @since 180516
+     * @author TACKSU
+     * 
+     * @param {String} plain UTf-8 encoded plain text
+     * @param {String} key Base64 encoded AES256 Key.
+     * @param {function(object, String)} cb Callback function.
+     */
+    encryptAESECB(plain, key, cb) {
+        process.nextTick(() => {
+            try {
+                var cipher = crypto.createCipher(this.spec.symAlg, Buffer.from(key, this.spec.encode));
+                cipher.setAutoPadding(true);
+                var encrypted = cipher.update(plain, 'utf8', this.spec.encode);
+                encrypted += cipher.final(this.spec.encode);
+                cb(null, encrypted);
+            } catch (e) {
+                cb(e, null);
+            }
+        });
+    }
+
+    /**
+     * Decrypt data in AES256ECB mode. <br />
+     * 
+     * @since 180516
+     * @author TACKSU
+     * 
+     * @param {String} encrypted Base64 encoded encrypted string.
+     * @param {String} key Base64 encoded AES Key.
+     * @param {function(object, String)} cb Callback function.
+     */
+    decryptAESECB(encrypted, key, cb) {
+        process.nextTick(() => {
+            try {
+                var decipher = crypto.createDecipher(this.spec.symAlg, Buffer.from(key, this.spec.encode));
+                var decrypted = decipher.update(encrypted, this.spec.encode, 'utf8');
+                decrypted += decipher.final('utf8');
+                cb(null, decrypted);
+            } catch (e) {
+                cb(e, null);
+            }
+        });
+    }
+
+    /**
      * Decrypt string with symmetric key and iv.
      * 
      * @param {string} encrypted Encoded encrypted string.
@@ -149,7 +209,7 @@ class CryptoManager extends AbstractManager {
             } catch (e) {
                 cb(e, null);
             }
-        })
+        });
     }
 
     /**

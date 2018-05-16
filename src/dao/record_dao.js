@@ -31,8 +31,13 @@ class RecordDAO extends AbstractDAO {
     }
 
 
+    /**
+     * 
+     * @param {*} uid 
+     * @param {*} orgid 
+     * @param {*} cb 
+     */
     getStoredDataByUserId(uid, orgid, cb) {
-
         var query = mysql.format(recordQuery.getStoredDataByUserIdAndOrgID, [uid, orgid]);
         this.query(query, (err, result) => {
             if (err) {
