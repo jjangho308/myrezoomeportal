@@ -1,0 +1,41 @@
+<%- include('base_head_import') -%>
+<head>
+    <script src="js/share-cert.js"></script>
+
+    <link rel="stylesheet" href="css/share-cert.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+</head>
+<body>
+    <div class="main-container">
+        <p>본 증명서는 암호로 보호되고 있습니다.<br>
+        증명서 확인을 위해 비밀번호를 입력해주세요.</p>
+        <input type="password" placeholder="비밀번호를 입력해주세요.">
+        <div class="error-message">올바르지 않은 비밀번호 입니다.</div>
+        <button class="confirm-btn">확인</button>
+
+    </div>
+
+    <div class="loading-container">
+        <div>
+             <img src="/img/myresume/group-3.svg" alt="">
+                
+            <span id="circle-0"></span>
+            <span id="circle-1"></span>
+            <span id="circle-2"></span>
+            <span id="circle-3"></span>
+            <span id="circle-4"></span>
+            <span id="circle-5"></span>
+            
+             <img src="/img/myresume/group-4.svg" alt="">
+        </div>
+
+            <p>이력서를 생성하고 있습니다.</p>
+            <p>발급기관에 이력정보를 요청하고 있습니다.<br/>
+                잠시만 기다려주세요.</p>
+    </div>
+
+
+        <span class="bottom-element">Powered By</span>
+        <img class="bottom-element" src="/img/common/logo.svg"/>
+</body>

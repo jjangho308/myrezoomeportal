@@ -77,6 +77,7 @@ export default (() => {
             if (!!cb) {
                 procss.nextTick(() => {});
             }
+            cb(crypto.createHash('sha256').update(obj).digest('base64'));
         },
 
         /**

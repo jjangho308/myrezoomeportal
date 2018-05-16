@@ -65,7 +65,8 @@ function loadresumelist() {
 }
 
 $(document).ready(function () {
-
+    
+    $(".modal tbody").mCustomScrollbar({"theme":"minimal-dark"});
     //get client token
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
@@ -88,8 +89,21 @@ $(document).ready(function () {
 
 
 
-    $('.resumes-container').click(function () {
-        window.location = "/resumeseditor";
+    $('.resumes-container').click(function (event ) {
+        console.log($(event.target));
+        if(($(event.target).prop("class") != 'more-store-resume') && ($(event.target).prop("class") != 'more-store-resume-p') )
+           window.location = "/resumeseditor";
+     });
+
+    $(document).on('click', ".more-store-resume", function () {
+        var element = $(this).closest(".resumes-container").find(".more-store-resume-div");
+
+
+        if(element.css("display") == "none")
+            element.css("display", "block");
+        else
+            element.css("display", "none");
+
     });
 
     loadresumelist();
@@ -175,6 +189,50 @@ $(document).ready(function () {
             },
             contentType: 'application/json',
         });
+
+    });
+
+    $(document).on('click', ".more-store-resume", function () {
+        var element = $(this).closest(".cert-container").find(".more-store-resume-div");
+
+
+        if(element.css("display") == "none")
+            element.css("display", "block");
+        else
+            element.css("display", "none");
+
+    });
+
+    $(".option-open").click(function () {
+        var element = $(".sub-info-select-div");
+
+
+        if(element.css("display") == "none")
+            element.css("display", "block");
+        else
+            element.css("display", "none");
+
+        element = $(".sub-info img:nth-child(2)");
+        console.log(element.attr("src"));
+        if(element.attr("src").indexOf("path-2") >= 0){
+            console.log("sadasd");
+            element.attr("src", element.attr("src").replace("path-2","path-1"));
+        }
+        else if(element.attr("src").indexOf("path-1") >= 0){
+            console.log("sada2sd");
+            element.attr("src", element.attr("src").replace("path-1","path-2")); 
+        }
+
+
+    });
+
+    $(".sub-info-select-p").click(function () {
+        $(".sub-info-select-p").removeClass("active");
+        $(this).addClass("active");
+
+        $(".sub-info-select-div").css("display", "none");
+
+        $("p.option-open").text($(this).text());
 
     });
 
