@@ -16,9 +16,7 @@ export default {
                 next(err);
             } else {                
                 res.render('verify', {
-                    encrypted: true,
-                    data: result,
-                    iv: "iv"
+                    data : result
                 });
             }
         });        
