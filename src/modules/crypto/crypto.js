@@ -74,7 +74,7 @@ class CryptoManager extends AbstractManager {
         if (!!this.defaultKey) {
             return this.defaultKey;
         } else {
-            this.defaultKey = crypto.createHash('sha256').update('rezoomedefaultsecret').digest('sha256');
+            this.defaultKey = crypto.createHash('sha256').update('rezoomedefaultsecret').digest('base64');
             return this.defaultKey;
         }
     }
