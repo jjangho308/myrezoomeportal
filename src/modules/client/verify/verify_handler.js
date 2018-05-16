@@ -46,7 +46,7 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                     var crypto = Managers.crypto(); 
                     var encData = "vVw5vCB+Yeq4/Gn+U5Nv0eB++u2d2KBtj/D2+qdochidP18jG2+CYxwiLJVugugu+mVkdYmBiaj40P8amZ/9aiNmG0X6G6yHr7540UzYyDMfo/bJJSmp/4XPYy6+zJyT9LXtcj5kDdTrwFINCFZVZWR86a7CNdw6MZ914tgSA/4aNz3IiVT+EArLxy3eT3XBW2+XX9l7P8PEC2ZHNc6936gxOmYx3NQQr6QndfrKDuNcnRVTk+uZ2R35p0ACB9QJQikHrPL6K/DyDQYhAgJU6S2iyJoaknUQcxiEHtFgJeqQnixZnhMGmPj81aqRNj58NyA0uLLMClYYmLKJsrlKe43AzUxGopS1b9KDeN8Kj53uWPRDpK7oUNxOiAD5RUgGWvt9eJfe/PnqjYl4pFsGuQXuU2raoA/WzVluO19lhzbC8+TT/65EF5Ddkbe2NnqHfKBnxE+z3O0u9fWRO3A1Cw==";
                     crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey
-                        if("Y" == shareModel.pubYn) { // encrypt with user's passcode when pubYn is Y     
+                        if("N" == shareModel.pubYn) { // encrypt with user's passcode when pubYn is N    
                             //Util.sha256(shareModel.passcode, (hashedKey) =>{                                          
                                 crypto.encryptAES(decrypted, shareModel.passcode, (err, encodedIV, encryptedData) => {
                                     if (!!err) {
