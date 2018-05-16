@@ -12,6 +12,8 @@ import NodeRSA from 'node-rsa';
 import CryptoJS from 'crypto-js';
 import AES from 'crypto-js/aes';
 
+import assert from 'assert';
+
 /**
  * CryptoManagers test suite. <br />
  * 
@@ -19,7 +21,7 @@ import AES from 'crypto-js/aes';
  * @author SSEK-SU
  */
 describe('Crypto test suit', () => {
-    var crypto;
+    var crypto = new CryptoManager();
 
     before('Crypto module init', () => {
         Initializer();
@@ -278,5 +280,13 @@ describe('Crypto test suit', () => {
                 });
             });
         });
-    })
+    });
+
+    /**
+     * Get system default symmetric key test case'
+     */
+    it('Get system default symmetric key test case', () => {
+        console.log(crypto.getSystemSymmetricKey());
+        assert.equal(true, true);
+    });
 });
