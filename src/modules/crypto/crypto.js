@@ -65,6 +65,8 @@ class CryptoManager extends AbstractManager {
      * 
      * @since 180404
      * @author TACKU
+     * 
+     * @return 32bytes Base64 encoded string.
      */
     getSystemSymmetricKey() {
 
