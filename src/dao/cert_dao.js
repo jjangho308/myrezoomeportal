@@ -203,7 +203,7 @@ class CertificateDAO extends AbstractDAO {
                                 console.log(err);
                             }
                             else if (result.affectedRows > 0) {
-                                var selectShareCertQuery = mysql.format(CertQuery.getShared, [condition, { DEL_YN: 'N' }]);
+                                var selectShareCertQuery = mysql.format(CertQuery.getShared, condition);
 
                                 connection.query(selectShareCertQuery, (err, result) => {
                                     if (!!err) {
