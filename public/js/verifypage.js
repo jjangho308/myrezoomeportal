@@ -8,11 +8,11 @@ function setData(data) {
         var encodedIv = verifyData.iv;
         var encryptedData = verifyData.data;
 
-        var decrypted = CryptoJS.AES.decrypt(encryptedData, CryptoJS.enc.Base64.parse(
+        var decrypted = CryptoJS.AES.decrypt(encryptedData, CryptoJS.enc.Hex.parse(
             passcodehash), {
             iv: CryptoJS.enc.Base64.parse(encodedIv)
-            });
-            console.log(decrypted.toString(CryptoJS.enc.Utf8));
+        });
+        console.log(decrypted.toString(CryptoJS.enc.Utf8));
     }    
     
 }
