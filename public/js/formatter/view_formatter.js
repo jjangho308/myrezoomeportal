@@ -1,3 +1,6 @@
+/*
+  main 화면 view formatter
+*/
 
 var formatter= {    
     "RCLPT0005":function viewformatter(record) {              
@@ -184,14 +187,4 @@ var formatter= {
         $('#spec_forign_lang').append(htmldiv);
         $('#spec_forign_lang > .spec-body-default').hide();
     }
-}
-
-
-function getviewdata(record) {
-
-
-}
-
-function RCLPT0005() {
-    
 }

@@ -199,8 +199,43 @@ $(document).ready(function(){
     });
 
     
-    
+    $('.confirm-btn').click(function(){
+        summitform();     
+    });
 });
+
+function summitform() {
+    var cert_id = window.location.href.split('/')[4];
+    var cert_url = $('#cert-url-input').val();
+    var cert_password;
+    var cert_exp = 20501231;
+    var cert_emails =[];
+    var cert_msg;
+    var cert_public;
+
+    $.ajax({
+        type: 'POST',
+        url: '/shared_certs',
+        headers: {
+            'Authorization': client_authorization
+        },
+        data: JSON.stringify({
+            shared_cert: {
+                certid: cert_id,
+                url: cert_url,
+                password: cert_password,
+                exp: cert_exp,
+                emails: cert_emails,            
+                msg: cert_msg,
+                public: cert_public
+            }
+        }),
+        success: function (result) {
+            console.log(result);
+        },
+        contentType: 'application/json'
+    });
+}
 
 function setCertViewer(sub_id, tx_id) {
     //alert("subid : " + sub_id + " / txid" + tx_id);
@@ -209,35 +244,6 @@ function setCertViewer(sub_id, tx_id) {
     certformatter[sub_id](record.data);
 
 
-}
-
-var certformatter= {    
-    "RCLPT0005":function viewformatter(record_data) {              
-        // opic
-        var htmldiv = '<div>';
-            htmldiv = htmldiv + "<p>이름 : " +record_data.name + '</p>';
-            htmldiv = htmldiv + "<p>testid : " +record_data.testid + '</p>';
-            htmldiv = htmldiv + "<p>고유번호 : " +record_data.phone + '</p>';
-            htmldiv = htmldiv + "<p>시험일 : " +record_data.date + '</p>';
-            htmldiv = htmldiv + "<p>Grade : " +record_data.grade + '</p>';
-            
-        htmldiv = htmldiv + '</div>';
-        $('#cert-body-div').append(htmldiv);
-    },
-
-    "RCCNF0001":function viewformatter(record_data) {
-        //mktest
-        var htmldiv = '<div>';
-            htmldiv = htmldiv + "<p>이름 : " +record_data.name + '</p>';
-            htmldiv = htmldiv + "<p>Grade : " +record_data.grade + '</p>';
-            htmldiv = htmldiv + "<p>총점 : " +record_data.point0 + '</p>';
-            htmldiv = htmldiv + "<p>과목1 : " +record_data.point1 + '</p>';
-            htmldiv = htmldiv + "<p>과목2 : " +record_data.point2 + '</p>';
-            htmldiv = htmldiv + "<p>과목3 : " +record_data.point3 + '</p>';
-            
-        htmldiv = htmldiv + '</div>';
-        $('#cert-body-div').append(htmldiv);
-    },
 }
 
 function generateURL() {

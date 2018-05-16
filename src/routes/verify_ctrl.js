@@ -10,7 +10,7 @@ import VerifyRequest from '../modules/client/verify/verify_request'
  */
 export default {
     get: (req, res, next) => {
-        req.body.shortUrl = req.params.shortUrl;
+        req.body.shortUrl = req.params.shortUrl;        
         Managers.client().request(new VerifyRequest(req.body), (err, result) => {
             if (!!err) {
                 next(err);

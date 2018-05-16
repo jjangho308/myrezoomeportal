@@ -73,10 +73,7 @@ export default (() => {
          * @author TACKSU
          */
         sha256: (obj, cb) => {
-            // TODO Imple here
-            if (!!cb) {
-                procss.nextTick(() => {});
-            }
+            cb(crypto.createHash('sha256').update(obj).digest('base64'));
         },
 
         /**
