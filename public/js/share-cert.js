@@ -5,16 +5,36 @@ $(document).ready(function(){
 
     var situation = 1;
 
-    $(".confirm-btn").click(function(){
+    $("#cert-confirm-btn").click(function(){
+    	verify($('#cert-confirm-pw').val());
+    })
 
-    	if(situation == 1){
-	        $("input").css("border", "solid 1px #f59188");
+	//viewer hide
+	$('#popup-dialog a').click();
+	$("#cert-viewer").css("display", "none");
 
-	        $(".error-message").css("display", "block");
+});
 
-    		situation = 0;
-    	}else{
-    		$(".main-container").css("display", "none");
+function verify(passcode) {
+	var passcodehash = SHA256(passcode);
+
+	try {
+		if(certdata.encrypted) {
+			var encodedIv = certdata.iv;
+			var encryptedData = certdata.data;
+
+			var decrypted = CryptoJS.AES.decrypt(encryptedData, CryptoJS.enc.Hex.parse(
+				passcodehash), {
+				iv: CryptoJS.enc.Base64.parse(encodedIv)
+			});
+			console.log(decrypted.toString(CryptoJS.enc.Utf8));
+
+			//process verify
+			var json_decrypted = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));        
+        	certformatter[json_decrypted.subid](json_decrypted.data);
+			
+
+			$(".main-container").css("display", "none");
     		$(".loading-container").css("display", "block");
 
 		    var current_active = 0;
@@ -26,34 +46,19 @@ $(document).ready(function(){
 		        current_active += 1;
 		        
 		        if(current_active > 5){
-		            current_active = 0;
+					current_active = 0;
+					$("#cert-verify").css("display", "none");
+					$("#cert-viewer").css("display", "block");
 		        }
 		        $(`#circle-${current_active}`).css("background-color","#4a90e2");
 		                           
 		                          
 		     }, 1000);
-
-    		situation = 1;	
-    	}
-
-    })
-
-
-
-});
-
-function verify(passcode) {
-	var passcodehash = SHA256(passcode);
-
-    if(verifyData.encrypted) {
-        var encodedIv = verifyData.iv;
-        var encryptedData = verifyData.data;
-
-        var decrypted = CryptoJS.AES.decrypt(encryptedData, CryptoJS.enc.Hex.parse(
-            passcodehash), {
-            iv: CryptoJS.enc.Base64.parse(encodedIv)
-        });
-        console.log(decrypted.toString(CryptoJS.enc.Utf8));
+		}
+	}
+	catch(exception) {
+		$("input").css("border", "solid 1px #f59188");
+		$(".error-message").css("display", "block");
 	}
 }
 
