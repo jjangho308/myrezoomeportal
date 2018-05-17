@@ -167,11 +167,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                     var defferedPromises = [];
                                     resultOrgIds.forEach((item, idx, array) => {
 
-                                        defferedPromises.push(new Promise((resolve, reject) => {
+                                        defferedPromises.push(new Promise((innerResolve, innerReject) => {
 
                                             db.getOrgDAO().getSubIdByOrgId(item.ORG_ID, (err, subIdQueryResult) => {
                                                 if (!!err) {
-                                                    reject(err);
+                                                    innerReject(err);
                                                 } else {
                                                     var subIds = [];
                                                     subIdQueryResult.forEach((resultItem, resultItemIdx, resultArray) => {
@@ -183,9 +183,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     // 모든 기관마다 Push Message를 한번씩 발신한 뒤 Result.
                                                     Managers.push().sendMessage(pushMessage, subIdQueryResult[0].ORG_ID, err => {
                                                         if (!!err) {
-                                                            reject(err);
+                                                            innerReject(err);
                                                         } else {
-                                                            resolve();
+                                                            innerResolve();
                                                         }
                                                     });
                                                 }
@@ -286,7 +286,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                                                     resolve();
                                                                                     return;
                                                                                 }
-                                                                            })
+                                                                            });
                                                                         }
                                                                     });
                                                                 });
@@ -325,7 +325,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                                                 resolve();
                                                                                 return;
                                                                             }
-                                                                        })
+                                                                        });
                                                                     }
                                                                 }
                                                             });
@@ -357,7 +357,6 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                     storedOrgs.forEach((storedOrgItem, storedOrgIdx) => {
                                         defferedOrgPromises.push(new Promise((orgResolve, orgReject) => {
                                             db.getRecordDAO().getStoredDataByUserId(uId, storedOrgItem.ORG_ID, (err, storedData) => {
-
                                                 if (!!err) {
                                                     console.log(err.toString());
                                                     orgReject(err);
@@ -448,12 +447,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
             var user_bc_wallet_addr = users[0].bcWalletAddr;
 
-            var j = 0;
-            var defferedPromise = [];
+            var nexledgerPromises = [];
             agentRequest.records.forEach((recordsItem, recordsIdx) => {
 
                 if (recordsItem.stored == 'N') {
-                    defferedPromises.push(new Promise((resolve, reject) => {
+                    nexledgerPromises.push(new Promise((resolve, reject) => {
                             var data = {
                                 hash: recordsItem.hash
                             }
@@ -492,7 +490,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                             return;
                         }));
                 } else {
-                    defferedPromises.push(new Promise((resolve, reject) => {
+                    nexledgerPromises.push(new Promise((resolve, reject) => {
                         // Get BLC MAP Default YN
                         var data = {
                             uid: uid,
@@ -508,7 +506,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             });
 
             // Response의 모든 처리가 완료된 후 Client socket으로 Response push.
-            Promise.all(defferedPromises)
+            Promise.all(nexledgerPromises)
                 .catch(err => {
                     // TODO Send error message to client socket. 
                 })
