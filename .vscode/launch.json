@@ -11,7 +11,8 @@
             "address": "localhost",
             "port": 19229,
             "localRoot": "${workspaceFolder}",
-            "remoteRoot": "/home/rezoome/git/rezoome"
+            "remoteRoot": "/home/rezoome/git/rezoome/",
+            "protocol": "inspector"
         },
         {
             "type": "node",
@@ -20,16 +21,16 @@
             "address": "localhost",
             "port": 29229,
             "localRoot": "${workspaceFolder}",
-            "remoteRoot": "/home/rezoome/git/rezoome"
+            "remoteRoot": "/home/rezoome/git/rezoome/",
+            "protocol": "inspector"
         },
         {
             "type": "node",
             "request": "attach",
             "name": "Attach to local",
             "port": 9229,
-            "protocol": "auto",
+            "protocol": "inspector"
         },
-
         {
             "type": "node",
             "request": "launch",
