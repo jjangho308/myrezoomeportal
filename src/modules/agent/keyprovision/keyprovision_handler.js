@@ -46,23 +46,23 @@ class KeyProvisionRequestHandler extends AbstractAgentRequestHandler {
         }, (err, result) => {
             if (!!err) {
                 // Datbase or system error.
-                done(AgentReqeust.RESULT_FAILURE, err);
+                done(AgentRequest.RESULT_FAILURE, err);
                 return;
             } else if (result.length == 0) {
                 // No organization error.
-                done(AgentReqeust.RESULT_FAILURE, err);
+                done(AgentRequest.RESULT_FAILURE, err);
                 return;
             } else {
                 orgDAO.getInfo({
                     orgId: requestEntity.orgId
                 }, (err, orgInfoList) => {
                     if (!!err) {
-                        done(AgentReqeust.RESULT_FAILURE, err);
+                        done(AgentRequest.RESULT_FAILURE, err);
                         return;
                     } else {
                         if (orgInfoList.length == 0) {
                             // 존재하지 않는 기관 정보므로 error 처리
-                            done(AgentReqeust.RESULT_FAILURE, null);
+                            done(AgentRequest.RESULT_FAILURE, null);
                             return;
                         } else if (orgInfoList.length == 1) {
                             // Org info update.
@@ -73,7 +73,7 @@ class KeyProvisionRequestHandler extends AbstractAgentRequestHandler {
                                 publicKey: requestEntity.publicKey
                             }), (err, result) => {
                                 if (!!err) {
-                                    done(AgentReqeust.RESULT_FAILURE, err);
+                                    done(AgentRequest.RESULT_FAILURE, err);
                                     return;
                                 } else {
                                     done(AgentRequest.RESULT_SUCCESS, {
