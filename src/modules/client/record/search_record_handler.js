@@ -434,18 +434,18 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      * @param {*} agentRequest 
      */
     response(clientRequest, agentRequest) {
-        //console.log('Socket Push : ' + agentRequest);
-        var socket = clientRequest.socket;
         var db = Managers.db();
-        var uid = clientRequest.uId;
+
+        var socket = clientRequest.socket;
+        var uId = clientRequest.uId;
 
         db.getUserDAO().get({
-            uId: uid
-        }, (err, users) => {
+            uId: uId
+        }, (getUserError, userModels) => {
 
             var nexledgerService = Managers.nex();
 
-            var user_bc_wallet_addr = users[0].bcWalletAddr;
+            var user_bc_wallet_addr = userModels[0].bcWalletAddr;
 
             var nexledgerPromises = [];
             agentRequest.records.forEach((recordsItem, recordsIdx) => {
@@ -467,7 +467,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
                             var blcmapinsertData = [
                                 Util.uuid(),
-                                uid, //uid
+                                uId, //uid
                                 nexledgerResponse.result.txid, //trxid
                                 agentRequest.orgcode, //orgid
                                 recordsItem.subid //subid
@@ -476,11 +476,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                             //console.log(blcmapinsertData);
                             //console.log("=========================================");
 
-                            db.getRecordDAO().putRecord(blcmapinsertData, (dbres) => {
+                            db.getRecordDAO().putRecord(blcmapinsertData, (putRecordResponse) => {
                                 //console.log(dbres);
                             });
 
-                            db.getUserDAO().setFristYN(uid, (dbres2) => {
+                            db.getUserDAO().setFristYN(uId, (setFirstResponse) => {
                                 //console.log(dbres2);
                             });
 
@@ -493,7 +493,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     nexledgerPromises.push(new Promise((resolve, reject) => {
                         // Get BLC MAP Default YN
                         var data = {
-                            uid: uid,
+                            uid: uId,
                             txid: recordsItem.txid
                         };
 
