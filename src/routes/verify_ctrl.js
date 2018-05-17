@@ -14,10 +14,18 @@ export default {
         Managers.client().request(new VerifyRequest(req.body), (err, result) => {
             if (!!err) {
                 next(err);
-            } else {                
-                res.render('verify', {
-                    data : result
-                });
+            } else {
+                
+                if(req.body.shortUrl.substring(0,1)=='c') {
+                    res.render('share-cert', {
+                        data : result
+                    });
+                }
+                else {
+                    res.render('verify', {
+                        data : result
+                    });
+                }                
             }
         });        
     }

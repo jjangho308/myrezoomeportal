@@ -1,18 +1,31 @@
 <%- include('base_head_import') -%>
 <head>
-    <script src="js/share-cert.js"></script>
+    <link rel="stylesheet" href="/css/mypage/certviewer.css">
+    <link rel="stylesheet" href="/css/share-cert-viewer.css">
+    <link rel="stylesheet" href="/css/share-cert.css">
 
-    <link rel="stylesheet" href="css/share-cert.css">
+    <script src="/js/share-cert-viewer.js"></script>
+
+    <script type="text/javascript" src="/js/crypto-js/crypto-js.js"></script>
+    <script src="/js/share-cert.js"></script>
+    <script src="/js/formatter/certs_formatter.js"></script>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 </head>
 <body>
+    <script>         
+            setData('<%- JSON.stringify(data) %>');
+    </script>
+
+<div id="cert-verify">
+
     <div class="main-container">
         <p>본 증명서는 암호로 보호되고 있습니다.<br>
         증명서 확인을 위해 비밀번호를 입력해주세요.</p>
-        <input type="password" placeholder="비밀번호를 입력해주세요.">
+        <input id="cert-confirm-pw" type="password" placeholder="비밀번호를 입력해주세요.">
         <div class="error-message">올바르지 않은 비밀번호 입니다.</div>
-        <button class="confirm-btn">확인</button>
+        <button id="cert-confirm-btn" class="confirm-btn">확인</button>
 
     </div>
 
@@ -35,7 +48,83 @@
                 잠시만 기다려주세요.</p>
     </div>
 
+    <span class="bottom-element">Powered By</span>
+    <img class="bottom-element" src="/img/common/logo.svg"/>
 
-        <span class="bottom-element">Powered By</span>
-        <img class="bottom-element" src="/img/common/logo.svg"/>
+</div>
+<div id="cert-viewer">
+        <div class="header">
+   
+                <a href="/certs">
+                    <!-- <img src="img/certviewer/wt.png" alt=""> -->
+             
+                </a>
+                <div>
+                    <p>증명서 상세보기</p>
+                    <p>인하대학교 졸업증명서(학사)</p>
+                    
+                </div>
+                <button class="hide-in-mobile" id="more-button">···</button>
+                 <a href="#cert-add-dialog" rel="modal:open">
+                <!-- <button class="primary-solid-btn">   전송</button> -->
+                 </a>
+             
+                <button class="hide-in-mobile border-btn">다운로드</button>
+                <button class="hide-in-mobile border-btn">인쇄</button>
+                
+                 <div id="more-button-div">
+                    <p>항목#1</p>
+                    <p>항목#2</p>
+                    <p>항목#3</p>
+                 </div> 
+                 
+             </div>
+             
+             <div class="main-body">
+                 <div class="outer-container">
+                   <div class="inner-container">
+                     <div class = "cert-title">
+                       졸업증명서
+                     </div>  
+             
+                     <div id="cert-body-div" class = "cert-body">
+                       
+                     </div>  
+                     <div class = "cert-footer">
+                       위의 사실을증명합니다.
+                     </div> 
+                     <div class = "cert-reference">
+                       인하대학교교무처장
+                     </div> 
+             
+                       <img class = "stamp" src="/img/certviewer/stamp.png">
+                       <img class = "qrcode hide-in-mobile" src="/img/certviewer/qrcode.png">
+             
+                   </div>
+                   <p class="hide-in-mobile">본 증명서는 레쥬메 서비스를 통해 인터넷으로 발급되었으며 우측 QR코드를 이용하여 증명서 내용의 진위여부를 확인할 수 있습니다.</p>
+             
+             
+                 </div>
+             </div>
+             
+             
+             <div id="popup-dialog" class="modal">
+                     <div class="popup-header">
+                         <img src="/img/certviewer/check.svg" />
+                         <h2>신뢰할 수 있는 이력입니다</h2>
+                         <h3>레쥬메 블록체인을 통해 기관과 통신하여 <br>
+                 정상임을 확인하였습니다.</h3>
+             
+                         <h4>주요내용</h4>
+                     </div>
+                     <div class="content">
+                         <p><span>이름</span><span>이수지</span></p>
+                         <p><span>이력명</span><span><strong>OPIc(영어)</strong></span></p>
+                         <p><span>성적</span><span>AL</span></p>
+                         <p><span>일자</span><span>2018-03-03</span></p>
+                     </div>
+                     <button>자세히 보기</button>
+             
+             </div>
+</div>
 </body>
