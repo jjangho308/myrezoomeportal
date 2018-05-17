@@ -29,13 +29,6 @@ export default {
         // Client에서 전달된 CommandName이 매핑된 RequestEntity를 생성.
 
         if (!!req.body.cmd) {
-            next({
-                err: {
-                    code: 200,
-                    msg: 'Command가 존재하지 않습니다.'
-                }
-            });
-        } else {
             var requestEntity = new(clientRequest.getEntity(req.body.cmd))(req.body.args);
 
             // 모든 요청 객체에 대해 JWT에서 추출한 uId를 injection.
@@ -54,6 +47,13 @@ export default {
                 } else {
                     // 이 경우가 발생하지 않도록 수정 필요
                     // TODO Error 처리
+                }
+            });
+        } else {
+            next({
+                err: {
+                    code: 200,
+                    msg: 'Command가 존재하지 않습니다.'
                 }
             });
         }
