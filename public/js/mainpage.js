@@ -47,7 +47,7 @@ $(document).ready(function(){
     $('#education-add-dialog .add-span').click(function () {
         console.log("#education-add-dialog .add-span clicked");
         $("#major-div").append(` 
-            <div class="error-range">
+            <div class="error-range major-div">
                 <div class="select-100">
                     <select name="select-1">
                             <option value="1">전공</option>
@@ -135,6 +135,7 @@ $(document).ready(function(){
             $("#education-add-dialog .close-modal").click();
             $("#alarm-div span").text("학력이 추가되었습니다.");
             $('#alarm-div').css("display", "block");
+            $('#alarm-div').css("margin-right", "-108px");
         }
     });
 
@@ -307,7 +308,10 @@ $(document).ready(function(){
                     success: function (res) {
                         $("#spec-change-dialog .close-modal").click();
                         $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
-                        $('#alarm-div').css("display", "block");   
+                        $('#alarm-div').css("display", "block"); 
+                        $('#alarm-div').css("margin-right", "-142px");   
+
+                        
                         
                         // sessionStrage update
                         var txidList = getTxidList();         
@@ -356,11 +360,20 @@ $(document).ready(function(){
             var numberOfChecked = $('.spec-detail-div input:checkbox:checked').length;
     
             if (numberOfChecked == 0) {
-                $("#select-footer").hide();
+                // $("#select-footer").hide();
+                $("input").prop("disabled", "true");
+
+                $("#select-footer").animateCss("fadeOutDown", function() {
+                        $("#select-footer").hide();
+                        $("input").removeAttr("disabled");
+                    });
+                $
                 $("#main-footer").css("margin-bottom", "0px");
             } else {
                 $("#select-footer span:nth-child(2)").text(numberOfChecked + "건의");
                 $("#select-footer").show();
+                $("#select-footer").animateCss("fadeInUp");  
+
                 $("#main-footer").css("margin-bottom", "71px");
             }
         });        
@@ -415,7 +428,7 @@ $(document).ready(function(){
                                     $(`#cert-line-dialog #circle-${current_active}`).css("background-color","#dadada");
                                     current_active += 1;
                                     
-                                    if(current_active > 4){
+                                    if(current_active > 5){
                                         current_active = 0;
                                     }
                                     $(`#cert-line-dialog #circle-${current_active}`).css("background-color","#4a90e2");
@@ -423,13 +436,17 @@ $(document).ready(function(){
                                                       
                                  }, 1000);
                                 
-                        //        setTimeout(function() {
-                        //             $("#cert-line-dialog .close-modal").click();
-                        //             $('#select-footer').css("display","none");
-                        //             $('#alarm-div').css("display","block");
-                        //             
-                        //             $(".spec-detail-div input:checkbox:checked").click();
-                        //         }, 3000);
+                               setTimeout(function() {
+                                    
+                                    $("#alarm-div").css("display", "block");
+                                    $("#alarm-div").css("margin-right", "-224px");
+
+                                    $("#select-footer").animateCss("fadeOutDown");
+
+                                    $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+                                    
+                                     $("#cert-line-dialog .close-modal").click();    
+                                }, 3000);
 
                     },
                     success: function (res) {                        
@@ -459,6 +476,11 @@ $(document).ready(function(){
             beforeSend: function() {
                 //clean view
                 $('.spec-body').remove();
+                $('.spec-body-default').css("display", "none");
+                $('.spec-body-loading').css("display", "block");
+
+
+
             },
             data: JSON.stringify({
                 cmd: 'SearchRecord',
