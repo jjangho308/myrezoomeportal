@@ -459,7 +459,7 @@ $(document).ready(function(){
     });
 
     $('#refresh_record').click(function() {
-        $('.timeline').show();
+        $('.spec-body-loading').show();
         $('.spec-body-default').hide();    
         getRSAKey();
         var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
@@ -497,7 +497,7 @@ $(document).ready(function(){
                 setSocket(res.mid);
                 clientsocket_listener();
                 setTimeout(() => {
-                    $('.timeline').hide();
+                    $('.spec-body-loading').hide();
                     $('.spec-body-default').show();    
                 }, 1500);
             },
@@ -649,7 +649,7 @@ function request_agent() {
             clientsocket_listener();
             // loading css start
             setTimeout(() => {
-                $('.timeline').hide();
+                $('.spec-body-loading').hide();
                 $('.spec-body-default').show();    
             }, 1500);
             
@@ -659,7 +659,7 @@ function request_agent() {
 }
 
 function refreshview(records) {
-    $('.timeline').hide();
+    $('.spec-body-loading').hide();
 
     var recordList = {};
     var subid = "";
