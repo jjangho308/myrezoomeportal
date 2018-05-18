@@ -186,7 +186,7 @@ function test_setTestData() {
            {
                "data": "{\"testid\":\"6A3135824610\",\"phone\":\"01064749282\",\"name\":\"PARKHUNWOOK\",\"grade\":\"IM2\",\"date\":\"20180313\"}",
                "hash": "332ca60e27587689dfdbd71754abf3e6e8c81fe4ca8424b5afb746886d3fbf01",
-               "txid": "5489c0ebabef028bb6b0915837ce8325371b435722525f5717c47775ab2f6a34",
+               "txid": "8bee2e4871e1ab8217a5a30d73209f51eef0080a3f2858d0aff37ef476344fc0",
                "subid": "RCLPT0005",
                "stored": "Y",
                "dftYn": "N"

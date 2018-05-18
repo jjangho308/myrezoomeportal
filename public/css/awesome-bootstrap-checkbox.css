@@ -160,7 +160,7 @@
      }
 .abc-radio label {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: 15px;
   position: relative;
   padding-left: 5px; }
 .abc-radio label::before {
@@ -196,7 +196,9 @@
 
 .abc-radio input[type="radio"] {
   opacity: 0;
-  z-index: 1; }
+  z-index: 1;
+
+      }
 .abc-radio input[type="radio"]:focus + label::before {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;

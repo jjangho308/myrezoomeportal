@@ -67,6 +67,13 @@ import GenerateShortUrlRequest from './generate_short_url/generate_short_url_req
 import GenerateShortUrlHandler from './generate_short_url/generate_short_url_handler';
 
 /**
+ * '/v/' Verification request. <br />
+ * 
+ */
+import VerifyRequest from './verify/verify_request';
+import VerifyHandler from './verify/verify_handler';
+
+/**
  * Request manager from client. <br />
  * 
  * 초기화 시 RequestMap를 생성하며 Client channel의 <br />
@@ -124,6 +131,9 @@ class ClientRequestManager extends AbstractManager {
         this.handlerMap.set(CreatePrivateRecordRequest, new CreatePrivateRecordHandler());
         this.handlerMap.set(GetPrivateRecordsRequest, new GetPrivateRecordsHandler());
         this.handlerMap.set(DeletePrivateRecordRequest, new DeletePrivateRecordHandler());
+
+        // Verification request
+        this.handlerMap.set(VerifyRequest, new VerifyHandler());
 
         // 기타 등등 cmd 로 관리 되는것들
         this.entityMap.set('SearchRecord', SearchRecordRequest);

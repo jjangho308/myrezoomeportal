@@ -71,11 +71,30 @@ export default (() => {
          * 
          * @since 180404
          * @author TACKSU
+         * 
+         * @param {String} obj UTF-8 plain text.
+         * @param {function} cb Callback function.
          */
         sha256: (obj, cb) => {
-            // TODO Imple here
+            var sha256 = crypto.createHash('sha256');
+            var hashedData = null;
             if (!!cb) {
-                procss.nextTick(() => {});
+                process.nextTick(() => {
+                    if (obj instanceof String) {
+                        hashedData = sha256.update(obj, 'utf8').digest('base64');
+                    } else {
+                        hashedData = sha256.update(obj).digest('base64');
+                    }
+                    cb(hashedData);
+                });
+            } else {
+                if (obj instanceof String) {
+                    hashedData = sha256.update(obj, 'utf8').digest('base64');
+                } else {
+                    hashedData = sha256.update(obj).digest('base64');
+                }
+
+                return hashedData;
             }
         },
 
@@ -84,9 +103,35 @@ export default (() => {
          * 
          * @since 180404
          * @author TACKSU
+         * 
+         * @param {Buffer|String} obj Data to be hashed.
+         * @param {function} cb Callback function.
          */
         md5: (obj, cb) => {
-            // TODO Imple here
+            var md5 = crypto.createHash('md5');
+            var hashedData = null;
+            if (!!cb) {
+                process.nextTick(() => {
+                    try {
+                        if (obj instanceof String) {
+                            hashedData = md5.update(obj, 'base64').digest('base64');
+                        } else {
+                            hashedData = md5.update(obj).digest('base64');
+                        }
+                        cb(null, hashedData);
+                    } catch (e) {
+                        cb(e, null);
+                    }
+                });
+            } else {
+                if (obj instanceof String) {
+                    hashedData = md5.update(obj, 'base64').digest('base64');
+                } else {
+                    hashedData = md5.update(obj).digest('base64');
+                }
+
+                return hashedData;
+            }
         }
     }
 

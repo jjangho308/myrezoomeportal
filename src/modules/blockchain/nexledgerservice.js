@@ -9,7 +9,6 @@ import request from 'request-json';
  */
 class NexledgerService extends AbstractManager {
 
-
     /**
      * Default constructor. <br />
      * 
@@ -58,15 +57,15 @@ class NexledgerService extends AbstractManager {
             //console.log("============Nexledger Get function=================");
             //console.log(body);
             try {
-                if(body.result.hash=='') {
-              //      console.log("============Nexledger Retry=================");
-                    this.getbytxid(nodeurl,txid,callback);
+                if (body.result.hash == '') {
+                    //      console.log("============Nexledger Retry=================");
+                    this.getbytxid(nodeurl, txid, callback);
                     return;
                 }
-            }catch(nexledgerexception) {
-               // console.log(nexledgerexception);
-                this.getbytxid(nodeurl,txid,callback);
-                return;    
+            } catch (nexledgerexception) {
+                // console.log(nexledgerexception);
+                this.getbytxid(nodeurl, txid, callback);
+                return;
             }
             //console.log("==============================================");
             callback(body);
@@ -91,6 +90,14 @@ class NexledgerService extends AbstractManager {
 
     }
 
+    /**
+     * Put transaction data to nexledger. <br />
+     * 
+     * @param {*} nodeurl 
+     * @param {*} address 
+     * @param {*} data 
+     * @param {*} callback 
+     */
     put(nodeurl, address, data, callback) {
         var client = request.createClient(!!nodeurl ? nodeurl : this.url);
         var reqformatdata = {
@@ -104,15 +111,15 @@ class NexledgerService extends AbstractManager {
             //console.log("============Nexledger Put function=================");
             //console.log(body);
             try {
-                if(body.result.txid=='') {
-              //      console.log("============Nexledger Retry=================");
-                    this.put(nodeurl,address,data,callback);
+                if (body.result.txid == '') {
+                    //      console.log("============Nexledger Retry=================");
+                    this.put(nodeurl, address, data, callback);
                     return;
                 }
-            }catch(nexledgerexception) {
+            } catch (nexledgerexception) {
                 //console.log(nexledgerexception);
-                this.put(nodeurl,address,data,callback);
-                return;    
+                this.put(nodeurl, address, data, callback);
+                return;
             }
 
             //console.log("==============================================");

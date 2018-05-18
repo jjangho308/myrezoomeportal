@@ -1,3 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="101" height="101" viewBox="0 0 101 101">
-    <path fill="#FFF" fill-rule="evenodd" d="M50.48 51C64.514 51 76 39.545 76 25.5 76 11.487 64.514 0 50.48 0 36.486 0 25 11.487 25 25.5 25 39.545 36.486 51 50.48 51zm0 12C33.438 63 0 71.224 0 88.32V101h101V88.32C101 71.224 67.53 63 50.48 63z"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="151" height="149" viewBox="0 0 151 149">
+    <defs>
+        <rect id="b" width="147" height="145" rx="5"/>
+        <filter id="a" width="104.8%" height="104.8%" x="-2.4%" y="-1.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.591571003 0 0 0 0 0.591571003 0 0 0 0 0.591571003 0 0 0 0.318982111 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(2 1)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use fill="#EFEFEF" xlink:href="#b"/>
+            <rect width="144" height="142" x="1.5" y="1.5" stroke="#F8F8F8" stroke-width="3" rx="5"/>
+        </g>
+        <path fill="#FFF" d="M75.48 74C89.514 74 101 62.545 101 48.5 101 34.487 89.514 23 75.48 23 61.486 23 50 34.487 50 48.5 50 62.545 61.486 74 75.48 74zm0 12C58.438 86 25 94.224 25 111.32V124h101v-12.68C126 94.224 92.53 86 75.48 86z"/>
+    </g>
 </svg>
