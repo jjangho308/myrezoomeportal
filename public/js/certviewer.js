@@ -206,7 +206,7 @@ $(document).ready(function(){
 
 function summitform() {
     var cert_id = window.location.href.split('/')[4];
-    var cert_url = $('#cert-url-input').val();
+    var cert_url = $('#cert-url-input').val().split('/')[2];
     var cert_password = hexToBase64(SHA256($('#shared_password').val()));
     var cert_exp = 20501231;
     var cert_emails =[];
@@ -236,6 +236,7 @@ function summitform() {
         }),
         success: function (result) {
             console.log(result);
+            $('#cert-add-dialog a').click();
         },
         contentType: 'application/json'
     });
@@ -271,7 +272,7 @@ function generateURL() {
             
         }),
         success: function (result) {
-            $("#cert-url-input").val(result.result);
+            $("#cert-url-input").val(window.location.host + '/v/' + result.result);
         },
         contentType: 'application/json'
     });
