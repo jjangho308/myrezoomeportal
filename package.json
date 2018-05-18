@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "babel-trans": "babel-node --presets es2015",
-    "start": "nodemon --exec npm run babel-trans -- ./bin/www",
-    "debug": "nodemon --exec npm run babel-trans --inspect-brk ./bin/www",
+    "babel-node": "babel-node --presets es2015",
+    "start": "nodemon --exec npm run babel-node -- ./bin/www",
+    "debug": "babel-node --inspect-brk ./bin/www",
     "test": "mocha --require babel-core/register ./src/test/*.test.js",
     "build": "./node_modules/.bin/babel ./src/**/*.js --out-dir dist --source-maps"
   },
