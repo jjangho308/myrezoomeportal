@@ -34,7 +34,7 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
      * @param {function(number, object)} done callback function.
      */
     request(requestEntity, done) {
-
+        
         var resumeDAO = Managers.db().getResumeDAO();
         resumeDAO.getResume({
             uId: requestEntity.uId,
@@ -46,51 +46,18 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
                 //console.log(resumeList);
                 var recordDAO = Managers.db().getRecordDAO();
                 var completedResume = 0;
-                resumeList.forEach((item, index, array) => {
-                    delete item.sId;
-                    // console.log(resumeList);
+                for (var i in resumeList) {
+                    !((idx) => {
+                        // Remove 'sId' field.
+                        delete resumeList[idx].sId;
+                        console.log(resumeList);
 
-                    if (index == array.length - 1) {
-                        done(ClientRequest.RESULT_SUCCESS, array);
-                    }
-
-
-                    /*
-                    // 이력서가 담고 있는 Records의 Blc MAP IDs
-                    var recordsMap = JSON.parse(resumeList[idx].blcMap)
-                    // Remove 'blcMap' Field
-                    delete resumeList[idx].blcMap;
-                    for (var j in recordsMap) {
-                        var bcMapIds = [];
-                        !((jdx) => {
-                            recordDAO.getBlockChainMap({
-                                blcMapId: recordsMap[jdx].mapId
-                            }, (err, bcModels) => {
-                                if (bcModels.length > 0) {
-                                    bcMapIds.push({
-                                        order: recordsMap[jdx].order,
-                                        txid: bcModels[0].txid
-                                    });
-
-                                    // 하나 이력서의 blockchain mapId 구성 완료함.
-                                    if (bcMapIds.length == recordsMap.length) {
-                                        bcMapIds.sort((a, b) => {
-                                            return a.order - b.order;
-                                        });
-
-                                        resumeList[idx].records = bcMapIds;
-                                        completedResume++;
-
-                                        if (completedResume == resumeList.length) {
-                                            done(ClientRequest.RESULT_SUCCESS, resumeList);
-                                        }
-                                    }
-                                }
-                            })
-                        })(j);                            
-                    }
-                    */
-                });
+                        completedResume++;
+                        if (completedResume == resumeList.length) {
+                            done(ClientRequest.RESULT_SUCCESS, resumeList);
+                        }
+                    })(i);
+                }
             }
         })
     }

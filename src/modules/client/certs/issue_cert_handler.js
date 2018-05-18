@@ -53,23 +53,25 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                 });
             } else {
                 //TODO Plain text를 암호화 된 message로 변환할 것.
-                var cryptoManager = Managers.crypto();
+                var crypto = Managers.crypto();
                 
-                var certModel = new CertModel({
-                    certId: Util.uuid(),
-                    uId: request.uId,
-                    txId: blcMapModels[0].txid,
-                    encryptedData: JSON.stringify(request.cert.record)
-                });
-
-                certDAO.putCert(certModel, (err, insertId) => {
-                    if (!!err) {
-                        cb(ClientRequest.RESULT_FAILURE, err);
-                    } else {
-                        cb(ClientRequest.RESULT_SUCCESS, {
-                            result:"success" 
-                        });
-                    }
+                crypto.encryptAESECB(JSON.stringify(request.cert.record), crypto.getSystemSymmetricKey(), (err, encrypted)=> {
+                    var certModel = new CertModel({
+                        certId: Util.uuid(),
+                        uId: request.uId,
+                        txId: blcMapModels[0].txid,
+                        encryptedData: encrypted
+                    });
+    
+                    certDAO.putCert(certModel, (err, insertId) => {
+                        if (!!err) {
+                            cb(ClientRequest.RESULT_FAILURE, err);
+                        } else {
+                            cb(ClientRequest.RESULT_SUCCESS, {
+                                result:"success" 
+                            });
+                        }
+                    });
                 });
             }
         })

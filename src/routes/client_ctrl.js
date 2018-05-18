@@ -27,30 +27,35 @@ export default {
         // console.log('==============================================================');
 
         // Client에서 전달된 CommandName이 매핑된 RequestEntity를 생성.
-        var requestEntity = new(clientRequest.getEntity(req.body.cmd))(req.body.args);
 
-        // 모든 요청 객체에 대해 JWT에서 추출한 uId를 injection.
-        requestEntity.uId = req.body.uId;
-        clientRequest.request(requestEntity, (err, result) => {
+        if (!!req.body.cmd) {
+            var requestEntity = new(clientRequest.getEntity(req.body.cmd))(req.body.args);
 
-            // 아직 Sent 안됐을때만 response
-            if (!res.headersSent) {
-                if (!!err) {
-                    next(err);
+            // 모든 요청 객체에 대해 JWT에서 추출한 uId를 injection.
+            requestEntity.uId = req.body.uId;
+            clientRequest.request(requestEntity, (err, result) => {
+                // 아직 Sent 안됐을때만 response
+                if (!res.headersSent) {
+                    if (!!err) {
+                        next(err);
+                    } else {
+                        res.json({
+                            mid: requestEntity.mId,
+                            result: result
+                        });
+                    }
                 } else {
-                    res.json({
-                        mid: requestEntity.mId,
-                        result: result
-                    });
+                    // 이 경우가 발생하지 않도록 수정 필요
+                    // TODO Error 처리
                 }
-            } else {
-                // 이 경우가 발생하지 않도록 수정 필요
-                // TODO Error 처리
-            }
-        });
-
-        // res.json({
-        //     mid: requestEntity.mId
-        // });
+            });
+        } else {
+            next({
+                err: {
+                    code: 200,
+                    msg: 'Command가 존재하지 않습니다.'
+                }
+            });
+        }
     }
 }

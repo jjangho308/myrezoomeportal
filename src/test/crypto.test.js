@@ -12,6 +12,8 @@ import NodeRSA from 'node-rsa';
 import CryptoJS from 'crypto-js';
 import AES from 'crypto-js/aes';
 
+import assert from 'assert';
+
 /**
  * CryptoManagers test suite. <br />
  * 
@@ -19,7 +21,7 @@ import AES from 'crypto-js/aes';
  * @author SSEK-SU
  */
 describe('Crypto test suit', () => {
-    var crypto;
+    var crypto = new CryptoManager();
 
     before('Crypto module init', () => {
         Initializer();
@@ -133,7 +135,7 @@ describe('Crypto test suit', () => {
      * @since 180503
      * @author TACKSU
      */
-    it('Encrypt with organization publicKey', done => {
+    it.skip('Encrypt with organization publicKey', done => {
         var publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAysQGoArHW2Cf9p5WjEvv+bqMTw0KhI+TCeSup3TB0lMMA3N12jT34KN+Pr0uZHZ79XtiaNYMf/hY3mS28Gn7WzDPy9QYsVLAW56jNUEn83I4vz9QQBQv9dbNUuUzg40yyydobdw9o1DUejbRjhWy7OwJOlkA9hdlkZgg2Q6KewLCEXLdx1JIe6i5x0uQkYKoNfT0oURk4dm82RKrqsnK9p47Cp19Xyqx/J5V2gE505bHlWyhVQvyfyrcpuv4WNwe6qcfB2HLbINFj92Kjrstp9jxz/+ejCN6d/lCgYjO/BL9ROOLgGIi8CSwVswaD0znlDIn0MDZDooZKTvLIeVytQIDAQAB";
         var privateKey = "MIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQDKxAagCsdbYJ/2nlaMS+/5uoxPDQqEj5MJ5K6ndMHSUwwDc3XaNPfgo34+vS5kdnv1e2Jo1gx/+FjeZLbwaftbMM/L1BixUsBbnqM1QSfzcji/P1BAFC/11s1S5TODjTLLJ2ht3D2jUNR6NtGOFbLs7Ak6WQD2F2WRmCDZDop7AsIRct3HUkh7qLnHS5CRgqg19PShRGTh2bzZEquqycr2njsKnX1fKrH8nlXaATnTlseVbKFVC/J/Ktym6/hY3B7qpx8HYctsg0WP3YqOuy2n2PHP/56MI3p3+UKBiM78Ev1E44uAYiLwJLBWzBoPTOeUMifQwNkOihkpO8sh5XK1AgMBAAECggEBAMJ+G1jCXg1xdp7prFzwriRd4x4khTU4PrNbrogjv5LOZBSfWKlQ63+Hc54cevaUjDyg+HlU8DKD9kKEWtHq5tbG0FtUe8cDeE2psiVv9TFYG8Sep4x/kK2AN/zOq4YBF3q0tz/B5UHVU6pTENj4SWNm2Uclfn2PXba1NLTfdMed3KSZqHgXSiwxqyacu+HfrSdYZJGbjE42H2Td6qygorGhwrdy4xZM1oEffN3mZ74QyR8DpvewaW3br89msgjZOlD5gBVGm9ROaLwCbhOrvGEGQC8+nTjSvUE4C/ePe865OPRvmertiTFhJQFqdLgceGVPXJGyGzBqNUhnUk6MIFUCgYEA8y2wpPvAUKwpvjxcPtHN4qgVdhTE6yzdNDqXDFZrCmzeisKeQwVnt+VCcLNAFSwAubW6kX6uAOeZ39gwM6PunD8N6JuiswEhM7hcTpTgcVLe+5yGa/8pK4l3d3C7yWXm01cLL2ypwCba6V1+2iRX1AtprQh9H+5RCjb1t5Lo7osCgYEA1XTdBILneVmV/ng2+GQTd0RtDsE1vvRD0lx2/WtAWtN27jyxmkxnlgmzSanavUWoABHCAl5k4OHSMgANNqxauumlQRhtb62R6mEKIDsNsViBK8RHXtHEnTXj1IXxtlFI2L11lmcyjT++RwOp/BDsTWpdGbasXui2Cjtwa/6Ci78CgYEA4ru6FMoKEO3E6fO7inLyBR/1CqjoxeGJyfXK+hzlJs5FXJmDGDhE8WhX316yJEtnzb+MWbYEpSFMDjKzFqMFijccT8I1G7O08lU186rJ7b932p+hkbZR+57rfbjlzi0t3+Urr6cgSuGvgKDE8r2qCjIt8MCWcZwxgVWnGudmOWsCgYEAiULn6UHAVcFs+cEWIC5Ccjx3ILjPteZfQoOhJJ72ODGpVdODpaQiLFI6j1EBTxreyISizGEk35N3Vh3AYXr9sRoT4UMzBFCJ9zzFhSpUSMmP7rP97RRZKXsA8aXcZA/rFyzl03yy/i+STRonEedT/Qg7rBBS0Yk1nmjQhzGXgwMCgYEApGQRXiJH1ylCvJuWIeQQvqF2u5oSnElLdAUVtYFnMl/cS5eqVxn/KNf9xKVnJKZ0pr7ZEgoAoOiTwJf9Zcf39ZM8F8QoNWNpxXTlBCzLfkKRn7BwZKGYmoLLoGp8NkixfbFU0SoIB8s4h4QT3Y7JWsbnjQDMcZKXWX8xe2K2Z50=";
         var plain = "giemncc3LqXT+o8MWucPqkGQPCmsBliHCwCOlxoHY6k=";
@@ -259,4 +261,32 @@ describe('Crypto test suit', () => {
             done();
         });
     })
+
+    /**
+     * Encrypt decrypt in ECB mode test case. <br />
+     * 
+     * @since 180516
+     * @author TACKSU
+     */
+    it('AES Encrypt/Decrypt in ECB mode', done => {
+        var plainText = 'Hello, World!';
+        crypto.generateAESKey((err, encodedKey) => {
+            console.log('AES Key : ' + encodedKey);
+            crypto.encryptAESECB(plainText, encodedKey, (err, encrypted) => {
+                console.log('Encrypted : ' + encrypted);
+                crypto.decryptAESECB(encrypted, encodedKey, (err, decrypted) => {
+                    if (plainText == decrypted)
+                        done();
+                });
+            });
+        });
+    });
+
+    /**
+     * Get system default symmetric key test case'
+     */
+    it('Get system default symmetric key test case', () => {
+        console.log(crypto.getSystemSymmetricKey());
+        assert.equal(true, true);
+    });
 });

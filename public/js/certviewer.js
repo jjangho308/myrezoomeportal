@@ -1,11 +1,17 @@
 $(document).ready(function(){
+
+    //common
+    client_token = getCookie("JWT");
+    client_authorization = 'Bearer ' + client_token;
    
     $('#create-link-button').click(function(){
         $('.abc-radio label').css("color","#676767");
         $("#cert-url-input").val("http://rezoome.io/d/20194011003A");
-        $('.abc-radio .default-label').click();
+        $('.abc-radio .default-password-label').click();
+        $('.abc-radio .default-period-label').click();
         
         $(".modal-footer a").css("display","inline-block");
+        generateURL();
     });
     
     
@@ -193,8 +199,48 @@ $(document).ready(function(){
     });
 
     
-    
+    $('.confirm-btn').click(function(){
+        summitform();     
+    });
 });
+
+function summitform() {
+    var cert_id = window.location.href.split('/')[4];
+    var cert_url = $('#cert-url-input').val().split('/')[2];
+    var cert_password = hexToBase64(SHA256($('#shared_password').val()));
+    var cert_exp = 20501231;
+    var cert_emails =[];
+    var cert_msg;
+    var cert_public = 'N';
+
+    if(cert_password == '' || cert_password == null) {
+        var cert_public = 'Y';
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/shared_certs',
+        headers: {
+            'Authorization': client_authorization
+        },
+        data: JSON.stringify({
+            shared_cert: {
+                certid: cert_id,
+                url: cert_url,
+                password: cert_password,
+                exp: cert_exp,
+                emails: cert_emails,            
+                msg: cert_msg,
+                public: cert_public
+            }
+        }),
+        success: function (result) {
+            console.log(result);
+            $('#cert-add-dialog a').click();
+        },
+        contentType: 'application/json'
+    });
+}
 
 function setCertViewer(sub_id, tx_id) {
     //alert("subid : " + sub_id + " / txid" + tx_id);
@@ -205,41 +251,26 @@ function setCertViewer(sub_id, tx_id) {
 
 }
 
-var certformatter= {    
-    "RCLPT0005":function viewformatter(record_data) {              
-        // opic
-        var htmldiv = '<div>';
-            htmldiv = htmldiv + "<p>이름 : " +record_data.name + '</p>';
-            htmldiv = htmldiv + "<p>testid : " +record_data.testid + '</p>';
-            htmldiv = htmldiv + "<p>고유번호 : " +record_data.phone + '</p>';
-            htmldiv = htmldiv + "<p>시험일 : " +record_data.date + '</p>';
-            htmldiv = htmldiv + "<p>Grade : " +record_data.grade + '</p>';
+function generateURL() {
+
+    $.ajax({
+        type: 'POST',
+        url: '/client',
+        headers: {
+            'Authorization': client_authorization
+        },
+        data: JSON.stringify({
+            cmd: 'GenerateShortURL',
             
-        htmldiv = htmldiv + '</div>';
-        $('#cert-body-div').append(htmldiv);
-    },
-
-    "RCCNF0001":function viewformatter(record_data) {
-        //mktest
-        var htmldiv = '<div>';
-            htmldiv = htmldiv + "<p>이름 : " +record_data.name + '</p>';
-            htmldiv = htmldiv + "<p>Grade : " +record_data.grade + '</p>';
-            htmldiv = htmldiv + "<p>총점 : " +record_data.point0 + '</p>';
-            htmldiv = htmldiv + "<p>과목1 : " +record_data.point1 + '</p>';
-            htmldiv = htmldiv + "<p>과목2 : " +record_data.point2 + '</p>';
-            htmldiv = htmldiv + "<p>과목3 : " +record_data.point3 + '</p>';
+            args: {
+               prefix: 'c'
+            }
             
-        htmldiv = htmldiv + '</div>';
-        $('#cert-body-div').append(htmldiv);
-    },
-}
+        }),
+        success: function (result) {
+            $("#cert-url-input").val(window.location.host + '/v/' + result.result);
+        },
+        contentType: 'application/json'
+    });
 
-function test0507() {
-    var temp_sub_id = "RCCNF0001";
-    var temp_tx_id = "1b8ec94a79ab02fb09d5a0e8595d6b0f488a7c7b7cc59c66b393bccbbb2909cb";
-
-    var record = '{"data":{"userid":"123456","point0":"999","point1":"99","point2":"600","point3":"399","name":"박헌욱","grade":"짱","date":"2018-04-18 08:39:03.0"},"hash":"8e031d8fb7711ad6dbccbce85913b01ecec3643543da8e1245c8f232a63d3f1c","txid":"1b8ec94a79ab02fb09d5a0e8595d6b0f488a7c7b7cc59c66b393bccbbb2909cb","subid":"RCCNF0001","stored":"Y","dftYn":"Y"}';
-    var json_record = JSON.parse(record);
-
-    certformatter[temp_sub_id](json_record.data);
 }

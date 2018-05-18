@@ -72,6 +72,8 @@ function loadcertlist() {
 $(document).ready(function(){
 
     //get client token
+
+    $(".modal tbody").mCustomScrollbar({"theme":"minimal-dark"});
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
 
@@ -94,8 +96,10 @@ $(document).ready(function(){
         window.location = "main";
     });
     
-    $('.cert-container').click(function () {
-        window.location = "/certviewer";
+    $('.cert-container').click(function (event ) {
+        console.log($(event.target));
+        if(($(event.target).prop("class") != 'more-store-resume') && ($(event.target).prop("class") != 'more-store-resume-p') )
+            window.location = "/certviewer";
     });
     
 
@@ -189,19 +193,49 @@ $(document).ready(function(){
 
     $(document).on('click', ".more-store-resume", function () {
         var element = $(this).closest(".cert-container").find(".more-store-resume-div");
-        element.css("display", "block");
+
+
+        if(element.css("display") == "none")
+            element.css("display", "block");
+        else
+            element.css("display", "none");
+
+    });
+
+    $(".option-open").click(function () {
+        var element = $(".sub-info-select-div");
+
+
+        if(element.css("display") == "none")
+            element.css("display", "block");
+        else
+            element.css("display", "none");
+
+        element = $(".sub-info img:nth-child(2)");
+        console.log(element.attr("src"));
+        if(element.attr("src").indexOf("path-2") >= 0){
+            console.log("sadasd");
+            element.attr("src", element.attr("src").replace("path-2","path-1"));
+        }
+        else if(element.attr("src").indexOf("path-1") >= 0){
+            console.log("sada2sd");
+            element.attr("src", element.attr("src").replace("path-1","path-2")); 
+        }
+
+
+    });
+
+    $(".sub-info-select-p").click(function () {
+        $(".sub-info-select-p").removeClass("active");
+        $(this).addClass("active");
+
+        $(".sub-info-select-div").css("display", "none");
+
+        $("p.option-open").text($(this).text());
 
     });
 
 
-
-    $(document).click(function (e) {        
-        if ($(e.target).attr('class') == "more-store-resume")
-            return;
-
-        var element = $(".more-store-resume-div");
-        element.css("display", "none");
-    });
 
     $('#add-cert-dialog .confirm-btn').click(function() {
         $("#add-cert-dialog  .close-modal").click();

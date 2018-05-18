@@ -1,0 +1,14 @@
+{
+    "window.zoomLevel": 1,
+    "explorer.confirmDragAndDrop": false,
+    "editor.cursorBlinking": "expand",
+    "workbench.editor.openPositioning": "left",
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.enablePreview": true,
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "files.autoSave": "onFocusChange",
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "gitlens.historyExplorer.enabled": true,
+}

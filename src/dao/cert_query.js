@@ -22,15 +22,15 @@ export default {
     putShared: 'INSERT INTO ' + SHARED_CERT_TABLE + ' SET ?',
     
     // del_yn 처리 완료
-    getShared: 'SELECT * FROM ' + SHARED_CERT_TABLE + ' WHERE ? and ?',
+    getShared: 'SELECT * FROM ' + SHARED_CERT_TABLE + " WHERE DEL_YN = 'N' and ?",
+    
+    getSharedUrl: "SELECT TCD.TRX_ID, TCD.ENC_CERT_DATA, TCD.SHRD_YN, TCSI.URL, TCSI.CERT_ID, TCSI.PUB_YN, TCSI.PASSCODE, TCSI.EXPIRED_DT FROM " + SHARED_CERT_TABLE + " AS TCSI INNER JOIN " + CERT_TABLE + " AS TCD ON (TCD.CERT_ID = TCSI.CERT_ID AND TCD.DEL_YN = 'N') WHERE TCSI.DEL_YN = 'N' AND ?",
     
     //del_yn 처리 필요 없는것같음(검토필요)
     setShared: 'UPDATE ' + SHARED_CERT_TABLE + ' SET ? WHERE ?',
     
     //완료 del_yn
     delShared: 'UPDATE ' + SHARED_CERT_TABLE + " SET DEL_YN = 'Y' WHERE ? and ?",
-
-    
     
     //putUrl: 'INSERT INTO ' + SHARED_URL_TABLE + ' SET ?',
     

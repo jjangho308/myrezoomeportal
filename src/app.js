@@ -6,16 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 
-//var index = require('./routes/index');
-// var users = require('./routes/users');
-
-var app = express();
-
 import Initialize from './core/initializer';
 import agentRouter from './routes/agent_route';
 
 
 import rootRouter from './routes/root_route';
+
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
