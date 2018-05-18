@@ -243,8 +243,12 @@ function summitform() {
 
 function setCertViewer(sub_id, tx_id) {
     //alert("subid : " + sub_id + " / txid" + tx_id);
-
     var record = getData(tx_id);
+    console.log(record);
+
+    $(".cert-title").html(record.data.univInfo.univ_name + "증명서");
+
+    
     certformatter[sub_id](record.data);
 
 

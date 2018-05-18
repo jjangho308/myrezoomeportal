@@ -119,6 +119,60 @@ var formatter= {
         $('#spec_forign_lang > .spec-body-default').hide();
     },
 
+    "RCOGC0010":function viewformatter(record) {
+        // 매경대 졸업증명서
+        var htmldiv = '<div class="spec-body">';
+            htmldiv = htmldiv + '<div class="spec-left">';
+            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-center">';
+            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kmu.jpg" alt="">';
+            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-right" id="btn_change'+record.subid+'" >';
+            htmldiv = htmldiv + '<p>계명대</p>';
+            htmldiv = htmldiv + '<p>'+record.userInfo[0].course +'</p>';
+            htmldiv = htmldiv + '<p>'+record.userInfo[0].status +'</p>';
+            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+            htmldiv = htmldiv + '</div>';
+        htmldiv = htmldiv + '</div>';
+        $('#spec_edu_detail').append(htmldiv);
+        $('#spec_edu_detail > .spec-body-default').hide();
+    },
+
+    "RCOGC0011":function viewformatter(record) {
+        console.log(record);
+
+        var avg = '';
+        var total = 0;
+        for(var i in record.scoreStatisticList) {
+            total += parseInt(record.scoreStatisticList[i].average_score);
+        }
+
+        // 매경대 성적증명서
+        var htmldiv = '<div class="spec-body">';
+            htmldiv = htmldiv + '<div class="spec-left">';
+            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-center">';
+            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kmu.jpg" alt="">';
+            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-right" id="btn_change'+record.subid+'" >';
+            htmldiv = htmldiv + '<p>계명대</p>';
+            htmldiv = htmldiv + '<p>성적증명서</p>';
+            htmldiv = htmldiv + '<p>'+ total/record.scoreStatisticList.length + '</p>';
+            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+            htmldiv = htmldiv + '</div>';
+        htmldiv = htmldiv + '</div>';
+        $('#spec_edu_detail').append(htmldiv);
+        $('#spec_edu_detail > .spec-body-default').hide();
+    },
+
     "CPR":function viewformatter(record) {
         // Private record
         var htmldiv = '<div class="private-spec-body">';
