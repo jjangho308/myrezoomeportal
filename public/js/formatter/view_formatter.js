@@ -119,8 +119,9 @@ var formatter= {
         $('#spec_forign_lang > .spec-body-default').hide();
     },
 
-    "RCOGC0010":function viewformatter(record) {
-        // 매경대 졸업증명서
+    "RCOGC0010":function viewformatter(record) {        
+
+        // 계명대 졸업증명서
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
@@ -142,7 +143,8 @@ var formatter= {
         $('#spec_edu_detail > .spec-body-default').hide();
     },
 
-    "RCOGC0011":function viewformatter(record) {
+    "RCOGC0011":function viewformatter(record) {       
+
         console.log(record);
 
         var avg = '';
@@ -151,7 +153,7 @@ var formatter= {
             total += parseInt(record.scoreStatisticList[i].average_score);
         }
 
-        // 매경대 성적증명서
+        // 계명대 성적증명서
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
@@ -238,54 +240,6 @@ var formatter= {
             htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
-        $('#spec_forign_lang').append(htmldiv);
-        $('#spec_forign_lang > .spec-body-default').hide();
-    },
-
-    "RCOGC0010":function viewformatter(record) {              
-        // 계명대학교 졸업/휴학/재학증명서
-        var htmldiv = '<div class="spec-body">';
-            htmldiv = htmldiv + '<div class="spec-left">';
-            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            htmldiv = htmldiv + '<span>'+ record.date +'</span>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>OPIC</p>';
-            htmldiv = htmldiv + '<p>'+record.testid +'</p>';
-            htmldiv = htmldiv + '<p>'+record.grade+'</p>';
-            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
-            htmldiv = htmldiv + '</div>';
-
-        htmldiv = htmldiv + '</div>';        
-        $('#spec_forign_lang').append(htmldiv);
-        $('#spec_forign_lang > .spec-body-default').hide();
-    },
-
-    "RCOGC0011":function viewformatter(record) {              
-        // 계명대학교 성적증명서
-        var htmldiv = '<div class="spec-body">';
-            htmldiv = htmldiv + '<div class="spec-left">';
-            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            htmldiv = htmldiv + '<span>'+ record.date +'</span>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>OPIC</p>';
-            htmldiv = htmldiv + '<p>'+record.testid +'</p>';
-            htmldiv = htmldiv + '<p>'+record.grade+'</p>';
-            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
-            htmldiv = htmldiv + '</div>';
-
-        htmldiv = htmldiv + '</div>';        
         $('#spec_forign_lang').append(htmldiv);
         $('#spec_forign_lang > .spec-body-default').hide();
     },

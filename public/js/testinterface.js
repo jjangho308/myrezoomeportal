@@ -309,485 +309,485 @@ record = {
                       "msg1": "위 사실을 증명합니다."
                     },
                     "scoreList": [
-                      {
-                        "year": "2012",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "객체지향프로그래밍",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "논리회로",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "소프트웨어공학",
-                        "score_result": "3",
-                        "grade_result": "D+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터보안",
-                        "score_result": "3",
-                        "grade_result": "D+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터알고리즘",
-                        "score_result": "3",
-                        "grade_result": "B0",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "자바프로그래밍",
-                        "score_result": "3",
-                        "grade_result": "D+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2013",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "데이타베이스",
-                        "score_result": "3",
-                        "grade_result": "B+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "모바일프로그래밍",
-                        "score_result": "3",
-                        "grade_result": "B0",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "미분적분학",
-                        "score_result": "3",
-                        "grade_result": "B+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "시스템분석과설계",
-                        "score_result": "3",
-                        "grade_result": "C0",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "일반물리학",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "일반화학",
-                        "score_result": "3",
-                        "grade_result": "B0",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "일반수학",
-                        "score_result": "3",
-                        "grade_result": "B+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "일반물리학(2)",
-                        "score_result": "3",
-                        "grade_result": "B0",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "일반화학(2)",
-                        "score_result": "3",
-                        "grade_result": "B+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "일반수학(2)",
-                        "score_result": "3",
-                        "grade_result": "B0",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터구조",
-                        "score_result": "3",
-                        "grade_result": "D+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "디지털영상처리",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                   {
-                        "year": "2011",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "과학과기술의역사",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터개론",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터공학창의설계",
-                        "score_result": "3",
-                        "grade_result": "C0",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2013",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터공학프로젝트",
-                        "score_result": "2",
-                        "grade_result": "P",
-                        "grade_division": "P/F"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터그래픽스1",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "아카데미영어",
-                        "score_result": "2",
-                        "grade_result": "B+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "커뮤니케이션영어",
-                        "score_result": "2",
-                        "grade_result": "B0",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "공학상담및지도",
-                        "score_result": "1",
-                        "grade_result": "P",
-                        "grade_division": "P/F"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "대학생활의설계",
-                        "score_result": "1",
-                        "grade_result": "P",
-                        "grade_division": "P/F"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "교양세미나와글쓰기",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "웹어플리케이션구축",
-                        "score_result": "3",
-                        "grade_result": "D+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "사전인턴십",
-                        "score_result": "1",
-                        "grade_result": "P",
-                        "grade_division": "P/F"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "파이썬프로그래밍",
-                        "score_result": "3",
-                        "grade_result": "C0",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "기술창업",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터공학인턴십",
-                        "score_result": "3",
-                        "grade_result": "P",
-                        "grade_division": "P/F"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터공학인턴십(2)",
-                        "score_result": "3",
-                        "grade_result": "P",
-                        "grade_division": "P/F"
-                      },
-                   {
-                        "year": "2014",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "융합캡스톤디자인)",
-                        "score_result": "3",
-                        "grade_result": "D+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "자료구조(1)",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "자료구조(2)",
-                        "score_result": "3",
-                        "grade_result": "C0",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터공학창업현장실습(2)",
-                        "score_result": "3",
-                        "grade_result": "P",
-                        "grade_division": "P/F"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터공학캡스톤디자인",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                      {
-                        "year": "2013",
-                        "semester": "2",
-                        "lecture_no": "01",
-                        "lecture_name": "컴퓨터공학학기현장실습",
-                        "score_result": "15",
-                        "grade_result": "P",
-                        "grade_division": "P/F"
-                      },
-                      {
-                        "year": "2013",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "ICT학점연계프로젝트인턴십심화",
-                        "score_result": "15",
-                        "grade_result": "P",
-                        "grade_division": "P/F"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "실시간시스템",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      },
-                   {
-                        "year": "2012",
-                        "semester": "1",
-                        "lecture_no": "01",
-                        "lecture_name": "프로그래밍",
-                        "score_result": "3",
-                        "grade_result": "C+",
-                        "grade_division": "등급"
-                      }
-                    ],
-                    "scoreStatisticList": [
-                      {
-                        "year": "2011",
-                        "semester": "1",
-                        "department": "컴퓨터공학전공",
-                        "completion_std_class": "1",
-                        "score_enrolled": "18",
-                        "scored_acquired": "18",
-                        "average_score": "3.1470588235",
-                        "ranking": "40",
-                        "people_count": "125"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "1",
-                        "department": "컴퓨터공학전공",
-                        "completion_std_class": "2",
-                        "score_enrolled": "18",
-                        "scored_acquired": "18",
-                        "average_score": "2.1666666666",
-                        "ranking": "31",
-                        "people_count": "125"
-                      },
-                      {
-                        "year": "2013",
-                        "semester": "1",
-                        "department": "컴퓨터공학전공",
-                        "completion_std_class": "3",
-                        "score_enrolled": "27",
-                        "scored_acquired": "27",
-                        "average_score": "2.8333333333",
-                        "ranking": "24",
-                        "people_count": "125"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "1",
-                        "department": "컴퓨터공학전공",
-                        "completion_std_class": "4",
-                        "score_enrolled": "19",
-                        "scored_acquired": "19",
-                        "average_score": "3.0000000000",
-                        "ranking": "13",
-                        "people_count": "125"
-                      },
-                      {
-                        "year": "2011",
-                        "semester": "2",
-                        "department": "컴퓨터공학전공",
-                        "completion_std_class": "1",
-                        "score_enrolled": "19",
-                        "scored_acquired": "19",
-                        "average_score": "3.2647058823",
-                        "ranking": "30",
-                        "people_count": "125"
-                      },
-                      {
-                        "year": "2012",
-                        "semester": "2",
-                        "department": "컴퓨터공학전공",
-                        "completion_std_class": "2",
-                        "score_enrolled": "18",
-                        "scored_acquired": "18",
-                        "average_score": "2.4166666666",
-                        "ranking": "23",
-                        "people_count": "125"
-                      },
-                      {
-                        "year": "2013",
-                        "semester": "2",
-                        "department": "컴퓨터공학전공",
-                        "completion_std_class": "3",
-                        "score_enrolled": "26",
-                        "scored_acquired": "26",
-                        "average_score": "2.0000000000",
-                        "ranking": "29",
-                        "people_count": "125"
-                      },
-                      {
-                        "year": "2014",
-                        "semester": "2",
-                        "department": "컴퓨터공학전공",
-                        "completion_std_class": "4",
-                        "score_enrolled": "18",
-                        "scored_acquired": "18",
-                        "average_score": "3.5000000000",
-                        "ranking": "6",
-                        "people_count": "125"
-                      }
-                    ]
-                   }),
+                        {
+                          "year": "2012",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "객체지향프로그래밍",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "논리회로",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "소프트웨어공학",
+                          "score_result": "3",
+                          "grade_result": "D+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터보안",
+                          "score_result": "3",
+                          "grade_result": "D+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터알고리즘",
+                          "score_result": "3",
+                          "grade_result": "B0",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "자바프로그래밍",
+                          "score_result": "3",
+                          "grade_result": "D+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2013",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "데이타베이스",
+                          "score_result": "3",
+                          "grade_result": "B+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "모바일프로그래밍",
+                          "score_result": "3",
+                          "grade_result": "B0",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "미분적분학",
+                          "score_result": "3",
+                          "grade_result": "B+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "시스템분석과설계",
+                          "score_result": "3",
+                          "grade_result": "C0",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "일반물리학",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "일반화학",
+                          "score_result": "3",
+                          "grade_result": "B0",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "일반수학",
+                          "score_result": "3",
+                          "grade_result": "B+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "일반물리학(2)",
+                          "score_result": "3",
+                          "grade_result": "B0",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "일반화학(2)",
+                          "score_result": "3",
+                          "grade_result": "B+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "일반수학(2)",
+                          "score_result": "3",
+                          "grade_result": "B0",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터구조",
+                          "score_result": "3",
+                          "grade_result": "D+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "디지털영상처리",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                     {
+                          "year": "2011",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "과학과기술의역사",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터개론",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터공학창의설계",
+                          "score_result": "3",
+                          "grade_result": "C0",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2013",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터공학프로젝트",
+                          "score_result": "2",
+                          "grade_result": "P",
+                          "grade_division": "P/F"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터그래픽스1",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "아카데미영어",
+                          "score_result": "2",
+                          "grade_result": "B+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "커뮤니케이션영어",
+                          "score_result": "2",
+                          "grade_result": "B0",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "공학상담및지도",
+                          "score_result": "1",
+                          "grade_result": "P",
+                          "grade_division": "P/F"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "대학생활의설계",
+                          "score_result": "1",
+                          "grade_result": "P",
+                          "grade_division": "P/F"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "교양세미나와글쓰기",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "웹어플리케이션구축",
+                          "score_result": "3",
+                          "grade_result": "D+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "사전인턴십",
+                          "score_result": "1",
+                          "grade_result": "P",
+                          "grade_division": "P/F"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "파이썬프로그래밍",
+                          "score_result": "3",
+                          "grade_result": "C0",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "기술창업",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터공학인턴십",
+                          "score_result": "3",
+                          "grade_result": "P",
+                          "grade_division": "P/F"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터공학인턴십(2)",
+                          "score_result": "3",
+                          "grade_result": "P",
+                          "grade_division": "P/F"
+                        },
+                     {
+                          "year": "2014",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "융합캡스톤디자인)",
+                          "score_result": "3",
+                          "grade_result": "D+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "자료구조(1)",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "자료구조(2)",
+                          "score_result": "3",
+                          "grade_result": "C0",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터공학창업현장실습(2)",
+                          "score_result": "3",
+                          "grade_result": "P",
+                          "grade_division": "P/F"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터공학캡스톤디자인",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                        {
+                          "year": "2013",
+                          "semester": "2",
+                          "lecture_no": "01",
+                          "lecture_name": "컴퓨터공학학기현장실습",
+                          "score_result": "15",
+                          "grade_result": "P",
+                          "grade_division": "P/F"
+                        },
+                        {
+                          "year": "2013",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "ICT학점연계프로젝트인턴십심화",
+                          "score_result": "15",
+                          "grade_result": "P",
+                          "grade_division": "P/F"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "실시간시스템",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        },
+                     {
+                          "year": "2012",
+                          "semester": "1",
+                          "lecture_no": "01",
+                          "lecture_name": "프로그래밍",
+                          "score_result": "3",
+                          "grade_result": "C+",
+                          "grade_division": "등급"
+                        }
+                      ],
+                      "scoreStatisticList": [
+                        {
+                          "year": "2011",
+                          "semester": "1",
+                          "department": "컴퓨터공학전공",
+                          "completion_std_class": "1",
+                          "score_enrolled": "18",
+                          "scored_acquired": "18",
+                          "average_score": "3.1470588235",
+                          "ranking": "40",
+                          "people_count": "125"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "1",
+                          "department": "컴퓨터공학전공",
+                          "completion_std_class": "2",
+                          "score_enrolled": "18",
+                          "scored_acquired": "18",
+                          "average_score": "2.1666666666",
+                          "ranking": "31",
+                          "people_count": "125"
+                        },
+                        {
+                          "year": "2013",
+                          "semester": "1",
+                          "department": "컴퓨터공학전공",
+                          "completion_std_class": "3",
+                          "score_enrolled": "27",
+                          "scored_acquired": "27",
+                          "average_score": "2.8333333333",
+                          "ranking": "24",
+                          "people_count": "125"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "1",
+                          "department": "컴퓨터공학전공",
+                          "completion_std_class": "4",
+                          "score_enrolled": "19",
+                          "scored_acquired": "19",
+                          "average_score": "3.0000000000",
+                          "ranking": "13",
+                          "people_count": "125"
+                        },
+                        {
+                          "year": "2011",
+                          "semester": "2",
+                          "department": "컴퓨터공학전공",
+                          "completion_std_class": "1",
+                          "score_enrolled": "19",
+                          "scored_acquired": "19",
+                          "average_score": "3.2647058823",
+                          "ranking": "30",
+                          "people_count": "125"
+                        },
+                        {
+                          "year": "2012",
+                          "semester": "2",
+                          "department": "컴퓨터공학전공",
+                          "completion_std_class": "2",
+                          "score_enrolled": "18",
+                          "scored_acquired": "18",
+                          "average_score": "2.4166666666",
+                          "ranking": "23",
+                          "people_count": "125"
+                        },
+                        {
+                          "year": "2013",
+                          "semester": "2",
+                          "department": "컴퓨터공학전공",
+                          "completion_std_class": "3",
+                          "score_enrolled": "26",
+                          "scored_acquired": "26",
+                          "average_score": "2.0000000000",
+                          "ranking": "29",
+                          "people_count": "125"
+                        },
+                        {
+                          "year": "2014",
+                          "semester": "2",
+                          "department": "컴퓨터공학전공",
+                          "completion_std_class": "4",
+                          "score_enrolled": "18",
+                          "scored_acquired": "18",
+                          "average_score": "3.5000000000",
+                          "ranking": "6",
+                          "people_count": "125"
+                        }
+                      ]
+                     }),
                 "hash": "332ca60e27587689dfdbd71754abf3e6e8c81fe4ca8333b5afb746886d3fbf01",
                 "txid": "e0a84aa76e3f10598e33f77890416bff78378f64b094f1c7bb28027bc320721f",
                 "subid": "RCOGC0011",
@@ -797,7 +797,7 @@ record = {
             ]
         }
     }
-
+    
     for(var i=0; i<rocords.length ; i++) {        
         var subid = rocords[i].subid;        
         try {            

@@ -44,14 +44,69 @@ var certformatter= {
     "RCOGC0011":function viewformatter(record_data) {
         //계명대 성적증명서
         console.log(record_data);
+
+        $("#cert-body-div").css({"margin":"0px 25px", "font-size":"12px", "display":"flex", "width": "100%"});
+
+        record_data.scoreList.sort((a, b) => {
+            return a["year"] - b["year"] || a["semester"] - b["semester"];
+        });
+
+        //30 row
+        
+        var year = '';
+        var semester = '';
+
+        var htmldiv = '<div class="sungjuk_sector_1" style="flex: 33%"></div>';
+        $('#cert-body-div').append(htmldiv);
+        htmldiv = '<div class="sungjuk_sector_2" style="flex: 33%"></div>';
+        $('#cert-body-div').append(htmldiv);
+        htmldiv = '<div class="sungjuk_sector_3" style="flex: 33%"></div>';
+        $('#cert-body-div').append(htmldiv);
+
+        htmldiv = '';
+        var sector = '1';
+
+        var totalscore = 0;
+        var beforeagree = 0;
+        var beforeavg = 0;
         for(var i in record_data.scoreList) {
-            console.log(record_data.scoreList[i]);
-            var htmldiv = '<div>';        
-            htmldiv = htmldiv + "<p>" + record_data.scoreList[i].year + "." 
-            + record_data.scoreList[i].semester + "   " + record_data.scoreList[i].lecture_name + "       " 
-            + record_data.scoreList[i].score_result + "/" + record_data.scoreList[i].grade_result + '</p>';
-            htmldiv = htmldiv + '</div>';
-            $('#cert-body-div').append(htmldiv);
-        }        
+            if(year != record_data.scoreList[i].year || semester != record_data.scoreList[i].semester) {
+                for(var j in record_data.scoreStatisticList) {
+                    if(year == record_data.scoreStatisticList[j].year && semester == record_data.scoreStatisticList[j].semester){
+                        beforeagree = record_data.scoreStatisticList[j].scored_acquired;
+                        beforeavg = record_data.scoreStatisticList[j].average_score;
+                        htmldiv = "<p style='font-weight:bold; margin: 10px 0px'>취득학점 : " 
+                        + beforeagree + "      평점평균 : " 
+                        + beforeavg.substr(0, 3) + '</p>'; 
+                        $('.sungjuk_sector_' + sector).append(htmldiv);
+                    }
+                }
+
+                htmldiv = "<p style='font-weight:bold; text-align: center; text-decoration: underline; margin: 10px 0px'>" 
+                + record_data.scoreList[i].year + "학년도 " 
+                + record_data.scoreList[i].semester + "학기"+ '</p>';   
+                year = record_data.scoreList[i].year;
+                semester = record_data.scoreList[i].semester;
+                $('.sungjuk_sector_' + sector).append(htmldiv);
+            }            
+            htmldiv = "<p>" + record_data.scoreList[i].lecture_name + "" 
+            + record_data.scoreList[i].score_result + "/" + record_data.scoreList[i].grade_result + '</p>';    
+            $('.sungjuk_sector_' + sector).append(htmldiv);  
+            if(i > 15 && i % 15 == 1) {
+                sector ++;
+            }          
+
+            totalscore += parseInt(record_data.scoreList[i].score_result);
+        } 
+        
+        var totalagree = 0;        
+        for(var i in record_data.scoreStatisticList) {
+            totalagree += parseInt(record_data.scoreStatisticList[i].scored_acquired);            
+        }
+        // 총 취득학점
+        htmldiv = "<p style='font-weight:bold; margin: 10px 0px'> 총취득학점  " 
+        + totalagree + "<br>총점 누계  " 
+        + totalscore + ""+ '</p>';   
+        $('.sungjuk_sector_' + sector).append(htmldiv);
     },
 }
