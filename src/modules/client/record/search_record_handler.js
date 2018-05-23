@@ -477,11 +477,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                             //console.log("=========================================");
 
                             db.getRecordDAO().putRecord(blcmapinsertData, (putRecordResponse) => {
-                                //console.log(dbres);
+                                console.log(dbres);
                             });
 
                             db.getUserDAO().setFristYN(uId, (setFirstResponse) => {
-                                //console.log(dbres2);
+                                console.log(dbres2);
                             });
 
                             // set default N in initially
