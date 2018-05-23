@@ -447,16 +447,21 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
             var user_bc_wallet_addr = userModels[0].bcWalletAddr;
 
+            console.log('User Wallet : ' + user_bc_wallet_addr);
+
             var nexledgerPromises = [];
             agentRequest.records.forEach((recordsItem, recordsIdx) => {
 
                 if (recordsItem.stored == 'N') {
+                    console.log('to Store : ' + recordsItem.hash);
                     nexledgerPromises.push(new Promise((resolve, reject) => {
+                        console.log('Each promise : ' + recordsItem.hash);
                             var data = {
                                 hash: recordsItem.hash
                             }
 
                             nexledgerService.put(user_bc_wallet_addr, data, (nexledgerResponse) => {
+                                console.log('NexLedger Response : ' + nexledgerResponse);
                                 resolve(nexledgerResponse);
                             });
                         })
