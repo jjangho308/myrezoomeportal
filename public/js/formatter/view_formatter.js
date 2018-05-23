@@ -119,8 +119,8 @@ var formatter= {
         $('#spec_forign_lang > .spec-body-default').hide();
     },
 
-    "RCOGC0010":function viewformatter(record) {        
-
+    "RCOGC0010":function viewformatter(record) { 
+        
         // 계명대 졸업증명서
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
@@ -134,8 +134,8 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right" id="btn_change'+record.subid+'" >';
             htmldiv = htmldiv + '<p>계명대</p>';
-            htmldiv = htmldiv + '<p>'+record.userInfo[0].course +'</p>';
-            htmldiv = htmldiv + '<p>'+record.userInfo[0].status +'</p>';
+            htmldiv = htmldiv + '<p>'+record.registList[0].course +'</p>';
+            htmldiv = htmldiv + '<p>'+record.registList[0].status +'</p>';
             htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
