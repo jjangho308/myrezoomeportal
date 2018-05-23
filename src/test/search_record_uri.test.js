@@ -34,7 +34,7 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
      * 
      * @author TACKSU
      */
-    it('First search records', done => {
+    it.skip('First search records', done => {
         var cryptoManager = new CryptoManager();
         cryptoManager = Managers.crypto();
         // cryptoManager.generateRSAKeyPair((err, keyPair) => {
@@ -73,7 +73,11 @@ describe('Portal <-> Agent Search Record interpolation test suite.', () => {
     })
 
 
-    it.skip('Refresh search records', done => {
+    /**
+     * Refresh search records. <br />
+     * 
+     */
+    it('Refresh search records', done => {
         chai.request(app)
             .post('/client')
             .set('Content-Type', 'application/json')
