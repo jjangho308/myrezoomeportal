@@ -45,7 +45,7 @@ var certformatter= {
         //계명대 성적증명서
         console.log(record_data);
 
-        $("#cert-body-div").css({"margin":"0px 25px", "font-size":"12px", "display":"flex", "width": "100%"});
+        $("#cert-body-div").css({"margin":"0px 25px", "font-size":"12px", "display":"flex", "width": "100%", "letter-spacing": "1px"});
 
         record_data.scoreList.sort((a, b) => {
             return a["year"] - b["year"] || a["semester"] - b["semester"];
@@ -65,12 +65,12 @@ var certformatter= {
 
         htmldiv = '';
         var sector = '1';
-
         var totalscore = 0;
         var beforeagree = 0;
         var beforeavg = 0;
         for(var i in record_data.scoreList) {
             if(year != record_data.scoreList[i].year || semester != record_data.scoreList[i].semester) {
+                
                 for(var j in record_data.scoreStatisticList) {
                     if(year == record_data.scoreStatisticList[j].year && semester == record_data.scoreStatisticList[j].semester){
                         beforeagree = record_data.scoreStatisticList[j].scored_acquired;
@@ -94,8 +94,7 @@ var certformatter= {
             $('.sungjuk_sector_' + sector).append(htmldiv);  
             if(i > 15 && i % 15 == 1) {
                 sector ++;
-            }          
-
+            }
             totalscore += parseInt(record_data.scoreList[i].score_result);
         } 
         
