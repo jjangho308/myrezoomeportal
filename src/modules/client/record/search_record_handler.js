@@ -243,7 +243,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                             storedData.forEach((storedDataItem, storedDataIdx) => {
 
                                                                 defferedStoredDataPromises.push(new Promise((resolve, reject) => {
-                                                                        nexledgerService.getbytxid(storedDataItem.TRX_ID, (res) => {
+                                                                        nexledgerService.getbytxid(null,storedDataItem.TRX_ID, (res) => {
                                                                             resolve(res);
                                                                         });
                                                                     })
@@ -366,7 +366,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     // BlockChain에 저장된 hash값을 실어서 전송함.
                                                     storedData.forEach((storedDataItem, storedDataIdx) => {
                                                         defferedStoredDataFunctions.push(new Promise((storedDataResolve, storedDataReject) => {
-                                                                nexledgerService.getbytxid(storedDataItem.TRX_ID, function (res) {
+                                                                nexledgerService.getbytxid(null, storedDataItem.TRX_ID, function (res) {
                                                                     storedDataResolve(res);
                                                                 });
                                                             })
@@ -460,7 +460,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 hash: recordsItem.hash
                             }
 
-                            nexledgerService.put(user_bc_wallet_addr, data, (nexledgerResponse) => {
+                            nexledgerService.put(null, user_bc_wallet_addr, data, (nexledgerResponse) => {
                                 console.log('NexLedger Response : ' + nexledgerResponse);
                                 resolve(nexledgerResponse);
                             });
@@ -513,7 +513,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             // Response의 모든 처리가 완료된 후 Client socket으로 Response push.
             Promise.all(nexledgerPromises)
                 .catch(err => {
-                    // TODO Send error message to client socket. 
+                    console.log("Agent response promise error " + err);
                 })
                 .then(result => {
                     if (!!socket)
