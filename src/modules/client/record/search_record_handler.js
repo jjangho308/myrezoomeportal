@@ -472,16 +472,16 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 agentRequest.orgcode, //orgid
                                 recordsItem.subid //subid
                             ];
-                            //console.log("===========blcmapinsertData==============");
-                            //console.log(blcmapinsertData);
-                            //console.log("=========================================");
+                            console.log("===========blcmapinsertData==============");
+                            console.log(blcmapinsertData);
+                            console.log("=========================================");
 
                             db.getRecordDAO().putRecord(blcmapinsertData, (putRecordResponse) => {
-                                console.log(dbres);
+                                console.log(putRecordResponse);
                             });
 
                             db.getUserDAO().setFristYN(uId, (setFirstResponse) => {
-                                console.log(dbres2);
+                                console.log(setFirstResponse);
                             });
 
                             // set default N in initially
