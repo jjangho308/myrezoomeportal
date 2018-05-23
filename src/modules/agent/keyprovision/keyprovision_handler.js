@@ -38,7 +38,6 @@ class KeyProvisionRequestHandler extends AbstractAgentRequestHandler {
      * @param {*} done Callback function of AgentRequest. <br />
      */
     request(requestEntity, done) {
-        var orgDAO = new OrgDAO();
         var orgDAO = Managers.db().getOrgDAO();
 
         orgDAO.getOrg({
@@ -81,12 +80,12 @@ class KeyProvisionRequestHandler extends AbstractAgentRequestHandler {
                                     });
                                     return;
                                 }
-                            })
+                            });
                         }
                     }
                 });
             }
-        })
+        });
     }
 }
 
