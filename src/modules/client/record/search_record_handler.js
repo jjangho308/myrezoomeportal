@@ -293,7 +293,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                         });
                                                     } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
                                                         //console.log("subIDs만 있으면 돼!");
-                                                        db.getOrgDAO().getSubIdByOrgId(item.ORG_ID, (err, subIdResult) => {
+                                                        db.getOrgDAO().getSubIdByOrgId(resultOrgIdsItem.ORG_ID, (err, subIdResult) => {
                                                             delete pushMessage.args.subIDs;
                                                             delete pushMessage.args.records;
 
@@ -308,7 +308,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                             //console.log(msg);
 
                                                             //Managers.push().init();
-                                                            Managers.push().sendMessage(pushMessage, item.ORG_ID, err => {
+                                                            Managers.push().sendMessage(pushMessage, resultOrgIdsItem.ORG_ID, err => {
                                                                 if (subIds.length == resultOrgIds.length) {
                                                                     if (!!err) {
                                                                         reject(err);
