@@ -16,7 +16,7 @@ $(document).ready(function(){
 });
 
 function verify(passcode) {
-	var passcodehash = SHA256(passcode);
+	var passcodehash = hexToBase64(SHA256(passcode));
 
 	try {
 		if(certdata.encrypted) {
