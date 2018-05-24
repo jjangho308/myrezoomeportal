@@ -17,10 +17,10 @@ $(document).ready(function(){
 
 function verify(passcode) {
 
-	if(hexToBase64(SHA256(passcode)) != certdata.passcode) {
-		$("input").css("border", "solid 1px #f59188");
-		$(".error-message").css("display", "block");
-	} else {
+	// if(hexToBase64(SHA256(passcode)) != certdata.passcode) {
+	// 	$("input").css("border", "solid 1px #f59188");
+	// 	$(".error-message").css("display", "block");
+	// } else {
 
 		var passcodehash = SHA256(passcode);
 
@@ -66,7 +66,7 @@ function verify(passcode) {
 			$(".error-message").css("display", "block");
 		}
 
-	}
+	// }
 }
 
 function setData(data) {
