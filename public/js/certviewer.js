@@ -202,6 +202,17 @@ $(document).ready(function(){
     $('.confirm-btn').click(function(){
         summitform();     
     });
+
+    $("#btn_print").click(function() {		
+
+		$(".header").hide();
+		$("#footer").hide();
+
+		window.print();
+		
+		$(".header").show();
+		$("#footer").show();
+	});
 });
 
 function summitform() {
