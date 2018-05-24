@@ -243,7 +243,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                             storedData.forEach((storedDataItem, storedDataIdx) => {
 
                                                                 defferedStoredDataPromises.push(new Promise((resolve, reject) => {
-                                                                        nexledgerService.getbytxid(storedDataItem.TRX_ID, (res) => {
+                                                                        nexledgerService.getbytxid(null,storedDataItem.TRX_ID, (res) => {
                                                                             resolve(res);
                                                                         });
                                                                     })
@@ -293,7 +293,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                         });
                                                     } else { //BLC MAP에 저장된 record가 없는 경우.. subIDs만 만들면 됨.
                                                         //console.log("subIDs만 있으면 돼!");
-                                                        db.getOrgDAO().getSubIdByOrgId(item.ORG_ID, (err, subIdResult) => {
+                                                        db.getOrgDAO().getSubIdByOrgId(resultOrgIdsItem.ORG_ID, (err, subIdResult) => {
                                                             delete pushMessage.args.subIDs;
                                                             delete pushMessage.args.records;
 
@@ -308,7 +308,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                             //console.log(msg);
 
                                                             //Managers.push().init();
-                                                            Managers.push().sendMessage(pushMessage, item.ORG_ID, err => {
+                                                            Managers.push().sendMessage(pushMessage, resultOrgIdsItem.ORG_ID, err => {
                                                                 if (subIds.length == resultOrgIds.length) {
                                                                     if (!!err) {
                                                                         reject(err);
@@ -366,7 +366,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     // BlockChain에 저장된 hash값을 실어서 전송함.
                                                     storedData.forEach((storedDataItem, storedDataIdx) => {
                                                         defferedStoredDataFunctions.push(new Promise((storedDataResolve, storedDataReject) => {
-                                                                nexledgerService.getbytxid(storedDataItem.TRX_ID, function (res) {
+                                                                nexledgerService.getbytxid(null, storedDataItem.TRX_ID, function (res) {
                                                                     storedDataResolve(res);
                                                                 });
                                                             })
@@ -447,16 +447,21 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
 
             var user_bc_wallet_addr = userModels[0].bcWalletAddr;
 
+            console.log('User Wallet : ' + user_bc_wallet_addr);
+
             var nexledgerPromises = [];
             agentRequest.records.forEach((recordsItem, recordsIdx) => {
 
                 if (recordsItem.stored == 'N') {
+                    console.log('to Store : ' + recordsItem.hash);
                     nexledgerPromises.push(new Promise((resolve, reject) => {
+                        console.log('Each promise : ' + recordsItem.hash);
                             var data = {
                                 hash: recordsItem.hash
                             }
 
-                            nexledgerService.put(user_bc_wallet_addr, data, (nexledgerResponse) => {
+                            nexledgerService.put(null, user_bc_wallet_addr, data, (nexledgerResponse) => {
+                                console.log('NexLedger Response : ' + nexledgerResponse);
                                 resolve(nexledgerResponse);
                             });
                         })
@@ -472,16 +477,16 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 agentRequest.orgcode, //orgid
                                 recordsItem.subid //subid
                             ];
-                            //console.log("===========blcmapinsertData==============");
-                            //console.log(blcmapinsertData);
-                            //console.log("=========================================");
+                            console.log("===========blcmapinsertData==============");
+                            console.log(blcmapinsertData);
+                            console.log("=========================================");
 
                             db.getRecordDAO().putRecord(blcmapinsertData, (putRecordResponse) => {
-                                //console.log(dbres);
+                                console.log(putRecordResponse);
                             });
 
                             db.getUserDAO().setFristYN(uId, (setFirstResponse) => {
-                                //console.log(dbres2);
+                                console.log(setFirstResponse);
                             });
 
                             // set default N in initially
@@ -508,7 +513,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             // Response의 모든 처리가 완료된 후 Client socket으로 Response push.
             Promise.all(nexledgerPromises)
                 .catch(err => {
-                    // TODO Send error message to client socket. 
+                    console.log("Agent response promise error " + err);
                 })
                 .then(result => {
                     if (!!socket)
