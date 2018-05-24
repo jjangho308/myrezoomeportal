@@ -272,7 +272,7 @@ function generateURL() {
             
         }),
         success: function (result) {
-            $("#cert-url-input").val(window.location.host + '/v/' + result.result);
+            $("#cert-url-input").val("https://" + window.location.host + '/v/' + result.result);
         },
         contentType: 'application/json'
     });
