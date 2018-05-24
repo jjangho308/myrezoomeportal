@@ -48,53 +48,7 @@ var formatter= {
         htmldiv = htmldiv + '</div>';
         $('#spec_certification').append(htmldiv);
         $('#spec_certification > .spec-body-default').hide();
-    },
-
-    "RCOGC0008":function viewformatter(record) {
-        //inha
-        var htmldiv = '<div class="spec-body">';
-            htmldiv = htmldiv + '<div class="spec-left">';
-            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            htmldiv = htmldiv + '<span>' + record.date +'</span>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>인하대학교</p>';
-            htmldiv = htmldiv + '<p>'+ record +'</p>';
-            htmldiv = htmldiv + '<p>'+record +'</p>';
-            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
-            htmldiv = htmldiv + '</div>';
-        htmldiv = htmldiv + '</div>';
-        $('#spec_edu_detail').append(htmldiv);
-        $('#spec_edu_detail > .spec-body-default').hide();
-    },
-
-    "RCOGC0009":function viewformatter(record) {
-        //inha
-        var htmldiv = '<div class="spec-body">';
-            htmldiv = htmldiv + '<div class="spec-left">';
-            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            htmldiv = htmldiv + '<span></span>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>인하대학교</p>';
-            htmldiv = htmldiv + '<p>'+ record.list +'</p>';
-            htmldiv = htmldiv + '<p>'+record +'</p>';
-            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
-            htmldiv = htmldiv + '</div>';
-        htmldiv = htmldiv + '</div>';
-        $('#spec_edu_detail').append(htmldiv);
-        $('#spec_edu_detail > .spec-body-default').hide();
-    },
+    },    
 
     "RCLPT0006":function viewformatter(record) {
         //OPIC ENGlish writing
@@ -119,9 +73,38 @@ var formatter= {
         $('#spec_forign_lang > .spec-body-default').hide();
     },
 
-    "RCOGC0010":function viewformatter(record) { 
-        
-        // 계명대 졸업증명서
+    "RCOGC0008":function viewformatter(record) {
+        //inha
+        var htmldiv = '<div class="spec-body">';
+            htmldiv = htmldiv + '<div class="spec-left">';
+            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+            htmldiv = htmldiv + '<span>' + record.data.registList[0].admission_date + '~' + record.data.registList[0].change_date +'</span>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-center">';
+            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg" alt="">';
+            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-right">';
+            htmldiv = htmldiv + '<p>인하대학교</p>';
+            htmldiv = htmldiv + '<p>'+record.data.registList[0].course +'</p>';
+            htmldiv = htmldiv + '<p>'+record.data.registList[0].status +'</p>';
+            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+            htmldiv = htmldiv + '</div>';
+        htmldiv = htmldiv + '</div>';
+        $('#spec_edu_detail').append(htmldiv);
+        $('#spec_edu_detail > .spec-body-default').hide();
+    },
+
+    "RCOGC0009":function viewformatter(record) {
+        //inha
+
+        var avg = '';
+        var total = 0;
+        for(var i in record.data.scoreStatisticList) {
+            total += parseInt(record.data.scoreStatisticList[i].average_score);
+        }
+
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
@@ -129,13 +112,37 @@ var formatter= {
             htmldiv = htmldiv + '<span></span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
+            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg" alt="">';
+            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-right">';
+            htmldiv = htmldiv + '<p>인하대학교</p>';
+            htmldiv = htmldiv + '<p>성적증명서</p>';
+            htmldiv = htmldiv + '<p>'+ total/record.data.scoreStatisticList.length + '</p>';
+            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+            htmldiv = htmldiv + '</div>';
+        htmldiv = htmldiv + '</div>';
+        $('#spec_edu_detail').append(htmldiv);
+        $('#spec_edu_detail > .spec-body-default').hide();
+    },
+
+    "RCOGC0010":function viewformatter(record) { 
+        
+        // 계명대 졸업증명서
+        var htmldiv = '<div class="spec-body">';
+            htmldiv = htmldiv + '<div class="spec-left">';
+            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+            htmldiv = htmldiv + '<span>' + record.data.registList[0].admission_date + '~' + record.data.registList[0].change_date +'</span>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kmu.jpg" alt="">';
             htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right" id="btn_change'+record.subid+'" >';
             htmldiv = htmldiv + '<p>계명대</p>';
-            htmldiv = htmldiv + '<p>'+record.registList[0].course +'</p>';
-            htmldiv = htmldiv + '<p>'+record.registList[0].status +'</p>';
+            htmldiv = htmldiv + '<p>'+record.data.registList[0].course +'</p>';
+            htmldiv = htmldiv + '<p>'+record.data.registList[0].status +'</p>';
             htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
@@ -144,8 +151,6 @@ var formatter= {
     },
 
     "RCOGC0011":function viewformatter(record) {       
-
-        console.log(record);
 
         var avg = '';
         var total = 0;
