@@ -79,7 +79,7 @@ var formatter= {
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
             htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            htmldiv = htmldiv + '<span>' + record.data.registList[0].admission_date + '~' + record.data.registList[0].change_date +'</span>';
+            htmldiv = htmldiv + '<span>' + record.registList[0].admission_date + '~' + record.registList[0].change_date +'</span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg" alt="">';
@@ -87,8 +87,8 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>인하대학교</p>';
-            htmldiv = htmldiv + '<p>'+record.data.registList[0].course +'</p>';
-            htmldiv = htmldiv + '<p>'+record.data.registList[0].status +'</p>';
+            htmldiv = htmldiv + '<p>'+record.registList[0].course +'</p>';
+            htmldiv = htmldiv + '<p>'+record.registList[0].status +'</p>';
             htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
@@ -101,8 +101,8 @@ var formatter= {
 
         var avg = '';
         var total = 0;
-        for(var i in record.data.scoreStatisticList) {
-            total += parseInt(record.data.scoreStatisticList[i].average_score);
+        for(var i in record.scoreStatisticList) {
+            total += parseInt(record.scoreStatisticList[i].average_score);
         }
 
         var htmldiv = '<div class="spec-body">';
@@ -118,7 +118,7 @@ var formatter= {
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>인하대학교</p>';
             htmldiv = htmldiv + '<p>성적증명서</p>';
-            htmldiv = htmldiv + '<p>'+ total/record.data.scoreStatisticList.length + '</p>';
+            htmldiv = htmldiv + '<p>'+ total/record.scoreStatisticList.length + '</p>';
             htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
@@ -133,7 +133,7 @@ var formatter= {
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
             htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            htmldiv = htmldiv + '<span>' + record.data.registList[0].admission_date + '~' + record.data.registList[0].change_date +'</span>';
+            htmldiv = htmldiv + '<span>' + record.registList[0].admission_date + '~' + record.registList[0].change_date +'</span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kmu.jpg" alt="">';
@@ -141,8 +141,8 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right" id="btn_change'+record.subid+'" >';
             htmldiv = htmldiv + '<p>계명대</p>';
-            htmldiv = htmldiv + '<p>'+record.data.registList[0].course +'</p>';
-            htmldiv = htmldiv + '<p>'+record.data.registList[0].status +'</p>';
+            htmldiv = htmldiv + '<p>'+record.registList[0].course +'</p>';
+            htmldiv = htmldiv + '<p>'+record.registList[0].status +'</p>';
             htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
