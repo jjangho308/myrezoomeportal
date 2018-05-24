@@ -213,7 +213,7 @@ function summitform() {
     var cert_msg;
     var cert_public = 'N';
 
-    if(cert_password == '' || cert_password == null) {
+    if($('#shared_password').val() == '' || $('#shared_password').val() == null) {
         var cert_public = 'Y';
     }
 
