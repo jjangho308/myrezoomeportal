@@ -68,17 +68,17 @@ class ResumeDao extends AbstractDAO {
         if (!!creteria.rsmId) {
             if (!!where) {
                 where += ' AND '
-                where += "RSM_ID = '" + creteria.rsmId + "'"+"AND DEL_YN = 'N'"
+                where += "RSM_ID = '" + creteria.rsmId + "'" + "AND DEL_YN = 'N'"
             } else {
-                where = "RSM_ID = '" + creteria.rsmId + "'"+"AND DEL_YN = 'N'"
+                where = "RSM_ID = '" + creteria.rsmId + "'" + "AND DEL_YN = 'N'"
             }
         }
         if (!!creteria.uId) {
             if (!!where) {
                 where += ' AND '
-                where += "UID = '" + creteria.uId + "'" +"AND DEL_YN = 'N'"
+                where += "UID = '" + creteria.uId + "'" + "AND DEL_YN = 'N'"
             } else {
-                where = "UID = '" + creteria.uId + "'" +"AND DEL_YN = 'N'"
+                where = "UID = '" + creteria.uId + "'" + "AND DEL_YN = 'N'"
             }
         }
 
@@ -161,33 +161,66 @@ class ResumeDao extends AbstractDAO {
                         connection.query(usrResumeDelQuery, (err, result) => {
 
                             if (!!err) {
-                                connection.release();
                                 console.log(err);
+                                connection.rollback(function () {
+                                    console.error("rollback error");
+                                    cb(500, err);
+                                })
+                            }
 
-                            } else if (result.affectedRows > 0) {
-                                var usrResumeSharedDelQuery = mysql.format(ResumeQuery.delShared, [condition, { DEL_YN: 'N' }]);
+                            //TCDA_USR_RSM이 삭제가 제대로 되었을때.
+                            else if (result.affectedRows > 0) {
+
+                                var usrResumeSharedDelQuery = mysql.format(ResumeQuery.delResumeRecords, [condition, { DEL_YN: 'N' }]);
+
+                                //TCDA_RSM_DATA와 TCDA_USR_RSM은 1:1 관계이다.
+                                //TCDA_USR_RSM이 있다면 TCDA_RSM_DATA는 무조건 존재한다
+                                //TCDA_USR_RSM이 삭제된다면 DATA는 같이 삭제되어야 한다.
                                 connection.query(usrResumeSharedDelQuery, (err, result) => {
                                     if (!!err) {
-                                        connection.release();
+
                                         console.log(err);
+                                        connection.rollback(function () {
+                                            console.error("rollback error");
+                                            cb(500, err);
+                                        })
                                     } else if (result.affectedRows > 0) {
-                                        var selectResumeSharedInfo = mysql.format(ResumeQuery.getUrl, [condition, { DEL_YN: 'N' }]);
+
+                                        //TCDA_USR_RSM과 TCDA_RSM_DATA가 동시에 지워진 상황
+                                        //TCDA_RSM_SHR_INFO Table을 select하여 있다면 update 치고 없다면 직전상황까지 commit한다.
+                                        var selectResumeSharedInfo = mysql.format(ResumeQuery.isShareURL, [condition, { DEL_YN: 'N' }]);
+
                                         connection.query(selectResumeSharedInfo, (err, result) => {
                                             if (!!err) {
-                                                connection.release();
+
+
                                                 console.log(err);
-                                            } else if (result.length > 0) {
+                                                connection.rollback(function () {
+                                                    console.error("rollback error");
+                                                    cb(500, err);
+                                                })
+                                            }
+
+                                            //URL 공유가 한번이라도 완료되었다면
+                                            else if (result.length > 0) {
+
                                                 var deleteResumeSharedInfoQuery = mysql.format(ResumeQuery.delUrl, [condition, { DEL_YN: 'N' }]);
 
                                                 connection.query(deleteResumeSharedInfoQuery, (err, result) => {
                                                     if (!!err) {
-                                                        connection.release();
                                                         console.log(err);
-                                                    }else if(result.affectedRows>0){
-                                                        connection.commit(function(err){
-                                                            if(!!err){
-                                                                connection.release();
+                                                        connection.rollback(function () {
+                                                            console.error("rollback error");
+                                                            cb(500, err);
+                                                        })
+                                                    } else if (result.affectedRows > 0) {
+                                                        connection.commit(function (err) {
+                                                            if (!!err) {
                                                                 console.log(err);
+                                                                connection.rollback(function () {
+                                                                    console.error("rollback error");
+                                                                    cb(500, err);
+                                                                })
                                                             }
 
                                                             console.log("tranaction sucess");
@@ -197,12 +230,17 @@ class ResumeDao extends AbstractDAO {
                                                     }
                                                 })
                                                 console.log(result);
-                                            } else {
-                                                console.log("=====")
+                                            }
+                                            //한번도 URL 공유를 한적이 없다면..
+                                            //TCDA_USR_RSM 테이블과 TCDA_RSM_DATA 테이블을 삭제한 것 까지 commit한다.
+                                            else {
                                                 connection.commit(function (err) {
                                                     if (!!err) {
-                                                        connection.release();
                                                         console.log(err);
+                                                        connection.rollback(function () {
+                                                            console.error("rollback error");
+                                                            cb(500, "fail!!!");
+                                                        })
                                                     }
                                                     //정상처리
                                                     cb(200, "sucess");
@@ -346,10 +384,10 @@ class ResumeDao extends AbstractDAO {
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);
-            } else {                
+            } else {
                 cb(err, {
                     txId: rows[0].TRX_ID,
-                    passcode:rows[0].PASSCODE,
+                    passcode: rows[0].PASSCODE,
                     certId: rows[0].CERT_ID,
                     url: rows[0].URL,
                     sharedYn: rows[0].SHRD_YN,

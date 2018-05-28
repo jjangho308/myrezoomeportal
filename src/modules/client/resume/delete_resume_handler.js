@@ -8,10 +8,15 @@ class DeleteResumeHandler extends AbstractClientRequestHandler{
     }
 
     request(requestEntity, cb){
+
+        
+
         
         var resumeDAO = Managers.db().getResumeDAO();
         resumeDAO.delResume(requestEntity,
         (err, result)=>{
+            //200 or 500을 result로 넘겨온다.
+            //정의를 통한 재 정립이 필요하다.
             console.log(result);
         })
 
