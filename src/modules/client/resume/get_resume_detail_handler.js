@@ -50,8 +50,8 @@ class GetResumeDetailRequestHandler extends AbstractClientRequestHandler {
                     records.sort((a, b) => {
                         return a.order - b.order;
                     });
-
-                    resumeModel.records = records;                    
+                    resumeModel.records = records; 
+                    console.log(resumeModel);
                     done(ClientRequest.RESULT_SUCCESS, resumeModel);
                 });
             }

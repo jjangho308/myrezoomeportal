@@ -25,13 +25,10 @@ function setResumeModel(_resumeModel) {
 }
 
 function setUserModel(_userModel) {
-	userModel = JSON.parse(_userModel);	
+	userModel = JSON.parse(_userModel);
 }
 
 function rendering() {
-	console.log(resumeModel);
-	console.log(userModel);
-
 	$("#resume_title").html(resumeModel.title);
 
 	$("#resume-user").children().eq(0).html(userModel.fullNameKO);
@@ -43,8 +40,8 @@ function rendering() {
 
 	var records = resumeModel.records;
 	for(var i in records) {
-		try {
-			var record = getData(records[i].txid);			
+		try {			
+			var record = getData(records[i].trxId);			
 			resumeformatter(record);
 		} catch (exception) {
 			console.log(exception);

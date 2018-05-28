@@ -20,6 +20,11 @@ function resumedelete(rsmId) {
             'Authorization': client_authorization
         },
         success: function (result) {
+            console.log(result);
+            loadresumelist();
+        },
+        error: function (request, status, error) {
+            console.log(error);
             loadresumelist();
         },
         contentType: 'application/json'
@@ -27,6 +32,7 @@ function resumedelete(rsmId) {
 }
 
 function loadresumelist() {
+    console.log("============loadresumelist========");
     $.ajax({
         type: 'GET',
         url: '/resumes/list',
@@ -59,6 +65,11 @@ function loadresumelist() {
                 $('#resume-grid-div').append(htmldiv);
 
             }
+        }, 
+        error : function(request, status, error) {
+            console.log(request);
+            console.log(status);
+            console.log(error);
         },
         contentType: 'application/json'
     });
@@ -144,7 +155,7 @@ $(document).ready(function () {
                         else if (subid == "RCLPT0005") {
                             category = "어학";
                         }
-                        else if (subid == "RCOGC0008" || subid == "RCOGC0009") {
+                        else if (subid == "RCOGC0008" || subid == "RCOGC0009" || subid == "RCOGC0010" || subid == "RCOGC0011") {
                             category = "학력";
                         }
 
