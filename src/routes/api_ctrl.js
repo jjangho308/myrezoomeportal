@@ -1,0 +1,22 @@
+import Managers from '../core/managers'
+import ApiRequest from '../modules/api/common/api_request'
+
+/**
+ * Controller function for '/api' Router.
+ * 
+ * @since 180509
+ * @author TACKSU
+ * 
+ */
+export default {
+    getCert: (req, res, next) => {
+
+        Managers.api().request(new ApiRequest(req.body), (err, result) => {
+            if (!!err) {
+                next(err);
+            } else {     
+                res.render('certviewer', result);   
+            }
+        });
+    }
+}

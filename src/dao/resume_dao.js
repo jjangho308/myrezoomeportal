@@ -263,9 +263,7 @@ class ResumeDao extends AbstractDAO {
             condition.RSM_ID = creteria.rsmId;
         }
 
-
         var query = mysql.format(ResumeQuery.getResumeRecords, condition);
-        console.log(query);
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);

@@ -9,6 +9,8 @@ var SHARED_CERT_TABLE = 'rezoome_db.TCDA_CERT_SHR_INFO';
 // var SHARED_URL_TABLE = 'rezoome_db.TCDA_CERT_SHR_INFO';
 export default {
     issueCert: 'INSERT INTO ' + CERT_TABLE + ' SET ?',
+
+    issueCertByGuest: 'INSERT INTO rezoome_db.TCDA_CERT_DATA_GUEST SET ?',
     
     //getCertList와 중복되는 처리 같음..
     getCert: 'SELECT * FROM ' + CERT_TABLE + ' WHERE ?',
