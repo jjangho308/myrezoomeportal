@@ -102,16 +102,16 @@ describe('Blockchain test suit', () => {
         //     score: "80"
         // };
         var data = {
-            hash:"dddddddddddddddddddddddddddddddd"
+            hash: "dddddddddddddddddddddddddddddddd"
         }
 
-        for(var t=0; t< 100; t++) {
+        for (var t = 0; t < 100; t++) {
 
             nexledgerService.put(nodeurl, "155WAnc5m7RFjjLgQJjQN82nr7xjYXN2wg", data, function (res) {
                 console.log("==========test put procedure==========");
                 console.log(res);
                 console.log("======================================");
-                
+
             });
         }
         done();
