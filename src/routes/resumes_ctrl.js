@@ -80,6 +80,7 @@ export default {
                             console.log("getResume ERROR!!!");
                         } else {
 
+                            console.log()
                             res.render('resumesviewer', {
                                 resumeModel: result,
                                 userModel: userResult[0]

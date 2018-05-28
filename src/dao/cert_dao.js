@@ -151,6 +151,20 @@ class CertificateDAO extends AbstractDAO {
         })
     }
 
+    putCertByGuest(certModel, cb) {
+        var param = certModel.toRow();
+        var query = mysql.format(CertQuery.issueCertByGuest, param);
+        
+        this.query(query, (err, result) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                //console.log(result);
+                cb(err, result.insertId);
+            }
+        })
+    }
+
     /**
      * Update certificate database. <br />
      * 
