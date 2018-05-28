@@ -97,7 +97,7 @@ var formatter= {
     },
 
     "RCOGC0009":function viewformatter(record) {
-        //inha
+        //인하대학교 성적
 
         var avg = '';
         var total = 0;
@@ -107,8 +107,7 @@ var formatter= {
 
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
-            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+            htmldiv = htmldiv + '<span></span>';
             htmldiv = htmldiv + '<span></span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
@@ -116,7 +115,7 @@ var formatter= {
             htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>인하대학교</p>';
+            htmldiv = htmldiv + '<p>인하대학교 성적증명서</p>';
             htmldiv = htmldiv + '<p>성적증명서</p>';
             htmldiv = htmldiv + '<p>'+ total/record.scoreStatisticList.length + '</p>';
             htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
@@ -131,8 +130,8 @@ var formatter= {
         // 계명대 졸업증명서
         var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
-            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<span></span>';
             htmldiv = htmldiv + '<span>' + record.registList[0].admission_date + '~' + record.registList[0].change_date +'</span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
