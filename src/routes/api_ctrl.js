@@ -14,8 +14,8 @@ export default {
         Managers.api().request(new ApiRequest(req.body), (err, result) => {
             if (!!err) {
                 next(err);
-            } else {     
-                res.render('certviewer', result);   
+            } else {
+                res.render('certviewer', result);
             }
         });
     }
