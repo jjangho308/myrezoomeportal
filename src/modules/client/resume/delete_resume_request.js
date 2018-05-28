@@ -4,6 +4,7 @@ class DeleteResumeRequest extends AbstractClientRequesEntity {
     constructor(opt){
         super(opt);
         this.rsmId=opt.rsmId;
+        this.uId=opt.uId;
     }
 
 }

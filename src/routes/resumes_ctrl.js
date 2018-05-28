@@ -170,8 +170,10 @@ export default {
     deleteResum: (req, res, next) => {
         if (!!req.xhr) {
 
+            
+
             var data = {
-                uID: req.body.uId,
+                uId: req.body.uId,
                 rsmId: req.params.rsmId
             }
 
