@@ -30,7 +30,7 @@ describe('Client request test suite', () => {
      * @since 180509
      * @author TACKSU
      */
-    it('Generate ShortURL', done => {
+    it.skip('Generate ShortURL', done => {
 
         chai.request(app)
             .post('/client')
