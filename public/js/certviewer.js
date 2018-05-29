@@ -268,9 +268,7 @@ function summitform() {
 function setCertViewer(sub_id, tx_id) {    
     var record = getData(tx_id);
     console.log(record);
-
-    //$(".cert-title").html(record.data.univInfo.univ_name + "증명서");
-    
+    $(".cert-title").html("증명서");
     generateQRCode();    
     certformatter[sub_id](record.data);
 }
@@ -279,7 +277,7 @@ function generateQRCode(){
     var options = {
         render: "image", 
         ecLevel: "H", // ERROR CORRECTION LEVEL
-        minVersion: 6,
+        minVersion: 1,
 
         fill: "#333333",
         background: "#ffffff",
@@ -296,7 +294,7 @@ function generateQRCode(){
         mPosX: 0.5, // 글자 위치 x
         mPosY: 0.5, // 글자 위치 y
 
-        label: "레쥬메",
+        label: "레쥬메gogo",
         fontname: "Ubuntu",
         fontcolor: "#ff9818",
 
