@@ -36,6 +36,8 @@ class VerifyHandler extends AbstractAgentRequestHandler {
         var url = requestEntity.shortUrl;
         var urlType = url.charAt(0);
 
+        var nexledgerService = Managers.nex();
+
         if("c" == urlType) { // cert
             var certDAO = Managers.db().getCertDAO();
             certDAO.getSharedUrl({url: url}, (err, shareModel) => {
@@ -45,42 +47,48 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                     console.log(shareModel);
                     var crypto = Managers.crypto();                     
                     crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey
-                        console.log("====================verify handler============================");
-                        console.log(decrypted);
+                        
                         var json_decrypted = JSON.parse(decrypted);
-                        console.log("==============================================================");
+                        
                         var stringfy_data = JSON.stringify(json_decrypted.data);
-                        console.log( "stringfy : "+ stringfy_data);
+                        
                         var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){
                             console.log("====================data hashed---============================");
                             console.log(data_hashed_cb);
+                            nexledgerService.getbytxid(null, json_decrypted.txid, function (res) {
+                                if(res == data_hashed_cb) {
+                                    if("N" == shareModel.pubYn) { // encrypt with user's passcode when pubYn is N                                
+                                        crypto.encryptAES(decrypted, shareModel.passcode, (err, encodedIV, encryptedData) => {
+                                            if (!!err) {
+                                                console.log(err);
+                                            } else {
+                                                var verifyData = {
+                                                    encrypted: true,
+                                                    iv: encodedIV,
+                                                    data: encryptedData
+                                                };
+                                                console.log(verifyData);
+                                                done(ClientRequest.RESULT_SUCCESS, verifyData);
+                                            }
+                                        });                            
+                                    } else {
+                                        var verifyData = {
+                                            encrypted: false,
+                                            iv: "",
+                                            data: decrypted
+                                        };
+                                        console.log(verifyData);
+                                        done(ClientRequest.RESULT_SUCCESS, verifyData);
+                                    }
+                                }
+                                else {
+                                    //err differnt hash data and stored cert data
+
+                                }
+                            });
                             console.log("==============================================================");
                         });
-                        
 
-                        if("N" == shareModel.pubYn) { // encrypt with user's passcode when pubYn is N                                
-                            crypto.encryptAES(decrypted, shareModel.passcode, (err, encodedIV, encryptedData) => {
-                                if (!!err) {
-                                    console.log(err);
-                                } else {
-                                    var verifyData = {
-                                        encrypted: true,
-                                        iv: encodedIV,
-                                        data: encryptedData
-                                    };
-                                    console.log(verifyData);
-                                    done(ClientRequest.RESULT_SUCCESS, verifyData);
-                                }
-                            });                            
-                        } else {
-                            var verifyData = {
-                                encrypted: false,
-                                iv: "",
-                                data: decrypted
-                            };
-                            console.log(verifyData);
-                            done(ClientRequest.RESULT_SUCCESS, verifyData);
-                        }
                     });  
                 }
             });
