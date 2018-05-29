@@ -145,8 +145,7 @@ $(document).ready(function(){
     });
     
     
-    $("#more-button").click(function(){
-        console.log($("#more-button-div").css("display"));
+    $("#more-button").click(function(){        
         if($("#more-button-div").css("display")=="none"){
             $("#more-button-div").show();
         }else{
@@ -206,7 +205,10 @@ $(document).ready(function(){
     $("#btn_print").click(function() {		
 
 		$(".header").hide();
-		$("#footer").hide();
+        $("#footer").hide();
+        
+        // qr gen
+        // qr gui
         
         const html = document.querySelector('html');
         const printContents = document.querySelector('.main-body').innerHTML;
@@ -263,17 +265,45 @@ function summitform() {
     });
 }
 
-function setCertViewer(sub_id, tx_id) {
-    //alert("subid : " + sub_id + " / txid" + tx_id);
+function setCertViewer(sub_id, tx_id) {    
     var record = getData(tx_id);
     console.log(record);
 
-    $(".cert-title").html(record.data.univInfo.univ_name + "증명서");
-
+    //$(".cert-title").html(record.data.univInfo.univ_name + "증명서");
     
+    generateQRCode();    
     certformatter[sub_id](record.data);
+}
 
+function generateQRCode(){
+    var options = {
+        render: "image", 
+        ecLevel: "H", // ERROR CORRECTION LEVEL
+        minVersion: 6,
 
+        fill: "#333333",
+        background: "#ffffff",
+        // fill: jq('#img-buffer')[0],
+
+        text: "https://dev.rezoome.io/v/cjcsoI7",
+        size: 100,
+        radius: 0.5,
+        quiet: 1, // 흰색 여백, 숫자 높을수록 바깥 여백이 넓어지고 내용이 작아짐
+
+        mode: 2,
+
+        mSize: 0.15, // 글자 사이즈
+        mPosX: 0.5, // 글자 위치 x
+        mPosY: 0.5, // 글자 위치 y
+
+        label: "레쥬메",
+        fontname: "Ubuntu",
+        fontcolor: "#ff9818",
+
+        //image: jq('#img-buffer')[0]
+    };
+
+    $('#qrcode').empty().qrcode(options);
 }
 
 function generateURL() {

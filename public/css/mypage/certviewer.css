@@ -475,8 +475,7 @@ vertical-align: -4px;
 
 .qrcode{
   position: absolute;
-
-     bottom: -105px;
+  bottom: -110px;
   right: 0px;
 }
 
