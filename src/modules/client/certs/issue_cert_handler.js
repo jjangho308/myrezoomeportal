@@ -39,7 +39,8 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
         var certDAO = Managers.db().getCertDAO();
         var recordDAO = Managers.db().getRecordDAO();
 
-        //console.log(request);
+        console.log("==================issue_cert_handeler request===========")
+        console.log(request);
 
         recordDAO.getBlockChainMap({
             txid: request.cert.txid
