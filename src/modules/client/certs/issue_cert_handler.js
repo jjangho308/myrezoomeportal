@@ -54,6 +54,8 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
             } else {
                 //TODO Plain text를 암호화 된 message로 변환할 것.
                 var crypto = Managers.crypto();
+                console.log("==================issue_cert_handeler cert record===========")
+                console.log(request.cert.record);
                 
                 crypto.encryptAESECB(JSON.stringify(request.cert.record), crypto.getSystemSymmetricKey(), (err, encrypted)=> {
                     var certModel = new CertModel({
