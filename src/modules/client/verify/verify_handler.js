@@ -53,12 +53,9 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                         var stringfy_data = JSON.stringify(json_decrypted.data);
                         
                         var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){
-                            console.log("====================data hashed---============================");
-                            console.log(data_hashed_cb);
+                            
                             nexledgerService.getbytxid(null, json_decrypted.txid, function (res) {
-                                console.log("============================Nexledger hash=================");
-                                console.log(res.result.hash);
-                                console.log("===========================================================");
+                                
                                 if(res.result.hash == data_hashed_cb) {
                                     if("N" == shareModel.pubYn) { // encrypt with user's passcode when pubYn is N                                
                                         crypto.encryptAES(decrypted, shareModel.passcode, (err, encodedIV, encryptedData) => {
