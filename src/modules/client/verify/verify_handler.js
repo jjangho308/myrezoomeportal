@@ -83,7 +83,7 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                 }
                                 else {
                                     //err differnt hash data and stored cert data
-
+                                    done(ClientRequest.RESULT_FAILURE, err);
                                 }
                             });
                             console.log("==============================================================");
