@@ -343,7 +343,7 @@ $(document).ready(function(){
         });        
     });
 
-    $('.spec-detail-div input:checkbox').click(function () {
+    $('.spec-detail-div').click(function () {
         $(".spec-detail-div input:checkbox").each(function(i) {
             if ($(this).is(':checked')) {
                 $(this).closest('.spec-body').css({ "border": "solid 1px #4c80f1", "border-radius": "4px", "background-color": "rgba(76, 128, 241, 0.05)" });
@@ -360,20 +360,11 @@ $(document).ready(function(){
             var numberOfChecked = $('.spec-detail-div input:checkbox:checked').length;
     
             if (numberOfChecked == 0) {
-                // $("#select-footer").hide();
-                $("input").prop("disabled", "true");
-
-                $("#select-footer").animateCss("fadeOutDown", function() {
-                        $("#select-footer").hide();
-                        $("input").removeAttr("disabled");
-                    });
-                $
+                $("#select-footer").hide();
                 $("#main-footer").css("margin-bottom", "0px");
             } else {
                 $("#select-footer span:nth-child(2)").text(numberOfChecked + "건의");
                 $("#select-footer").show();
-                $("#select-footer").animateCss("fadeInUp");  
-
                 $("#main-footer").css("margin-bottom", "71px");
             }
         });        
