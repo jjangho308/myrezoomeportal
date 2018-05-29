@@ -62,6 +62,9 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                         txId: blcMapModels[0].txid,
                         encryptedData: encrypted
                     });
+
+                    console.log("==================issue_cert_handeler===========")
+                    console.log(certModel);
     
                     certDAO.putCert(certModel, (err, insertId) => {
                         if (!!err) {
