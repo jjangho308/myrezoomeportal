@@ -45,6 +45,17 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                     console.log(shareModel);
                     var crypto = Managers.crypto();                     
                     crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey
+                        console.log("====================verify handler============================");
+                        console.log(decrypted);
+                        var json_decrypted = JSON.parse(decrypted);
+                        console.log("==============================================================");
+                        var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){
+                            console.log("====================data hashed---============================");
+                            console.log(data_hashed_cb);
+                            console.log("==============================================================");
+                        });
+                        
+
                         if("N" == shareModel.pubYn) { // encrypt with user's passcode when pubYn is N                                
                             crypto.encryptAES(decrypted, shareModel.passcode, (err, encodedIV, encryptedData) => {
                                 if (!!err) {
