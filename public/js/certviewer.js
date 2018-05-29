@@ -207,11 +207,21 @@ $(document).ready(function(){
 
 		$(".header").hide();
 		$("#footer").hide();
+        
+        const html = document.querySelector('html');
+        const printContents = document.querySelector('.main-body').innerHTML;
+        const printDiv = document.createElement("DIV");
+        printDiv.className = "print-div";
+        
+        html.appendChild(printDiv);
+        printDiv.innerHTML = printContents;
+        document.body.style.display = 'none';
+        window.print();
+        document.body.style.display = 'block';
+        printDiv.style.display = 'none';
 
-		window.print();
-		
-		$(".header").show();
-		$("#footer").show();
+        $(".header").show();
+        $("#footer").show();
 	});
 });
 
