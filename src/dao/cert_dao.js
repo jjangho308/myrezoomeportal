@@ -456,7 +456,7 @@ class CertificateDAO extends AbstractDAO {
             if (!!err) {
                 cb(err);
             } else {     
-                if(rows != null) {             
+                if(rows != null || rows != undefined) {             
                     cb(err, {
                         txId: rows[0].TRX_ID,
                         passcode:rows[0].PASSCODE,
@@ -468,6 +468,9 @@ class CertificateDAO extends AbstractDAO {
                         created: rows[0].CRTD_DT,
                         encData: rows[0].ENC_CERT_DATA
                     });
+                }
+                else {
+                    cb(err);
                 }
             }
         })
