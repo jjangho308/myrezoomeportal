@@ -49,6 +49,8 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                         console.log(decrypted);
                         var json_decrypted = JSON.parse(decrypted);
                         console.log("==============================================================");
+                        var stringfy_data = JSON.stringify(json_decrypted.data);
+                        console.log( "stringfy : "+ stringfy_data);
                         var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){
                             console.log("====================data hashed---============================");
                             console.log(data_hashed_cb);
