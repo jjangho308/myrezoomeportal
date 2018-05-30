@@ -1,6 +1,10 @@
 import Managers from '../core/managers';
 import UserDao from '../dao/user_dao';
 
+import UserModel from '../models/user/user';
+
+import Util from '../util/util';
+
 /**
  * Controller for '/oauth2' URI. <br />
  * 
@@ -24,22 +28,28 @@ var defaultController = {
         // 핸드폰 번호를 기준으로 사용자를 조회해서 있으면 id를 반환하고
         // 없으면 빈값을 전달하여 기준값으로 삼게 한다.
         var phone = req.query.phone;
-        Mangers.db().getUserDAO().getByPhone(phone, (err, users) => {
-            if (!!err) {
-                next(err);
-            } else {
-                var result = [];
-                for (var user in users) {
-                    result.push({
-                        // 회원 상태가 L일 경우에만 Lite 회원으로 정립
-                        status: user.status == 'L' ? 0 : 1
+        if (!phone) {
+            // TODO Invalid paramter exception.
+            // next(new InvalidException);
+        } else {
+            Mangers.db().getUserDAO().getByPhone(phone, (err, users) => {
+                if (!!err) {
+                    next(err);
+                } else {
+                    var result = [];
+                    for (var user in users) {
+                        result.push({
+
+                            // 회원 상태가 L일 경우에만 Lite 회원으로 정립
+                            status: user.status == 'L' ? 0 : 1
+                        });
+                    }
+                    res.send({
+                        result: result
                     });
                 }
-                res.send({
-                    result: result
-                });
-            }
-        });
+            });
+        }
     },
     /**
      * Lite sign up with phone number
@@ -56,9 +66,35 @@ var defaultController = {
      * }
      */
     litesignup: (req, res, next) => {
+        // POST method만 허용
+        if ('POST' !== req.method) {
+            next({
+                err: {}
+            });
+            return;
+        }
         // 핸드폰 번호와 ci값을 기준으로 password 입력 없이
         // 가볍게 sign up 하는 기능
         // 임시 패스워드를 발급하여 가입을 시킴
+
+
+        var phone = req.body.phone;
+        if (!phone) {
+            // TODO Invalid parameter exception
+        } else {
+            Managers.db().getUserDAO().put(new UserModel({
+                phone: phone,
+                pw: Util.sha256(Util.randomStr(8))
+            }), (err, insertId) => {
+                if (!!err) {
+                    next(err);
+                } else {
+                    res.send({
+                        result: insertId
+                    });
+                }
+            });
+        }
     },
     /**
      * Controller function for '/oauth2/auth' URI. <br />

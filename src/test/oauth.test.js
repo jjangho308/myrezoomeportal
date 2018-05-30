@@ -89,9 +89,9 @@ describe('OAuth test suite', () => {
      * @since 180530
      * @author TACKSU
      */
-    it.skip('Lite sign up test case', done => {
+    it('Lite sign up test case', done => {
         chai.request(app)
-            .get('/oauth2/litesignup')
+            .post('/oauth2/litesignup')
             .set('Content-Type', 'application/json')
             .send({
                 phone: '01045454545',
@@ -101,8 +101,8 @@ describe('OAuth test suite', () => {
                 // gender: 'M'
             })
             .end((err, res) => {
-                if (!!res.result) {
-                    console.log(res.result.uId);
+                if (!!res.body.result) {
+                    console.log(res.body.result.uId);
                     done();
                 }
             });

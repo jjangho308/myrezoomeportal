@@ -9,5 +9,6 @@ import ctrl from './oauth_ctrl';
  */
 var router = express.Router();
 router.get('/:cmd', ctrl);
+router.post('/:cmd', ctrl);
 
 export default router;
