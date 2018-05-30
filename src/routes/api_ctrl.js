@@ -8,7 +8,12 @@ import ApiRequest from '../modules/api/common/api_request'
  * @author TACKSU
  * 
  */
-export default {
+export default (req, res, next)=>{
+    var version = req.params.version;
+    var command = req.params.command;
+}
+
+{
     getCert: (req, res, next) => {
 
         Managers.api().request(new ApiRequest(req.body), (err, result) => {

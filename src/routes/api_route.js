@@ -18,6 +18,6 @@ var router = express.Router();
  * @author TACKSU
  */
 
-router.use('/cert', ctrl.getCert);
+router.use('/:version/:api', ctrl);
 
 export default router;
