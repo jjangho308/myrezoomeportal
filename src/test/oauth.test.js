@@ -89,7 +89,7 @@ describe('OAuth test suite', () => {
      * @since 180530
      * @author TACKSU
      */
-    it('Lite sign up test case', done => {
+    it.skip('Lite sign up test case', done => {
         chai.request(app)
             .post('/oauth2/litesignup')
             .set('Content-Type', 'application/json')
@@ -108,12 +108,22 @@ describe('OAuth test suite', () => {
             });
     });
 
-    /**
-     * OAuth authentication test case. <br />
-     * 
-     * @since 180530
-     * @author TACKSU
-     */
+    it('Lite signin test case', done => {
+        chai.request(app)
+            .get('/oauth2/signin')
+            .set('Content-Type', 'application/json')
+            .send({
+                phone: '01045454545',
+                ci: 'alskdflkasjdlkfjlaskdjlfk'
+            })
+            .end((err, res) => {
+                if (!!res.body.result) {
+                    console.log(res.body.result.uId);
+                    done();
+                }
+            });
+    });
+
     it.skip('Auth test case', done => {
         chai.request(app)
             .get('/oauth2/auth')

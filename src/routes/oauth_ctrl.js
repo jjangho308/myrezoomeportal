@@ -96,6 +96,40 @@ var defaultController = {
             });
         }
     },
+
+    /**
+     * Lite sign in with phone number and ci. <br />
+     * 
+     * @since 180530
+     * @author TACKSU
+     */
+    signin: (req, res, next) => {
+        var phone = req.body.phone,
+            ci = req.body.ci;
+
+        if (!phone) {
+            // TODO Invalid parameter. 
+            // } else if (!ci) {
+            //     // TODO Invalid parameter.
+        } else {
+            Managers.db().getUserDAO().get({
+                phone: phone
+            }, (err, userModels) => {
+                if (!!err) {
+                    next(err);
+                } else if (userModels.length == 0) {
+                    next({
+                        err: {}
+                    })
+                } else {
+                    res.send({
+                        result: userModels[0].uId
+                    });
+                }
+            })
+        }
+    },
+
     /**
      * Controller function for '/oauth2/auth' URI. <br />
      * Render HTML page to authenticate. <br />

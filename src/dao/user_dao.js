@@ -4,6 +4,8 @@ import userQuery from './user_query.js';
 import UserModel from '../models/user/user';
 import AbstractDAO from './abstract_dao.js';
 
+import Util from '../util/util';
+
 /**
  * DAO for UserModel. <br />
  * 
@@ -84,7 +86,7 @@ class UserDao extends AbstractDAO {
         var condition = {
             PHN_NUM: phone
         };
-        
+
         var query = mysql.format(userQuery.get, condition);
         this.query(query, (err, rows) => {
             if (!!err) {
@@ -108,9 +110,11 @@ class UserDao extends AbstractDAO {
      * @author TACKSU
      */
     get(creteria, cb) {
-        var condition = {
-            UID: creteria.uId
-        }
+        var condition = Util.trim({
+            UID: creteria.uId,
+            PHN_NUM: creteria.phone
+        });
+
         // condition = (new UserModel(creteria)).toRow();
         var query = mysql.format(userQuery.get, condition);
         this.query(query, (err, rows) => {
