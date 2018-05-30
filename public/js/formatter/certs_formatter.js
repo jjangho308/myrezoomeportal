@@ -1,15 +1,22 @@
-var certformatter= {    
-    "RCLPT0005":function viewformatter(record_data) {              
-        // opic
-        var htmldiv = '<div>';
-            htmldiv = htmldiv + "<p>이름 : " +record_data.name + '</p>';
-            htmldiv = htmldiv + "<p>testid : " +record_data.testid + '</p>';
-            htmldiv = htmldiv + "<p>고유번호 : " +record_data.phone + '</p>';
-            htmldiv = htmldiv + "<p>시험일 : " +record_data.date + '</p>';
-            htmldiv = htmldiv + "<p>Grade : " +record_data.grade + '</p>';
-            
-        htmldiv = htmldiv + '</div>';
-        $('#cert-body-div').append(htmldiv);
+var certformatter= { 
+    
+    "RCLPT0005":function viewformatter(record_data) {     
+        $(".inner-container").empty();                 
+
+        $(".inner-container").html($("<img src='/img/mycert/opic/cert/01_AL.jpg'>").css({"width":"100%", "height":"100%"}));
+        // $(".inner-container").attr("background-image", 'url("/img/mycert/opic/cert/01_AL.jpg")');
+        // $(".inner-container").css({"background":"url(/img/mycert/opic/cert/01_AL.jpg)", 'background-repeat' : 'no-repeat', 'background-position':'center center', "background-size":"100%"});
+        
+        $(".inner-container").append($("<p>인증서번호 : 2323IERSDVL239SDKSDF</p>").css({"position":"absolute", "top":"-5px","left":"0px", "font-szie":"20px", "font-weight":"bold"}));
+        $(".inner-container").append($("<p>"+ record_data.name +"</p>").css({"position":"absolute", "top":"130px","left":"405px", "font-szie":"20px", "font-weight":"bold"}));
+        $(".inner-container").append($("<p>"+ record_data.testid +"</p>").css({"position":"absolute", "top":"200px","left":"215px"}));
+        $(".inner-container").append($("<p>birthday</p>").css({"position":"absolute", "top":"200px","left":"350px"}));
+        $(".inner-container").append($("<p>"+ record_data.date +"</p>").css({"position":"absolute", "top":"200px","left":"485px"}));
+        $(".inner-container").append($("<p>OPic(English)</p>").css({"position":"absolute", "top":"200px","left":"620px"}));
+        $(".inner-container").append($("<p>ADVANCED LOW - ENGLISH</p>").css({"position":"absolute", "top":"305px","left":"400px"}));
+
+        $(".inner-container").append($("<p>발급일</p>").css({"position":"absolute", "top":"305px","left":"400px"}));
+        $(".inner-container").append($("<p>만료일</p>").css({"position":"absolute", "top":"305px","left":"400px"}));
     },
 
     "RCCNF0001":function viewformatter(record_data) {

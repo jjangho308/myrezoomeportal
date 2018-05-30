@@ -15,7 +15,10 @@ export default {
             if (!!err) {
                 next(err);
             } else {
-                
+                console.log("===========Verify ctrl============================");
+                console.log(req.body);
+                console.log(result);
+                console.log("==================================================");
                 if(req.body.shortUrl.substring(0,1)=='c') {
                     res.render('share-cert', {
                         data : result

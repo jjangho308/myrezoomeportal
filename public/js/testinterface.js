@@ -261,7 +261,7 @@ record = {
             {
                 "data": "{\"univInfo\":{\"univ_name\":\"계명대학교\",\"cert_main_agent\":\"교무처장\",\"msg1\":\"위 사실을 증명합니다.\"},\"registList\":[{\"std_no\":\"1142001\",\"name\":\"박헌욱\",\"birth\":\"870123\",\"univ_course\":\"대학\",\"univ_affiliation\":\"공과대학\",\"univ_group\":\"학부\",\"course\":\"학사과정\",\"admission_date\":\"2011-03-02\",\"change_date\":\"2015-02-20\",\"status\":\"졸업\"}],\"hash\":\"eb00121a6e0148272ac1d6307f25ff05e673a36ce717fd0abe6e02f952d22dbd\",\"txid\":\"86da0be9c9fef31bfc1e41fd2f641d7eb83988deef3772393c812402d0c0179a\",\"subid\":\"RCOGC0010\",\"stored\":\"Y\",\"dftYn\":\"N\"}",
                 "hash": "332ca60e27587689dfdbd71754abf3e6e8c81fe4ca8424b5afb746886d3fbf01",
-                "txid": "86da0be9c9fef31bfc1e41fd2f641d7eb83988deef3772393c812402d0c0179a",
+                "txid": "4ac881acfbf69f18662717582d6290c46b0a9b0a0e533306493bc520a61ef7b0",
                 "subid": "RCOGC0010",
                 "stored": "Y",
                 "dftYn": "N"

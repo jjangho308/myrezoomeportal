@@ -39,7 +39,8 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
         var certDAO = Managers.db().getCertDAO();
         var recordDAO = Managers.db().getRecordDAO();
 
-        //console.log(request);
+        console.log("==================issue_cert_handeler request===========")
+        console.log(request);
 
         recordDAO.getBlockChainMap({
             txid: request.cert.txid
@@ -54,6 +55,8 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
             } else {
                 //TODO Plain text를 암호화 된 message로 변환할 것.
                 var crypto = Managers.crypto();
+                console.log("==================issue_cert_handeler cert record===========")
+                console.log(request.cert.record);
                 
                 crypto.encryptAESECB(JSON.stringify(request.cert.record), crypto.getSystemSymmetricKey(), (err, encrypted)=> {
                     var certModel = new CertModel({
@@ -62,6 +65,9 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                         txId: blcMapModels[0].txid,
                         encryptedData: encrypted
                     });
+
+                    console.log("==================issue_cert_handeler===========")
+                    console.log(certModel);
     
                     certDAO.putCert(certModel, (err, insertId) => {
                         if (!!err) {
