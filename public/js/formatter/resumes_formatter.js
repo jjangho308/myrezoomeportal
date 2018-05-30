@@ -89,7 +89,7 @@ function resumeformatter(record) {
 		case "RCLPT0005" :			
 			var htmldiv = '<div class="resumes-body">';
 			htmldiv = htmldiv + '<div class="resumes-left">';
-			htmldiv = htmldiv + '<span>' + record.data.date + '</span>';
+			htmldiv = htmldiv + '<span>' + record.data.ctestday + '</span>';
 			htmldiv = htmldiv + '</div>';
 			htmldiv = htmldiv + '<div class="resumes-center">';
 			htmldiv = htmldiv + '<img src="/img/myresume/on.png" alt="">';
@@ -97,7 +97,7 @@ function resumeformatter(record) {
 			htmldiv = htmldiv + '</div>';
 			htmldiv = htmldiv + '<div class="resumes-right">';
 			htmldiv = htmldiv + '<p>오픽</p>';
-			htmldiv = htmldiv + '<p>'+record.data.grade +'</p>';
+			htmldiv = htmldiv + '<p>'+record.data.rating +'</p>';
 			htmldiv = htmldiv + '</div>';
 			htmldiv = htmldiv + '</div>';
 			$('#resumes-lang-body').append(htmldiv);

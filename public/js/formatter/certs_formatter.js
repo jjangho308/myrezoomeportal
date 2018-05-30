@@ -1,22 +1,54 @@
 var certformatter= { 
     
     "RCLPT0005":function viewformatter(record_data) {     
-        $(".inner-container").empty();                 
-
-        $(".inner-container").html($("<img src='/img/mycert/opic/cert/01_AL.jpg'>").css({"width":"100%", "height":"100%"}));
-        // $(".inner-container").attr("background-image", 'url("/img/mycert/opic/cert/01_AL.jpg")');
-        // $(".inner-container").css({"background":"url(/img/mycert/opic/cert/01_AL.jpg)", 'background-repeat' : 'no-repeat', 'background-position':'center center', "background-size":"100%"});
+        $(".inner-container").empty();             
+        $(".outer-container").append($("<div></div>").addClass("inner-container2"));
+        $(".outer-container").css({"height":"2320px"})
+        var level = record_data.rating;
+        if(level == "NL") {
+            $(".inner-container").html($("<img src='/img/mycert/opic/cert/09_NL.jpg'>").css({"width":"100%", "height":"100%"}));
+            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up NL FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
+        } else if(level == "NM") {
+            $(".inner-container").html($("<img src='/img/mycert/opic/cert/08_NM.jpg'>").css({"width":"100%", "height":"100%"}));
+            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up NM FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
+        } else if(level == "NH") {
+            $(".inner-container").html($("<img src='/img/mycert/opic/cert/07_NH.jpg'>").css({"width":"100%", "height":"100%"}));
+            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up NH FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
+        } else if(level == "IL") {
+            $(".inner-container").html($("<img src='/img/mycert/opic/cert/06_IL.jpg'>").css({"width":"100%", "height":"100%"}));
+            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up IL FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
+        } else if(level == "IM1") {
+            $(".inner-container").html($("<img src='/img/mycert/opic/cert/05_IM_1.jpg'>").css({"width":"100%", "height":"100%"}));
+            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up IM1 FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
+        } else if(level == "IM2") {
+            $(".inner-container").html($("<img src='/img/mycert/opic/cert/04_IM_2.jpg'>").css({"width":"100%", "height":"100%"}));
+            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up IM2 FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
+        } else if(level == "IM3") {
+            $(".inner-container").html($("<img src='/img/mycert/opic/cert/03_IM_3.jpg'>").css({"width":"100%", "height":"100%"}));
+            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up IM3 FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
+        } else if(level == "IH") {
+            $(".inner-container").html($("<img src='/img/mycert/opic/cert/02_IH.jpg'>").css({"width":"100%", "height":"100%"}));
+            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up IH FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
+        } else if(level == "AL") {
+            $(".inner-container").html($("<img src='/img/mycert/opic/cert/01_AL.jpg'>").css({"width":"100%", "height":"100%"}));
+            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up AL FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
+        }       
         
-        $(".inner-container").append($("<p>인증서번호 : 2323IERSDVL239SDKSDF</p>").css({"position":"absolute", "top":"-5px","left":"0px", "font-szie":"20px", "font-weight":"bold"}));
-        $(".inner-container").append($("<p>"+ record_data.name +"</p>").css({"position":"absolute", "top":"130px","left":"405px", "font-szie":"20px", "font-weight":"bold"}));
-        $(".inner-container").append($("<p>"+ record_data.testid +"</p>").css({"position":"absolute", "top":"200px","left":"215px"}));
-        $(".inner-container").append($("<p>birthday</p>").css({"position":"absolute", "top":"200px","left":"350px"}));
-        $(".inner-container").append($("<p>"+ record_data.date +"</p>").css({"position":"absolute", "top":"200px","left":"485px"}));
-        $(".inner-container").append($("<p>OPic(English)</p>").css({"position":"absolute", "top":"200px","left":"620px"}));
-        $(".inner-container").append($("<p>ADVANCED LOW - ENGLISH</p>").css({"position":"absolute", "top":"305px","left":"400px"}));
+        $(".inner-container").append($("<p>인증서번호 : 2323IERSDVL239SDKSDF</p>").css({"position":"absolute", "top":"-25px","left":"0px", "font-szie":"20px", "font-weight":"bold", "font-size":"11px"}));
+        $(".inner-container").append($("<p>"+ record_data.cname +"</p>").css({"position":"absolute", "top":"130px","left":"405px", "font-szie":"20px", "font-weight":"bold"}));
+        $(".inner-container").append($("<p>"+ record_data.subjseq +"</p>").css({"position":"absolute", "top":"200px","left":"215px"}));
+        $(".inner-container").append($("<p>"+ record_data.birthday +"</p>").css({"position":"absolute", "top":"200px","left":"350px"}));
+        $(".inner-container").append($("<p>"+ record_data.ctestday +"</p>").css({"position":"absolute", "top":"200px","left":"485px"}));
+        $(".inner-container").append($("<p>"+ record_data.testtype +"</p>").css({"position":"absolute", "top":"200px","left":"620px"}));
+        $(".inner-container").append($("<p>"+ record_data.clevel + "</p>").css({"position":"absolute", "top":"305px","left":"400px"}));
 
-        $(".inner-container").append($("<p>발급일</p>").css({"position":"absolute", "top":"305px","left":"400px"}));
-        $(".inner-container").append($("<p>만료일</p>").css({"position":"absolute", "top":"305px","left":"400px"}));
+        $(".inner-container").append($("<p>"+ record_data.cissudate +"</p>").css({"position":"absolute", "top":"460px","left":"550px"}));
+        $(".inner-container").append($("<p>"+ record_data.useend +"</p>").css({"position":"absolute", "top":"460px","left":"675px"}));
+
+        $(".inner-container2").append($("<p>"+ record_data.ename +"</p>").css({"position":"absolute", "top":"170px","left":"230px","font-size":"15px"}));
+        $(".inner-container2").append($("<p>"+ record_data.language +"</p>").css({"position":"absolute", "top":"200px","left":"230px","font-size":"15px"}));
+        $(".inner-container2").append($("<p>"+ record_data.testdate +"</p>").css({"position":"absolute", "top":"230px","left":"230px","font-size":"15px"}));
+        $(".inner-container2").append($("<p>"+ record_data.examid +"</p>").css({"position":"absolute", "top":"265px","left":"230px","font-size":"15px"}));        
     },
 
     "RCCNF0001":function viewformatter(record_data) {
