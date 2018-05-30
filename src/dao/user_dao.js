@@ -31,10 +31,10 @@ class UserDao extends AbstractDAO {
      * @param {UserModel} userModel 
      * @param {Function(err,result)} cb 
      */
-    put(userModel, cb) {       
+    put(userModel, cb) {
         var params = userModel.toRow();
         var query = mysql.format(userQuery.put, params);
-        
+
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -69,6 +69,36 @@ class UserDao extends AbstractDAO {
                 cb(err, result);
             }
         })
+    }
+
+    /**
+     * Get user row by given phone number. <br />
+     * 
+     * @since 180530
+     * @author TACKSU
+     * 
+     * @param {String} phone 
+     * @param {function} cb 
+     */
+    getByPhone(phone, cb) {
+        var condition = {
+            PHN_NUM: phone
+        };
+        
+        var query = mysql.format(userQuery.get, condition);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                var result = [];
+
+                for (var i in rows) {
+                    var entry = UserModel.fromRow(rows[i]);
+                    result.push(entry);
+                }
+                cb(err, result);
+            }
+        });
     }
 
     /**
@@ -126,14 +156,16 @@ class UserDao extends AbstractDAO {
         })
     }
 
-    setMDFIDT(creteria, cb){
-        
-        var query = mysql.format(userQuery.setMDFIDDT, {UID:creteria.uId});
+    setMDFIDT(creteria, cb) {
+
+        var query = mysql.format(userQuery.setMDFIDDT, {
+            UID: creteria.uId
+        });
         //console.log(query);
-        this.query(query,(err, result)=>{
-            if(!!err){
+        this.query(query, (err, result) => {
+            if (!!err) {
                 cb(err);
-            }else{
+            } else {
                 cb(err, result.affectedRows);
             }
         })

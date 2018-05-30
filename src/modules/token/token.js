@@ -23,6 +23,8 @@ class TokenManager extends AbstractManager {
 
     init(from) {
         super.init(from);
+
+        // TODO 실제 Keystore 값으로 변경 필요
         this.secretKey = 'rezoomesecretkey';
     }
 
@@ -42,6 +44,47 @@ class TokenManager extends AbstractManager {
             // TODO 이 부분 property로 바꿀 필요가 있어보임.
             exp: Math.floor(Date.now() / 1000) + (60 * 60 * 4320) // 6month
             //}, 'rezoomesecretkey', { expiresIn: '1' });
+        }, this.secretKey);
+    }
+
+    /**
+     * Issue refresh token for intergrated user. <br />
+     * 
+     * @since 180530
+     * @author TACKSU
+     * 
+     * @param {String} partyId Third-Party ID.
+     * @param {String} uId Intergrated user id.
+     * 
+     * @return Token with 1 month
+     */
+    issueRefreshToken(partyId, uId) {
+        return jwt.sign({
+            data: {
+                uId: uId,
+                partyId: partyId
+            },
+            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 720) // 1month
+        }, this.secretKey);
+    }
+
+    /**
+     * Issue OAuth token for intergrated user. <br />
+     * 
+     * @since 180530
+     * @author TACKSU
+     * 
+     * @param {String} partyId ID of requested third-party. <br />
+     * @param {String} uId uid of intergrated user.
+     */
+    issueOAuthToken(partyId, uId) {
+        return jwt.sign({
+            data: {
+                partyId: partyId,
+                uId: uId
+            },
+            // TODO 1달 단위로 수정 필요
+            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 720) // 1 month
         }, this.secretKey);
     }
 

@@ -8,6 +8,6 @@ import ctrl from './oauth_ctrl';
  * @author TACKSU
  */
 var router = express.Router();
-router.get('/auth', ctrl.auth);
+router.get('/:cmd', ctrl);
 
 export default router;
