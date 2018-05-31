@@ -26,12 +26,12 @@ class CertificateRequestHandler extends AbstractClientRequestHandler {
 
             // 사용자 유저 존재
             if (!!res) {
-                REZOOME_CERTIFICATE.name = res[0].NAME;
-                REZOOME_CERTIFICATE.birthday = res[0].BIRTH;
-                REZOOME_CERTIFICATE.grade = "AL3";
-                REZOOME_CERTIFICATE.publish_date = "2018년 01월 01일";
-                REZOOME_CERTIFICATE.orgname = "오픽";
-                REZOOME_CERTIFICATE.hash = "ssdfawefasdfv234r34trefwerfswerf";
+                // REZOOME_CERTIFICATE.name = res[0].NAME;
+                // REZOOME_CERTIFICATE.birthday = res[0].BIRTH;
+                // REZOOME_CERTIFICATE.grade = "AL3";
+                // REZOOME_CERTIFICATE.publish_date = "2018년 01월 01일";
+                // REZOOME_CERTIFICATE.orgname = "오픽";
+                // REZOOME_CERTIFICATE.hash = "ssdfawefasdfv234r34trefwerfswerf";
 
                 managers.pdf().makePDF(PDF, REZOOME_CERTIFICATE, clientRes);
             }
