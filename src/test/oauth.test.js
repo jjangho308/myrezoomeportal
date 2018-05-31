@@ -25,6 +25,31 @@ describe('OAuth test suite', () => {
 
     });
 
+    /**
+     * Lite signup with phone number<br />
+     * 
+     * @since 180530
+     * @author TACKSU
+     */
+    it.skip('Lite sign up test case', done => {
+        chai.request(app)
+            .post('/oauth2/litesignup')
+            .set('Content-Type', 'application/json')
+            .send({
+                phone: '01045454545',
+                // ci: 'aslkdflkasjdlkfjk',
+                // firstNameKR: '정우',
+                // familyNameKR: '박',
+                // gender: 'M'
+            })
+            .end((err, res) => {
+                if (!!res.body.result) {
+                    console.log(res.body.result.uId);
+                    done();
+                }
+            });
+    });
+
 
     /**
      * 핸드폰 번호를 기반으로 회원 상태를 체크하는 API test case. <br />
@@ -83,32 +108,9 @@ describe('OAuth test suite', () => {
             });
     });
 
-    /**
-     * Lite signup with phone number<br />
-     * 
-     * @since 180530
-     * @author TACKSU
-     */
-    it.skip('Lite sign up test case', done => {
-        chai.request(app)
-            .post('/oauth2/litesignup')
-            .set('Content-Type', 'application/json')
-            .send({
-                phone: '01045454545',
-                // ci: 'aslkdflkasjdlkfjk',
-                // firstNameKR: '정우',
-                // familyNameKR: '박',
-                // gender: 'M'
-            })
-            .end((err, res) => {
-                if (!!res.body.result) {
-                    console.log(res.body.result.uId);
-                    done();
-                }
-            });
-    });
 
-    it('Lite signin test case', done => {
+
+    it.skip('Lite signin test case', done => {
         chai.request(app)
             .get('/oauth2/signin')
             .set('Content-Type', 'application/json')
@@ -124,14 +126,19 @@ describe('OAuth test suite', () => {
             });
     });
 
+    /**
+     * OAuth page render.
+     */
     it.skip('Auth test case', done => {
         chai.request(app)
-            .get('/oauth2/auth')
+            .post('/oauth2/auth')
             .set('Content-Type', 'application/json')
             .send({
                 client_id: 'asdf',
                 client_secret: 'secret',
-                response_type: 'code'
+                response_type: 'code',
+                redirect_uri: 'https://dev.rezoome.com/',
+                state: 'value'
             })
             .end((err, res) => {
                 if (!!res.result) {
@@ -141,22 +148,26 @@ describe('OAuth test suite', () => {
             });
     });
 
-    it.skip('Token refresh test case', done => {
+    it('Token refresh test case', done => {
         var code = {
-            partyId: 'PT65465456',
+            clientId: 'PT65465456',
             uId: 'UID2'
         };
 
         code = Buffer.from(JSON.stringify(code), 'utf8').toString('base64');
 
         chai.request(app)
-            .get('/oauth2/token')
+            .post('/oauth2/token')
             .set('Content-Type', 'application/json')
-            .query({
-                code: code
+            .send({
+                grant_type: 'code',
+                code: code,
+                redirect_uri: 'https://dev.naver.com',
+                client_id: 'PT65465456',
+                client_secret: 'asdfasdf123'
             })
             .end((err, res) => {
-                if (!!res.body.result) {
+                if (!!res.body) {
                     console.log('Refresh token : ' + res.body.result.refresh_token);
                     console.log('Access token : ' + res.body.result.access_token);
                     done();
@@ -164,13 +175,13 @@ describe('OAuth test suite', () => {
             });
     });
 
-    it('Refresh access token test case', done => {
+    it.skip('Refresh access token test case', done => {
         var refreshToken = Managers.token().issueRefreshToken('PT65465456', 'UID2');
 
         chai.request(app)
-            .get('/oauth2/token')
+            .post('/oauth2/token')
             .set('Content-Type', 'application/json')
-            .query({
+            .send({
                 refresh_token: refreshToken
             })
             .end((err, res) => {

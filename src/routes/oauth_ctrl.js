@@ -120,7 +120,7 @@ var defaultController = {
                 } else if (userModels.length == 0) {
                     next({
                         err: {}
-                    })
+                    });
                 } else {
                     res.send({
                         result: userModels[0].uId
@@ -144,26 +144,33 @@ var defaultController = {
      * }
      */
     auth: (req, res, next) => {
-        var client_id = req.query.client_id;
-        var client_secret = req.query.client_secret;
-        var response_type = req.query.response_type;
+        var clientId = req.query.client_id,
+            clientSecret = req.query.client_secret,
+            responseType = req.query.response_type,
+            state = req.query.state,
+            redirectUri = req.query.redired_uri;
 
-        if (!!client_id) {
-
+        if (!clientId) {
+            // TODO Invalid parameter
         }
 
-        if (!!client_secret) {
-
+        if (!clientSecret) {
+            // TODO Invalid parameter
         }
 
-        if (!!response_type) {
-
+        if (!responseType) {
+            // TODO Invalid parameter
         }
 
+        if (!redirectUri) {
+            // TODO Invalid parameter
+        }
 
         res.render('oauth/auth', {
             client_name: "클라이언트 이름",
-            response_type: response_type
+            response_type: responseType,
+            state: state,
+            redirect_uri: redirectUri
         });
     },
 
@@ -180,7 +187,11 @@ var defaultController = {
      * }
      */
     token: (req, res, next) => {
-        var code = req.query.code;
+        var grantType = req.body.grant_type,
+            authCode = req.body.code,
+            clientId = req.body.client_id,
+            clientSecret = req.body.client_secret,
+            redirectUri = req.body.redirect_uri;
 
         var tokenManager = Managers.token();
 
@@ -188,22 +199,22 @@ var defaultController = {
         var accessToken = null;
 
         // 코드가 있는 경우에는 refresh_token과 access_token을 모두 발급하여 전달
-        if (!!code) {
+        if (!!authCode) {
             try {
-                code = JSON.parse(Buffer.from(code, 'base64').toString('utf-8'));
+                authCode = JSON.parse(Buffer.from(authCode, 'base64').toString('utf-8'));
             } catch (e) {
                 // Invalid json string.
                 next(e);
                 return;
             }
 
-            refreshToken = tokenManager.issueRefreshToken(code.partyId, code.uId);
-            accessToken = tokenManager.issueOAuthToken(code.partyId, code.uId);
+            refreshToken = tokenManager.issueRefreshToken(authCode.clientId, authCode.uId);
+            accessToken = tokenManager.issueOAuthToken(authCode.clientId, authCode.uId);
+
             res.send({
-                result: {
-                    refresh_token: refreshToken,
-                    access_token: accessToken
-                }
+                refresh_token: refreshToken,
+                access_token: accessToken,
+                expires_in: 4320
             });
             return;
 
