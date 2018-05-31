@@ -1,6 +1,6 @@
 import PropertyManager from '../modules/property/property';
 import PushManager from '../modules/push/push';
-import KMSManager from '../modules/kms/kms';
+
 import DatabaseManager from '../modules/db/db';
 import TokenManager from '../modules/token/token';
 import PDFManager from '../modules/pdf/pdf';
@@ -39,9 +39,7 @@ export default (() => {
             return pushInstance = pushInstance ? pushInstance : new PushManager();
         },
 
-        kms: () => {
-            return kmsInstance = kmsInstance ? kmsInstance : new KMSManager();
-        },
+
 
         // blockchain : ()=>{
         //     return bcInstance = bcInstance ? bcInstance : new BlockchainManager();

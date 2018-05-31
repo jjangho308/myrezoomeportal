@@ -1,8 +1,12 @@
 var certformatter= { 
     
     "RCLPT0005":function viewformatter(record_data) {     
-        $(".inner-container").empty();             
+        //$(".inner-container").empty();             
+        //$(".outer-container").append($("<div></div>").addClass("inner-container"));
+        //$(".outer-container").append($("<p></p>").html("본 증명서는 레쥬메 서비스를 통해 인터넷으로 발급되었으며 우측 QR코드를 이용하여 증명서 내용의 진위여부를 확인할 수 있습니다."));
         $(".outer-container").append($("<div></div>").addClass("inner-container2"));
+        $(".outer-container > p").css({"padding":"10px 25px 80px"});
+
         $(".outer-container").css({"height":"2320px"})
         var level = record_data.rating;
         if(level == "NL") {
@@ -32,11 +36,13 @@ var certformatter= {
         } else if(level == "AL") {
             $(".inner-container").html($("<img src='/img/mycert/opic/cert/01_AL.jpg'>").css({"width":"100%", "height":"100%"}));
             $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up AL FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
-        }       
+        }    
+        
+        $(".inner-container").append($("<div></div>").addClass("qrcode").attr("id", "qrcode"));
         
         $(".inner-container").append($("<p>인증서번호 : 2323IERSDVL239SDKSDF</p>").css({"position":"absolute", "top":"-25px","left":"0px", "font-szie":"20px", "font-weight":"bold", "font-size":"11px"}));
         $(".inner-container").append($("<p>"+ record_data.cname +"</p>").css({"position":"absolute", "top":"130px","left":"405px", "font-szie":"20px", "font-weight":"bold"}));
-        $(".inner-container").append($("<p>"+ record_data.subjseq +"</p>").css({"position":"absolute", "top":"200px","left":"215px"}));
+        $(".inner-container").append($("<p>"+ record_data.examid +"</p>").css({"position":"absolute", "top":"200px","left":"215px"}));
         $(".inner-container").append($("<p>"+ record_data.birthday +"</p>").css({"position":"absolute", "top":"200px","left":"350px"}));
         $(".inner-container").append($("<p>"+ record_data.ctestday +"</p>").css({"position":"absolute", "top":"200px","left":"485px"}));
         $(".inner-container").append($("<p>"+ record_data.testtype +"</p>").css({"position":"absolute", "top":"200px","left":"620px"}));
@@ -49,6 +55,7 @@ var certformatter= {
         $(".inner-container2").append($("<p>"+ record_data.language +"</p>").css({"position":"absolute", "top":"200px","left":"230px","font-size":"15px"}));
         $(".inner-container2").append($("<p>"+ record_data.testdate +"</p>").css({"position":"absolute", "top":"230px","left":"230px","font-size":"15px"}));
         $(".inner-container2").append($("<p>"+ record_data.examid +"</p>").css({"position":"absolute", "top":"265px","left":"230px","font-size":"15px"}));        
+
     },
 
     "RCCNF0001":function viewformatter(record_data) {

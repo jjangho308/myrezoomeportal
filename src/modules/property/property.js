@@ -67,18 +67,6 @@ PropertyManager.PUSH_HEADER_LOGIN = 'push.header.login';
 PropertyManager.PUSH_HEADER_PASSCODE = 'push.header.passcode';
 
 /****************************************/
-/* NOSQL                                */
-/****************************************/
-PropertyManager.NOSQL_HOST = 'nosql.host';
-PropertyManager.NOSQL_KEYSPACE_NAME = 'nosql.keyspacename';
-//PropertyManager.NOSQL_PORT = 'nosql.port'
-//PropertyManager.NOSQL_PROTOCOL = 'nosql.protocol';
-//PropertyManager.NOSQL_ID = 'nosql.id';
-//PropertyManager.NOSQL_PW = 'nosql.pw';
-//PropertyManager.NOSQL_TIMEOUT = 'nosql.timeout';
-
-
-/****************************************/
 /* MySQL                                */
 /****************************************/
 PropertyManager.MySQL_HOST = 'mysql.host';
@@ -88,5 +76,10 @@ PropertyManager.MySQL_PW = 'mysql.pw';
 PropertyManager.MySQL_TIMEOUT = 'mysql.timeout';
 PropertyManager.MySQL_DATABASE = 'mysql.database';
 
+
+/****************************************/
+/* Nexledger                            */
+/****************************************/
+PropertyManager.Nexledger_URL = 'nexledger.url';
 
 export default PropertyManager;
