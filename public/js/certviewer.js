@@ -145,7 +145,8 @@ $(document).ready(function(){
     });
     
     
-    $("#more-button").click(function(){        
+    $("#more-button").click(function(){             
+
         if($("#more-button-div").css("display")=="none"){
             $("#more-button-div").show();
         }else{
@@ -202,28 +203,28 @@ $(document).ready(function(){
         summitform();     
     });
 
-    $("#btn_print").click(function() {		
+    $("#btn_print").click(function() {	
 
 		$(".header").hide();
         $("#footer").hide();
+        generateQRCode(); 
         
-        // qr gen
-        // qr gui
-        
-        const html = document.querySelector('html');
-        const printContents = document.querySelector('.main-body').innerHTML;
-        const printDiv = document.createElement("DIV");
-        printDiv.className = "print-div";
-        
-        html.appendChild(printDiv);
-        printDiv.innerHTML = printContents;
-        document.body.style.display = 'none';
-        window.print();
-        document.body.style.display = 'block';
-        printDiv.style.display = 'none';
+        setInterval(function(){
+            const html = document.querySelector('html');
+            const printContents = document.querySelector('.main-body').innerHTML;
+            const printDiv = document.createElement("DIV");
+            printDiv.className = "print-div";
+            
+            html.appendChild(printDiv);
+            printDiv.innerHTML = printContents;
+            document.body.style.display = 'none';
+            window.print();
+            document.body.style.display = 'block';
+            printDiv.style.display = 'none';
 
-        $(".header").show();
-        $("#footer").show();
+            $(".header").show();
+            $("#footer").show();                                                           
+        }, 2000);        
 	});
 });
 
@@ -268,8 +269,7 @@ function summitform() {
 function setCertViewer(sub_id, tx_id) {    
     var record = getData(tx_id);
     console.log(record);
-    $(".cert-title").html("증명서");
-    generateQRCode();    
+    $(".cert-title").html("증명서");    
     certformatter[sub_id](record.data);
 }
 
@@ -283,7 +283,7 @@ function generateQRCode(){
         background: "#ffffff",
         // fill: jq('#img-buffer')[0],
 
-        text: "https://dev.rezoome.io/v/cjcsoI7",
+        text: "https://dev.rezoome.io/v/cnvanRn",
         size: 100,
         radius: 0.5,
         quiet: 1, // 흰색 여백, 숫자 높을수록 바깥 여백이 넓어지고 내용이 작아짐
@@ -294,7 +294,7 @@ function generateQRCode(){
         mPosX: 0.5, // 글자 위치 x
         mPosY: 0.5, // 글자 위치 y
 
-        label: "레쥬메",
+        label: "",
         fontname: "Ubuntu",
         fontcolor: "#ff9818",
 
