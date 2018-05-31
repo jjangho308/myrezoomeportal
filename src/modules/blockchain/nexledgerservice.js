@@ -2,6 +2,7 @@ import AbstractManager from '../abstract_manager';
 import request from 'request-json';
 
 import Manager from '../../core/managers';
+import Property from '../property/property';
 
 /**
  * Manager for IO function on NexLedger. <br />
