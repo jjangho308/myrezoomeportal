@@ -32,7 +32,7 @@ var defaultController = {
             // TODO Invalid paramter exception.
             // next(new InvalidException);
         } else {
-            Mangers.db().getUserDAO().getByPhone(phone, (err, users) => {
+            Managers.db().getUserDAO().getByPhone(phone, (err, users) => {
                 if (!!err) {
                     next(err);
                 } else {
@@ -40,7 +40,7 @@ var defaultController = {
                     result = users.map(user => {
                         return {
                             // 회원 상태가 L일 경우에만 Lite 회원으로 정립
-                            status: user.status == 'L' ? 0 : 1
+                            status: user.status == 'L' ? 1 : 2
                         };
                     });
                     res.send({
@@ -103,7 +103,9 @@ var defaultController = {
      * @author TACKSU
      */
     signin: (req, res, next) => {
-        var phone = req.body.phone,
+        var clientId = req.body.client_id,
+            clientSecret = req.body.client_secret,
+            phone = req.body.phone,
             ci = req.body.ci;
 
         if (!phone) {
@@ -116,16 +118,15 @@ var defaultController = {
             }, (err, userModels) => {
                 if (!!err) {
                     next(err);
-                } else if (userModels.length == 0) {
-                    next({
-                        err: {}
-                    });
                 } else {
                     res.send({
-                        result: userModels[0].uId
+                        code: Managers.token().issueToken({
+                            clientId: clientId,
+                            uId: userModels[0].uId
+                        })
                     });
                 }
-            })
+            });
         }
     },
 

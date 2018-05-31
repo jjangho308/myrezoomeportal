@@ -27,7 +27,7 @@
             <form id="oauth_signin">
                 <div>
                     <label>Phone : </label>
-                    <input id="input_phone" type="text" />
+                    <input id="input_phone" type="text" value="01046464646" />
                 </div>
 
                 <div id='password'>
@@ -42,7 +42,11 @@
     </div>
 </body>
 <script type="text/javascript">
-    const AJAX_URL = './oauth2';
+    const USER_STATUS_NONE = 0,
+        USER_STATUS_LITE = 1,
+        USER_STATUS_FULL = 2;
+
+    const AJAX_URL = '/oauth2';
     var state = <%= state || "null" %>,
         redirectUri = <%= redirect_uri || "null" %>,
         responseType = <%= response_type || "null" %>;
@@ -50,53 +54,66 @@
     /**
      * If user is existed.
      */
-    var userFound = false;
+    var userStatus = USER_STATUS_NONE;
 
     $("#oauth_signin").submit(event => {
         event.stopPropagation();
         event.preventDefault();
 
-        if (userFound) {
-            var phone = $('#input_phone').val();
-            var pw = $('#input_password').val();
+        switch (userStatus) {
+            case USER_STATUS_NONE:
+                {
+                    var phone = $('#input_phone').val();
+                    if (!phone) {
+                        alert('핸드폰 번호를 입력해 주세요.');
+                        return;
+                    }
+                    $.ajax({
+                        url: AJAX_URL + '/phone',
+                        type: 'GET',
+                        data: {
+                            phone: phone
+                        },
+                        success: res => {
+                            res.result.map(item => {
+                                userStatus = item.status;
+                            });
 
-            if (!phone || !pw) {
-                alert('ID 또는 Password를 확인해 주세요.')
-                return;
-            }
+                            // Lite user로 확인될 경우 signin 진행
+                            switch (userStatus) {
+                                case USER_STATUS_LITE:
+                                    {
+                                        $.ajax({
+                                            url: AJAX_URL + '/signin',
+                                            type: 'POST',
+                                            data: {
+                                                phone: phone
+                                            },
+                                            success: res => {
+                                                window.opener.postMessage({
+                                                    code: res.result.code,
+                                                    redirectUri: redirectUri,
+                                                });
+                                            },
+                                            failue: err => {
+                                                alert(err);
+                                            }
+                                        });
+                                        break;
+                                    }
+                                case USER_STATUS_FULL:
+                                    {
 
-            $.ajax({
-                url: AJAX_URL + '/signin',
-                type: 'POST',
-                data: {
-                    phone: phone
-                },
-                success: res => {
-
-                },
-                failue: err => {
-
+                                        break;
+                                    }
+                            }
+                        },
+                        failue: err => {
+                            alert(err);
+                        }
+                    });
+                    break;
                 }
-            });
-        } else {
-            var phone = $('#input_phone').val();
-            if (!phone) {
-                alert('핸드폰 번호를 입력해 주세요.');
-                return;
-            }
-            $.ajax({
-                url: AJAX_URL + '/phone',
-                type: 'GET',
-                data: {
-                    phone: phone
-                },
-                success: res => {
-                    if(res.result.status)
-                },
-                failue: err => {
-
-                }
-            });
         }
         console.log(phone);
     });
