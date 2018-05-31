@@ -184,4 +184,5 @@ border:solid 1px #c3cdd8;
 .table-div {
     height:300px;
     width:100%;
+    overflow: auto;
 }
