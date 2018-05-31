@@ -129,6 +129,58 @@ var certformatter= {
 
     "RCOGC0011":function viewformatter(record_data) {
         //계명대 성적증명서        
+        $(".inner-container").load("../../viewhtml/RCOGC0011.html", function() {
+            record_data.scoreList.sort((a, b) => {
+                return a["year"] - b["year"] || a["semester"] - b["semester"];
+            });
+    
+            //30 row
+            
+            var year = '';
+            var semester = '';
+    
+            var sector = '1';
+            var totalscore = 0;
+            var beforeagree = 0;
+            var beforeavg = 0;
+    
+            var htmldiv = '';
+    
+            for(var i in record_data.scoreList) {
+                if(year != record_data.scoreList[i].year || semester != record_data.scoreList[i].semester) {
+                    
+                    for(var j in record_data.scoreStatisticList) {
+                        if(year == record_data.scoreStatisticList[j].year && semester == record_data.scoreStatisticList[j].semester){
+                            beforeagree = record_data.scoreStatisticList[j].scored_acquired;
+                            beforeavg = record_data.scoreStatisticList[j].average_score;
+                            htmldiv = "<tr><td colspan='4' style='font-weight:bold; margin: 10px 0px; text-align:center'>취득학점 : " 
+                            + beforeagree + "      평점평균 : " 
+                            + beforeavg.substr(0, 3) + '</td></tr>'; 
+                            
+                            $('.sungjuk_sector_'+sector).append(htmldiv);
+                        }
+                    }
+    
+                    htmldiv = "<tr><td colspan='4' style='font-weight:bold; text-align: center; text-decoration: underline; margin: 10px 0px'>" 
+                    + record_data.scoreList[i].year + "학년도 " 
+                    + record_data.scoreList[i].semester + "학기"+ '</td></tr>';   
+                    year = record_data.scoreList[i].year;
+                    semester = record_data.scoreList[i].semester;
+                    
+                    $('.sungjuk_sector_'+sector).append(htmldiv);
+                }            
+                htmldiv = "<tr><td></td><td>" + record_data.scoreList[i].lecture_name + "</td><td>" 
+                + record_data.scoreList[i].score_result + "</td><td>" + record_data.scoreList[i].grade_result + '</td></tr>';    
+                
+                $('.sungjuk_sector_'+sector).append(htmldiv);
+                if($('.sungjuk_sector_'+sector+' tbody tr').length > 30) {
+                    sector ++;
+                }   
+                totalscore += parseInt(record_data.scoreList[i].score_result);
+            } 
+        });
+        
+        /*
         $("#cert-body-div").css({"margin":"0px 25px", "font-size":"12px", "display":"flex", "width": "100%", "letter-spacing": "1px"});
 
         record_data.scoreList.sort((a, b) => {
@@ -191,5 +243,6 @@ var certformatter= {
         + totalagree + "<br>총점 누계  " 
         + totalscore + ""+ '</p>';   
         $('.sungjuk_sector_' + sector).append(htmldiv);
+        */
     },
 }
