@@ -181,3 +181,8 @@ box-shadow:0 2px 5px 0 rgba(191,191,191,0.5);
 border:solid 1px #c3cdd8;
 }
 
+.table-div {
+    height:300px;
+    width:100%;
+    overflow: auto;
+}
