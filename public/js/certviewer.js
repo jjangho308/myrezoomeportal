@@ -277,7 +277,7 @@ function generateQRCode(){
     var options = {
         render: "image", 
         ecLevel: "H", // ERROR CORRECTION LEVEL
-        minVersion: 1,
+        minVersion: 6,
 
         fill: "#333333",
         background: "#ffffff",
@@ -294,7 +294,7 @@ function generateQRCode(){
         mPosX: 0.5, // 글자 위치 x
         mPosY: 0.5, // 글자 위치 y
 
-        label: "레쥬메gogo",
+        label: "레쥬메",
         fontname: "Ubuntu",
         fontcolor: "#ff9818",
 
