@@ -6,7 +6,7 @@ import UserModel from '../models/user/user';
 import Util from '../util/util';
 
 /**
- * Controller for '/oauth2' URI. <br />
+ * Controller for '/oauth2' URI. <br />`
  * 
  * @since 180528
  * @author TACKSU
@@ -37,13 +37,12 @@ var defaultController = {
                     next(err);
                 } else {
                     var result = [];
-                    for (var user in users) {
-                        result.push({
-
+                    result = users.map(user => {
+                        return {
                             // 회원 상태가 L일 경우에만 Lite 회원으로 정립
                             status: user.status == 'L' ? 0 : 1
-                        });
-                    }
+                        };
+                    });
                     res.send({
                         result: result
                     });

@@ -35,6 +35,7 @@ describe('OAuth test suite', () => {
         chai.request(app)
             .post('/oauth2/litesignup')
             .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
             .send({
                 phone: '01045454545',
                 // ci: 'aslkdflkasjdlkfjk',
@@ -61,11 +62,12 @@ describe('OAuth test suite', () => {
         chai.request(app)
             .get('/oauth2/phone')
             .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
             .send({
                 phone: '01064749282'
             })
             .end((err, res) => {
-                if (!!res.result && result.status == 1)
+                if (!!res.body.result && res.body.result.status == 1)
                     done();
             });
     });
@@ -80,11 +82,12 @@ describe('OAuth test suite', () => {
         chai.request(app)
             .get('/oauth2/phone')
             .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
             .send({
                 phone: '01067602946'
             })
             .end((err, res) => {
-                if (!!res.result && result.status == 0)
+                if (!!res.body.result && res.body.result.status == 0)
                     done();
             });
     });
