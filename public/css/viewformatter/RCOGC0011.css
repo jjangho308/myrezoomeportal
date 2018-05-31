@@ -1,0 +1,17 @@
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.personinfo1 {
+    width: 100%;
+}
+
+.cert_doc_id {
+
+}
+
+.cert_title {
+    width:100%;
+    text-align: center;
+}

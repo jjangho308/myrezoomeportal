@@ -8,6 +8,7 @@ import ClientRequestManager from '../modules/client/client_request';
 import AgentRequestManager from '../modules/agent/agent_request';
 import CryptoManager from '../modules/crypto/crypto';
 import NexLedgerManger from '../modules/blockchain/nexledgerservice';
+import ApiRequestManager from '../modules/api/api_request';
 
 /**
  * Wrapper function to provide singleton instance of each modules. <br />
@@ -26,6 +27,7 @@ export default (() => {
     var clientRequestInstance = null;
     var agentRequestInstance = null;
     var nexLedgerInstance = null;
+    var apiRequestInstance = null;
 
 
     return {
@@ -71,6 +73,10 @@ export default (() => {
 
         nex: () => {
             return nexLedgerInstance = nexLedgerInstance ? nexLedgerInstance : new NexLedgerManger();
+        },
+
+        api: () => {
+            return apiRequestInstance = apiRequestInstance ? apiRequestInstance : new ApiRequestManager();
         }
     }
 })();

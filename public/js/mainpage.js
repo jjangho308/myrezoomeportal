@@ -343,7 +343,7 @@ $(document).ready(function(){
         });        
     });
 
-    $('.spec-detail-div input:checkbox').click(function () {
+    $('.spec-detail-div').click(function () {
         $(".spec-detail-div input:checkbox").each(function(i) {
             if ($(this).is(':checked')) {
                 $(this).closest('.spec-body').css({ "border": "solid 1px #4c80f1", "border-radius": "4px", "background-color": "rgba(76, 128, 241, 0.05)" });
@@ -360,20 +360,11 @@ $(document).ready(function(){
             var numberOfChecked = $('.spec-detail-div input:checkbox:checked').length;
     
             if (numberOfChecked == 0) {
-                // $("#select-footer").hide();
-                $("input").prop("disabled", "true");
-
-                $("#select-footer").animateCss("fadeOutDown", function() {
-                        $("#select-footer").hide();
-                        $("input").removeAttr("disabled");
-                    });
-                $
+                $("#select-footer").hide();
                 $("#main-footer").css("margin-bottom", "0px");
             } else {
                 $("#select-footer span:nth-child(2)").text(numberOfChecked + "건의");
                 $("#select-footer").show();
-                $("#select-footer").animateCss("fadeInUp");  
-
                 $("#main-footer").css("margin-bottom", "71px");
             }
         });        
@@ -459,7 +450,7 @@ $(document).ready(function(){
     });
 
     $('#refresh_record').click(function() {
-        $('.timeline').show();
+        $('.spec-body-loading').show();
         $('.spec-body-default').hide();    
         getRSAKey();
         var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
@@ -497,7 +488,7 @@ $(document).ready(function(){
                 setSocket(res.mid);
                 clientsocket_listener();
                 setTimeout(() => {
-                    $('.timeline').hide();
+                    $('.spec-body-loading').hide();
                     $('.spec-body-default').show();    
                 }, 1500);
             },
@@ -559,11 +550,11 @@ function change_default_cert(subid) {
                 htmldiv = htmldiv + '<label for=change_cert_'+ record.txid +'></label>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</td>';
-                htmldiv = htmldiv + '<td>' + formatDate(jsonData.date) +'</td>';
+                htmldiv = htmldiv + '<td>' + formatDate(jsonData.ctestday) +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.userid +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.name +'</td>';
                 htmldiv = htmldiv + '<td>' + dftYn +'</td>';
-                htmldiv = htmldiv + '<td>' + jsonData.grade +'</td>';
+                htmldiv = htmldiv + '<td>' + jsonData.rating +'</td>';
                 htmldiv = htmldiv + '<td></td>';
                 htmldiv = htmldiv + '</tr>';            
                 $("#spec-change-table").append(htmldiv);
@@ -649,7 +640,7 @@ function request_agent() {
             clientsocket_listener();
             // loading css start
             setTimeout(() => {
-                $('.timeline').hide();
+                $('.spec-body-loading').hide();
                 $('.spec-body-default').show();    
             }, 1500);
             
@@ -659,7 +650,7 @@ function request_agent() {
 }
 
 function refreshview(records) {
-    $('.timeline').hide();
+    $('.spec-body-loading').hide();
 
     var recordList = {};
     var subid = "";

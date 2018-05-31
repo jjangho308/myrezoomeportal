@@ -41,24 +41,44 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
             rsmId: requestEntity.rsmId
         }, (err, resumeList) => {
             if (!!err) {
-                done(ClientRequest.RESULT_FAILURE, err);
-            } else {
-                //console.log(resumeList);
+                done(ClientRequest.RESULT_FAILURE, ErrorContainer.DB);
+            } else if (resumeList.length == 0) {
+                //done(ClientRequest.RESULT_FAILURE, ErrorContainer.PARAMETER);
+                //TODO List 확인 필요 택수!
+                //length가 0이라고 error 아님                
+                done(ClientRequest.RESULT_SUCCESS, []);
+            } else if (resumeList.length > 0) {
                 var recordDAO = Managers.db().getRecordDAO();
                 var completedResume = 0;
                 for (var i in resumeList) {
                     !((idx) => {
                         // Remove 'sId' field.
                         delete resumeList[idx].sId;
-                        console.log(resumeList);
-
                         completedResume++;
-                        if (completedResume == resumeList.length) {
+                        if (completedResume == resumeList.length) {                            
                             done(ClientRequest.RESULT_SUCCESS, resumeList);
                         }
                     })(i);
                 }
             }
+
+
+            // if (!!err) {
+            //     done(ClientRequest.RESULT_FAILURE, err);
+            // } else { 
+            //     var recordDAO = Managers.db().getRecordDAO();
+            //     var completedResume = 0;
+            //     for (var i in resumeList) {
+            //         !((idx) => {
+            //             // Remove 'sId' field.
+            //             delete resumeList[idx].sId;
+            //             completedResume++;
+            //             if (completedResume == resumeList.length) {
+            //                 done(ClientRequest.RESULT_SUCCESS, resumeList);
+            //             }
+            //         })(i);
+            //     }
+            // }
         })
     }
 }
