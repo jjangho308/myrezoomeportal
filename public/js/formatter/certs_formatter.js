@@ -2,6 +2,8 @@ var certformatter= {
     
     "RCLPT0005":function viewformatter(record_data) {     
         //$(".inner-container").empty();             
+        $(".outer-container").append($("<div></div>").addClass("inner-container"));
+        $(".outer-container").append($("<p></p>").html("본 증명서는 레쥬메 서비스를 통해 인터넷으로 발급되었으며 우측 QR코드를 이용하여 증명서 내용의 진위여부를 확인할 수 있습니다."));
         $(".outer-container").append($("<div></div>").addClass("inner-container2"));
         $(".outer-container > p").css({"padding":"10px 25px 80px"});
 
