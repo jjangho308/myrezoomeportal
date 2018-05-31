@@ -58,7 +58,7 @@ background-color:#dadada;
     margin: 1.5px;
 }
 
-@media screen{
+@media screen and (min-width: 1000px){
 	body{
 		background-color: #f2f5f8;
 
@@ -120,8 +120,9 @@ background-color:#dadada;
 	}
 }
 
-@media screen{
-	body{		
+@media screen and (max-width: 1000px){
+	body{
+		min-width: 0px;
 		background-color: #f2f5f8;
 		    height: calc(100vh - 167px);
      position: relative;
