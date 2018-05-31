@@ -1,6 +1,8 @@
 import AbstractManager from '../abstract_manager';
 import request from 'request-json';
 
+import Manager from '../../core/managers';
+
 /**
  * Manager for IO function on NexLedger. <br />
  * 
@@ -20,7 +22,9 @@ class NexledgerService extends AbstractManager {
 
     init(from) {
         super.init(from);
-        this.url = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
+        var propertyManager = Manager.property();
+        //this.url = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
+        this.url = propertyManager.get(Property.Nexledger_URL);
     }
 
     newaccount(nodeurl, callback) {
