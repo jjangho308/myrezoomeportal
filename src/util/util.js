@@ -73,7 +73,9 @@ export default (() => {
          * @author TACKSU
          * 
          * @param {String} obj UTF-8 plain text.
-         * @param {function} cb Callback function.
+         * @param {function(object, String)} cb Optional. Callback function.
+         * 
+         * @return HEX encoded hashed value, If callbacks is not given.
          */
         sha256: (obj, cb) => {
             var sha256 = crypto.createHash('sha256');
@@ -81,17 +83,17 @@ export default (() => {
             if (!!cb) {
                 process.nextTick(() => {
                     if (obj instanceof String) {
-                        hashedData = sha256.update(obj, 'utf8').digest('base64');
+                        hashedData = sha256.update(obj, 'utf8').digest('hex');
                     } else {
-                        hashedData = sha256.update(obj).digest('base64');
+                        hashedData = sha256.update(obj).digest('hex');
                     }
                     cb(hashedData);
                 });
             } else {
                 if (obj instanceof String) {
-                    hashedData = sha256.update(obj, 'utf8').digest('base64');
+                    hashedData = sha256.update(obj, 'utf8').digest('hex');
                 } else {
-                    hashedData = sha256.update(obj).digest('base64');
+                    hashedData = sha256.update(obj).digest('hex');
                 }
 
                 return hashedData;

@@ -72,6 +72,17 @@ class RecordDAO extends AbstractDAO {
         })
     }
 
+    putRecordByGuest(record, cb) {
+        var query = mysql.format(recordQuery.putRecordByGuest, record);
+        this.query(query, (err, result) => {
+            if (err) {
+                cb(err);
+            } else {
+                cb(err, result);
+            }
+        })
+    }
+
     /**
      * 사용자의 수기 입력 이력을 db에 기록함.
      */

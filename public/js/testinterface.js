@@ -125,56 +125,56 @@ function test_getresumeslist(certid) {
 
 
 function test_setTestData() {
-       var record = {
-       "mid": "5b57ad01-28f6-4720-a710-f6f9e4785d06",
-       "cmd": "SearchRecord",
-       "args": {
-           "code": "0",
-           "orgcode": "200",
-           "key": "ENCRYPTED_AESKEY",
-           "iv": "ENCRYPTED_IV",
-           "records": [
-               {
-                   "data": "{\"userid\":\"123456\",\"point0\":\"800\",\"point1\":\"95\",\"point2\":\"500\",\"point3\":\"300\",\"name\":\"박헌욱\",\"grade\":\"우수\",\"date\":\"2018-04-10 05:18:29.0\"}",
-                   "hash": "4406db28e9620c4cd538f512dd82fee6dfc0bdf64e3a27148c672e09ee65207e",
-                   "txid": "7c731bfa671da3769414218c1ddd83722e735155bd80a8e0d4e971204f77f7d9",
-                   "subid": "RCCNF0001",
-                   "stored": "Y",
-                   "dftYn": "N"
-               },
-               {
-                   "data": "{\"userid\":\"123456\",\"point0\":\"999\",\"point1\":\"99\",\"point2\":\"600\",\"point3\":\"399\",\"name\":\"박헌욱\",\"grade\":\"짱\",\"date\":\"2018-04-18 08:39:03.0\"}",
-                   "hash": "8e031d8fb7711ad6dbccbce85913b01ecec3643543da8e1245c8f232a63d3f1c",
-                   "txid": "c910c7a45583553532dc8c8c4a595835553d8d4e089b2f82f66e24ee4db8ad02",
-                   "subid": "RCCNF0001",
-                   "stored": "Y",
-                   "dftYn": "Y"
-               },
-               {
-                   "data": "{\"userid\":\"123456\",\"point0\":\"100\",\"point1\":\"10\",\"point2\":\"50\",\"point3\":\"50\",\"name\":\"박헌욱\",\"grade\":\"병신\",\"date\":\"2018-04-18 17:39:27.0\"}",
-                   "hash": "917cd80cd2127db71cc3f89519d78b2eeff0328f3885fb10b53e0c1b51c25fbb",
-                   "txid": "e3c02ed226c2ddc9d74dbdc6434e0458c7f9c10156d4b7b04455eb9a4392822c",
-                   "subid": "RCCNF0001",
-                   "stored": "Y",
-                   "dftYn": "N"
-               }
-           ]
-       }
-   };
-   var rocords =  record.args.records;    
+//        var record = {
+//        "mid": "5b57ad01-28f6-4720-a710-f6f9e4785d06",
+//        "cmd": "SearchRecord",
+//        "args": {
+//            "code": "0",
+//            "orgcode": "200",
+//            "key": "ENCRYPTED_AESKEY",
+//            "iv": "ENCRYPTED_IV",
+//            "records": [
+//                {
+//                    "data": "{\"userid\":\"123456\",\"point0\":\"800\",\"point1\":\"95\",\"point2\":\"500\",\"point3\":\"300\",\"name\":\"박헌욱\",\"grade\":\"우수\",\"date\":\"2018-04-10 05:18:29.0\"}",
+//                    "hash": "4406db28e9620c4cd538f512dd82fee6dfc0bdf64e3a27148c672e09ee65207e",
+//                    "txid": "7c731bfa671da3769414218c1ddd83722e735155bd80a8e0d4e971204f77f7d9",
+//                    "subid": "RCCNF0001",
+//                    "stored": "Y",
+//                    "dftYn": "N"
+//                },
+//                {
+//                    "data": "{\"userid\":\"123456\",\"point0\":\"999\",\"point1\":\"99\",\"point2\":\"600\",\"point3\":\"399\",\"name\":\"박헌욱\",\"grade\":\"짱\",\"date\":\"2018-04-18 08:39:03.0\"}",
+//                    "hash": "8e031d8fb7711ad6dbccbce85913b01ecec3643543da8e1245c8f232a63d3f1c",
+//                    "txid": "c910c7a45583553532dc8c8c4a595835553d8d4e089b2f82f66e24ee4db8ad02",
+//                    "subid": "RCCNF0001",
+//                    "stored": "Y",
+//                    "dftYn": "Y"
+//                },
+//                {
+//                    "data": "{\"userid\":\"123456\",\"point0\":\"100\",\"point1\":\"10\",\"point2\":\"50\",\"point3\":\"50\",\"name\":\"박헌욱\",\"grade\":\"병신\",\"date\":\"2018-04-18 17:39:27.0\"}",
+//                    "hash": "917cd80cd2127db71cc3f89519d78b2eeff0328f3885fb10b53e0c1b51c25fbb",
+//                    "txid": "e3c02ed226c2ddc9d74dbdc6434e0458c7f9c10156d4b7b04455eb9a4392822c",
+//                    "subid": "RCCNF0001",
+//                    "stored": "Y",
+//                    "dftYn": "N"
+//                }
+//            ]
+//        }
+//    };
+//    var rocords =  record.args.records;    
 
-   for(var i=0; i<rocords.length ; i++) {        
-       var subid = rocords[i].subid;        
-       try {            
-           setData(record.args.records[i]);           
-       }catch(exception) {
-           console.log(exception);
-           //continue;
-       }
-   }
-   refreshview(record.args.records);
+//    for(var i=0; i<rocords.length ; i++) {        
+//        var subid = rocords[i].subid;        
+//        try {            
+//            setData(record.args.records[i]);           
+//        }catch(exception) {
+//            console.log(exception);
+//            //continue;
+//        }
+//    }
+//    refreshview(record.args.records);
     
-   record = {
+   var record = {
        "mid": "fca37200-a6ab-4fb3-9032-1d20fa269a67",
        "cmd": "SearchRecord",
        "args": {
@@ -184,9 +184,9 @@ function test_setTestData() {
            "iv": "ENCRYPTED_IV",
            "records": [
            {
-               "data": "{\"testid\":\"6A3135824610\",\"phone\":\"01064749282\",\"name\":\"PARKHUNWOOK\",\"grade\":\"IM2\",\"date\":\"20180313\"}",
+               "data": "{\"cname\":\"박헌욱 (PARK HEONUG)\",\"grcode\":\"OBB0003\",\"birthday\":\"1987 / 01 / 23\",\"ctestday\":\"2014 / 09 / 28\",\"testtype\":\"OPIc (ENGLISH)\",\"cnation\":\"OPIc 특별시험\",\"clevel\":\"NOVICE LOW - ENGLISH\",\"cissudate\":\"2018 / 05 / 30\",\"name\":\"박헌욱\",\"ename\":\"PARK HEONUG\",\"opidate\":\"Sep 28 2014  6:24PM\",\"issudate\":\"20180530\",\"subj\":\"OPI003\",\"year\":\"2014\",\"subjseq\":\"66797\",\"started\":\"201409281820\",\"ended\":\"201409281930\",\"rating\":\"NL\",\"areacd\":\"A\",\"exroomno\":\"A0068\",\"exroomnm\":\"OPIc역삼교육센터\",\"addr\":\"서울강남구 역삼동 718-5 멀티스퀘어 6층(구 삼성SDS멀티캠퍼스 건물)\",\"levels\":\"1\",\"code\":\"NL\",\"codenm\":\"Novice Low\",\"freebillchk\":\"N\",\"realyear\":\"2014\",\"useend\":\"2016/09/27\",\"examid\":null,\"language\":\"English\",\"testdate\":\"September28,2014\",\"imsubscore\":null,\"subjnm\":\"OPIc 특별시험\"}",
                "hash": "332ca60e27587689dfdbd71754abf3e6e8c81fe4ca8424b5afb746886d3fbf01",
-               "txid": "8bee2e4871e1ab8217a5a30d73209f51eef0080a3f2858d0aff37ef476344fc0",
+               "txid": "8af636cd2605e0bff287c168b9e6c333787ae778f8d91456f5b6d94e696b71c4",
                "subid": "RCLPT0005",
                "stored": "Y",
                "dftYn": "N"
@@ -217,18 +217,18 @@ record = {
        "iv": "ENCRYPTED_IV",
        "records": [
            {
-            "data":"{\"id\":\"12060992\",\"sub\":\"일반수학2\",\"name\":\"박헌욱\",\"grade\":\"A+\",\"date\":\"null ~ null\"}",
+            "data":"{\"univInfo\":{\"univ_name\":\"인하대학교\",\"cert_main_agent\":\"교무처장\",\"msg1\":\"위 사실을 증명합니다.\"},\"registList\":[{\"std_no\":\"12121116\",\"name\":\"박헌욱\",\"birth\":\"1987-01-23\",\"univ_affiliation\":\"공과대학\",\"univ_group\":\"컴퓨터공학과\",\"major_first\":\"컴퓨터공학\",\"major_second\":\"\",\"course\":\"공학사\",\"admission_date\":\"2012-03-02\",\"change_date\":\"2018-06-14\"}],\"hash\":\"6c2967d31523bbf9c7415a61cca978b223f879cc411e34862e8921856e9a8234\",\"txid\":\"1c2eb6a24d8bd2f9660c309c39efbcbe2bb0cca2c049ff400ae3903d00340244\",\"subid\":\"RCOGC0008\",\"stored\":\"Y\",\"dftYn\":\"N\"}",
             "hash":"971d23e9c0791d8cd83cd0bf074f3d0dec132aa38bf7a75015d190f717fd70a4",
-            "txid":"4329f322d166c503dd6f6e750c1e57915c8b8cfff16f43742a7b65baa1fe32c0",
-            "subid":"RCOGC0009",
+            "txid":"1c2eb6a24d8bd2f9660c309c39efbcbe2bb0cca2c049ff400ae3903d00340244",
+            "subid":"RCOGC0008",
             "stored":"Y",
             "dftYn":"N"
            },
            {
-           "data": "{\"id\":\"12060992\",\"status\":\"JAEHAK\",\"entranceDate\":\"2018-02-01\",\"graduDate\":\"2018-08-01\",\"name\":\"박헌욱\",\"date\":\"2018-02-01 ~ 2018-08-01\"}",
+           "data": "{\"univInfo\":{\"univ_name\":\"인하대학교\",\"cert_main_agent\":\"교무처장\",\"msg1\":\"위 사실을 증명합니다.\"},\"scoreList\":[{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"CSE1101\",\"lecture_name\":\"객체지향프로그래밍1\",\"score_result\":\"3\",\"grade_result\":\"B+\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"CSE1104\",\"lecture_name\":\"창의적컴퓨터공학설계\",\"score_result\":\"3\",\"grade_result\":\"A+\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"GEB1105\",\"lecture_name\":\"Academic English 1\",\"score_result\":\"2\",\"grade_result\":\"A0\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"GEB1124\",\"lecture_name\":\"이공계열 글쓰기와 토론\",\"score_result\":\"3\",\"grade_result\":\"A+\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"GEB1131\",\"lecture_name\":\"생활한문\",\"score_result\":\"1\",\"grade_result\":\"A+\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"PHY1003\",\"lecture_name\":\"물리학실험1\",\"score_result\":\"1\",\"grade_result\":\"A+\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"ACE1204\",\"lecture_name\":\"생명과학\",\"score_result\":\"4\",\"grade_result\":\"D0\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"CSE1102\",\"lecture_name\":\"컴퓨터공학입문 및 실습\",\"score_result\":\"3\",\"grade_result\":\"B0\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"CSE1103\",\"lecture_name\":\"객체지향프로그래밍2\",\"score_result\":\"3\",\"grade_result\":\"B+\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"GEB1106\",\"lecture_name\":\"Academic English 2\",\"score_result\":\"2\",\"grade_result\":\"B0\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"MTH1002\",\"lecture_name\":\"일반수학2\",\"score_result\":\"3\",\"grade_result\":\"A+\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"PHY1004\",\"lecture_name\":\"물리학실험2\",\"score_result\":\"1\",\"grade_result\":\"A0\"},{\"year\":\"2015\",\"semester\":\"1\",\"lecture_no\":\"ACE1312\",\"lecture_name\":\"이산수학\",\"score_result\":\"3\",\"grade_result\":\"C+\"},{\"year\":\"2015\",\"semester\":\"1\",\"lecture_no\":\"ACE2104\",\"lecture_name\":\"통계학\",\"score_result\":\"3\",\"grade_result\":\"A+\"},{\"year\":\"2015\",\"semester\":\"1\",\"lecture_no\":\"ACE2106\",\"lecture_name\":\"정수론입문\",\"score_result\":\"3\",\"grade_result\":\"A+\"},{\"year\":\"2015\",\"semester\":\"1\",\"lecture_no\":\"CSE2103\",\"lecture_name\":\"어셈블리어\",\"score_result\":\"3\",\"grade_result\":\"D0\"},{\"year\":\"2015\",\"semester\":\"1\",\"lecture_no\":\"CSE2107\",\"lecture_name\":\"자바기반응용프로그래밍\",\"score_result\":\"3\",\"grade_result\":\"A0\"},{\"year\":\"2015\",\"semester\":\"1\",\"lecture_no\":\"EDC2205\",\"lecture_name\":\"교육사회\",\"score_result\":\"2\",\"grade_result\":\"A+\"},{\"year\":\"2015\",\"semester\":\"1\",\"lecture_no\":\"EDC2211\",\"lecture_name\":\"교육학개론\",\"score_result\":\"2\",\"grade_result\":\"C+\"},{\"year\":\"2015\",\"semester\":\"1\",\"lecture_no\":\"MTH1001\",\"lecture_name\":\"일반수학1\",\"score_result\":\"3\",\"grade_result\":\"C+\"},{\"year\":\"2015\",\"semester\":\"2\",\"lecture_no\":\"ACE2101\",\"lecture_name\":\"공업수학 1\",\"score_result\":\"3\",\"grade_result\":\"D0\"},{\"year\":\"2015\",\"semester\":\"2\",\"lecture_no\":\"CSE2101\",\"lecture_name\":\"논리회로\",\"score_result\":\"3\",\"grade_result\":\"B+\"},{\"year\":\"2015\",\"semester\":\"2\",\"lecture_no\":\"CSE2102\",\"lecture_name\":\"자료구조\",\"score_result\":\"3\",\"grade_result\":\"B+\"},{\"year\":\"2015\",\"semester\":\"2\",\"lecture_no\":\"CSE2105\",\"lecture_name\":\"컴퓨터기반선형대수\",\"score_result\":\"3\",\"grade_result\":\"B+\"},{\"year\":\"2015\",\"semester\":\"2\",\"lecture_no\":\"GEC1017\",\"lecture_name\":\"인간의 성장과 발달\",\"score_result\":\"3\",\"grade_result\":\"A0\"},{\"year\":\"2015\",\"semester\":\"2\",\"lecture_no\":\"PHY1001\",\"lecture_name\":\"물리학1\",\"score_result\":\"3\",\"grade_result\":\"A+\"},{\"year\":\"2015\",\"semester\":\"2\",\"lecture_no\":\"PHY1002\",\"lecture_name\":\"물리학2\",\"score_result\":\"3\",\"grade_result\":\"C+\"},{\"year\":\"2016\",\"semester\":\"1\",\"lecture_no\":\"CSE3203\",\"lecture_name\":\"컴퓨터구조론\",\"score_result\":\"3\",\"grade_result\":\"A0\"},{\"year\":\"2016\",\"semester\":\"1\",\"lecture_no\":\"CSE3206\",\"lecture_name\":\"오퍼레이팅시스템\",\"score_result\":\"3\",\"grade_result\":\"D0\"},{\"year\":\"2016\",\"semester\":\"1\",\"lecture_no\":\"CSE3207\",\"lecture_name\":\"데이터베이스\",\"score_result\":\"3\",\"grade_result\":\"C0\"},{\"year\":\"2016\",\"semester\":\"1\",\"lecture_no\":\"CSE3301\",\"lecture_name\":\"데이터통신\",\"score_result\":\"3\",\"grade_result\":\"B0\"},{\"year\":\"2016\",\"semester\":\"1\",\"lecture_no\":\"EDC3201\",\"lecture_name\":\"교육과정\",\"score_result\":\"2\",\"grade_result\":\"A+\"},{\"year\":\"2016\",\"semester\":\"1\",\"lecture_no\":\"EDC3202\",\"lecture_name\":\"교육평가\",\"score_result\":\"2\",\"grade_result\":\"B+\"},{\"year\":\"2016\",\"semester\":\"2\",\"lecture_no\":\"CSE3303\",\"lecture_name\":\"유닉스프로그래밍\",\"score_result\":\"3\",\"grade_result\":\"C+\"},{\"year\":\"2016\",\"semester\":\"2\",\"lecture_no\":\"CSE3304\",\"lecture_name\":\"임베디드소프트웨어\",\"score_result\":\"3\",\"grade_result\":\"A0\"},{\"year\":\"2016\",\"semester\":\"2\",\"lecture_no\":\"CSE4301\",\"lecture_name\":\"전자상거래\",\"score_result\":\"3\",\"grade_result\":\"B0\"},{\"year\":\"2016\",\"semester\":\"2\",\"lecture_no\":\"CSE4308\",\"lecture_name\":\"컴퓨터보안\",\"score_result\":\"3\",\"grade_result\":\"B0\"},{\"year\":\"2016\",\"semester\":\"2\",\"lecture_no\":\"GEG3009\",\"lecture_name\":\"블루오션리더십\",\"score_result\":\"3\",\"grade_result\":\"A0\"},{\"year\":\"2017\",\"semester\":\"1\",\"lecture_no\":\"CSE1105\",\"lecture_name\":\"컴퓨터공학 종합설계\",\"score_result\":\"3\",\"grade_result\":\"A0\"},{\"year\":\"2017\",\"semester\":\"1\",\"lecture_no\":\"CSE4204\",\"lecture_name\":\"알고리즘\",\"score_result\":\"3\",\"grade_result\":\"B0\"},{\"year\":\"2017\",\"semester\":\"1\",\"lecture_no\":\"CSE4312\",\"lecture_name\":\"컴파일러\",\"score_result\":\"3\",\"grade_result\":\"A0\"},{\"year\":\"2017\",\"semester\":\"1\",\"lecture_no\":\"EDC4209\",\"lecture_name\":\"교육실습\",\"score_result\":\"2\",\"grade_result\":\"A0\"},{\"year\":\"2017\",\"semester\":\"2\",\"lecture_no\":\"GEC4010\",\"lecture_name\":\"영화와 테크놀러지\",\"score_result\":\"3\",\"grade_result\":\"A+\"},{\"year\":\"2017\",\"semester\":\"2\",\"lecture_no\":\"GEG3064\",\"lecture_name\":\"미래사회와 진로설계\",\"score_result\":\"2\",\"grade_result\":\"P\"},{\"year\":\"2017\",\"semester\":\"2\",\"lecture_no\":\"GEG4015\",\"lecture_name\":\"야구 소프트볼\",\"score_result\":\"1\",\"grade_result\":\"C+\"},{\"year\":\"2018\",\"semester\":\"1\",\"lecture_no\":\"EDC2200\",\"lecture_name\":\"교육철학및교육사\",\"score_result\":\"2\",\"grade_result\":\"C+\"},{\"year\":\"2018\",\"semester\":\"1\",\"lecture_no\":\"EDC2207\",\"lecture_name\":\"특수교육학개론\",\"score_result\":\"2\",\"grade_result\":\"B+\"},{\"year\":\"2018\",\"semester\":\"1\",\"lecture_no\":\"EDC3411\",\"lecture_name\":\"학교폭력예방 및 학생의 이해\",\"score_result\":\"2\",\"grade_result\":\"C+\"},{\"year\":\"2018\",\"semester\":\"1\",\"lecture_no\":\"GEC4005\",\"lecture_name\":\"디지털 이미지와 사회\",\"score_result\":\"3\",\"grade_result\":\"A+\"}],\"scoreStatisticList\":[{\"ranking\":\"50\",\"people_count\":\"65\",\"gradecertificated\":\"1\"}],\"hash\":\"3536edffe0fb0b958f65336d8052bcdb3c1355cbfae301e2887c350d2a230e06\",\"txid\":\"c745d3a0f11a575cff7b2344a0bffef5efca522c3c7ecf2555ca9ad1dcb0c273\",\"subid\":\"RCOGC0009\",\"stored\":\"Y\",\"dftYn\":\"N\"}",
            "hash": "34ccbc51eccd9bd3944f7f092b7c8b324c5af9f63cf9bac2b9d59df5d0d7dce0",
-           "txid": "785267710bde9decc12cf503f3a8f1accd58dc2fd30891ae443fca5a2bf637ab",
-           "subid": "RCOGC0008",
+           "txid": "c745d3a0f11a575cff7b2344a0bffef5efca522c3c7ecf2555ca9ad1dcb0c273",
+           "subid": "RCOGC0009",
            "stored": "Y",
            "dftYn": "N"
            }
@@ -248,6 +248,47 @@ record = {
        }
    }
    refreshview(record.args.records);
+
+   record = {
+        "mid": "fca37200-a6ab-4fb3-9032-1d20fa269a67",
+        "cmd": "SearchRecord",
+        "args": {
+            "code": "0",
+            "orgcode": "400",
+            "key": "ENCRYPTED_AESKEY",
+            "iv": "ENCRYPTED_IV",
+            "records": [
+            // {
+            //     "data": "{\"univInfo\":{\"univ_name\":\"계명대학교\",\"cert_main_agent\":\"교무처장\",\"msg1\":\"위 사실을 증명합니다.\"},\"registList\":[{\"std_no\":\"1142001\",\"name\":\"박헌욱\",\"birth\":\"870123\",\"univ_course\":\"대학\",\"univ_affiliation\":\"공과대학\",\"univ_group\":\"학부\",\"course\":\"학사과정\",\"admission_date\":\"2011-03-02\",\"change_date\":\"2015-02-20\",\"status\":\"졸업\"}],\"hash\":\"eb00121a6e0148272ac1d6307f25ff05e673a36ce717fd0abe6e02f952d22dbd\",\"txid\":\"86da0be9c9fef31bfc1e41fd2f641d7eb83988deef3772393c812402d0c0179a\",\"subid\":\"RCOGC0010\",\"stored\":\"Y\",\"dftYn\":\"N\"}",
+            //     "hash": "332ca60e27587689dfdbd71754abf3e6e8c81fe4ca8424b5afb746886d3fbf01",
+            //     "txid": "4ac881acfbf69f18662717582d6290c46b0a9b0a0e533306493bc520a61ef7b0",
+            //     "subid": "RCOGC0010",
+            //     "stored": "Y",
+            //     "dftYn": "N"
+            // }, 
+                {
+                    "data":"{\"univInfo\":{\"univ_name\":\"계명대학교\",\"cert_main_agent\":\"교무처장\",\"msg1\":\"위 사실을 증명합니다.\"},\"scoreList\":[{\"year\":\"2012\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"객체지향프로그래밍\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2012\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"논리회로\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2012\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"소프트웨어공학\",\"score_result\":\"3\",\"grade_result\":\"D+\",\"grade_division\":\"등급\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터보안\",\"score_result\":\"3\",\"grade_result\":\"D+\",\"grade_division\":\"등급\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터알고리즘\",\"score_result\":\"3\",\"grade_result\":\"B0\",\"grade_division\":\"등급\"},{\"year\":\"2012\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"자바프로그래밍\",\"score_result\":\"3\",\"grade_result\":\"D+\",\"grade_division\":\"등급\"},{\"year\":\"2013\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"데이타베이스\",\"score_result\":\"3\",\"grade_result\":\"B+\",\"grade_division\":\"등급\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"모바일프로그래밍\",\"score_result\":\"3\",\"grade_result\":\"B0\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"미분적분학\",\"score_result\":\"3\",\"grade_result\":\"B+\",\"grade_division\":\"등급\"},{\"year\":\"2012\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"시스템분석과설계\",\"score_result\":\"3\",\"grade_result\":\"C0\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"일반물리학\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"일반화학\",\"score_result\":\"3\",\"grade_result\":\"B0\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"일반수학\",\"score_result\":\"3\",\"grade_result\":\"B+\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"일반물리학(2)\",\"score_result\":\"3\",\"grade_result\":\"B0\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"일반화학(2)\",\"score_result\":\"3\",\"grade_result\":\"B+\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"일반수학(2)\",\"score_result\":\"3\",\"grade_result\":\"B0\",\"grade_division\":\"등급\"},{\"year\":\"2012\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터구조\",\"score_result\":\"3\",\"grade_result\":\"D+\",\"grade_division\":\"등급\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"디지털영상처리\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"과학과기술의역사\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터개론\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2012\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터공학창의설계\",\"score_result\":\"3\",\"grade_result\":\"C0\",\"grade_division\":\"등급\"},{\"year\":\"2013\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터공학프로젝트\",\"score_result\":\"2\",\"grade_result\":\"P\",\"grade_division\":\"P/F\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터그래픽스1\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"아카데미영어\",\"score_result\":\"2\",\"grade_result\":\"B+\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"커뮤니케이션영어\",\"score_result\":\"2\",\"grade_result\":\"B0\",\"grade_division\":\"등급\"},{\"year\":\"2011\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"공학상담및지도\",\"score_result\":\"1\",\"grade_result\":\"P\",\"grade_division\":\"P/F\"},{\"year\":\"2011\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"대학생활의설계\",\"score_result\":\"1\",\"grade_result\":\"P\",\"grade_division\":\"P/F\"},{\"year\":\"2011\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"교양세미나와글쓰기\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"웹어플리케이션구축\",\"score_result\":\"3\",\"grade_result\":\"D+\",\"grade_division\":\"등급\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"사전인턴십\",\"score_result\":\"1\",\"grade_result\":\"P\",\"grade_division\":\"P/F\"},{\"year\":\"2012\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"파이썬프로그래밍\",\"score_result\":\"3\",\"grade_result\":\"C0\",\"grade_division\":\"등급\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"기술창업\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터공학인턴십\",\"score_result\":\"3\",\"grade_result\":\"P\",\"grade_division\":\"P/F\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터공학인턴십(2)\",\"score_result\":\"3\",\"grade_result\":\"P\",\"grade_division\":\"P/F\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"융합캡스톤디자인)\",\"score_result\":\"3\",\"grade_result\":\"D+\",\"grade_division\":\"등급\"},{\"year\":\"2012\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"자료구조(1)\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2012\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"자료구조(2)\",\"score_result\":\"3\",\"grade_result\":\"C0\",\"grade_division\":\"등급\"},{\"year\":\"2014\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터공학창업현장실습(2)\",\"score_result\":\"3\",\"grade_result\":\"P\",\"grade_division\":\"P/F\"},{\"year\":\"2014\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터공학캡스톤디자인\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2013\",\"semester\":\"2\",\"lecture_no\":\"01\",\"lecture_name\":\"컴퓨터공학학기현장실습\",\"score_result\":\"15\",\"grade_result\":\"P\",\"grade_division\":\"P/F\"},{\"year\":\"2013\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"ICT학점연계프로젝트인턴십심화\",\"score_result\":\"15\",\"grade_result\":\"P\",\"grade_division\":\"P/F\"},{\"year\":\"2012\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"실시간시스템\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"},{\"year\":\"2012\",\"semester\":\"1\",\"lecture_no\":\"01\",\"lecture_name\":\"프로그래밍\",\"score_result\":\"3\",\"grade_result\":\"C+\",\"grade_division\":\"등급\"}],\"scoreStatisticList\":[{\"year\":\"2011\",\"semester\":\"1\",\"department\":\"컴퓨터공학전공\",\"completion_std_class\":\"1\",\"score_enrolled\":\"18\",\"scored_acquired\":\"18\",\"average_score\":\"3.1470588235\",\"ranking\":\"40\",\"people_count\":\"125\"},{\"year\":\"2012\",\"semester\":\"1\",\"department\":\"컴퓨터공학전공\",\"completion_std_class\":\"2\",\"score_enrolled\":\"18\",\"scored_acquired\":\"18\",\"average_score\":\"2.1666666666\",\"ranking\":\"31\",\"people_count\":\"125\"},{\"year\":\"2013\",\"semester\":\"1\",\"department\":\"컴퓨터공학전공\",\"completion_std_class\":\"3\",\"score_enrolled\":\"27\",\"scored_acquired\":\"27\",\"average_score\":\"2.8333333333\",\"ranking\":\"24\",\"people_count\":\"125\"},{\"year\":\"2014\",\"semester\":\"1\",\"department\":\"컴퓨터공학전공\",\"completion_std_class\":\"4\",\"score_enrolled\":\"19\",\"scored_acquired\":\"19\",\"average_score\":\"3.0000000000\",\"ranking\":\"13\",\"people_count\":\"125\"},{\"year\":\"2011\",\"semester\":\"2\",\"department\":\"컴퓨터공학전공\",\"completion_std_class\":\"1\",\"score_enrolled\":\"19\",\"scored_acquired\":\"19\",\"average_score\":\"3.2647058823\",\"ranking\":\"30\",\"people_count\":\"125\"},{\"year\":\"2012\",\"semester\":\"2\",\"department\":\"컴퓨터공학전공\",\"completion_std_class\":\"2\",\"score_enrolled\":\"18\",\"scored_acquired\":\"18\",\"average_score\":\"2.4166666666\",\"ranking\":\"23\",\"people_count\":\"125\"},{\"year\":\"2013\",\"semester\":\"2\",\"department\":\"컴퓨터공학전공\",\"completion_std_class\":\"3\",\"score_enrolled\":\"26\",\"scored_acquired\":\"26\",\"average_score\":\"2.0000000000\",\"ranking\":\"29\",\"people_count\":\"125\"},{\"year\":\"2014\",\"semester\":\"2\",\"department\":\"컴퓨터공학전공\",\"completion_std_class\":\"4\",\"score_enrolled\":\"18\",\"scored_acquired\":\"18\",\"average_score\":\"3.5000000000\",\"ranking\":\"6\",\"people_count\":\"125\"}]}",
+                    "hash":"960725ad6ceea19e8f27e18c3a3cc19556b6c3d059b47982b7469d45d60f7dc3",
+                    "txid":"bc2a6d2d583dc697851e62d91cc0bb887d83643a5d343ac9327a651930ef67b7",
+                    "subid":"RCOGC0011",
+                    "stored":"Y",
+                    "dftYn":"N"
+                }
+            ]
+        }
+    }
+    var rocords =  record.args.records;    
+
+    for(var i=0; i<rocords.length ; i++) {        
+        var subid = rocords[i].subid;        
+        try {            
+            setData(record.args.records[i]);           
+        }catch(exception) {
+            console.log(exception);
+            //continue;
+        }
+    }
+    refreshview(record.args.records);
 }
 
 function test_genrsakey() {

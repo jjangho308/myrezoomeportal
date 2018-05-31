@@ -143,7 +143,7 @@ $(document).ready(function(){
                         else if(subid=="RCLPT0005") {
                             category = "어학";
                         }
-                        else if(subid=="RCOGC0008" || subid=="RCOGC0009") {
+                        else if(subid=="RCOGC0008" || subid=="RCOGC0009" || subid=="RCOGC0010" || subid=="RCOGC0011") {
                             category = "학력";
                         }
 
@@ -275,9 +275,9 @@ $(document).ready(function(){
                 var reqcerts = {};
                 reqcerts.txid = id;
                 reqcerts.record = JSON.parse(sdata);
-
+                
                 console.log("cert req param");
-                console.log(id);
+                console.log(reqcerts);
                 $.ajax({
                     type: 'POST',
                     url: '/certs',

@@ -13,7 +13,17 @@ $(document).ready(function(){
 		$(".header").hide();
 		$("#footer").hide();
 
-		window.print();
+		const html = document.querySelector('html');
+        const printContents = document.querySelector('.main-body').innerHTML;
+        const printDiv = document.createElement("DIV");
+        printDiv.className = "print-div";
+        
+        html.appendChild(printDiv);
+        printDiv.innerHTML = printContents;
+        document.body.style.display = 'none';
+        window.print();
+        document.body.style.display = 'block';
+        printDiv.style.display = 'none';
 		
 		$(".header").show();
 		$("#footer").show();
@@ -25,13 +35,10 @@ function setResumeModel(_resumeModel) {
 }
 
 function setUserModel(_userModel) {
-	userModel = JSON.parse(_userModel);	
+	userModel = JSON.parse(_userModel);
 }
 
 function rendering() {
-	console.log(resumeModel);
-	console.log(userModel);
-
 	$("#resume_title").html(resumeModel.title);
 
 	$("#resume-user").children().eq(0).html(userModel.fullNameKO);
@@ -43,8 +50,8 @@ function rendering() {
 
 	var records = resumeModel.records;
 	for(var i in records) {
-		try {
-			var record = getData(records[i].txid);			
+		try {			
+			var record = getData(records[i].trxId);			
 			resumeformatter(record);
 		} catch (exception) {
 			console.log(exception);

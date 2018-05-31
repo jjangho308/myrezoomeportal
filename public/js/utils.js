@@ -49,6 +49,7 @@ function getCookie(cname) {
 
 function setData(record) {
     // dcript data
+    console.log(record.data);
     record.data = JSON.parse(record.data); 
 
     sessionStorage.setItem(record.txid, JSON.stringify(record));

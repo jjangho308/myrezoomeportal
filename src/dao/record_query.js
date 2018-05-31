@@ -16,6 +16,7 @@ export default {
     getByCodes : "SELECT ORG_QUEUE_NAME FROM TBL_ORG WHERE ORG_CD IN ( %s )",
     findAll : "SELECT ORG_QUEUE_NAME FROM TBL_ORG",
     putRecord : "INSERT INTO `rezoome_db`.`TCDA_BLC_MAP` (`BLC_MAP_ID`,`UID`, `TRX_ID`,`ORG_ID`, `SUB_ID`) VALUES ( ?, ? , ? , ?, ?)",
+    putRecordByGuest : "INSERT INTO `rezoome_db`.`TCDA_BLC_MAP_GUEST` (`BLC_MAP_ID`,`TRX_ID`,`ORG_ID`, `SUB_ID`) VALUES ( ?, ? , ?, ?)",
     set : '',
     del : '',
     getTxid : 'SELECT * FROM ' + BLC_MAP_TABLE + ' WHERE ?',

@@ -50,12 +50,10 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
             uId: request.uId,
             //수정 여부!
             status: request.resume.status,
-
             title: request.resume.title,
         });
 
         var bcIdList = [];
-
 
         for (var i in request.resume.data) {
             !((idx) => {
@@ -70,11 +68,9 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                             mapId: bcModelList[0].blcMapId
                         });
 
-                        // BC Map 완성이 되었으면 아래 로직으로 수행
                         if (bcIdList.length == request.resume.data.length) {
-
                             resumeModel.blcMap = JSON.stringify(bcIdList);
-                            // TODO 이력서의 txid가 한 column으로 되어 있는데 이걸 별도의 table로 가져가야 되는게 아닌가? 싶음
+                            
                             var resumeDAO = Managers.db().getResumeDAO();
                             resumeDAO.putResume(resumeModel, (err, insertId) => {                               
                                 if (!!err) {
@@ -90,25 +86,30 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                                             if(!!request.resume.data){
                                                 var cryptoManager = Managers.crypto();
 
+                                                var completedResume = 0;
                                                 for(var j in request.resume.data) {
                                                     !((idx) => {
                                                         var sharedResume = new SharedResumeModel({
                                                             uId: request.uId,
                                                             rsmId: resumeList[0].rsmId,
                                                             trxId: request.resume.data[idx].txid,
-                                                            data: JSON.stringify(request.resume.data[idx]),
+                                                            data: request.resume.data[idx],
                                                             deleted: false
                                                         });
                                                         
                                                         resumeDAO.putResumeRecords(sharedResume, (err, insertSharedId)=>{                                                           
                                                             if(!!err){
                                                                 cb(ClientRequest.RESULT_FAILURE, err);
-                                                            }else{                                                               
-                                                                cb(ClientRequest.RESULT_SUCCESS, {
-                                                                    rsmId: resumeList[0].rsmId,
-                                                                    txid: bcModelList[0].txid,
-                                                                    date: resumeList[0].createdDate
-                                                                });
+                                                            }else{      
+                                                                
+                                                                completedResume++;
+                                                                if(completedResume == request.resume.data.length) {
+                                                                    cb(ClientRequest.RESULT_SUCCESS, {
+                                                                        rsmId: resumeList[0].rsmId,
+                                                                        txid: bcModelList[0].txid,
+                                                                        date: resumeList[0].createdDate
+                                                                    });
+                                                                }                                                         
                                                             }        
                                                         });
                                                     })(j);                                                

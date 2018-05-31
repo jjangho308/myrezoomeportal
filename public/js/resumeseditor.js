@@ -100,8 +100,6 @@ function setUserModel(_userModel) {
 }
 
 function rendering() {
-	console.log(resumeModel);
-	console.log(userModel);
 
 	$("#resume_title").html(resumeModel.title);
 
@@ -114,9 +112,8 @@ function rendering() {
 
 	var records = resumeModel.records;
 	for(var i in records) {
-		try {
-			var record = getData(records[i].txid);	
-			console.log(record);		
+		try {           
+			var record = getData(records[i].trxId);	
 			resumeformatter(record);
 		} catch (exception) {
 			console.log(exception);

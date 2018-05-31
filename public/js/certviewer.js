@@ -6,7 +6,7 @@ $(document).ready(function(){
    
     $('#create-link-button').click(function(){
         $('.abc-radio label').css("color","#676767");
-        $("#cert-url-input").val("http://rezoome.io/d/20194011003A");
+        $("#cert-url-input").val("https://rezoome.io/d/20194011003A");
         $('.abc-radio .default-password-label').click();
         $('.abc-radio .default-period-label').click();
         
@@ -145,8 +145,8 @@ $(document).ready(function(){
     });
     
     
-    $("#more-button").click(function(){
-        console.log($("#more-button-div").css("display"));
+    $("#more-button").click(function(){             
+
         if($("#more-button-div").css("display")=="none"){
             $("#more-button-div").show();
         }else{
@@ -202,18 +202,42 @@ $(document).ready(function(){
     $('.confirm-btn').click(function(){
         summitform();     
     });
+
+    $("#btn_print").click(function() {	
+
+		$(".header").hide();
+        $("#footer").hide();
+        generateQRCode(); 
+        
+        setInterval(function(){
+            const html = document.querySelector('html');
+            const printContents = document.querySelector('.main-body').innerHTML;
+            const printDiv = document.createElement("DIV");
+            printDiv.className = "print-div";
+            
+            html.appendChild(printDiv);
+            printDiv.innerHTML = printContents;
+            document.body.style.display = 'none';
+            window.print();
+            document.body.style.display = 'block';
+            printDiv.style.display = 'none';
+
+            $(".header").show();
+            $("#footer").show();                                                           
+        }, 2000);        
+	});
 });
 
 function summitform() {
     var cert_id = window.location.href.split('/')[4];
-    var cert_url = $('#cert-url-input').val().split('/')[2];
+    var cert_url = $('#cert-url-input').val().split('/')[4];
     var cert_password = hexToBase64(SHA256($('#shared_password').val()));
     var cert_exp = 20501231;
     var cert_emails =[];
     var cert_msg;
     var cert_public = 'N';
 
-    if(cert_password == '' || cert_password == null) {
+    if($('#shared_password').val() == '' || $('#shared_password').val() == null) {
         var cert_public = 'Y';
     }
 
@@ -242,13 +266,42 @@ function summitform() {
     });
 }
 
-function setCertViewer(sub_id, tx_id) {
-    //alert("subid : " + sub_id + " / txid" + tx_id);
-
+function setCertViewer(sub_id, tx_id) {    
     var record = getData(tx_id);
+    console.log(record);
+    $(".cert-title").html("증명서");    
     certformatter[sub_id](record.data);
+}
 
+function generateQRCode(){
+    var options = {
+        render: "image", 
+        ecLevel: "H", // ERROR CORRECTION LEVEL
+        minVersion: 6,
 
+        fill: "#333333",
+        background: "#ffffff",
+        // fill: jq('#img-buffer')[0],
+
+        text: "https://dev.rezoome.io/v/cnvanRn",
+        size: 100,
+        radius: 0.5,
+        quiet: 1, // 흰색 여백, 숫자 높을수록 바깥 여백이 넓어지고 내용이 작아짐
+
+        mode: 2,
+
+        mSize: 0.15, // 글자 사이즈
+        mPosX: 0.5, // 글자 위치 x
+        mPosY: 0.5, // 글자 위치 y
+
+        label: "",
+        fontname: "Ubuntu",
+        fontcolor: "#ff9818",
+
+        //image: jq('#img-buffer')[0]
+    };
+
+    $('#qrcode').empty().qrcode(options);
 }
 
 function generateURL() {
@@ -268,7 +321,7 @@ function generateURL() {
             
         }),
         success: function (result) {
-            $("#cert-url-input").val(window.location.host + '/v/' + result.result);
+            $("#cert-url-input").val("https://" + window.location.host + '/v/' + result.result);
         },
         contentType: 'application/json'
     });
