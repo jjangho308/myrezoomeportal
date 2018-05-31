@@ -2,9 +2,7 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
 
 body{
-  font-family: 'Spoqa Han Sans';
-  
-      min-width: 1680px;
+  font-family: 'Spoqa Han Sans';  
 }
 
 a{
