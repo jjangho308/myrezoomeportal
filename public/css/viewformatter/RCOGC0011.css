@@ -36,16 +36,20 @@ table {
 .sungjuk_sector_1_div {
     border: 1px solid black;
     height: 620px;
+    border-left:0px;
 }
 
 .sungjuk_sector_2_div {
     border: 1px solid black;
     height: 620px;
+    border-left:0px;
 }
 
 .sungjuk_sector_3_div {
     border: 1px solid black;
     height: 620px;
+    border-left:0px;
+    border-right:0px;
 }
 
 .cert-reference-RCOGC0011 {
@@ -74,14 +78,21 @@ table {
 
 .persoinfodiv1 {
     border: 1px solid black;
+    border-left: 0px;
+    border-bottom:0px;
 }
 
 .persoinfodiv2 {
     border: 1px solid black;
+    border-left: 0px;
+    border-bottom:0px;
 }
 
 .persoinfodiv3 {
     border: 1px solid black;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom:0px;
 }
 
 .personinfo_name {
