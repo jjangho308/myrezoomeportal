@@ -16,6 +16,8 @@ $(document).ready(function(){
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
 
+    $('.spec-body-loading').show();
+    $('.spec-body-default').hide();
 
     // set event for element main page
     $('#header-mycert').click(function () {
