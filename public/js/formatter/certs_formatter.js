@@ -145,17 +145,20 @@ var certformatter= {
     },
 
     "RCOGC0010":function viewformatter(record_data) {
-        //계명대 졸업증명서        
-        var htmldiv = '<div>';
-            htmldiv = htmldiv + "<p>이름 : " +record_data.registList[0].name + '</p>';
-            htmldiv = htmldiv + "<p>생년월일 : " +record_data.registList[0].birth + '</p>';
-            htmldiv = htmldiv + "<p>대학 : " +record_data.registList.univ_name + '</p>';
-            htmldiv = htmldiv + "<p>소속 : " +record_data.registList[0].univ_affiliation + '</p>';
-            htmldiv = htmldiv + "<p>입학일자 : " +record_data.registList[0].admission_date + '</p>';
-            htmldiv = htmldiv + "<p>졸업일자 : " +record_data.registList[0].change_date + '</p>';
+        //계명대 졸업증명서   
+        $(".inner-container").load("../../viewhtml/RCOGC0010.html", function() {
+        
+        });     
+        // var htmldiv = '<div>';
+        //     htmldiv = htmldiv + "<p>이름 : " +record_data.registList[0].name + '</p>';
+        //     htmldiv = htmldiv + "<p>생년월일 : " +record_data.registList[0].birth + '</p>';
+        //     htmldiv = htmldiv + "<p>대학 : " +record_data.registList.univ_name + '</p>';
+        //     htmldiv = htmldiv + "<p>소속 : " +record_data.registList[0].univ_affiliation + '</p>';
+        //     htmldiv = htmldiv + "<p>입학일자 : " +record_data.registList[0].admission_date + '</p>';
+        //     htmldiv = htmldiv + "<p>졸업일자 : " +record_data.registList[0].change_date + '</p>';
             
-        htmldiv = htmldiv + '</div>';
-        $('#cert-body-div').append(htmldiv);
+        // htmldiv = htmldiv + '</div>';
+        // $('#cert-body-div').append(htmldiv);
     },
 
     "RCOGC0011":function viewformatter(record_data) {
