@@ -1,0 +1,13 @@
+.outer-container {
+    height: 2320px;
+}
+
+#opic_cert > img {
+    width: 100%; 
+    height: 100%;
+}
+
+#opic_report > img {
+    width: 100%; 
+    height: 100%;
+}
