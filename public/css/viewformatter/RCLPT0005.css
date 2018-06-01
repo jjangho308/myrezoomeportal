@@ -27,3 +27,14 @@
 @media (min-width:800px) and (max-width:839px){html{font-size:22px;}}
 @media (min-width:840px) and (max-width:879px){html{font-size:23px;}}
 @media (min-width:880px){html{font-size:10px;}}
+
+
+@media screen and (max-width: 1000px){
+	.inner-container{
+	    width: 345px;
+	    height: 450px;
+	    margin: 20px 15px 52px 15px;
+		background: white;
+		font-size:60%;
+    }
+}
