@@ -104,4 +104,12 @@ table {
     .personinfo_outter {
         font-size: 65%;
     }
+
+    .inner-container{
+	    width: 550px;
+	    height: 1000px;
+	    margin: 20px 15px 52px 15px;
+		background: white;
+		font-size:60%;
+	}
 }
