@@ -99,3 +99,9 @@ table {
     width:15%;
     text-align:right;
 }
+
+@media screen and (max-width: 1000px){
+    .personinfo_outter {
+        font-size: 65%;
+    }
+}
