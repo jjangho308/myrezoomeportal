@@ -117,10 +117,11 @@
 	}
 
 	.inner-container{
-	    width: 345px;
-	    height: 450px;
+	    width: 450px;
+	    height: 1000px;
 	    margin: 20px 15px 52px 15px;
-	    background: white;
+		background: white;
+		font-size:60%;
 	}
 
 	.cert-title{
