@@ -1,61 +1,53 @@
 var certformatter= { 
     
-    "RCLPT0005":function viewformatter(record_data) {     
-        //$(".inner-container").empty();             
-        //$(".outer-container").append($("<div></div>").addClass("inner-container"));
-        //$(".outer-container").append($("<p></p>").html("본 증명서는 레쥬메 서비스를 통해 인터넷으로 발급되었으며 우측 QR코드를 이용하여 증명서 내용의 진위여부를 확인할 수 있습니다."));
-        $(".outer-container").append($("<div></div>").addClass("inner-container2"));
-        $(".outer-container > p").css({"padding":"10px 25px 80px"});
-
-        $(".outer-container").css({"height":"2320px"})
-        var level = record_data.rating;
-        if(level == "NL") {
-            $(".inner-container").html($("<img src='/img/mycert/opic/cert/09_NL.jpg'>").css({"width":"100%", "height":"100%"}));
-            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up NL FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
-        } else if(level == "NM") {
-            $(".inner-container").html($("<img src='/img/mycert/opic/cert/08_NM.jpg'>").css({"width":"100%", "height":"100%"}));
-            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up NM FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
-        } else if(level == "NH") {
-            $(".inner-container").html($("<img src='/img/mycert/opic/cert/07_NH.jpg'>").css({"width":"100%", "height":"100%"}));
-            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up NH FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
-        } else if(level == "IL") {
-            $(".inner-container").html($("<img src='/img/mycert/opic/cert/06_IL.jpg'>").css({"width":"100%", "height":"100%"}));
-            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up IL FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
-        } else if(level == "IM1") {
-            $(".inner-container").html($("<img src='/img/mycert/opic/cert/05_IM_1.jpg'>").css({"width":"100%", "height":"100%"}));
-            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up IM1 FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
-        } else if(level == "IM2") {
-            $(".inner-container").html($("<img src='/img/mycert/opic/cert/04_IM_2.jpg'>").css({"width":"100%", "height":"100%"}));
-            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up IM2 FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
-        } else if(level == "IM3") {
-            $(".inner-container").html($("<img src='/img/mycert/opic/cert/03_IM_3.jpg'>").css({"width":"100%", "height":"100%"}));
-            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up IM3 FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
-        } else if(level == "IH") {
-            $(".inner-container").html($("<img src='/img/mycert/opic/cert/02_IH.jpg'>").css({"width":"100%", "height":"100%"}));
-            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up IH FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
-        } else if(level == "AL") {
-            $(".inner-container").html($("<img src='/img/mycert/opic/cert/01_AL.jpg'>").css({"width":"100%", "height":"100%"}));
-            $(".inner-container2").html($("<img src='/img/mycert/opic/report/Score Report OPIc Mock-up AL FINAL.jpg'>").css({"width":"100%", "height":"100%"}));
-        }    
+    "RCLPT0005":function viewformatter(record_data) {
         
-        $(".inner-container").append($("<div></div>").addClass("qrcode").attr("id", "qrcode"));
-        
-        $(".inner-container").append($("<p>인증서번호 : 2323IERSDVL239SDKSDF</p>").css({"position":"absolute", "top":"-25px","left":"0px", "font-szie":"20px", "font-weight":"bold", "font-size":"11px"}));
-        $(".inner-container").append($("<p>"+ record_data.cname +"</p>").css({"position":"absolute", "top":"130px","left":"405px", "font-szie":"20px", "font-weight":"bold"}));
-        $(".inner-container").append($("<p>"+ record_data.examid +"</p>").css({"position":"absolute", "top":"200px","left":"215px"}));
-        $(".inner-container").append($("<p>"+ record_data.birthday +"</p>").css({"position":"absolute", "top":"200px","left":"350px"}));
-        $(".inner-container").append($("<p>"+ record_data.ctestday +"</p>").css({"position":"absolute", "top":"200px","left":"485px"}));
-        $(".inner-container").append($("<p>"+ record_data.testtype +"</p>").css({"position":"absolute", "top":"200px","left":"620px"}));
-        $(".inner-container").append($("<p>"+ record_data.clevel + "</p>").css({"position":"absolute", "top":"305px","left":"400px"}));
+        $(".outer-container").load("../../viewhtml/RCLPT0005.html", function() {
+            var level = record_data.rating;
+            if(level == "NL") {
+                $("#opic_cert img").attr("src", "/img/mycert/opic/cert/09_NL.jpg");
+                $("#opic_report img").attr("src", "/img/mycert/opic/report/Score Report OPIc Mock-up NL FINAL.jpg");                
+            } else if(level == "NM") {
+                $("#opic_cert img").attr("src", "/img/mycert/opic/cert/08_NM.jpg");
+                $("#opic_report img").attr("src", "/img/mycert/opic/report/Score Report OPIc Mock-up NM FINAL.jpg");                
+            } else if(level == "NH") {
+                $("#opic_cert img").attr("src", "/img/mycert/opic/cert/07_NH.jpg");
+                $("#opic_report img").attr("src", "/img/mycert/opic/report/Score Report OPIc Mock-up NH FINAL.jpg");
+            } else if(level == "IL") {
+                $("#opic_cert img").attr("src", "/img/mycert/opic/cert/06_IL.jpg");
+                $("#opic_report img").attr("src", "/img/mycert/opic/report/Score Report OPIc Mock-up IL FINAL.jpg");
+            } else if(level == "IM1") {
+                $("#opic_cert img").attr("src", "/img/mycert/opic/cert/05_IM_1.jpg");
+                $("#opic_report img").attr("src", "/img/mycert/opic/report/Score Report OPIc Mock-up IM1 FINAL.jpg");
+            } else if(level == "IM2") {
+                $("#opic_cert img").attr("src", "/img/mycert/opic/cert/04_IM_2.jpg");
+                $("#opic_report img").attr("src", "/img/mycert/opic/report/Score Report OPIc Mock-up IM2 FINAL.jpg");
+            } else if(level == "IM3") {
+                $("#opic_cert img").attr("src", "/img/mycert/opic/cert/03_IM_3.jpg");
+                $("#opic_report img").attr("src", "/img/mycert/opic/report/Score Report OPIc Mock-up IM3 FINAL.jpg");
+            } else if(level == "IH") {
+                $("#opic_cert img").attr("src", "/img/mycert/opic/cert/02_IH.jpg");
+                $("#opic_report img").attr("src", "/img/mycert/opic/report/Score Report OPIc Mock-up IH FINAL.jpg");
+            } else if(level == "AL") {
+                $("#opic_cert img").attr("src", "/img/mycert/opic/cert/01_AL.jpg");
+                $("#opic_report img").attr("src", "/img/mycert/opic/report/Score Report OPIc Mock-up AL FINAL.jpg");
+            }
 
-        $(".inner-container").append($("<p>"+ record_data.cissudate +"</p>").css({"position":"absolute", "top":"460px","left":"550px"}));
-        $(".inner-container").append($("<p>"+ record_data.useend +"</p>").css({"position":"absolute", "top":"460px","left":"675px"}));
+            $("#opic_cert").children('p').eq(0).html("인증서번호 : 2323IERSDVL239SDKSDF");
+            $("#opic_cert").children('p').eq(1).html(record_data.cname);
+            $("#opic_cert").children('p').eq(2).html(record_data.examid);
+            $("#opic_cert").children('p').eq(3).html(record_data.birthday);
+            $("#opic_cert").children('p').eq(4).html(record_data.ctestday);
+            $("#opic_cert").children('p').eq(5).html(record_data.testtype);
+            $("#opic_cert").children('p').eq(6).html(record_data.clevel);
+            $("#opic_cert").children('p').eq(7).html(record_data.cissudate);
+            $("#opic_cert").children('p').eq(8).html(record_data.useend);
 
-        $(".inner-container2").append($("<p>"+ record_data.ename +"</p>").css({"position":"absolute", "top":"170px","left":"230px","font-size":"15px"}));
-        $(".inner-container2").append($("<p>"+ record_data.language +"</p>").css({"position":"absolute", "top":"200px","left":"230px","font-size":"15px"}));
-        $(".inner-container2").append($("<p>"+ record_data.testdate +"</p>").css({"position":"absolute", "top":"230px","left":"230px","font-size":"15px"}));
-        $(".inner-container2").append($("<p>"+ record_data.examid +"</p>").css({"position":"absolute", "top":"265px","left":"230px","font-size":"15px"}));        
-
+            $("#opic_report").children('p').eq(0).html(record_data.ename);
+            $("#opic_report").children('p').eq(1).html(record_data.language);
+            $("#opic_report").children('p').eq(2).html(record_data.testdate);
+            $("#opic_report").children('p').eq(3).html(record_data.examid);
+        });
     },
 
     "RCCNF0001":function viewformatter(record_data) {
