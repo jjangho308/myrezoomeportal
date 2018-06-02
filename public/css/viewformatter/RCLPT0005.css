@@ -33,11 +33,17 @@
 	.inner-container{
 	    width: 345px;
 	    height: 450px;
-	    margin: 20px 15px 52px 15px;
+        /*margin: 20px 15px 52px 15px;*/
+        margin: auto;
 		background: white;		
     }
 
     .outer-container {
         height: 1000px;
+    }
+
+    #qrmessage {
+        content: "";
+        visibility: hidden;
     }
 }
