@@ -14,7 +14,7 @@ class User extends AbstractModel {
      * @since
      * @param {*} data 
      */
-    constructor(data) {        
+    constructor(data) {
         super(data);
 
         this.sId = data.sId;
@@ -94,7 +94,7 @@ class User extends AbstractModel {
             status: row.STS_CD,
             first: row.FRST_YN,
             imgsrc: row.IMG_PATH,
-            bcWalletAddr : row.BC_WALLET_ADDR,
+            bcWalletAddr: row.BC_WALLET_ADDR,
             created: row.CRTD_DT,
             modified: row.MDFID_DT
         });
@@ -124,9 +124,10 @@ class User extends AbstractModel {
             PHN_NUM: this.phone,
             CARRIER_NM: this.carrierName,
             MCC: this.mcc,
-            BC_WALLET_ADDR : this.bcWalletAddr,
+            BC_WALLET_ADDR: this.bcWalletAddr,
             CNTY_CD: this.country,
-            CNTY_CD_AREA: this.area
+            CNTY_CD_AREA: this.area,
+            STS_CD: this.status
         };
 
         return this.trim(row);

@@ -43,13 +43,12 @@ var defaultController = {
                             status: user.status == 'L' ? 1 : 2
                         };
                     });
-                    res.send({
-                        result: result
-                    });
+                    res.send(result);
                 }
             });
         }
     },
+
     /**
      * Lite sign up with phone number
      * 
@@ -76,14 +75,14 @@ var defaultController = {
         // 가볍게 sign up 하는 기능
         // 임시 패스워드를 발급하여 가입을 시킴
 
-
         var phone = req.body.phone;
         if (!phone) {
             // TODO Invalid parameter exception
         } else {
             Managers.db().getUserDAO().put(new UserModel({
                 phone: phone,
-                pw: Util.sha256(Util.randomStr(8))
+                pw: Util.sha256(Util.randomStr(8)),
+                status : 'L'
             }), (err, insertId) => {
                 if (!!err) {
                     next(err);
