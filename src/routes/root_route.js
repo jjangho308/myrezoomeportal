@@ -11,8 +11,8 @@ import intro_router from './intro_route';
 import shared_certs_router from './shared_certs_route';
 import shared_resumes_router from './shared_resumes_route';
 import verify_router from './verify_route';
-import api_router from './api_route';
-import oauth_router from './oauth_route';
+import api_router from './api/api_route';
+import oauth_router from './oauth/oauth_route';
 
 /**
  * Root router of all http request channel. <br />

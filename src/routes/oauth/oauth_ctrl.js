@@ -1,9 +1,9 @@
-import Managers from '../core/managers';
-import UserDao from '../dao/user_dao';
+import Managers from '../../core/managers';
+import UserDao from '../../dao/user_dao';
 
-import UserModel from '../models/user/user';
+import UserModel from '../../models/user/user';
 
-import Util from '../util/util';
+import Util from '../../util/util';
 
 /**
  * Controller for '/oauth2' URI. <br />`
