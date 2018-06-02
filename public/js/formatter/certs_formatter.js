@@ -35,8 +35,6 @@ var certformatter= {
 
             var width = $("#opic_cert").css("width");
 
-            
-
             $("#opic_cert").children('p').eq(0).html("인증서번호 : 2323IERSDVL239SDKSDF");
             $("#opic_cert").children('p').eq(1).html(record_data.cname);
             $("#opic_cert").children('p').eq(2).html(record_data.examid);
@@ -51,9 +49,6 @@ var certformatter= {
             $("#opic_report").children('p').eq(1).html(record_data.language);
             $("#opic_report").children('p').eq(2).html(record_data.testdate);
             $("#opic_report").children('p').eq(3).html(record_data.examid);
-
-            
-            
         });
     },
 
