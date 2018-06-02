@@ -69,14 +69,14 @@
         padding: 10px 25px;
     }
 
-    #opic_cert p:nth-child(2) {position: absolute; top: 12.5%; left: 47.5%; font-weight: bold;}
-    #opic_cert p:nth-child(3) {position: absolute; top: 18.5%; left: 26% }
-    #opic_cert p:nth-child(4) {position: absolute; top: 18.5%; left: 42.5% }
-    #opic_cert p:nth-child(5) {position: absolute; top: 18.5%; left: 59% }
-    #opic_cert p:nth-child(6) {position: absolute; top: 18.5%; left: 75.5% }
-    #opic_cert p:nth-child(7) {position: absolute; top: 27%; left: 49% }
-    #opic_cert p:nth-child(8) {position: absolute; top: 39.5%; left: 66% }
-    #opic_cert p:nth-child(9) {position: absolute; top: 39.5%; left: 81% }
+    #opic_cert p:nth-child(2) {position: absolute; top: 13.5%; left: 47.5%; font-weight: bold;}
+    #opic_cert p:nth-child(3) {position: absolute; top: 20%; left: 26% }
+    #opic_cert p:nth-child(4) {position: absolute; top: 20%; left: 42.5% }
+    #opic_cert p:nth-child(5) {position: absolute; top: 20%; left: 59% }
+    #opic_cert p:nth-child(6) {position: absolute; top: 20%; left: 75.5% }
+    #opic_cert p:nth-child(7) {position: absolute; top: 28%; left: 49% }
+    #opic_cert p:nth-child(8) {position: absolute; top: 41%; left: 66% }
+    #opic_cert p:nth-child(9) {position: absolute; top: 41%; left: 81% }
 
     #opic_report p:nth-child(2) {position: absolute; top: 13.5%; left: 27.5% }
     #opic_report p:nth-child(3) {position: absolute; top: 16%; left: 27.5% }
