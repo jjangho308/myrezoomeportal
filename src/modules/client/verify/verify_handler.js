@@ -84,7 +84,13 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                 else {
                                     //err differnt hash data and stored cert data
                                     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!Hash Different!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                                    done(ClientRequest.RESULT_FAILURE, err);
+                                    var verifyData = {
+                                        encrypted: false,
+                                        iv: encodedIV,
+                                        data: "관리자에게 문의하시오"
+                                    };
+                                    
+                                    done(ClientRequest.RESULT_SUCCESS, verifyData);
                                 }
                             });
                             console.log("==============================================================");

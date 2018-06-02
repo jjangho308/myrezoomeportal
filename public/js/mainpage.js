@@ -16,6 +16,8 @@ $(document).ready(function(){
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
 
+    $('.spec-body-loading').show();
+    $('.spec-body-default').hide();
 
     // set event for element main page
     $('#header-mycert').click(function () {
@@ -550,11 +552,11 @@ function change_default_cert(subid) {
                 htmldiv = htmldiv + '<label for=change_cert_'+ record.txid +'></label>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</td>';
-                htmldiv = htmldiv + '<td>' + formatDate(jsonData.date) +'</td>';
+                htmldiv = htmldiv + '<td>' + formatDate(jsonData.ctestday) +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.userid +'</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.name +'</td>';
                 htmldiv = htmldiv + '<td>' + dftYn +'</td>';
-                htmldiv = htmldiv + '<td>' + jsonData.grade +'</td>';
+                htmldiv = htmldiv + '<td>' + jsonData.rating +'</td>';
                 htmldiv = htmldiv + '<td></td>';
                 htmldiv = htmldiv + '</tr>';            
                 $("#spec-change-table").append(htmldiv);

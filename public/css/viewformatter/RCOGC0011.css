@@ -1,0 +1,115 @@
+table {
+    /* border: 1px solid black; */
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.personinfo1 {
+    width: 100%;
+}
+
+.cert_doc_id {
+
+}
+
+.cert_title {
+    width:100%;
+    text-align: center;
+}
+
+.sector_col_name {
+    border-bottom: 1px solid black;
+}
+
+.sungjuk_sector_1 {
+    border: 0px;
+}
+
+.sungjuk_sector_2 {
+    border: 0px;
+}
+
+.sungjuk_sector_3 {
+    border: 0px;
+}
+
+.sungjuk_sector_1_div {
+    border: 1px solid black;
+    height: 100%;
+    border-left:0px;
+}
+
+.sungjuk_sector_2_div {
+    border: 1px solid black;
+    height: 100%;
+    border-left:0px;
+}
+
+.sungjuk_sector_3_div {
+    border: 1px solid black;
+    height: 100%;
+    border-left:0px;
+    border-right:0px;
+}
+
+.cert-reference-default {
+    font-family: 'Nanum Myeongjo';
+    font-size: 34px;
+    font-weight: bold;
+    letter-spacing: 30px;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+    margin: 60px 0px 0px 0px;
+}
+
+.cert-footer-default {
+    position: relative;
+    font-family: 'Nanum Myeongjo';
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 10px;
+    text-align: center;
+    margin: 50px 0px 0px 0px;
+    width: 100%;
+}
+
+.persoinfodiv1 {
+    border: 1px solid black;
+    border-left: 0px;
+    border-bottom:0px;
+}
+
+.persoinfodiv2 {
+    border: 1px solid black;
+    border-left: 0px;
+    border-bottom:0px;
+}
+
+.persoinfodiv3 {
+    border: 1px solid black;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom:0px;
+}
+
+.personinfo_name {
+    width:15%;
+    text-align:right;
+}
+
+@media screen and (max-width: 1000px){
+    .personinfo_outter {
+        font-size: 65%;
+    }
+
+    .inner-container{
+	    width: 550px;
+	    height: 1000px;
+	    margin: 20px 15px 52px 15px;
+		background: white;
+		font-size:60%;
+	}
+}

@@ -42,7 +42,7 @@ class ApiHandler extends AbstractApiRequestHandler {
         var recordDAO = Managers.db().getRecordDAO();
 
         var nexledgerService = Managers.nex();
-        var user_bc_wallet_addr = "1E1TZd4Uh1NSvyRy9oKuL78VSrp3A9RXuG"; // need to guest wallet address        
+        var user_bc_wallet_addr = ""; // need to guest wallet address        
         var nexledgerPromises = [];
 
         Util.sha256(JSON.stringify(certInfo), (hashed) => {            

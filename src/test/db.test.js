@@ -144,7 +144,7 @@ describe.skip('Blockchain test suit', () => {
 })
 
 describe('MySQL test suit', () => {
-    var db = Managers.db();
+    //var db = Managers.db();
     before('DB module initialize', () => {
         initializer();
     });
@@ -168,30 +168,49 @@ describe('MySQL test suit', () => {
         //     })
         // });
 
-        var plain = "test";
-        var passcode = "testpasscode";
-        Util.sha256(passcode, (hashed) =>{
-            console.log(hashed);
-            var crypto = Managers.crypto();
-            crypto.encryptAES(plain, hashed, (err, encodedIV, encryptedData) => {
-                if (!!err) {
-                    console.log(err);
-                } else {
-                    var verifyData = {
-                        encrypted: true,
-                        iv: encodedIV,
-                        data: encryptedData
-                    };
-                    console.log(verifyData);
-                                        
-                    crypto.decryptAES(encryptedData, hashed, encodedIV, (err, decryptedData) => {
-                        console.log(decryptedData);
-                    });
-                    
-                    done(ClientRequest.RESULT_SUCCESS, verifyData);
-                }
-            });
+        var msgString = "KCuYKAmztvm1uDdklhI/Xz+aGZe6V3ATg1eBty+01ZMoX+PBejI1QJOe25ju3HM3dpgvHaVMuvzzmVU9Ytub1Q==";        
+        var crypto = Managers.crypto();
+        crypto.generateAESKey((err, aesKey) => {
+            if (!!err) {
+                console.log(err);
+            } else {
+                crypto.encryptAES(msgString, aesKey, (err, encodedIV, encryptedMsg) => {
+                    if (!!err) {
+                        console.log(err);
+                    } else {
+                        crypto.decryptAES(encryptedMsg, aesKey, encodedIV, (err, decryptedData) => {
+                            console.log(decryptedData);
+                        });                                             
+                    }
+                });
+            }
         });
+   
+
+        // var plain = "test";
+        // var passcode = "testpasscode";
+        // Util.sha256(passcode, (hashed) =>{
+        //     console.log(hashed);
+        //     var crypto = Managers.crypto();
+        //     crypto.encryptAES(plain, hashed, (err, encodedIV, encryptedData) => {
+        //         if (!!err) {
+        //             console.log(err);
+        //         } else {
+        //             var verifyData = {
+        //                 encrypted: true,
+        //                 iv: encodedIV,
+        //                 data: encryptedData
+        //             };
+        //             console.log(verifyData);
+                                        
+        //             crypto.decryptAES(encryptedData, hashed, encodedIV, (err, decryptedData) => {
+        //                 console.log(decryptedData);
+        //             });
+                    
+        //             done(ClientRequest.RESULT_SUCCESS, verifyData);
+        //         }
+        //     });
+        // });
 
         // var shareModel = { 
         //     txId: 'bf14acbc2cd790a5b0bcbbcf5246c85d4388676e748098402a1aad42663ca8f4',

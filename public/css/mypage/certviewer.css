@@ -140,8 +140,8 @@ p{
 
 .outer-container{
     margin: auto;
-  width: 870px;
-  height: 1230px;
+  width: 46%;
+  height: 100%;
   background-color: #ffffff;
   padding-top: 27px;
     
@@ -153,14 +153,22 @@ p{
   color: #676767;
   padding: 11px 24px;
 }
-.inner-container{
+
+.inner-container {
+  margin: auto;
+  position: relative;
+  width: 95%;
+  height: 1095px;
+  border: solid 2px #2b2c2c;    
+}
+
+.inner-container2 {
     margin: auto;
     position: relative;
-  width: 820px;
-  height: 1095px;
-  border: solid 2px #2b2c2c;
-    
-}
+    width: 820px;
+    height: 1095px;
+    border: solid 2px #2b2c2c;    
+  }
 
 .cert-title{
   width:100%;

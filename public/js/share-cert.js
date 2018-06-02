@@ -54,7 +54,7 @@ function verify(passcode) {
 				$(`#circle-${current_active}`).css("background-color","#dadada");
 				current_active += 1;
 				
-				if(current_active > 5){
+				if(current_active > 2){
 					current_active = 0;
 					$("#cert-verify").css("display", "none");
 					$("#cert-viewer").css("display", "block");
