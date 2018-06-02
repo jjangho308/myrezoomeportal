@@ -32,18 +32,18 @@
 @media screen and (max-width: 1000px){
 	.inner-container{
 	    width: 345px;
-	    height: 450px;
-        /*margin: 20px 15px 52px 15px;*/
+	    height: 450px;       
         margin: auto;
 		background: white;		
     }
 
     .outer-container {
-        height: 1000px;
+        height: 950px;
     }
 
     #qrmessage {
         content: "";
         visibility: hidden;
+        padding: 10px 25px;
     }
 }
