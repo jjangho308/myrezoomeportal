@@ -4,14 +4,14 @@
  * @since 180602
  * @author TACKSU
  */
-((window) => {
-    const ENV_LOC = 0,
+!function (_w) {
+    var ENV_LOC = 0,
         ENV_DEV = 1,
         ENV_PRO = 2;
 
     var ENVIRONMENT = ENV_LOC;
 
-    const HOST_LOCAL = 'http://localhost:3000',
+    var HOST_LOCAL = 'http://localhost:3000',
         HOST_DEV = 'https://dev.rezoome.io',
         HOST_PRO = 'https://rezoome.io';
 
@@ -57,7 +57,7 @@
             var signInBtn = document.createElement('button');
             signInBtn.innerHTML = 'Rezoome Sign In';
             signInBtn.addEventListener('click', function (event) {
-                window.addEventListener('message', function (postMsg) {
+                _w.addEventListener('message', function (postMsg) {
                     doneCallback({
                         refreshToken: postMsg.data.refreshToken,
                         accessToken: postMsg.data.accessToken
@@ -65,7 +65,7 @@
                 }, false);
 
                 // Open auth page
-                window.open(HOST_DOMAIN + '/oauth2/auth'
+                _w.open(HOST_DOMAIN + '/oauth2/auth'
                     + '?client_id=' + clientId
                     + '&client_secret=' + clientSecret
                     + 'redirect_uri=' + redirectUri,
@@ -93,7 +93,7 @@
 
             };
 
-            window.addEventListener("message", function (postMsg) {
+            _w.addEventListener("message", function (postMsg) {
                 if (!!postMsg.data.result && postMsg.data.result === true) {
                     doneCallback({
                         refreshToken: postMsg.data.refreshToken,
@@ -106,7 +106,7 @@
             }, false);
 
             // Open auth page
-            window.open(HOST_DOMAIN + '/oauth2/auth'
+            _w.open(HOST_DOMAIN + '/oauth2/auth'
                 + '?client_id=' + clientId
                 + '&client_secret=' + clientSecret
                 + 'redirect_uri=' + redirectUri,
@@ -115,6 +115,6 @@
         }
     }
 
-    window.RZM = window.RZM || rezoomeSDK;
-    window.Rezoome = window.Rezoome || rezoomeSDK;
-})(window);
+    _w.RZM = _w.RZM || rezoomeSDK;
+    _w.Rezoome = _w.Rezoome || rezoomeSDK;
+}(window);
