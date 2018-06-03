@@ -49,7 +49,7 @@
     const AJAX_URL = '/oauth2';
     var state = <%= state || "null" %>,
         redirectUri = <%= redirect_uri || "null" %>,
-        responseType = <%= response_type || "null" %>;
+            responseType = <%= response_type || "null" %>;
 
     /**
      * If user is existed.
@@ -108,7 +108,7 @@
                                     }
                             }
                         },
-                        failue: err => {
+                        failure: err => {
                             alert(err);
                         }
                     });

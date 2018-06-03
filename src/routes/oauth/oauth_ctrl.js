@@ -166,7 +166,8 @@ var defaultController = {
         }
 
         res.render('oauth/auth', {
-            client_name: "클라이언트 이름",
+            // TODO Change to real client name
+            client_name: "매경 TEST",
             response_type: responseType,
             state: state,
             redirect_uri: redirectUri
