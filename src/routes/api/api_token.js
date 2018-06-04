@@ -1,6 +1,5 @@
-import Managers from '../core/managers';
-
-import Env from '../core/environment';
+import Managers from '../../core/managers';
+import Env from '../../core/environment';
 
 /**
  * API Access token extractor. <br />

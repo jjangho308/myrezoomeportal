@@ -4,7 +4,7 @@
  * @since 180602
  * @author TACKSU
  */
-!function (w) {
+! function (w) {
     var ENV_LOC = 0,
         ENV_DEV = 1,
         ENV_PRO = 2;

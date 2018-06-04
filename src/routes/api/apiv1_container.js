@@ -13,6 +13,13 @@ export default {
      * @author TACKSU
      */
     'issuecert': (req, res, next) => {
-        var token = req.params.token
+        // Access token for API.
+        var accessToken = req.body.accessToken;
+
+        // Access granted user Id.
+        var uId = req.body.uId;
+
+        // Raw data of Client server
+        var data = req.body.data;
     }
 }
