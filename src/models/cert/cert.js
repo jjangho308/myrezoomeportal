@@ -31,7 +31,7 @@ class CertModel extends AbstractModel {
         this.created = data.created;
         this.modified = data.modified;
         this.deleted = data.deleted;
-        this.encryptedData=data.encryptedData;
+        this.encryptedData = data.encryptedData;
         this.trim(this);
     }
 
@@ -87,7 +87,7 @@ class CertModel extends AbstractModel {
             LST_SHRD_DT: obj.lastShared,
             CRTD_DT: obj.created,
             MDFID_DT: obj.modified,
-            ENC_CERT_DATA:obj.encryptedData
+            ENC_CERT_DATA: obj.encryptedData
         })
     }
 }

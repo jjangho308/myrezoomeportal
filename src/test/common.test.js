@@ -4,6 +4,8 @@ import managers from '../core/managers';
 
 import Cluster from 'cluster';
 
+import jsonminify from 'jsonminify'
+
 /**
  * Instance test suit. <br />
  * 
@@ -14,6 +16,17 @@ describe('Instant test suit', () => {
     before('Instant test init', () => {
         process.env.NODE_ENV = 'development';
     })
+
+    it('JSON minify test', () => {
+        console.log(jsonminify(JSON.stringify({
+            value: 'asdfasdf',
+
+            minias: 'elkjsfkef',
+
+            weklifajsld: 'euiehvakuil sdf'
+        })));
+        assert(true);
+    });
 
     it.skip('Initialize managers', () => {
         managers.property().init();
@@ -44,17 +57,17 @@ describe('Instant test suit', () => {
         });
     });
 
-    it('for each promise test', done => {
+    it.skip('for each promise test', done => {
         var array = [1, 2, 3, 4, 5];
         var promiseList = [];
         array.forEach((item, index, array) => {
             promiseList.push(new Promise((resolved, rejected) => {
-                
+
                 setTimeout((result) => {
                     console.log("Result : " + result);
                     resolved(result);
                 }, 1000 * index, true);
-                
+
             }).then(result => {
                 console.log(result);
                 return 'complete';

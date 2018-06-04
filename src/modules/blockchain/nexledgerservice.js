@@ -92,7 +92,6 @@ class NexledgerService extends AbstractManager {
             // console.log("==============================================");
             callback(body);
         });
-
     }
 
     /**

@@ -1,7 +1,7 @@
 import Managers from '../../core/managers'
 import ApiRequest from '../../modules/api/common/api_request'
 
-import v1Container from './api_container';
+import v1Container from './apiv1_container';
 
 /**
  * Controller function for '/api' Router.
@@ -18,6 +18,16 @@ var apiController = (req, res, next) => {
             err: {
                 code: 200,
                 msg: 'API command is null'
+            }
+        });
+    }
+
+    // API Version이 맞지 않은 경우
+    if (!apiController[version]) {
+        next({
+            err: {
+                code: 200,
+                msg: 'API version is not valid'
             }
         });
     }
