@@ -4,7 +4,7 @@
  * @since 180602
  * @author TACKSU
  */
-!function (_w) {
+! function (_w) {
     var ENV_LOC = 0,
         ENV_DEV = 1,
         ENV_PRO = 2;
@@ -65,10 +65,10 @@
                 }, false);
 
                 // Open auth page
-                _w.open(HOST_DOMAIN + '/oauth2/auth'
-                    + '?client_id=' + clientId
-                    + '&client_secret=' + clientSecret
-                    + 'redirect_uri=' + redirectUri,
+                _w.open(HOST_DOMAIN + '/oauth2/auth' +
+                    '?client_id=' + clientId +
+                    '&client_secret=' + clientSecret +
+                    'redirect_uri=' + redirectUri,
                     'auth_pop',
                     'top=200, left=200, width=400, height=500');
             }, false);
@@ -106,10 +106,10 @@
             }, false);
 
             // Open auth page
-            _w.open(HOST_DOMAIN + '/oauth2/auth'
-                + '?client_id=' + clientId
-                + '&client_secret=' + clientSecret
-                + 'redirect_uri=' + redirectUri,
+            _w.open(HOST_DOMAIN + '/oauth2/auth' +
+                '?client_id=' + clientId +
+                '&client_secret=' + clientSecret +
+                'redirect_uri=' + redirectUri,
                 'auth_pop',
                 'top=200, left=200, width=400, height=500');
         }

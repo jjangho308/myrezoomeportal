@@ -15,7 +15,8 @@
         clientId: 'P123123',
         clientSecret: 'asdfasdf123',
         done: function (res) {
-            alert(res);
+            console.log('AccessToken : ' + res.accessToken);
+            console.log('RefreshToken : ' + res.refreshToken);
         },
         fail: function (err) {
             alert(err);
