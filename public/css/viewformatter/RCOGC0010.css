@@ -15,6 +15,8 @@ table {
 .cert_title {
     width:100%;
     text-align: center;
+    font-family: 'Spoqa Han Sans';
+    font-size:48px;
 }
 
 .sector_col_name {
@@ -60,9 +62,9 @@ table {
     text-align: center;
     position: relative;
     width: 100%;
-    text-align: center;
     z-index: 1;
     margin: 60px 0px 0px 0px;
+    bottom:-185px;
 }
 
 .cert-footer-default {
@@ -74,6 +76,15 @@ table {
     text-align: center;
     margin: 50px 0px 0px 0px;
     width: 100%;
+    bottom:-185px;
+}
+
+.cert-body-default {
+    height: 50%;
+    position: relative;
+    left:10%;
+    top:20px;
+    font-family: 'Spoqa Han Sans';
 }
 
 .persoinfodiv1 {
@@ -98,6 +109,21 @@ table {
 .personinfo_name {
     width:87px;
     text-align:right;
+}
+
+.two-interval {
+    width: 91px;
+    display: inline-block;
+}
+
+.four-interval {
+    width:21px;
+    display: inline-block;
+}
+
+.body-line {
+    height: 60px;
+    font-size:20px;
 }
 
 @media screen and (max-width: 1000px){
