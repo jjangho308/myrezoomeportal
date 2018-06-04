@@ -68,7 +68,7 @@
                 _w.open(HOST_DOMAIN + '/oauth2/auth' +
                     '?client_id=' + clientId +
                     '&client_secret=' + clientSecret +
-                    'redirect_uri=' + redirectUri,
+                    '&redirect_uri=' + redirectUri,
                     'auth_pop',
                     'top=200, left=200, width=400, height=500');
             }, false);
@@ -109,7 +109,7 @@
             _w.open(HOST_DOMAIN + '/oauth2/auth' +
                 '?client_id=' + clientId +
                 '&client_secret=' + clientSecret +
-                'redirect_uri=' + redirectUri,
+                '&redirect_uri=' + redirectUri,
                 'auth_pop',
                 'top=200, left=200, width=400, height=500');
         }
