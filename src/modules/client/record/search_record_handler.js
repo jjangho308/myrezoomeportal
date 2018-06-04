@@ -39,7 +39,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
      * 응답을 push함. <br />
      * 
      * @param {SearchRecordRequestEntity} clientRequestEntity RequestEntity
-     * @param {functions(object, object)} done Callback of ClientRequestManager.
+     * @param {Function(object, object)} done Callback of ClientRequestManager.
      * 
      */
     request(clientRequestEntity, done) {
@@ -243,7 +243,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                             storedData.forEach((storedDataItem, storedDataIdx) => {
 
                                                                 defferedStoredDataPromises.push(new Promise((resolve, reject) => {
-                                                                        nexledgerService.getbytxid(null,storedDataItem.TRX_ID, (res) => {
+                                                                        nexledgerService.getbytxid(null, storedDataItem.TRX_ID, (res) => {
                                                                             resolve(res);
                                                                         });
                                                                     })
@@ -456,7 +456,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                 if (recordsItem.stored == 'N') {
                     console.log('to Store : ' + recordsItem.hash);
                     nexledgerPromises.push(new Promise((resolve, reject) => {
-                        console.log('Each promise : ' + recordsItem.hash);
+                            console.log('Each promise : ' + recordsItem.hash);
                             var data = {
                                 hash: recordsItem.hash
                             }

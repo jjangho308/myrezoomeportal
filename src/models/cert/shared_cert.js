@@ -33,7 +33,7 @@ class SharedCertModel extends AbstractModel {
             this.uId = data.uId;
 
             //new
-            this.password=data.password;
+            this.password = data.password;
 
 
             /**
@@ -76,7 +76,7 @@ class SharedCertModel extends AbstractModel {
     static fromRow(row) {
         return new SharedCertModel({
             sId: row.S_CERT_SHR_INFO_ID,
-            password:row.PASSCODE,
+            password: row.PASSCODE,
             certId: row.CERT_ID,
             url: row.URL,
             uId: row.UID,
@@ -95,9 +95,9 @@ class SharedCertModel extends AbstractModel {
     toRow() {
         var row = {
             S_CERT_SHR_INFO_ID: this.sId,
-            PASSCODE:this.password,
+            PASSCODE: this.password,
             CERT_ID: this.certId,
-            URL:this.url,
+            URL: this.url,
             UID: this.uId,
             DEL_YN: Util.boolToFlag(this.deleted),
             CRTD_DT: this.created,
