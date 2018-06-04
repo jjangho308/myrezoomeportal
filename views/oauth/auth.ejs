@@ -1,0 +1,122 @@
+<!-- {
+    client_name: "클라이언트 이름",
+    response_type: responseType,
+    state: state,
+    redirect_uri: redirectUri
+} -->
+
+<html>
+
+<head>
+    <title> Rezoome OAuth 2.0</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/oauth/oauth.css">
+</head>
+
+<body>
+    <div id="container">
+        <div>
+            <div>
+                <label>
+                    <%= client_name %>에서 Rezoome 서비스를 사용하고자 합니다. %>
+                </label>
+            </div>
+        </div>
+        <div class="form container">
+            <form id="oauth_signin">
+                <div>
+                    <label>Phone : </label>
+                    <input id="input_phone" type="text" value="01046464646" />
+                </div>
+
+                <div id='password'>
+                    <label>Password : </label>
+                    <input id="input_password" type="password" />
+                </div>
+                <div>
+                    <input type="submit" value="핸드폰 번호 인증">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    const USER_STATUS_NONE = 0,
+        USER_STATUS_LITE = 1,
+        USER_STATUS_FULL = 2;
+
+    const AJAX_URL = '/oauth2';
+    var state = <%= state || "null" %>,
+        redirectUri = <%= redirect_uri || "null" %>,
+            responseType = <%= response_type || "null" %>;
+
+    /**
+     * If user is existed.
+     */
+    var userStatus = USER_STATUS_NONE;
+
+    $("#oauth_signin").submit(event => {
+        event.stopPropagation();
+        event.preventDefault();
+
+        switch (userStatus) {
+            case USER_STATUS_NONE:
+                {
+                    var phone = $('#input_phone').val();
+                    if (!phone) {
+                        alert('핸드폰 번호를 입력해 주세요.');
+                        return;
+                    }
+                    $.ajax({
+                        url: AJAX_URL + '/phone',
+                        type: 'GET',
+                        data: {
+                            phone: phone
+                        },
+                        success: res => {
+                            res.result.map(item => {
+                                userStatus = item.status;
+                            });
+
+                            // Lite user로 확인될 경우 signin 진행
+                            switch (userStatus) {
+                                case USER_STATUS_LITE:
+                                    {
+                                        $.ajax({
+                                            url: AJAX_URL + '/signin',
+                                            type: 'POST',
+                                            data: {
+                                                phone: phone
+                                            },
+                                            success: res => {
+                                                window.opener.postMessage({
+                                                    code: res.result.code,
+                                                    redirectUri: redirectUri,
+                                                });
+                                            },
+                                            failue: err => {
+                                                alert(err);
+                                            }
+                                        });
+                                        break;
+                                    }
+                                case USER_STATUS_FULL:
+                                    {
+
+                                        break;
+                                    }
+                            }
+                        },
+                        failure: err => {
+                            alert(err);
+                        }
+                    });
+                    break;
+                }
+        }
+        console.log(phone);
+    });
+</script>
+
+</html>

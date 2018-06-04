@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>테스트 용</title>
+    <script src="../sdk/javascript.sdk.js"></script>
+</head>
+
+<body>
+    <div id="signInContainer"></div>
+</body>
+<script type="text/javascript">
+    RZM.createSignInButton({
+        container: 'signInContainer',
+        clientId: 'P123123',
+        clientSecret: 'asdfasdf123',
+        done: function (res) {
+            console.log('AccessToken : ' + res.accessToken);
+            console.log('RefreshToken : ' + res.refreshToken);
+        },
+        fail: function (err) {
+            alert(err);
+        }
+    });
+</script>
+
+</html>

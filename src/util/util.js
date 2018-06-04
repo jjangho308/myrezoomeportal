@@ -1,6 +1,8 @@
 import uuidv4 from 'uuid/v4';
 import crypto from 'crypto'
 
+import randomstring from 'randomstring';
+
 /**
  * Common utility class. <br />
  * ### DO NOT PRESERVE STATE IN THIS CLASS ### <br />
@@ -134,6 +136,40 @@ export default (() => {
 
                 return hashedData;
             }
+        },
+
+        /**
+         * Generate random string by given options. <br />
+         * 
+         * @since 180531
+         * @author TACKSU
+         * 
+         * @param {Number|Object} opt Length number or Option container
+         */
+        randomStr: (opt) => {
+            var length = null,
+                prefix = null,
+                suffix = null;
+
+            if (!!opt && 'number' == typeof opt) {
+                length = opt;
+            }
+
+            if (!!opt && opt instanceof Object) {
+                length = !!opt.length ? opt.length : 12;
+                prefix = opt.prefix;
+                suffix = opt.suffix;
+            }
+
+            var result = randomstring.generate({
+                length: length,
+                charset: 'alphanumeric'
+            });
+
+            result = !!prefix ? prefix + result : result;
+            result = !!suffix ? result + suffix : result;
+
+            return result;
         }
     }
 

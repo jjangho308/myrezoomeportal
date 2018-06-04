@@ -4,6 +4,8 @@ import userQuery from './user_query.js';
 import UserModel from '../models/user/user';
 import AbstractDAO from './abstract_dao.js';
 
+import Util from '../util/util';
+
 /**
  * DAO for UserModel. <br />
  * 
@@ -31,10 +33,10 @@ class UserDao extends AbstractDAO {
      * @param {UserModel} userModel 
      * @param {Function(err,result)} cb 
      */
-    put(userModel, cb) {       
+    put(userModel, cb) {
         var params = userModel.toRow();
         var query = mysql.format(userQuery.put, params);
-        
+
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -72,15 +74,47 @@ class UserDao extends AbstractDAO {
     }
 
     /**
+     * Get user row by given phone number. <br />
+     * 
+     * @since 180530
+     * @author TACKSU
+     * 
+     * @param {String} phone 
+     * @param {function} cb 
+     */
+    getByPhone(phone, cb) {
+        var condition = {
+            PHN_NUM: phone
+        };
+
+        var query = mysql.format(userQuery.get, condition);
+        this.query(query, (err, rows) => {
+            if (!!err) {
+                cb(err);
+            } else {
+                var result = [];
+
+                for (var i in rows) {
+                    var entry = UserModel.fromRow(rows[i]);
+                    result.push(entry);
+                }
+                cb(err, result);
+            }
+        });
+    }
+
+    /**
      * Search specific UserModel by given creteria from User Table. <br />
      * 
      * @since 180327
      * @author TACKSU
      */
     get(creteria, cb) {
-        var condition = {
-            UID: creteria.uId
-        }
+        var condition = Util.trim({
+            UID: creteria.uId,
+            PHN_NUM: creteria.phone
+        });
+
         // condition = (new UserModel(creteria)).toRow();
         var query = mysql.format(userQuery.get, condition);
         this.query(query, (err, rows) => {
@@ -126,14 +160,16 @@ class UserDao extends AbstractDAO {
         })
     }
 
-    setMDFIDT(creteria, cb){
-        
-        var query = mysql.format(userQuery.setMDFIDDT, {UID:creteria.uId});
+    setMDFIDT(creteria, cb) {
+
+        var query = mysql.format(userQuery.setMDFIDDT, {
+            UID: creteria.uId
+        });
         //console.log(query);
-        this.query(query,(err, result)=>{
-            if(!!err){
+        this.query(query, (err, result) => {
+            if (!!err) {
                 cb(err);
-            }else{
+            } else {
                 cb(err, result.affectedRows);
             }
         })

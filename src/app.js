@@ -41,6 +41,7 @@ app.use('/', express.static('public'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
+  console.log("Not found : " + req.originalUrl);
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -52,7 +53,7 @@ app.use(function (req, res, next) {
  * @since 180201
  * @author TACKSU
  */
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

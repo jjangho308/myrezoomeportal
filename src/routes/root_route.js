@@ -11,7 +11,8 @@ import intro_router from './intro_route';
 import shared_certs_router from './shared_certs_route';
 import shared_resumes_router from './shared_resumes_route';
 import verify_router from './verify_route';
-import api_router from './api_route';
+import api_router from './api/api_route';
+import oauth_router from './oauth/oauth_route';
 
 /**
  * Root router of all http request channel. <br />
@@ -34,5 +35,6 @@ router.use('/shared_certs', shared_certs_router);
 router.use('/shared_resumes', shared_resumes_router);
 router.use('/v', verify_router);
 router.use('/api', api_router);
+router.use('/oauth2', oauth_router);
 
 export default router;
