@@ -1,4 +1,5 @@
 import express from 'express';
+import accessToken from './api_token';
 import ctrl from './api_ctrl';
 
 /**
@@ -17,7 +18,7 @@ var router = express.Router();
  * @since 180509
  * @author TACKSU
  */
-
+router.use('/:version/:command', api_token);
 router.use('/:version/:command', ctrl);
 
 export default router;
