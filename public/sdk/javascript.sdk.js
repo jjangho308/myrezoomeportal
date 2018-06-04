@@ -4,7 +4,7 @@
  * @since 180602
  * @author TACKSU
  */
-! function (_w) {
+!function (w) {
     var ENV_LOC = 0,
         ENV_DEV = 1,
         ENV_PRO = 2;
@@ -57,7 +57,7 @@
             var signInBtn = document.createElement('button');
             signInBtn.innerHTML = 'Rezoome Sign In';
             signInBtn.addEventListener('click', function (event) {
-                _w.addEventListener('message', function (postMsg) {
+                w.addEventListener('message', function (postMsg) {
                     doneCallback({
                         refreshToken: postMsg.data.refreshToken,
                         accessToken: postMsg.data.accessToken
@@ -65,7 +65,7 @@
                 }, false);
 
                 // Open auth page
-                _w.open(HOST_DOMAIN + '/oauth2/auth' +
+                w.open(HOST_DOMAIN + '/oauth2/auth' +
                     '?client_id=' + clientId +
                     '&client_secret=' + clientSecret +
                     '&redirect_uri=' + redirectUri,
@@ -93,7 +93,7 @@
 
             };
 
-            _w.addEventListener("message", function (postMsg) {
+            w.addEventListener("message", function (postMsg) {
                 if (!!postMsg.data.result && postMsg.data.result === true) {
                     doneCallback({
                         refreshToken: postMsg.data.refreshToken,
@@ -106,7 +106,7 @@
             }, false);
 
             // Open auth page
-            _w.open(HOST_DOMAIN + '/oauth2/auth' +
+            w.open(HOST_DOMAIN + '/oauth2/auth' +
                 '?client_id=' + clientId +
                 '&client_secret=' + clientSecret +
                 '&redirect_uri=' + redirectUri,
@@ -115,6 +115,6 @@
         }
     }
 
-    _w.RZM = _w.RZM || rezoomeSDK;
-    _w.Rezoome = _w.Rezoome || rezoomeSDK;
+    w.RZM = w.RZM || rezoomeSDK;
+    w.Rezoome = w.Rezoome || rezoomeSDK;
 }(window);
