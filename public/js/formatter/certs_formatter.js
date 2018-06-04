@@ -149,6 +149,13 @@ var certformatter= {
     "RCOGC0010":function viewformatter(record_data) {
         //계명대 졸업증명서   
         $(".inner-container").load("../../viewhtml/RCOGC0010.html", function() {
+            $('#cert-owner-name').text(record_data.registList[0].name);
+            $('#cert-owner-birth').text(record_data.registList[0].birth);
+            $('#cert-owner-uni').text(record_data.registList[0].uni_course);
+            $('#cert-owner-uni-org-major').text(record_data.registList[0].univ_affiliation);
+            $('#cert-owner-uni-enter-date').text(record_data.registList[0].admission_date);
+            $('#cert-owner-uni-gredu-date').text(record_data.registList[0].change_date);
+            $('#cert-owner-uni-gredu-id').text(record_data.registList[0].std_no);
         
         });     
         // var htmldiv = '<div>';
