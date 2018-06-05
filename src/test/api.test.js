@@ -12,9 +12,37 @@ import app from '../app';
  * @author TACKSU
  */
 describe('OAuth and Public API test suite', () => {
-    before('Service initialize', () => {
+    var accessToken = null;
+
+    before('Access token initialize', () => {
         Initializer();
         chai.use(chaihttp);
+
+        accessToken = Managers.token().accessToken({
+            clientId: 'Client_MKT',
+            uId: 3
+        });
+    });
+
+    /**
+     * @since 180604
+     * @author TACKSU
+     */
+    it('Issue certificate and url test case', done => {
+        chai.request(app)
+            .post('/api/v1/issueCert')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'Bearer ' + accessToken)
+            .send({
+                data: JSON.stringify({
+                    // TODO MKT Test JSON
+                })
+            })
+            .end((err, res) => {
+                if (!!res.body.url) {
+                    done();
+                }
+            });
     });
 
     /**
@@ -33,7 +61,7 @@ describe('OAuth and Public API test suite', () => {
             });
     });
 
-    it('API command failure test case', done => {
+    it.skip('API command failure test case', done => {
         chai.request(app)
             .get('/api/v1/asdfasdf')
             .set('Content-Type', 'application/json')
