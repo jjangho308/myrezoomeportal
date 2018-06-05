@@ -58,12 +58,12 @@ describe('OAuth test suite', () => {
      * @since 180530
      * @author TACKSU
      */
-    it.skip('Phone number check Full member test case', done => {
+    it('Phone number check Full member test case', done => {
         chai.request(app)
             .get('/oauth2/phone')
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
-            .send({
+            .query({
                 phone: '01064749282'
             })
             .end((err, res) => {
@@ -78,12 +78,12 @@ describe('OAuth test suite', () => {
      * @since 180530
      * @author TACKSU
      */
-    it.skip('Phone number check lite member test case', done => {
+    it('Phone number check lite member test case', done => {
         chai.request(app)
             .get('/oauth2/phone')
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
-            .send({
+            .query({
                 phone: '01067602946'
             })
             .end((err, res) => {
@@ -98,7 +98,7 @@ describe('OAuth test suite', () => {
      * @since 180530
      * @author TACKSU
      */
-    it.skip('Phone number check no member', done => {
+    it('Phone number check no member', done => {
         chai.request(app)
             .get('/oauth2/phone')
             .set('Content-Type', 'application/json')
