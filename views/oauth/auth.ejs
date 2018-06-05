@@ -75,9 +75,7 @@
                             phone: phone
                         },
                         success: res => {
-                            res.result.map(item => {
-                                userStatus = item.status;
-                            });
+                            userStatus = res.status;
 
                             // Lite user로 확인될 경우 signin 진행
                             switch (userStatus) {
