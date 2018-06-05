@@ -48,6 +48,7 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                     var crypto = Managers.crypto();                     
                     crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey
                         
+                        console.log(decrypted);
                         var json_decrypted = JSON.parse(decrypted);
                         
                         var stringfy_data = JSON.stringify(json_decrypted.data);
