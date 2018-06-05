@@ -1,5 +1,7 @@
 <!-- {
     client_name: "클라이언트 이름",
+    client_id : "ClientId",
+    client_secret : "ClientSecret",
     response_type: responseType,
     state: state,
     redirect_uri: redirectUri
@@ -18,9 +20,9 @@
     <div id="container">
         <div>
             <div>
-                <label>
-                    <%= client_name %>에서 Rezoome 서비스를 사용하고자 합니다. %>
-                </label>
+                <p>
+                    <%= client_name %>에서 Rezoome 서비스를 사용하고자 합니다.
+                </p>
             </div>
         </div>
         <div class="form container">
@@ -48,8 +50,47 @@
 
     const AJAX_URL = '/oauth2';
     var state = <%= state || "null" %>,
+        clientId = "<%= client_id || '' %>",
+        clientSecret = "<%= client_secret || '' %>",
         redirectUri = <%= redirect_uri || "null" %>,
-            responseType = <%= response_type || "null" %>;
+        responseType = <%= response_type || "null" %>;
+
+    /**
+     * Issue token with authentication code by ajax. <br />
+     */
+    function issueToken(opt) {
+        var code = opt.code;
+        $.ajax({
+            url: AJAX_URL + '/token',
+            type: 'POST',
+            data: {
+                code: code,
+                grant_type: 'authorization_code',
+                client_id: clientId,
+                client_secret: clientSecret
+            },
+
+            /**
+             * 성공 시 Opener window에 Refresh token 및 access token 전송
+             */
+            success: function (res) {
+                window.opener.postMessage({
+                    refreshToken: res.refresh_token,
+                    accessToken: res.access_token
+                }, '*');
+                setTimeout(function () {
+                    window.close();
+                }, 0);
+            },
+
+            /**
+             * 실패시에는 Alert으로 에러 발생
+             */
+            failure: function (err) {
+                alert(err);
+            }
+        });
+    }
 
     /**
      * If user is existed.
@@ -72,12 +113,10 @@
                         url: AJAX_URL + '/phone',
                         type: 'GET',
                         data: {
-                            phone: phone
+                            phone: phone,
                         },
-                        success: res => {
-                            res.result.map(item => {
-                                userStatus = item.status;
-                            });
+                        success: function (res) {
+                            userStatus = res.status;
 
                             // Lite user로 확인될 경우 signin 진행
                             switch (userStatus) {
@@ -87,12 +126,13 @@
                                             url: AJAX_URL + '/signin',
                                             type: 'POST',
                                             data: {
-                                                phone: phone
+                                                phone: phone,
+                                                client_id: clientId,
+                                                client_secret: clientSecret,
                                             },
                                             success: res => {
-                                                window.opener.postMessage({
-                                                    code: res.result.code,
-                                                    redirectUri: redirectUri,
+                                                issueToken({
+                                                    code: res.code
                                                 });
                                             },
                                             failue: err => {
@@ -108,7 +148,7 @@
                                     }
                             }
                         },
-                        failure: err => {
+                        failure: function (err) {
                             alert(err);
                         }
                     });
