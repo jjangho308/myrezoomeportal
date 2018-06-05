@@ -91,7 +91,7 @@
                                                 window.opener.postMessage({
                                                     code: res.result.code,
                                                     redirectUri: redirectUri,
-                                                });
+                                                }, '*');
                                             },
                                             failue: err => {
                                                 alert(err);
