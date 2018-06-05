@@ -116,7 +116,9 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                         });
 
                                         var crypto = Managers.crypto();
-                                        crypto.encryptAESECB(data, crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
+                                        console.log(data);
+                                        console.log(JSON.stringify(data));
+                                        crypto.encryptAESECB(JSON.stringify(data), crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
                                             if (!!err) {
                                                 done(ClientRequest.RESULT_FAILURE, {
                                                     err: {
