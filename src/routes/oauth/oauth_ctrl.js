@@ -37,7 +37,7 @@ var defaultController = {
                     next(err);
                 } else if (users.length > 0) {
                     res.send({
-                        status: user.status == 'L' ? 1 : 2
+                        status: users[0].status == 'L' ? 1 : 2
                     });
                 }
             });
