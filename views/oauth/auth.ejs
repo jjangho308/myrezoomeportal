@@ -89,8 +89,8 @@
                                             },
                                             success: res => {
                                                 window.opener.postMessage({
-                                                    code: res.result.code,
-                                                    redirectUri: redirectUri,
+                                                    code: res.code
+                                                    // redirectUri: redirectUri,
                                                 }, '*');
                                                 setTimeout(function () {
                                                     window.close();
