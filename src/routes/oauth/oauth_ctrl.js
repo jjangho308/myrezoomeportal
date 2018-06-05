@@ -35,15 +35,10 @@ var defaultController = {
             Managers.db().getUserDAO().getByPhone(phone, (err, users) => {
                 if (!!err) {
                     next(err);
-                } else {
-                    var result = [];
-                    result = users.map(user => {
-                        return {
-                            // 회원 상태가 L일 경우에만 Lite 회원으로 정립
-                            status: user.status == 'L' ? 1 : 2
-                        };
+                } else if (users.length > 0) {
+                    res.send({
+                        status: user.status == 'L' ? 1 : 2
                     });
-                    res.send(result);
                 }
             });
         }
@@ -82,7 +77,7 @@ var defaultController = {
             Managers.db().getUserDAO().put(new UserModel({
                 phone: phone,
                 pw: Util.sha256(Util.randomStr(8)),
-                status : 'L'
+                status: 'L'
             }), (err, insertId) => {
                 if (!!err) {
                     next(err);
@@ -241,9 +236,7 @@ var defaultController = {
                 var oauthToken = tokenManager.issueOAuthToken(uId);
                 if (!!oauthToken) {
                     res.send({
-                        result: {
-                            access_token: oauthToken
-                        }
+                        access_token: oauthToken
                     });
                 }
             }
