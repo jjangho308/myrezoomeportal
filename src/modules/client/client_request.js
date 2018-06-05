@@ -73,6 +73,9 @@ import GenerateShortUrlHandler from './generate_short_url/generate_short_url_han
 import VerifyRequest from './verify/verify_request';
 import VerifyHandler from './verify/verify_handler';
 
+import IssueCertAPIV1Entity from './api/v1/api_issue_cert_entity';
+import IssueCertAPIV1Handler from './api/v1/api_issue_cert_handler';
+
 /**
  * Request manager from client. <br />
  * 
@@ -144,6 +147,12 @@ class ClientRequestManager extends AbstractManager {
 
         // this.entityMap.set('SetDefault', SearchRecordRequest);
         // this.handlerMap.set(SearchRecordRequest, new SearchRecordHandler());
+
+        /**
+         * API v1 handler. <br />
+         */
+        this.handlerMap.set(IssueCertAPIV1Entity, new IssueCertAPIV1Handler());
+
 
         this.setPrepared();
     }

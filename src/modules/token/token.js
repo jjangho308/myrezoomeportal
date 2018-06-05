@@ -53,16 +53,16 @@ class TokenManager extends AbstractManager {
      * @since 180530
      * @author TACKSU
      * 
-     * @param {String} partyId Third-Party ID.
+     * @param {String} clientId Third-Party ID.
      * @param {String} uId Intergrated user id.
      * 
      * @return Token with 1 month
      */
-    issueRefreshToken(partyId, uId) {
+    issueRefreshToken(clientId, uId) {
         return jwt.sign({
             data: {
-                uId: uId,
-                partyId: partyId
+                clientId: clientId,
+                uId: uId
             },
             exp: Math.floor(Date.now() / 1000) + (60 * 60 * 720) // 1month
         }, this.secretKey);
@@ -74,13 +74,13 @@ class TokenManager extends AbstractManager {
      * @since 180530
      * @author TACKSU
      * 
-     * @param {String} partyId ID of requested third-party. <br />
+     * @param {String} clientId ID of requested third-party. <br />
      * @param {String} uId uid of intergrated user.
      */
-    issueOAuthToken(partyId, uId) {
+    issueOAuthToken(clientId, uId) {
         return jwt.sign({
             data: {
-                partyId: partyId,
+                clientId: clientId,
                 uId: uId
             },
             // TODO 1달 단위로 수정 필요

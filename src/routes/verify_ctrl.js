@@ -10,7 +10,7 @@ import VerifyRequest from '../modules/client/verify/verify_request'
  */
 export default {
     get: (req, res, next) => {
-        req.body.shortUrl = req.params.shortUrl;        
+        req.body.shortUrl = req.params.shortUrl;
         Managers.client().request(new VerifyRequest(req.body), (err, result) => {
             if (!!err) {
                 next(err);
@@ -19,17 +19,16 @@ export default {
                 console.log(req.body);
                 console.log(result);
                 console.log("==================================================");
-                if(req.body.shortUrl.substring(0,1)=='c') {
+                if (req.body.shortUrl.substring(0, 1) == 'c') {
                     res.render('share-cert', {
-                        data : result
+                        data: result
+                    });
+                } else {
+                    res.render('verify', {
+                        data: result
                     });
                 }
-                else {
-                    res.render('verify', {
-                        data : result
-                    });
-                }                
             }
-        });        
+        });
     }
 }

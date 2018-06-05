@@ -23,7 +23,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
      * @param {*} opt 
      */
     constructor(opt) {
-
+        super(opt);
     }
 
     /**
@@ -71,7 +71,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
             } else {
                 var userWalletAddress = userModels[0].bcWalletAddr;
 
-                Util.sha256(data, (err, hashedRawData) => {
+                Util.sha256(data, (hashedRawData) => {
                     if (!!err) {
                         done(ClientRequest.RESULT_FAILURE, {
                             err: {
@@ -84,78 +84,94 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                         var nex = Managers.nex();
 
                         // NexLedger에 hash 데이터 있는지부터 확인
-                        nex.getbyaddress(null, userWalletAddress, (addressData) => {
+                        nex.getbyaddress(null, userWalletAddress, (userBCHashes) => {
 
-                            if (!!addressData) {
-                                done(ClientRequest.RESULT_FAILURE, {
-                                    err: {
-                                        code: 500,
-                                        msg: 'Nexledger error'
-                                    }
+                            if (!!userBCHashes) {
+                                // NexLedger에 이미 Hash가 저장되어 있는지 확인
+                                var found = false
+                                userBCHashes.result.forEach((item) => {
+                                    found = found || (item.hash === hashedRawData);
                                 });
-                                return;
-                            } else {
-                                nex.put(null, userWalletAddress, {
-                                    hash: hashedRawData
-                                }, (nexBody) => {
-                                    var txid = nexBody.result.txid;
-                                    var crypto = Managers.crypto();
-                                    crypto.encryptAESECB(data, crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
-                                        if (!!err) {
-                                            done(ClientRequest.RESULT_FAILURE, {
-                                                err: {
-                                                    code: 500,
-                                                    msg: 'Internal error'
-                                                }
-                                            });
-                                        } else {
-                                            var certId = Util.uuid();
-                                            var certModel = new CertModel({
-                                                certId: certId,
-                                                txId: txid,
-                                                uId: uId,
-                                                encryptedData: encryptedRawData
-                                            });
-                                            var certDao = Managers.db().getCertDAO();
-                                            certDao.putCert(certModel, (err, insertCertId) => {
-                                                if (!!err) {
-                                                    done(ClientRequest.RESULT_FAILURE, {
-                                                        err: {
-                                                            code: 500,
-                                                            msg: 'Internal error'
-                                                        }
-                                                    });
-                                                } else if (insertCertId > 0) {
-                                                    var sharedUrl = Util.randomStr({
-                                                        lenght: 6,
-                                                        prefix: 'c'
-                                                    });
-                                                    var sharedCert = new SharedCertModel({
-                                                        certId: certId,
-                                                        uId: uId,
-                                                        url: sharedUrl,
-                                                        public: true
-                                                    });
 
-                                                    certDao.putShared(sharedCert, (err, insertSharedId) => {
-                                                        if (!!err) {
-                                                            done(ClientRequest.RESULT_FAILURE, {
-                                                                err: {
-                                                                    code: 500,
-                                                                    msg: 'Internal error'
-                                                                }
-                                                            });
-                                                        } else if (insertSharedId > 0) {
-                                                            done(ClientRequest.RESULT_SUCCESS, {
-                                                                url: sharedUrl
-                                                            });
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                        }
+                                if (found) {
+                                    // 있다면 txid 가져온 다음에 아래 로직 수행.
+                                    return;
+                                } else {
+                                    nex.put(null, userWalletAddress, {
+                                        hash: hashedRawData
+                                    }, (nexBody) => {
+                                        var txid = nexBody.result.txid;
+
+                                        // 일단 BLCMap DB에 넣음
+                                        var blcmapinsertData = [
+                                            Util.uuid(),
+                                            uId, //uid
+                                            txid, //trxid
+                                            "", // FIXME Org code로 박아야 함
+                                            clientId // TODO 이걸 사실상 SubID로 인식해야 하나
+                                        ];
+
+                                        Managers.db().getRecordDAO().putRecord(blcmapinsertData, (putRecordResponse) => {
+                                            console.log(putRecordResponse);
+                                        });
+
+                                        var crypto = Managers.crypto();
+                                        crypto.encryptAESECB(data, crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
+                                            if (!!err) {
+                                                done(ClientRequest.RESULT_FAILURE, {
+                                                    err: {
+                                                        code: 500,
+                                                        msg: 'Internal error'
+                                                    }
+                                                });
+                                            } else {
+                                                var certId = Util.uuid();
+                                                var certModel = new CertModel({
+                                                    certId: certId,
+                                                    txId: txid,
+                                                    uId: uId,
+                                                    encryptedData: encryptedRawData
+                                                });
+                                                var certDao = Managers.db().getCertDAO();
+                                                certDao.putCert(certModel, (err, insertCertId) => {
+                                                    if (!!err) {
+                                                        done(ClientRequest.RESULT_FAILURE, {
+                                                            err: {
+                                                                code: 500,
+                                                                msg: 'Internal error'
+                                                            }
+                                                        });
+                                                    } else if (insertCertId > 0) {
+                                                        var sharedUrl = Util.randomStr({
+                                                            length: 6,
+                                                            prefix: 'c'
+                                                        });
+                                                        var sharedCert = new SharedCertModel({
+                                                            certId: certId,
+                                                            url: sharedUrl,
+                                                            public: true
+                                                        });
+
+                                                        certDao.putShared(sharedCert, (err, insertSharedId) => {
+                                                            if (!!err) {
+                                                                done(ClientRequest.RESULT_FAILURE, {
+                                                                    err: {
+                                                                        code: 500,
+                                                                        msg: 'Internal error'
+                                                                    }
+                                                                });
+                                                            } else if (insertSharedId > 0) {
+                                                                done(ClientRequest.RESULT_SUCCESS, {
+                                                                    url: 'https://dev.rezoome.io/v/' + sharedUrl
+                                                                });
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
                                     });
-                                });
+                                }
                             }
                         });
                     }

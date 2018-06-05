@@ -1,3 +1,8 @@
+import IssueCertEntity from '../../modules/client/api/v1/api_issue_cert_entity';
+import IssueCertHandler from '../../modules/client/api/v1/api_issue_cert_handler';
+
+import Managers from '../../core/managers';
+
 /**
  * API Version 1 function container. <br />
  * 
@@ -19,7 +24,22 @@ export default {
         // Access granted user Id.
         var uId = req.body.uId;
 
+        var clientId = req.body.clientId;
+
         // Raw data of Client server
         var data = req.body.data;
+
+        var entity = new IssueCertEntity({
+            uId: uId,
+            clientId: clientId,
+            data: data
+        });
+
+        Managers.client().request(entity, (err, result) => {
+            if (!!err) {
+                next(err);
+            }
+            res.send(result);
+        });
     }
 }

@@ -5,6 +5,8 @@ import Initializer from '../core/initializer';
 
 import app from '../app';
 
+import Managers from '../core/managers';
+
 /**
  * Test suite for public API. <br />
  * 
@@ -17,11 +19,10 @@ describe('OAuth and Public API test suite', () => {
     before('Access token initialize', () => {
         Initializer();
         chai.use(chaihttp);
-
-        accessToken = Managers.token().accessToken({
-            clientId: 'Client_MKT',
-            uId: 3
-        });
+        accessToken = Managers.token().issueOAuthToken(
+            'RCCNF0003',
+            'UID3'
+        );
     });
 
     /**
@@ -30,13 +31,11 @@ describe('OAuth and Public API test suite', () => {
      */
     it('Issue certificate and url test case', done => {
         chai.request(app)
-            .post('/api/v1/issueCert')
+            .post('/api/v1/issuecert')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + accessToken)
             .send({
-                data: JSON.stringify({
-                    // TODO MKT Test JSON
-                })
+                data: "hello, world!"
             })
             .end((err, res) => {
                 if (!!res.body.url) {
