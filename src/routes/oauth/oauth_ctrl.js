@@ -114,10 +114,10 @@ var defaultController = {
                     next(err);
                 } else {
                     res.send({
-                        code: Managers.token().issueToken({
+                        code: Buffer.from(Managers.token().issueToken({
                             clientId: clientId,
                             uId: userModels[0].uId
-                        })
+                        })).toString('base64')
                     });
                 }
             });
@@ -162,6 +162,8 @@ var defaultController = {
 
         res.render('oauth/auth', {
             // TODO Change to real client name
+            client_id: clientId,
+            client_secret: clientSecret,
             client_name: "매경 TEST",
             response_type: responseType,
             state: state,
@@ -196,15 +198,15 @@ var defaultController = {
         // 코드가 있는 경우에는 refresh_token과 access_token을 모두 발급하여 전달
         if (!!authCode) {
             try {
-                authCode = JSON.parse(Buffer.from(authCode, 'base64').toString('utf-8'));
+                authCode = tokenManager.verify(Buffer.from(authCode, 'base64').toString('utf-8'));
             } catch (e) {
                 // Invalid json string.
                 next(e);
                 return;
             }
 
-            refreshToken = tokenManager.issueRefreshToken(authCode.clientId, authCode.uId);
-            accessToken = tokenManager.issueOAuthToken(authCode.clientId, authCode.uId);
+            refreshToken = tokenManager.issueRefreshToken(authCode.clientId, authCode.data.uId);
+            accessToken = tokenManager.issueOAuthToken(authCode.clientId, authCode.data.uId);
 
             res.send({
                 refresh_token: refreshToken,
@@ -215,7 +217,7 @@ var defaultController = {
 
             // Refresh token 가지고 access token만 재발급 하는 경우
         } else {
-            refreshToken = req.query.refresh_token;
+            refreshToken = req.body.refresh_token;
             if (!refreshToken) {
                 // TODO Invalid parameter error.
             }
