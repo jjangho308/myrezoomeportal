@@ -45,22 +45,15 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                     done(ClientRequest.RESULT_FAILURE, err);
                 } else {
                     console.log(shareModel);
-                    var crypto = Managers.crypto(); 
-                    console.log("systemsymmetrickey");
-                    console.log(crypto.getSystemSymmetricKey());                    
-                    crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey
-                        console.log(crypto.getSystemSymmetricKey());
-                        console.log(err);
+                    var crypto = Managers.crypto();                     
+                    crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey                        
                         console.log(decrypted);
-                        var json_decrypted = JSON.parse(decrypted);
-                        
-                        var stringfy_data = JSON.stringify(json_decrypted.data);
-                        
-                        var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){
-                            
-                            nexledgerService.getbytxid(null, json_decrypted.txid, function (res) {
-                                
+                        var json_decrypted = JSON.parse(decrypted);                        
+                        console.log(json_decrypted.data);
+                        var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){                            
+                            nexledgerService.getbytxid(null, json_decrypted.txid, function (res) {                                
                                 if(res.result.hash == data_hashed_cb) {
+                                    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!Hash same!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                                     if("N" == shareModel.pubYn) { // encrypt with user's passcode when pubYn is N                                
                                         crypto.encryptAES(decrypted, shareModel.passcode, (err, encodedIV, encryptedData) => {
                                             if (!!err) {
@@ -84,8 +77,7 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                         console.log(verifyData);
                                         done(ClientRequest.RESULT_SUCCESS, verifyData);
                                     }
-                                }
-                                else {
+                                } else {
                                     //err differnt hash data and stored cert data
                                     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!Hash Different!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                                     var verifyData = {

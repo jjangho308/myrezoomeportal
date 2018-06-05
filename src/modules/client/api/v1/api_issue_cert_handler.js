@@ -44,9 +44,11 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
          * 3. 원본을 암호화 하여 공유 db를 생성하고
          * 4. URL Link를 생성하여 respons한다.
          */
+        
         var uId = requestEntity.uId;
         var clientId = requestEntity.clientId;
-        var data = !!requestEntity.data && requestEntity.data instanceof String ? jsonminify(data) : "";
+        //var data = !!requestEntity.data && requestEntity.data instanceof String ? jsonminify(data) : "";
+        var data = requestEntity.data;
 
         var userDAO = Managers.db().getUserDAO();
         userDAO.get({
@@ -70,8 +72,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                 return;
             } else {
                 var userWalletAddress = userModels[0].bcWalletAddr;
-
-                Util.sha256(data, (hashedRawData) => {
+                Util.sha256(JSON.stringify(data), (hashedRawData) => {
                     if (!!err) {
                         done(ClientRequest.RESULT_FAILURE, {
                             err: {
@@ -108,17 +109,16 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                             uId, //uid
                                             txid, //trxid
                                             "", // FIXME Org code로 박아야 함
-                                            clientId // TODO 이걸 사실상 SubID로 인식해야 하나
+                                            "" // TODO 이걸 사실상 SubID로 인식해야 하나
                                         ];
 
                                         Managers.db().getRecordDAO().putRecord(blcmapinsertData, (putRecordResponse) => {
                                             console.log(putRecordResponse);
                                         });
 
-                                        var crypto = Managers.crypto();
-                                        console.log(data);
-                                        console.log(JSON.stringify(data));
-                                        crypto.encryptAESECB(JSON.stringify(data), crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
+                                        var crypto = Managers.crypto();      
+                                        // todo encrypte data spec 재확인 > 증명서생성 핸들러가 바뀜                                  
+                                        crypto.encryptAESECB(JSON.stringify({"data":data, "subid":"RCCNF0001"}), crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
                                             if (!!err) {
                                                 done(ClientRequest.RESULT_FAILURE, {
                                                     err: {
@@ -144,14 +144,16 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                                             }
                                                         });
                                                     } else if (insertCertId > 0) {
+                                                        
                                                         var sharedUrl = Util.randomStr({
                                                             length: 6,
                                                             prefix: 'c'
                                                         });
+                                                        
                                                         var sharedCert = new SharedCertModel({
                                                             certId: certId,
                                                             url: sharedUrl,
-                                                            public: true
+                                                            public: "Y"
                                                         });
 
                                                         certDao.putShared(sharedCert, (err, insertSharedId) => {

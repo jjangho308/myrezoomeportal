@@ -57,7 +57,7 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                 var crypto = Managers.crypto();
                 console.log("==================issue_cert_handeler cert record===========")
                 console.log(request.cert.record);
-                
+                // TODO request.cert.record 'data', 'subid' 를 제외한 필요없는 컬럼 삭제
                 crypto.encryptAESECB(JSON.stringify(request.cert.record), crypto.getSystemSymmetricKey(), (err, encrypted)=> {
                     var certModel = new CertModel({
                         certId: Util.uuid(),
