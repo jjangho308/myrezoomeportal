@@ -188,3 +188,8 @@ top: 229px;
   font-weight: bold;
 
 }
+
+.navbar-default {
+    background-color: initial;
+    border: initial;
+}
