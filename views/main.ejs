@@ -6,6 +6,7 @@
     <script type="text/javascript" src="js/crypto-js/crypto-js.js"></script>
     <script src="js/jsrsasign/jsrsasign-all-min.js"></script>
     <!-- <script src="js/aesutil.js"></script> -->
+    <link rel="stylesheet" href="css/initial-resume.css">
     <script src="js/mainpage.js"></script>
 </head>
 
@@ -233,6 +234,61 @@
     <%- include('base_main_dialog') -%>
 
     <%- include('base_footer') -%>
+    
+    <div id="initial-dialog" class="modal">
+        <div class="section-1">
+            <img src="/img/initial-resume/image-1.svg" />
+            <h4>레쥬메 서비스에 오신 것을 환영합니다!</h4>
+            <p>새롭고 혁신적인 증명서 발급, 이력서 작성을 위한 준비를 시작합니다.</p>
+            <button>다음으로</button>
+        </div>
+        <div class="section-2">
+            <h4><span>이수지</span>님의 영문이름은 무엇인가요?</h4>
+            <h5>영문이름(여권과 동일)을 입력하시면 보다 더 정확한 이력을 확인하실 수 있어요.</h5>
+
+            <p>First Name(성)</p>
+            <input placeholder="Hong">
+
+            <p>비밀번호</p>
+            <input placeholder="Gildong">
+            <button>다음으로</button>
+            <a>건너뛰기</a>
+        </div>
+
+        <div class="section-3">
+            <h4>정보들을 조회하고 있습니다.</h4>
+            <h5>영문이름(여권과 동일)을 입력하시면 보다 더 정확한 이력을 확인하실 수 있어요.</h5>
+            <div class="ko-progress-circle" data-progress="0">
+                <div class="ko-circle">
+                    <div class="full ko-progress-circle__slice">
+                        <div class="ko-progress-circle__fill"></div>
+                    </div>
+                    <div class="ko-progress-circle__slice">
+                        <div class="ko-progress-circle__fill"></div>
+                        <div class="ko-progress-circle__fill ko-progress-circle__bar"></div>
+                    </div>
+                </div>
+                <div class="ko-progress-circle__overlay"></div>
+            </div>
+
+            <div class="percentage">
+                <span>24%</span>
+                <img src="/img/initial-resume/fill-1.svg"/>
+
+            </div>
+            
+            <p>레쥬메의 최첨단 Bot들이 열심히 일을 하고 있습니다.</p>
+            <button disabled>레쥬메 시작하기</button>
+            <a>건너뛰기</a>
+        </div>
+    </div>
+    <script>
+        
+        if('Y' == '<%= first %>') {
+            firstLogin();
+        }
+        
+    </script>
     <div id="select-footer">
         <img src="img/myresume/minus-circle.png" alt="">
         <span>2건의</span>
