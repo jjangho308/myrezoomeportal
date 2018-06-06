@@ -81,6 +81,7 @@ class SharedCertModel extends AbstractModel {
             url: row.URL,
             uId: row.UID,
             deleted: Util.ftb(row.DEL_YN),
+            public: row.PUB_YN,
             created: row.CRTD_DT,
             modified: row.MDFID_DT
         })
@@ -100,6 +101,7 @@ class SharedCertModel extends AbstractModel {
             URL: this.url,
             UID: this.uId,
             DEL_YN: Util.boolToFlag(this.deleted),
+            PUB_YN: this.public,
             CRTD_DT: this.created,
             MDFID_DT: this.modified
         };
