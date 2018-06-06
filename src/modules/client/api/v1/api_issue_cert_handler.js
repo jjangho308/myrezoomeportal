@@ -108,8 +108,8 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                             Util.uuid(),
                                             uId, //uid
                                             txid, //trxid
-                                            "", // FIXME Org code로 박아야 함
-                                            "" // TODO 이걸 사실상 SubID로 인식해야 하나
+                                            "200", // FIXME Org code로 박아야 함 (임시)
+                                            "RCCNF0001" // TODO 이걸 사실상 SubID로 인식해야 하나 (임시)
                                         ];
 
                                         Managers.db().getRecordDAO().putRecord(blcmapinsertData, (putRecordResponse) => {
@@ -117,8 +117,8 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                         });
 
                                         var crypto = Managers.crypto();      
-                                        // todo encrypte data spec 재확인 > 증명서생성 핸들러가 바뀜                                                                        
-                                        crypto.encryptAESECB({"data":data, "subid":"RCCNF0001"}, crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
+                                        // todo encrypte data spec 재확인 > 증명서생성 핸들러가 바뀜                                                                                  
+                                        crypto.encryptAESECB(JSON.stringify({"data":data, "subid":"RCCNF0001"}), crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
                                             if (!!err) {
                                                 done(ClientRequest.RESULT_FAILURE, {
                                                     err: {
