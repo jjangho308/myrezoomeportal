@@ -43,16 +43,12 @@ class VerifyHandler extends AbstractAgentRequestHandler {
             certDAO.getSharedUrl({url: url}, (err, shareModel) => {
                 if (!!err) {
                     done(ClientRequest.RESULT_FAILURE, err);
-                } else {  
-                    console.log(err)                  
-                    console.log(shareModel);
+                } else {                      
                     var crypto = Managers.crypto();                     
-                    crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey                                                
-                        console.log(err);
-                        console.log(decrypted);
+                    crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey                                                                        
                         var json_decrypted = JSON.parse(decrypted);
-                        var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){                            
-                            nexledgerService.getbytxid(null, shareModel.txid, function (res) {                                
+                        var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){     
+                            nexledgerService.getbytxid(null, shareModel.txId, function (res) {                                
                                 if(res.result.hash == data_hashed_cb) {
                                     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!Hash same!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                                     if("N" == shareModel.pubYn) { // encrypt with user's passcode when pubYn is N                                
