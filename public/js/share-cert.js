@@ -13,6 +13,35 @@ $(document).ready(function(){
 	$('#popup-dialog a').click();
 	$("#cert-viewer").css("display", "none");
 
+	try {
+		if(certdata.encrypted == false) {
+			json_decrypted = certdata.data;
+			certformatter[json_decrypted.subid](json_decrypted.data);			
+
+			$(".main-container").css("display", "none");
+			$(".loading-container").css("display", "block");
+
+			var current_active = 0;
+			
+			$(`#circle-${current_active}`).css("background-color","#4a90e2");
+			
+			setInterval(function(){
+				$(`#circle-${current_active}`).css("background-color","#dadada");
+				current_active += 1;
+				
+				if(current_active > 2){
+					current_active = 0;
+					$("#cert-verify").css("display", "none");
+					$("#cert-viewer").css("display", "block");
+				}
+				$(`#circle-${current_active}`).css("background-color","#4a90e2");									
+								
+			}, 1000);
+		}
+	}catch(exception) {
+		console.log(exception);
+	}
+
 });
 
 function verify(passcode) {

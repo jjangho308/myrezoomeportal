@@ -76,7 +76,7 @@ var formatter= {
 
     "RCOGC0008":function viewformatter(record) {
         //inha
-        var htmldiv = '<div class="spec-body">';
+        var htmldiv = '<div id="spec-body-RCOGC0008" class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
             htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
@@ -90,7 +90,7 @@ var formatter= {
             htmldiv = htmldiv + '<p>인하대학교</p>';
             htmldiv = htmldiv + '<p>'+record.registList[0].course +'</p>';
             htmldiv = htmldiv + '<p>'+record.registList[0].status +'</p>';
-            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+            //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
         $('#spec_edu_detail').append(htmldiv);
@@ -106,7 +106,7 @@ var formatter= {
             total += parseInt(record.scoreStatisticList[i].average_score);
         }
 
-        var htmldiv = '<div class="spec-body">';
+        var htmldiv = '<div id="spec-body-RCOGC0009" class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
             htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
@@ -121,7 +121,7 @@ var formatter= {
             htmldiv = htmldiv + '<p>인하대학교</p>';
             htmldiv = htmldiv + '<p>성적증명서</p>';
             htmldiv = htmldiv + '<p>'+ total/record.scoreStatisticList.length + '</p>';
-            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+            //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
         $('#spec_edu_detail').append(htmldiv);
@@ -131,7 +131,7 @@ var formatter= {
     "RCOGC0010":function viewformatter(record) { 
         
         // 계명대 졸업증명서
-        var htmldiv = '<div class="spec-body">';
+        var htmldiv = '<div id="spec-body-RCOGC0010" class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
             htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
@@ -145,7 +145,7 @@ var formatter= {
             htmldiv = htmldiv + '<p>계명대</p>';
             htmldiv = htmldiv + '<p>'+record.registList[0].course +'</p>';
             htmldiv = htmldiv + '<p>'+record.registList[0].status +'</p>';
-            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+            //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
         $('#spec_edu_detail').append(htmldiv);
@@ -161,7 +161,7 @@ var formatter= {
         }
 
         // 계명대 성적증명서
-        var htmldiv = '<div class="spec-body">';
+        var htmldiv = '<div id="spec-body-RCOGC0011" class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
             htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
@@ -175,7 +175,7 @@ var formatter= {
             htmldiv = htmldiv + '<p>계명대</p>';
             htmldiv = htmldiv + '<p>성적증명서</p>';
             htmldiv = htmldiv + '<p>'+ total/record.scoreStatisticList.length + '</p>';
-            htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+            //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
         $('#spec_edu_detail').append(htmldiv);
