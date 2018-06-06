@@ -69,7 +69,7 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                         var verifyData = {
                                             encrypted: false,
                                             iv: "",
-                                            data: JSON.stringify(decrypted)
+                                            data: JSON.parse(decrypted)
                                         };
                                         console.log(verifyData);
                                         done(ClientRequest.RESULT_SUCCESS, verifyData);
