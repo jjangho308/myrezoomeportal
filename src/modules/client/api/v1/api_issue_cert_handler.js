@@ -117,8 +117,8 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                         });
 
                                         var crypto = Managers.crypto();      
-                                        // todo encrypte data spec 재확인 > 증명서생성 핸들러가 바뀜                                  
-                                        crypto.encryptAESECB(JSON.stringify({"data":data, "subid":"RCCNF0001"}), crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
+                                        // todo encrypte data spec 재확인 > 증명서생성 핸들러가 바뀜                                                                        
+                                        crypto.encryptAESECB({"data":data, "subid":"RCCNF0001"}, crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
                                             if (!!err) {
                                                 done(ClientRequest.RESULT_FAILURE, {
                                                     err: {
