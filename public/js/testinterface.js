@@ -125,54 +125,54 @@ function test_getresumeslist(certid) {
 
 
 function test_setTestData() {
-//        var record = {
-//        "mid": "5b57ad01-28f6-4720-a710-f6f9e4785d06",
-//        "cmd": "SearchRecord",
-//        "args": {
-//            "code": "0",
-//            "orgcode": "200",
-//            "key": "ENCRYPTED_AESKEY",
-//            "iv": "ENCRYPTED_IV",
-//            "records": [
-//                {
-//                    "data": "{\"userid\":\"123456\",\"point0\":\"800\",\"point1\":\"95\",\"point2\":\"500\",\"point3\":\"300\",\"name\":\"박헌욱\",\"grade\":\"우수\",\"date\":\"2018-04-10 05:18:29.0\"}",
-//                    "hash": "4406db28e9620c4cd538f512dd82fee6dfc0bdf64e3a27148c672e09ee65207e",
-//                    "txid": "7c731bfa671da3769414218c1ddd83722e735155bd80a8e0d4e971204f77f7d9",
-//                    "subid": "RCCNF0001",
-//                    "stored": "Y",
-//                    "dftYn": "N"
-//                },
-//                {
-//                    "data": "{\"userid\":\"123456\",\"point0\":\"999\",\"point1\":\"99\",\"point2\":\"600\",\"point3\":\"399\",\"name\":\"박헌욱\",\"grade\":\"짱\",\"date\":\"2018-04-18 08:39:03.0\"}",
-//                    "hash": "8e031d8fb7711ad6dbccbce85913b01ecec3643543da8e1245c8f232a63d3f1c",
-//                    "txid": "c910c7a45583553532dc8c8c4a595835553d8d4e089b2f82f66e24ee4db8ad02",
-//                    "subid": "RCCNF0001",
-//                    "stored": "Y",
-//                    "dftYn": "Y"
-//                },
-//                {
-//                    "data": "{\"userid\":\"123456\",\"point0\":\"100\",\"point1\":\"10\",\"point2\":\"50\",\"point3\":\"50\",\"name\":\"박헌욱\",\"grade\":\"병신\",\"date\":\"2018-04-18 17:39:27.0\"}",
-//                    "hash": "917cd80cd2127db71cc3f89519d78b2eeff0328f3885fb10b53e0c1b51c25fbb",
-//                    "txid": "e3c02ed226c2ddc9d74dbdc6434e0458c7f9c10156d4b7b04455eb9a4392822c",
-//                    "subid": "RCCNF0001",
-//                    "stored": "Y",
-//                    "dftYn": "N"
-//                }
-//            ]
-//        }
-//    };
-//    var rocords =  record.args.records;    
+       var record = {
+       "mid": "5b57ad01-28f6-4720-a710-f6f9e4785d06",
+       "cmd": "SearchRecord",
+       "args": {
+           "code": "0",
+           "orgcode": "200",
+           "key": "ENCRYPTED_AESKEY",
+           "iv": "ENCRYPTED_IV",
+           "records": [
+               {
+                   "data": "{\"userid\":\"123456\",\"point0\":\"800\",\"point1\":\"95\",\"point2\":\"500\",\"point3\":\"300\",\"name\":\"박헌욱\",\"grade\":\"우수\",\"date\":\"2018-04-10 05:18:29.0\"}",
+                   "hash": "4406db28e9620c4cd538f512dd82fee6dfc0bdf64e3a27148c672e09ee65207e",
+                   "txid": "1fdd9c6fcfab0454e3e04e35582eebb8bcde44c2e38aba13d3cc8d7be771ca58",
+                   "subid": "RCCNF0001",
+                   "stored": "Y",
+                   "dftYn": "N"
+               },
+               {
+                   "data": "{\"userid\":\"123456\",\"point0\":\"999\",\"point1\":\"99\",\"point2\":\"600\",\"point3\":\"399\",\"name\":\"박헌욱\",\"grade\":\"짱\",\"date\":\"2018-04-18 08:39:03.0\"}",
+                   "hash": "8e031d8fb7711ad6dbccbce85913b01ecec3643543da8e1245c8f232a63d3f1c",
+                   "txid": "c910c7a45583553532dc8c8c4a595835553d8d4e089b2f82f66e24ee4db8ad02",
+                   "subid": "RCCNF0001",
+                   "stored": "Y",
+                   "dftYn": "Y"
+               },
+               {
+                   "data": "{\"userid\":\"123456\",\"point0\":\"100\",\"point1\":\"10\",\"point2\":\"50\",\"point3\":\"50\",\"name\":\"박헌욱\",\"grade\":\"병신\",\"date\":\"2018-04-18 17:39:27.0\"}",
+                   "hash": "917cd80cd2127db71cc3f89519d78b2eeff0328f3885fb10b53e0c1b51c25fbb",
+                   "txid": "e3c02ed226c2ddc9d74dbdc6434e0458c7f9c10156d4b7b04455eb9a4392822c",
+                   "subid": "RCCNF0001",
+                   "stored": "Y",
+                   "dftYn": "N"
+               }
+           ]
+       }
+   };
+   var rocords =  record.args.records;    
 
-//    for(var i=0; i<rocords.length ; i++) {        
-//        var subid = rocords[i].subid;        
-//        try {            
-//            setData(record.args.records[i]);           
-//        }catch(exception) {
-//            console.log(exception);
-//            //continue;
-//        }
-//    }
-//    refreshview(record.args.records);
+   for(var i=0; i<rocords.length ; i++) {        
+       var subid = rocords[i].subid;        
+       try {            
+           setData(record.args.records[i]);           
+       }catch(exception) {
+           console.log(exception);
+           //continue;
+       }
+   }
+   refreshview(record.args.records);
     
    var record = {
        "mid": "fca37200-a6ab-4fb3-9032-1d20fa269a67",

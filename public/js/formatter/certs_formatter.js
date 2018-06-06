@@ -54,16 +54,14 @@ var certformatter= {
 
     "RCCNF0001":function viewformatter(record_data) {
         //mktest
-        var htmldiv = '<div>';
-            htmldiv = htmldiv + "<p>이름 : " +record_data.name + '</p>';
-            htmldiv = htmldiv + "<p>Grade : " +record_data.grade + '</p>';
-            htmldiv = htmldiv + "<p>총점 : " +record_data.point0 + '</p>';
-            htmldiv = htmldiv + "<p>과목1 : " +record_data.point1 + '</p>';
-            htmldiv = htmldiv + "<p>과목2 : " +record_data.point2 + '</p>';
-            htmldiv = htmldiv + "<p>과목3 : " +record_data.point3 + '</p>';
-            
-        htmldiv = htmldiv + '</div>';
-        $('#cert-body-div').append(htmldiv);
+        $(".outer-container").load("../../viewhtml/RCCNF0001.html", function() {
+            $("#mk_cert").children('p').eq(0).html(record_data.name);
+            $("#mk_cert").children('p').eq(1).html(record_data.grade);
+            $("#mk_cert").children('p').eq(2).html(record_data.point0);
+            $("#mk_cert").children('p').eq(3).html(record_data.point1);
+            $("#mk_cert").children('p').eq(4).html(record_data.point2);
+            $("#mk_cert").children('p').eq(5).html(record_data.point3);
+        });
     },
 
     "RCOGC0008":function viewformatter(record_data) {

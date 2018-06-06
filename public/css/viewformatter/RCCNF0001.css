@@ -1,0 +1,34 @@
+.outer-container {
+    height: 1000px;
+}
+
+#qrmessage {    
+    padding: 10px 25px 80px;
+}
+
+#mk_cert p:nth-child(2) {}
+#mk_cert p:nth-child(3) {}
+#mk_cert p:nth-child(4) {}
+#mk_cert p:nth-child(5) {}
+#mk_cert p:nth-child(6) {}
+#mk_cert p:nth-child(7) {}
+
+@media screen and (max-width:1000px){
+
+    html{
+        font-size:10px;
+    }
+
+	.inner-container{
+	    width: 345px;
+	    height: 450px;       
+        margin: auto;
+		background: white;		
+    }
+
+    #qrmessage {
+        content: "";
+        visibility: hidden;
+        padding: 10px 25px;
+    }
+}

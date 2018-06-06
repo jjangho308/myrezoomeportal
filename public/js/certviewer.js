@@ -266,11 +266,11 @@ function summitform() {
     });
 }
 
-function setCertViewer(sub_id, tx_id) {    
+function setCertViewer(tx_id) {    
     var record = getData(tx_id);
     console.log(record);
     $(".cert-title").html("증명서");    
-    certformatter[sub_id](record.data);
+    certformatter[record.subid](record.data);
 }
 
 function generateQRCode(){
