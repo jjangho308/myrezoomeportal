@@ -35,6 +35,8 @@ var defaultController = {
             Managers.db().getUserDAO().getByPhone(phone, (err, users) => {
                 if (!!err) {
                     next(err);
+                } else if (users.length == 0) {
+                    res.send({});
                 } else if (users.length > 0) {
                     res.send({
                         status: users[0].status == 'L' ? 1 : 2
@@ -247,14 +249,13 @@ var defaultController = {
 };
 
 export default (req, res, next) => {
-    if(defaultController[req.params.cmd] && defaultController[req.params.cmd] instanceof Function){
+    if (defaultController[req.params.cmd] && defaultController[req.params.cmd] instanceof Function) {
         defaultController[req.params.cmd](req, res, next);
-    }
-    else{
+    } else {
         next({
-            err : {
-                code : 200,
-                msg : 'No command found'
+            err: {
+                code: 200,
+                msg: 'No command found'
             }
         })
     }
