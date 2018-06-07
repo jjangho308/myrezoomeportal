@@ -98,10 +98,18 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
 
                             if (!!userBCHashes) {
                                 // NexLedger에 이미 Hash가 저장되어 있는지 확인
-                                var found = false
-                                userBCHashes.result.forEach((item) => {
-                                    found = found || (item.hash === hashedRawData);
-                                });
+                                var found = false;
+
+                                if(userBCHashes.result == null || userBCHashes.result == undefined) {
+                                    found = false;
+                                }
+                                else {
+                                    userBCHashes.result.forEach((item) => {
+                                        found = found || (item.hash === hashedRawData);
+                                    });
+                                }
+
+                                
 
                                 if (found) {
                                     // 있다면 txid 가져온 다음에 아래 로직 수행.
