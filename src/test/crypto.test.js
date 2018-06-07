@@ -28,6 +28,16 @@ describe('Crypto test suit', () => {
         crypto = Managers.crypto();
     });
 
+    it('Encrypt Decrypt instance test', done => {
+        var plain = 'hello, world!';
+
+        crypto.encryptAESECB(plain, crypto.getSystemSymmetricKey(), (err, encrypted) => {
+            crypto.decryptAESECB(encrypted, crypto.getSystemSymmetricKey(), (err, decrypted) => {
+                console.log(decrypted);
+            });
+        });
+    });
+
     /**
      * 
      */
@@ -268,7 +278,7 @@ describe('Crypto test suit', () => {
      * @since 180516
      * @author TACKSU
      */
-    it('AES Encrypt/Decrypt in ECB mode', done => {
+    it.skip('AES Encrypt/Decrypt in ECB mode', done => {
         var plainText = 'Hello, World!';
         crypto.generateAESKey((err, encodedKey) => {
             console.log('AES Key : ' + encodedKey);
@@ -285,7 +295,7 @@ describe('Crypto test suit', () => {
     /**
      * Get system default symmetric key test case'
      */
-    it('Get system default symmetric key test case', () => {
+    it.skip('Get system default symmetric key test case', () => {
         console.log(crypto.getSystemSymmetricKey());
         assert.equal(true, true);
     });

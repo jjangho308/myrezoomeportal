@@ -155,7 +155,7 @@ class CryptoManager extends AbstractManager {
      * @param {function(object, String)} cb Callback function.
      */
     encryptAESECB(plain, key, cb) {
-        process.nextTick(() => {
+        process.nextTick((() => {
             try {
                 var cipher = crypto.createCipher(this.spec.symAlg, Buffer.from(key, this.spec.encode));
                 cipher.setAutoPadding(true);
@@ -165,7 +165,7 @@ class CryptoManager extends AbstractManager {
             } catch (e) {
                 cb(e, null);
             }
-        });
+        }).bind(this));
     }
 
     /**
@@ -179,7 +179,7 @@ class CryptoManager extends AbstractManager {
      * @param {function(object, String)} cb Callback function.
      */
     decryptAESECB(encrypted, key, cb) {
-        process.nextTick(() => {
+        process.nextTick((() => {
             try {
                 var decipher = crypto.createDecipher(this.spec.symAlg, Buffer.from(key, this.spec.encode));
                 var decrypted = decipher.update(encrypted, this.spec.encode, 'utf8');
@@ -188,7 +188,7 @@ class CryptoManager extends AbstractManager {
             } catch (e) {
                 cb(e, null);
             }
-        });
+        }).bind(this));
     }
 
     /**

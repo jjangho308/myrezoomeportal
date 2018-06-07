@@ -1,5 +1,30 @@
 .outer-container {
-    height: 1000px;
+    height: 1230px;
+    width: 780px;
+}
+
+.inner-container {
+    width: 92%;
+    padding: 10px;
+}
+
+.mk-header {
+    text-align: center;    
+    margin-bottom: 50px;
+}
+
+.mk-header {
+    text-align: center;    
+}
+
+.mk-total-score-div {
+    background-color: aliceblue;
+    height: 300px;
+}
+
+.mk-sector-score-div {
+    background-color: bisque;
+    height: 300px;
 }
 
 #qrmessage {    
