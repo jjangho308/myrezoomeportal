@@ -72,6 +72,11 @@ class User extends AbstractModel {
      * @param {*} row 
      */
     static fromRow(row) {
+
+        if(row.IMG_PATH == null) {
+            row.IMG_PATH = "https://s3.ap-northeast-2.amazonaws.com/rezoome/userphoto/user-shape.png";
+        }
+
         return new User({
             sId: row.S_USR_ID,
             uId: row.UID,
