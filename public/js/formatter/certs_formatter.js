@@ -54,13 +54,7 @@ var certformatter= {
 
     "RCCNF0001":function viewformatter(record_data) {
         //mktest
-        $(".outer-container").load("../../viewhtml/RCCNF0001.html", function() {
-            // $("#mk_cert").children('p').eq(0).html(record_data.name);
-            // $("#mk_cert").children('p').eq(1).html(record_data.grade);
-            // $("#mk_cert").children('p').eq(2).html(record_data.point0);
-            // $("#mk_cert").children('p').eq(3).html(record_data.point1);
-            // $("#mk_cert").children('p').eq(4).html(record_data.point2);
-            // $("#mk_cert").children('p').eq(5).html(record_data.point3);
+        $(".outer-container").load("../../viewhtml/RCCNF0001.html", function() {            
             console.log(record_data);
 
             $(".mk-sector-score-div tbody").children('tr').eq(1).children('td').eq(2).html(record_data.re_point4 + "/" + record_data.re_point5);
@@ -80,6 +74,8 @@ var certformatter= {
 
             $(".mk-sector-score-div tbody").children('tr').eq(6).children('td').eq(1).html(record_data.re_point19 + "/" + record_data.re_point20);
             $(".mk-sector-score-div tbody").children('tr').eq(6).children('td').eq(2).html(parseFloat(record_data.re_point21).toFixed(2));
+            
+            createChart(record_data);
         });
     },
 
@@ -194,8 +190,7 @@ var certformatter= {
                 return a["year"] - b["year"] || a["semester"] - b["semester"];
             });
     
-            //30 row
-            
+            //30 row            
             var year = '';
             var semester = '';
     
@@ -260,4 +255,65 @@ var certformatter= {
         });
         
     },
+}
+
+function createChart(record) {
+	// radar chart drawing
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ["경제(지식)", "경제(사고력)", "경제(시사)", "경영(지식)", "경영(사고력)", "경영(시사)"],
+            datasets: [{
+                label: '내 성취도',
+                data: [record.re_point22, record.re_point23, record.re_point24, record.re_point25, record.re_point26, record.re_point27],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            },{
+                label: '평균',
+                data: [record.re_point28, record.re_point29, record.re_point30, record.re_point31, record.re_point32, record.re_point33],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
 }

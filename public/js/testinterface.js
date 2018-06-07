@@ -137,7 +137,7 @@ function test_setTestData() {
                {
                    "data": "{\"ea_asset\":\"49\",\"ex_name\":\"매경TEST\",\"ea_exam_time\":\"20180324\",\"re_grade\":\"보통\",\"re_point0\":\"565\",\"re_point1\":\"44.8139\",\"re_point2\":\"325\",\"re_point3\":\"240\",\"re_point4\":\"60\",\"re_point5\":\"150\",\"re_point6\":\"34.4418\",\"re_point7\":\"175\",\"re_point8\":\"250\",\"re_point9\":\"36.9755\",\"re_point10\":\"90\",\"re_point11\":\"100\",\"re_point12\":\"5.14648\",\"re_point13\":\"50\",\"re_point14\":\"150\",\"re_point15\":\"40.4592\",\"re_point16\":\"120\",\"re_point17\":\"250\",\"re_point18\":\"77.0388\",\"re_point19\":\"70\",\"re_point20\":\"100\",\"re_point21\":\"37.2922\",\"re_point22\":\"40\",\"re_point23\":\"70\",\"re_point24\":\"90\",\"re_point25\":\"33.3333\",\"re_point26\":\"48\",\"re_point27\":\"70\",\"re_point28\":\"38.6698\",\"re_point29\":\"65.7118\",\"re_point30\":\"64.8377\",\"re_point31\":\"34.9169\",\"re_point32\":\"61.8369\",\"re_point33\":\"63.2304\",\"re_point34\":\"0\"}",
                    "hash": "4406db28e9620c4cd538f512dd82fee6dfc0bdf64e3a27148c672e09ee65207e",
-                   "txid": "1fdd9c6fcfab0454e3e04e35582eebb8bcde44c2e38aba13d3cc8d7be771ca58",
+                   "txid": "5eb7e3a558615deab8cdb3e5e5fcc4a17ae035c5ec1de2541e680e4108c8e984",
                    "subid": "RCCNF0001",
                    "stored": "Y",
                    "dftYn": "N"

@@ -225,7 +225,7 @@ $(document).ready(function(){
             $(".header").show();
             $("#footer").show();  
         }, 1000);        
-	});
+    });
 });
 
 function summitform() {
@@ -325,5 +325,6 @@ function generateURL() {
         },
         contentType: 'application/json'
     });
-
 }
+
+
