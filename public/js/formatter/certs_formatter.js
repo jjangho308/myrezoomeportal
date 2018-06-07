@@ -55,12 +55,31 @@ var certformatter= {
     "RCCNF0001":function viewformatter(record_data) {
         //mktest
         $(".outer-container").load("../../viewhtml/RCCNF0001.html", function() {
-            $("#mk_cert").children('p').eq(0).html(record_data.name);
-            $("#mk_cert").children('p').eq(1).html(record_data.grade);
-            $("#mk_cert").children('p').eq(2).html(record_data.point0);
-            $("#mk_cert").children('p').eq(3).html(record_data.point1);
-            $("#mk_cert").children('p').eq(4).html(record_data.point2);
-            $("#mk_cert").children('p').eq(5).html(record_data.point3);
+            // $("#mk_cert").children('p').eq(0).html(record_data.name);
+            // $("#mk_cert").children('p').eq(1).html(record_data.grade);
+            // $("#mk_cert").children('p').eq(2).html(record_data.point0);
+            // $("#mk_cert").children('p').eq(3).html(record_data.point1);
+            // $("#mk_cert").children('p').eq(4).html(record_data.point2);
+            // $("#mk_cert").children('p').eq(5).html(record_data.point3);
+            console.log(record_data);
+
+            $(".mk-sector-score-div tbody").children('tr').eq(1).children('td').eq(2).html(record_data.re_point4 + "/" + record_data.re_point5);
+            $(".mk-sector-score-div tbody").children('tr').eq(1).children('td').eq(3).html(parseFloat(record_data.re_point6).toFixed(2));
+            
+            $(".mk-sector-score-div tbody").children('tr').eq(2).children('td').eq(1).html(record_data.re_point7 + "/" + record_data.re_point8);
+            $(".mk-sector-score-div tbody").children('tr').eq(2).children('td').eq(2).html(parseFloat(record_data.re_point9).toFixed(2));
+
+            $(".mk-sector-score-div tbody").children('tr').eq(3).children('td').eq(1).html(record_data.re_point10 + "/" + record_data.re_point11);
+            $(".mk-sector-score-div tbody").children('tr').eq(3).children('td').eq(2).html(parseFloat(record_data.re_point12).toFixed(2));
+
+            $(".mk-sector-score-div tbody").children('tr').eq(4).children('td').eq(2).html(record_data.re_point13 + "/" + record_data.re_point14);
+            $(".mk-sector-score-div tbody").children('tr').eq(4).children('td').eq(3).html(parseFloat(record_data.re_point15).toFixed(2));
+
+            $(".mk-sector-score-div tbody").children('tr').eq(5).children('td').eq(1).html(record_data.re_point16 + "/" + record_data.re_point17);
+            $(".mk-sector-score-div tbody").children('tr').eq(5).children('td').eq(2).html(parseFloat(record_data.re_point18).toFixed(2));
+
+            $(".mk-sector-score-div tbody").children('tr').eq(6).children('td').eq(1).html(record_data.re_point19 + "/" + record_data.re_point20);
+            $(".mk-sector-score-div tbody").children('tr').eq(6).children('td').eq(2).html(parseFloat(record_data.re_point21).toFixed(2));
         });
     },
 
