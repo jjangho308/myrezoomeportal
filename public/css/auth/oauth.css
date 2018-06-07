@@ -1,0 +1,236 @@
+@import url(https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+body{
+    font-family: SpoqaHanSans;
+}
+
+#top-container{
+    width: 550px;
+    height: 398px;
+    border-radius: 4px;
+    background-color:white;
+    box-shadow: 0 2px 3px 0 rgba(64, 64, 64, 0.5);
+    padding: 0px;
+}
+
+.top-div {
+    text-align: left;
+    font-size: 21px;
+    width: 184px;
+    height: 31px;
+    margin-left: 41px;
+    margin-top: 33px;
+    margin-bottom: 9px;
+    font-weight: bold;
+}
+
+.mid-div {
+    text-align: left;
+    font-size: 13px; 
+    margin-left: 41px;  
+    margin-bottom: 31px;
+}
+
+.mid-div p:nth-child(1){
+    margin-bottom: 5px;
+}
+
+  #grid-table {
+      
+      width: 100%;
+  }
+
+  #grid-table img{
+      width: 79px;
+      height: 79px;
+      margin-top: 26px;
+  }
+
+  #grid-table tr{
+      height: 209px;
+  }
+
+  #grid-table div{
+    height: 128px;
+}
+
+  #grid-table tr td:nth-child(1){
+    width: 41px;
+  }
+  #grid-table tr td:nth-child(2){
+    width: 226px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: solid 1px #e2e8f0;
+    cursor: pointer;
+  }
+  #grid-table tr td:nth-child(3){
+    width: 18px;
+  }
+  #grid-table tr td:nth-child(4){
+    width: 226px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: solid 1px #e2e8f0;
+    cursor: pointer;
+  }
+  #grid-table tr td:nth-child(5){
+    width: 41px;
+  }
+
+
+  #grid-table tr td:nth-child(2):hover{
+    background-color: #e7f3fd;
+    border: solid 1px #1792f2;
+  }
+
+  #grid-table tr td:nth-child(4):hover{
+    background-color: #e7f3fd;
+    border: solid 1px #1792f2;
+  }
+
+  .title{
+    font-family: SpoqaHanSans;
+    font-size: 19px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #4d5256;
+  }
+
+  .sub-title{
+    font-family: SpoqaHanSans;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.55;
+    letter-spacing: normal;
+    text-align: center;
+    color: #878d91;
+
+  }
+
+
+
+
+/* 로그인 */
+
+.login-container{
+    width: 395px;
+    height: 360px;
+    background-color: #f2f5f8;
+ 
+}
+
+.login-info{
+    width: 395px;
+    height: 135px;
+    background-color: #3c435f;
+}
+
+.login-info img{
+    width: 158px;
+    height: 18px;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    margin-left: 119px;
+    margin-right: 118px;
+}
+
+.login-sub{
+    font-family: SpoqaHanSans;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.69;
+    letter-spacing: normal;
+    text-align: center;
+    color: #d7dde3;
+}
+
+.pw-sub{
+    font-family: SpoqaHanSans;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    margin-left: 50px;
+    margin-top: 34px;
+}
+
+input{
+    width: 295px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: solid 1px #ced3d6;
+    margin-left: 50px;
+    margin-bottom: 18px;
+    text-indent: 16px;
+}
+
+.text-placeholder{
+    margin-left: 50px;
+}
+
+.login-button{
+  width: 295px;
+  height: 50px;
+  border-radius: 3px;
+  background-color: #4c80f1;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
+  border: none;
+  margin-left: 50px;
+}
+
+.find-password-div{
+    width: 69px;
+    height: 14px;
+    padding: 21px 163px 25px 163px;
+    border-top: solid 1px #e2e8f0;
+    margin-top: 26px;
+    background-color: #f2f5f8;
+}
+.find-password-div a{
+    font-family: SpoqaHanSans;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    text-align: center;
+    color: #878d91;
+}
+
+.phone-info-div {
+    width: 395px;
+    height: 60px;
+    border-top: solid 1px #e2e8f0;
+    margin-top: 26px;
+    background-color: #f2f5f8;
+}
+
+.phone-info-div p{
+    font-family: SpoqaHanSans;
+    font-size: 10px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #878d91;
+    line-height: 1.69;
+}
