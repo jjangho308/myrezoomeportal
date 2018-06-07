@@ -18,7 +18,7 @@ var router = express.Router();
  * @since 180509
  * @author TACKSU
  */
-router.use('/:version/:command', apiTokenExtractor);
+// router.use('/:version/:command', apiTokenExtractor);
 router.use('/:version/:command', ctrl);
 
 export default router;

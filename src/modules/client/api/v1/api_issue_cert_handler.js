@@ -12,6 +12,12 @@ import Util from '../../../../util/util';
 import CertModel from '../../../../models/cert/cert';
 import SharedCertModel from '../../../../models/cert/shared_cert';
 
+/**
+ * Handler for IssueCertAPIV1RequestEntity. <br />
+ * 
+ * @since 180604
+ * @author TACKSU
+ */
 class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
 
     /**
@@ -36,6 +42,9 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
      * 
      * @param {IssueCertAPIV1RequestEntity} requestEntity 
      * @param {*} done 
+     * 
+     * @since 180604
+     * @author TACKSU
      */
     request(requestEntity, done) {
         /**
@@ -44,7 +53,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
          * 3. 원본을 암호화 하여 공유 db를 생성하고
          * 4. URL Link를 생성하여 respons한다.
          */
-        
+
         var uId = requestEntity.uId;
         var clientId = requestEntity.clientId;
         //var data = !!requestEntity.data && requestEntity.data instanceof String ? jsonminify(data) : "";
@@ -116,9 +125,12 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                             console.log(putRecordResponse);
                                         });
 
-                                        var crypto = Managers.crypto();      
+                                        var crypto = Managers.crypto();
                                         // todo encrypte data spec 재확인 > 증명서생성 핸들러가 바뀜                                                                                  
-                                        crypto.encryptAESECB(JSON.stringify({"data":data, "subid":"RCCNF0001"}), crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
+                                        crypto.encryptAESECB(JSON.stringify({
+                                            "data": data,
+                                            "subid": "RCCNF0001"
+                                        }), crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
                                             if (!!err) {
                                                 done(ClientRequest.RESULT_FAILURE, {
                                                     err: {
@@ -144,12 +156,12 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                                             }
                                                         });
                                                     } else if (insertCertId > 0) {
-                                                        
+
                                                         var sharedUrl = Util.randomStr({
                                                             length: 6,
                                                             prefix: 'c'
                                                         });
-                                                        
+
                                                         var sharedCert = new SharedCertModel({
                                                             certId: certId,
                                                             url: sharedUrl,

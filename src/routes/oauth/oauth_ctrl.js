@@ -142,7 +142,7 @@ var defaultController = {
             clientSecret = req.query.client_secret,
             responseType = req.query.response_type,
             state = req.query.state,
-            redirectUri = req.query.redired_uri;
+            redirectUri = req.query.redirect_uri;
 
         if (!clientId) {
             // TODO Invalid parameter
@@ -247,5 +247,15 @@ var defaultController = {
 };
 
 export default (req, res, next) => {
-    defaultController[req.params.cmd](req, res, next);
+    if(defaultController[req.params.cmd] && defaultController[req.params.cmd] instanceof Function){
+        defaultController[req.params.cmd](req, res, next);
+    }
+    else{
+        next({
+            err : {
+                code : 200,
+                msg : 'No command found'
+            }
+        })
+    }
 };;
