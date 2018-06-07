@@ -42,8 +42,8 @@ var formatter= {
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>매경TEST</p>';
-            htmldiv = htmldiv + '<p>'+record.userid + '</p>';
-            htmldiv = htmldiv + '<p>'+record.grade +' / '+ record.point0+'</p>';
+            htmldiv = htmldiv + '<p>제 '+record.ea_asset + '회</p>';
+            htmldiv = htmldiv + '<p>'+record.re_grade +' , '+ record.re_point0+'</p>';
             htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
