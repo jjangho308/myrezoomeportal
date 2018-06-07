@@ -58,6 +58,62 @@ background-color:#dadada;
     margin: 1.5px;
 }
 
+.main-body-footer {
+	margin: auto;
+	width: 780px;
+
+}
+
+.main-body-footer-left {
+	float: left;
+	width: 300px;
+	height:40px;
+	font-size: 12px;
+}
+
+.main-body-footer-right {
+	float: left;
+}
+
+.main-body-footer-1 {
+	width: 45px;
+	height: 18px;
+	font-family: SpoqaHanSans;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #878d91;
+}
+
+.main-body-footer-2 {
+	width: 34px;
+	height: 18px;
+	font-family: SpoqaHanSans;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #878d91;
+}
+
+.main-body-footer-3 {
+	width: 58px;
+	height: 18px;
+	font-family: SpoqaHanSans;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #878d91;
+}
+
 @media screen and (min-width: 1000px){
 	body{
 		background-color: #f2f5f8;
