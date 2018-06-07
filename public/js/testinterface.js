@@ -135,25 +135,9 @@ function test_setTestData() {
            "iv": "ENCRYPTED_IV",
            "records": [
                {
-                   "data": "{\"userid\":\"123456\",\"point0\":\"800\",\"point1\":\"95\",\"point2\":\"500\",\"point3\":\"300\",\"name\":\"박헌욱\",\"grade\":\"우수\",\"date\":\"2018-04-10 05:18:29.0\"}",
+                   "data": "{\"ea_asset\":\"49\",\"ex_name\":\"매경TEST\",\"ea_exam_time\":\"20180324\",\"re_grade\":\"보통\",\"re_point0\":\"565\",\"re_point1\":\"44.8139\",\"re_point2\":\"325\",\"re_point3\":\"240\",\"re_point4\":\"60\",\"re_point5\":\"150\",\"re_point6\":\"34.4418\",\"re_point7\":\"175\",\"re_point8\":\"250\",\"re_point9\":\"36.9755\",\"re_point10\":\"90\",\"re_point11\":\"100\",\"re_point12\":\"5.14648\",\"re_point13\":\"50\",\"re_point14\":\"150\",\"re_point15\":\"40.4592\",\"re_point16\":\"120\",\"re_point17\":\"250\",\"re_point18\":\"77.0388\",\"re_point19\":\"70\",\"re_point20\":\"100\",\"re_point21\":\"37.2922\",\"re_point22\":\"40\",\"re_point23\":\"70\",\"re_point24\":\"90\",\"re_point25\":\"33.3333\",\"re_point26\":\"48\",\"re_point27\":\"70\",\"re_point28\":\"38.6698\",\"re_point29\":\"65.7118\",\"re_point30\":\"64.8377\",\"re_point31\":\"34.9169\",\"re_point32\":\"61.8369\",\"re_point33\":\"63.2304\",\"re_point34\":\"0\"}",
                    "hash": "4406db28e9620c4cd538f512dd82fee6dfc0bdf64e3a27148c672e09ee65207e",
                    "txid": "1fdd9c6fcfab0454e3e04e35582eebb8bcde44c2e38aba13d3cc8d7be771ca58",
-                   "subid": "RCCNF0001",
-                   "stored": "Y",
-                   "dftYn": "N"
-               },
-               {
-                   "data": "{\"userid\":\"123456\",\"point0\":\"999\",\"point1\":\"99\",\"point2\":\"600\",\"point3\":\"399\",\"name\":\"박헌욱\",\"grade\":\"짱\",\"date\":\"2018-04-18 08:39:03.0\"}",
-                   "hash": "8e031d8fb7711ad6dbccbce85913b01ecec3643543da8e1245c8f232a63d3f1c",
-                   "txid": "c910c7a45583553532dc8c8c4a595835553d8d4e089b2f82f66e24ee4db8ad02",
-                   "subid": "RCCNF0001",
-                   "stored": "Y",
-                   "dftYn": "Y"
-               },
-               {
-                   "data": "{\"userid\":\"123456\",\"point0\":\"100\",\"point1\":\"10\",\"point2\":\"50\",\"point3\":\"50\",\"name\":\"박헌욱\",\"grade\":\"병신\",\"date\":\"2018-04-18 17:39:27.0\"}",
-                   "hash": "917cd80cd2127db71cc3f89519d78b2eeff0328f3885fb10b53e0c1b51c25fbb",
-                   "txid": "e3c02ed226c2ddc9d74dbdc6434e0458c7f9c10156d4b7b04455eb9a4392822c",
                    "subid": "RCCNF0001",
                    "stored": "Y",
                    "dftYn": "N"
