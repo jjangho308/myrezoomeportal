@@ -34,7 +34,7 @@ var formatter= {
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
             htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            htmldiv = htmldiv + '<span>'+record.date+'</span>';
+            htmldiv = htmldiv + '<span>'+record.ea_exam_time+'</span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/mktest.png" alt="">';
@@ -43,7 +43,7 @@ var formatter= {
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>매경TEST</p>';
             htmldiv = htmldiv + '<p>제 '+record.ea_asset + '회</p>';
-            htmldiv = htmldiv + '<p>'+record.re_grade +' , '+ record.re_point0+'</p>';
+            htmldiv = htmldiv + '<p>'+record.re_grade +', '+ record.re_point0+'</p>';
             htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';
         htmldiv = htmldiv + '</div>';
