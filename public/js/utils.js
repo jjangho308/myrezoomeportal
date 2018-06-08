@@ -77,6 +77,10 @@ function getRSAKey() {
     var session_rsa_pub = sessionStorage.getItem("rsa_pub");
     var session_rsa_prv = sessionStorage.getItem("rsa_prv");
 
+    if(session_rsa_pub == null || session_rsa_prv == null) {
+        genRsaKey();
+    }
+
     var json_rsa_prv = JSON.parse(session_rsa_prv); 
     var json_rsa_pub = JSON.parse(session_rsa_pub); 
 
