@@ -30,10 +30,8 @@ $(document).ready(function(){
 				current_active += 1;
 				
 				if(current_active > 2){
-					current_active = 0;
 					$("#cert-verify").css("display", "none");
 					$("#cert-viewer").css("display", "block");
-
 					certformatter[json_decrypted.subid](json_decrypted.data);								
 				}
 				$(`#circle-${current_active}`).css("background-color","#4a90e2");									
