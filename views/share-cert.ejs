@@ -11,7 +11,6 @@
     <script src="/js/formatter/certs_formatter.js"></script>
     
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
 </head>
 <body>
     <script>         
@@ -52,23 +51,27 @@
 </div>     
 
 <div id="cert-viewer">
-    <div class="header">           
+    <div class="header">
+   
+        <a href="/certs"></a>
         <div>
             <p>증명서 상세보기</p>            
-        </div>        
+        </div>
+        <button style="visibility: hidden;" id="more-button">···</button>
         <a href="#cert-add-dialog" rel="modal:open">
-            <button class="primary-solid-btn">   전송
+        <button class="primary-solid-btn">   전송
             </button>
-        </a>    
+            </a>
+        
         <button class="border-btn">다운로드</button>
-        <button id="btn_print" class="border-btn">인쇄</button>    
+        <button id="btn_print" class="border-btn">인쇄</button>
+        
         <div id="more-button-div">
             <p>항목#1</p>
             <p>항목#2</p>
             <p>항목#3</p>
-        </div>                     
+        </div>         
     </div>  
-
 
     <div class="main-body">
         <div class="outer-container">

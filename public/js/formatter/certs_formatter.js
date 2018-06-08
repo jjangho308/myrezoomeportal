@@ -75,7 +75,54 @@ var certformatter= {
             $(".mk-sector-score-div tbody").children('tr').eq(6).children('td').eq(1).html(record_data.re_point19 + "/" + record_data.re_point20);
             $(".mk-sector-score-div tbody").children('tr').eq(6).children('td').eq(2).html(parseFloat(record_data.re_point21).toFixed(2));
             
-            createChart(record_data);
+            var record = record_data;
+
+            var canvas = $("#myChart");    
+            var myChart = new Chart(canvas, {
+                type: 'radar',
+                data: {
+                    labels: ["경제(지식)", "경제(사고력)", "경제(시사)", "경영(지식)", "경영(사고력)", "경영(시사)"],
+                    datasets: [{
+                        pointStyle: 'dash',
+                        label: '내 성취도',
+                        data: [record.re_point22, record.re_point23, record.re_point24, record.re_point25, record.re_point26, record.re_point27],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)'
+                        ],
+                        borderWidth: 1
+                    },{
+                        pointStyle: 'dash',
+                        label: '평균',
+                        data: [record.re_point28, record.re_point29, record.re_point30, record.re_point31, record.re_point32, record.re_point33],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.2)'
+                            
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235,1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    // scales: {
+                    //     yAxes: [{
+                    //         ticks: {
+                    //             beginAtZero:false
+                    //         }
+                    //     },]
+                    // }
+                }
+            });
+            
+            setInterval(function(){
+                var dataURL = canvas.get(0).toDataURL("image/png"); 
+                $("#myChart").hide();
+                canvas.replaceWith($("<img></img>").attr("src", dataURL));
+            }, 3100);  
         });
     },
 
