@@ -202,12 +202,12 @@ $(document).ready(function(){
         summitform();     
     });
 
-    $("#btn_print").click(function() {	
+    $("#btn_print").click(function(event) {
+        event.stopPropagation();
 
 		$(".header").hide();
         $("#footer").hide();
-        generateQRCode(); 
-        
+        generateQRCode();        
         setInterval(function(){
             const html = document.querySelector('html');
             const printContents = document.querySelector('.main-body').innerHTML;
@@ -218,13 +218,12 @@ $(document).ready(function(){
             printDiv.innerHTML = printContents;
             document.body.style.display = 'none';
             window.print();
-            factory.printing.Print(false, window) 
             document.body.style.display = 'block';
             printDiv.style.display = 'none';
 
             $(".header").show();
-            $("#footer").show();  
-        }, 1000);        
+            $("#footer").show();              
+        }, 100);        
     });
 });
 
