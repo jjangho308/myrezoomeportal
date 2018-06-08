@@ -66,19 +66,22 @@ background-color:#dadada;
 
 .main-body-footer-left {
 	float: left;
-	width: 700px;
+	width: 610px;
 	height:40px;
 	font-size: 12px;
 }
 
 .main-body-footer-right {
 	float: left;
+	width: 100px;
+	height: 40px;
+	border-radius: 4px;
+	background-color: #979fa9;
 }
 
 .main-body-footer-1 {
 	width: 135px;
 	height: 18px;
-	font-family: SpoqaHanSans;
 	font-size: 12px;
 	font-weight: normal;
 	font-style: normal;
@@ -86,12 +89,12 @@ background-color:#dadada;
 	line-height: normal;
 	letter-spacing: normal;
 	color: #878d91;
+	border: initial;
 }
 
 .main-body-footer-2 {
 	width: 150px;
 	height: 18px;
-	font-family: SpoqaHanSans;
 	font-size: 12px;
 	font-weight: normal;
 	font-style: normal;
@@ -99,12 +102,12 @@ background-color:#dadada;
 	line-height: normal;
 	letter-spacing: normal;
 	color: #878d91;
+	border: initial;
 }
 
 .main-body-footer-3 {
 	width: 400px;
 	height: 18px;
-	font-family: SpoqaHanSans;
 	font-size: 12px;
 	font-weight: normal;
 	font-style: normal;
@@ -112,13 +115,35 @@ background-color:#dadada;
 	line-height: normal;
 	letter-spacing: normal;
 	color: #878d91;
+	border: initial;
+}
+
+.main-body-footer-4 {
+	border: initial;
+}
+
+.main-body-footer-5 {
+	border: initial;
+}
+
+.main-body-footer-6 {
+	border: initial;
 }
 
 .main-body-footer-right-button1 {
-	width: 100px;
-	height: 40px;
-	border-radius: 4px;
-	background-color: #979fa9;
+	position: relative;
+	top : 7px;
+	left: 21px;
+	width: 55px;
+	height: 20px;
+	font-size: 14px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: right;
+	color: #ffffff;
 }
 
 @media screen and (min-width: 1000px){
