@@ -207,6 +207,7 @@ $(document).ready(function(){
 
 		$(".header").hide();
         $("#footer").hide();
+        $(".main-body-footer").hide();
         generateQRCode();        
         setInterval(function(){
             const html = document.querySelector('html');
@@ -222,7 +223,8 @@ $(document).ready(function(){
             printDiv.style.display = 'none';
 
             $(".header").show();
-            $("#footer").show();              
+            $("#footer").show();   
+            $(".main-body-footer").show();           
         }, 100);        
     });
 });

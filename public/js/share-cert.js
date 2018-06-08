@@ -38,10 +38,35 @@ $(document).ready(function(){
 								
 			}, 1000);
 		}
-	}catch(exception) {
+	}	catch(exception) {
 		console.log(exception);
 	}
 
+	$("#btn_print").click(function(event) {
+        event.stopPropagation();
+
+		$(".header").hide();
+        $("#footer").hide();
+        $(".main-body-footer").hide();
+        generateQRCode();        
+        setInterval(function(){
+            const html = document.querySelector('html');
+            const printContents = document.querySelector('.main-body').innerHTML;
+            const printDiv = document.createElement("DIV");
+            printDiv.className = "print-div";
+            
+            html.appendChild(printDiv);
+            printDiv.innerHTML = printContents;
+            document.body.style.display = 'none';
+            window.print();
+            document.body.style.display = 'block';
+            printDiv.style.display = 'none';
+
+            $(".header").show();
+            $("#footer").show();   
+            $(".main-body-footer").show();           
+        }, 100);        
+    });
 });
 
 function verify(passcode) {
@@ -64,7 +89,7 @@ function verify(passcode) {
 					iv: CryptoJS.enc.Base64.parse(encodedIv)
 				});
 				
-				//process verify
+				//1ocess verify
 				json_decrypted = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));    				
 			} else {
 				json_decrypted = certdata.data;
