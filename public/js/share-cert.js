@@ -16,7 +16,7 @@ $(document).ready(function(){
 	try {
 		if(certdata.encrypted == false) {
 			json_decrypted = certdata.data;
-			certformatter[json_decrypted.subid](json_decrypted.data);			
+			
 
 			$(".main-container").css("display", "none");
 			$(".loading-container").css("display", "block");
@@ -34,7 +34,7 @@ $(document).ready(function(){
 					$("#cert-verify").css("display", "none");
 					$("#cert-viewer").css("display", "block");
 
-					
+					certformatter[json_decrypted.subid](json_decrypted.data);								
 				}
 				$(`#circle-${current_active}`).css("background-color","#4a90e2");									
 								
@@ -114,9 +114,6 @@ function verify(passcode) {
 					current_active = 0;
 					$("#cert-verify").css("display", "none");
 					$("#cert-viewer").css("display", "block");
-
-					certformatter[record.subid](record.data);
-					
 				}
 				$(`#circle-${current_active}`).css("background-color","#4a90e2");									
 								
