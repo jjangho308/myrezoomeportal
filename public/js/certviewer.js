@@ -1,3 +1,5 @@
+var record;
+
 $(document).ready(function(){
 
     //common
@@ -202,12 +204,13 @@ $(document).ready(function(){
         summitform();     
     });
 
-    $("#btn_print").click(function() {	
+    $("#btn_print").click(function(event) {
+        event.stopPropagation();
 
 		$(".header").hide();
         $("#footer").hide();
-        generateQRCode(); 
-        
+        $(".main-body-footer").hide();
+        generateQRCode();        
         setInterval(function(){
             const html = document.querySelector('html');
             const printContents = document.querySelector('.main-body').innerHTML;
@@ -218,14 +221,19 @@ $(document).ready(function(){
             printDiv.innerHTML = printContents;
             document.body.style.display = 'none';
             window.print();
-            factory.printing.Print(false, window) 
             document.body.style.display = 'block';
             printDiv.style.display = 'none';
 
+            var dataURL = $("#myChart").toBase64Image();
+            //var dataURL = canvas.get(0).toDataURL("image/png");
+            //$("#myChart").hide();
+            canvas.replaceWith($("<img></img>").attr("src", dataURL));
+
             $(".header").show();
-            $("#footer").show();  
-        }, 1000);        
-	});
+            $("#footer").show();   
+            $(".main-body-footer").show();           
+        }, 100);        
+    });
 });
 
 function summitform() {
@@ -267,7 +275,7 @@ function summitform() {
 }
 
 function setCertViewer(tx_id) {    
-    var record = getData(tx_id);
+    record = getData(tx_id);
     console.log(record);
     $(".cert-title").html("증명서");    
     certformatter[record.subid](record.data);
@@ -325,5 +333,6 @@ function generateURL() {
         },
         contentType: 'application/json'
     });
-
 }
+
+

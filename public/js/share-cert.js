@@ -16,7 +16,7 @@ $(document).ready(function(){
 	try {
 		if(certdata.encrypted == false) {
 			json_decrypted = certdata.data;
-			certformatter[json_decrypted.subid](json_decrypted.data);			
+			
 
 			$(".main-container").css("display", "none");
 			$(".loading-container").css("display", "block");
@@ -25,23 +25,49 @@ $(document).ready(function(){
 			
 			$(`#circle-${current_active}`).css("background-color","#4a90e2");
 			
-			setInterval(function(){
+			var mytimer = setInterval(function(){
 				$(`#circle-${current_active}`).css("background-color","#dadada");
 				current_active += 1;
 				
-				if(current_active > 2){
-					current_active = 0;
+				if(current_active == 2){
 					$("#cert-verify").css("display", "none");
-					$("#cert-viewer").css("display", "block");
+					$("#cert-viewer").css("display", "block");					
+					certformatter[json_decrypted.subid](json_decrypted.data);		
+					clearInterval(mytimer);
 				}
 				$(`#circle-${current_active}`).css("background-color","#4a90e2");									
 								
 			}, 1000);
 		}
-	}catch(exception) {
+	}	catch(exception) {
 		console.log(exception);
 	}
 
+	$("#btn_print").click(function(event) {
+        event.stopPropagation();
+
+		$(".header").hide();
+        $("#footer").hide();
+        $(".main-body-footer").hide();
+               
+        setInterval(function(){
+            const html = document.querySelector('html');
+            const printContents = document.querySelector('.main-body').innerHTML;
+            const printDiv = document.createElement("DIV");
+            printDiv.className = "print-div";
+            
+            html.appendChild(printDiv);
+            printDiv.innerHTML = printContents;
+            document.body.style.display = 'none';
+            window.print();
+            document.body.style.display = 'block';
+            printDiv.style.display = 'none';
+
+            $(".header").show();
+            $("#footer").show();   
+            $(".main-body-footer").show();           
+        }, 100);        
+	});
 });
 
 function verify(passcode) {
@@ -64,7 +90,7 @@ function verify(passcode) {
 					iv: CryptoJS.enc.Base64.parse(encodedIv)
 				});
 				
-				//process verify
+				//1ocess verify
 				json_decrypted = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));    				
 			} else {
 				json_decrypted = certdata.data;

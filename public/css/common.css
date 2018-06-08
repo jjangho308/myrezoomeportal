@@ -1,10 +1,36 @@
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
+/* @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css); */
+
+@font-face {
+    font-family: Spoqa Han Sans;
+    font-weight: 700;
+    src: local(Spoqa Han Sans Bold), local(Spoqa Han Sans Bold), url(../fonts/Spoqa%20Han%20Sans%20Bold.woff2) format(woff2), url(../fonts/Spoqa%20Han%20Sans%20Bold.woff) format(woff), url(../fonts/Spoqa%20Han%20Sans%20Bold.ttf) format(truetype); 
+}
+   
+   @font-face {
+    font-family: Spoqa Han Sans;
+    font-weight: 400;
+    src: local(Spoqa Han Sans Regular), local(Spoqa Han Sans Regular), url(../fonts/Spoqa%20Han%20Sans%20Regular.woff2) format(woff2), url(../fonts/SpoqaHanSans-Regular.woff) format(woff), url(../fonts/Spoqa%20Han%20Sans%20Regular.ttf) format(truetype); 
+}
+   
+   @font-face {
+    font-family: Spoqa Han Sans;
+    font-weight: 300;
+    src: local(Spoqa Han Sans Light), local(Spoqa Han Sans Light), url(../fonts/Spoqa%20Han%20Sans%20Light.woff2) format(woff2), url(../fonts/Spoqa%20Han%20Sans%20Light.woff) format(“woff”), url(../fonts/Spoqa%20Han%20Sans%20Light.ttf) format(truetype); 
+}
+   
+   @font-face {
+    font-family: ‘Spoqa Han Sans’;
+    font-weight: 100;
+   src: local(Spoqa Han Sans Thin), local(Spoqa Han Sans Thin), url(../fonts/Spoqa%20Han%20Sans%20Thin.woff2) format(woff2), url(../fonts/Spoqa%20Han%20Sans%20Thin.woff) format(woff), url(../fonts/Spoqa%20Han%20Sans%20Thin.ttf) format(truetype); 
+}
+
+
 
 body{
-  font-family: 'Spoqa Han Sans';
-  
-      min-width: 1680px;
+    font-family: 'Spoqa Han Sans';
+    min-width: 1680px;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 a{

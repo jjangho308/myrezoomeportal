@@ -54,32 +54,33 @@ var certformatter= {
 
     "RCCNF0001":function viewformatter(record_data) {
         //mktest
-        $(".outer-container").load("../../viewhtml/RCCNF0001.html", function() {
-            // $("#mk_cert").children('p').eq(0).html(record_data.name);
-            // $("#mk_cert").children('p').eq(1).html(record_data.grade);
-            // $("#mk_cert").children('p').eq(2).html(record_data.point0);
-            // $("#mk_cert").children('p').eq(3).html(record_data.point1);
-            // $("#mk_cert").children('p').eq(4).html(record_data.point2);
-            // $("#mk_cert").children('p').eq(5).html(record_data.point3);
+        $(".outer-container").load("../../viewhtml/RCCNF0001.html", function() {            
             console.log(record_data);
 
-            $(".mk-sector-score-div tbody").children('tr').eq(1).children('td').eq(2).html(record_data.re_point4 + "/" + record_data.re_point5);
-            $(".mk-sector-score-div tbody").children('tr').eq(1).children('td').eq(3).html(parseFloat(record_data.re_point6).toFixed(2));
+            $("#user-info-div").children('p').eq(0).html("박헌욱");
+            $("#user-info-div").children('p').eq(1).html("870123-1111111");            
+            $("#user-info-div").children('p').eq(2).html("1234567");
+            $("#user-info-div").children('p').eq(3).html("2017.07.16");
+
+            $("#main-score-info-div").children('p').eq(0).html(record_data.grade);
+            $("#main-score-info-div").children('p').eq(1).html(parseFloat(record_data.re_point1).toFixed(2));            
+            $("#main-score-info-div").children('p').eq(2).html(record_data.re_point2);
+            $("#main-score-info-div").children('p').eq(3).html(record_data.re_point3);
+
+            $("#detail-score-info-div").children('p').eq(0).html(record_data.re_point4 + "/" + record_data.re_point5);
+            $("#detail-score-info-div").children('p').eq(6).html(parseFloat(record_data.re_point6).toFixed(2));            
+            $("#detail-score-info-div").children('p').eq(1).html(record_data.re_point7 + "/" + record_data.re_point8);
+            $("#detail-score-info-div").children('p').eq(7).html(parseFloat(record_data.re_point9).toFixed(2));
+            $("#detail-score-info-div").children('p').eq(2).html(record_data.re_point10 + "/" + record_data.re_point11);
+            $("#detail-score-info-div").children('p').eq(8).html(parseFloat(record_data.re_point12).toFixed(2));
+            $("#detail-score-info-div").children('p').eq(3).html(record_data.re_point13 + "/" + record_data.re_point14);
+            $("#detail-score-info-div").children('p').eq(9).html(parseFloat(record_data.re_point15).toFixed(2));
+            $("#detail-score-info-div").children('p').eq(4).html(record_data.re_point16 + "/" + record_data.re_point17);
+            $("#detail-score-info-div").children('p').eq(10).html(parseFloat(record_data.re_point18).toFixed(2));
+            $("#detail-score-info-div").children('p').eq(5).html(record_data.re_point19 + "/" + record_data.re_point20);
+            $("#detail-score-info-div").children('p').eq(11).html(parseFloat(record_data.re_point21).toFixed(2));
             
-            $(".mk-sector-score-div tbody").children('tr').eq(2).children('td').eq(1).html(record_data.re_point7 + "/" + record_data.re_point8);
-            $(".mk-sector-score-div tbody").children('tr').eq(2).children('td').eq(2).html(parseFloat(record_data.re_point9).toFixed(2));
-
-            $(".mk-sector-score-div tbody").children('tr').eq(3).children('td').eq(1).html(record_data.re_point10 + "/" + record_data.re_point11);
-            $(".mk-sector-score-div tbody").children('tr').eq(3).children('td').eq(2).html(parseFloat(record_data.re_point12).toFixed(2));
-
-            $(".mk-sector-score-div tbody").children('tr').eq(4).children('td').eq(2).html(record_data.re_point13 + "/" + record_data.re_point14);
-            $(".mk-sector-score-div tbody").children('tr').eq(4).children('td').eq(3).html(parseFloat(record_data.re_point15).toFixed(2));
-
-            $(".mk-sector-score-div tbody").children('tr').eq(5).children('td').eq(1).html(record_data.re_point16 + "/" + record_data.re_point17);
-            $(".mk-sector-score-div tbody").children('tr').eq(5).children('td').eq(2).html(parseFloat(record_data.re_point18).toFixed(2));
-
-            $(".mk-sector-score-div tbody").children('tr').eq(6).children('td').eq(1).html(record_data.re_point19 + "/" + record_data.re_point20);
-            $(".mk-sector-score-div tbody").children('tr').eq(6).children('td').eq(2).html(parseFloat(record_data.re_point21).toFixed(2));
+            createChart(record_data);
         });
     },
 
@@ -194,8 +195,7 @@ var certformatter= {
                 return a["year"] - b["year"] || a["semester"] - b["semester"];
             });
     
-            //30 row
-            
+            //30 row            
             var year = '';
             var semester = '';
     
@@ -260,4 +260,54 @@ var certformatter= {
         });
         
     },
+}
+
+function createChart(record) {
+	// radar chart drawing
+    var canvas = $("#myChart");    
+    var myChart = new Chart(canvas, {
+        type: 'radar',
+        data: {
+            labels: ["경제(지식)", "경제(사고력)", "경제(시사)", "경영(지식)", "경영(사고력)", "경영(시사)"],
+            datasets: [{
+                pointStyle: 'dash',
+                label: '내 성취도',
+                data: [record.re_point22, record.re_point23, record.re_point24, record.re_point25, record.re_point26, record.re_point27],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)'
+                ],
+                borderWidth: 1
+            },{
+                pointStyle: 'dash',
+                label: '평균',
+                data: [record.re_point28, record.re_point29, record.re_point30, record.re_point31, record.re_point32, record.re_point33],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)'
+                    
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235,1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            // scales: {
+            //     yAxes: [{
+            //         ticks: {
+            //             beginAtZero:false
+            //         }
+            //     },]
+            // }            
+        }
+    });
+
+    setInterval(function(){    
+        var dataURL = myChart.toBase64Image();
+        canvas.replaceWith($("<img></img>").attr("src", dataURL));
+    }, 100); 
+  
 }
