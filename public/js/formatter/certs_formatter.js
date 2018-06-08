@@ -304,18 +304,10 @@ function createChart(record) {
             // }            
         }
     });
-    
-    if($(".cert-verify").is(":visible")) {
-        setInterval(function(){    
-            var dataURL = myChart.toBase64Image();
-            $("#myChart").hide();
-            canvas.replaceWith($("<img></img>").attr("src", dataURL));
-        }, 3100);  
-    } else {
-        setInterval(function(){    
-            var dataURL = myChart.toBase64Image();
-            $("#myChart").hide();
-            canvas.replaceWith($("<img></img>").attr("src", dataURL));
-        }, 100);
-    }
+
+    setInterval(function(){    
+        var dataURL = myChart.toBase64Image();
+        canvas.replaceWith($("<img></img>").attr("src", dataURL));
+    }, 100); 
+  
 }

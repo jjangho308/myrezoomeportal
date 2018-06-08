@@ -33,6 +33,8 @@ $(document).ready(function(){
 					current_active = 0;
 					$("#cert-verify").css("display", "none");
 					$("#cert-viewer").css("display", "block");
+
+					
 				}
 				$(`#circle-${current_active}`).css("background-color","#4a90e2");									
 								
@@ -66,7 +68,7 @@ $(document).ready(function(){
             $("#footer").show();   
             $(".main-body-footer").show();           
         }, 100);        
-    });
+	});
 });
 
 function verify(passcode) {
@@ -112,6 +114,9 @@ function verify(passcode) {
 					current_active = 0;
 					$("#cert-verify").css("display", "none");
 					$("#cert-viewer").css("display", "block");
+
+					certformatter[record.subid](record.data);
+					
 				}
 				$(`#circle-${current_active}`).css("background-color","#4a90e2");									
 								

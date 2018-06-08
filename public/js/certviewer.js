@@ -1,3 +1,5 @@
+var record;
+
 $(document).ready(function(){
 
     //common
@@ -222,6 +224,11 @@ $(document).ready(function(){
             document.body.style.display = 'block';
             printDiv.style.display = 'none';
 
+            var dataURL = $("#myChart").toBase64Image();
+            //var dataURL = canvas.get(0).toDataURL("image/png");
+            //$("#myChart").hide();
+            canvas.replaceWith($("<img></img>").attr("src", dataURL));
+
             $(".header").show();
             $("#footer").show();   
             $(".main-body-footer").show();           
@@ -268,7 +275,7 @@ function summitform() {
 }
 
 function setCertViewer(tx_id) {    
-    var record = getData(tx_id);
+    record = getData(tx_id);
     console.log(record);
     $(".cert-title").html("증명서");    
     certformatter[record.subid](record.data);
