@@ -25,14 +25,15 @@ $(document).ready(function(){
 			
 			$(`#circle-${current_active}`).css("background-color","#4a90e2");
 			
-			setInterval(function(){
+			var mytimer = setInterval(function(){
 				$(`#circle-${current_active}`).css("background-color","#dadada");
 				current_active += 1;
 				
-				if(current_active > 2){
+				if(current_active == 2){
 					$("#cert-verify").css("display", "none");
-					$("#cert-viewer").css("display", "block");
-					certformatter[json_decrypted.subid](json_decrypted.data);								
+					$("#cert-viewer").css("display", "block");					
+					certformatter[json_decrypted.subid](json_decrypted.data);		
+					clearInterval(mytimer);
 				}
 				$(`#circle-${current_active}`).css("background-color","#4a90e2");									
 								
