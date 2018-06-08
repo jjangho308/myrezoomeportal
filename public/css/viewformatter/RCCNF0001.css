@@ -23,7 +23,7 @@
 }
 
 .mk-sector-score-div {    
-    height: 420px;
+    height: 300px;
 }
 
 .mk-sector-score-div table {
@@ -65,6 +65,10 @@
 
 #qrmessage {    
     padding: 10px 25px 80px;
+}
+
+canvas {
+ 
 }
 
 #mk_cert p:nth-child(2) {}
