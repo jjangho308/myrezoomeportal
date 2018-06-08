@@ -1,0 +1,208 @@
+<head>
+    <link rel="stylesheet" href="/css/reference-oauth.css">
+</head>
+
+<body class="developer-body">
+    <div class="imgheader_wrap">
+        <div class="header">
+            <img class="imgheader" src="/img/developer/Developers_logo.svg">
+        </div>
+    </div>
+    <div class="center">
+        <div class="l_center_wrap">
+            <div class="l_center">
+
+                <div class="l_center_sdk_download_wrap">
+
+                    <a href="/dev/sdk_download" class="l_center_sdk_download">
+                        SDK_DOWNLOAD
+                    </a>
+
+                </div>
+
+                <div class="l_center_REST_API_Reference_oauth_wrap">
+
+                    <a href="/dev/reference/rest" class="l_center_REST_API_Reference_oauth">
+                        API REFERENCE (REST API)
+                    </a>
+
+                </div>
+
+                <div class="l_center_REST_API_Reference_javascript_wrap">
+
+                    <a href="/dev/reference/js" class="l_center_REST_API_Reference_javascript">
+                        API REFERENCE (JS LIBRARY)
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="r_center_wrap">
+            <div class="r_center">
+                <div class="content_header">
+                    코드 받기
+                </div>
+
+                <div class="content_body">
+                    <p class="content_line">
+                        OAuth 인증을 위한 페이지를 전송합니다.
+                    </p>
+                    <p class="content_line">
+                        Rezoome는 Lite Sign Up을 지원하며 핸드폰 입력만으로 Rezoome Lite 회원으로 즉시 가입됩니다.
+                    </p>
+                    <p class="content_line">
+                        회원이 로그인 하면 Authentication Code가 RedirectURI로 전송됩니다.
+                    </p>
+
+                    <div class="content_header2">
+                        [Request]
+                    </div>
+
+
+                    <pre><code class="http hljs"><span class="hljs-request">GET <span class="hljs-string">/oauth2/auth?client_id={app_key}&amp;client_secret={client_secret}&amp;response_type=code&amp;state={state}&amp;redirect_uri={redirect_uri}</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">rezoome.io</span></code></pre>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:left"> 키</th>
+                                    <th style="text-align:left"> 설명</th>
+                                    <th style="text-align:center"> 필수</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:left">client_id</td>
+                                    <td style="text-align:left">앱 생성시 발급 받은 REST API 키.</td>
+                                    <td style="text-align:center">O</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">redirect_uri</td>
+                                    <td style="text-align:left">코드를 리다이렉트 해줄 URI.
+
+                                    </td>
+                                    <td style="text-align:center">O</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">response_type</td>
+                                    <td style="text-align:left">code 문자열 값으로 고정.</td>
+                                    <td style="text-align:center">O</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">state</td>
+                                    <td style="text-align:left">
+                                        <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery" target="_blank">Cross-site Request Forgery</a> 공격을 보호하기 위한 임의의 고유한 문자열. 리다이렉트시 해당 값이 전달됨.</td>
+                                    <td style="text-align:center">X</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">encode_state</td>
+                                    <td style="text-align:left">state가 encode되어 있는지에 대한 유무(boolean). true(y 또는 1)일 경우 state 전달시 decoded state로 전달. false(n
+                                        또는 0)일 경우 별도의 decode를 하지 않고 state를 그대로 전달. default false.</td>
+                                    <td style="text-align:center">X</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="content_header2">
+                        <div class="padding-top"></div>
+                        [Response]
+                    </div>
+
+                    <div class="padding-top"></div>
+                    <p class="content_line">
+                        REZOOME 회원이 로그인 하면 Authentication Code가 RedirectURI로 전송됩니다.
+                    </p>
+
+
+                    <pre><code class="http hljs"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">302</span> Found</span>
+<span class="hljs-attribute">Content-Length</span>: <span class="hljs-string">0</span>
+<span class="hljs-attribute">Location</span>: <span class="hljs-string">{redirect_uri}?code={authorize_code}</span></code></pre>
+
+                    <div class="padding-top"></div>
+
+                    <div class="content_header">
+                        사용자 토큰 받기
+                    </div>
+
+                    <p class="content_line">
+                        코드를 얻은 다음, 이를 이용하여 실제로 API를 호출할 수 있는 사용자 토큰(Access Token, Refresh Token)을 받아 올 수 있습니다.
+                    </p>
+
+                    <div class="content_header2">
+                        [Request]
+                    </div>
+
+                    <pre><code class="http hljs"><span class="hljs-request">POST <span class="hljs-string">/oauth2/token</span> HTTP/1.1</span>
+<span class="hljs-attribute">Host</span>: <span class="hljs-string">rezoome.io</span></code></pre>
+
+                    <p class="content_line">
+                        아래 파라미터의 값들을 POST로 요청합니다.
+                    </p>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:left">키</th>
+                                    <th style="text-align:left">설명</th>
+                                    <th style="text-align:center">필수</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:left">grant_type</td>
+                                    <td style="text-align:left">authorization_code로 고정</td>
+                                    <td style="text-align:center">O</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">client_id</td>
+                                    <td style="text-align:left">앱 생성시 발급 받은 REST API 키.</td>
+                                    <td style="text-align:center">O</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">redirect_uri</td>
+                                    <td style="text-align:left">코드가 리다이렉트 된 URI.
+                                        </td>
+                                    <td style="text-align:center">O</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">code</td>
+                                    <td style="text-align:left">위
+                                        <a href="#코드-받기">코드 받기</a>에서 발급 받은 인증된 코드.</td>
+                                    <td style="text-align:center">O</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left">client_secret</td>
+                                    <td style="text-align:left">
+                                        생성한 client_secret 코드
+                                        </td>
+                                    <td style="text-align:center">X</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="padding-top"></div>
+                    <div class="padding-top"></div>
+                    <div class="content_header2">
+                        [Response]
+                    </div>
+
+                    <p class="content_line">
+                        응답 바디는 JSON 객체로 아래 값을 포함합니다.
+                    </p>
+                    <pre><code class="http hljs"><span class="hljs-status">HTTP/1.1 <span class="hljs-number">200</span> OK</span>
+<span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json;charset=UTF-8</span>
+{
+    "<span class="hljs-attribute">access_token":"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+    "refresh_token":"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",  
+}</span></code></pre>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
