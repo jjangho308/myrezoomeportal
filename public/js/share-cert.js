@@ -48,7 +48,7 @@ $(document).ready(function(){
 		$(".header").hide();
         $("#footer").hide();
         $(".main-body-footer").hide();
-        generateQRCode();        
+               
         setInterval(function(){
             const html = document.querySelector('html');
             const printContents = document.querySelector('.main-body').innerHTML;
