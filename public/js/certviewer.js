@@ -202,7 +202,8 @@ $(document).ready(function(){
         summitform();     
     });
 
-    $("#btn_print").click(function() {	
+    $("#btn_print").click(function(event) {
+        event.stopPropagation();
 
 		$(".header").hide();
         $("#footer").hide();
@@ -222,7 +223,7 @@ $(document).ready(function(){
 
             $(".header").show();
             $("#footer").show();              
-        }, 1000);        
+        }, 100);        
     });
 });
 
