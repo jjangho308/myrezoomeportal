@@ -304,5 +304,5 @@ function createChart(record) {
         var dataURL = canvas.get(0).toDataURL("image/png"); 
         $("#myChart").hide();
         canvas.replaceWith($("<img></img>").attr("src", dataURL));
-    }, 100);  
+    }, 1000);  
 }
