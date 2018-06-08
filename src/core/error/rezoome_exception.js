@@ -1,35 +1,44 @@
 /**
- * Common error class. <br />
+ * Wrapper of rezoome custom error classes. <br />
  * 
  * @since 180417
  * @author TACKSU
  */
-class RezoomeException {
+class RezoomeError extends Error {
 
     /**
      * Default constructor. <br />
      * 
      * @since 180417
      * @author TACKSU
+     * 
+     * @param {Object} opt Parameter container.
+     * @param {Number} opt.code Internal error code.
+     * @param {String} opt.msg Plain message for human readable.
+     * @param {Number} opt.msgcode Message code for international localizing.
+     * @param {Number} opt.statusCode HTTP Status code for this error.
+     * @param {Error} opt.cause Root cause error.
      */
-    constructor() {
-        super();
+    constructor(opt) {
+        super(opt.msg);
+        this.code = opt.code;
+        this.msg = opt.msg;
+        this.msgcode = opt.msgcode;
+        this.statusCode = opt.statusCode;
+        this.cause = opt.cause;
     }
 
     /**
-     * Constructor with option parameter. <br />
+     * Stringify function. <br />
      * 
-     * @since 180417
-     * @author TACKSU
-     * 
-     * @param {*} opt error container.
+     * @since 180608
      */
-    constructor(opt) {
-        super(opt);
-        this.cause = opt.cause;
-        this.code = opt.code;
-        this.msg = opt.msg;
+    toString() {
+        return JSON.stringify({
+            code: this.code,
+            msg: this.msg
+        });
     }
 }
 
-export default RezoomeException;
+export default RezoomeError;

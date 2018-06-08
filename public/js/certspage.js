@@ -11,14 +11,14 @@ function certckeckboxclick(uniqueid) {
 function certredirect(certId) {
     console.log("######## certdirect ###########");
     //console.log(getData(txid));
-    window.location.href = "/certs/"+certId;
+    window.location.href = "/certs/" + certId;
 }
 
 function certdelete(certId) {
     window.event.stopPropagation();
     $.ajax({
         type: 'DELETE',
-        url: '/certs/'+ certId,
+        url: '/certs/' + certId,
         headers: {
             'Authorization': client_authorization
         },
@@ -31,7 +31,7 @@ function certdelete(certId) {
 
 function certmore(divname) {
     var jquerydiv = "#" + divname;
-    $(jquerydiv).css('display','block');
+    $(jquerydiv).css('display', 'block');
     window.event.stopPropagation();
 }
 
@@ -47,41 +47,70 @@ function loadcertlist() {
             var certlistresult = certlistres.result;
             $(".cert-container").remove();
             $('#certlistcount').text(certlistresult.length + '건');
-            for(var i in certlistresult) {
-                var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+ certlistresult[i].certId +'")>';                
-                htmldiv = htmldiv + '<p>'+ certlistresult[i].certId.substring(0,25) + '..<img style="z-index:999" src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=certmore("more-div-'+ certlistresult[i].certId +'")></p>';
+            var divContainer = $('#cert-grid-div');
+            certlistresult.forEach(item => {
+                var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '")>';
+                htmldiv = htmldiv + '<p>' + item.certId.substring(0, 25) + '..<img style="z-index:999" src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=certmore("more-div-' + item.certId + '")></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
-                htmldiv = htmldiv + '<p>' + certlistresult[i].title + '</p>';
+                htmldiv = htmldiv + '<p>' + item.title + '</p>';
                 htmldiv = htmldiv + '<p>증명서</p>';
-                htmldiv = htmldiv + '<p>발급일시 : ' + certlistresult[i].date + '</p>';
-                
-                htmldiv = htmldiv + '<div id="more-div-'+ certlistresult[i].certId +'" class="more-store-resume-div">';                
+                htmldiv = htmldiv + '<p>발급일시 : ' + item.date + '</p>';
+
+                htmldiv = htmldiv + '<div id="more-div-' + item.certId + '" class="more-store-resume-div">';
                 htmldiv = htmldiv + '<p>복사</p>';
-                htmldiv = htmldiv + '<p onclick=certdelete("'+ certlistresult[i].certId +'")>삭제</p>';
+                htmldiv = htmldiv + '<p onclick=certdelete("' + item.certId + '")>삭제</p>';
                 htmldiv = htmldiv + '<p>공유내역</p>';
                 htmldiv = htmldiv + '</div>';
 
                 htmldiv = htmldiv + '</div>';
-                $('#cert-grid-div').append(htmldiv);
-            }
+                divContainer.append(htmldiv);
+            });
+            // for(var i in certlistresult) {
+            //     var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+ item.certId +'")>';                
+            //     htmldiv = htmldiv + '<p>'+ item.certId.substring(0,25) + '..<img style="z-index:999" src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=certmore("more-div-'+ item.certId +'")></p>';
+            //     htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
+            //     htmldiv = htmldiv + '<p>' + item.title + '</p>';
+            //     htmldiv = htmldiv + '<p>증명서</p>';
+            //     htmldiv = htmldiv + '<p>발급일시 : ' + item.date + '</p>';
+
+            //     htmldiv = htmldiv + '<div id="more-div-'+ item.certId +'" class="more-store-resume-div">';                
+            //     htmldiv = htmldiv + '<p>복사</p>';
+            //     htmldiv = htmldiv + '<p onclick=certdelete("'+ item.certId +'")>삭제</p>';
+            //     htmldiv = htmldiv + '<p>공유내역</p>';
+            //     htmldiv = htmldiv + '</div>';
+
+            //     htmldiv = htmldiv + '</div>';
+            //     divContainer.append(htmldiv);
+            // }
         },
         contentType: 'application/json'
     });
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
 
     //get client token
 
-    $(".modal tbody").mCustomScrollbar({"theme":"minimal-dark"});
+    $(".modal tbody").mCustomScrollbar({
+        "theme": "minimal-dark"
+    });
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
 
     loadcertlist();
 
-    $('#header-myresume').css({ "border": "none", "font-weight": "normal" });
-    $('#header-resume-store').css({ "border": "none", "font-weight": "normal" });
-    $('#header-mycert').css({ "border-bottom": "solid 5px #4c80f1", "font-weight": "bold" });
+    $('#header-myresume').css({
+        "border": "none",
+        "font-weight": "normal"
+    });
+    $('#header-resume-store').css({
+        "border": "none",
+        "font-weight": "normal"
+    });
+    $('#header-mycert').css({
+        "border-bottom": "solid 5px #4c80f1",
+        "font-weight": "bold"
+    });
 
 
     $('#header-mycert').click(function () {
@@ -95,18 +124,18 @@ $(document).ready(function(){
     $('#header-myresume').click(function () {
         window.location = "main";
     });
-    
-    $('.cert-container').click(function (event ) {
+
+    $('.cert-container').click(function (event) {
         console.log($(event.target));
-        if(($(event.target).prop("class") != 'more-store-resume') && ($(event.target).prop("class") != 'more-store-resume-p') )
+        if (($(event.target).prop("class") != 'more-store-resume') && ($(event.target).prop("class") != 'more-store-resume-p'))
             window.location = "/certviewer";
     });
-    
+
 
     //출력 가능한 증명서 목록 세팅
     console.log('=====Cert page=====');
-    
-    $(".add-cert").click(function() {
+
+    $(".add-cert").click(function () {
         console.log('증명서 발급 목록 클릭');
 
         // add by hyunsu for running
@@ -124,31 +153,29 @@ $(document).ready(function(){
                 'Authorization': client_authorization
             },
             data: JSON.stringify({
-                
+
             }),
             success: function (mappingres) {
                 console.log(mappingres);
 
-                for(var i in txidlist) {
+                for (var i in txidlist) {
                     try {
                         var viewdata = getData(txidlist[i]);
                         var subid = viewdata.subid;
                         var subname = "";
                         var category = "";
 
-                        if(subid=="RCCNF0001" || subid=="RCGOC0002" || subid=="RCCNF0003" || subid=="RCGOC0004" || subid=="RCCNF0001" || subid=="RCCNF0001" ) {
+                        if (subid == "RCCNF0001" || subid == "RCGOC0002" || subid == "RCCNF0003" || subid == "RCGOC0004" || subid == "RCCNF0001" || subid == "RCCNF0001") {
                             //자격 
                             category = "자격";
-                        }
-                        else if(subid=="RCLPT0005") {
+                        } else if (subid == "RCLPT0005") {
                             category = "어학";
-                        }
-                        else if(subid=="RCOGC0008" || subid=="RCOGC0009" || subid=="RCOGC0010" || subid=="RCOGC0011") {
+                        } else if (subid == "RCOGC0008" || subid == "RCOGC0009" || subid == "RCOGC0010" || subid == "RCOGC0011") {
                             category = "학력";
                         }
 
-                        for(var j in mappingres) {
-                            if(mappingres[j].SUB_ID==subid) {
+                        for (var j in mappingres) {
+                            if (mappingres[j].SUB_ID == subid) {
                                 subname = mappingres[j].SUB_NM;
                             }
                         }
@@ -156,17 +183,17 @@ $(document).ready(function(){
                         var addcertcheckboxid = txidlist[i];
 
                         var htmldiv = '<tr class="certtr">';
-                            htmldiv = htmldiv + '<td>';
-                            htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
-                            //htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';
-                            htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" name="certcheck">';
-                            htmldiv = htmldiv + '<label for='+ addcertcheckboxid +'></label>';
-                            htmldiv = htmldiv + '</div>';
-                            htmldiv = htmldiv + '</td>';
-                            htmldiv = htmldiv + '<td>' + category +'</td>';
-                            htmldiv = htmldiv + '<td>' + subname +'</td>';
+                        htmldiv = htmldiv + '<td>';
+                        htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
+                        //htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';
+                        htmldiv = htmldiv + '<input id=' + addcertcheckboxid + ' type="checkbox" name="certcheck">';
+                        htmldiv = htmldiv + '<label for=' + addcertcheckboxid + '></label>';
+                        htmldiv = htmldiv + '</div>';
+                        htmldiv = htmldiv + '</td>';
+                        htmldiv = htmldiv + '<td>' + category + '</td>';
+                        htmldiv = htmldiv + '<td>' + subname + '</td>';
                         htmldiv = htmldiv + '</tr>';
-        
+
                         $("#add-cert-dialog-table").append(htmldiv);
 
                         /*
@@ -178,8 +205,8 @@ $(document).ready(function(){
                             console.log(reqparam);
                         });
                         */
-        
-                    }catch(exception) {
+
+                    } catch (exception) {
                         console.log(exception);
                         continue;
                     }
@@ -195,7 +222,7 @@ $(document).ready(function(){
         var element = $(this).closest(".cert-container").find(".more-store-resume-div");
 
 
-        if(element.css("display") == "none")
+        if (element.css("display") == "none")
             element.css("display", "block");
         else
             element.css("display", "none");
@@ -206,20 +233,19 @@ $(document).ready(function(){
         var element = $(".sub-info-select-div");
 
 
-        if(element.css("display") == "none")
+        if (element.css("display") == "none")
             element.css("display", "block");
         else
             element.css("display", "none");
 
         element = $(".sub-info img:nth-child(2)");
         console.log(element.attr("src"));
-        if(element.attr("src").indexOf("path-2") >= 0){
+        if (element.attr("src").indexOf("path-2") >= 0) {
             console.log("sadasd");
-            element.attr("src", element.attr("src").replace("path-2","path-1"));
-        }
-        else if(element.attr("src").indexOf("path-1") >= 0){
+            element.attr("src", element.attr("src").replace("path-2", "path-1"));
+        } else if (element.attr("src").indexOf("path-1") >= 0) {
             console.log("sada2sd");
-            element.attr("src", element.attr("src").replace("path-1","path-2")); 
+            element.attr("src", element.attr("src").replace("path-1", "path-2"));
         }
 
 
@@ -237,45 +263,45 @@ $(document).ready(function(){
 
 
 
-    $('#add-cert-dialog .confirm-btn').click(function() {
+    $('#add-cert-dialog .confirm-btn').click(function () {
         $("#add-cert-dialog  .close-modal").click();
 
 
         var current_active = 0;
-        
-        $(`#cert-line-dialog #circle-${current_active}`).css("background-color","#4a90e2");
-        
-        setInterval(function(){
-            $(`#cert-line-dialog #circle-${current_active}`).css("background-color","#dadada");
+
+        $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
+
+        setInterval(function () {
+            $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#dadada");
             current_active += 1;
-            
-            if(current_active > 5){
+
+            if (current_active > 5) {
                 current_active = 0;
             }
-            $(`#cert-line-dialog #circle-${current_active}`).css("background-color","#4a90e2");
-                               
-                              
-         }, 1000);
+            $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
 
-        setTimeout(function() {
+
+        }, 1000);
+
+        setTimeout(function () {
             $("#cert-line-dialog  .close-modal").click();
             $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
-            $('#alarm-div').css("display","block");       
+            $('#alarm-div').css("display", "block");
         }, 3000);
 
 
         //$('#alarm-div').css("display","none");
 
-        $('input:checkbox[name="certcheck"]').each(function() {
-            if(this.checked) {
+        $('input:checkbox[name="certcheck"]').each(function () {
+            if (this.checked) {
                 var id = this.id;
 
                 var sdata = sessionStorage.getItem(id);
-                
+
                 var reqcerts = {};
                 reqcerts.txid = id;
                 reqcerts.record = JSON.parse(sdata);
-                
+
                 console.log("cert req param");
                 console.log(reqcerts);
                 $.ajax({
