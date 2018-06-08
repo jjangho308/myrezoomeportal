@@ -520,6 +520,7 @@ window.onload = function() {
                 continue;
             }
         }
+        $('#initial-dialog .close-modal').click();
     }
     else {
         //session storage dont have user info(txid list)
@@ -643,7 +644,8 @@ function request_agent() {
             // loading css start
             setTimeout(() => {
                 $('.spec-body-loading').hide();
-                $('.spec-body-default').show();    
+                $('.spec-body-default').show();
+                refreshview(null);    
             }, 1500);
             
         },
@@ -793,8 +795,6 @@ function firstLogin() {
     });
 
     $('#initial-dialog').modal('show');
-
-    
 }
 
 function setSocket(mId) {
