@@ -9,6 +9,8 @@ import Initialize from './core/initializer';
 import rootRouter from './routes/root_route';
 import agentRouter from './routes/agent_route';
 
+import ResponseError from './core/error/response_error';
+
 
 var app = express();
 
@@ -56,12 +58,20 @@ app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+
   var status = err.status || 500;
   if (!!req.xhr) {
-    res.status(status).json(err);
+    if (err instanceof ResponseError) {
+      res.status(status).json(err.toJson());
+    } else {
+      res.status(status).json(err);
+    }
+
   } else {
     res.status(status).render('error', err);
   }
+
+  next(err);
 
   // render the error page
   // console.log('error : ' + JSON.stringify(err));

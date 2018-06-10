@@ -30,18 +30,18 @@ export default {
      * @author TACKSU
      */
     post: (req, res, next) => {
-        if (!!req.body.email &&  req.body.pw) {
+        if (!!req.body.email && req.body.pw) {
             Managers.client().request(new SignInRequest(req.body), (err, result) => {
                 if (!!err) {
                     next(err);
                 } else {
-                    res.set('Set-Cookie', 'JWT=' + result.token);
-                    res.json(result);
+                    res.set('Set-Cookie', 'JWT=' + result.token)
+                        .type('application/json').status(200).json(result);
                 }
             });
         } else {
             next(new HttpResponseError({
-                code : ErrorCode.PARA
+                code: ErrorCode.PARAM_INVALID
             }));
         }
     }

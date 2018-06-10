@@ -1,5 +1,5 @@
-import ErrorCode from 'error_code';
-import ErrorMessage from 'error_message';
+import ErrorCode from './error_code';
+import ErrorMessage from './error_message';
 
 /**
  * Rezoome internal error to response via HTTP Response. <br />
@@ -35,13 +35,14 @@ class HttpResponseError extends Error {
      * Stringify function. <br />
      * 
      * @since 180608
+     * @author TACKSU
      */
-    toString(locale) {
+    toJson(locale) {
         var locale = locale || 'default';
-        return JSON.stringify({
+        return {
             code: this.code,
             msg: ErrorMessage[locale][this.code]
-        });
+        };
     }
 }
 
