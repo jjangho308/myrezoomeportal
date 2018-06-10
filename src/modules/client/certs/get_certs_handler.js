@@ -6,8 +6,6 @@ import Managers from '../../../core/managers';
 
 import ClientRequest from '../client_request';
 
-import ErrorContainer from '../../../core/error/error_container';
-
 /**
  * Handler for {GetCertificateRequest}. <br />
  * 
@@ -35,24 +33,17 @@ class GetCertificateHandler extends AbstractClientRequestHandler {
      * @author TACKSU
      * 
      * @param {GetCertificateRequest} requestEntity 
-     * @param {function(object, array)} done 
+     * @param {Function(object, array)} done ClientRequest callback.
      */
     request(requestEntity, done) {
-        //console.log(requestEntity);
         var certDAO = Managers.db().getCertDAO();
-        //console.log("testtest");
-        //console.log(requestEntity);
         certDAO.getCertList({
             uId: requestEntity.uId,
             certId: requestEntity.certId
         }, (err, certModels) => {
-            
             if (!!err) {
-                done(ClientRequest.RESULT_FAILURE, ErrorContainer.DB);
+                done(ClientRequest.RESULT_FAILURE, err);
             } else if (certModels.length == 0) {
-                //done(ClientRequest.RESULT_FAILURE, ErrorContainer.PARAMETER);
-                //TODO List 확인 필요 택수!
-                //length가 0이라고 error 아님
                 done(ClientRequest.RESULT_SUCCESS, []);
             } else if (certModels.length > 0) {
                 done(ClientRequest.RESULT_SUCCESS, certModels);

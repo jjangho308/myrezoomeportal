@@ -10,9 +10,11 @@ import SocketIO from 'socket.io';
 // This snippet set default environment to 'development'
 process.env.NODE_ENV = (process.env.NODE_ENV && (process.env.NODE_ENV).trim().toLowerCase() == 'production') ? 'production' : 'development';
 
-var app = require('../src/app');
-var debug = require('debug')('rezoome:server');
-var http = require('http');
+import app from '../src/app';
+import http from 'http';
+import debugModule from 'debug';
+
+var debug = debugModule('rezoome:server');
 
 /**
  * Get port from environment and store in Express.

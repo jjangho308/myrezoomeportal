@@ -15,17 +15,14 @@ describe('Instant test suit', () => {
 
     before('Instant test init', () => {
         process.env.NODE_ENV = 'development';
-        process.on('uncaughtException', (err) => {
-            console.log('Default Error : ' + err);
-        });
     });
 
-    it('Uncaught exception test', done => {
-        process.nextTick(() => {
-            process.nextTick(() => {
-                throw new Error("Intentional error");
-            });
-        });
+    it('Await sync', done => {
+        test();
+        async function test() {
+            await new Promise((resolve, reject) => setTimeout(() => resolve(), 10000));
+            console.log('Hello, World!');
+        }
     })
 
     it.skip('JSON minify test', () => {

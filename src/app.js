@@ -1,16 +1,14 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-
+import express from 'express';
+import path from 'path';
+import favicon from 'serve-favicon';
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 
 import Initialize from './core/initializer';
+import rootRouter from './routes/root_route';
 import agentRouter from './routes/agent_route';
 
-
-import rootRouter from './routes/root_route';
 
 var app = express();
 
@@ -58,19 +56,20 @@ app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  var status = err.status || 500;
   if (!!req.xhr) {
-    // TODO Render to ajax error page.
+    res.status(status).json(err);
   } else {
-    // TODO Render to html error page.
+    res.status(status).render('error', err);
   }
 
   // render the error page
   // console.log('error : ' + JSON.stringify(err));
-  console.log(err.stack);
-  res.status(err.status || 500);
-  res.render('error');
+  // console.log(err.stack);
+  // res.status(err.status || 500);
+  // res.render('error');
 });
 
 Initialize();
 
-module.exports = app;
+export default app;

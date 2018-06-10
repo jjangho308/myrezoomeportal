@@ -2,6 +2,9 @@ import Managers from '../core/managers'
 
 import SignInRequest from '../modules/client/user/signin_request'
 
+import ErrorCode from '../core/error/error_code';
+import HttpResponseError from '../core/error/response_error';
+
 /**
  * Controller for /signin URI. <br />
  * 
@@ -27,7 +30,7 @@ export default {
      * @author TACKSU
      */
     post: (req, res, next) => {
-        if (!!req.xhr) {
+        if (!!req.body.email &&  req.body.pw) {
             Managers.client().request(new SignInRequest(req.body), (err, result) => {
                 if (!!err) {
                     next(err);
@@ -37,7 +40,9 @@ export default {
                 }
             });
         } else {
-            next(new Error("Not found."));
+            next(new HttpResponseError({
+                code : ErrorCode.PARA
+            }));
         }
     }
 }

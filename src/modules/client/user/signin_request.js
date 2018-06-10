@@ -17,7 +17,7 @@ class SignInRequest extends AbstractClientRequestEntity {
      */
     constructor(opt) {
         super(opt);
-        this.user = opt;        
+        this.user = opt;
     }
 }
 

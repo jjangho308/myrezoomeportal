@@ -1,10 +1,13 @@
+import ErrorCode from 'error_code';
+import ErrorMessage from 'error_message';
+
 /**
- * Wrapper of rezoome custom error classes. <br />
+ * Rezoome internal error to response via HTTP Response. <br />
  * 
  * @since 180417
  * @author TACKSU
  */
-class RezoomeError extends Error {
+class HttpResponseError extends Error {
 
     /**
      * Default constructor. <br />
@@ -14,16 +17,16 @@ class RezoomeError extends Error {
      * 
      * @param {Object} opt Parameter container.
      * @param {Number} opt.code Internal error code.
-     * @param {String} opt.msg Plain message for human readable.
-     * @param {Number} opt.msgcode Message code for international localizing.
      * @param {Number} opt.statusCode HTTP Status code for this error.
      * @param {Error} opt.cause Root cause error.
      */
     constructor(opt) {
-        super(opt.msg);
+        if (!!opt.msg) {
+            super(opt.msg);
+        } else {
+            super("Error to response");
+        }
         this.code = opt.code;
-        this.msg = opt.msg;
-        this.msgcode = opt.msgcode;
         this.statusCode = opt.statusCode;
         this.cause = opt.cause;
     }
@@ -33,12 +36,13 @@ class RezoomeError extends Error {
      * 
      * @since 180608
      */
-    toString() {
+    toString(locale) {
+        var locale = locale || 'default';
         return JSON.stringify({
             code: this.code,
-            msg: this.msg
+            msg: ErrorMessage[locale][this.code]
         });
     }
 }
 
-export default RezoomeError;
+export default HttpResponseError;
