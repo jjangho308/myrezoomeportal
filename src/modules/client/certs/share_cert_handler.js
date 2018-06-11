@@ -34,7 +34,7 @@ class ShareCertRequestHandler extends AbstractClientRequestHandler {
      * @param {*} cb 
      */
     request(requestEntity, cb) {
-        //console.log(requestEntity);
+        console.log(requestEntity);
 
         var certDAO = Managers.db().getCertDAO();
 

@@ -18,7 +18,7 @@ export default {
     /**
      * Post controller. <br />
      */
-    post: (req, res, next) => {
+    post: (req, res, next) => {        
         if (!!req.xhr) {
             Managers.client().request(new ShareCertRequest(req.body), (err, result) => {
                 if (!!err) {

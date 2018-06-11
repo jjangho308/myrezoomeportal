@@ -97,16 +97,7 @@ var certformatter= {
             generateQRCode();
             createChart(record_data);
 
-            html2canvas($(".inner-container"), {
-                onrendered: function(canvas) {
-                    var img = canvas.toDataURL();
-                    console.log(img);
-                    $($(".inner-container")).html("<img src=" + img + ">");
-                    //window.open(img);            
-                }
-            });
-
-            $(".inner-container").css({"width":"100%", "border":"0px"});
+            //$(".inner-container").css({"width":"100%", "border":"0px"});
         });
     },
 

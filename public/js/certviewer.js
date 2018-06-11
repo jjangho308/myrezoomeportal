@@ -242,6 +242,14 @@ function summitform() {
         var cert_public = 'Y';
     }
 
+    // convert to image
+    // html2canvas($(".inner-container"), {
+    //     onrendered: function(canvas) {
+    //         var img = canvas.toDataURL();                    
+    //         $($(".inner-container")).html("<img src=" + img + ">");                                  
+    //     }
+    // });
+
     $.ajax({
         type: 'POST',
         url: '/shared_certs',
@@ -265,6 +273,7 @@ function summitform() {
         },
         contentType: 'application/json'
     });
+    
 }
 
 function setCertViewer(tx_id) {    
