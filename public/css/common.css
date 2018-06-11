@@ -10,7 +10,7 @@
    @font-face {
     font-family: Spoqa Han Sans;
     font-weight: 400;
-    src: local(Spoqa Han Sans Regular), local(Spoqa Han Sans Regular), url(../fonts/Spoqa%20Han%20Sans%20Regular.woff2) format(woff2), url(../fonts/SpoqaHanSans-Regular.woff) format(woff), url(../fonts/Spoqa%20Han%20Sans%20Regular.ttf) format(truetype); 
+    src: local(Spoqa Han Sans Regular), local(Spoqa Han Sans Regular), url(../fonts/Spoqa%20Han%20Sans%20Regular.woff2) format(woff2), url(../fonts/Spoqa%20Han%20Sans%20Regular.woff) format(woff), url(../fonts/Spoqa%20Han%20Sans%20Regular.ttf) format(truetype); 
 }
    
    @font-face {

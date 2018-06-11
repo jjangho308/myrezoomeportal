@@ -217,25 +217,27 @@ var formatter= {
             // 경기대 성적증명서가 이미 있다면
             $('#edu-p-RCOGC0012').text(record.registList[0].course + ' / '+ record.registList[0].status);
         }
-        var htmldiv = '<div id="spec-body-RCOGC0012" class="spec-body">';
-            htmldiv = htmldiv + '<div class="spec-left">';
-            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            htmldiv = htmldiv + '<span>' + record.registList[0].admission_date + '~' + record.registList[0].change_date +'</span>';
+        else {
+            var htmldiv = '<div id="spec-body-RCOGC0012" class="spec-body">';
+                htmldiv = htmldiv + '<div class="spec-left">';
+                htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                htmldiv = htmldiv + '<span>' + record.registList[0].admission_date + '~' + record.registList[0].change_date +'</span>';
+                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '<div class="spec-center">';
+                htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kyungki.gif" alt="">';
+                htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '<div class="spec-right" id="btn_change'+record.subid+'" >';
+                htmldiv = htmldiv + '<p>경기대</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0012">'+ record.registList[0].course + ' / '+ record.registList[0].status +'</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + '</p>';
+                //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+                htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kyungki.gif" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-right" id="btn_change'+record.subid+'" >';
-            htmldiv = htmldiv + '<p>경기대</p>';
-            htmldiv = htmldiv + '<p id="edu-p-RCOGC0012">'+ record.registList[0].course + ' / '+ record.registList[0].status +'</p>';
-            htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + '</p>';
-            //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
-            htmldiv = htmldiv + '</div>';
-        htmldiv = htmldiv + '</div>';
-        $('#spec_edu_detail').append(htmldiv);
-        $('#spec_edu_detail > .spec-body-default').hide();
+            $('#spec_edu_detail').append(htmldiv);
+            $('#spec_edu_detail > .spec-body-default').hide();
+        }
     },
 
     "RCOGC0013":function viewformatter(record) {       
