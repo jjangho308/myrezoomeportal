@@ -77,7 +77,7 @@ var formatter= {
     "RCOGC0008":function viewformatter(record) {
         //인하대학교 졸업증명서
 
-        if($('#spec-body-RCOGC0008').length > 0) {
+        if($('#spec-body-RCOGC0009').length > 0) {
             // 인하대 성적증명서가 이미 있다면
             $('#edu-p-RCOGC0008').text(record.registList[0].course + ' / '+ record.registList[0].status);
         }
@@ -115,7 +115,7 @@ var formatter= {
 
         if($('#spec-body-RCOGC0008').length > 0) {
             // 인하대 졸업증명서가 이미 있다면
-            $('#edu-p-RCOGC0008').text(total/record.scoreStatisticList.length + ' / 4.5');
+            $('#edu-p-RCOGC0009').text(total/record.scoreStatisticList.length + ' / 4.5');
         }
         else {
 
