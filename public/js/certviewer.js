@@ -210,8 +210,9 @@ $(document).ready(function(){
 		$(".header").hide();
         $("#footer").hide();
         $(".main-body-footer").hide();
-        generateQRCode();        
-        setInterval(function(){
+        $(".qrcode").show();
+             
+        //setInterval(function(){
             const html = document.querySelector('html');
             const printContents = document.querySelector('.main-body').innerHTML;
             const printDiv = document.createElement("DIV");
@@ -224,15 +225,11 @@ $(document).ready(function(){
             document.body.style.display = 'block';
             printDiv.style.display = 'none';
 
-            var dataURL = $("#myChart").toBase64Image();
-            //var dataURL = canvas.get(0).toDataURL("image/png");
-            //$("#myChart").hide();
-            canvas.replaceWith($("<img></img>").attr("src", dataURL));
-
             $(".header").show();
             $("#footer").show();   
-            $(".main-body-footer").show();           
-        }, 100);        
+            $(".main-body-footer").show();            
+            $(".qrcode").hide();
+        //}, 100);        
     });
 });
 
@@ -276,7 +273,7 @@ function summitform() {
 
 function setCertViewer(tx_id) {    
     record = getData(tx_id);
-    console.log(record);
+    console.log(record);    
     $(".cert-title").html("증명서");    
     certformatter[record.subid](record.data);
 }

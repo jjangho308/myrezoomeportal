@@ -49,6 +49,8 @@ var certformatter= {
             $("#opic_report").children('p').eq(1).html(record_data.language);
             $("#opic_report").children('p').eq(2).html(record_data.testdate);
             $("#opic_report").children('p').eq(3).html(record_data.examid);
+
+            generateQRCode();
         });
     },
 
@@ -80,6 +82,7 @@ var certformatter= {
             $("#detail-score-info-div").children('p').eq(5).html(record_data.re_point19 + "/" + record_data.re_point20);
             $("#detail-score-info-div").children('p').eq(11).html(parseFloat(record_data.re_point21).toFixed(2));
             
+            generateQRCode();
             createChart(record_data);
         });
     },
@@ -96,6 +99,8 @@ var certformatter= {
             
         htmldiv = htmldiv + '</div>';
         $('#cert-body-div').append(htmldiv);
+
+        generateQRCode();
     },
 
     "RCOGC0009":function viewformatter(record_data) {
@@ -162,6 +167,8 @@ var certformatter= {
         + totalagree + "<br>총점 누계  " 
         + totalscore + ""+ '</p>';   
         $('.sungjuk_sector_' + sector).append(htmldiv);
+
+        generateQRCode();
     },
 
     "RCOGC0010":function viewformatter(record_data) {
@@ -186,6 +193,8 @@ var certformatter= {
             
         // htmldiv = htmldiv + '</div>';
         // $('#cert-body-div').append(htmldiv);
+
+        generateQRCode();
     },
 
     "RCOGC0011":function viewformatter(record_data) {
@@ -259,6 +268,7 @@ var certformatter= {
             $('.sungjuk_sector_'+sector).append(htmldiv);
         });
         
+        generateQRCode();
     },
 }
 
