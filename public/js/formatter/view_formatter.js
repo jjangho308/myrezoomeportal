@@ -116,7 +116,7 @@ var formatter= {
 
         if($('#spec-body-RCOGC0008').length > 0) {
             // 인하대 졸업증명서가 이미 있다면
-            $('#edu-p-RCOGC0009').text(total/record.scoreStatisticList.length + ' / 4.5');
+            $('#edu-p-RCOGC0009').text((total/record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
         }
         else {
 
@@ -134,7 +134,7 @@ var formatter= {
                 htmldiv = htmldiv + '<div class="spec-right">';
                 htmldiv = htmldiv + '<p>인하대학교</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0008"></p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0009">'+ total/record.scoreStatisticList.length + ' / 4.5' + '</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0009">'+ (total/record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
@@ -184,7 +184,7 @@ var formatter= {
         
         if($('#spec-body-RCOGC0010').length > 0) {
             // 계명대 졸업증명서가 이미 있다면
-            $('#edu-p-RCOGC0011').text(total/record.scoreStatisticList.length + ' / 4.5');
+            $('#edu-p-RCOGC0011').text((total/record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
         }
         else {
             
@@ -201,7 +201,7 @@ var formatter= {
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change'+record.subid+'" >';
                 htmldiv = htmldiv + '<p>계명대</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0010"></p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0011">'+ total/record.scoreStatisticList.length + ' / 4.5' +'</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0011">'+ (total/record.scoreStatisticList.length).toFixed(2) + ' / 4.5' +'</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
@@ -249,7 +249,7 @@ var formatter= {
 
         if($('#spec-body-RCOGC0012').length > 0) {
             // 경기대 졸업증명서가 이미 있다면
-            $('#edu-p-RCOGC0013').text(total/record.scoreStatisticList.length + ' / 4.5');
+            $('#edu-p-RCOGC0013').text((total/record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
         }
         else {
             var htmldiv = '<div id="spec-body-RCOGC0013" class="spec-body">';
@@ -265,7 +265,7 @@ var formatter= {
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change'+record.subid+'" >';
                 htmldiv = htmldiv + '<p>경기대</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0012"></p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">'+ total/record.scoreStatisticList.length + '</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">'+ (total/record.scoreStatisticList.length).toFixed(2) + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
