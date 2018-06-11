@@ -3,11 +3,6 @@
     width: 780px;
 }
 
-.inner-container {
-    height: 1000px;
-    padding: 10px;
-}
-
 .qrcode {
     position: absolute;
     bottom: 0px;
