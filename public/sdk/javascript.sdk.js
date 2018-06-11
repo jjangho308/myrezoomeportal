@@ -15,10 +15,11 @@
         HOST_DEV = 'https://dev.rezoome.io',
         HOST_PRO = 'https://rezoome.io';
 
-    var HOST_DOMAIN = HOST_LOCAL;
+    var HOST_DOMAIN = HOST_DEV;
     // var HOST_DOMAIN = dev ? 'https://dev.rezoome' : 'https://rezoome.io';
 
     var rezoomeSDK = {
+
         /**
          * Create Sign in button function. <br />
          * 
@@ -43,11 +44,11 @@
             var clientSecret = opt.clientSecret;
             var redirectUri = opt.redirectUri;
             var doneCallback = opt.done || function (res) {
-                console.log("No callback : " + res);
+                alert('Default success callback Response : ' + res);
             };
 
             var failCallback = opt.fail || function (err) {
-                console.log("No error callback : " + err);
+                alert('Default error callback Error : ' + err);
             };
 
             if (!opt.container) {
@@ -86,11 +87,11 @@
             var clientSecret = opt.clientSecret;
             var redirectUri = opt.redirectUri;
             var doneCallback = opt.done || function (res) {
-
+                alert('Default success callback Response : ' + res);
             };
 
             var failCallback = opt.fail || function (err) {
-
+                alert('Default error callback Error : ' + err);
             };
 
             w.addEventListener("message", function (postMsg) {

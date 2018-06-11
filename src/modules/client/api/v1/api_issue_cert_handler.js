@@ -100,7 +100,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                 // NexLedger에 이미 Hash가 저장되어 있는지 확인
                                 var found = false;
 
-                                if(userBCHashes.result == null || userBCHashes.result == undefined) {
+                                if(!!userBCHashes.result) {
                                     found = false;
                                 }
                                 else {

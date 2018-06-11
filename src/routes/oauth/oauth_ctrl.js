@@ -75,10 +75,18 @@ var defaultController = {
         var phone = req.body.phone;
         if (!phone) {
             // TODO Invalid parameter exception
+            next({
+                err: {
+                    code: 200,
+                    msg: 'Invalid parameter'
+                }
+            });
+        // } else if (true) {
+            // TODO Phone number string validation check.
         } else {
             Managers.db().getUserDAO().put(new UserModel({
                 phone: phone,
-                pw: Util.sha256(Util.randomStr(8)),
+                pw: Util.sha256(Util.randomStr(12)),
                 status: 'L'
             }), (err, insertId) => {
                 if (!!err) {
