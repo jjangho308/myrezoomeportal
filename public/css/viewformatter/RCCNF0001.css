@@ -161,17 +161,6 @@
 
 @media screen and (max-width:1000px){
 
-    html{
-        font-size:10px;
-    }
-
-	.inner-container{
-	    width: 345px;
-	    height: 450px;       
-        margin: auto;
-		background: white;		
-    }
-
     #qrmessage {
         content: "";
         visibility: hidden;
