@@ -4,147 +4,154 @@
 }
 
 .inner-container {
+    height: 1000px;
     padding: 10px;
+}
+
+.qrcode {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
 }
 
 #user-info-div img:nth-child(1) {    
     position: absolute;
     left: 3%;
-    top: 17.5%;
+    top: 19.5%;
     width: 100px;
 }
 
 #user-info-div p:nth-child(2) {    
     position: absolute;
     left: 30%;
-    top: 18%
+    top: 20%
 }
 
 #user-info-div p:nth-child(3) {    
     position: absolute;
     left: 30%;
-    top: 20.5%
+    top: 22.5%
 }
 
 #user-info-div p:nth-child(4) {    
     position: absolute;
     left: 30%;
-    top: 23.5%
+    top: 25.5%
 }
 
 #user-info-div p:nth-child(5) {    
     position: absolute;
     left: 30%;
-    top: 26.5%
+    top: 28.5%
 }
 
 #main-score-info-div p:nth-child(1) {
     position: absolute;
     left: 56%;
-    top: 19%;
+    top: 21%;
 }
 
 #main-score-info-div p:nth-child(2) {
     position: absolute;
     left: 79%;
-    top: 19%;
+    top: 21%;
 }
 
 #main-score-info-div p:nth-child(3) {
     position: absolute;
     left: 56%;
-    top: 24.5%;
+    top: 26.5%;
 }
 
 #main-score-info-div p:nth-child(4) {
     position: absolute;
     left: 79%;
-    top: 24.5%;
+    top: 26.5%;
 }
 
 #detail-score-info-div p:nth-child(1) {
     position: absolute;
     left: 28%;
-    top: 39.5%;
+    top: 43.5%;
 }
 
 #detail-score-info-div p:nth-child(2) {
     position: absolute;
     left: 28%;
-    top: 43%;
+    top: 47%;
 }
 
 #detail-score-info-div p:nth-child(3) {
     position: absolute;
     left: 28%;
-    top: 46.5%;
+    top: 50.5%;
 }
 
 #detail-score-info-div p:nth-child(4) {
     position: absolute;
     left: 28%;
-    top: 50%;
+    top: 55%;
 }
 
 #detail-score-info-div p:nth-child(5) {
     position: absolute;
     left: 28%;
-    top: 53.5%;
+    top: 58.5%;
 }
 
 #detail-score-info-div p:nth-child(6) {
     position: absolute;
     left: 28%;
-    top: 57.5%;
+    top: 62.5%;
 }
 
 #detail-score-info-div p:nth-child(7) {
     position: absolute;
     left: 41%;
-    top: 39.5%;
+    top: 43.5%;
 }
 
 #detail-score-info-div p:nth-child(8) {
     position: absolute;
     left: 41%;
-    top: 43%;
+    top: 47%;
 }
 
 #detail-score-info-div p:nth-child(9) {
     position: absolute;
     left: 41%;
-    top: 46.5%;
+    top: 50.5%;
 }
 
 #detail-score-info-div p:nth-child(10) {
     position: absolute;
     left: 41%;
-    top: 50%;
+    top: 55%;
 }
 
 #detail-score-info-div p:nth-child(11) {
     position: absolute;
     left: 41%;
-    top: 54%;
+    top: 59%;
 }
 
 #detail-score-info-div p:nth-child(12) {
     position: absolute;
     left: 41%;
-    top: 57.5%;
+    top: 62.5%;
 }
 
 #chart-div canvas {
     position: absolute;
     left: 45%;
-    top: 39%;
+    top: 43%;
     width: 450px;
 }
 
 #chart-div img {
     position: absolute;
     left: 45%;
-    top: 39%;
+    top: 43%;
     width: 450px;
 }
 
