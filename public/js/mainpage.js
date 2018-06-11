@@ -4,12 +4,14 @@ require socket.is
 <script src="/socket.io/socket.io.js"></script>
 */
 
-$(document).ready(function(){   
+$(document).ready(function(){
+
     // comment by hyunsu for running
     //socket = io();
     /*
         view init empty set
     */   
+
     $(".study-period").datepicker();
     $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
 
