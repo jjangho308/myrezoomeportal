@@ -3,11 +3,6 @@
     width: 780px;
 }
 
-.inner-container {
-    height: 1000px;
-    padding: 10px;
-}
-
 .qrcode {
     position: absolute;
     bottom: 0px;
@@ -160,17 +155,6 @@
 }
 
 @media screen and (max-width:1000px){
-
-    html{
-        font-size:10px;
-    }
-
-	.inner-container{
-	    width: 345px;
-	    height: 450px;       
-        margin: auto;
-		background: white;		
-    }
 
     #qrmessage {
         content: "";
