@@ -313,9 +313,9 @@ var formatter= {
             total += parseInt(record.scoreStatisticList[i].average_score);
         }
 
-        if($('#spec-body-RCOGC0012').length > 0) {
+        if($('#spec-body-RCOGC0014').length > 0) {
             // 중앙대 졸업증명서가 이미 있다면
-            $('#edu-p-RCOGC0013').text((total/record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
+            $('#edu-p-RCOGC0015').text((total/record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
         }
         else {
             var htmldiv = '<div id="spec-body-RCOGC0015" class="spec-body">';
