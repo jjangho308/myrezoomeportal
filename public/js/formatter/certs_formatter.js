@@ -51,7 +51,19 @@ var certformatter= {
             $("#opic_report").children('p').eq(3).html(record_data.examid);
 
             generateQRCode();
+
+            html2canvas($(".inner-container"), {
+                onrendered: function(canvas) {
+                    var img = canvas.toDataURL();
+                    console.log(img);
+                    $($(".inner-container")).html("<img src=" + img + ">");
+                    window.open(img);            
+                }
+            });
+
         });
+
+        
     },
 
     "RCCNF0001":function viewformatter(record_data) {
@@ -84,6 +96,17 @@ var certformatter= {
             
             generateQRCode();
             createChart(record_data);
+
+            html2canvas($(".inner-container"), {
+                onrendered: function(canvas) {
+                    var img = canvas.toDataURL();
+                    console.log(img);
+                    $($(".inner-container")).html("<img src=" + img + ">");
+                    window.open(img);            
+                }
+            });
+
+            $(".inner-container").css({"width":"100%", "border":"0px"});
         });
     },
 
@@ -319,5 +342,8 @@ function createChart(record) {
         var dataURL = myChart.toBase64Image();
         canvas.replaceWith($("<img></img>").attr("src", dataURL));
     }, 100); 
+
+
+   
   
 }
