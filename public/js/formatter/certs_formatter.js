@@ -102,7 +102,7 @@ var certformatter= {
                     var img = canvas.toDataURL();
                     console.log(img);
                     $($(".inner-container")).html("<img src=" + img + ">");
-                    window.open(img);            
+                    //window.open(img);            
                 }
             });
 
