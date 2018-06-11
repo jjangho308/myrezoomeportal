@@ -367,7 +367,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     storedData.forEach((storedDataItem, storedDataIdx) => {
                                                         defferedStoredDataFunctions.push(new Promise((storedDataResolve, storedDataReject) => {
                                                                 nexledgerService.getbytxid(null, storedDataItem.TRX_ID, function (res) {
-                                                                    console.log(res);
+                                                                    //console.log(res);
                                                                     storedDataResolve(res);
                                                                 });
                                                             })
