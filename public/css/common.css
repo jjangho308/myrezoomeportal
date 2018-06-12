@@ -7,6 +7,8 @@
     src: local(Spoqa Han Sans Bold), local(Spoqa Han Sans Bold), url(../fonts/Spoqa%20Han%20Sans%20Bold.woff2) format(woff2), url(../fonts/Spoqa%20Han%20Sans%20Bold.woff) format(woff), url(../fonts/Spoqa%20Han%20Sans%20Bold.ttf) format(truetype);
 }
 
+
+
 @font-face {
     font-family: Spoqa Han Sans;
     font-weight: 400;
@@ -27,6 +29,7 @@
 
 body {
     font-family: 'Spoqa Han Sans';
+    min-width: 1680px;
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
