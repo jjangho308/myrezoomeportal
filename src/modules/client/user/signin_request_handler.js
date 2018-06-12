@@ -33,10 +33,12 @@ class SigninRequestHandler extends AbstractClientRequestHandler {
         }, (err, users) => {
             if (!!err) {
                 cb(ClientRequest.RESULT_FAILURE, err);
+                return;
             } else if (users.length == 0) {
                 cb(ClientRequest.RESULT_FAILURE, new ResponseError({
                     code: ErrorCode.DATA_NO_USER_ID
                 }));
+                return;
             } else if (users[0].pw == requestEntity.user.pw) {
                 var token = Managers.token().issueToken({
                     uId: users[0].uId
@@ -45,10 +47,12 @@ class SigninRequestHandler extends AbstractClientRequestHandler {
                 cb(ClientRequest.RESULT_SUCCESS, {
                     token: token
                 });
+                return;
             } else {
                 cb(ClientRequest.RESULT_FAILURE, new ResponseError({
                     code: ErrorCode.DATA_PASSWORD_INCORRECT
                 }));
+                return;
             }
         });
     }

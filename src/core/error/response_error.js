@@ -7,7 +7,7 @@ import ErrorMessage from './error_message';
  * @since 180417
  * @author TACKSU
  */
-class HttpResponseError extends Error {
+class HttpResponseError {
 
     /**
      * Default constructor. <br />
@@ -17,18 +17,15 @@ class HttpResponseError extends Error {
      * 
      * @param {Object} opt Parameter container.
      * @param {Number} opt.code Internal error code.
-     * @param {Number} opt.statusCode HTTP Status code for this error.
+     * @param {Number} opt.status HTTP Status code for this error.
      * @param {Error} opt.cause Root cause error.
+     * @param {String} opt.locale Locale for error message.
      */
     constructor(opt) {
-        if (!!opt.msg) {
-            super(opt.msg);
-        } else {
-            super("Error to response");
-        }
         this.code = opt.code;
-        this.statusCode = opt.statusCode;
+        this.status = opt.status;
         this.cause = opt.cause;
+        this.message = ErrorMessage[opt.locale || 'default'][this.code];
     }
 
     /**

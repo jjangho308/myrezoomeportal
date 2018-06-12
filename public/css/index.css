@@ -10,7 +10,7 @@ body {
 #header {
     height: 850px;
     object-fit: contain;
-    background: url("/img/main/header-background.png");
+    background-image: url("/img/main/header-background.png");
     background-position: center;
   background-repeat: no-repeat;
     background-color: rgba(14, 49, 89, 0.85);
@@ -41,6 +41,8 @@ margin: auto;
     text-align: center;
     color: white;
     margin-bottom: 70px;
+    margin-top: 7px;
+    font-weight: 300;
 }
 
 #resume-start-btn {

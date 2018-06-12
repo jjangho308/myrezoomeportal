@@ -283,37 +283,6 @@ function setCertViewer(tx_id) {
     certformatter[record.subid](record.data);
 }
 
-function generateQRCode(){
-    var options = {
-        render: "image", 
-        ecLevel: "H", // ERROR CORRECTION LEVEL
-        minVersion: 6,
-
-        fill: "#333333",
-        background: "#ffffff",
-        // fill: jq('#img-buffer')[0],
-
-        text: "https://rezoome.io/v/cxw7ZbI",
-        size: 100,
-        radius: 0.5,
-        quiet: 1, // 흰색 여백, 숫자 높을수록 바깥 여백이 넓어지고 내용이 작아짐
-
-        mode: 2,
-
-        mSize: 0.15, // 글자 사이즈
-        mPosX: 0.5, // 글자 위치 x
-        mPosY: 0.5, // 글자 위치 y
-
-        label: "",
-        fontname: "Ubuntu",
-        fontcolor: "#ff9818",
-
-        //image: jq('#img-buffer')[0]
-    };
-
-    $('#qrcode').empty().qrcode(options);
-}
-
 function generateURL() {
 
     $.ajax({

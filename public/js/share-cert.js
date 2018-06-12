@@ -44,29 +44,27 @@ $(document).ready(function(){
 	}
 
 	$("#btn_print").click(function(event) {
-        event.stopPropagation();
-
 		$(".header").hide();
         $("#footer").hide();
         $(".main-body-footer").hide();
-               
-        setInterval(function(){
-            const html = document.querySelector('html');
-            const printContents = document.querySelector('.main-body').innerHTML;
-            const printDiv = document.createElement("DIV");
-            printDiv.className = "print-div";
-            
-            html.appendChild(printDiv);
-            printDiv.innerHTML = printContents;
-            document.body.style.display = 'none';
-            window.print();
-            document.body.style.display = 'block';
-            printDiv.style.display = 'none';
+        $(".qrcode").show();             
+        
+        const html = document.querySelector('html');
+        const printContents = document.querySelector('.main-body').innerHTML;
+        const printDiv = document.createElement("DIV");
+        printDiv.className = "print-div";
+        
+        html.appendChild(printDiv);
+        printDiv.innerHTML = printContents;
+        document.body.style.display = 'none';
+        window.print();
+        document.body.style.display = 'block';
+        printDiv.style.display = 'none';
 
-            $(".header").show();
-            $("#footer").show();   
-            $(".main-body-footer").show();           
-        }, 100);        
+        $(".header").show();
+        $("#footer").show();   
+        $(".main-body-footer").show();            
+        $(".qrcode").hide();    
 	});
 });
 

@@ -59,15 +59,23 @@ app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-
   var status = err.status || 500;
   if (!!req.xhr) {
-    if (err instanceof ResponseError) {
-      res.status(status).json(err.toJson());
+    if (!!err.code && !!err.message) {
+      res.status(err.status || 500).json({
+        err: {
+          code: err.code,
+          msg: err.message
+        }
+      });
     } else {
-      res.status(status).json(err);
+      res.status(500).json({
+        err: {
+          code: 1,
+          msg: 'Internal error',
+        }
+      });
     }
-
   } else {
     res.status(status).render('error', err);
   }

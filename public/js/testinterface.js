@@ -170,7 +170,7 @@ function test_setTestData() {
            {
                "data": "{\"cname\":\"박헌욱 (PARK HEONUG)\",\"grcode\":\"OBB0003\",\"birthday\":\"1987 / 01 / 23\",\"ctestday\":\"2014 / 09 / 28\",\"testtype\":\"OPIc (ENGLISH)\",\"cnation\":\"OPIc 특별시험\",\"clevel\":\"NOVICE LOW - ENGLISH\",\"cissudate\":\"2018 / 05 / 30\",\"name\":\"박헌욱\",\"ename\":\"PARK HEONUG\",\"opidate\":\"Sep 28 2014  6:24PM\",\"issudate\":\"20180530\",\"subj\":\"OPI003\",\"year\":\"2014\",\"subjseq\":\"66797\",\"started\":\"201409281820\",\"ended\":\"201409281930\",\"rating\":\"NL\",\"areacd\":\"A\",\"exroomno\":\"A0068\",\"exroomnm\":\"OPIc역삼교육센터\",\"addr\":\"서울강남구 역삼동 718-5 멀티스퀘어 6층(구 삼성SDS멀티캠퍼스 건물)\",\"levels\":\"1\",\"code\":\"NL\",\"codenm\":\"Novice Low\",\"freebillchk\":\"N\",\"realyear\":\"2014\",\"useend\":\"2016/09/27\",\"examid\":null,\"language\":\"English\",\"testdate\":\"September28,2014\",\"imsubscore\":null,\"subjnm\":\"OPIc 특별시험\"}",
                "hash": "332ca60e27587689dfdbd71754abf3e6e8c81fe4ca8424b5afb746886d3fbf01",
-               "txid": "8af636cd2605e0bff287c168b9e6c333787ae778f8d91456f5b6d94e696b71c4",
+               "txid": "db8c4ec73fa3bb9e13cd1d2315428010bd0f121da57a1eed389bf765ecc5c5e0",
                "subid": "RCLPT0005",
                "stored": "Y",
                "dftYn": "N"

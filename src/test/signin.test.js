@@ -22,7 +22,7 @@ describe('Sign In test suite', () => {
                 email: 'test@naver.com',
             })
             .end((err, res) => {
-                console.log(res.body);
+                console.log(JSON.stringify(res.body));
                 done();
             });
     });
