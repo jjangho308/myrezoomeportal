@@ -25,6 +25,7 @@ export default {
                         .type('application/json').status(302).redirect('/');
         //res.render('index', {});
         //res.redirect('/');
+
     },
 
 }
