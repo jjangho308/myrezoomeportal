@@ -2,14 +2,10 @@ import chai from 'chai';
 import chaihttp from 'chai-http';
 
 import app from '../app';
-
 import CertModel from '../models/cert/cert';
 import CertDao from '../dao/cert_dao';
-
 import Util from '../util/util';
-
 import Managers from '../core/managers';
-
 import Terminator from '../core/terminator';
 
 /**
@@ -21,7 +17,7 @@ describe('/certs URI Page test suite.', () => {
     var jwtToken = null;
     before('Service initialize', () => {
         jwtToken = Managers.token().issueToken({
-            uId: 'UID2'
+            uId: 'UID4'
         })
         chai.use(chaihttp);
     });
@@ -75,9 +71,9 @@ describe('/certs URI Page test suite.', () => {
             });
     })
 
-    it.skip('Certificate view page test case', done => {
+    it('Certificate view page test case', done => {
         chai.request(app)
-            .get('/certs/bfd04148-c918-46c3-99fa-9f1fc0e20122')
+            .get('/certs/d03c60c4-ec5d-4f9e-b59b-d34f261868c4')
             .set('Content-Type', 'text/html')
             .set('Authorization', 'Bearer ' + jwtToken)
             .send()
@@ -110,7 +106,7 @@ describe('/certs URI Page test suite.', () => {
             .set('X-Requested-With', 'XMLHttpRequest')
             .send()
             .end((err, res) => {
-                
+
                 done();
             });
     })

@@ -60,6 +60,8 @@ export default {
      * 
      * @since 180419
      * @author TACKSU
+     * 
+     * @updated 180612 원본 데이터를 전달하도록 수정
      */
     getCertView: (req, res, next) => {
         req.body.certId = req.params.certId;
@@ -67,13 +69,9 @@ export default {
         Managers.client().request(new GetCertsRequest(req.body), (err, result) => {
             if (!!err) {
                 next(err);
+            } else if (result.length == 0) {
+                // TODO Do something.
             } else {
-                /*
-                res.json({
-                    result: result
-                });
-                */
-                console.log(result);
                 res.render('certviewer', result[0]);
             }
         });
@@ -164,9 +162,9 @@ export default {
             Managers.client().request(new DeleteCertRequest(data), (err, result) => {
                 if (!!err) {
                     next(err);
-                }else{
+                } else {
                     res.json({
-                        result : result
+                        result: result
                     });
                 }
             });
