@@ -502,6 +502,15 @@ class CertificateDAO extends AbstractDAO {
             }
         })
     }
+
+    /**
+     * 
+     * @param {*} creteria 
+     * @param {*} cb 
+     */
+    getCertDa ta(creteria, cb){
+        
+    }
 }
 
 export default CertificateDAO;
