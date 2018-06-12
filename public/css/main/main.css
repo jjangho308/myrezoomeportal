@@ -94,7 +94,8 @@ li a:hover {}
     text-align: center;
     color: white;
     margin-bottom: 70px;
-}
+    margin-top: 5px;
+    font-weight: 300;
 
 #resume-start-btn {
     width: 350px;
