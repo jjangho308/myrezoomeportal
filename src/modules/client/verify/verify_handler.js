@@ -41,6 +41,7 @@ class VerifyHandler extends AbstractAgentRequestHandler {
         if("c" == urlType) { // cert
             var certDAO = Managers.db().getCertDAO();
             certDAO.getSharedUrl({url: url}, (err, shareModel) => {
+
                 if (!!err) {
                     done(ClientRequest.RESULT_FAILURE, err);
                 } else {                      
@@ -48,7 +49,7 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                     crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey                                                                        
                         var json_decrypted = JSON.parse(decrypted);
                         var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){     
-                            nexledgerService.getbytxid(null, shareModel.txId, function (res) {                                
+                            nexledgerService.getbytxid(null, shareModel.txId, function (res) {                             
                                 if(res.result.hash == data_hashed_cb) {
                                     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!Hash same!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                                     if("N" == shareModel.pubYn) { // encrypt with user's passcode when pubYn is N                                
@@ -59,7 +60,8 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                                 var verifyData = {
                                                     encrypted: true,
                                                     iv: encodedIV,
-                                                    data: encryptedData
+                                                    data: encryptedData,
+                                                    created: shareModel.created
                                                 };
                                                 console.log(verifyData);
                                                 done(ClientRequest.RESULT_SUCCESS, verifyData);
@@ -69,7 +71,8 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                         var verifyData = {
                                             encrypted: false,
                                             iv: "",
-                                            data: JSON.parse(decrypted)
+                                            data: JSON.parse(decrypted),
+                                            created: shareModel.created
                                         };
                                         console.log(verifyData);
                                         done(ClientRequest.RESULT_SUCCESS, verifyData);
@@ -80,7 +83,8 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                     var verifyData = {
                                         encrypted: false,
                                         iv: encodedIV,
-                                        data: "관리자에게 문의하시오"
+                                        data: "관리자에게 문의하시오",
+                                        created: shareModel.created
                                     };
                                     
                                     done(ClientRequest.RESULT_SUCCESS, verifyData);
