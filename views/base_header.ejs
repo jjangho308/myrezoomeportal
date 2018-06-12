@@ -7,7 +7,22 @@
                 </li>
 
                 <li class="right">
-                    <a href="#"><img id="user-small-icon" src=<%= imgsrc %>><span><%= email %></span><img class="check-icon" src="/img/myresume/shape@3x.png" /></a>
+                    <a id="header-signout" href="#"><img id="user-small-icon" src=<%= imgsrc %>><span><%= email %></span><img class="check-icon" src="/img/myresume/shape@3x.png" /></a>
+                    <div id="header-div-signout" style="width:100px;position: relative;display: none;top:13px;left:90px;background-color: #3c435f;color: #FFF;font-size: 14px;cursor: pointer;">Sing out</div>
+                    <script>
+                        $('#header-signout').click(function(){
+                            if($("#header-div-signout").css("display") == "none"){
+                                $("#header-div-signout").show();
+                            }
+                            else{
+                                $("#header-div-signout").hide();
+                            }
+                        });
+                        $("#header-div-signout").click(function() {
+                            sessionStorage.clear();
+                            location.href = "/signout";
+                        });
+                    </script>
                 </li>
 
                 <li class="right">

@@ -1,6 +1,7 @@
 import express from 'express';
 
 import signin_router from './signin_route';
+import signout_router from './signout_route';
 import signup_router from './signup_route';
 import records_router from './records_route';
 import certs_router from './certs_route';
@@ -25,6 +26,7 @@ import developer_router from './developer_route';
 var router = express.Router();
 router.use('/', intro_router);
 router.use('/signin', signin_router);
+router.use('/signout', signout_router);
 router.use('/signup', signup_router);
 router.use('/main', main_router);
 router.use('/record', records_router);
