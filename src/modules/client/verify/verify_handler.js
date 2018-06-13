@@ -49,7 +49,15 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                     crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey                                                                        
                         var json_decrypted = JSON.parse(decrypted);
                         var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){     
-                            nexledgerService.getbytxid(null, shareModel.txId, function (res) {                             
+                            nexledgerService.getbytxid(null, shareModel.txId, function (res) {    
+                                console.log("---Verify Handler---");
+                                if(res == undefined || res == null) {
+                                    res = {
+                                        result:{
+                                            hash:""
+                                        }
+                                    };
+                                }                         
                                 if(res.result.hash == data_hashed_cb) {
                                     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!Hash same!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                                     if("N" == shareModel.pubYn) { // encrypt with user's passcode when pubYn is N                                
@@ -80,12 +88,12 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!Hash Different!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                                     var verifyData = {
                                         encrypted: false,
-                                        iv: encodedIV,
+                                        iv: '',
                                         data: "관리자에게 문의하시오",
                                         created: shareModel.created
                                     };
                                     
-                                    done(ClientRequest.RESULT_SUCCESS, verifyData);
+                                    done(ClientRequest.RESULT_FAILURE, verifyData);
                                 }
                             });
                             console.log("==============================================================");
