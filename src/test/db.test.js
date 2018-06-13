@@ -108,7 +108,7 @@ describe('Blockchain test suit', () => {
             hash: "dddddddddddddddddddddddddddddddd"
         }
 
-        for (var t = 0; t < 1; t++) {
+        for (var t = 0; t < 10; t++) {
 
             nexledgerService.put(nodeurl, "155WAnc5m7RFjjLgQJjQN82nr7xjYXN2wg", data, function (res) {
                 console.log("==========test put procedure==========");
@@ -120,7 +120,7 @@ describe('Blockchain test suit', () => {
         done();
     });
 
-    it('Get Nexledger', done => {
+    it.skip('Get Nexledger', done => {
 
         var rtxid = "ce4437fdaec125c88c694ada6b58a1993cfb411bc08845c11312b3f477cce2c4";
 
