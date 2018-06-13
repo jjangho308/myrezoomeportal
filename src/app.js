@@ -80,7 +80,7 @@ app.use((err, req, res, next) => {
     res.status(status).render('error', err);
   }
 
-  next(err);
+  // next(err);
 
   // render the error page
   // console.log('error : ' + JSON.stringify(err));

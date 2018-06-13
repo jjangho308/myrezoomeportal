@@ -87,12 +87,12 @@ describe.skip('Cassandra test suit', () => {
     })
 })
 
-describe.skip('Blockchain test suit', () => {
+describe('Blockchain test suit', () => {
     var nodeurl = null;
     var nexledgerService = null;
 
     before('Blockchain module initialize', () => {
-        initialize();
+        //initialize();
         nexledgerService = new NexledgerService();
         nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
     });

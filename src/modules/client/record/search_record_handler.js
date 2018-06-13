@@ -517,6 +517,9 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                     console.log("Agent response promise error " + err);
                 })
                 .then(result => {
+                    console.log("search record handler");
+                    console.log(result);
+                    console.log(agentRequest);
                     if (!!socket)
                         socket.emit('SearchResult', JSON.stringify(agentRequest));
                 });
