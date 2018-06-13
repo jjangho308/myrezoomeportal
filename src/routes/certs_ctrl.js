@@ -7,6 +7,8 @@ import IssueNewCertRequest from '../modules/client/certs/issue_cert_request';
 import UpdateCertRequest from '../modules/client/certs/update_cert_request';
 import DeleteCertRequest from '../modules/client/certs/delete_cert_request';
 
+import GetCertViewRequest from '../modules/client/certs/get_cert_view_request';
+
 /**
  * Controller for /certs URI. <br />
  * 
@@ -66,13 +68,11 @@ export default {
     getCertView: (req, res, next) => {
         req.body.certId = req.params.certId;
 
-        Managers.client().request(new GetCertsRequest(req.body), (err, result) => {
+        Managers.client().request(new GetCertViewRequest(req.body), (err, certificate) => {
             if (!!err) {
                 next(err);
-            } else if (result.length == 0) {
-                // TODO Do something.
             } else {
-                res.render('certviewer', result[0]);
+                res.render('certviewer', certificate);
             }
         });
     },

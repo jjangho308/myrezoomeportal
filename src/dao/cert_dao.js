@@ -492,7 +492,6 @@ class CertificateDAO extends AbstractDAO {
     }
 
     getSubName(cb) {
-
         var query = mysql.format(CertQuery.getSubName);
         this.query(query, (err, rows) => {
             if (!!err) {
@@ -501,6 +500,34 @@ class CertificateDAO extends AbstractDAO {
                 cb(rows);
             }
         })
+    }
+
+    /**
+     * Get certificate original data. <br/ >
+     * 
+     * @since 180613
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} cb 
+     */
+    getCertData(creteria, cb) {
+        var creteria = {
+            CERT_ID: creteria.certId,
+        };
+
+        var query = mysql.format(CertQuery.getCertData, creteria);
+        this.query(query, (err, cursor) => {
+            if (!!err) {
+                cb(err, null);
+            } else {
+                var result = {};
+                cursor.forEach(item => {
+                    result.txid = item.TRX_ID;
+                    result.encryptedData = item.ENC_CERT_DATA;
+                });
+            }
+        });
     }
 }
 

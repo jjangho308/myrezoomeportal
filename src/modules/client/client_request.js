@@ -76,6 +76,9 @@ import VerifyHandler from './verify/verify_handler';
 import IssueCertAPIV1Entity from './api/v1/api_issue_cert_entity';
 import IssueCertAPIV1Handler from './api/v1/api_issue_cert_handler';
 
+import GetCertViewRequestEntity from './certs/get_cert_view_request';
+import GetCertViewRequestHandler from './certs/get_cert_view_handler';
+
 /**
  * Request manager from client. <br />
  * 
@@ -153,6 +156,7 @@ class ClientRequestManager extends AbstractManager {
          */
         this.handlerMap.set(IssueCertAPIV1Entity, new IssueCertAPIV1Handler());
 
+        this.handlerMap.set(GetCertViewRequestEntity, new GetCertViewRequestHandler());
 
         this.setPrepared();
     }
