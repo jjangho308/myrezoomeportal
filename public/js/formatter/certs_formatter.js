@@ -103,16 +103,16 @@ var certformatter= {
 
     "RCOGC0008":function viewformatter(record_data) {
         //인하대 졸업증명서        
-        var htmldiv = '<div>';
-            htmldiv = htmldiv + "<p>이름 : " +record_data.registList[0].name + '</p>';
-            htmldiv = htmldiv + "<p>생년월일 : " +record_data.registList[0].birth + '</p>';
-            htmldiv = htmldiv + "<p>대학 : " +record_data.registList.univ_name + '</p>';
-            htmldiv = htmldiv + "<p>소속 : " +record_data.registList[0].univ_affiliation + '</p>';
-            htmldiv = htmldiv + "<p>입학일자 : " +record_data.registList[0].admission_date + '</p>';
-            htmldiv = htmldiv + "<p>졸업일자 : " +record_data.registList[0].change_date + '</p>';
-            
-        htmldiv = htmldiv + '</div>';
-        $('#cert-body-div').append(htmldiv);
+        $(".inner-container").load("../../viewhtml/RCOGC0008.html", function() {
+            $('#cert-owner-name').text(record_data.registList[0].name);
+            $('#cert-owner-birth').text(record_data.registList[0].birth);
+            $('#cert-owner-uni').text(record_data.registList[0].uni_course);
+            $('#cert-owner-uni-org-major').text(record_data.registList[0].univ_affiliation);
+            $('#cert-owner-uni-enter-date').text(record_data.registList[0].admission_date);
+            $('#cert-owner-uni-gredu-date').text(record_data.registList[0].change_date);
+            $('#cert-owner-uni-gredu-id').text(record_data.registList[0].std_no);
+        
+        });     
 
         generateQRCode();
     },

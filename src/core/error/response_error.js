@@ -38,7 +38,7 @@ class HttpResponseError {
         var locale = locale || 'default';
         return {
             code: this.code,
-            msg: ErrorMessage[locale][this.code]
+            msg: this.message
         };
     }
 }
