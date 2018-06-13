@@ -73,7 +73,7 @@ describe('/certs URI Page test suite.', () => {
 
     it('Certificate view page test case', done => {
         chai.request(app)
-            .get('/certs/4bfc9f22-e18e-4dab-98b1-1ef3a923af77')
+            .get('/certs/9f8bbce2-b944-4fda-9fa6-f2dabaa4745a')
             .set('Content-Type', 'text/html')
             .set('Authorization', 'Bearer ' + jwtToken)
             .send()

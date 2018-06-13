@@ -190,7 +190,7 @@
             <script>
                 <% if(record) {%>
                 if (!!window.sessionStorage) {
-                    sessionStorage.setItem('<%= txid %>', <%= record %>);
+                    sessionStorage.setItem('<%= txid %>', <%- record %>);
                 }
                 <% } %>
                 setCertViewer('<%= txid %>');

@@ -53,5 +53,5 @@ export default {
     /**
      * Query to 
      */
-    getCertData: 'SELECT TRX_ID, ENC_CERT_DATA from ' + CERT_TABLE + ' WHERE ?',
+    getCertData: 'SELECT TCD.TRX_ID as txid, TCD.ENC_CERT_DATA as encryptedData, TSB.SUB_NM as title from rezoome_db.TCDA_CERT_DATA as TCD	INNER JOIN TCDA_BLC_MAP AS TBM ON (TBM.TRX_ID = TCD.TRX_ID) INNER JOIN TCCO_SUB AS TSB ON (TBM.SUB_ID = TSB.SUB_ID) WHERE ?',
 }

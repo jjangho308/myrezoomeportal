@@ -521,12 +521,7 @@ class CertificateDAO extends AbstractDAO {
             if (!!err) {
                 cb(err, null);
             } else {
-                var result = {};
-                cursor.forEach(item => {
-                    result.txid = item.TRX_ID;
-                    result.encryptedData = item.ENC_CERT_DATA;
-                });
-                cb(null, result);
+                cb(null, cursor.length > 0 ? cursor[0] : {});
             }
         });
     }
