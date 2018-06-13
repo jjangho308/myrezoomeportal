@@ -97,7 +97,12 @@ var certformatter= {
             generateQRCode();
             createChart(record_data);
 
-            //$(".inner-container").css({"width":"100%", "border":"0px"});
+            html2canvas($(".inner-container"), {
+                onrendered: function(canvas) {
+                    var img = canvas.toDataURL();
+                    $($(".inner-container")).html("<img src=" + img + ">");
+                }
+            });
         });
     },
 

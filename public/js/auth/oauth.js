@@ -82,7 +82,11 @@ $(document).ready(function () {
                                             client_id: clientId,
                                             client_secret: clientSecret,
                                         },
-                                        success: res => {
+                                        success: res => {                                            
+                                            $("#")
+
+
+
                                             issueToken({
                                                 code: res.code
                                             });
