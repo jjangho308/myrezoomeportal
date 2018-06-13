@@ -63,7 +63,6 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                                     data: encryptedData,
                                                     created: shareModel.created
                                                 };
-                                                console.log(verifyData);
                                                 done(ClientRequest.RESULT_SUCCESS, verifyData);
                                             }
                                         });                            
@@ -74,7 +73,6 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                             data: JSON.parse(decrypted),
                                             created: shareModel.created
                                         };
-                                        console.log(verifyData);
                                         done(ClientRequest.RESULT_SUCCESS, verifyData);
                                     }
                                 } else {

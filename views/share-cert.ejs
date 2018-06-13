@@ -84,18 +84,18 @@
     <div class="main-body-footer">
         <div>
             <div class="main-body-footer-left">
-                <table>
-                    <tr>
-                        <td class="main-body-footer-1">발급기관</th>
-                        <td class="main-body-footer-2">발급일</th>
-                        <td class="main-body-footer-3">트랜젝션 ID</th>
-                    </tr>
-                    <tr>
-                        <td class="main-body-footer-4"></td>
-                        <td class="main-body-footer-5"><%= created %></td>
-                        <td class="main-body-footer-6"><%= data.txid %></td>
-                    </tr>
-                </table>
+                <div>
+                    <div>
+                        <div class="main-body-footer-1">발급기관</div>
+                        <div class="main-body-footer-2">발급일</div>
+                        <div class="main-body-footer-3">트랜젝션 ID</div>
+                    </div>
+                    <div>
+                        <div class="main-body-footer-4"></div>
+                        <div class="main-body-footer-5"><%= data.created %></div>
+                        <div class="main-body-footer-6"><%= data.data.txid %></div>
+                    </div>
+                </div>
             </div>
             <div class="main-body-footer-right">
                 <a class="main-body-footer-right-button1">내역 검증</a>

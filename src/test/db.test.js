@@ -97,7 +97,7 @@ describe('Blockchain test suit', () => {
         nodeurl = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
     });
 
-    it.skip('Put Nexledger', done => {
+    it('Put Nexledger', done => {
 
         // var data = {
         //     name: "lkwook",
@@ -108,7 +108,7 @@ describe('Blockchain test suit', () => {
             hash: "dddddddddddddddddddddddddddddddd"
         }
 
-        for (var t = 0; t < 100; t++) {
+        for (var t = 0; t < 1; t++) {
 
             nexledgerService.put(nodeurl, "155WAnc5m7RFjjLgQJjQN82nr7xjYXN2wg", data, function (res) {
                 console.log("==========test put procedure==========");
