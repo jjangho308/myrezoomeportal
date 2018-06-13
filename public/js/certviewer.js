@@ -279,7 +279,7 @@ function summitform() {
 function setCertViewer(tx_id) {    
     record = getData(tx_id);
     console.log(record);    
-    $(".cert-title").html("증명서");    
+    $("#cert_title").html(record.subid);    
     certformatter[record.subid](record.data);
 }
 
