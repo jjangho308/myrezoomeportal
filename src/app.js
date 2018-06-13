@@ -62,7 +62,7 @@ app.use((err, req, res, next) => {
       res.status(status).json({
         err: {
           code: err.code,
-          msg: ErrorMessage['ko-KR'.toLowerCase()][err.code];
+          msg: ErrorMessage['ko-KR'.toLowerCase()][err.code],
         }
       });
     } else {

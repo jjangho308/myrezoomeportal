@@ -30,7 +30,7 @@ class GetCertViewRequestHandler extends AbstractClientRequestHandler {
      * @param {Function} done ClientRequest callback.
      */
     request(requestEntity, done) {
-        if (!!requestEntity.uId || !!requestEntity.certId) {
+        if (!requestEntity.uId || !requestEntity.certId) {
             done(ClientRequest.RESULT_FAILURE, new ResponseError(ErrorCode.PARAM_INVALID));
             return;
         }
@@ -53,12 +53,14 @@ class GetCertViewRequestHandler extends AbstractClientRequestHandler {
                         done(ClientRequest.RESULT_FAILURE, new ResponseError(ErrorCode.INTERNAL_ERROR));
                         return;
                     } else {
-                        Managers.crypto().decryptAESECB(certData.encryptedData, (err, decrypted) => {
+                        var crypto = Managers.crypto();
+                        crypto.decryptAESECB(certData.encryptedData, crypto.getSystemSymmetricKey(), (err, decrypted) => {
                             if (!!err) {
                                 done(ClientRequest.RESULT_FAILURE, new ResponseError(ErrorCode.INTERNAL_ERROR));
                                 return;
                             } else {
                                 done(ClientRequest.RESULT_SUCCESS, {
+                                    
                                     txid: certData.txid,
                                     record: decrypted,
                                 });

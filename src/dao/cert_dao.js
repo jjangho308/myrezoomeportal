@@ -526,6 +526,7 @@ class CertificateDAO extends AbstractDAO {
                     result.txid = item.TRX_ID;
                     result.encryptedData = item.ENC_CERT_DATA;
                 });
+                cb(null, result);
             }
         });
     }
