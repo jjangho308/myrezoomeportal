@@ -86,7 +86,7 @@
 }
 
 
-@media screen and (min-width: 1000px){
+@media screen and (min-width: 720px){
 	body{
 		min-width: 0px;
 		height: 100vh; 
@@ -95,7 +95,9 @@
 	}
 
 	.main-body{
-		padding: 1px 0px;
+		background-color: #f2f5f8;
+		padding: 35px 0px;
+		margin: 0;
 	}
 
 	.header{
@@ -109,19 +111,18 @@
 	}
 
 	.outer-container{
-    width: auto;
-    height: auto;
-    padding-top: 0px;
-	
-        background:  #f2f5f8;
+		width: 840px;
+    	height: 1188px;
 	}
 
 	.inner-container{
-	    width: 345px;
-	    height: 450px;	    
-	    margin: 20px 15px 52px 15px;
+		width: 98%;
+		height: 98%;
+		/* margin-top: 20px; */
 		background: white;
-		font-size:60%;
+		font-size: 60%;
+		border: solid 2px #2b2c2c;
+		/* margin: 20px; */
 	}
 
 	.cert-title{
@@ -188,7 +189,7 @@
 }
 
 
-@media (min-width:360px) {
+@media (max-width:720px) {
 
 	body {
 		font-size: 10px;
@@ -265,24 +266,3 @@
     }	
 }
 
-
-@media (min-width:768px) {
-
-	body {
-		font-size: 10px;
-	}
-
-	.outer-container  {
-		
-	}
-	
-	.inner-container {
-		
-	}
-}
-
-@media (max-width:359px) {
-	.header {
-		width : 360px;
-	}
-}

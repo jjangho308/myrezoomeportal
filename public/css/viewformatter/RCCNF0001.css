@@ -165,7 +165,7 @@
     height: 40px;
 }
 
-@media all and (min-width:360px) {
+@media all and (min-width:720px) {
     #qrmessage {
         content: "";
         visibility: hidden;
@@ -177,10 +177,6 @@
         left: 150px;
         top: 195px;
         width: 220px;
-    }
-
-    .inner-container img {
-        width: 100%;
     }
 
     #user-info-div img:nth-child(1) {
@@ -311,7 +307,10 @@
     }
 }
 
+@media all and (min-width:1023px) {
 
-@media all and (min-width:768px) {
+}
+
+@media all and (max-width:1024px) {
 
 }
