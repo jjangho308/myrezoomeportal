@@ -243,7 +243,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                             storedData.forEach((storedDataItem, storedDataIdx) => {
 
                                                                 defferedStoredDataPromises.push(new Promise((resolve, reject) => {
-                                                                        nexledgerService.getbytxid(null, storedDataItem.TRX_ID, (res) => {
+                                                                        nexledgerService.getbytxid(null, storedDataItem.TRX_ID, 0, (res) => {
                                                                             resolve(res);
                                                                         });
                                                                     })
@@ -366,7 +366,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     // BlockChain에 저장된 hash값을 실어서 전송함.
                                                     storedData.forEach((storedDataItem, storedDataIdx) => {
                                                         defferedStoredDataFunctions.push(new Promise((storedDataResolve, storedDataReject) => {
-                                                                nexledgerService.getbytxid(null, storedDataItem.TRX_ID, function (res) {
+                                                                nexledgerService.getbytxid(null, storedDataItem.TRX_ID, 0,function (res) {
                                                                     //console.log(res);
                                                                     storedDataResolve(res);
                                                                 });
@@ -461,7 +461,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                 hash: recordsItem.hash
                             }
 
-                            nexledgerService.put(null, user_bc_wallet_addr, data, (nexledgerResponse) => {
+                            nexledgerService.put(null, user_bc_wallet_addr, data, 0, (nexledgerResponse) => {
                                 console.log('NexLedger Response : ' + nexledgerResponse);
                                 resolve(nexledgerResponse);
                             });

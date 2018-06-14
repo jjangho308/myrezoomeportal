@@ -110,7 +110,7 @@ describe('Blockchain test suit', () => {
 
         for (var t = 0; t < 10; t++) {
 
-            nexledgerService.put(nodeurl, "155WAnc5m7RFjjLgQJjQN82nr7xjYXN2wg", data, function (res) {
+            nexledgerService.put(nodeurl, "155WAnc5m7RFjjLgQJjQN82nr7xjYXN2wg", data, 0, function (res) {
                 console.log("==========test put procedure==========");
                 console.log(res);
                 console.log("======================================");
@@ -124,7 +124,7 @@ describe('Blockchain test suit', () => {
 
         var rtxid = "ce4437fdaec125c88c694ada6b58a1993cfb411bc08845c11312b3f477cce2c4";
 
-        nexledgerService.getbytxid(nodeurl, rtxid, function (res) {
+        nexledgerService.getbytxid(nodeurl, rtxid, 0,function (res) {
             console.log("==========test get procedure==========");
             console.log(res);
             console.log("======================================");

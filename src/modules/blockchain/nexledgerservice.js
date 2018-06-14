@@ -1,9 +1,6 @@
 import AbstractManager from '../abstract_manager';
 import request from 'request-json';
 
-import Manager from '../../core/managers';
-import Property from '../property/property';
-
 /**
  * Manager for IO function on NexLedger. <br />
  * 
@@ -11,6 +8,9 @@ import Property from '../property/property';
  * @author
  */
 class NexledgerService extends AbstractManager {
+
+
+    
 
     /**
      * Default constructor. <br />
@@ -23,9 +23,7 @@ class NexledgerService extends AbstractManager {
 
     init(from) {
         super.init(from);
-        var propertyManager = Manager.property();
-        //this.url = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
-        this.url = propertyManager.get(Property.Nexledger_URL);
+        this.url = "http://DEVNexledgerEXTELB-809568528.ap-northeast-2.elb.amazonaws.com:18080";
     }
 
     newaccount(nodeurl, callback) {
@@ -39,15 +37,15 @@ class NexledgerService extends AbstractManager {
 
             //console.error(err);
             //console.log(res);
-            // console.log("============response function=================");
-            // console.log(body);
-            // console.log("==============================================");
+            console.log("============response function=================");
+            console.log(body);
+            console.log("==============================================");
             callback(body);
         });
 
     }
 
-    getbytxid(nodeurl, txid, callback) {
+    getbytxid(nodeurl, txid, retryCount, callback) {
 
         var client = request.createClient(!!nodeurl ? nodeurl : this.url);
 
@@ -58,34 +56,48 @@ class NexledgerService extends AbstractManager {
             }
         };
 
-        var nex_interval = 0;
-        var res_nexledger = 0;
-        while( nex_interval < 5) {
-            client.post('/', reqformatdata, function (err, res, body) {
-                try {
-                    if (body.result.hash == '') {
-                        res_nexledger = res_nexledger + 1;    
-
-                        if(res_nexledger >= 5) {
-                            //console.log("!!Nexledger ERR!!");
+        client.post('/', reqformatdata, function (err, res, body) {
+            //console.log("============Nexledger Get function=================");
+            //console.log(body);
+            try {
+                if(body.result.hash=='') {
+                    if(retryCount > 5) {
+                        try {
+                            if(body.err != '') {
+                                callback(body.err);
+                            }
+                        }
+                        catch(nexledgerexception) {
+                            body.err = "Nexledger SDK exception";
                             callback(body.err);
                         }
                     }
                     else {
-                        res_nexledger = 5;
-                        callback(body);
+                        this.getbytxid(nodeurl, txid, retryCount+1, callback);
                     }
-                }catch(nexledgerexception) {
-                    res_nexledger = res_nexledger + 1;
-
-                    if(res_nexledger >= 5) {
-                        //console.log("!!Nexledger ERR!!");
+                }
+                else {
+                    callback(body);
+                }
+            }catch(nexledgerexception) {
+                //console.log(nexledgerexception);
+                if(retryCount > 5) {
+                    try {
+                        if(body.err != '') {
+                            callback(body.err);
+                        }
+                    }
+                    catch(nexledgerexception) {
+                        body.err = "Nexledger SDK exception";
                         callback(body.err);
                     }
-                }                
-            }.bind(this));
-            nex_interval = nex_interval + 1;
-        }
+                }
+                else {
+                    this.getbytxid(nodeurl, txid, retryCount+1, callback);
+                }
+            }
+            
+        }.bind(this));
 
     }
 
@@ -98,22 +110,15 @@ class NexledgerService extends AbstractManager {
             }
         };
         client.post('/', reqformatdata, function (err, res, body) {
-            // console.log("============Nexledger Get function=================");
-            // console.log(body);
-            // console.log("==============================================");
+            console.log("============Nexledger Get function=================");
+            console.log(body);
+            console.log("==============================================");
             callback(body);
         });
+
     }
 
-    /**
-     * Put transaction data to nexledger. <br />
-     * 
-     * @param {*} nodeurl 
-     * @param {*} address 
-     * @param {*} data 
-     * @param {*} callback 
-     */
-    put(nodeurl, address, data, callback) {
+    put(nodeurl, address, data, retryCount, callback) {
         var client = request.createClient(!!nodeurl ? nodeurl : this.url);
         var reqformatdata = {
             cmd: 'put',
@@ -122,33 +127,46 @@ class NexledgerService extends AbstractManager {
                 data: data
             }
         };
-
-        var nex_interval = 0;
-        var res_nexledger = 0;
-        while( nex_interval < 5) {
-            client.post('/', reqformatdata, function (err, res, body) {
-                try {
-                    if (body.result.txid == '') {
-                        res_nexledger = res_nexledger + 1;    
-                        if(res_nexledger >= 5) {
-                            console.log("!!Nexledger ERR!!");
+        client.post('/', reqformatdata, function (err, res, body) {
+            //console.log(body);
+            try {
+                if(body.result.txid == '') {
+                    if(retryCount > 5) {
+                        try {
+                            if(body.err != '') {
+                                callback(body.err);
+                            }
+                        }
+                        catch(nexledgerexception) {
+                            body.err = "Nexledger SDK exception";
                             callback(body.err);
                         }
                     }
                     else {
-                        res_nexledger = 5;
-                        callback(body);
+                        this.put(nodeurl, address, data, retryCount + 1, callback);
                     }
-                }catch(nexledgerexception) {
-                    res_nexledger = res_nexledger + 1;
-                    if(res_nexledger >= 5) {
-                        console.log("!!Nexledger ERR!!");
+                }
+                else {
+                    callback(body);
+                }
+            }catch(nexledgerexception) {
+                if(retryCount > 5) {
+                    try {
+                        if(body.err != '') {
+                            callback(body.err);
+                        }
+                    }
+                    catch(nexledgerexception) {
+                        body.err = "Nexledger SDK exception";
                         callback(body.err);
                     }
-                }                
-            }.bind(this));
-            nex_interval = nex_interval + 1;
-        } 
+                }
+                else {
+                    this.put(nodeurl, address, data, retryCount + 1, callback);
+                }
+            }
+            
+        }.bind(this));
     }
 
     newMethod() {
