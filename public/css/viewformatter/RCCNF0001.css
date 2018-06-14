@@ -184,6 +184,10 @@
         padding: 10px 25px;
     }
 
+    .inner-container img {
+        width: 100%;
+    }
+    
     #user-info-div img:nth-child(1) {
         position: absolute;
         left: 15px;
