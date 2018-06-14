@@ -140,7 +140,7 @@ class CertificateDAO extends AbstractDAO {
     putCert(certModel, cb) {
         var param = certModel.toRow();
         var query = mysql.format(CertQuery.issueCert, param);
-        
+
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -154,7 +154,7 @@ class CertificateDAO extends AbstractDAO {
     putCertByGuest(certModel, cb) {
         var param = certModel.toRow();
         var query = mysql.format(CertQuery.issueCertByGuest, param);
-        
+
         this.query(query, (err, result) => {
             if (!!err) {
                 cb(err);
@@ -213,20 +213,19 @@ class CertificateDAO extends AbstractDAO {
 
                         connection.query(usrCertDelQuery, (err, result) => {
                             if (!!err) {
-                                
+
                                 console.log(err);
                                 connection.rollback(function () {
                                     console.error("rollback error");
                                     cb(500, err);
                                 })
-                            }
-                            else if (result.affectedRows > 0) {
-                                
+                            } else if (result.affectedRows > 0) {
+
                                 var selectShareCertQuery = mysql.format(CertQuery.getShared, condition);
 
                                 connection.query(selectShareCertQuery, (err, result) => {
                                     if (!!err) {
-                                        
+
                                         console.log(err);
                                         connection.rollback(function () {
                                             console.error("rollback error");
@@ -235,20 +234,22 @@ class CertificateDAO extends AbstractDAO {
                                     } else {
                                         console.log(result);
                                         if (result.length > 0) {
-                                            var usrCertSharedDelQuery = mysql.format(CertQuery.delShared, [condition, { DEL_YN: 'N' }]);
+                                            var usrCertSharedDelQuery = mysql.format(CertQuery.delShared, [condition, {
+                                                DEL_YN: 'N'
+                                            }]);
                                             //console.log(usrCertSharedDelQuery);
                                             connection.query(usrCertSharedDelQuery, (err, result) => {
                                                 if (!!err) {
-                                                    
+
                                                     console.log(err);
                                                     connection.rollback(function () {
                                                         console.error("rollback error");
                                                         cb(500, err);
                                                     })
-                                                } else if (result.affectedRows > 0) {                                                    
+                                                } else if (result.affectedRows > 0) {
                                                     connection.commit(function (err) {
                                                         if (!!err) {
-                                                            
+
                                                             console.log(err);
                                                             connection.rollback(function () {
                                                                 console.error("rollback error");
@@ -326,7 +327,7 @@ class CertificateDAO extends AbstractDAO {
      * }
      * @param {*} cb 
      */
-    getShared(creteria, cb) {        
+    getShared(creteria, cb) {
 
         var condition = {};
 
@@ -344,8 +345,8 @@ class CertificateDAO extends AbstractDAO {
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);
-            } else {                
-                cb(err, SharedCertModel.fromRow(rows));                
+            } else {
+                cb(err, SharedCertModel.fromRow(rows));
             }
         });
     }
@@ -455,11 +456,11 @@ class CertificateDAO extends AbstractDAO {
         this.query(query, (err, rows) => {
             if (!!err) {
                 cb(err);
-            } else {     
-                if(rows != null || rows != undefined) {             
+            } else {
+                if (rows != null || rows != undefined) {
                     cb(err, {
                         txId: rows[0].TRX_ID,
-                        passcode:rows[0].PASSCODE,
+                        passcode: rows[0].PASSCODE,
                         certId: rows[0].CERT_ID,
                         url: rows[0].URL,
                         sharedYn: rows[0].SHRD_YN,
@@ -468,8 +469,7 @@ class CertificateDAO extends AbstractDAO {
                         created: rows[0].CRTD_DT,
                         encData: rows[0].ENC_CERT_DATA
                     });
-                }
-                else {
+                } else {
                     cb(err);
                 }
             }
@@ -492,7 +492,6 @@ class CertificateDAO extends AbstractDAO {
     }
 
     getSubName(cb) {
-
         var query = mysql.format(CertQuery.getSubName);
         this.query(query, (err, rows) => {
             if (!!err) {
@@ -501,6 +500,30 @@ class CertificateDAO extends AbstractDAO {
                 cb(rows);
             }
         })
+    }
+
+    /**
+     * Get certificate original data. <br/ >
+     * 
+     * @since 180613
+     * @author TACKSU
+     * 
+     * @param {*} creteria 
+     * @param {*} cb 
+     */
+    getCertData(creteria, cb) {
+        var creteria = {
+            CERT_ID: creteria.certId,
+        };
+
+        var query = mysql.format(CertQuery.getCertData, creteria);
+        this.query(query, (err, cursor) => {
+            if (!!err) {
+                cb(err, null);
+            } else {
+                cb(null, cursor.length > 0 ? cursor[0] : {});
+            }
+        });
     }
 }
 

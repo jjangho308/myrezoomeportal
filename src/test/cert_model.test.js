@@ -7,6 +7,8 @@ import SharedCertModel from '../models/cert/shared_cert';
 import SharedCertUrlModel from '../models/cert/shared_cert_url';
 import CertDAO from '../dao/cert_dao';
 
+import domain from 'domain';
+
 /**
  * Test suit for Certificate model. <br />
  * 
@@ -22,14 +24,29 @@ describe('Certficiate Model DAO test suite.', () => {
         certDAO = Managers.db().getCertDAO();
     })
 
-    it('Certificate issue  & get test case', done => {
+    it('Certificate original data test case', done => {
+        var localDomain = domain.create();
+        localDomain.on('error', err => {
+            console.log(err);
+        })
+        localDomain.run(() => {
+            certDAO.getCertData({
+                certId: 'd03c60c4-ec5d-4f9e-b59b-d34f261868c4'
+            }, (err, decryptedData) => {
+                console.log(decryptedData);
+                done();
+            });
+        });
+    })
+
+    it.skip('Certificate issue  & get test case', done => {
         var certModel = new CertModel({
             certId: Util.uuid(),
             uId: 1,
             blcMapId: Util.uuid(),
             shared: false,
             deleted: false
-        })
+        });
 
         certDAO.putCert(certModel, (err, insertId) => {
             certDAO.getCert({
@@ -42,11 +59,11 @@ describe('Certficiate Model DAO test suite.', () => {
                         done();
                     }
                 }
-            })
-        })
-    })
+            });
+        });
+    });
 
-    it('Update certitificate model test', done => {
+    it.skip('Update certitificate model test', done => {
         var orig = Util.uuid();
         var updated = Util.uuid();
         var certModel = new CertModel({
@@ -55,7 +72,7 @@ describe('Certficiate Model DAO test suite.', () => {
             blcMapId: orig,
             shared: false,
             deleted: false
-        })
+        });
 
         certDAO.putCert(certModel, (err, insertId) => {
             certModel.blcMapId = updated;
@@ -68,11 +85,11 @@ describe('Certficiate Model DAO test suite.', () => {
                 } else if (affectedRows > 0) {
                     done();
                 }
-            })
-        })
-    })
+            });
+        });
+    });
 
-    it('SharedCertModel Put & Get test case', done => {
+    it.skip('SharedCertModel Put & Get test case', done => {
         var sharedModel = new SharedCertModel({
             uId: 1,
             certId: Util.uuid(),
@@ -93,7 +110,7 @@ describe('Certficiate Model DAO test suite.', () => {
 
     });
 
-    it('Search shared model data by userId', done => {
+    it.skip('Search shared model data by userId', done => {
         certDAO.getShared({
             uId: 1,
         }, (err, sharedModels) => {
@@ -116,7 +133,7 @@ describe('Certficiate Model DAO test suite.', () => {
         });
     });
 
-    it('Update shared model', done => {
+    it.skip('Update shared model', done => {
         var originData = Util.uuid();
         var updatedData = Util.uuid();
 
@@ -124,7 +141,7 @@ describe('Certficiate Model DAO test suite.', () => {
             uId: 1,
             certId: Util.uuid(),
             encryptedData: originData,
-        })
+        });
 
         certDAO.shareCert(sharedModel, (err, insertId) => {
             certDAO.getShared({
@@ -157,7 +174,7 @@ describe('Certficiate Model DAO test suite.', () => {
         })
     });
 
-    it('Shared info test case', done => {
+    it.skip('Shared info test case', done => {
         var orig = Util.uuid();
         var modified = Util.uuid();
         var urlModel = new SharedCertUrlModel({
@@ -190,7 +207,5 @@ describe('Certficiate Model DAO test suite.', () => {
                 })
             }
         })
-    })
-
-    after('Close database connection', () => {})
+    });
 });
