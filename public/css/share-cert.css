@@ -66,13 +66,13 @@ background-color:#dadada;
 
 .main-body-footer-left {
 	float: left;
-	width: 610px;
+	width: calc(100% - 100px);
 	height:40px;
 	font-size: 12px;
 }
 
 .main-body-footer-right {
-	float: left;
+	float: right;
 	width: 100px;
 	height: 40px;
 	border-radius: 4px;
@@ -123,16 +123,27 @@ background-color:#dadada;
 .main-body-footer-4 {
 	float: left;
 	border: initial;
+	width: 135px;
+	height: 18px;
 }
 
 .main-body-footer-5 {
 	float: left;
 	border: initial;
+	width: 150px;
+	height: 18px;
 }
 
 .main-body-footer-6 {
 	float: left;
 	border: initial;
+	width: calc(100% - 300px);
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal !important;
+    display: block;
 }
 
 .main-body-footer-right-button1 {

@@ -138,7 +138,9 @@ class NexledgerService extends AbstractManager {
                             }
                         }
                         catch(nexledgerexception) {
-                            body.err = "Nexledger SDK exception";
+                            var body = {
+                                err: "Nexledger SDK exception" 
+                            };
                             callback(body.err);
                         }
                     }
@@ -157,7 +159,9 @@ class NexledgerService extends AbstractManager {
                         }
                     }
                     catch(nexledgerexception) {
-                        body.err = "Nexledger SDK exception";
+                        var body = {
+                            err: "Nexledger SDK exception" 
+                        };
                         callback(body.err);
                     }
                 }

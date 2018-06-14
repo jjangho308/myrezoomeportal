@@ -92,7 +92,12 @@
                     </div>
                     <div>
                         <div class="main-body-footer-4"></div>
-                        <div class="main-body-footer-5"><%= data.created %></div>
+                        <div class="main-body-footer-5">
+                            <script>
+                                var sdate = formatDate('<%= data.created %>');
+                                $('.main-body-footer-5').text(sdate);
+                            </script>
+                        </div>
                         <div class="main-body-footer-6"><%= data.data.txid %></div>
                     </div>
                 </div>
