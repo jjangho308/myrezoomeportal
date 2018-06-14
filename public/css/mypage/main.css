@@ -171,7 +171,8 @@ content:url("/img/myresume/upload.svg");
     margin-right: 63px;
     text-align: center;
     float: right;
-    padding: 17px 16px;
+    padding: 15px 16px;
+    margin-top: 4px;
 }
 
 #header-2 li:nth-child(1) {

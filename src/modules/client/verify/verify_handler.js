@@ -49,7 +49,7 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                     crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey                                                                        
                         var json_decrypted = JSON.parse(decrypted);
                         var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){     
-                            nexledgerService.getbytxid(null, shareModel.txId, function (res) {    
+                            nexledgerService.getbytxid(null, shareModel.txId, 0, function (res) {    
                                 console.log("---Verify Handler---");
                                 if(res == undefined || res == null) {
                                     res = {

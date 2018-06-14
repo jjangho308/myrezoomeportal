@@ -50,7 +50,7 @@ class ApiHandler extends AbstractApiRequestHandler {
                 var data = {
                     hash: hashed
                 }
-                nexledgerService.put(null, user_bc_wallet_addr, data, (nexledgerResponse) => {                    
+                nexledgerService.put(null, user_bc_wallet_addr, data, 0,(nexledgerResponse) => {                    
                     console.log("===========NexLedger Response==============");
                     console.log(nexledgerResponse);
                     console.log("=========================================");
