@@ -1,8 +1,3 @@
-.outer-container {
-    height: 1230px;
-    width: 780px;
-}
-
 .qrcode {
     position: absolute;
     bottom: 0px;
@@ -20,120 +15,141 @@
     position: absolute;
     left: 30%;
     top: 17.5%
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #user-info-div p:nth-child(3) {    
     position: absolute;
     left: 30%;
     top: 20.5%
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #user-info-div p:nth-child(4) {    
     position: absolute;
     left: 30%;
     top: 23%
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #user-info-div p:nth-child(5) {    
     position: absolute;
     left: 30%;
     top: 26%
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #main-score-info-div p:nth-child(1) {
     position: absolute;
     left: 56%;
     top: 19%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #main-score-info-div p:nth-child(2) {
     position: absolute;
     left: 79%;
     top: 19%;
+   font-family: 'Nanum Myeongjo', serif;
 }
 
 #main-score-info-div p:nth-child(3) {
     position: absolute;
     left: 56%;
     top: 24.5%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #main-score-info-div p:nth-child(4) {
     position: absolute;
     left: 79%;
     top: 24.5%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #detail-score-info-div p:nth-child(1) {
     position: absolute;
     left: 28%;
     top: 39.5%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #detail-score-info-div p:nth-child(2) {
     position: absolute;
     left: 28%;
     top: 43%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #detail-score-info-div p:nth-child(3) {
     position: absolute;
     left: 28%;
     top: 46.5%;
+    font-family: 'Nanum Myeongjo', serif;
+    
 }
 
 #detail-score-info-div p:nth-child(4) {
     position: absolute;
     left: 28%;
     top: 50.5%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #detail-score-info-div p:nth-child(5) {
     position: absolute;
     left: 28%;
     top: 54%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #detail-score-info-div p:nth-child(6) {
     position: absolute;
     left: 28%;
     top: 58%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #detail-score-info-div p:nth-child(7) {
     position: absolute;
     left: 41%;
     top: 39.5%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #detail-score-info-div p:nth-child(8) {
     position: absolute;
     left: 41%;
     top: 43%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #detail-score-info-div p:nth-child(9) {
     position: absolute;
     left: 41%;
     top: 46.5%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #detail-score-info-div p:nth-child(10) {
     position: absolute;
     left: 41%;
     top: 50.5%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #detail-score-info-div p:nth-child(11) {
     position: absolute;
     left: 41%;
     top: 54.5%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #detail-score-info-div p:nth-child(12) {
     position: absolute;
     left: 41%;
     top: 58%;
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #chart-div canvas {
@@ -170,16 +186,7 @@
     height: 40px;
 }
 
-@media screen and (max-width:1000px){
-
-    #qrmessage {
-        content: "";
-        visibility: hidden;
-        padding: 10px 25px;
-    }
-}
-
-@media all and (max-width:768px) {
+@media all and (min-width:360px) {
     #qrmessage {
         content: "";
         visibility: hidden;
@@ -193,66 +200,139 @@
         width: 220px;
     }
 
-    .outer-container {
-        height: 100%;
-        width: 100%;
-    }
-
-    .inner-container {
-        margin: auto;
-    }
-
     .inner-container img {
         width: 100%;
     }
-
-    .header a:nth-child(1) {
-        display: none;
-    }
-
-    .header button:nth-child(3) {
-        display: none;
-    }
-
-    .header a:nth-child(4) > button {
-        background-color: #4c80f1;
-        color: white;
-        width: 50px;
-        height: 30px;
-        font-size: 10px;
-    }
-
-    .header button:nth-child(5) {
-        width: 55px;
-        height: 30px;
-        font-size: 10px;
-    }
-
-    .header button:nth-child(6) {
-        width: 45px;
-        height: 30px;
-        font-size: 10px;
-    }
-
-    .header > div {
-        display: inline-block;
-        width: 100px;
-        vertical-align: middle;
-    }
-
-    .header > div p:nth-child(1) {
-        font-size: 12px;
-        font-weight: bold;
-        color: #676767;
-    }
-
 
     #user-info-div img:nth-child(1) {
         position: absolute;
         left: 5px;
         top: 85px;
         width: 50px;
-    }
+    }    
 
+    #user-info-div p:nth-child(2) {    
+        position: absolute;
+        left: 30%;
+        top: 17.5%
+    }
     
+    #user-info-div p:nth-child(3) {    
+        position: absolute;
+        left: 30%;
+        top: 20.5%
+    }
+    
+    #user-info-div p:nth-child(4) {    
+        position: absolute;
+        left: 30%;
+        top: 23%
+    }
+    
+    #user-info-div p:nth-child(5) {    
+        position: absolute;
+        left: 30%;
+        top: 26%
+    }
+    
+    #main-score-info-div p:nth-child(1) {
+        position: absolute;
+        left: 56%;
+        top: 19%;
+    }
+    
+    #main-score-info-div p:nth-child(2) {
+        position: absolute;
+        left: 79%;
+        top: 19%;
+    }
+    
+    #main-score-info-div p:nth-child(3) {
+        position: absolute;
+        left: 56%;
+        top: 24.5%;
+    }
+    
+    #main-score-info-div p:nth-child(4) {
+        position: absolute;
+        left: 79%;
+        top: 24.5%;
+    }
+    
+    #detail-score-info-div p:nth-child(1) {
+        position: absolute;
+        left: 28%;
+        top: 39.5%;
+    }
+    
+    #detail-score-info-div p:nth-child(2) {
+        position: absolute;
+        left: 28%;
+        top: 43%;
+    }
+    
+    #detail-score-info-div p:nth-child(3) {
+        position: absolute;
+        left: 28%;
+        top: 46.5%;
+    }
+    
+    #detail-score-info-div p:nth-child(4) {
+        position: absolute;
+        left: 28%;
+        top: 50.5%;
+    }
+    
+    #detail-score-info-div p:nth-child(5) {
+        position: absolute;
+        left: 28%;
+        top: 54%;
+    }
+    
+    #detail-score-info-div p:nth-child(6) {
+        position: absolute;
+        left: 28%;
+        top: 58%;
+    }
+    
+    #detail-score-info-div p:nth-child(7) {
+        position: absolute;
+        left: 41%;
+        top: 39.5%;
+    }
+    
+    #detail-score-info-div p:nth-child(8) {
+        position: absolute;
+        left: 41%;
+        top: 43%;
+    }
+    
+    #detail-score-info-div p:nth-child(9) {
+        position: absolute;
+        left: 41%;
+        top: 46.5%;
+    }
+    
+    #detail-score-info-div p:nth-child(10) {
+        position: absolute;
+        left: 41%;
+        top: 50.5%;
+    }
+    
+    #detail-score-info-div p:nth-child(11) {
+        position: absolute;
+        left: 41%;
+        top: 54.5%;
+    }
+    
+    #detail-score-info-div p:nth-child(12) {
+        position: absolute;
+        left: 41%;
+        top: 58%;
+    }
+}
+
+
+@media all and (min-width:768px) {
+
 }
