@@ -64,6 +64,10 @@ background-color:#dadada;
 
 }
 
+.main-body-footer-1st-line {
+	height: 40px;
+}
+
 .main-body-footer-left {
 	float: left;
 	width: calc(100% - 100px);
