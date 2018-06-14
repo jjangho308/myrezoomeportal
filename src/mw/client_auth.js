@@ -26,8 +26,8 @@ export default (req, res, next) => {
         req.query.uId = verified.data.uId;
         req.body.uId = verified.data.uId;
         next();
-    } catch (e) {
-        // Error middleware call
-        next(e);
+    } catch (err) {
+        console.error(err.stack);
+        next(err);
     }
 }

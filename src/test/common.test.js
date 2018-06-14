@@ -17,13 +17,15 @@ describe('Instant test suit', () => {
         process.env.NODE_ENV = 'development';
     });
 
-    it('Await sync', done => {
-        test();
-        async function test() {
-            await new Promise((resolve, reject) => setTimeout(() => resolve(), 10000));
-            console.log('Hello, World!');
+    it('Error catch', () => {
+        try{
+            throw new Error("test error");
+        }catch (err){
+            // console.error(err);
+            console.error(err.stack);
+            assert(true);
         }
-    })
+    });
 
     it.skip('JSON minify test', () => {
         console.log(jsonminify(JSON.stringify({

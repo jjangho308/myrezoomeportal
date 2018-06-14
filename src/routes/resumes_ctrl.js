@@ -35,7 +35,7 @@ export default {
                         result: result
                     });
                 }
-            })
+            });
         }
         // Static request to get HTML Page of /certs URI.
         else {
@@ -66,24 +66,22 @@ export default {
      * @author TACKSU
      */
     getResume: (req, res, next) => {
-        req.body.rsmId = req.params.rsmId;       
+        req.body.rsmId = req.params.rsmId;
         if (!!req.body.rsmId) {
             Managers.client().request(new GetResumeDetailRequest(req.body), (err, result) => {
                 if (!!err) {
                     next(err);
-                } else {                    
+                } else {
                     var userDAO = Managers.db().getUserDAO();
                     userDAO.get({
                         uId: result.uId
-                    }, (err, userResult)=>{
-                        if(!!err){
-                            console.log("getResume ERROR!!!");
+                    }, (err, userResult) => {
+                        if (!!err) {
+                            next(err);
                         } else {
-
-                            console.log()
                             res.render('resumesviewer', {
                                 resumeModel: result,
-                                userModel: userResult[0]
+                                userModel: userResult[0],
                             });
                         }
                     })
@@ -110,11 +108,11 @@ export default {
                         uId: result.uId
                     }, (err, userResult) => {
                         if (!!err) {
-                            console.log("getResume ERROR!!!");
+                            next(err);
                         } else {
                             res.render('resumeseditor', {
                                 resumeModel: result,
-                                userModel: userResult[0]
+                                userModel: userResult[0],
                             });
                         }
                     });
@@ -129,22 +127,16 @@ export default {
      * @since 180402
      * @author TACKSU
      */
-    post: (req, res, next) => {        
-        console.log(req.body);
-        if (!!req.xhr) {
-            Managers.client().request(new CreateResumeRequest(req.body), (err, result) => {               
-                if (!!err) {
-                    next(err);
-                } else {
-                    console.log(result);
-                    res.json({
-                        result: result
-                    });
-                }
-            });
-        } else {
-            next(new Error("No page."));
-        }
+    post: (req, res, next) => {
+        Managers.client().request(new CreateResumeRequest(req.body), (err, result) => {
+            if (!!err) {
+                next(err);
+            } else {
+                res.json({
+                    result: result
+                });
+            }
+        });
     },
 
     /**
@@ -154,36 +146,27 @@ export default {
      * @author TACKSU
      */
     patch: (req, res, next) => {
-        if (!!req.xhr) {
-            Manager.client().request(new UpdateResumeRequest(req.body), (err, result) => {
-                if (!!err) {
-                    next(err);
-                } else {
-                    res.json(result);
-                }
-            })
-        } else {
-            next(new Error("No page."));
-        }
+        Manager.client().request(new UpdateResumeRequest(req.body), (err, result) => {
+            if (!!err) {
+                next(err);
+            } else {
+                res.json(result);
+            }
+        })
     },
 
-    deleteResum: (req, res, next) => {
-        if (!!req.xhr) {
+    deleteResume: (req, res, next) => {
+        var data = {
+            uId: req.body.uId,
+            rsmId: req.params.rsmId
+        };
 
-            
-
-            var data = {
-                uId: req.body.uId,
-                rsmId: req.params.rsmId
+        Managers.client().request(new DeleteResumeRequest(data), (err, result) => {
+            if (!!err) {
+                next(err);
+            } else {
+                res.json(result);
             }
-
-            Managers.client().request(new DeleteResumeRequest(data), (err, result) => {
-                if (!!err) {
-                    next(err);
-                } else {
-                    res.json(result);
-                }
-            })
-        }
+        });
     }
 }

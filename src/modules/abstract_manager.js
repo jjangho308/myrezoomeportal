@@ -2,25 +2,19 @@
  * AbstratManager. <br />
  * 
  * @since 180228.
-*/
-class AbstractManager{
-    constructor(context){
+ */
+class AbstractManager {
+    constructor(context) {
         this.context = context;
     }
 
-    init(from){
-
-    }
-
     /**
-     * Event callback when terminate nodejs server instance. <br />
+     * Initialization function. <br />
      * 
-     * @since 180420
-     * @author TACKSU
      * 
-     * @param {*} from Termination point. <br />
+     * @param {InitializedFrom} from 
      */
-    onTerminate(from){
+    init(from) {
 
     }
 
@@ -29,7 +23,7 @@ class AbstractManager{
      * 
      * @since 180305
      * @author TACKSU
-    */
+     */
     setPrepared() {
         this.prepared = true;
     }
@@ -39,9 +33,21 @@ class AbstractManager{
      * 
      * @since 180305
      * @author TACKSU
-    */
+     */
     isPrepared() {
         return !!this.prepared;
+    }
+
+    /**
+     * Callback when terminate nodejs server instance. <br />
+     * 
+     * @since 180420
+     * @author TACKSU
+     * 
+     * @param {*} cause Termination cause.
+     */
+    onTerminate(cause) {
+
     }
 }
 
