@@ -22,10 +22,15 @@ class HttpResponseError {
      * @param {String} opt.locale Locale for error message.
      */
     constructor(opt) {
-        this.code = opt.code;
-        this.status = opt.status;
-        this.cause = opt.cause;
-        this.message = ErrorMessage[opt.locale || 'default'][this.code];
+        if (typeof opt === 'number') {
+            this.code = opt;
+            // this.message = ErrorMessage['default'][this.code];
+        } else if (opt instanceof Object) {
+            this.code = opt.code;
+            this.status = opt.status;
+            this.cause = opt.cause;
+            // this.message = ErrorMessage[opt.locale || 'default'][this.code];
+        }
     }
 
     /**

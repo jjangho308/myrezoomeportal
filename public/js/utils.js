@@ -50,7 +50,7 @@ function getCookie(cname) {
 function setData(record) {
     // dcript data
     console.log(record.data);
-    record.data = JSON.parse(record.data); 
+    record.data = JSON.parse(record.data);
 
     sessionStorage.setItem(record.txid, JSON.stringify(record));
 
@@ -69,27 +69,33 @@ function setRSAKey(rsaKeypair) {
 
     sessionStorage.setItem("rsa_prv", JSON.stringify(rsakey_prv));
     sessionStorage.setItem("rsa_pub", JSON.stringify(rsakey_pub));
-    
+
 }
 
 function getRSAKey() {
-    
+
     var session_rsa_pub = sessionStorage.getItem("rsa_pub");
     var session_rsa_prv = sessionStorage.getItem("rsa_prv");
 
-    if(session_rsa_pub == null || session_rsa_prv == null) {
+    if (session_rsa_pub == null || session_rsa_prv == null) {
         genRsaKey();
     }
 
-    var json_rsa_prv = JSON.parse(session_rsa_prv); 
-    var json_rsa_pub = JSON.parse(session_rsa_pub); 
+    var json_rsa_prv = JSON.parse(session_rsa_prv);
+    var json_rsa_pub = JSON.parse(session_rsa_pub);
 
     rsakey_prv = KEYUTIL.getKey(json_rsa_prv);
     rsakey_pub = KEYUTIL.getKey(json_rsa_pub);
 }
 
 function getData(record_txid) {
-    return JSON.parse(sessionStorage.getItem(record_txid));
+    var sessionData = sessionStorage.getItem(record_txid) || '{}';
+    try {
+        return JSON.parse(sessionData);
+    } catch (e) {
+        console.log(e);
+        return {};
+    }
 }
 
 function addTxidList(txid) {
@@ -112,13 +118,13 @@ function setTxidList(txidarray) {
 
 function getTxidList() {
     var storagedata = sessionStorage.getItem(client_token);
-    if(storagedata==null) {
+    if (storagedata == null) {
         var emptyarray = [];
         setTxidList(emptyarray);
         storagedata = sessionStorage.getItem(client_token);
     }
-     var resultarray = storagedata.split(",");
-     return resultarray;
+    var resultarray = storagedata.split(",");
+    return resultarray;
 }
 
 function SHA256(s) {
@@ -131,14 +137,37 @@ function SHA256(s) {
         return (msw << 16) | (lsw & 0xFFFF);
     }
 
-    function S(X, n) { return (X >>> n) | (X << (32 - n)); }
-    function R(X, n) { return (X >>> n); }
-    function Ch(x, y, z) { return ((x & y) ^ ((~x) & z)); }
-    function Maj(x, y, z) { return ((x & y) ^ (x & z) ^ (y & z)); }
-    function Sigma0256(x) { return (S(x, 2) ^ S(x, 13) ^ S(x, 22)); }
-    function Sigma1256(x) { return (S(x, 6) ^ S(x, 11) ^ S(x, 25)); }
-    function Gamma0256(x) { return (S(x, 7) ^ S(x, 18) ^ R(x, 3)); }
-    function Gamma1256(x) { return (S(x, 17) ^ S(x, 19) ^ R(x, 10)); }
+    function S(X, n) {
+        return (X >>> n) | (X << (32 - n));
+    }
+
+    function R(X, n) {
+        return (X >>> n);
+    }
+
+    function Ch(x, y, z) {
+        return ((x & y) ^ ((~x) & z));
+    }
+
+    function Maj(x, y, z) {
+        return ((x & y) ^ (x & z) ^ (y & z));
+    }
+
+    function Sigma0256(x) {
+        return (S(x, 2) ^ S(x, 13) ^ S(x, 22));
+    }
+
+    function Sigma1256(x) {
+        return (S(x, 6) ^ S(x, 11) ^ S(x, 25));
+    }
+
+    function Gamma0256(x) {
+        return (S(x, 7) ^ S(x, 18) ^ R(x, 3));
+    }
+
+    function Gamma1256(x) {
+        return (S(x, 17) ^ S(x, 19) ^ R(x, 10));
+    }
 
     function core_sha256(m, l) {
 
@@ -221,12 +250,10 @@ function SHA256(s) {
 
             if (c < 128) {
                 utftext += String.fromCharCode(c);
-            }
-            else if ((c > 127) && (c < 2048)) {
+            } else if ((c > 127) && (c < 2048)) {
                 utftext += String.fromCharCode((c >> 6) | 192);
                 utftext += String.fromCharCode((c & 63) | 128);
-            }
-            else {
+            } else {
                 utftext += String.fromCharCode((c >> 12) | 224);
                 utftext += String.fromCharCode(((c >> 6) & 63) | 128);
                 utftext += String.fromCharCode((c & 63) | 128);
@@ -252,7 +279,7 @@ function SHA256(s) {
 }
 
 
-function currentDate(time) {    
+function currentDate(time) {
     var time = new Date(time.toString().replace(/GMT.*/, "") + " UTC");
     $("#updateTime").html("업데이트 : " + time.format('yyyy-MM-dd(KS) HH:mm'));
     //return time.format('yyyy-MM-dd(KS) HH:mm');
@@ -269,34 +296,58 @@ function currentDate(time) {
 
         return f.replace(/(yyyy|yy|MM|dd|KS|KL|ES|EL|HH|hh|mm|ss|a\/p)/gi, function ($1) {
             switch ($1) {
-                case "yyyy": return d.getFullYear(); // 년 (4자리)
-                case "yy": return (d.getFullYear() % 1000).zf(2); // 년 (2자리)
-                case "MM": return (d.getMonth() + 1).zf(2); // 월 (2자리)
-                case "dd": return d.getDate().zf(2); // 일 (2자리)
-                case "KS": return weekKorShortName[d.getDay()]; // 요일 (짧은 한글)
-                case "KL": return weekKorName[d.getDay()]; // 요일 (긴 한글)
-                case "ES": return weekEngShortName[d.getDay()]; // 요일 (짧은 영어)
-                case "EL": return weekEngName[d.getDay()]; // 요일 (긴 영어)
-                case "HH": return d.getHours().zf(2); // 시간 (24시간 기준, 2자리)
-                case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2); // 시간 (12시간 기준, 2자리)
-                case "mm": return d.getMinutes().zf(2); // 분 (2자리)
-                case "ss": return d.getSeconds().zf(2); // 초 (2자리)
-                case "a/p": return d.getHours() < 12 ? "오전" : "오후"; // 오전/오후 구분
-                default: return $1;
+                case "yyyy":
+                    return d.getFullYear(); // 년 (4자리)
+                case "yy":
+                    return (d.getFullYear() % 1000).zf(2); // 년 (2자리)
+                case "MM":
+                    return (d.getMonth() + 1).zf(2); // 월 (2자리)
+                case "dd":
+                    return d.getDate().zf(2); // 일 (2자리)
+                case "KS":
+                    return weekKorShortName[d.getDay()]; // 요일 (짧은 한글)
+                case "KL":
+                    return weekKorName[d.getDay()]; // 요일 (긴 한글)
+                case "ES":
+                    return weekEngShortName[d.getDay()]; // 요일 (짧은 영어)
+                case "EL":
+                    return weekEngName[d.getDay()]; // 요일 (긴 영어)
+                case "HH":
+                    return d.getHours().zf(2); // 시간 (24시간 기준, 2자리)
+                case "hh":
+                    return ((h = d.getHours() % 12) ? h : 12).zf(2); // 시간 (12시간 기준, 2자리)
+                case "mm":
+                    return d.getMinutes().zf(2); // 분 (2자리)
+                case "ss":
+                    return d.getSeconds().zf(2); // 초 (2자리)
+                case "a/p":
+                    return d.getHours() < 12 ? "오전" : "오후"; // 오전/오후 구분
+                default:
+                    return $1;
             }
         });
     };
 
-    String.prototype.string = function (len) { var s = '', i = 0; while (i++ < len) { s += this; } return s; };
-    String.prototype.zf = function (len) { return "0".string(len - this.length) + this; };
-    Number.prototype.zf = function (len) { return this.toString().zf(len); };
+    String.prototype.string = function (len) {
+        var s = '',
+            i = 0;
+        while (i++ < len) {
+            s += this;
+        }
+        return s;
+    };
+    String.prototype.zf = function (len) {
+        return "0".string(len - this.length) + this;
+    };
+    Number.prototype.zf = function (len) {
+        return this.toString().zf(len);
+    };
 }
 
 function hexToBase64(str) {
     return btoa(String.fromCharCode.apply(null,
-      str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
-    );
-  }
+        str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+}
 
 function base64toHEX(base64) {
     var raw = window.atob(base64);
@@ -314,19 +365,18 @@ function base64toHEX(base64) {
 }
 
 
-function formatDate(date) { 
-    var d = new Date(date), 
-    month = '' + (d.getMonth() + 1), 
-    day = '' + d.getDate(), 
-    year = d.getFullYear(); 
-    
-    if (month.length < 2) {
-        month = '0' + month; 
-    } 
-    if (day.length < 2) {
-        day = '0' + day; 
-    }
-    
-    return [year, month, day].join('-'); 
-}
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
+    if (month.length < 2) {
+        month = '0' + month;
+    }
+    if (day.length < 2) {
+        day = '0' + day;
+    }
+
+    return [year, month, day].join('-');
+}

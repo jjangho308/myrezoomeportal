@@ -7,6 +7,8 @@ import IssueNewCertRequest from '../modules/client/certs/issue_cert_request';
 import UpdateCertRequest from '../modules/client/certs/update_cert_request';
 import DeleteCertRequest from '../modules/client/certs/delete_cert_request';
 
+import GetCertViewRequest from '../modules/client/certs/get_cert_view_request';
+
 /**
  * Controller for /certs URI. <br />
  * 
@@ -60,21 +62,17 @@ export default {
      * 
      * @since 180419
      * @author TACKSU
+     * 
+     * @updated 180612 원본 데이터를 전달하도록 수정
      */
     getCertView: (req, res, next) => {
         req.body.certId = req.params.certId;
 
-        Managers.client().request(new GetCertsRequest(req.body), (err, result) => {
+        Managers.client().request(new GetCertViewRequest(req.body), (err, certificate) => {
             if (!!err) {
                 next(err);
             } else {
-                /*
-                res.json({
-                    result: result
-                });
-                */
-                console.log(result);
-                res.render('certviewer', result[0]);
+                res.render('certviewer', certificate);
             }
         });
     },
@@ -164,9 +162,9 @@ export default {
             Managers.client().request(new DeleteCertRequest(data), (err, result) => {
                 if (!!err) {
                     next(err);
-                }else{
+                } else {
                     res.json({
-                        result : result
+                        result: result
                     });
                 }
             });

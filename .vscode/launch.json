@@ -34,6 +34,13 @@
         {
             "type": "node",
             "request": "attach",
+            "name": "Attach to local",
+            "port": 9229,
+            "protocol": "inspector"
+        },
+        {
+            "type": "node",
+            "request": "attach",
             "name": "Attach to Dev1",
             "address": "localhost",
             "port": 19229,
@@ -49,13 +56,6 @@
             "port": 29229,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/home/rezoome/git/rezoome/",
-            "protocol": "inspector"
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach to local",
-            "port": 9229,
             "protocol": "inspector"
         },
         {
