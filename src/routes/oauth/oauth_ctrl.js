@@ -39,7 +39,8 @@ var defaultController = {
                     res.send({});
                 } else if (users.length > 0) {
                     res.send({
-                        status: users[0].status == 'L' ? 1 : 2
+                        status: users[0].status == 'L' ? 1 : 2,
+                        name: users[0].fullNameKO
                     });
                 }
             });
@@ -110,8 +111,9 @@ var defaultController = {
         var clientId = req.body.client_id,
             clientSecret = req.body.client_secret,
             phone = req.body.phone,
-            ci = req.body.ci;
-
+            ci = req.body.ci,
+            password = req.body.password;       
+                
         if (!phone) {
             // TODO Invalid parameter. 
             // } else if (!ci) {
@@ -122,13 +124,19 @@ var defaultController = {
             }, (err, userModels) => {
                 if (!!err) {
                     next(err);
-                } else {
-                    res.send({
-                        code: Buffer.from(Managers.token().issueToken({
-                            clientId: clientId,
-                            uId: userModels[0].uId
-                        })).toString('base64')
-                    });
+                } else {                    
+                    if(userModels[0].pw == password) {
+                        res.send({
+                            code: Buffer.from(Managers.token().issueToken({
+                                clientId: clientId,
+                                uId: userModels[0].uId
+                            })).toString('base64')
+                        });
+                    } else {
+                        res.send({
+                            code: 'password mismatch'
+                        });
+                    }
                 }
             });
         }

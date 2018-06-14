@@ -68,38 +68,23 @@ $(document).ready(function () {
                         phone: phone,
                     },
                     success: function (res) {
-                        userStatus = res.status;
+                        userStatus = res.status;                        
+                        userPassword = res.pw;
+
+                        $("#div-phone").hide();
+                        $("#div-pw").show();
 
                         // Lite user로 확인될 경우 signin 진행
                         switch (userStatus) {
                             case USER_STATUS_LITE:
                                 {
-                                    $.ajax({
-                                        url: AJAX_URL + '/signin',
-                                        type: 'POST',
-                                        data: {
-                                            phone: phone,
-                                            client_id: clientId,
-                                            client_secret: clientSecret,
-                                        },
-                                        success: res => {                                            
-                                            $("#")
-
-
-
-                                            issueToken({
-                                                code: res.code
-                                            });
-                                        },
-                                        failue: err => {
-                                            alert(err);
-                                        }
-                                    });
+                                    // 정상대로라면 lite 가입 유저는 본인인증으로 패스
+                                    $(".pw-sub").html(res.name + " 님의 비밀번호");                                                                        
                                     break;
                                 }
                             case USER_STATUS_FULL:
                                 {
-
+                                    $(".pw-sub").html(res.name + " 님의 비밀번호");                                    
                                     break;
                                 }
                         }
@@ -111,6 +96,27 @@ $(document).ready(function () {
                 break;
             }
         }
-        console.log(phone);
+    });
+
+    $("#btn_signin").click(function(){
+        var inputPassword = SHA256($('#signin_pw').val());       
+        $.ajax({
+            url: AJAX_URL + '/signin',
+            type: 'POST',
+            data: {
+                phone: $('#input_phone').val(),
+                client_id: clientId,
+                client_secret: clientSecret,
+                password : inputPassword
+            },
+            success: res => { 
+                issueToken({
+                    code: res.code
+                });
+            },
+            failue: err => {
+                alert(err);
+            }
+        });        
     });
 });
