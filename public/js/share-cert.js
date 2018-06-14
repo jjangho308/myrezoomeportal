@@ -66,6 +66,39 @@ $(document).ready(function(){
         $(".main-body-footer").show();            
         $(".qrcode").hide();    
 	});
+
+	$(".main-body-footer-right").click(function(event){
+		var htmldiv = '<div>';
+			htmldiv = htmldiv + '<div>';
+			htmldiv = htmldiv + '<p>' + "STEP1" + '</p>';
+			htmldiv = htmldiv + '<p>' + "Nexledger에 기록된 Transaction ID를 조회하는중입니다." + '</p>';
+			
+			htmldiv = htmldiv + '</div>';
+		htmldiv = htmldiv + '</div>';
+		$('.main-body-footer').append(htmldiv);
+		setTimeout(function(){
+			var htmldiv = '<div>';
+				htmldiv = htmldiv + '<div>';
+				htmldiv = htmldiv + '<p>' + "STEP2" + '</p>';
+				htmldiv = htmldiv + '<p>' + "Hash 데이터를 비교하고 있습니다." + '</p>';
+				
+				htmldiv = htmldiv + '</div>';
+			htmldiv = htmldiv + '</div>';
+			$('.main-body-footer').append(htmldiv);
+
+			setTimeout(function() {
+				var htmldiv = '<div>';
+					htmldiv = htmldiv + '<div>';
+					htmldiv = htmldiv + '<p>' + "STEP3" + '</p>';
+					htmldiv = htmldiv + '<p>' + "결과를 정리하고 있습니다." + '</p>';
+					
+					htmldiv = htmldiv + '</div>';
+				htmldiv = htmldiv + '</div>';
+				$('.main-body-footer').append(htmldiv);
+			},1000);
+
+		}, 1000); 
+	}) 
 });
 
 function verify(passcode) {
