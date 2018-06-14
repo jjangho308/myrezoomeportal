@@ -170,6 +170,11 @@
     height: 40px;
 }
 
+.main-body-footer {
+    width: 780px;
+
+}
+
 @media screen and (max-width:1000px){
 
     #qrmessage {
