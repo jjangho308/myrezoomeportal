@@ -188,9 +188,9 @@
 
     #chart-div img {
         position: absolute;
-        left: 43%;
-        top: 50%;
-        width: 222px;    
+        left: 150px;
+        top: 195px;
+        width: 220px;
     }
 
     .outer-container {
