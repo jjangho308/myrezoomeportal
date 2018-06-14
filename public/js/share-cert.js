@@ -68,31 +68,24 @@ $(document).ready(function(){
 	});
 
 	$(".main-body-footer-right").click(function(event){
-		var htmldiv = '<div>';
-			htmldiv = htmldiv + '<div>';
-			htmldiv = htmldiv + '<p>' + "STEP1" + '</p>';
-			htmldiv = htmldiv + '<p>' + "Nexledger에 기록된 Transaction ID를 조회하는중입니다." + '</p>';
-			
-			htmldiv = htmldiv + '</div>';
+		var htmldiv = '<div class="footer-verify-1">';
+			htmldiv = htmldiv + '<div>' + "STEP1" + '</div>';
+			htmldiv = htmldiv + '<div>' + "Nexledger에 기록된 Transaction ID를 조회하는중입니다." + '</div>';
 		htmldiv = htmldiv + '</div>';
 		$('.main-body-footer').append(htmldiv);
 		setTimeout(function(){
-			var htmldiv = '<div>';
-				htmldiv = htmldiv + '<div>';
-				htmldiv = htmldiv + '<p>' + "STEP2" + '</p>';
-				htmldiv = htmldiv + '<p>' + "Hash 데이터를 비교하고 있습니다." + '</p>';
+			var htmldiv = '<div class="footer-verify-2">';
+				htmldiv = htmldiv + '<div>' + "STEP2" + '</div>';
+				htmldiv = htmldiv + '<div>' + "Hash 데이터를 비교하고 있습니다." + '</div>';
 				
-				htmldiv = htmldiv + '</div>';
 			htmldiv = htmldiv + '</div>';
 			$('.main-body-footer').append(htmldiv);
 
 			setTimeout(function() {
-				var htmldiv = '<div>';
-					htmldiv = htmldiv + '<div>';
-					htmldiv = htmldiv + '<p>' + "STEP3" + '</p>';
-					htmldiv = htmldiv + '<p>' + "결과를 정리하고 있습니다." + '</p>';
+				var htmldiv = '<div class="footer-verify-3">';
+					htmldiv = htmldiv + '<div>' + "STEP3" + '</div>';
+					htmldiv = htmldiv + '<div>' + "결과를 정리하고 있습니다." + '</div>';
 					
-					htmldiv = htmldiv + '</div>';
 				htmldiv = htmldiv + '</div>';
 				$('.main-body-footer').append(htmldiv);
 			},1000);

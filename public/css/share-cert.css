@@ -166,6 +166,27 @@ background-color:#dadada;
 	color: #ffffff;
 }
 
+.footer-verify-1 {
+	width: 830px;
+	height: 50px;
+	background-color: #ffffff;
+	border: solid 1px #dfe5ef;
+}
+
+.footer-verify-2 {
+	width: 830px;
+	height: 50px;
+	background-color: #ffffff;
+	border: solid 1px #dfe5ef;
+}
+
+.footer-verify-3 {
+	width: 830px;
+	height: 50px;
+	background-color: #ffffff;
+	border: solid 1px #dfe5ef;
+}
+
 @media screen and (min-width: 1000px){
 	body{
 		background-color: #f2f5f8;

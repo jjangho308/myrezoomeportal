@@ -338,6 +338,10 @@
         top: 478px;
         width: 500px;
     }
+
+    .main-body-footer {
+        width: 840px;
+    }
 }
 
 @media (max-width:720px) {
