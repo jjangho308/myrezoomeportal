@@ -187,7 +187,7 @@
 
 @media (max-width:720px) {
 	body {
-		font-size: 10px;
+		
 	}
 
 	.main-body {
@@ -209,7 +209,8 @@
 	*/
 
 	.header {
-		padding: 12px 20px;
+		padding: 7px 20px;
+    	font-size: 20px;
 	}
 
 	.header a:nth-child(1) {
@@ -265,3 +266,8 @@
 	
 }
 
+@media (max-width:360px) {
+	.header {
+		width: 324px;
+	}
+}
