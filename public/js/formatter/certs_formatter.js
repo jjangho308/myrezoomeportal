@@ -376,3 +376,7 @@ function generateQRCode(){
 
     $('#qrcode').empty().qrcode(options);
 }
+
+function dateconverter() {
+    
+}

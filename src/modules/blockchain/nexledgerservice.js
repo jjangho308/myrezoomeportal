@@ -58,23 +58,34 @@ class NexledgerService extends AbstractManager {
             }
         };
 
-        client.post('/', reqformatdata, function (err, res, body) {
-            //console.log("============Nexledger Get function=================");
-            //console.log(body);
-            try {
-                if (body.result.hash == '') {
-                    //      console.log("============Nexledger Retry=================");
-                    this.getbytxid(nodeurl, txid, callback);
-                    return;
-                }
-            } catch (nexledgerexception) {
-                // console.log(nexledgerexception);
-                this.getbytxid(nodeurl, txid, callback);
-                return;
-            }
-            //console.log("==============================================");
-            callback(body);
-        }.bind(this));
+        var nex_interval = 0;
+        var res_nexledger = 0;
+        while( nex_interval < 5) {
+            client.post('/', reqformatdata, function (err, res, body) {
+                try {
+                    if (body.result.hash == '') {
+                        res_nexledger = res_nexledger + 1;    
+
+                        if(res_nexledger >= 5) {
+                            //console.log("!!Nexledger ERR!!");
+                            callback(body.err);
+                        }
+                    }
+                    else {
+                        res_nexledger = 5;
+                        callback(body);
+                    }
+                }catch(nexledgerexception) {
+                    res_nexledger = res_nexledger + 1;
+
+                    if(res_nexledger >= 5) {
+                        //console.log("!!Nexledger ERR!!");
+                        callback(body.err);
+                    }
+                }                
+            }.bind(this));
+            nex_interval = nex_interval + 1;
+        }
 
     }
 
@@ -111,24 +122,33 @@ class NexledgerService extends AbstractManager {
                 data: data
             }
         };
-        client.post('/', reqformatdata, function (err, res, body) {
-            //console.log("============Nexledger Put function=================");
-            //console.log(body);
-            try {
-                if (body.result.txid == '') {
-                    //      console.log("============Nexledger Retry=================");
-                    this.put(nodeurl, address, data, callback);
-                    return;
-                }
-            } catch (nexledgerexception) {
-                //console.log(nexledgerexception);
-                this.put(nodeurl, address, data, callback);
-                return;
-            }
 
-            //console.log("==============================================");
-            callback(body);
-        }.bind(this));
+        var nex_interval = 0;
+        var res_nexledger = 0;
+        while( nex_interval < 5) {
+            client.post('/', reqformatdata, function (err, res, body) {
+                try {
+                    if (body.result.txid == '') {
+                        res_nexledger = res_nexledger + 1;    
+                        if(res_nexledger >= 5) {
+                            console.log("!!Nexledger ERR!!");
+                            callback(body.err);
+                        }
+                    }
+                    else {
+                        res_nexledger = 5;
+                        callback(body);
+                    }
+                }catch(nexledgerexception) {
+                    res_nexledger = res_nexledger + 1;
+                    if(res_nexledger >= 5) {
+                        console.log("!!Nexledger ERR!!");
+                        callback(body.err);
+                    }
+                }                
+            }.bind(this));
+            nex_interval = nex_interval + 1;
+        } 
     }
 
     newMethod() {
