@@ -97,12 +97,12 @@ var certformatter= {
             generateQRCode();
             createChart(record_data);
 
-            html2canvas($(".inner-container"), {
-                onrendered: function(canvas) {
-                    var img = canvas.toDataURL();
-                    $($(".inner-container")).html("<img src=" + img + ">");
-                }
-            });
+            // html2canvas($(".inner-container"), {
+            //     onrendered: function(canvas) {
+            //         var img = canvas.toDataURL();
+            //         $($(".inner-container")).html("<img src=" + img + ">");
+            //     }
+            // });
         });
     },
 
