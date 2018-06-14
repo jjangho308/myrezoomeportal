@@ -26,4 +26,5 @@ export default {
     DATA_NO_USER_ID: 301,
     DATA_NO_PHONE_NUM: 302,
     DATA_PASSWORD_INCORRECT: 303,
+    DATA_NO_CERT: 304,
 };

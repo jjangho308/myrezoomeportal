@@ -9,9 +9,6 @@ import Initialize from './core/initializer';
 import rootRouter from './routes/root_route';
 import agentRouter from './routes/agent_route';
 
-import ResponseError from './core/error/response_error';
-
-
 var app = express();
 
 // view engine setup
@@ -48,46 +45,50 @@ app.use('/', express.static('public'));
 //   next(err);
 // });
 
+
+import ResponseError from './core/error/response_error';
+import ErrorMessage from './core/error/error_message';
 /**
- * Middle ware for error handling. <br />
+ * Response error handler. <br />
  * 
  * @since 180201
  * @author TACKSU
+ */
+app.use((err, req, res, next) => {
+  if (err instanceof ResponseError) {
+    var status = res.locals.status = err.status || 500;
+
+    if (!!req.xhr) {
+      res.status(status).json({
+        err: {
+          code: err.code,
+          msg: ErrorMessage['ko-KR'.toLowerCase()][err.code],
+        }
+      });
+    } else {
+      res.locals.code = err.code;
+      res.locals.msg = ErrorMessage['ko-KR'.toLowerCase()][err.code];
+      res.status(status).render('response_error');
+    }
+  } else {
+    next(err);
+  }
+});
+
+/**
+ * Default error handler
  */
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  var status = err.status || 500;
-  if (!!req.xhr) {
-    if (!!err.code && !!err.message) {
-      res.status(err.status || 500).json({
-        err: {
-          code: err.code,
-          msg: err.message
-        }
-      });
-    } else {
-      res.status(500).json({
-        err: {
-          code: 1,
-          msg: 'Internal error',
-        }
-      });
-    }
-  } else {
-    res.status(status).render('error', err);
-  }
-
-  // next(err);
-
   // render the error page
-  // console.log('error : ' + JSON.stringify(err));
-  // console.log(err.stack);
-  // res.status(err.status || 500);
-  // res.render('error');
+  res.status(err.status || 500);
+  res.render('internal_error');
 });
+
+
 
 Initialize();
 
