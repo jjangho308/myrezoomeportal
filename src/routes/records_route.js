@@ -1,7 +1,6 @@
 import express from 'express';
 import tokenAuth from '../mw/client_auth';
 import ctrl from './records_ctrl';
-import view from '../mw/view';
 
 /**
  * Router for records. <br />
@@ -17,18 +16,14 @@ var router = express.Router();
 
 router.post('/', tokenAuth);
 router.post('/', ctrl.post);
-router.post('/', view);
 
 router.get('/list', tokenAuth);
 router.get('/list', ctrl.get);
-router.get('/list', view);
 
 router.post('/:prvtId', tokenAuth);
 router.post('/:prvtId', ctrl.del);
-router.post('/:prvtId', view);
 
 router.patch('/:recordId', tokenAuth);
 router.patch('/:recordId', ctrl.patch);
-router.patch('/:recordId', view);
 
 export default router;

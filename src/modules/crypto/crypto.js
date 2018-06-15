@@ -114,8 +114,10 @@ class CryptoManager extends AbstractManager {
      */
     generateAESKey(cb) {
         crypto.randomBytes(this.spec.symLength, ((err, key) => {
-            if (err) {
+            if (!!err) {
+                console.error(err.stack);
                 cb(err);
+                return;
             }
             cb(null, key.toString(this.spec.encode));
         }).bind(this));
@@ -131,14 +133,23 @@ class CryptoManager extends AbstractManager {
     encryptAES(plain, key, cb) {
         process.nextTick(() => {
             this.generatePRN(this.spec.ivLength, ((err, iv) => {
+                if (!!err) {
+                    console.error(err.stack);
+                    cb(err);
+                    return;
+                }
                 try {
                     var cipher = crypto.createCipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), iv);
                     cipher.setAutoPadding(true);
                     var encrypted = cipher.update(plain, 'utf8', this.spec.encode);
                     encrypted += cipher.final(this.spec.encode);
                     cb(null, iv.toString(this.spec.encode), encrypted);
-                } catch (e) {
-                    console.log(e);
+                } catch (err) {
+                    if (!!err) {
+                        console.error(err.stack);
+                        cb(err);
+                        return;
+                    }
                 }
             }).bind(this));
         });
@@ -162,8 +173,12 @@ class CryptoManager extends AbstractManager {
                 var encrypted = cipher.update(plain, 'utf8', this.spec.encode);
                 encrypted += cipher.final(this.spec.encode);
                 cb(null, encrypted);
-            } catch (e) {
-                cb(e, null);
+            } catch (err) {
+                if (!!err) {
+                    console.error(err.stack);
+                    cb(err);
+                    return;
+                }
             }
         }).bind(this));
     }
@@ -185,8 +200,12 @@ class CryptoManager extends AbstractManager {
                 var decrypted = decipher.update(encrypted, this.spec.encode, 'utf8');
                 decrypted += decipher.final('utf8');
                 cb(null, decrypted);
-            } catch (e) {
-                cb(e, null);
+            } catch (err) {
+                if (!!err) {
+                    console.error(err.stack);
+                    cb(err);
+                    return;
+                }
             }
         }).bind(this));
     }
@@ -206,8 +225,12 @@ class CryptoManager extends AbstractManager {
                 var decrypted = decipher.update(encrypted, this.spec.encode, 'utf8');
                 decrypted += decipher.final('utf8');
                 cb(null, decrypted);
-            } catch (e) {
-                cb(e, null);
+            } catch (err) {
+                if (!!err) {
+                    console.error(err.stack);
+                    cb(err);
+                    return;
+                }
             }
         });
     }
@@ -233,8 +256,12 @@ class CryptoManager extends AbstractManager {
                     public: rsa.exportKey('pkcs8-public-der'),
                     private: rsa.exportKey('pkcs8-private-der')
                 });
-            } catch (e) {
-                cb(e, null);
+            } catch (err) {
+                if (!!err) {
+                    console.error(err.stack);
+                    cb(err);
+                    return;
+                }
             }
         });
     }
@@ -260,8 +287,12 @@ class CryptoManager extends AbstractManager {
                 });
                 var encrypted = rsa.encrypt(dataBuffer);
                 cb(null, encrypted);
-            } catch (e) {
-                cb(e);
+            } catch (err) {
+                if (!!err) {
+                    console.error(err.stack);
+                    cb(err);
+                    return;
+                }
             }
         });
     }
@@ -284,8 +315,12 @@ class CryptoManager extends AbstractManager {
                 });
                 var decrypted = rsa.decrypt(encryptedBuffer);
                 cb(null, decrypted);
-            } catch (e) {
-                cb(e);
+            } catch (err) {
+                if (!!err) {
+                    console.error(err.stack);
+                    cb(err);
+                    return;
+                }
             }
         });
     }

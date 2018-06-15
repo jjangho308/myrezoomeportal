@@ -33,7 +33,7 @@ describe('/certs URI Page test suite.', () => {
             });
     });
 
-    it.skip('Cert Ajax request', done => {
+    it('Cert Ajax request', done => {
         chai.request(app)
             .get('/certs')
             .set('Content-Type', 'application/json')

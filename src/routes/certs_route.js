@@ -35,11 +35,11 @@ router.patch('/:certId', ctrl.patch);
 
 //발급가능한 증명서 목록에 맞는 자격명 가져오기
 router.post('/getmapping', tokenAuth);
-router.post('/getmapping',ctrl.getmapping);
+router.post('/getmapping', ctrl.getmapping);
 
 //대표 증명서 설정
 router.post('/setDefault', tokenAuth);
-router.post('/setDefault',ctrl.setDefault);
+router.post('/setDefault', ctrl.setDefault);
 
 // 증명서 삭제 Ajax request controller.
 router.delete('/:certId', tokenAuth);

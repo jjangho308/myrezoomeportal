@@ -50,10 +50,8 @@ export default {
                 org_major: '언론정보대학원 인터랙션디자인 전공',
                 grade: '성적 : 3.8 / 4.5'
             }
-        ]
+        ];
 
         res.status(200).json(result);
-
     }
-
 }

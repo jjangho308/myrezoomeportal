@@ -88,8 +88,6 @@ app.use((err, req, res, next) => {
   res.render('internal_error');
 });
 
-
-
 Initialize();
 
 export default app;

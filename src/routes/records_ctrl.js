@@ -19,18 +19,14 @@ export default {
      * @since 180402
      * @author TACKSU
      */
-    get: (req, res, next) => {        
-        if (!!req.xhr) {            
-            Managers.client().request(new GetPrivateRecordsRequest(req.body.uId), (err, result) => {                
-                if (!!err) {
-                    res.status(500).json(err);
-                } else {                    
-                    res.json(result);
-                }
-            });
-        } else {
-            next();
-        }        
+    get: (req, res, next) => {
+        Managers.client().request(new GetPrivateRecordsRequest(req.body.uId), (err, result) => {
+            if (!!err) {
+                res.status(500).json(err);
+            } else {
+                res.json(result);
+            }
+        });
     },
 
     /**
@@ -40,17 +36,13 @@ export default {
      * @author TACKSU
      */
     post: (req, res, next) => {
-        if (!!req.xhr) {
-            Managers.client().request(new CreatePrivateRecordRequest(req.body), (err, result) => {
-                if (!!err) {
-                    res.status(500).json(err);
-                } else {
-                    res.json(result);
-                }
-            })
-        } else {
-            next();
-        }
+        Managers.client().request(new CreatePrivateRecordRequest(req.body), (err, result) => {
+            if (!!err) {
+                res.status(500).json(err);
+            } else {
+                res.json(result);
+            }
+        });
     },
 
     /**
@@ -60,18 +52,14 @@ export default {
      * @author TACKSU
      */
     del: (req, res, next) => {
-        if (!!req.xhr) {
-            req.body.prvtId = req.params.prvtId;
-            Managers.client().request(new DeletePrivateRecordRequest(req.body), (err, result) => {
-                if (!!err) {
-                    res.status(500).json(err);
-                } else {
-                    res.json(result);
-                }
-            })
-        } else {
-            next();
-        }
+        req.body.prvtId = req.params.prvtId;
+        Managers.client().request(new DeletePrivateRecordRequest(req.body), (err, result) => {
+            if (!!err) {
+                res.status(500).json(err);
+            } else {
+                res.json(result);
+            }
+        });
     },
 
     /**
@@ -89,6 +77,6 @@ export default {
             } else {
                 res.json(result);
             }
-        })
+        });
     }
 }

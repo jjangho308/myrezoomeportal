@@ -10,7 +10,7 @@ import request from 'request-json';
 class NexledgerService extends AbstractManager {
 
 
-    
+
 
     /**
      * Default constructor. <br />
@@ -60,43 +60,38 @@ class NexledgerService extends AbstractManager {
             //console.log("============Nexledger Get function=================");
             //console.log(body);
             try {
-                if(body.result.hash=='') {
-                    if(retryCount > 5) {
+                if (body.result.hash == '') {
+                    if (retryCount > 5) {
                         try {
-                            if(body.err != '') {
+                            if (body.err != '') {
                                 callback(body.err);
                             }
-                        }
-                        catch(nexledgerexception) {
+                        } catch (nexledgerexception) {
                             body.err = "Nexledger SDK exception";
                             callback(body.err);
                         }
+                    } else {
+                        this.getbytxid(nodeurl, txid, retryCount + 1, callback);
                     }
-                    else {
-                        this.getbytxid(nodeurl, txid, retryCount+1, callback);
-                    }
-                }
-                else {
+                } else {
                     callback(body);
                 }
-            }catch(nexledgerexception) {
+            } catch (nexledgerexception) {
                 //console.log(nexledgerexception);
-                if(retryCount > 5) {
+                if (retryCount > 5) {
                     try {
-                        if(body.err != '') {
+                        if (body.err != '') {
                             callback(body.err);
                         }
-                    }
-                    catch(nexledgerexception) {
+                    } catch (nexledgerexception) {
                         body.err = "Nexledger SDK exception";
                         callback(body.err);
                     }
-                }
-                else {
-                    this.getbytxid(nodeurl, txid, retryCount+1, callback);
+                } else {
+                    this.getbytxid(nodeurl, txid, retryCount + 1, callback);
                 }
             }
-            
+
         }.bind(this));
 
     }
@@ -130,46 +125,41 @@ class NexledgerService extends AbstractManager {
         client.post('/', reqformatdata, function (err, res, body) {
             //console.log(body);
             try {
-                if(body.result.txid == '') {
-                    if(retryCount > 5) {
+                if (body.result.txid == '') {
+                    if (retryCount > 5) {
                         try {
-                            if(body.err != '') {
+                            if (body.err != '') {
                                 callback(body.err);
                             }
-                        }
-                        catch(nexledgerexception) {
+                        } catch (nexledgerexception) {
                             var body = {
-                                err: "Nexledger SDK exception" 
+                                err: "Nexledger SDK exception"
                             };
                             callback(body.err);
                         }
-                    }
-                    else {
+                    } else {
                         this.put(nodeurl, address, data, retryCount + 1, callback);
                     }
-                }
-                else {
+                } else {
                     callback(body);
                 }
-            }catch(nexledgerexception) {
-                if(retryCount > 5) {
+            } catch (nexledgerexception) {
+                if (retryCount > 5) {
                     try {
-                        if(body.err != '') {
+                        if (body.err != '') {
                             callback(body.err);
                         }
-                    }
-                    catch(nexledgerexception) {
+                    } catch (nexledgerexception) {
                         var body = {
-                            err: "Nexledger SDK exception" 
+                            err: "Nexledger SDK exception"
                         };
                         callback(body.err);
                     }
-                }
-                else {
+                } else {
                     this.put(nodeurl, address, data, retryCount + 1, callback);
                 }
             }
-            
+
         }.bind(this));
     }
 

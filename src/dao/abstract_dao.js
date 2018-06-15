@@ -30,15 +30,16 @@ class AbstractDAO {
     query(query, cb) {
         this.connectionPool.getConnection((err, connection) => {
             if (!!err) {
+                console.error(err.stack);
                 cb(err);
             } else {
                 connection.query(query, (err, result) => {
                     connection.release();
-
-                    //console.log(err);
-                    //console.log(result);
+                    if (!!err) {
+                        console.error(err.stack);
+                    }
                     cb(err, result);
-                })
+                });
             }
         });
     }

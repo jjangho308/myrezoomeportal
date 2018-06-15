@@ -83,14 +83,14 @@ function onError(error) {
       process.exit(1);
       break;
     default:
-      throw error;
+      console.log(JSON.stringify(error));
+      // throw error;
   }
 }
 
 /**
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string' ?
