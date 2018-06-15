@@ -14,19 +14,34 @@ var certformatter = {
             var width = $("#opic_cert").css("width");
 
             $("#certno").html("인증서번호 : 2323IERSDVL239SDKSDF");
-            $("#opic_cert").children('p').eq(0).html(record_data.cname);
-            $("#opic_cert").children('p').eq(1).html(record_data.examid);
-            $("#opic_cert").children('p').eq(2).html(record_data.birthday);
-            $("#opic_cert").children('p').eq(3).html(record_data.ctestday);
-            $("#opic_cert").children('p').eq(4).html(record_data.testtype);
-            $("#opic_cert").children('p').eq(5).html(record_data.clevel);
-            $("#opic_cert").children('p').eq(6).html(record_data.cissudate);
-            $("#opic_cert").children('p').eq(7).html(record_data.useend);
+            $("#opic_cert").children('p').eq(0)
+                .html(record_data.cname)
+                .next().html(record_data.examid)
+                .next().html(record_data.birthday)
+                .next().html(record_data.ctestday)
+                .next().html(record_data.testtype)
+                .next().html(record_data.clevel)
+                .next().html(record_data.cissudate)
+                .next().html(record_data.useend);
 
-            $("#opic_report").children('p').eq(0).html(record_data.ename);
-            $("#opic_report").children('p').eq(1).html(record_data.language);
-            $("#opic_report").children('p').eq(2).html(record_data.testdate);
-            $("#opic_report").children('p').eq(3).html(record_data.examid);
+            $("#opic_report").children('p').eq(0)
+                .html(record_data.ename)
+                .next().html(record_data.language)
+                .next().html(record_data.testdate)
+                .next().html(record_data.examid);
+            // $("#opic_cert").children('p').eq(0).html(record_data.cname);
+            // $("#opic_cert").children('p').eq(1).html(record_data.examid);
+            // $("#opic_cert").children('p').eq(2).html(record_data.birthday);
+            // $("#opic_cert").children('p').eq(3).html(record_data.ctestday);
+            // $("#opic_cert").children('p').eq(4).html(record_data.testtype);
+            // $("#opic_cert").children('p').eq(5).html(record_data.clevel);
+            // $("#opic_cert").children('p').eq(6).html(record_data.cissudate);
+            // $("#opic_cert").children('p').eq(7).html(record_data.useend);
+
+            // $("#opic_report").children('p').eq(0).html(record_data.ename);
+            // $("#opic_report").children('p').eq(1).html(record_data.language);
+            // $("#opic_report").children('p').eq(2).html(record_data.testdate);
+            // $("#opic_report").children('p').eq(3).html(record_data.examid);
 
             generateQRCode();
 
