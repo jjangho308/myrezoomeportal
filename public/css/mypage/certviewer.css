@@ -350,13 +350,12 @@ p{
 }
 
 .verify-loader {
-	width: 90px;
+    float: right;
 	height: 20px;
 	position: relative;
 	top: 50%;
-	left: 50%;
 	margin-left: -10px;
-	transform: translate(-50%, -50%);
+	transform: translate(10%, -65%);
 	font-size: 0;
 }
 
