@@ -605,6 +605,12 @@ header > div p:nth-child(1) {
       .header {
           width: 324px;
       }
+
+      .outer-container{
+        width: 324px;
+      
+        }
+
   }
 
   /**/
