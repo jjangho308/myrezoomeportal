@@ -251,9 +251,9 @@ background-color:#dadada;
 
 .verify-loader-item {
 	display: inline-block;
-	width: 20px;
-	height: 20px;
-	margin-left: 10px;
+	width: 10px;
+	height: 10px;
+	margin-left: 5px;
 	border-radius: 50%;
 	background: black;
 	
