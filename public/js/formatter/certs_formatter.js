@@ -52,14 +52,14 @@ var certformatter= {
 
             generateQRCode();
 
-            html2canvas($(".inner-container"), {
-                onrendered: function(canvas) {
-                    var img = canvas.toDataURL();
-                    console.log(img);
-                    $($(".inner-container")).html("<img src=" + img + ">");
-                    window.open(img);            
-                }
-            });
+            // html2canvas($(".inner-container"), {
+            //     onrendered: function(canvas) {
+            //         var img = canvas.toDataURL();
+            //         console.log(img);
+            //         $($(".inner-container")).html("<img src=" + img + ">");
+            //         window.open(img);            
+            //     }
+            // });
 
         });
 
