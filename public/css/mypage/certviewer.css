@@ -134,6 +134,227 @@ header > div p:nth-child(1) {
     width:104px;
 }
 
+.main-body-footer {
+	margin: auto;
+	width: 46%;
+
+}
+
+.main-body-footer-1st-line {
+	height: 40px;
+}
+
+.main-body-footer-left {
+	float: left;
+	width: calc(100% - 100px);
+	height:40px;
+	font-size: 12px;
+}
+
+.main-body-footer-right {
+	float: right;
+	width: 100px;
+	height: 40px;
+	border-radius: 4px;
+	background-color: #979fa9;
+}
+
+.main-body-footer-1 {
+	float:left;
+	width: 135px;
+	height: 18px;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #878d91;
+	border: initial;
+}
+
+.main-body-footer-2 {
+	float:left;
+	width: 150px;
+	height: 18px;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #878d91;
+	border: initial;
+}
+
+.main-body-footer-3 {
+	width: 400px;
+	height: 18px;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #878d91;
+	border: initial;
+}
+
+.main-body-footer-4 {
+	float: left;
+	border: initial;
+	width: 135px;
+	height: 18px;
+}
+
+.main-body-footer-5 {
+	float: left;
+	border: initial;
+	width: 150px;
+	height: 18px;
+}
+
+.main-body-footer-6 {
+	float: left;
+	border: initial;
+	width: calc(100% - 300px);
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal !important;
+    display: block;
+}
+
+.main-body-footer-right-button1 {
+	position: relative;
+	top : 7px;
+	left: 21px;
+	width: 55px;
+	height: 20px;
+	font-size: 14px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: right;
+	color: #ffffff;
+}
+
+.footer-verify-1 {
+	width: 830px;
+	height: 50px;
+	background-color: #ffffff;
+	border: solid 1px #dfe5ef;
+}
+
+.footer-verify-2 {
+	width: 830px;
+	height: 50px;
+	background-color: #ffffff;
+	border: solid 1px #dfe5ef;
+}
+
+.footer-verify-3 {
+	width: 830px;
+	height: 50px;
+	background-color: #ffffff;
+	border: solid 1px #dfe5ef;
+}
+
+.footer-verify-4 {
+	width: 830px;
+	height: 50px;
+	background-color: #ffffff;
+	border: solid 1px #dfe5ef;
+}
+
+.footer-verify-left {
+	float :left;
+	width: 100px;
+	height: 50px;
+
+	font-size: 12px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	letter-spacing: normal;
+	color: #878d91;
+	line-height: 50px;
+	text-align: center;
+}
+
+.footer-verify-center {
+	float :left;
+
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #878d91;
+	line-height: 50px;
+}
+
+.footer-verify-right {
+	float :right;
+	width: 150px;
+	height: 50px;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #878d91;
+	line-height: 50px;
+	text-align: right;
+	margin: 0px 32px 0px 0px;
+}
+
+.verify-loader {
+	width: 90px;
+	height: 20px;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	margin-left: -10px;
+	transform: translate(-50%, -50%);
+	font-size: 0;
+}
+
+.verify-loader-item {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin-left: 10px;
+	border-radius: 50%;
+	background: black;
+	
+	animation: anim .8s infinite linear;
+}
+
+.verify-loader-item:nth-child(2) {
+	animation-delay: -.6s;
+}
+
+.verify-loader-item:nth-child(3) {
+	animation-delay: -.4s;
+}
+
+@keyframes anim {
+	0%   { transform: translateY(0); opacity: .2; }
+	50%  { transform: translateY(-10px); opacity: .6; }
+	100% { transform: translateY(0); opacity: .2; }
+}
+
+.Shape {
+	width: 20px;
+	height: 20px;
+	object-fit: contain;
+}
 /**/
 
 @media screen and (min-width: 720px){
@@ -605,6 +826,12 @@ header > div p:nth-child(1) {
       .header {
           width: 324px;
       }
+
+      .outer-container{
+        width: 324px;
+      
+        }
+
   }
 
   /**/
