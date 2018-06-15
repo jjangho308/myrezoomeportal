@@ -1,6 +1,6 @@
-import AbstractModel from "../abstract_model";
+var AbstractModel = require('../abstract_model');
 
-import Util from '../../util/util'
+var Util = require('../../util/util');
 
 /**
  * Shared resume info model. <br />
@@ -70,4 +70,4 @@ class SharedResumeUrl extends AbstractModel {
     }
 }
 
-export default SharedResumeUrl;
+module.exports = SharedResumeUrl;

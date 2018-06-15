@@ -1,13 +1,13 @@
-import Managers from '../core/managers';
+var Managers = require('../core/managers');
 
-import Env from '../core/environment';
+var Env = require('../core/environment');
 
-import GetCertsRequest from '../modules/client/certs/get_certs_request';
-import IssueNewCertRequest from '../modules/client/certs/issue_cert_request';
-import UpdateCertRequest from '../modules/client/certs/update_cert_request';
-import DeleteCertRequest from '../modules/client/certs/delete_cert_request';
+var GetCertsRequest = require('../modules/client/certs/get_certs_request');
+var IssueNewCertRequest = require('../modules/client/certs/issue_cert_request');
+var UpdateCertRequest = require('../modules/client/certs/update_cert_request');
+var DeleteCertRequest = require('../modules/client/certs/delete_cert_request');
 
-import GetCertViewRequest from '../modules/client/certs/get_cert_view_request';
+var GetCertViewRequest = require('../modules/client/certs/get_cert_view_request');
 
 /**
  * Controller for /certs URI. <br />
@@ -15,7 +15,7 @@ import GetCertViewRequest from '../modules/client/certs/get_cert_view_request';
  * @since 180321
  * @author TACKSU
  */
-export default {
+module.exports = {
 
     /**
      * Function to get certificates by given condition. <br />

@@ -1,7 +1,7 @@
-import AbstractClientRequestHandler from "../abstract_client_request_handler";
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
-import Managers from '../../../core/managers';
-import ClientRequest from '../client_request';
+var Managers = require('../../../core/managers');
+var ClientRequest = require('../client_request');
 
 class DeleteResumeHandler extends AbstractClientRequestHandler {
     constructor(opt) {
@@ -26,4 +26,4 @@ class DeleteResumeHandler extends AbstractClientRequestHandler {
 
 }
 
-export default DeleteResumeHandler;
+module.exports = DeleteResumeHandler;

@@ -29,4 +29,4 @@ class AbstractClientRequestHandler {
     }
 }
 
-export default AbstractClientRequestHandler
+module.exports = AbstractClientRequestHandler

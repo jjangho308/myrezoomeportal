@@ -1,7 +1,7 @@
-import uuidv4 from 'uuid/v4';
-import crypto from 'crypto'
+var uuidv4 = require('uuid/v4');
+var crypto = require('crypto');
 
-import randomstring from 'randomstring';
+var randomstring = require('randomstring');
 
 /**
  * Common utility class. <br />
@@ -10,7 +10,7 @@ import randomstring from 'randomstring';
  * @since 180305
  * @author TACKSU
  */
-export default (() => {
+module.exports = (() => {
     var util = {
 
         /**

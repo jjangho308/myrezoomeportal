@@ -51,4 +51,4 @@ class AbstractManager {
     }
 }
 
-export default AbstractManager
+module.exports = AbstractManager

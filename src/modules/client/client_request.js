@@ -1,83 +1,83 @@
-import HashMap from 'hashmap';
+var HashMap = require('hashmap');
 
-import AbstractManager from "../abstract_manager";
+var AbstractManager = require('../abstract_manager');
 
 /**
  * User request set. <br />
  */
-import SignInRequest from './user/signin_request';
-import SignInRequestHandler from './user/signin_request_handler';
-import SignUpRequest from './user/signup_request';
-import SignUpHandler from './user/signup_handler';
+var SignInRequest = require('./user/signin_request');
+var SignInRequestHandler = require('./user/signin_request_handler');
+var SignUpRequest = require('./user/signup_request');
+var SignUpHandler = require('./user/signup_handler');
 
-import SearchRecordRequest from './record/search_record';
-import SearchRecordHandler from './record/search_record_handler';
+var SearchRecordRequest = require('./record/search_record');
+var SearchRecordHandler = require('./record/search_record_handler');
 
 /**
  * Certificates request set. <br />
  */
-import IssueCertificateRequest from './certs/issue_cert_request';
-import IssueCertificateHandler from './certs/issue_cert_handler';
-import GetCertificatesRequest from './certs/get_certs_request';
-import GetCertificatesHandler from './certs/get_certs_handler';
-import UpdateCertificateRequest from './certs/update_cert_request';
-import UpdateCertificateHandler from './certs/update_cert_handler';
-import DeleteCertificateRequest from './certs/delete_cert_request';
-import DeleteCertificateHandler from './certs/delete_cert_handler';
+var IssueCertificateRequest = require('./certs/issue_cert_request');
+var IssueCertificateHandler = require('./certs/issue_cert_handler');
+var GetCertificatesRequest = require('./certs/get_certs_request');
+var GetCertificatesHandler = require('./certs/get_certs_handler');
+var UpdateCertificateRequest = require('./certs/update_cert_request');
+var UpdateCertificateHandler = require('./certs/update_cert_handler');
+var DeleteCertificateRequest = require('./certs/delete_cert_request');
+var DeleteCertificateHandler = require('./certs/delete_cert_handler');
 
 
-import ShareCertRequest from './certs/share_cert_request';
-import ShareCertRequestHandler from './certs/share_cert_handler';
+var ShareCertRequest = require('./certs/share_cert_request');
+var ShareCertRequestHandler = require('./certs/share_cert_handler');
 
 /**
  * Resume request set. <br />
  */
-import CreateResumeRequest from './resume/create_resume_request';
-import CreateResumeHandler from './resume/create_resume_handler';
-import GetResumeRequest from './resume/get_resume_request';
-import GetResumeHandler from './resume/get_resume_handler';
-import GetResumeDetailRequest from './resume/get_resume_detail_request';
-import GetResumeDetailHandler from './resume/get_resume_detail_handler';
-import UpdateResumeRequest from './resume/update_resume_request';
-import UpdateResumeHandler from './resume/update_resume_handler';
+var CreateResumeRequest = require('./resume/create_resume_request');
+var CreateResumeHandler = require('./resume/create_resume_handler');
+var GetResumeRequest = require('./resume/get_resume_request');
+var GetResumeHandler = require('./resume/get_resume_handler');
+var GetResumeDetailRequest = require('./resume/get_resume_detail_request');
+var GetResumeDetailHandler = require('./resume/get_resume_detail_handler');
+var UpdateResumeRequest = require('./resume/update_resume_request');
+var UpdateResumeHandler = require('./resume/update_resume_handler');
 
-import DeleteResumeRequest from './resume/delete_resume_request';
-import DeleteResumeHandler from './resume/delete_resume_handler';
+var DeleteResumeRequest = require('./resume/delete_resume_request');
+var DeleteResumeHandler = require('./resume/delete_resume_handler');
 
 
-import ShareResumeRequest from './resume/share_resume_request';
-import ShareResumeRequestHandler from './resume/share_resume_handler';
+var ShareResumeRequest = require('./resume/share_resume_request');
+var ShareResumeRequestHandler = require('./resume/share_resume_handler');
 
 
 /**
  * Private Record request set. <br />
  */
-import CreatePrivateRecordRequest from './record/create_record_request';
-import CreatePrivateRecordHandler from './record/create_record_handler';
-import GetPrivateRecordsRequest from './record/get_records_request';
-import GetPrivateRecordsHandler from './record/get_records_handler';
-import DeletePrivateRecordRequest from './record/delete_record_request';
-import DeletePrivateRecordHandler from './record/delete_record_handler';
+var CreatePrivateRecordRequest = require('./record/create_record_request');
+var CreatePrivateRecordHandler = require('./record/create_record_handler');
+var GetPrivateRecordsRequest = require('./record/get_records_request');
+var GetPrivateRecordsHandler = require('./record/get_records_handler');
+var DeletePrivateRecordRequest = require('./record/delete_record_request');
+var DeletePrivateRecordHandler = require('./record/delete_record_handler');
 
 
 /**
  * '/client' 'GenerateShortUrl' command request. <br />
  */
-import GenerateShortUrlRequest from './generate_short_url/generate_short_url_request';
-import GenerateShortUrlHandler from './generate_short_url/generate_short_url_handler';
+var GenerateShortUrlRequest = require('./generate_short_url/generate_short_url_request');
+var GenerateShortUrlHandler = require('./generate_short_url/generate_short_url_handler');
 
 /**
  * '/v/' Verification request. <br />
  * 
  */
-import VerifyRequest from './verify/verify_request';
-import VerifyHandler from './verify/verify_handler';
+var VerifyRequest = require('./verify/verify_request');
+var VerifyHandler = require('./verify/verify_handler');
 
-import IssueCertAPIV1Entity from './api/v1/api_issue_cert_entity';
-import IssueCertAPIV1Handler from './api/v1/api_issue_cert_handler';
+var IssueCertAPIV1Entity = require('./api/v1/api_issue_cert_entity');
+var IssueCertAPIV1Handler = require('./api/v1/api_issue_cert_handler');
 
-import GetCertViewRequestEntity from './certs/get_cert_view_request';
-import GetCertViewRequestHandler from './certs/get_cert_view_handler';
+var GetCertViewRequestEntity = require('./certs/get_cert_view_request');
+var GetCertViewRequestHandler = require('./certs/get_cert_view_handler');
 
 /**
  * Request manager from client. <br />
@@ -276,4 +276,4 @@ ClientRequestManager.RESULT_PENDING = 1;
  */
 ClientRequestManager.RESULT_FAILURE = 2;
 
-export default ClientRequestManager
+module.exports = ClientRequestManager

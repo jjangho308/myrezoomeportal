@@ -1,6 +1,6 @@
-import express from 'express';
+var express = require('express');
 
-import ctrl from './verify_ctrl';
+var ctrl = require('./verify_ctrl');
 
 /**
  * Router of "/v/{:shortURL} URI for <br />
@@ -20,4 +20,4 @@ var router = express.Router();
  */
 router.use('/:shortUrl', ctrl.get);
 
-export default router;
+module.exports = router;

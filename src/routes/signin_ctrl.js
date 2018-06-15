@@ -1,9 +1,9 @@
-import Managers from '../core/managers'
+var Managers = require('../core/managers');
 
-import SignInRequest from '../modules/client/user/signin_request'
+var SignInRequest = require('../modules/client/user/signin_request');
 
-import ErrorCode from '../core/error/error_code';
-import HttpResponseError from '../core/error/response_error';
+var ErrorCode = require('../core/error/error_code');
+var HttpResponseError = require('../core/error/response_error');
 
 /**
  * Controller for /signin URI. <br />
@@ -11,7 +11,7 @@ import HttpResponseError from '../core/error/response_error';
  * @since 180321
  * @author TACKSU
  */
-export default {
+module.exports = {
 
     /**
      * Temporal get request controller. <br />

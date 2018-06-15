@@ -1,13 +1,13 @@
-//import DatabaseManager from '../modules/db';
-import crypto from 'crypto';
-import DataManager from '../modules/db/db';
-import NexledgerService from '../modules/blockchain/nexledgerservice';
-import initializer from '../core/initializer';
+//var DatabaseManager = require('../modules/db');
+var crypto = require('crypto');
+var DataManager = require('../modules/db/db');
+var NexledgerService = require('../modules/blockchain/nexledgerservice');
+var initializer = require('../core/initializer');
 
-import Managers from '../core/managers';
+var Managers = require('../core/managers');
 
-import CryptoManager from '../modules/crypto/crypto';
-import Util from '../util/util'
+var CryptoManager = require('../modules/crypto/crypto');
+var Util = require('../util/util');
 
 describe.skip('Cassandra test suit', () => {
     var csdr = null;

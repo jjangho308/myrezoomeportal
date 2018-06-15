@@ -1,20 +1,20 @@
-import express from 'express';
+var express = require('express');
 
-import signin_router from './signin_route';
-import signout_router from './signout_route';
-import signup_router from './signup_route';
-import records_router from './records_route';
-import certs_router from './certs_route';
-import resumes_router from './resumes_route';
-import main_router from './main_route';
-import client_router from './client_route';
-import intro_router from './intro_route';
-import shared_certs_router from './shared_certs_route';
-import shared_resumes_router from './shared_resumes_route';
-import verify_router from './verify_route';
-import api_router from './api/api_route';
-import oauth_router from './oauth/oauth_route';
-import developer_router from './developer_route';
+var signin_router = require('./signin_route');
+var signout_router = require('./signout_route');
+var signup_router = require('./signup_route');
+var records_router = require('./records_route');
+var certs_router = require('./certs_route');
+var resumes_router = require('./resumes_route');
+var main_router = require('./main_route');
+var client_router = require('./client_route');
+var intro_router = require('./intro_route');
+var shared_certs_router = require('./shared_certs_route');
+var shared_resumes_router = require('./shared_resumes_route');
+var verify_router = require('./verify_route');
+var api_router = require('./api/api_route');
+var oauth_router = require('./oauth/oauth_route');
+var developer_router = require('./developer_route');
 
 /**
  * Root router of all http request channel. <br />
@@ -42,4 +42,4 @@ router.use('/api', api_router);
 router.use('/oauth2', oauth_router);
 router.use('/dev', developer_router);
 
-export default router;
+module.exports = router;

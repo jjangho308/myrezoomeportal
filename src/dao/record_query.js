@@ -7,7 +7,7 @@
 var BLC_MAP_TABLE = 'rezoome_db.TCDA_BLC_MAP';
 var CERT_PRVT_TABLE = 'rezoome_db.TCDA_CERT_PRVT';
 
-export default {
+module.exports = {
     getStoredDataByUserIdAndOrgID : "SELECT * FROM rezoome_db.TCDA_BLC_MAP WHERE `UID` = ? and `ORG_ID` = ? ",
     getStoredDataByUserId : "SELECT * FROM rezoome_db.TCDA_BLC_MAP WHERE `UID` = ? ",
     getStoredOrgByUserId : "SELECT DISTINCT ORG_ID FROM rezoome_db.TCDA_BLC_MAP WHERE TCDA_BLC_MAP.UID = ?",

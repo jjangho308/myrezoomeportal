@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from "../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
 /**
  * Request to sign up given user. <br />
@@ -12,4 +12,4 @@ class SignUpRequest extends AbstractClientRequestEntity {
     }
 }
 
-export default SignUpRequest;
+module.exports = SignUpRequest;

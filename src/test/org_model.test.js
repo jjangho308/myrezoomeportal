@@ -1,10 +1,10 @@
-import Initializer from '../core/initializer';
-import Util from '../util/util';
-import OrgDAO from '../models/org/org_dao';
-import OrgModel from '../models/org/org';
+var Initializer = require('../core/initializer');
+var Util = require('../util/util');
+var OrgDAO = require('../models/org/org_dao');
+var OrgModel = require('../models/org/org');
 
-import Managers from '../core/managers';
-import DBManager from '../modules/db/db';
+var Managers = require('../core/managers');
+var DBManager = require('../modules/db/db');
 
 /**
  * Test suit for organization model. <br />

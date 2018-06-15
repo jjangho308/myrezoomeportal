@@ -7,7 +7,7 @@
  * @since 180508
  * @author TACKSU
  */
-export default {
+module.exports = {
 
     // General internal error codes.
     INTERNAL_ERROR: 1,

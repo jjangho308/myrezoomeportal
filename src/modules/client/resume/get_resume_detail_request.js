@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from "../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
 
 /**
@@ -33,4 +33,4 @@ class GetResumeDetailRequestEntity extends AbstractClientRequestEntity {
     }
 }
 
-export default GetResumeDetailRequestEntity;
+module.exports = GetResumeDetailRequestEntity;

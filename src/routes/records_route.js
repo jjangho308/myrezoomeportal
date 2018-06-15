@@ -1,6 +1,6 @@
-import express from 'express';
-import tokenAuth from '../mw/client_auth';
-import ctrl from './records_ctrl';
+var express = require('express');
+var tokenAuth = require('../mw/client_auth');
+var ctrl = require('./records_ctrl');
 
 /**
  * Router for records. <br />
@@ -26,4 +26,4 @@ router.post('/:prvtId', ctrl.del);
 router.patch('/:recordId', tokenAuth);
 router.patch('/:recordId', ctrl.patch);
 
-export default router;
+module.exports = router;

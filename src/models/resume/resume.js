@@ -1,6 +1,6 @@
-import AbstractModel from "../abstract_model";
+var AbstractModel = require('../abstract_model');
 
-import Util from '../../util/util';
+var Util = require('../../util/util');
 
 /**
  * Model declaration of resume. <br />
@@ -118,4 +118,4 @@ class ResumeModel extends AbstractModel {
     }
 }
 
-export default ResumeModel;
+module.exports = ResumeModel;

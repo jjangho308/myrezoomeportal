@@ -1,7 +1,7 @@
-import crypto from 'crypto';
-import NodeRSA from 'node-rsa';
+var crypto = require('crypto');
+var NodeRSA = require('node-rsa');
 
-import AbstractManager from '../abstract_manager';
+var AbstractManager = require('../abstract_manager');
 
 /**
  * CryptoManager. <br />
@@ -326,4 +326,4 @@ class CryptoManager extends AbstractManager {
     }
 }
 
-export default CryptoManager;
+module.exports = CryptoManager;

@@ -1,7 +1,7 @@
-import IssueCertEntity from '../../modules/client/api/v1/api_issue_cert_entity';
-import IssueCertHandler from '../../modules/client/api/v1/api_issue_cert_handler';
+var IssueCertEntity = require('../../modules/client/api/v1/api_issue_cert_entity');
+var IssueCertHandler = require('../../modules/client/api/v1/api_issue_cert_handler');
 
-import Managers from '../../core/managers';
+var Managers = require('../../core/managers');
 
 /**
  * API Version 1 function container. <br />
@@ -9,7 +9,7 @@ import Managers from '../../core/managers';
  * @since 180528
  * @author TACKSU
  */
-export default {
+module.exports = {
 
     /**
      * API function to issue certificate by given data from request client. <br />

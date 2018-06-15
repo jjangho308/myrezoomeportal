@@ -1,5 +1,5 @@
-import ManagerProvider from './managers'
-import AbstractManager from '../modules/abstract_manager';
+var ManagerProvider = require('./managers');
+var AbstractManager = require('../modules/abstract_manager');
 
 
 /**
@@ -20,4 +20,4 @@ var terminator = (from) => {
     }
 }
 
-export default terminator;
+module.exports = terminator;

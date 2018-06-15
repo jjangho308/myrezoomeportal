@@ -1,5 +1,5 @@
-import Managers from '../core/managers';
-import ShareCertRequest from '../modules/client/certs/share_cert_request';
+var Managers = require('../core/managers');
+var ShareCertRequest = require('../modules/client/certs/share_cert_request');
 
 /**
  * Controller for '/shared_certs' URI. <br />
@@ -7,7 +7,7 @@ import ShareCertRequest from '../modules/client/certs/share_cert_request';
  * @since 180412
  * @author TACKSU
  */
-export default {
+module.exports = {
     /**
      * Get controller. <br />
      */

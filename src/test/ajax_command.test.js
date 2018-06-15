@@ -1,10 +1,10 @@
-import app from '../app';
+var app = require('../app');
 
-import chai from 'chai';
-import chaihttp from 'chai-http';
+var chai = require('chai');
+var chaihttp = require('chai-http');
 
-import Util from '../util/util';
-import Managers from '../core/managers';
+var Util = require('../util/util');
+var Managers = require('../core/managers');
 
 /**
  * Test suite for ajax command request. <br />

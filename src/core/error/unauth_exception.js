@@ -1,4 +1,4 @@
-// import RezoomeError from "./rezoome_exception";
+// var RezoomeError = require('./rezoome_exception');
 
 // /**
 //  * Error indicator for Unauthorized. <br />
@@ -12,4 +12,4 @@
 //     }
 // }
 
-// export default UnauthorizationError;
+// module.exports = UnauthorizationError;

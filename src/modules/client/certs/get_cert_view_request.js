@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from "../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
 /**
  * Get cert view request entity. <br />
@@ -14,4 +14,4 @@ class GetCertViewRequestEntity extends AbstractClientRequestEntity {
     }
 }
 
-export default GetCertViewRequestEntity;
+module.exports = GetCertViewRequestEntity;

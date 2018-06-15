@@ -1,11 +1,11 @@
-import app from '../app';
+var app = require('../app');
 
-import Initializer from '../core/initializer';
-import Managers from '../core/managers';
-import ClientRequestManager from '../modules/client/client_request';
+var Initializer = require('../core/initializer');
+var Managers = require('../core/managers');
+var ClientRequestManager = require('../modules/client/client_request');
 
-import chai from 'chai';
-import chaihttp from 'chai-http';
+var chai = require('chai');
+var chaihttp = require('chai-http');
 
 /**
  * Test suit for /client command request. <br />

@@ -1,13 +1,13 @@
-import Initializer from '../core/initializer';
-import Managers from '../core/managers';
-import Util from '../util/util';
+var Initializer = require('../core/initializer');
+var Managers = require('../core/managers');
+var Util = require('../util/util');
 
-import CertModel from '../models/cert/cert';
-import SharedCertModel from '../models/cert/shared_cert';
-import SharedCertUrlModel from '../models/cert/shared_cert_url';
-import CertDAO from '../dao/cert_dao';
+var CertModel = require('../models/cert/cert');
+var SharedCertModel = require('../models/cert/shared_cert');
+var SharedCertUrlModel = require('../models/cert/shared_cert_url');
+var CertDAO = require('../dao/cert_dao');
 
-import domain from 'domain';
+var domain = require('domain');
 
 /**
  * Test suit for Certificate model. <br />

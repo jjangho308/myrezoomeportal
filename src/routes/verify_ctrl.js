@@ -1,5 +1,5 @@
-import Managers from '../core/managers'
-import VerifyRequest from '../modules/client/verify/verify_request'
+var Managers = require('../core/managers');
+var VerifyRequest = require('../modules/client/verify/verify_request');
 
 /**
  * Controller function for '/v' Router.
@@ -8,7 +8,7 @@ import VerifyRequest from '../modules/client/verify/verify_request'
  * @author TACKSU
  * 
  */
-export default {
+module.exports = {
     get: (req, res, next) => {
         req.body.shortUrl = req.params.shortUrl;
         Managers.client().request(new VerifyRequest(req.body), (err, result) => {

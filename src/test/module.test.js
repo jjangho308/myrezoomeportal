@@ -1,6 +1,6 @@
-import managers from '../core/managers';
-import assert from 'assert';
-import initialize from '../core/initializer';
+var managers = require('../core/managers');
+var assert = require('assert');
+var initialize = require('../core/initializer');
 
 describe.skip('Module Test', ()=>{
     before('Module test init', () => {

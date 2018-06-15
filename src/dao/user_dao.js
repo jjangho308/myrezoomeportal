@@ -1,10 +1,10 @@
-import mysql from 'mysql';
+var mysql = require('mysql');
 
-import userQuery from './user_query.js';
-import UserModel from '../models/user/user';
-import AbstractDAO from './abstract_dao.js';
+var userQuery = require('./user_query.js');
+var UserModel = require('../models/user/user');
+var AbstractDAO = require('./abstract_dao.js');
 
-import Util from '../util/util';
+var Util = require('../util/util');
 
 /**
  * DAO for UserModel. <br />
@@ -203,4 +203,4 @@ class UserDao extends AbstractDAO {
     }
 }
 
-export default UserDao;
+module.exports = UserDao;

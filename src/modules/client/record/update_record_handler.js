@@ -1,4 +1,4 @@
-import AbstractClientRequestHandler from "../abstract_client_request_handler";
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
 /**
  * Update given private record of user. <br />

@@ -1,12 +1,12 @@
-import AbstractClientRequestHandler from '../abstract_client_request_handler';
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
-import ClientRequest from '../client_request';
+var ClientRequest = require('../client_request');
 
-import CertModel from '../../../models/cert/cert';
-import SharedCertModel from '../../../models/cert/shared_cert';
-import SharedCertUrlModel from '../../../models/cert/shared_cert_url';
+var CertModel = require('../../../models/cert/cert');
+var SharedCertModel = require('../../../models/cert/shared_cert');
+var SharedCertUrlModel = require('../../../models/cert/shared_cert_url');
 
-import Managers from '../../../core/managers';
+var Managers = require('../../../core/managers');
 
 /**
  * Handler of ShareCertRequestEntity. <br />
@@ -113,4 +113,4 @@ class ShareCertRequestHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default ShareCertRequestHandler;
+module.exports = ShareCertRequestHandler;

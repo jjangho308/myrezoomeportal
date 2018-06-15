@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from '../abstract_client_request_entity';
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
 /**
  * Generate short url for verification page. <br />
@@ -24,4 +24,4 @@ class GenerateShortUrlRequestEntity extends AbstractClientRequestEntity {
     }
 }
 
-export default GenerateShortUrlRequestEntity;
+module.exports = GenerateShortUrlRequestEntity;

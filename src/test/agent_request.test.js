@@ -1,13 +1,13 @@
-import chai from 'chai';
-import chaiHttp from 'chai-http';
+var chai = require('chai');
+var chaiHttp = require('chai-http');
 
-import assert from 'assert';
+var assert = require('assert');
 
-import app from '../app';
+var app = require('../app');
 
-import Util from '../util/util';
+var Util = require('../util/util');
 
-import Managers from '../core/managers';
+var Managers = require('../core/managers');
 
 /**
  * Test suite for /agent HTTP Request method. <br />

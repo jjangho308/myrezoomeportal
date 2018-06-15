@@ -1,4 +1,4 @@
-import AbstractClientRequest from "../abstract_client_request_entity";
+var AbstractClientRequest = require('../abstract_client_request_entity');
 
 /**
  * Get saved certificate entities and response them to client. <br />
@@ -35,4 +35,4 @@ class GetCertificateRequest extends AbstractClientRequest {
     }
 }
 
-export default GetCertificateRequest;
+module.exports = GetCertificateRequest;

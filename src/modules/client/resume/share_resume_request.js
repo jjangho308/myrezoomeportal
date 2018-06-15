@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from "../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
 /**
  * Request to share given resume. <br />s
@@ -11,4 +11,4 @@ class ShareResumeRequest extends AbstractClientRequestEntity {
     }
 }
 
-export default ShareResumeRequest;
+module.exports = ShareResumeRequest;

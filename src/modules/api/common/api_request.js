@@ -1,4 +1,4 @@
-import AbstractApiRequestEntity from '../abstract_api_request_entity';
+var AbstractApiRequestEntity = require('../abstract_api_request_entity');
 
 /**
  * Request entity for verification feature. <br />
@@ -29,4 +29,4 @@ class ApiRequest extends AbstractApiRequestEntity {
     }
 }
 
-export default ApiRequest;
+module.exports = ApiRequest;

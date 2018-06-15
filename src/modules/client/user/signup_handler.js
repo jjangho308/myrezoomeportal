@@ -1,10 +1,10 @@
-import Managers from '../../../core/managers';
+var Managers = require('../../../core/managers');
 
-import ClientRequest from '../../client/client_request';
-import AbstractClientRequestHandler from '../abstract_client_request_handler';
+var ClientRequest = require('../../client/client_request');
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
-import Util from "../../../util/util";
-import UserModel from '../../../models/user/user';
+var Util = require('../../../util/util');
+var UserModel = require('../../../models/user/user');
 
 /**
  * Handler of SigninRequestEntity. <br />
@@ -63,4 +63,4 @@ class SignupRequestHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default SignupRequestHandler;
+module.exports = SignupRequestHandler;

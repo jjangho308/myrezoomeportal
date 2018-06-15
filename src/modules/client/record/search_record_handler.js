@@ -1,16 +1,16 @@
-import Managers from '../../../core/managers'
+var Managers = require('../../../core/managers');
 
-import DataManager from '../../db/db';
-import PushManager from '../../push/push';
+var DataManager = require('../../db/db');
+var PushManager = require('../../push/push');
 
-import AbstractClientRequestHandler from '../abstract_client_request_handler';
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
-import ClientRequestManager from '../client_request'
-import SearchRecordPush from '../../push/message/search';
+var ClientRequestManager = require('../client_request');
+var SearchRecordPush = require('../../push/message/search');
 
-import NexledgerService from '../../blockchain/nexledgerservice';
+var NexledgerService = require('../../blockchain/nexledgerservice');
 
-import Util from '../../../util/util'
+var Util = require('../../../util/util');
 
 /**
  * Handler for SearchRecordRequest. <br />
@@ -527,4 +527,4 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default SearchRecordRequestHandler;
+module.exports = SearchRecordRequestHandler;

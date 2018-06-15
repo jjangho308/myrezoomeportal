@@ -1,9 +1,9 @@
-import AbstractClientRequestHandler from "../abstract_client_request_handler";
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
-import ClientRequest from '../client_request';
+var ClientRequest = require('../client_request');
 
-import Managers from '../../../core/managers';
-import Util from "../../../util/util";
+var Managers = require('../../../core/managers');
+var Util = require('../../../util/util');
 
 /**
  * Update given private record of user. <br />
@@ -45,4 +45,4 @@ class DeleteRecordHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default DeleteRecordHandler;
+module.exports = DeleteRecordHandler;

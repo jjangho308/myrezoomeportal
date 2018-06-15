@@ -1,6 +1,6 @@
-import PDF from 'pdfkit';
-import managers from '../../core/managers';
-import AbstractClientRequestHandler from './abstract_clientrequest_handler';
+var PDF = require('pdfkit');
+var managers = require('../../core/managers');
+var AbstractClientRequestHandler = require('./abstract_clientrequest_handler');
 
 /**
  * 증명서 요청 핸들러.
@@ -39,5 +39,5 @@ class CertificateRequestHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default CertificateRequestHandler;
+module.exports = CertificateRequestHandler;
 

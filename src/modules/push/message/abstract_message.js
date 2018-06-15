@@ -1,4 +1,4 @@
-import process from "process"
+var process = require('process');
 /**
  * Abstract class of push message. <br />
  * 
@@ -14,4 +14,4 @@ class AbstractPush {
     }
 }
 
-export default AbstractPush;
+module.exports = AbstractPush;

@@ -1,7 +1,7 @@
-import express from 'express';
-import ctrl from './main_ctrl';
+var express = require('express');
+var ctrl = require('./main_ctrl');
 
-import client_auth_option from '../mw/client_auth_optional';
+var client_auth_option = require('../mw/client_auth_optional');
 
 /**
  * Router for './main'. <br />
@@ -17,4 +17,4 @@ router.get('/', ctrl.get);
 
 router.post('/edu', ctrl.edu);
 
-export default router;
+module.exports = router;

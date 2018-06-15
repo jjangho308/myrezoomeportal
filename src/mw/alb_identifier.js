@@ -5,7 +5,7 @@
  * @since 180403
  * @author TACKSU
  */
-export default (req, res, next) => {
+module.exports = (req, res, next) => {
     // TODO ServerID 넣어주기:
     req.params.sId = process.args[2];
     next();

@@ -1,17 +1,17 @@
-import mysql from 'mysql';
+var mysql = require('mysql');
 
-import Managers from "../../core/managers";
-import Property from "../property/property";
+var Managers = require('../../core/managers');
+var Property = require('../property/property');
 
-import AbstractManager from '../abstract_manager';
+var AbstractManager = require('../abstract_manager');
 
-import UserDAO from '../../dao/user_dao';
-import OrgDAO from '../../dao/org_dao';
-import RecordDAO from '../../dao/record_dao';
-import CertDAO from '../../dao/cert_dao'
-import ResumeDAO from '../../dao/resume_dao';
+var UserDAO = require('../../dao/user_dao');
+var OrgDAO = require('../../dao/org_dao');
+var RecordDAO = require('../../dao/record_dao');
+var CertDAO = require('../../dao/cert_dao');
+var ResumeDAO = require('../../dao/resume_dao');
 
-import Env from '../../core/environment';
+var Env = require('../../core/environment');
 
 /**
  * Database manager. <br />
@@ -139,4 +139,4 @@ class DatabaseManager extends AbstractManager {
     }
 }
 
-export default DatabaseManager;
+module.exports = DatabaseManager;

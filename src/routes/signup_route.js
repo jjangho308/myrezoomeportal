@@ -1,5 +1,5 @@
-import express from 'express';
-import ctrl from './signup_ctrl';
+var express = require('express');
+var ctrl = require('./signup_ctrl');
 
 /**
  * Router for /sigin URI. <br />
@@ -13,4 +13,4 @@ router.get('/', ctrl.get);
 router.get('/success', ctrl.signup_success);
 router.post('/', ctrl.post);
 
-export default router;
+module.exports = router;

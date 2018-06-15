@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken'
+var jwt = require('jsonwebtoken');
 
-import AbstractManager from "../abstract_manager";
+var AbstractManager = require('../abstract_manager');
 
 
 /**
@@ -135,4 +135,4 @@ class TokenManager extends AbstractManager {
     }
 }
 
-export default TokenManager;
+module.exports = TokenManager;

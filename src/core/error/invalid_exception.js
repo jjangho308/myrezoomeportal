@@ -22,4 +22,4 @@
 //     }
 // }
 
-// export default InvalidParameterError;
+// module.exports = InvalidParameterError;

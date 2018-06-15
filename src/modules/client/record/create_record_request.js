@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from "../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
 /**
  * 
@@ -11,4 +11,4 @@ class CreateRecordRequest extends AbstractClientRequestEntity {
     }
 }
 
-export default CreateRecordRequest;
+module.exports = CreateRecordRequest;

@@ -1,7 +1,7 @@
-import Initializer from '../core/initializer';
-import Managers from '../core/managers'
-import TokenManager from '../modules/token/token'
-import jwt from 'jsonwebtoken';
+var Initializer = require('../core/initializer');
+var Managers = require('../core/managers');
+var TokenManager = require('../modules/token/token');
+var jwt = require('jsonwebtoken');
 
 describe('TokenManager Test Suit', () => {
     var token;

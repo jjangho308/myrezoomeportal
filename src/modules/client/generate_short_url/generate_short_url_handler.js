@@ -1,10 +1,10 @@
-import randomstring from 'randomstring';
+var randomstring = require('randomstring');
 
-import AbstractAgentRequestHandler from "../../agent/abstract_agent_request_handler";
+var AbstractAgentRequestHandler = require('../../agent/abstract_agent_request_handler');
 
-import ClientRequest from '../client_request';
+var ClientRequest = require('../client_request');
 
-import ErrroCodes from '../../../core/error/error_code';
+var ErrroCodes = require('../../../core/error/error_code');
 
 /**
  * Handler of GenerateShortUrlRequest. <br />
@@ -69,4 +69,4 @@ class GenerateShortUrlHandler extends AbstractAgentRequestHandler {
     }
 }
 
-export default GenerateShortUrlHandler;
+module.exports = GenerateShortUrlHandler;

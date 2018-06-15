@@ -1,14 +1,13 @@
-import PropertyManager from '../modules/property/property';
-import PushManager from '../modules/push/push';
-
-import DatabaseManager from '../modules/db/db';
-import TokenManager from '../modules/token/token';
-import PDFManager from '../modules/pdf/pdf';
-import ClientRequestManager from '../modules/client/client_request';
-import AgentRequestManager from '../modules/agent/agent_request';
-import CryptoManager from '../modules/crypto/crypto';
-import NexLedgerManger from '../modules/blockchain/nexledgerservice';
-import ApiRequestManager from '../modules/api/api_request';
+var PropertyManager = require('../modules/property/property');
+var PushManager = require('../modules/push/push');
+var DatabaseManager = require('../modules/db/db');
+var TokenManager = require('../modules/token/token');
+var PDFManager = require('../modules/pdf/pdf');
+var ClientRequestManager = require('../modules/client/client_request');
+var AgentRequestManager = require('../modules/agent/agent_request');
+var CryptoManager = require('../modules/crypto/crypto');
+var NexLedgerManger = require('../modules/blockchain/nexledgerservice');
+var ApiRequestManager = require('../modules/api/api_request');
 
 /**
  * Wrapper function to provide singleton instance of each modules. <br />
@@ -16,65 +15,59 @@ import ApiRequestManager from '../modules/api/api_request';
  * @TODO add managers.
  * @since 180304
  */
-export default (() => {
-    var propertyInstance = null;
-    var cryptoInstance = null;
-    var dbInstance = null;
-    var pushInstance = null;
-    var kmsInstance = null;
-    var tokenInstance = null;
-    var pdfInstance = null;
-    var clientRequestInstance = null;
-    var agentRequestInstance = null;
-    var nexLedgerInstance = null;
-    var apiRequestInstance = null;
+var propertyInstance = null;
+var cryptoInstance = null;
+var dbInstance = null;
+var pushInstance = null;
+var kmsInstance = null;
+var tokenInstance = null;
+var pdfInstance = null;
+var clientRequestInstance = null;
+var agentRequestInstance = null;
+var nexLedgerInstance = null;
+var apiRequestInstance = null;
 
+exports.property = () => {
+    return propertyInstance = propertyInstance ? propertyInstance : new PropertyManager();
+};
 
-    return {
-        property: () => {
-            return propertyInstance = propertyInstance ? propertyInstance : new PropertyManager();
-        },
+exports.push =
+    () => {
+        return pushInstance = pushInstance ? pushInstance : new PushManager();
+    };
 
-        push: () => {
-            return pushInstance = pushInstance ? pushInstance : new PushManager();
-        },
+exports.crypto =
+    () => {
+        return cryptoInstance = cryptoInstance ? cryptoInstance : new CryptoManager();
+    };
 
+exports.db =
+    () => {
+        return dbInstance = dbInstance ? dbInstance : new DatabaseManager();
+    };
 
+exports.token =
+    () => {
+        return tokenInstance = tokenInstance ? tokenInstance : new TokenManager();
+    };
 
-        // blockchain : ()=>{
-        //     return bcInstance = bcInstance ? bcInstance : new BlockchainManager();
-        // },
+exports.pdf =
+    () => {
+        return pdfInstance = pdfInstance ? pdfInstance : new PDFManager();
+    };
 
-        crypto: () => {
-            return cryptoInstance = cryptoInstance ? cryptoInstance : new CryptoManager();
-        },
+exports.client = () => {
+    return clientRequestInstance = clientRequestInstance ? clientRequestInstance : new ClientRequestManager();
+};
 
-        db: () => {
-            return dbInstance = dbInstance ? dbInstance : new DatabaseManager();
-        },
+exports.agent = () => {
+    return agentRequestInstance = agentRequestInstance ? agentRequestInstance : new AgentRequestManager();
+};
 
-        token: () => {
-            return tokenInstance = tokenInstance ? tokenInstance : new TokenManager();
-        },
+exports.nex = () => {
+    return nexLedgerInstance = nexLedgerInstance ? nexLedgerInstance : new NexLedgerManger();
+};
 
-        pdf: () => {
-            return pdfInstance = pdfInstance ? pdfInstance : new PDFManager();
-        },
-
-        client: () => {
-            return clientRequestInstance = clientRequestInstance ? clientRequestInstance : new ClientRequestManager();
-        },
-
-        agent: () => {
-            return agentRequestInstance = agentRequestInstance ? agentRequestInstance : new AgentRequestManager();
-        },
-
-        nex: () => {
-            return nexLedgerInstance = nexLedgerInstance ? nexLedgerInstance : new NexLedgerManger();
-        },
-
-        api: () => {
-            return apiRequestInstance = apiRequestInstance ? apiRequestInstance : new ApiRequestManager();
-        }
-    }
-})();
+exports.api = () => {
+    return apiRequestInstance = apiRequestInstance ? apiRequestInstance : new ApiRequestManager();
+};

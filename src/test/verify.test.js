@@ -1,11 +1,11 @@
-import app from '../app';
+var app = require('../app');
 
-import chai from 'chai';
-import chaihttp from 'chai-http';
+var chai = require('chai');
+var chaihttp = require('chai-http');
 
-import Initializer from '../core/initializer';
+var Initializer = require('../core/initializer');
 
-import Managers from '../core/managers';
+var Managers = require('../core/managers');
 
 /**
  * Test suit for Verification feature. <br />

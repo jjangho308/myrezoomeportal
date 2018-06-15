@@ -1,8 +1,8 @@
-import crypto from 'crypto';
-import assert from 'assert';
+var crypto = require('crypto');
+var assert = require('assert');
 
-import PropertyManager from '../modules/property/property';
-import initialize from '../core/initializer';
+var PropertyManager = require('../modules/property/property');
+var initialize = require('../core/initializer');
 
 describe.skip('Property test suit', () => {
     var propertyManager;

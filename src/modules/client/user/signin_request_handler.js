@@ -1,10 +1,10 @@
-import Managers from '../../../core/managers';
+var Managers = require('../../../core/managers');
 
-import ClientRequest from '../../client/client_request';
-import AbstractClientRequestHandler from '../abstract_client_request_handler';
+var ClientRequest = require('../../client/client_request');
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
-import ResponseError from '../../../core/error/response_error';
-import ErrorCode from '../../../core/error/error_code';
+var ResponseError = require('../../../core/error/response_error');
+var ErrorCode = require('../../../core/error/error_code');
 
 /**
  * Handler of SigninRequestEntity. <br />
@@ -58,4 +58,4 @@ class SigninRequestHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default SigninRequestHandler;
+module.exports = SigninRequestHandler;

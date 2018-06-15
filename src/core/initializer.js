@@ -1,5 +1,5 @@
-import ManagerProvider from './managers'
-import AbstractManager from '../modules/abstract_manager';
+var ManagerProvider = require('./managers');
+var AbstractManager = require('../modules/abstract_manager');
 
 /**
  * Rezoome portal initialize. <br />
@@ -24,4 +24,4 @@ initializer.FROM_DEBUG = 0;
 initializer.FROM_UNITTEST = 1;
 initializer.FROM_RUNTIME = 2
 
-export default initializer;
+module.exports = initializer;

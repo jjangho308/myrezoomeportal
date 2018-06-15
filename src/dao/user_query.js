@@ -5,7 +5,7 @@
  * @author TACKSU
  */
 var TABLE_NAME = 'rezoome_db.TCUP_USR'
-export default {
+module.exports = {
     get: 'SELECT * FROM ' + TABLE_NAME + ' WHERE ?',
 
     getById: 'SELECT * FROM TCUP_USR where USR_ID = ?',

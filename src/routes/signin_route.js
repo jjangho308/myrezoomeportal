@@ -1,5 +1,5 @@
-import express from 'express';
-import ctrl from './signin_ctrl';
+var express = require('express');
+var ctrl = require('./signin_ctrl');
 
 /**
  * Router for /signin URI. <br />
@@ -15,4 +15,4 @@ router.post('/', ctrl.post);
 //     console.log(err.toString());
 // })
 
-export default router;
+module.exports = router;

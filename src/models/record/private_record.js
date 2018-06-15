@@ -1,6 +1,6 @@
-import AbstractModel from "../abstract_model";
+var AbstractModel = require('../abstract_model');
 
-import Util from '../../util/util';
+var Util = require('../../util/util');
 
 class PrivateRecord extends AbstractModel {
 /**
@@ -88,4 +88,4 @@ class PrivateRecord extends AbstractModel {
     }
 }
 
-export default PrivateRecord;
+module.exports = PrivateRecord;

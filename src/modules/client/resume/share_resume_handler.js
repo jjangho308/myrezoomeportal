@@ -1,11 +1,11 @@
-import AbstractClientRequestHandler from "../abstract_client_request_handler";
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
-import ClientRequest from '../client_request';
-import UsrResume from '../../../models/resume/resume';
-import SharedResumeModel from '../../../models/resume/shared_resume';
-import SharedResumeUrlModel from '../../../models/resume/shared_resume_url';
+var ClientRequest = require('../client_request');
+var UsrResume = require('../../../models/resume/resume');
+var SharedResumeModel = require('../../../models/resume/shared_resume');
+var SharedResumeUrlModel = require('../../../models/resume/shared_resume_url');
 
-import Managers from '../../../core/managers';
+var Managers = require('../../../core/managers');
 
 /**
  * Handler of ShareResumeRequest. <br />
@@ -110,4 +110,4 @@ class ShareResumeRequestHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default ShareResumeRequestHandler;
+module.exports = ShareResumeRequestHandler;

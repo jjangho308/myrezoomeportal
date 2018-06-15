@@ -45,4 +45,4 @@ class AbstractDAO {
     }
 }
 
-export default AbstractDAO;
+module.exports = AbstractDAO;

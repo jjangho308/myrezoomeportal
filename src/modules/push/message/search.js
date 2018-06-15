@@ -1,4 +1,4 @@
-import AbstractPush from "./abstract_message"
+var AbstractPush = require('./abstract_message');
 
 /**
  * Push message instance for SearchRecordCommand. <br />
@@ -20,4 +20,4 @@ class SearchRecordPush extends AbstractPush {
     }
 }
 
-export default SearchRecordPush;
+module.exports = SearchRecordPush;

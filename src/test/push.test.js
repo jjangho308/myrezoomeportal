@@ -1,6 +1,6 @@
-import assert from 'assert';
-import PushManager from '../modules/push/push';
-import initialize from '../core/initializer';
+var assert = require('assert');
+var PushManager = require('../modules/push/push');
+var initialize = require('../core/initializer');
 
 describe.skip('Push suit', function () {
     var push = new PushManager();

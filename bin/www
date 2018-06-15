@@ -1,20 +1,16 @@
 #!/usr/bin/env node
 
-import socketHandler from '../src/core/socket_handler'
-import SocketIO from 'socket.io';
-
 /**
  * Module dependencies.
  */
+var app = require('../src/app');
+var http = require('http');
+var debug = require('debug')('rezoome:server');
+var socketHandler = require('../src/core/socket_handler');
+var SocketIO = require('socket.io');
 
 // This snippet set default environment to 'development'
 process.env.NODE_ENV = (process.env.NODE_ENV && (process.env.NODE_ENV).trim().toLowerCase() == 'production') ? 'production' : 'development';
-
-import app from '../src/app';
-import http from 'http';
-import debugModule from 'debug';
-
-var debug = debugModule('rezoome:server');
 
 /**
  * Get port from environment and store in Express.

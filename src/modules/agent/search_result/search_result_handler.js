@@ -1,9 +1,9 @@
-import Managers from '../../../core/managers';
-import AbstractAgentRequestHandler from "../abstract_agent_request_handler";
+var Managers = require('../../../core/managers');
+var AbstractAgentRequestHandler = require('../abstract_agent_request_handler');
 
-import SearchResultRequest from './search_result_request';
+var SearchResultRequest = require('./search_result_request');
 
-import AgentRequest from '../agent_request';
+var AgentRequest = require('../agent_request');
 
 /**
  * Handler of {@link SearchResultRequest}. <br />
@@ -56,4 +56,4 @@ class SearchResultHandler extends AbstractAgentRequestHandler {
     }
 }
 
-export default SearchResultHandler;
+module.exports = SearchResultHandler;

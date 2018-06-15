@@ -1,9 +1,9 @@
-import stompit from 'stompit'
+var stompit = require('stompit');
 
-import Managers from "../../core/managers";
+var Managers = require('../../core/managers');
 
-import AbstractManager from "../abstract_manager";
-import Property from "../property/property";
+var AbstractManager = require('../abstract_manager');
+var Property = require('../property/property');
 
 /**
  * PushManager. <br />
@@ -185,4 +185,4 @@ class PushManager extends AbstractManager {
     }
 }
 
-export default PushManager;
+module.exports = PushManager;

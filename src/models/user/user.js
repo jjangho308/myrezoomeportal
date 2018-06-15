@@ -1,4 +1,4 @@
-import AbstractModel from '../abstract_model';
+var AbstractModel = require('../abstract_model');
 
 /**
  * User model. <br />
@@ -139,4 +139,4 @@ class User extends AbstractModel {
     }
 }
 
-export default User;
+module.exports = User;

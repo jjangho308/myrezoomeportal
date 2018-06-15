@@ -1,6 +1,6 @@
-import express from 'express';
-import ctrl from './agent_ctrl';
-import process from "process";
+var express = require('express');
+var ctrl = require('./agent_ctrl');
+var process = require('process');
 
 /**
  * Router for '/agent' URI request. <br />
@@ -16,4 +16,4 @@ router.post('/', ctrl.post);
  */
 router.post('/' + process.argv[2], ctrl.post);
 
-export default router;
+module.exports = router;

@@ -1,8 +1,8 @@
-import AbstractClientRequestHandler from "../abstract_client_request_handler";
-import UpdateResumeRequest from "./update_resume_request";
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
+var UpdateResumeRequest = require('./update_resume_request');
 
-import ClientRequest from '../client_request';
-import Managers from '../../../core/managers';
+var ClientRequest = require('../client_request');
+var Managers = require('../../../core/managers');
 
 /**
  * Handler for UpdateResumeRequest. <br />
@@ -51,4 +51,4 @@ class UpdateResumeHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default UpdateResumeHandler;
+module.exports = UpdateResumeHandler;

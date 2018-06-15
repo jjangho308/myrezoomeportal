@@ -1,6 +1,6 @@
-import Managers from '../core/managers';
+var Managers = require('../core/managers');
 
-import Env from '../core/environment';
+var Env = require('../core/environment');
 
 /**
  * Optional JWT authenticator. <br />
@@ -11,7 +11,7 @@ import Env from '../core/environment';
  * @since 180418
  * @author TACKSU
  */
-export default (req, res, next) => {
+module.exports = (req, res, next) => {
 
     var tokenManager = Managers.token();
     var token = req.get('Authorization') ? req.get('Authorization').split(' ')[1] : req.cookies.JWT;

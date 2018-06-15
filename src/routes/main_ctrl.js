@@ -1,4 +1,4 @@
-import Managers from '../core/managers';
+var Managers = require('../core/managers');
 
 /**
  * Controller function of /main uri. <br />
@@ -6,7 +6,7 @@ import Managers from '../core/managers';
  * @since 180304
  * @author TACKSU
  */
-export default {
+module.exports = {
 
     /**
      * GET method controller function. <br />

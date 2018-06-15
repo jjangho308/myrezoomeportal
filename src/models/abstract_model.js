@@ -36,4 +36,4 @@ class AbstractModel {
     }
 }
 
-export default AbstractModel;
+module.exports = AbstractModel;

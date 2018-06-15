@@ -1,4 +1,4 @@
-import AbstractModel from '../abstract_model'
+var AbstractModel = require('../abstract_model');
 /**
  * Organization model. <br />
  * 
@@ -83,4 +83,4 @@ class Org extends AbstractModel {
     }
 }
 
-export default Org;
+module.exports = Org;

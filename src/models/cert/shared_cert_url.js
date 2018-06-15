@@ -1,6 +1,6 @@
-import AbstractModel from "../abstract_model";
+var AbstractModel = require('../abstract_model');
 
-import Util from '../../util/util';
+var Util = require('../../util/util');
 
 /**
  * Meta information of Shared certificate. <br />
@@ -87,4 +87,4 @@ class SharedCertUrl extends AbstractModel {
     }
 }
 
-export default SharedCertUrl;
+module.exports = SharedCertUrl;

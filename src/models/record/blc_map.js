@@ -1,6 +1,6 @@
-import AbstractModel from '../abstract_model';
+var AbstractModel = require('../abstract_model');
 
-import Util from '../../util/util';
+var Util = require('../../util/util');
 
 /**
  * Model of TCDA_BLC_MAP table. <br />
@@ -103,4 +103,4 @@ class BlcMapModel extends AbstractModel {
     }
 }
 
-export default BlcMapModel;
+module.exports = BlcMapModel;

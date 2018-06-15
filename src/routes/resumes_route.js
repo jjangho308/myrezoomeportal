@@ -1,7 +1,7 @@
-import express from 'express';
+var express = require('express');
 
-import tokenAuth from '../mw/client_auth';
-import ctrl from './resumes_ctrl';
+var tokenAuth = require('../mw/client_auth');
+var ctrl = require('./resumes_ctrl');
 
 /**
  * Router for '/resume' URI Request gateway. <br />
@@ -53,4 +53,4 @@ router.patch('/:rsmId', ctrl.patch);
 router.delete('/:rsmId', tokenAuth);
 router.delete('/:rsmId', ctrl.deleteResume);
 
-export default router;
+module.exports = router;

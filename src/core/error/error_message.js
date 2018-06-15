@@ -26,7 +26,7 @@ var koreanErrMsg = {
  * @since 180610
  * @author TACKSU
  */
-export default {
+module.exports = {
     'default': koreanErrMsg,
 
     'ko': koreanErrMsg,

@@ -1,6 +1,6 @@
-import express from 'express';
-import ctrl from './certs_ctrl';
-import tokenAuth from '../mw/client_auth';
+var express = require('express');
+var ctrl = require('./certs_ctrl');
+var tokenAuth = require('../mw/client_auth');
 
 /**
  * Router for /certs URI. <br />
@@ -45,4 +45,4 @@ router.post('/setDefault', ctrl.setDefault);
 router.delete('/:certId', tokenAuth);
 router.delete('/:certId', ctrl.deleteCert);
 
-export default router;
+module.exports = router;

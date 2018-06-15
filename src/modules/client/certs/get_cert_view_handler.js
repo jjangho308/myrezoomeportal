@@ -1,11 +1,11 @@
-import Managers from '../../../core/managers';
+var Managers = require('../../../core/managers');
 
-import ClientRequest from '../client_request';
-import GetCertViewRequestEntity from './get_cert_view_request';
+var ClientRequest = require('../client_request');
+var GetCertViewRequestEntity = require('./get_cert_view_request');
 
-import ResponseError from '../../../core/error/response_error';
-import ErrorCode from '../../../core/error/error_code';
-import AbstractClientRequestHandler from '../abstract_client_request_handler'
+var ResponseError = require('../../../core/error/response_error');
+var ErrorCode = require('../../../core/error/error_code');
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
 /**
  * Handler for GetCertViewRequestEntity. <br />
@@ -74,4 +74,4 @@ class GetCertViewRequestHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default GetCertViewRequestHandler;
+module.exports = GetCertViewRequestHandler;

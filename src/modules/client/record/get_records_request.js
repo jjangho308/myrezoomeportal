@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from "../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
 /**
  * Request to get private records of user. <br />
@@ -13,4 +13,4 @@ class GetRecordRequest extends AbstractClientRequestEntity {
     }
 }
 
-export default GetRecordRequest;
+module.exports = GetRecordRequest;

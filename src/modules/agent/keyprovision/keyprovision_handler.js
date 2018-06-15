@@ -1,11 +1,11 @@
-import AbstractAgentRequestHandler from "../abstract_agent_request_handler";
+var AbstractAgentRequestHandler = require('../abstract_agent_request_handler');
 
-import Managers from '../../../core/managers';
-import OrgDAO from '../../../dao/org_dao';
-import OrgModel from '../../../models/org/org';
-import OrgInfoModel from "../../../models/org/org_info";
+var Managers = require('../../../core/managers');
+var OrgDAO = require('../../../dao/org_dao');
+var OrgModel = require('../../../models/org/org');
+var OrgInfoModel = require('../../../models/org/org_info');
 
-import AgentRequest from '../agent_request';
+var AgentRequest = require('../agent_request');
 
 /**
  * Handler of KeyProvisionRequest. <br />
@@ -89,4 +89,4 @@ class KeyProvisionRequestHandler extends AbstractAgentRequestHandler {
     }
 }
 
-export default KeyProvisionRequestHandler;
+module.exports = KeyProvisionRequestHandler;

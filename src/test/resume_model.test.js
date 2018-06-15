@@ -1,13 +1,13 @@
-import Initialize from '../core/initializer';
-import Managers from '../core/managers';
+var Initialize = require('../core/initializer');
+var Managers = require('../core/managers');
 
-import ResumeModel from '../models/resume/resume';
-import SharedResume from '../models/resume/shared_resume';
-import SharedResumeUrl from '../models/resume/shared_resume_url';
+var ResumeModel = require('../models/resume/resume');
+var SharedResume = require('../models/resume/shared_resume');
+var SharedResumeUrl = require('../models/resume/shared_resume_url');
 
-import ResumeDAO from '../dao/resume_dao';
+var ResumeDAO = require('../dao/resume_dao');
 
-import Util from '../util/util';
+var Util = require('../util/util');
 
 
 /**

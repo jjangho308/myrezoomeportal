@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from "../../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../../abstract_client_request_entity');
 
 /**
  * API request entity. <br />
@@ -24,4 +24,4 @@ class IssueCertAPIV1RequestEntity extends AbstractClientRequestEntity {
     }
 }
 
-export default IssueCertAPIV1RequestEntity;
+module.exports = IssueCertAPIV1RequestEntity;

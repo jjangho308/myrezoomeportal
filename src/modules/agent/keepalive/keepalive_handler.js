@@ -1,4 +1,4 @@
-import AbstractAgentRequestHandler from '../abstract_agent_request_handler'
+var AbstractAgentRequestHandler = require('../abstract_agent_request_handler');
 
 /**
  * Handler of KeepAliveRequest. <br />
@@ -37,4 +37,4 @@ class KeepAliveRequestHandler extends AbstractAgentRequestHandler {
     }
 }
 
-export default KeepAliveRequestHandler;
+module.exports = KeepAliveRequestHandler;
