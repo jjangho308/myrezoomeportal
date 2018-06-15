@@ -266,6 +266,7 @@ p{
 	height: 50px;
 	background-color: #ffffff;
 	border: solid 1px #dfe5ef;
+	margin-top: -1px;
 }
 
 .footer-verify-3 {
@@ -273,6 +274,7 @@ p{
 	height: 50px;
 	background-color: #ffffff;
 	border: solid 1px #dfe5ef;
+	margin-top: -1px;
 }
 
 .footer-verify-4 {
@@ -280,13 +282,13 @@ p{
 	height: 50px;
 	background-color: #ffffff;
 	border: solid 1px #dfe5ef;
+	margin-top: -1px;
 }
 
 .footer-verify-left {
 	float :left;
-	width: 100px;
+	width: 80px;
 	height: 50px;
-
 	font-size: 12px;
 	font-weight: bold;
 	font-style: normal;
@@ -294,7 +296,8 @@ p{
 	letter-spacing: normal;
 	color: #878d91;
 	line-height: 50px;
-	text-align: center;
+	text-align: left;
+	margin-left: 35px;
 }
 
 .footer-verify-center {
@@ -310,20 +313,36 @@ p{
 	line-height: 50px;
 }
 
-.footer-verify-right {
-	float :right;
-	width: 150px;
-	height: 50px;
+.footer-verify-final {
+	float :left;
 	font-size: 12px;
 	font-weight: normal;
 	font-style: normal;
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
+	color: #7ed321;
+	font-weight:500;
+	line-height: 50px;
+}
+
+
+.footer-verify-right {
+	float :right;
+	vertical-align: middle;
+	width: 150px;
+	height: 50px;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 50px;
+	letter-spacing: normal;
 	color: #878d91;
 	line-height: 50px;
 	text-align: right;
-	margin: 0px 32px 0px 0px;
+	margin: 0px 30px 0px 0px;
+	text-decoration: underline;
 }
 
 .verify-loader {
@@ -363,9 +382,9 @@ p{
 }
 
 .Shape {
-	width: 20px;
-	height: 20px;
-	object-fit: contain;
+	width: 23px;
+	height: 23px;
+	/* margin-top: 5px; */
 }
 /**/
 
