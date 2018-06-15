@@ -188,7 +188,7 @@ li a {
     margin-right: 63px;
     text-align:  center;
     float: right;
-    padding: 15px 20px;
+    padding: 15px 5px;
     
 }
 
@@ -264,7 +264,7 @@ li a {
     float: right;
     color: #4a4a4a;
     display: inline-block;
-    line-height: 47px;
+    line-height: 52px;
 }
 
 .grid>img:nth-child(3){
