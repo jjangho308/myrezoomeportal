@@ -27,13 +27,15 @@ p{
     padding: 12px 112px;
     position: relative;
     background-color:#ffffff
+	vertical-align:middle;
+	
 }
 
 
 .header img{
     width: 40px;
     height: 40px;
-    vertical-align: -20px;
+    vertical-align: -21px;
 }
 
 .header > div {
@@ -43,11 +45,10 @@ p{
 
 }
 
-header > div p:nth-child(1) {
+.header > div p:nth-child(1) {
     font-size: 15px;
     font-weight: bold;
     color: #676767;
-    margin-top: 4px;
 }
 
 .header > div p:nth-child(2) {
@@ -77,19 +78,20 @@ header > div p:nth-child(1) {
 }
 
 .header  button:nth-child(6){
-  width: 80px;
-  height: 40px;
+  width: 70px;
+  height: 45px;
+  /* margin: auto; */
 }
 .header  button:nth-child(5){
   width: 100px;
-  height: 40px;
+  height: 45px;
 }
 
 .header  a:nth-child(4) > button{
   background-color: #4c80f1;
   color: white;
-    width: 100px;
-  height: 40px;
+  width: 80px;
+  height: 45px;
 }
 
 
@@ -357,7 +359,7 @@ header > div p:nth-child(1) {
 }
 /**/
 
-@media screen and (min-width: 840px){
+@media screen and (min-width: 720px){
 	body{
 		min-width: 0px;
 		height: 100vh; 
@@ -391,7 +393,7 @@ header > div p:nth-child(1) {
 		height: 98%;
 		/* margin-top: 20px; */
 		background: white;
-		/* font-size: 60%; */
+		font-size: 60%;
 		border: solid 2px #2b2c2c;
 		/* margin: 20px; */
 	}
@@ -460,13 +462,10 @@ header > div p:nth-child(1) {
 }
 
 
-@media (max-width:839px) {
+@media (max-width:720px) {
 
-	body{
-		min-width: 0px;
-		height: 100vh; 
-
-        background:  #f2f5f8;
+	body {
+		
 	}
 
 	.main-body {
@@ -485,7 +484,7 @@ header > div p:nth-child(1) {
 		float: inherit;		
 		margin-left: 5px;
 	}
-	*/    
+	*/
 
 	.header {
 		padding: 7px 20px;
@@ -640,7 +639,7 @@ header > div p:nth-child(1) {
   }
   
   
-  @media screen and (min-width: 840px){
+  @media screen and (min-width: 720px){
       body{
           min-width: 0px;
           height: 100vh; 
@@ -656,8 +655,8 @@ header > div p:nth-child(1) {
   
       .header{
               padding: 12px 19px;
-              
-       background: white;
+              background: white;
+              /* vertical-align:  middle; */
       }
   
       .hide-in-mobile{
@@ -674,7 +673,7 @@ header > div p:nth-child(1) {
           height: 98%;
           /* margin-top: 20px; */
           background: white;
-          /* font-size: 60%; */
+          font-size: 60%;
           border: solid 2px #2b2c2c;
           /* margin: 20px; */
       }
@@ -743,7 +742,7 @@ header > div p:nth-child(1) {
   }
   
   
-  @media (max-width:839px) {
+  @media (max-width:720px) {
   
       body {
           
