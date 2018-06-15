@@ -144,7 +144,8 @@ p{
 
 .main-body-footer-1st-line {
 	height: 40px;
-	margin-bottom: 100px;
+	margin-bottom: 15px;
+	padding: 10px;
 }
 
 .main-body-footer-left {
@@ -333,16 +334,19 @@ p{
 	width: 150px;
 	height: 50px;
 	font-size: 12px;
-	font-weight: normal;
-	font-style: normal;
-	font-stretch: normal;
-	line-height: 50px;
-	letter-spacing: normal;
+	/* font-weight: normal; */
+	/* font-style: normal; */
+	/* font-stretch: normal; */
+	/* line-height: 50px; */
+	/* letter-spacing: normal; */
 	color: #878d91;
-	line-height: 50px;
 	text-align: right;
-	margin: 0px 30px 0px 0px;
+	/* margin: 30px 0px 0px; */
 	text-decoration: underline;
+	margin-right: 30px;
+	position: relative;
+	top: 14px;
+	/* vertical-align: middle; */
 }
 
 .verify-loader {
@@ -382,8 +386,8 @@ p{
 }
 
 .Shape {
-	width: 23px;
-	height: 23px;
+	width: 22px;
+	height: 22px;
 	/* margin-top: 5px; */
 }
 /**/
@@ -683,7 +687,6 @@ p{
       }
   
       .header{
-              padding: 12px 19px;
               background: white;
               /* vertical-align:  middle; */
       }
