@@ -15,6 +15,7 @@ var initializer = (from) => {
             var manager = ManagerProvider[i]();
             if (manager instanceof AbstractManager) {
                 manager.init(from);
+                console.log();
             }
         }
     }

@@ -19,7 +19,6 @@ var propertyInstance = null;
 var cryptoInstance = null;
 var dbInstance = null;
 var pushInstance = null;
-var kmsInstance = null;
 var tokenInstance = null;
 var pdfInstance = null;
 var clientRequestInstance = null;

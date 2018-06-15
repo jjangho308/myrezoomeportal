@@ -1,135 +1,155 @@
 var record;
 
-$(document).ready(function(){
+$(document).ready(function () {
 
     //common
     client_token = getCookie("JWT");
     client_authorization = 'Bearer ' + client_token;
-   
-    $('#create-link-button').click(function(){
-        $('.abc-radio label').css("color","#676767");
+
+    $('#create-link-button').click(function () {
+        $('.abc-radio label').css("color", "#676767");
         $("#cert-url-input").val("https://rezoome.io/d/20194011003A");
         $('.abc-radio .default-password-label').click();
         $('.abc-radio .default-period-label').click();
-        
-        $(".modal-footer a").css("display","inline-block");
+
+        $(".modal-footer a").css("display", "inline-block");
         generateURL();
     });
-    
-    
-    $('.cert-create-div .default-password-label').click(function(){
+
+
+    $('.cert-create-div .default-password-label').click(function () {
         $('.cert-create-div  .password-div').hide();
     });
-    
-    $('.cert-create-div  .aware-password-label').click(function(){
+
+    $('.cert-create-div  .aware-password-label').click(function () {
         $('.cert-create-div  .password-div').show();
     });
-    
-    $('.cert-create-div  .default-period-label').click(function(){
+
+    $('.cert-create-div  .default-period-label').click(function () {
         $('.cert-create-div  .period-div').hide();
     });
-    
-    $('.cert-create-div  .expire-period-label').click(function(){
+
+    $('.cert-create-div  .expire-period-label').click(function () {
         $('.cert-create-div  .period-div').show();
     });
-    
-    $('.email-send-div .default-password-label').click(function(){
+
+    $('.email-send-div .default-password-label').click(function () {
         $('.email-send-div  .password-div').hide();
     });
-    
-    $('.email-send-div  .aware-password-label').click(function(){
+
+    $('.email-send-div  .aware-password-label').click(function () {
         $('.email-send-div  .password-div').show();
     });
-    
-    $('.email-send-div  .default-period-label').click(function(){
+
+    $('.email-send-div  .default-period-label').click(function () {
         $('.email-send-div  .period-div').hide();
     });
-    
-    $('.email-send-div  .expire-period-label').click(function(){
+
+    $('.email-send-div  .expire-period-label').click(function () {
         $('.email-send-div  .period-div').show();
     });
-    
-    
-    
-    $( ".expire-period" ).datepicker();
-    
-    $( ".expire-period" ).datepicker( "option", "dateFormat", "yy-mm-dd");
 
-    
-    $('.modal-sub-header span:nth-child(1)').click(function(){
-        $('.modal-sub-header span:nth-child(2)').css({"border":"none","font-weight":"normal"});
-        $(this).css({"border-bottom":"solid 5px #4c80f1","font-weight":"bold"});
+
+
+    $(".expire-period").datepicker();
+
+    $(".expire-period").datepicker("option", "dateFormat", "yy-mm-dd");
+
+
+    $('.modal-sub-header span:nth-child(1)').click(function () {
+        $('.modal-sub-header span:nth-child(2)').css({
+            "border": "none",
+            "font-weight": "normal"
+        });
+        $(this).css({
+            "border-bottom": "solid 5px #4c80f1",
+            "font-weight": "bold"
+        });
         $(".email-send-div").hide();
-        $(".cert-create-div").show();  
+        $(".cert-create-div").show();
     });
-    
-    
-    
-     $('.modal-sub-header span:nth-child(2)').click(function(){
-        $('.modal-sub-header span:nth-child(1)').css({"border":"none","font-weight":"normal"});
-        $(this).css({"border-bottom":"solid 5px #4c80f1","font-weight":"bold"});
+
+
+
+    $('.modal-sub-header span:nth-child(2)').click(function () {
+        $('.modal-sub-header span:nth-child(1)').css({
+            "border": "none",
+            "font-weight": "normal"
+        });
+        $(this).css({
+            "border-bottom": "solid 5px #4c80f1",
+            "font-weight": "bold"
+        });
         $(".email-send-div").show();
-        $(".cert-create-div").hide();  
+        $(".cert-create-div").hide();
     });
 
-    $(".main-body-footer-right").click(function(event){
-		var htmldiv = '<div class="footer-verify-1">';
-			htmldiv = htmldiv + '<div class="footer-verify-left">' + "STEP1" + '</div>';
-			htmldiv = htmldiv + '<div class="footer-verify-center">' + "Nexledger에 기록된 Transaction ID를 조회하는중입니다." + '</div>';
-			htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
-		htmldiv = htmldiv + '</div>';
+    $(".main-body-footer-right").click(function (event) {
+        var htmldiv = '<div class="footer-verify-1">';
+        htmldiv = htmldiv + '<div class="footer-verify-left">' + "STEP1" + '</div>';
+        htmldiv = htmldiv + '<div class="footer-verify-center">' + "Nexledger에 기록된 Transaction ID를 조회하는중입니다." + '</div>';
+        htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
+        htmldiv = htmldiv + '</div>';
         $('.main-body-footer').append(htmldiv);
-        
+
         var offset = $(".footer-verify-1").offset();
-        $('html, body').animate({scrollTop : offset.top}, 1000);
+        $('html, body').animate({
+            scrollTop: offset.top
+        }, 1000);
 
-		setTimeout(function(){
+        setTimeout(function () {
 
-			$('.footer-verify-1 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
+            $('.footer-verify-1 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
 
-			var htmldiv = '<div class="footer-verify-2">';
-				htmldiv = htmldiv + '<div class="footer-verify-left">' + "STEP2" + '</div>';
-				htmldiv = htmldiv + '<div class="footer-verify-center">' + "Hash 데이터를 비교하고 있습니다." + '</div>';
-				htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
-			htmldiv = htmldiv + '</div>';
+            var htmldiv = '<div class="footer-verify-2">';
+            htmldiv = htmldiv + '<div class="footer-verify-left">' + "STEP2" + '</div>';
+            htmldiv = htmldiv + '<div class="footer-verify-center">' + "Hash 데이터를 비교하고 있습니다." + '</div>';
+            htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
+            htmldiv = htmldiv + '</div>';
             $('.main-body-footer').append(htmldiv);
-            
+
             offset = $(".footer-verify-2").offset();
-            $('html, body').animate({scrollTop : offset.top}, 1000);
+            $('html, body').animate({
+                scrollTop: offset.top
+            }, 1000);
 
-			setTimeout(function() {
-				$('.footer-verify-2 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
-				var htmldiv = '<div class="footer-verify-3">';
-					htmldiv = htmldiv + '<div class="footer-verify-left">' + "STEP3" + '</div>';
-					htmldiv = htmldiv + '<div class="footer-verify-center">' + "결과를 정리하고 있습니다." + '</div>';
-					htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
-				htmldiv = htmldiv + '</div>';
+            setTimeout(function () {
+                $('.footer-verify-2 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
+                var htmldiv = '<div class="footer-verify-3">';
+                htmldiv = htmldiv + '<div class="footer-verify-left">' + "STEP3" + '</div>';
+                htmldiv = htmldiv + '<div class="footer-verify-center">' + "결과를 정리하고 있습니다." + '</div>';
+                htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
+                htmldiv = htmldiv + '</div>';
                 $('.main-body-footer').append(htmldiv);
-                
+
                 offset = $(".footer-verify-3").offset();
-                $('html, body').animate({scrollTop : offset.top}, 1000);
+                $('html, body').animate({
+                    scrollTop: offset.top
+                }, 1000);
 
-				setTimeout(function() {
-					$('.footer-verify-3 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
-					var htmldiv = '<div class="footer-verify-4">';
-						htmldiv = htmldiv + '<div class="footer-verify-left">' + "RESULT" + '</div>';
-						htmldiv = htmldiv + '<div class="footer-verify-center">' + "정상적인 데이터로 확인되었습니다." + '</div>';
-						htmldiv = htmldiv + '<div class="footer-verify-right">' + '<a>트랜잭션 히스토리 조회</a>' + '</div>';
-					htmldiv = htmldiv + '</div>';
-					$('.main-body-footer').append(htmldiv);
-	
-					offset = $(".footer-verify-4").offset();
-                    $('html, body').animate({scrollTop : offset.top}, 1000);
-	
-				},1000);
+                setTimeout(function () {
+                    $('.footer-verify-3 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
+                    var htmldiv = '<div class="footer-verify-4">';
+                    htmldiv = htmldiv + '<div class="footer-verify-left">' + "RESULT" + '</div>';
+                    htmldiv = htmldiv + '<div class="footer-verify-center">' + "정상적인 데이터로 확인되었습니다." + '</div>';
+                    htmldiv = htmldiv + '<div class="footer-verify-right">' + '<a>트랜잭션 히스토리 조회</a>' + '</div>';
+                    htmldiv = htmldiv + '</div>';
+                    $('.main-body-footer').append(htmldiv);
 
-			},1000);
+                    offset = $(".footer-verify-4").offset();
+                    $('html, body').animate({
+                        scrollTop: offset.top
+                    }, 1000);
 
-		}, 1000); 
+                }, 1000);
+
+            }, 1000);
+
+        }, 1000);
     });
-    
+
     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
-                      '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
+        '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
     $('#email-send-input').selectize({
         persist: false,
@@ -137,41 +157,40 @@ $(document).ready(function(){
         valueField: 'email',
         labelField: 'name',
         searchField: ['name', 'email'],
-        options: [
-        ],
+        options: [],
         render: {
-            item: function(item, escape) {
-                setTimeout(2000, function(){
-                    $(".email-remove-button").click(function(){
-                    console.log("c");
+            item: function (item, escape) {
+                setTimeout(2000, function () {
+                    $(".email-remove-button").click(function () {
+                        console.log("c");
+                    });
                 });
-                  });
 
-                
+
                 return '<div>' +
                     (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
                     (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
-                    
-                    (`<img src="/img/myresume/close-gray.svg"  class="email-remove-button" onclick="$(this).parent().hide()">` ) 
-                
+
+                    (`<img src="/img/myresume/close-gray.svg"  class="email-remove-button" onclick="$(this).parent().hide()">`)
+
                 '</div>';
-                
-    
+
+
             },
-            option: function(item, escape) {
-                                    
-                
+            option: function (item, escape) {
+
+
                 var label = item.name || item.email;
                 var caption = item.name ? item.email : null;
                 return '<div>' +
                     '<span class="label">' + escape(label) + '</span>' +
                     (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
-                '</div>';
+                    '</div>';
             }
-            
-            
+
+
         },
-        createFilter: function(input) {
+        createFilter: function (input) {
             var match, regex;
 
             // email@address.com
@@ -186,91 +205,93 @@ $(document).ready(function(){
 
             return false;
         },
-        create: function(input) {
+        create: function (input) {
             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
-                return {email: input};
+                return {
+                    email: input
+                };
             }
             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
             if (match) {
                 return {
-                    email : match[2],
-                    name  : $.trim(match[1])
+                    email: match[2],
+                    name: $.trim(match[1])
                 };
             }
             alert('Invalid email address.');
             return false;
         }
     });
-    
-    
-    $("#more-button").click(function(){             
 
-        if($("#more-button-div").css("display")=="none"){
+
+    $("#more-button").click(function () {
+
+        if ($("#more-button-div").css("display") == "none") {
             $("#more-button-div").show();
-        }else{
+        } else {
             $("#more-button-div").hide();
         }
-        
+
     });
 
-    function formatDummyText( text ) {
-      if ( !text ) {
-        return '&nbsp;';
-      }
-      return text.replace( /\n$/, '<br>&nbsp;' )
-        .replace( /\n/g, '<br>' );
+    function formatDummyText(text) {
+        if (!text) {
+            return '&nbsp;';
+        }
+        return text.replace(/\n$/, '<br>&nbsp;')
+            .replace(/\n/g, '<br>');
     }
 
-    
+
     var first = true;
-    $( function() {
+    $(function () {
 
-      var $wrap = $('#wrap');
+        var $wrap = $('#wrap');
         var $textarea = $('textarea');
-      var $dummy = $('.dummy');
+        var $dummy = $('.dummy');
 
 
-      function positionTextarea() {
-        var h = $wrap.height();
-        var top = Math.max( 0, ( h - $dummy.height() ) * 0.5 );
-          
-          if(first){
-              h -= 5;
-              top -= 5;
-              first=false;
-          }
-        $textarea.css({
-          paddingTop: top,
-          height: h - top
-        });
-      }
+        function positionTextarea() {
+            var h = $wrap.height();
+            var top = Math.max(0, (h - $dummy.height()) * 0.5);
 
-      $textarea.on( 'keyup change', function( event ) {
-        var html = formatDummyText( $textarea.val() );
-        $dummy.html( html );
+            if (first) {
+                h -= 5;
+                top -= 5;
+                first = false;
+            }
+            $textarea.css({
+                paddingTop: top,
+                height: h - top
+            });
+        }
+
+        $textarea.on('keyup change', function (event) {
+            var html = formatDummyText($textarea.val());
+            $dummy.html(html);
             positionTextarea();
-      }).trigger('change');
+        }).trigger('change');
 
-      // should debounce this
-      $( window ).on( 'resize', positionTextarea );
+        // should debounce this
+        $(window).on('resize', positionTextarea);
 
     });
-    
-    $('.confirm-btn').click(function(){
-        summitform();     
+
+    $('.confirm-btn').click(function () {
+        summitform();
     });
 
-    $("#btn_print").click(function(event) {   
-		$(".header").hide();
+    $("#btn_print").click(function (event) {
+        $(".header").hide();
         $("#footer").hide();
         $(".main-body-footer").hide();
-        $(".qrcode").show();             
-        
+        $(".qrcode").show();
+
         const html = document.querySelector('html');
         const printContents = document.querySelector('.main-body').innerHTML;
         const printDiv = document.createElement("DIV");
         printDiv.className = "print-div";
-        
+
         html.appendChild(printDiv);
         printDiv.innerHTML = printContents;
         document.body.style.display = 'none';
@@ -279,9 +300,9 @@ $(document).ready(function(){
         printDiv.style.display = 'none';
 
         $(".header").show();
-        $("#footer").show();   
-        $(".main-body-footer").show();            
-        $(".qrcode").hide();              
+        $("#footer").show();
+        $(".main-body-footer").show();
+        $(".qrcode").hide();
     });
 });
 
@@ -290,11 +311,11 @@ function summitform() {
     var cert_url = $('#cert-url-input').val().split('/')[4];
     var cert_password = hexToBase64(SHA256($('#shared_password').val()));
     var cert_exp = 20501231;
-    var cert_emails =[];
+    var cert_emails = [];
     var cert_msg;
     var cert_public = 'N';
 
-    if($('#shared_password').val() == '' || $('#shared_password').val() == null) {
+    if ($('#shared_password').val() == '' || $('#shared_password').val() == null) {
         var cert_public = 'Y';
     }
 
@@ -318,7 +339,7 @@ function summitform() {
                 url: cert_url,
                 password: cert_password,
                 exp: cert_exp,
-                emails: cert_emails,            
+                emails: cert_emails,
                 msg: cert_msg,
                 public: cert_public
             }
@@ -329,13 +350,13 @@ function summitform() {
         },
         contentType: 'application/json'
     });
-    
+
 }
 
-function setCertViewer(tx_id) {    
+function setCertViewer(tx_id) {
     record = getData(tx_id);
-    console.log(record);    
-    $("#cert_title").html(record.subid);    
+    console.log(record);
+    $("#cert_title").html(record.subid);
     certformatter[record.subid](record.data);
 }
 
@@ -349,11 +370,11 @@ function generateURL() {
         },
         data: JSON.stringify({
             cmd: 'GenerateShortURL',
-            
+
             args: {
-               prefix: 'c'
+                prefix: 'c'
             }
-            
+
         }),
         success: function (result) {
             $("#cert-url-input").val("https://" + window.location.host + '/v/' + result.result);
@@ -361,5 +382,3 @@ function generateURL() {
         contentType: 'application/json'
     });
 }
-
-
