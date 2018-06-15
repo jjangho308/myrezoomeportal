@@ -27,13 +27,15 @@ p{
     padding: 12px 112px;
     position: relative;
     background-color:#ffffff
+	vertical-align:middle;
+	
 }
 
 
 .header img{
     width: 40px;
     height: 40px;
-    vertical-align: -20px;
+    vertical-align: -21px;
 }
 
 .header > div {
@@ -43,11 +45,10 @@ p{
 
 }
 
-header > div p:nth-child(1) {
+.header > div p:nth-child(1) {
     font-size: 15px;
     font-weight: bold;
     color: #676767;
-    margin-top: 4px;
 }
 
 .header > div p:nth-child(2) {
@@ -77,19 +78,20 @@ header > div p:nth-child(1) {
 }
 
 .header  button:nth-child(6){
-  width: 80px;
-  height: 40px;
+  width: 70px;
+  height: 45px;
+  /* margin: auto; */
 }
 .header  button:nth-child(5){
   width: 100px;
-  height: 40px;
+  height: 45px;
 }
 
 .header  a:nth-child(4) > button{
   background-color: #4c80f1;
   color: white;
-    width: 100px;
-  height: 40px;
+  width: 80px;
+  height: 45px;
 }
 
 
@@ -142,6 +144,8 @@ header > div p:nth-child(1) {
 
 .main-body-footer-1st-line {
 	height: 40px;
+	margin-bottom: 15px;
+	padding: 10px;
 }
 
 .main-body-footer-left {
@@ -212,18 +216,27 @@ header > div p:nth-child(1) {
 	border: initial;
 	width: 150px;
 	height: 18px;
+	color: #878d91;
+	font-weight: bold;
+	margin-top: 5px;
+	font-size: 13px;
 }
 
 .main-body-footer-6 {
 	float: left;
 	border: initial;
-	width: calc(100% - 300px);
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    word-wrap: normal !important;
-    display: block;
+	width: calc(100% - 400px);
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	word-wrap: normal !important;
+	display: block;
+	color: #878d91;
+	font-weight: bold;
+	margin-top: 5px;
+	font-size: 13px;
+	text-decoration: underline;
 }
 
 .main-body-footer-right-button1 {
@@ -254,6 +267,7 @@ header > div p:nth-child(1) {
 	height: 50px;
 	background-color: #ffffff;
 	border: solid 1px #dfe5ef;
+	margin-top: -1px;
 }
 
 .footer-verify-3 {
@@ -261,6 +275,7 @@ header > div p:nth-child(1) {
 	height: 50px;
 	background-color: #ffffff;
 	border: solid 1px #dfe5ef;
+	margin-top: -1px;
 }
 
 .footer-verify-4 {
@@ -268,13 +283,13 @@ header > div p:nth-child(1) {
 	height: 50px;
 	background-color: #ffffff;
 	border: solid 1px #dfe5ef;
+	margin-top: -1px;
 }
 
 .footer-verify-left {
 	float :left;
-	width: 100px;
+	width: 80px;
 	height: 50px;
-
 	font-size: 12px;
 	font-weight: bold;
 	font-style: normal;
@@ -282,7 +297,8 @@ header > div p:nth-child(1) {
 	letter-spacing: normal;
 	color: #878d91;
 	line-height: 50px;
-	text-align: center;
+	text-align: left;
+	margin-left: 35px;
 }
 
 .footer-verify-center {
@@ -298,38 +314,56 @@ header > div p:nth-child(1) {
 	line-height: 50px;
 }
 
-.footer-verify-right {
-	float :right;
-	width: 150px;
-	height: 50px;
+.footer-verify-final {
+	float :left;
 	font-size: 12px;
 	font-weight: normal;
 	font-style: normal;
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: #878d91;
+	color: #7ed321;
+	font-weight:500;
 	line-height: 50px;
+}
+
+
+.footer-verify-right {
+	float :right;
+	vertical-align: middle;
+	width: 150px;
+	height: 50px;
+	font-size: 12px;
+	/* font-weight: normal; */
+	/* font-style: normal; */
+	/* font-stretch: normal; */
+	/* line-height: 50px; */
+	/* letter-spacing: normal; */
+	color: #878d91;
 	text-align: right;
-	margin: 0px 32px 0px 0px;
+	/* margin: 30px 0px 0px; */
+	text-decoration: underline;
+	margin-right: 30px;
+	position: relative;
+	top: 14px;
+	/* vertical-align: middle; */
 }
 
 .verify-loader {
-	width: 90px;
+    float: right;
 	height: 20px;
 	position: relative;
 	top: 50%;
-	left: 50%;
 	margin-left: -10px;
-	transform: translate(-50%, -50%);
+	transform: translate(10%, -65%);
 	font-size: 0;
 }
 
 .verify-loader-item {
 	display: inline-block;
-	width: 20px;
-	height: 20px;
-	margin-left: 10px;
+	width: 10px;
+	height: 10px;
+	margin-left: 5px;
 	border-radius: 50%;
 	background: black;
 	
@@ -351,13 +385,13 @@ header > div p:nth-child(1) {
 }
 
 .Shape {
-	width: 20px;
-	height: 20px;
-	object-fit: contain;
+	width: 22px;
+	height: 22px;
+	/* margin-top: 5px; */
 }
 /**/
 
-@media screen and (min-width: 840px){
+@media screen and (min-width: 720px){
 	body{
 		min-width: 0px;
 		height: 100vh; 
@@ -391,7 +425,7 @@ header > div p:nth-child(1) {
 		height: 98%;
 		/* margin-top: 20px; */
 		background: white;
-		/* font-size: 60%; */
+		font-size: 60%;
 		border: solid 2px #2b2c2c;
 		/* margin: 20px; */
 	}
@@ -460,13 +494,10 @@ header > div p:nth-child(1) {
 }
 
 
-@media (max-width:839px) {
+@media (max-width:720px) {
 
-	body{
-		min-width: 0px;
-		height: 100vh; 
-
-        background:  #f2f5f8;
+	body {
+		
 	}
 
 	.main-body {
@@ -485,7 +516,7 @@ header > div p:nth-child(1) {
 		float: inherit;		
 		margin-left: 5px;
 	}
-	*/    
+	*/
 
 	.header {
 		padding: 7px 20px;
@@ -640,7 +671,7 @@ header > div p:nth-child(1) {
   }
   
   
-  @media screen and (min-width: 840px){
+  @media screen and (min-width: 720px){
       body{
           min-width: 0px;
           height: 100vh; 
@@ -655,9 +686,8 @@ header > div p:nth-child(1) {
       }
   
       .header{
-              padding: 12px 19px;
-              
-       background: white;
+              background: white;
+              /* vertical-align:  middle; */
       }
   
       .hide-in-mobile{
@@ -674,7 +704,7 @@ header > div p:nth-child(1) {
           height: 98%;
           /* margin-top: 20px; */
           background: white;
-          /* font-size: 60%; */
+          font-size: 60%;
           border: solid 2px #2b2c2c;
           /* margin: 20px; */
       }
@@ -743,7 +773,7 @@ header > div p:nth-child(1) {
   }
   
   
-  @media (max-width:839px) {
+  @media (max-width:720px) {
   
       body {
           

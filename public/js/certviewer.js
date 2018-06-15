@@ -78,7 +78,11 @@ $(document).ready(function(){
 			htmldiv = htmldiv + '<div class="footer-verify-center">' + "Nexledger에 기록된 Transaction ID를 조회하는중입니다." + '</div>';
 			htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
 		htmldiv = htmldiv + '</div>';
-		$('.main-body-footer').append(htmldiv);
+        $('.main-body-footer').append(htmldiv);
+        
+        var offset = $(".footer-verify-1").offset();
+        $('html, body').animate({scrollTop : offset.top}, 1000);
+
 		setTimeout(function(){
 
 			$('.footer-verify-1 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
@@ -88,7 +92,10 @@ $(document).ready(function(){
 				htmldiv = htmldiv + '<div class="footer-verify-center">' + "Hash 데이터를 비교하고 있습니다." + '</div>';
 				htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
 			htmldiv = htmldiv + '</div>';
-			$('.main-body-footer').append(htmldiv);
+            $('.main-body-footer').append(htmldiv);
+            
+            offset = $(".footer-verify-2").offset();
+            $('html, body').animate({scrollTop : offset.top}, 1000);
 
 			setTimeout(function() {
 				$('.footer-verify-2 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
@@ -97,7 +104,10 @@ $(document).ready(function(){
 					htmldiv = htmldiv + '<div class="footer-verify-center">' + "결과를 정리하고 있습니다." + '</div>';
 					htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
 				htmldiv = htmldiv + '</div>';
-				$('.main-body-footer').append(htmldiv);
+                $('.main-body-footer').append(htmldiv);
+                
+                offset = $(".footer-verify-3").offset();
+                $('html, body').animate({scrollTop : offset.top}, 1000);
 
 				setTimeout(function() {
 					$('.footer-verify-3 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
@@ -108,7 +118,8 @@ $(document).ready(function(){
 					htmldiv = htmldiv + '</div>';
 					$('.main-body-footer').append(htmldiv);
 	
-					
+					offset = $(".footer-verify-4").offset();
+                    $('html, body').animate({scrollTop : offset.top}, 1000);
 	
 				},1000);
 
