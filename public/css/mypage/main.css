@@ -262,9 +262,8 @@ li a {
     font-size: 13px;
     line-height: 3;
     float: right;
-    color: #4a4a4a;
     display: inline-block;
-    line-height: 52px;
+    line-height: 53px;
 }
 
 .grid>img:nth-child(3){
