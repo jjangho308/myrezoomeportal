@@ -60,7 +60,10 @@
                 <div>
                     <div class="main-body-footer-4"></div>
                     <div class="main-body-footer-5">
-
+                        <script>
+                            var sdate = formatDate('<%= createdDate %>');
+                            $('.main-body-footer-5').text(sdate);
+                        </script>
                     </div>
                     <div class="main-body-footer-6"><%= txid %></div>
                 </div>
