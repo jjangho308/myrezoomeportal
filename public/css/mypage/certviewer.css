@@ -32,7 +32,7 @@ p{
 
 .header img{
     width: 40px;
-  height: 40px;
+    height: 40px;
     vertical-align: -20px;
 }
 
@@ -136,7 +136,7 @@ header > div p:nth-child(1) {
 
 /**/
 
-@media screen and (min-width: 720px){
+@media screen and (min-width: 840px){
 	body{
 		min-width: 0px;
 		height: 100vh; 
@@ -170,7 +170,7 @@ header > div p:nth-child(1) {
 		height: 98%;
 		/* margin-top: 20px; */
 		background: white;
-		font-size: 60%;
+		/* font-size: 60%; */
 		border: solid 2px #2b2c2c;
 		/* margin: 20px; */
 	}
@@ -239,10 +239,13 @@ header > div p:nth-child(1) {
 }
 
 
-@media (max-width:720px) {
+@media (max-width:839px) {
 
-	body {
-		
+	body{
+		min-width: 0px;
+		height: 100vh; 
+
+        background:  #f2f5f8;
 	}
 
 	.main-body {
@@ -261,7 +264,7 @@ header > div p:nth-child(1) {
 		float: inherit;		
 		margin-left: 5px;
 	}
-	*/
+	*/    
 
 	.header {
 		padding: 7px 20px;
@@ -416,7 +419,7 @@ header > div p:nth-child(1) {
   }
   
   
-  @media screen and (min-width: 720px){
+  @media screen and (min-width: 840px){
       body{
           min-width: 0px;
           height: 100vh; 
@@ -450,7 +453,7 @@ header > div p:nth-child(1) {
           height: 98%;
           /* margin-top: 20px; */
           background: white;
-          font-size: 60%;
+          /* font-size: 60%; */
           border: solid 2px #2b2c2c;
           /* margin: 20px; */
       }
@@ -519,7 +522,7 @@ header > div p:nth-child(1) {
   }
   
   
-  @media (max-width:720px) {
+  @media (max-width:839px) {
   
       body {
           
