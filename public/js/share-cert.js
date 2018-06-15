@@ -69,25 +69,44 @@ $(document).ready(function(){
 
 	$(".main-body-footer-right").click(function(event){
 		var htmldiv = '<div class="footer-verify-1">';
-			htmldiv = htmldiv + '<div>' + "STEP1" + '</div>';
-			htmldiv = htmldiv + '<div>' + "Nexledger에 기록된 Transaction ID를 조회하는중입니다." + '</div>';
+			htmldiv = htmldiv + '<div class="footer-verify-left">' + "STEP1" + '</div>';
+			htmldiv = htmldiv + '<div class="footer-verify-center">' + "Nexledger에 기록된 Transaction ID를 조회하는중입니다." + '</div>';
+			htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
 		htmldiv = htmldiv + '</div>';
 		$('.main-body-footer').append(htmldiv);
 		setTimeout(function(){
+
+			$('.footer-verify-1 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
+
 			var htmldiv = '<div class="footer-verify-2">';
-				htmldiv = htmldiv + '<div>' + "STEP2" + '</div>';
-				htmldiv = htmldiv + '<div>' + "Hash 데이터를 비교하고 있습니다." + '</div>';
-				
+				htmldiv = htmldiv + '<div class="footer-verify-left">' + "STEP2" + '</div>';
+				htmldiv = htmldiv + '<div class="footer-verify-center">' + "Hash 데이터를 비교하고 있습니다." + '</div>';
+				htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
 			htmldiv = htmldiv + '</div>';
 			$('.main-body-footer').append(htmldiv);
 
 			setTimeout(function() {
+				$('.footer-verify-2 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
 				var htmldiv = '<div class="footer-verify-3">';
-					htmldiv = htmldiv + '<div>' + "STEP3" + '</div>';
-					htmldiv = htmldiv + '<div>' + "결과를 정리하고 있습니다." + '</div>';
-					
+					htmldiv = htmldiv + '<div class="footer-verify-left">' + "STEP3" + '</div>';
+					htmldiv = htmldiv + '<div class="footer-verify-center">' + "결과를 정리하고 있습니다." + '</div>';
+					htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
 				htmldiv = htmldiv + '</div>';
 				$('.main-body-footer').append(htmldiv);
+
+				setTimeout(function() {
+					$('.footer-verify-3 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
+					var htmldiv = '<div class="footer-verify-4">';
+						htmldiv = htmldiv + '<div class="footer-verify-left">' + "RESULT" + '</div>';
+						htmldiv = htmldiv + '<div class="footer-verify-center">' + "정상적인 데이터로 확인되었습니다." + '</div>';
+						htmldiv = htmldiv + '<div class="footer-verify-right">' + '<a>트랜잭션 히스토리 조회</a>' + '</div>';
+					htmldiv = htmldiv + '</div>';
+					$('.main-body-footer').append(htmldiv);
+	
+					
+	
+				},1000);
+
 			},1000);
 
 		}, 1000); 
