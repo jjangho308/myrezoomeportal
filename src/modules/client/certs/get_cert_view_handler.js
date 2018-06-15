@@ -58,10 +58,11 @@ class GetCertViewRequestHandler extends AbstractClientRequestHandler {
                             if (!!err) {
                                 done(ClientRequest.RESULT_FAILURE, err);
                                 return;
-                            } else {
+                            } else {                                                              ;
                                 done(ClientRequest.RESULT_SUCCESS, {
                                     title: certData.title,
                                     txid: certData.txid,
+                                    createdDate: certData.createdDate,
                                     record: decrypted,
                                 });
                             }
