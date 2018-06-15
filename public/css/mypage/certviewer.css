@@ -144,6 +144,7 @@ p{
 
 .main-body-footer-1st-line {
 	height: 40px;
+	margin-bottom: 100px;
 }
 
 .main-body-footer-left {
@@ -214,18 +215,27 @@ p{
 	border: initial;
 	width: 150px;
 	height: 18px;
+	color: #878d91;
+	font-weight: bold;
+	margin-top: 5px;
+	font-size: 13px;
 }
 
 .main-body-footer-6 {
 	float: left;
 	border: initial;
-	width: calc(100% - 300px);
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    word-wrap: normal !important;
-    display: block;
+	width: calc(100% - 400px);
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	word-wrap: normal !important;
+	display: block;
+	color: #878d91;
+	font-weight: bold;
+	margin-top: 5px;
+	font-size: 13px;
+	text-decoration: underline;
 }
 
 .main-body-footer-right-button1 {
