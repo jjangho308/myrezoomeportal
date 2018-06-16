@@ -10,6 +10,27 @@
     <script src="/js/formatter/certs_formatter.js"></script>
     <script src="../js/certviewer.js"></script>
     <script src="../js/jquery-qrcode-0.14.0.min.js"></script>
+    <script src="../js/html2canvas.min.js"></script> 
+    <script src="../js/blockui/jquery.blockUI.js"></script>
+     
+    <style type="text/css">
+
+    @media print
+    {
+
+        body * { visibility: hidden; }
+        #printcontent * { visibility: visible; }
+        /* #printcontent { position: absolute; top: 40px; left: 30px;} */
+        #printcontent { position: absolute; top: 40px; left: 25px;}
+        * {
+            -webkit-print-color-adjust: exact;        
+        }
+        /* .inner-container{page-break-before:always;} */
+        .certImg{page-break-before:always;} 
+
+    }
+    </style>
+
 </head>
 
 <!------ Include the above in your HEAD tag ---------->
@@ -41,12 +62,15 @@
     
 </div>
 
-<div class="main-body">
-    <div class="outer-container">         
+<div class="main-body" >
+        
+    <div class="outer-container" > 
         <div class="inner-container">                     
         </div>
         <p class="hide-in-mobile">본 증명서는 레쥬메 서비스를 통해 인터넷으로 발급되었으며 우측 QR코드를 이용하여 증명서 내용의 진위여부를 확인할 수 있습니다.</p>
     </div>    
+    <div id="printcontent" >
+        </div>
 </div>
 <div class="main-body-footer">
     <div class="main-body-footer-1st-line">

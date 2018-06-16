@@ -1,5 +1,31 @@
 @import url(//fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
 
+/* @media print {
+    
+
+    
+    body * { visibility: hidden; }
+    #printcontent * { visibility: visible; }
+    #printcontent { position: absolute; top: 40px; left: 30px; }
+
+    #printcontent:after{
+        content : 'helloWorld'
+    }
+
+    
+} */
+
+
+/* @media print
+{
+body * { visibility: hidden; }
+#printcontent * { visibility: visible; }
+#printcontent { position: absolute; top: 40px; left: 30px; }
+} */
+
+
+
+
 body{
     margin: 0;
 }
@@ -392,7 +418,7 @@ header > div p:nth-child(1) {
 		/* margin-top: 20px; */
 		background: white;
 		/* font-size: 60%; */
-		border: solid 2px #2b2c2c;
+		/* border: solid 2px #2b2c2c; */
 		/* margin: 20px; */
 	}
 
@@ -405,7 +431,7 @@ header > div p:nth-child(1) {
 	}
 
 	.cert-body{
-		    width: 226px;
+		width: 226px;
 		height: auto;
 		font-size: 10px;
 		
@@ -433,8 +459,8 @@ header > div p:nth-child(1) {
 		font-size: 15px;
 		letter-spacing: 8.8px;
 		bottom: 32px;
-    width: 300px;
-     margin-left: -150px; 
+        width: 300px;
+        margin-left: -150px; 
 	}
 
 	.two-word-interval {
@@ -449,13 +475,13 @@ header > div p:nth-child(1) {
       width: 67px;
 	}
 	.cert-body > div > div:nth-child(2) {
-	width: 25px;
-    text-align: left;
-    margin-right: 0px;
+        width: 25px;
+        text-align: left;
+        margin-right: 0px;
 	}
 	.cert-body > div > div:nth-child(3) {
 
-     letter-spacing: 2.4px;
+        letter-spacing: 2.4px;
 	}
 }
 
@@ -537,7 +563,7 @@ header > div p:nth-child(1) {
     .inner-container {
 		height: 100%;
 		margin: auto;
-		border: solid 1px #2b2c2c;
+		/* border: solid 1px #2b2c2c; */
     }	
 }
 
@@ -675,7 +701,7 @@ header > div p:nth-child(1) {
           /* margin-top: 20px; */
           background: white;
           /* font-size: 60%; */
-          border: solid 2px #2b2c2c;
+          /* border: solid 2px #2b2c2c; */
           /* margin: 20px; */
       }
   
@@ -821,7 +847,7 @@ header > div p:nth-child(1) {
       .inner-container {
           height: 100%;
           margin: auto;
-          border: solid 1px #2b2c2c;
+          /* border: solid 1px #2b2c2c; */
       }	
   }
   
@@ -878,7 +904,7 @@ header > div p:nth-child(1) {
     position: relative;
     width: 820px;
     height: 1095px;
-    border: solid 2px #2b2c2c;    
+    /* border: solid 2px #2b2c2c;     */
   }
 /* 
 .cert-title{

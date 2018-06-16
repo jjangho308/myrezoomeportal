@@ -1,8 +1,4 @@
-/* .outer-container {
-    height: 2320px;
-} */
-
-#opic_cert > img {
+/* #opic_cert > img {
     width: 100%; 
     height: 100%;
 }
@@ -10,25 +6,13 @@
 #opic_report > img {
     width: 100%; 
     height: 100%;
-}
+} */
+
 
 #qrmessage {    
     padding: 10px 25px 80px;
 }
 
-/* #opic_cert p:nth-child(2) {position: absolute; top: 12.5%; left: 47.5%; font-weight: bold;}
-#opic_cert p:nth-child(3) {position: absolute; top: 18.5%; left: 26% }
-#opic_cert p:nth-child(4) {position: absolute; top: 18.5%; left: 42.5% }
-#opic_cert p:nth-child(5) {position: absolute; top: 18.5%; left: 59% }
-#opic_cert p:nth-child(6) {position: absolute; top: 18.5%; left: 75.5% }
-#opic_cert p:nth-child(7) {position: absolute; top: 27%; left: 49% }
-#opic_cert p:nth-child(8) {position: absolute; top: 39.5%; left: 66% }
-#opic_cert p:nth-child(9) {position: absolute; top: 39.5%; left: 81% }
-
-#opic_report p:nth-child(2) {position: absolute; top: 13.5%; left: 27.5% }
-#opic_report p:nth-child(3) {position: absolute; top: 16%; left: 27.5% }
-#opic_report p:nth-child(4) {position: absolute; top: 18.5%; left: 27.5% }
-#opic_report p:nth-child(5) {position: absolute; top: 21%; left: 27.5% } */
 
 /*@media (max-width:360px){html{font-size:10px;}}
 @media (min-width:361px) and (max-width:399px){html{font-size:11px;}}
@@ -47,34 +31,44 @@
 @media (min-width:360px){html{font-size:10px;}}*/
 
 
-@media screen and (min-width:840px){
+
+
+
+
+#opic_cert p:nth-child(1) {position: relative; top: 9.3%; left: 50%;}
+#opic_cert p:nth-child(2) {position: relative; top: 12.5%; left: 38.5%;}
+#opic_cert p:nth-child(3) {position: relative; top: 13.8%; left: 42% }
+#opic_cert p:nth-child(4) {position: relative; top: 12%; left: 59% }
+#opic_cert p:nth-child(5) {position: relative; top: 10.3%; left: 75.5% }
+#opic_cert p:nth-child(6) {position: relative; top: 15%; left: 50.5% }
+#opic_cert p:nth-child(7) {position: relative; top: 26%; left: 69% }
+#opic_cert p:nth-child(8) {position: relative; top: 24.3%; left: 82.5% }
+
+/* #opic_cert p:nth-child(9) {position: relative; top: 36.7%; left: 82% } */
+
+#opic_report p:nth-child(1) {position: relative; top: 12.5%; left: 27.5% }
+#opic_report p:nth-child(2) {position: relative; top: 13.2%; left: 27.5% }
+#opic_report p:nth-child(3) {position: relative; top: 14%; left: 27.5% }
+#opic_report p:nth-child(4) {position: relative; top: 14.6%; left: 27.5% }
+
+
+@media (min-width:840px){
 
     html{
         font-size:14px;
     }
-
+    
+    
     #qrmessage {
         content: "";
         visibility: hidden;
         padding: 10px 25px;
     }
 
-    #opic_cert p:nth-child(2) {position: absolute; top: 11.8%; left: 47.5%; font-size: 10px;}
-    #opic_cert p:nth-child(3) {position: absolute; top: 17.5%; left: 26% }
-    #opic_cert p:nth-child(4) {position: absolute; top: 17.5%; left: 42.5% }
-    #opic_cert p:nth-child(5) {position: absolute; top: 17.5%; left: 59% }
-    #opic_cert p:nth-child(6) {position: absolute; top: 17.5%; left: 75.5% }
-    #opic_cert p:nth-child(7) {position: absolute; top: 24.5%; left: 49% }
-    #opic_cert p:nth-child(8) {position: absolute; top: 36.7%; left: 69% }
-    #opic_cert p:nth-child(9) {position: absolute; top: 36.7%; left: 82% }
-
-    #opic_report p:nth-child(2) {position: absolute; top: 12.5%; left: 27.5% }
-    #opic_report p:nth-child(3) {position: absolute; top: 15%; left: 27.5% }
-    #opic_report p:nth-child(4) {position: absolute; top: 17.4%; left: 27.5% }
-    #opic_report p:nth-child(5) {position: absolute; top: 21%; left: 27.5% }
 }
 
 @media screen and (max-width:839px){
+    
 
     html{
         font-size:9px;
