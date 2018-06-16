@@ -1,18 +1,18 @@
-import HashMap from 'hashmap';
+var HashMap = require('hashmap');
 
-import AbstractManager from "../abstract_manager";
+var AbstractManager = require('../abstract_manager');
 
-import SearchResultRequestEntity from './search_result/search_result_request';
-import SearchResultRequestHandler from './search_result/search_result_handler';
+var SearchResultRequestEntity = require('./search_result/search_result_request');
+var SearchResultRequestHandler = require('./search_result/search_result_handler');
 
-import KeepAliveRequestEntity from './keepalive/keepalive_request';
-import KeepAliveRequestHandler from './keepalive/keepalive_handler';
+var KeepAliveRequestEntity = require('./keepalive/keepalive_request');
+var KeepAliveRequestHandler = require('./keepalive/keepalive_handler');
 
-import KeyProvisionRequestEntity from './keyprovision/keyprovision_request';
-import KeyProvisionRequestHandler from './keyprovision/keyprovision_handler';
+var KeyProvisionRequestEntity = require('./keyprovision/keyprovision_request');
+var KeyProvisionRequestHandler = require('./keyprovision/keyprovision_handler');
 
-import AuthenticationRequestEntity from './auth/auth_request';
-import AuthenticationRequestHandler from './auth/auth_handler';
+var AuthenticationRequestEntity = require('./auth/auth_request');
+var AuthenticationRequestHandler = require('./auth/auth_handler');
 
 /**
  * Agent request manager. <br />
@@ -152,4 +152,4 @@ AgentRequestManager.RESULT_PENDING = 1;
  */
 AgentRequestManager.RESULT_FAILURE = 1;
 
-export default AgentRequestManager
+module.exports = AgentRequestManager

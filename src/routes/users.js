@@ -1,7 +1,7 @@
 var express = require('express');
-import UserLoginHandler from '../modules/request/user_login_handler';
-import SearchRequestHandler from '../modules/request/search_record_handler';
-import CertificateHandler from '../modules/request/certificate_handler';
+var UserLoginHandler = require('../modules/request/user_login_handler');
+var SearchRequestHandler = require('../modules/request/search_record_handler');
+var CertificateHandler = require('../modules/request/certificate_handler');
 var router = express.Router();
 
 /* GET users listing. */

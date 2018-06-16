@@ -1,5 +1,5 @@
-import Managers from '../core/managers';
-import AgentRequestManager from '../modules/agent/agent_request';
+var Managers = require('../core/managers');
+var AgentRequestManager = require('../modules/agent/agent_request');
 
 /**
  * Controller function set for /agent URI Request with command arguments. <br />
@@ -7,7 +7,7 @@ import AgentRequestManager from '../modules/agent/agent_request';
  * @since 180313
  * @author TACKSU
  */
-export default {
+module.exports = {
 
     /**
      * POST method controller to process ajax request. <br />

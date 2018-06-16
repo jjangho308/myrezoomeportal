@@ -1,7 +1,7 @@
-import AbstractClientRequestHandler from "../abstract_client_request_handler";
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
-import Managers from '../../../core/managers';
-import ClientRequest from '../client_request';
+var Managers = require('../../../core/managers');
+var ClientRequest = require('../client_request');
 
 /**
  * Handler for UpdateCertificateHandler. <br />
@@ -41,4 +41,4 @@ class UpdateCertificateHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default UpdateCertificateHandler;
+module.exports = UpdateCertificateHandler;

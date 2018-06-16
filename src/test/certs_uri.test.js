@@ -1,12 +1,12 @@
-import chai from 'chai';
-import chaihttp from 'chai-http';
+var chai = require('chai');
+var chaihttp = require('chai-http');
 
-import app from '../app';
-import CertModel from '../models/cert/cert';
-import CertDao from '../dao/cert_dao';
-import Util from '../util/util';
-import Managers from '../core/managers';
-import Terminator from '../core/terminator';
+var app = require('../app');
+var CertModel = require('../models/cert/cert');
+var CertDao = require('../dao/cert_dao');
+var Util = require('../util/util');
+var Managers = require('../core/managers');
+var Terminator = require('../core/terminator');
 
 /**
  * Test suit to test '/cert' URI. <br />

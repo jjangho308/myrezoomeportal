@@ -1,16 +1,16 @@
-import AbstractClientRequestHandler from "../abstract_client_request_handler";
-import CreateResumeRequest from './create_resume_request';
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
+var CreateResumeRequest = require('./create_resume_request');
 
-import ClientRequest from '../client_request';
+var ClientRequest = require('../client_request');
 
-import Managers from '../../../core/managers';
+var Managers = require('../../../core/managers');
 
 
-import ResumeModel from '../../../models/resume/resume';
+var ResumeModel = require('../../../models/resume/resume');
 
-import SharedResumeModel from "../../../models/resume/shared_resume"
+var SharedResumeModel = require('../../../models/resume/shared_resume');
 
-import Util from "../../../util/util"
+var Util = require('../../../util/util');
 
 /**
  * Handler for {@link CreateResumeRequest}. <br />
@@ -127,4 +127,4 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default CreateResumeHandler;
+module.exports = CreateResumeHandler;

@@ -1,12 +1,12 @@
-import Env from '../core/environment';
-import Managers from '../core/managers';
+var Env = require('../core/environment');
+var Managers = require('../core/managers');
 
-import GetResumeRequest from '../modules/client/resume/get_resume_request';
-import GetResumeDetailRequest from '../modules/client/resume/get_resume_detail_request';
-import CreateResumeRequest from '../modules/client/resume/create_resume_request';
-import UpdatResumeRequest from '../modules/client/resume/update_resume_request';
-import UpdateResumeRequest from '../modules/client/resume/update_resume_request';
-import DeleteResumeRequest from '../modules/client/resume/delete_resume_request'
+var GetResumeRequest = require('../modules/client/resume/get_resume_request');
+var GetResumeDetailRequest = require('../modules/client/resume/get_resume_detail_request');
+var CreateResumeRequest = require('../modules/client/resume/create_resume_request');
+var UpdatResumeRequest = require('../modules/client/resume/update_resume_request');
+var UpdateResumeRequest = require('../modules/client/resume/update_resume_request');
+var DeleteResumeRequest = require('../modules/client/resume/delete_resume_request');
 
 /**
  * Controller for /resumes URI. <br />
@@ -14,7 +14,7 @@ import DeleteResumeRequest from '../modules/client/resume/delete_resume_request'
  * @since 180321
  * @author TACKSU
  */
-export default {
+module.exports = {
 
     /**
      * Controller function for get method. <br />

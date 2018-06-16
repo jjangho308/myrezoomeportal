@@ -1,8 +1,8 @@
-import AbstractClientRequestHandler from "../abstract_client_request_handler";
-import GetResumeRequestEntity from './get_resume_request';
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
+var GetResumeRequestEntity = require('./get_resume_request');
 
-import ClientRequest from '../client_request';
-import Managers from '../../../core/managers';
+var ClientRequest = require('../client_request');
+var Managers = require('../../../core/managers');
 
 /**
  * Handler of {@link GetResumeRequestEntity}. <br />
@@ -83,4 +83,4 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default GetResumeRequestHandler;
+module.exports = GetResumeRequestHandler;

@@ -1,6 +1,6 @@
-import AbstractClientRequesEntity from "../abstract_client_request_entity";
+var AbstractClientRequesEntity = require('../abstract_client_request_entity');
 
-import CertModel from '../../../models/cert/cert';
+var CertModel = require('../../../models/cert/cert');
 
 /**
  * Request to update certificate. <br />
@@ -42,4 +42,4 @@ class UpdateCertificateRequest extends AbstractClientRequesEntity {
     }
 }
 
-export default UpdateCertificateRequest;
+module.exports = UpdateCertificateRequest;

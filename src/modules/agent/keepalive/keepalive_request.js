@@ -1,4 +1,4 @@
-import AbstractAgentRequestEntity from "../abstract_agent_request_entity";
+var AbstractAgentRequestEntity = require('../abstract_agent_request_entity');
 
 /**
  * HTTP request of agent keep alive. <br />
@@ -20,4 +20,4 @@ class KeepAliveRequest extends AbstractAgentRequestEntity {
     }
 }
 
-export default KeepAliveRequest;
+module.exports = KeepAliveRequest;

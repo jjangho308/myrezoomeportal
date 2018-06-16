@@ -1,11 +1,11 @@
-import chai from 'chai';
-import chaihttp from 'chai-http';
+var chai = require('chai');
+var chaihttp = require('chai-http');
 
-import app from '../app';
+var app = require('../app');
 
-import Managers from '../core/managers';
-import Initializer from '../core/initializer';
-import Util from '../util/util';
+var Managers = require('../core/managers');
+var Initializer = require('../core/initializer');
+var Util = require('../util/util');
 
 describe('Portal <-> Agent Search Record interpolation test suite.', () => {
 

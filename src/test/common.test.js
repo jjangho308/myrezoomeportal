@@ -1,10 +1,6 @@
-import assert from 'assert';
-
-import managers from '../core/managers';
-
-import Cluster from 'cluster';
-
-import jsonminify from 'jsonminify'
+var assert = require('assert');
+var managers = require('../core/managers');
+var jsonminify = require('jsonminify');
 
 /**
  * Instance test suit. <br />
@@ -18,9 +14,9 @@ describe('Instant test suit', () => {
     });
 
     it('Error catch', () => {
-        try{
+        try {
             throw new Error("test error");
-        }catch (err){
+        } catch (err) {
             // console.error(err);
             console.error(err.stack);
             assert(true);

@@ -1,6 +1,6 @@
-import AbstractModel from "../abstract_model";
+var AbstractModel = require('../abstract_model');
 
-import Util from '../../util/util';
+var Util = require('../../util/util');
 
 /**
  * Model presentation of TCUP_MODE_INFO Table. <br />
@@ -80,4 +80,4 @@ class OrgInfoModel extends AbstractModel {
     }
 }
 
-export default OrgInfoModel;
+module.exports = OrgInfoModel;

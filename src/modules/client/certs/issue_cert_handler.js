@@ -1,12 +1,12 @@
-import AbstractClientRequestHandler from "../abstract_client_request_handler";
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
-import ClientRequest from '../client_request';
+var ClientRequest = require('../client_request');
 
-import Managers from '../../../core/managers'
-import Util from "../../../util/util";
+var Managers = require('../../../core/managers');
+var Util = require('../../../util/util');
 
-import CertModel from '../../../models/cert/cert';
-import SharedCertModel from "../../../models/cert/shared_cert";
+var CertModel = require('../../../models/cert/cert');
+var SharedCertModel = require('../../../models/cert/shared_cert');
 
 /**
  * Handler of IssueCertificateRequestEntity. <br />
@@ -84,4 +84,4 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default IssueCertificatHandler;
+module.exports = IssueCertificatHandler;

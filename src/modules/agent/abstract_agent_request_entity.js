@@ -21,4 +21,4 @@ class AbstractAgentRequestEntity {
     }
 }
 
-export default AbstractAgentRequestEntity;
+module.exports = AbstractAgentRequestEntity;

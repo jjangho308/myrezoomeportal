@@ -1,4 +1,4 @@
-import AbstractAgentRequestEntity from "../abstract_agent_request_entity";
+var AbstractAgentRequestEntity = require('../abstract_agent_request_entity');
 
 /**
  * Provision RSA Key pair of organization. <br />
@@ -30,4 +30,4 @@ class KeyProvisionRequest extends AbstractAgentRequestEntity{
     }
 }
 
-export default KeyProvisionRequest;
+module.exports = KeyProvisionRequest;

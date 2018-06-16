@@ -1,4 +1,4 @@
-import AbstractClientRequesEntity from "../abstract_client_request_handler";
+var AbstractClientRequesEntity = require('../abstract_client_request_handler');
 
 class DeleteResumeRequest extends AbstractClientRequesEntity {
     constructor(opt){
@@ -9,4 +9,4 @@ class DeleteResumeRequest extends AbstractClientRequesEntity {
 
 }
 
-export default DeleteResumeRequest;
+module.exports = DeleteResumeRequest;

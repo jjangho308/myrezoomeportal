@@ -1,8 +1,8 @@
-import Managers from '../../core/managers'
-import ApiRequest from '../../modules/api/common/api_request'
-import v1Container from './apiv1_container';
+var Managers = require('../../core/managers');
+var ApiRequest = require('../../modules/api/common/api_request');
+var v1Container = require('./apiv1_container');
 
-export default (() => {
+module.exports = (() => {
     var apiContainer = {
         'v1': v1Container
     }

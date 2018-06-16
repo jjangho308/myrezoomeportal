@@ -1,14 +1,14 @@
-import mysql from 'mysql';
+var mysql = require('mysql');
 
-import Env from '../core/environment'
+var Env = require('../core/environment');
 
-import CertQuery from './cert_query';
-import AbstractDAO from './abstract_dao';
+var CertQuery = require('./cert_query');
+var AbstractDAO = require('./abstract_dao');
 
-import CertModel from '../models/cert/cert';
-import SharedCertModel from '../models/cert/shared_cert';
-import SharedUrlModel from '../models/cert/shared_cert_url';
-import Util from '../util/util';
+var CertModel = require('../models/cert/cert');
+var SharedCertModel = require('../models/cert/shared_cert');
+var SharedUrlModel = require('../models/cert/shared_cert_url');
+var Util = require('../util/util');
 
 /**
  * DAO for certificate entity. <br />
@@ -527,4 +527,4 @@ class CertificateDAO extends AbstractDAO {
     }
 }
 
-export default CertificateDAO;
+module.exports = CertificateDAO;

@@ -1,8 +1,8 @@
-import Managers from '../../../core/managers';
-import ApiRequest from '../api_request';
-import AbstractApiRequestHandler from "../../api/abstract_api_request_handler";
-import Util from '../../../util/util';
-import randomstring from 'randomstring';
+var Managers = require('../../../core/managers');
+var ApiRequest = require('../api_request');
+var AbstractApiRequestHandler = require('../../api/abstract_api_request_handler');
+var Util = require('../../../util/util');
+var randomstring = require('randomstring');
 
 /**
  * Handler for ApiRequestEntity. <br />
@@ -118,4 +118,4 @@ class ApiHandler extends AbstractApiRequestHandler {
     }
 }
 
-export default ApiHandler;
+module.exports = ApiHandler;

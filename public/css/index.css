@@ -57,35 +57,6 @@ margin: auto;
     font-size: 18px;
 }
 
-.body-div {
-  overflow-y: hidden;
-    height: 797px;
-    background-color: #ffffff;
-    border-bottom: solid 1px #d7dde3;
-}
-
-.body-container{
-
-    position: relative;
-    width: 1000px;
-    margin: auto;
-}
-
-.title{
-    font-size: 37px;
-    color: #2b2c2c;
-    margin-top: 87px;
-    margin-bottom: 28px;
-}
-
-.sub-title{
-    font-size: 16px;
-    line-height: 1.69;
-    color: #7c848a;
-    margin: 0;
-    margin-bottom: 0px;
-}
-
 .title-2{
     font-size: 35px;
     color: #2b2c2c;
@@ -100,6 +71,40 @@ margin: auto;
     margin: 0;
     margin-bottom: 0px;
 }
+
+
+/* 첫번쨰 설명부분 시작 */
+.body-div {
+  overflow-y: hidden;
+    height: 797px;
+    background-color: #ffffff;
+    border-bottom: solid 1px #d7dde3;
+}
+
+.body-container{
+
+    position: relative;
+    width: 1000px;
+    margin: auto;
+}
+
+.title_A{
+    font-size: 37px;
+    color: #2b2c2c;
+    margin-top: 87px;
+    margin-bottom: 25px;
+    text-align:center;
+}
+
+.sub-title_A{
+    font-size: 16px;
+    line-height: 1.69;
+    color: #7c848a;
+    margin: 0;
+    margin-bottom: 30px;
+    text-align:center;
+}
+
 
 .body-div:nth-child(2) img{
     display: block;
@@ -193,4 +198,152 @@ top: 229px;
 .navbar-default {
     background-color: initial;
     border: initial;
+}
+
+
+/* 두번째 설명부분 시작 */
+
+.title_B{
+    font-size: 37px;
+    color: #2b2c2c;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.sub-title_B{
+    font-size: 16px;
+    line-height: 1.69;
+    color: #7c848a;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+
+.body-div_B {
+  overflow-y: hidden;
+    height: 797px;
+    background-color: #FAFCFD;
+    border-bottom: solid 1px #d7dde3;
+}
+
+.body-container_B{position: relative;width: 1000px;margin: auto;}
+
+
+.body-div_B:nth-child(2) img{
+    display: block;
+    margin-left: 0px;
+ /* width: 1000px;
+height: 535px;*/
+}
+
+.body-div_B:nth-child(2) p{
+    text-align: center;
+}
+
+
+.body-div_B:nth-child(3) img{
+  width: 495px;
+  height: 450px;
+  margin-top: 350px;
+}
+
+.body-div_B:nth-child(3) p{
+    text-align: left;
+}
+.body-div_B .left{
+    display: inline-block;
+    width: 49%;
+    vertical-align: 80px;
+}
+
+
+.body-div_B .right{display: inline-block;width: 50%; align-content: center; }
+
+
+
+/* 세번째 설명 시작 */
+
+.title_C{
+    font-size: 37px;
+    color: #2b2c2c;
+    /*margin-top: 170px;
+    margin-bottom: 25px;*/
+    text-align:right;
+    position: absolute;
+    top: 130px;
+    left: 520px;
+}
+
+.sub-title_C{
+    font-size: 16px;
+    line-height: 1.69;
+    color: #7c848a;
+    /* margin: 0;
+    margin-bottom: 30px;*/
+    position: absolute;
+    top: 200px;
+    left: 520px;
+}
+
+
+
+.body-div_C {
+  overflow-y: hidden;
+    height: 797px;
+    background-color: #ffffff;
+    border-bottom: solid 1px #d7dde3;
+}
+
+.body-container_C{position: relative;width: 1000px;margin: auto;}
+
+
+.body-div_C:nth-child(2) img{
+    display: block;
+    margin-left: 0px;
+ /* width: 1000px;
+height: 535px;*/
+}
+
+.body-div_C:nth-child(2) p{
+    text-align: center;
+}
+
+
+.body-div_C:nth-child(3) img{
+  width: 495px;
+  height: 450px;
+  margin-top: 350px;
+}
+
+.body-div_C:nth-child(3) p{
+    text-align: left;
+}
+.body-div_C .left{
+    display: inline-block;
+    width: 49%;
+    vertical-align: 80px;
+}
+
+
+.body-div_C .right{display: inline-block;width: 50%; align-content: center; }
+
+.body-div_C:nth-child(4) img{
+position: absolute;
+top:174px;
+left: 0;
+  width: 700px;
+  height: 486px;
+}
+
+.body-div_C:nth-child(4) .title-2{
+    position: absolute;
+    top: 68px;
+
+    left: 577px;
+}
+
+.body-div_C:nth-child(4) .sub-title-2{
+    position: absolute;
+top: 229px;
+    left: 577px;
 }

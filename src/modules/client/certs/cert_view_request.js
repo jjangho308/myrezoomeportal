@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from "../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
 /**
  * Request entity for /certs/:certId URI Get request. <br />
@@ -13,4 +13,4 @@ class CertViewRequestEntity extends AbstractClientRequestEntity{
     }
 }
 
-export default CertViewRequestEntity;
+module.exports = CertViewRequestEntity;

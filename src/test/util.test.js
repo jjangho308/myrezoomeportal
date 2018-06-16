@@ -1,6 +1,6 @@
-import assert from 'assert';
+var assert = require('assert');
 
-import util from '../util/util';
+var util = require('../util/util');
 
 /**
  * Test suit for Util class. <br />

@@ -1,5 +1,5 @@
-import Managers from '../core/managers'
-import SignUpRequest from '../modules/client/user/signup_request'
+var Managers = require('../core/managers');
+var SignUpRequest = require('../modules/client/user/signup_request');
 
 /**
  * Controller for /signup URI. <br />
@@ -7,7 +7,7 @@ import SignUpRequest from '../modules/client/user/signup_request'
  * @since 180321
  * @author TACKSU
  */
-export default {
+module.exports = {
 
     get: (req, res, next) => {
         res.render('signup', {});

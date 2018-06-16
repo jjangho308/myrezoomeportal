@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from '../abstract_client_request_entity';
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
 /**
  * Request entity for verification feature. <br />
@@ -26,4 +26,4 @@ class VerifyRequest extends AbstractClientRequestEntity {
     }
 }
 
-export default VerifyRequest;
+module.exports = VerifyRequest;

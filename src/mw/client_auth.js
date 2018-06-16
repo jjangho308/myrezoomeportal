@@ -1,6 +1,6 @@
-import Managers from '../core/managers';
+var Managers = require('../core/managers');
 
-import Env from '../core/environment';
+var Env = require('../core/environment');
 
 /**
  * Token authentication middleware. <br />
@@ -8,7 +8,7 @@ import Env from '../core/environment';
  * @since 180310
  * @author TACKSU
  */
-export default (req, res, next) => {
+module.exports = (req, res, next) => {
 
     var tokenManager = Managers.token();
 

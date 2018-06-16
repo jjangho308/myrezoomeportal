@@ -1,9 +1,9 @@
-import Managers from '../../core/managers';
-import UserDao from '../../dao/user_dao';
+var Managers = require('../../core/managers');
+var UserDao = require('../../dao/user_dao');
 
-import UserModel from '../../models/user/user';
+var UserModel = require('../../models/user/user');
 
-import Util from '../../util/util';
+var Util = require('../../util/util');
 
 /**
  * Controller for '/oauth2' URI. <br />`
@@ -264,7 +264,7 @@ var defaultController = {
     }
 };
 
-export default (req, res, next) => {
+module.exports = (req, res, next) => {
     if (defaultController[req.params.cmd] && defaultController[req.params.cmd] instanceof Function) {
         defaultController[req.params.cmd](req, res, next);
     } else {

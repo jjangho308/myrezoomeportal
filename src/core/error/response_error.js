@@ -1,5 +1,5 @@
-import ErrorCode from './error_code';
-import ErrorMessage from './error_message';
+var ErrorCode = require('./error_code');
+var ErrorMessage = require('./error_message');
 
 /**
  * Rezoome internal error to response via HTTP Response. <br />
@@ -48,4 +48,4 @@ class HttpResponseError {
     }
 }
 
-export default HttpResponseError;
+module.exports = HttpResponseError;

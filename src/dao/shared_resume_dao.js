@@ -1,7 +1,7 @@
-import mysql from 'mysql';
-import SharedResumeModel from './shared_resume';
-import AbstractDAO from '../abstract_dao';
-import sharedQuery from './shared_resume_query';
+var mysql = require('mysql');
+var SharedResumeModel = require('./shared_resume');
+var AbstractDAO = require('../abstract_dao');
+var sharedQuery = require('./shared_resume_query');
 
 /**
  * DAO for shared resume entity. <br />
@@ -103,4 +103,4 @@ class SharedResumeDAO extends AbstractDAO {
     }
 }
 
-export default SharedResumeDAO;
+module.exports = SharedResumeDAO;

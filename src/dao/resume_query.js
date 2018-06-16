@@ -8,7 +8,7 @@ var SHARED_INFO_TABLE_NAME = 'TCDA_RSM_SHR_INFO';
  * @since 180326
  * @author TACKSU
  */
-export default {
+module.exports = {
     put: 'INSERT INTO ' + TABLE_NAME + ' SET ?',
     get: 'SELECT * FROM ' + TABLE_NAME + ' WHERE ',
     set: 'UPDATE ' + TABLE_NAME + ' SET ? WHERE ?',

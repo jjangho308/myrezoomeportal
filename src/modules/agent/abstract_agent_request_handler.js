@@ -30,4 +30,4 @@ class AbstractAgentRequestHandler {
     }
 }
 
-export default AbstractAgentRequestHandler;
+module.exports = AbstractAgentRequestHandler;

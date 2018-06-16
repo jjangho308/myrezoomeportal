@@ -1,5 +1,5 @@
-import express from 'express';
-import ctrl from './oauth_ctrl';
+var express = require('express');
+var ctrl = require('./oauth_ctrl');
 
 /**
  * Router for '/oauth2' URI. <br />
@@ -11,4 +11,4 @@ var router = express.Router();
 router.get('/:cmd', ctrl);
 router.post('/:cmd', ctrl);
 
-export default router;
+module.exports = router;

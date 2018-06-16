@@ -1,4 +1,4 @@
-import AbstractModel from "../abstract_model";
+var AbstractModel = require('../abstract_model');
 
 /**
  * Model of Record entity. <br />

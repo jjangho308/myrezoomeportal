@@ -1,7 +1,7 @@
-import express from 'express';
+var express = require('express');
 
-import ctrl from './shared_certs_ctrl';
-import client_auth from '../mw/client_auth';
+var ctrl = require('./shared_certs_ctrl');
+var client_auth = require('../mw/client_auth');
 
 /**
  * Router for /shared_certs URI. <br />
@@ -17,4 +17,4 @@ router.get('/', ctrl.get);
 router.post('/', client_auth);
 router.post('/', ctrl.post);
 
-export default router;
+module.exports = router;

@@ -7,7 +7,7 @@
 var CERT_TABLE = 'rezoome_db.TCDA_CERT_DATA';
 var SHARED_CERT_TABLE = 'rezoome_db.TCDA_CERT_SHR_INFO';
 // var SHARED_URL_TABLE = 'rezoome_db.TCDA_CERT_SHR_INFO';
-export default {
+module.exports = {
     issueCert: 'INSERT INTO ' + CERT_TABLE + ' SET ?',
 
     issueCertByGuest: 'INSERT INTO rezoome_db.TCDA_CERT_DATA_GUEST SET ?',

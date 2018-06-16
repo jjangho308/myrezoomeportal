@@ -1,5 +1,5 @@
-import express from 'express';
-import ctrl from './intro_ctrl';
+var express = require('express');
+var ctrl = require('./intro_ctrl');
 /**
  * Router for './main'. <br />
  * 
@@ -10,4 +10,4 @@ var router = express.Router();
 
 router.get('/', ctrl.get);
 
-export default router;
+module.exports = router;

@@ -1,5 +1,5 @@
-import NexledgerService from '../modules/blockchain/nexledgerservice';
-import initialize from '../core/initializer';
+var NexledgerService = require('../modules/blockchain/nexledgerservice');
+var initialize = require('../core/initializer');
 
 describe('Blockchain test suit', () => {
     var nodeurl = null;

@@ -1,8 +1,8 @@
-import fs from 'fs';
-import pdfKit from 'pdfkit';
-import blobStream from 'blob-stream';
-import PDFManager from '../modules/pdf/pdf';
-import initialize from '../core/initializer';
+var fs = require('fs');
+var pdfKit = require('pdfkit');
+var blobStream = require('blob-stream');
+var PDFManager = require('../modules/pdf/pdf');
+var initialize = require('../core/initializer');
 
 describe.skip('PDF Test Suit', () => {
     var pdf;

@@ -6,7 +6,7 @@
  */
 var TABLE_NAME = 'TCUP_ORG';
 var INFO_TABLE = 'TCUP_ORG_INFO';
-export default {
+module.exports = {
     get : "SELECT * FROM " + TABLE_NAME + " WHERE ?",
     getSubIdsByOrgId : "SELECT * FROM rezoome_db.TCCO_ORG_SUB WHERE ORG_ID = ?",
     

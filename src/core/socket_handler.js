@@ -1,4 +1,4 @@
-import Managers from './managers';
+var Managers = require('./managers');
 
 var clientRequest = Managers.client();
 
@@ -16,7 +16,7 @@ const SOCKET_COMMAND_SET_SOCKET = 'SetSocket';
  * @since 180330
  * @author TACKSU
  */
-export default (socket) => {
+module.exports = (socket) => {
 
     /**
      * Assign client socket to specific RequestEntity with given messageId. <br />

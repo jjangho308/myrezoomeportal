@@ -1,6 +1,6 @@
-import express from 'express';
-import apiTokenExtractor from './api_token';
-import ctrl from './api_ctrl';
+var express = require('express');
+var apiTokenExtractor = require('./api_token');
+var ctrl = require('./api_ctrl');
 
 /**
  * Router of "/api URI for <br />
@@ -21,4 +21,4 @@ var router = express.Router();
 router.use('/:version/:command', apiTokenExtractor);
 router.use('/:version/:command', ctrl);
 
-export default router;
+module.exports = router;

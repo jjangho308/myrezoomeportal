@@ -1,12 +1,12 @@
-import chai from 'chai';
-import chaihttp from 'chai-http';
+var chai = require('chai');
+var chaihttp = require('chai-http');
 
-import app from '../app';
+var app = require('../app');
 
-import Managers from '../core/managers';
-import Initializer from '../core/initializer';
-import Util from '../util/util';
-import CryptoManager from '../modules/crypto/crypto';
+var Managers = require('../core/managers');
+var Initializer = require('../core/initializer');
+var Util = require('../util/util');
+var CryptoManager = require('../modules/crypto/crypto');
 
 /**
  * Test suit for '/client' SearchRecords command test. <br />

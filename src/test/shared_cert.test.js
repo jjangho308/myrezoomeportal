@@ -1,8 +1,8 @@
-import Initialize from '../core/initializer';
-import SharedCertDAO from '../models/shared_cert/shared_cert_dao';
-import Managers from '../core/managers';
-import SharedCertModel from '../models/shared_cert/shared_cert';
-import Util from '../util/util';
+var Initialize = require('../core/initializer');
+var SharedCertDAO = require('../models/shared_cert/shared_cert_dao');
+var Managers = require('../core/managers');
+var SharedCertModel = require('../models/shared_cert/shared_cert');
+var Util = require('../util/util');
 
 /**
  * Test suit for shared_cert model and DAO. <br />

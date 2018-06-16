@@ -1,12 +1,12 @@
-import HashMap from 'hashmap';
+var HashMap = require('hashmap');
 
-import AbstractManager from "../abstract_manager";
+var AbstractManager = require('../abstract_manager');
 
 /**
  * .... set. <br />
  */
-import ApiRequest from './common/api_request';
-import ApiHandler from './common/api_handler';
+var ApiRequest = require('./common/api_request');
+var ApiHandler = require('./common/api_handler');
 
 /**
  * Request manager from client. <br />
@@ -164,4 +164,4 @@ ApiRequestManager.RESULT_PENDING = 1;
  */
 ApiRequestManager.RESULT_FAILURE = 2;
 
-export default ApiRequestManager
+module.exports = ApiRequestManager

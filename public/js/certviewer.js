@@ -109,7 +109,6 @@ $(document).ready(function () {
                     $('.main-body-footer').append(htmldiv);
 
 
-
                 }, 1000);
 
             }, 1000);
@@ -126,8 +125,7 @@ $(document).ready(function () {
         valueField: 'email',
         labelField: 'name',
         searchField: ['name', 'email'],
-        options: [
-        ],
+        options: [],
         render: {
             item: function (item, escape) {
                 setTimeout(2000, function () {
@@ -458,5 +456,3 @@ function generateURL() {
         contentType: 'application/json'
     });
 }
-
-

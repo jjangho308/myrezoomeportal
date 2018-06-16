@@ -1,5 +1,5 @@
-import AbstractManager from '../abstract_manager';
-import request from 'request-json';
+var AbstractManager = require('../abstract_manager');
+var request = require('request-json');
 
 /**
  * Manager for IO function on NexLedger. <br />
@@ -168,4 +168,4 @@ class NexledgerService extends AbstractManager {
     }
 }
 
-export default NexledgerService;
+module.exports = NexledgerService;

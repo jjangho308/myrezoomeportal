@@ -1,8 +1,8 @@
-import express from 'express';
+var express = require('express');
 
-import clientTokenAuth from '../mw/client_auth';
-import controller from './client_ctrl';
-import managers from '../core/managers';
+var clientTokenAuth = require('../mw/client_auth');
+var controller = require('./client_ctrl');
+var managers = require('../core/managers');
 
 var router = express.Router();
 
@@ -15,4 +15,4 @@ var router = express.Router();
 router.post('/', clientTokenAuth);
 router.post('/', controller.post);
 
-export default router;
+module.exports = router;

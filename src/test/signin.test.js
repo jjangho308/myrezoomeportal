@@ -1,10 +1,10 @@
-import Initialize from '../core/initializer';
-import Managers from '../core/managers';
+var Initialize = require('../core/initializer');
+var Managers = require('../core/managers');
 
-import chai from 'chai';
-import chaihttp from 'chai-http';
+var chai = require('chai');
+var chaihttp = require('chai-http');
 
-import app from '../app';
+var app = require('../app');
 
 describe('Sign In test suite', () => {
 

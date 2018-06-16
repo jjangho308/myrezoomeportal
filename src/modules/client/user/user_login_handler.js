@@ -1,5 +1,5 @@
-import managers from '../../core/managers';
-import AbstractClientRequestHandler from './abstract_client_request_handler';
+var managers = require('../../core/managers');
+var AbstractClientRequestHandler = require('./abstract_client_request_handler');
 
 /**
  * 사용자 로그인 요청 핸들러.
@@ -49,5 +49,5 @@ class UserLoginRequestHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default UserLoginRequestHandler;
+module.exports = UserLoginRequestHandler;
 

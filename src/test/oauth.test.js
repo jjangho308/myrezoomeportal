@@ -1,9 +1,9 @@
-import chai from 'chai'
-import chaihttp from 'chai-http';
-import Initialize from '../core/initializer';
-import Managers from '../core/managers';
+var chai = require('chai');
+var chaihttp = require('chai-http');
+var Initialize = require('../core/initializer');
+var Managers = require('../core/managers');
 
-import app from '../app';
+var app = require('../app');
 
 /**
  * Test suite for OAuth2 service. <br />

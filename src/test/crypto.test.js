@@ -1,18 +1,18 @@
-import Managers from '../core/managers';
+var Managers = require('../core/managers');
 
-import CryptoManager from '../modules/crypto/crypto';
-import Initializer from '../core/initializer';
+var CryptoManager = require('../modules/crypto/crypto');
+var Initializer = require('../core/initializer');
 
-import JRSA from 'jsrsasign';
+var JRSA = require('jsrsasign');
 
-import nodeCrypto from 'crypto';
+var nodeCrypto = require('crypto');
 
-import NodeRSA from 'node-rsa';
+var NodeRSA = require('node-rsa');
 
-import CryptoJS from 'crypto-js';
-import AES from 'crypto-js/aes';
+var CryptoJS = require('crypto-js');
+var AES = require('crypto-js/aes');
 
-import assert from 'assert';
+var assert = require('assert');
 
 /**
  * CryptoManagers test suite. <br />

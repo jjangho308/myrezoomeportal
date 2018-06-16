@@ -1,11 +1,11 @@
-import AbstractClientRequestHandler from "../abstract_client_request_handler";
+var AbstractClientRequestHandler = require('../abstract_client_request_handler');
 
-import ClientRequest from '../client_request';
+var ClientRequest = require('../client_request');
 
-import Managers from '../../../core/managers';
-import Util from "../../../util/util";
+var Managers = require('../../../core/managers');
+var Util = require('../../../util/util');
 
-import PrivateRecord from '../../../models/record/private_record';
+var PrivateRecord = require('../../../models/record/private_record');
 
 
 /**
@@ -47,4 +47,4 @@ class CreateRecordRequestHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default CreateRecordRequestHandler;
+module.exports = CreateRecordRequestHandler;

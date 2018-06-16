@@ -4,7 +4,7 @@
  * @since 180329
  * @author JJANGHO
  */
-export default {
+module.exports = {
     getById: 'SELECT * FROM TCDA_RSM_SHR_INFO where S_RSM_SHR_INFO_ID = ?',
 
     count: 'SELECT COUNT(*) TCDA_RSM_SHR_INFO WHERE EMAIL = ?;',

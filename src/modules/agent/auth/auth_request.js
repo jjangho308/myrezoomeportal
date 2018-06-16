@@ -1,4 +1,4 @@
-import AbstractAgentRequestEntity from "../abstract_agent_request_entity";
+var AbstractAgentRequestEntity = require('../abstract_agent_request_entity');
 
 /**
  * Authentication of agent request entity. <br />
@@ -17,4 +17,4 @@ class AuthenticationRequestEntity extends AbstractAgentRequestEntity {
     }
 }
 
-export default AuthenticationRequestEntity;
+module.exports = AuthenticationRequestEntity;

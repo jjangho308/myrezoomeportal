@@ -1,5 +1,5 @@
-import managers from '../core/managers';
-import initialize from '../core/initializer';
+var managers = require('../core/managers');
+var initialize = require('../core/initializer');
 
 describe.skip('User Login Test Suit', function () {
 

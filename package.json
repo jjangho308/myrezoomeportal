@@ -1,13 +1,14 @@
 {
   "name": "rezoome",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "babel-node": "babel-node --presets es2015",
-    "start": "nodemon --exec npm run babel-node -- ./bin/www",
-    "debug": "babel-node --inspect-brk=0.0.0.0:9229 ./bin/www",
+    "start-with-babel": "nodemon --exec npm run babel-node -- ./bin/www",
+    "start": "nodemon ./bin/www",
+    "debug": "nodemon --inspect-brk=0.0.0.0:9229 ./bin/www",
     "test": "mocha --require babel-core/register ./src/test/*.test.js",
-    "build": "./node_modules/.bin/babel ./src/**/*.js --out-dir dist --source-maps"
+    "build-with-babel": "./node_modules/.bin/babel ./src/**/*.js --out-dir dist --source-maps"
   },
   "dependencies": {
     "args": "^3.0.8",

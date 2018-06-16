@@ -1,7 +1,7 @@
-import Managers from '../../../core/managers';
-import ClientRequest from '../client_request';
-import AbstractAgentRequestHandler from "../../agent/abstract_agent_request_handler";
-import Util from '../../../util/util';
+var Managers = require('../../../core/managers');
+var ClientRequest = require('../client_request');
+var AbstractAgentRequestHandler = require('../../agent/abstract_agent_request_handler');
+var Util = require('../../../util/util');
 
 /**
  * Handler for VerifyRequestEntity. <br />
@@ -119,4 +119,4 @@ class VerifyHandler extends AbstractAgentRequestHandler {
     }
 }
 
-export default VerifyHandler;
+module.exports = VerifyHandler;

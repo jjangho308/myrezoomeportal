@@ -1,6 +1,6 @@
-import AbstractManager from "../abstract_manager";
-import fs from 'fs';
-import QRCode from 'qrcode';
+var AbstractManager = require('../abstract_manager');
+var fs = require('fs');
+var QRCode = require('qrcode');
 
 /**
  * PDFManager. <br />
@@ -109,4 +109,4 @@ class PDFkManager extends AbstractManager {
     }
 }
 
-export default PDFkManager;
+module.exports = PDFkManager;

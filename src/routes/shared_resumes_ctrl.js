@@ -1,5 +1,5 @@
-import Managers from '../core/managers';
-import ShareResumeRequest from '../modules/client/resume/share_resume_request';
+var Managers = require('../core/managers');
+var ShareResumeRequest = require('../modules/client/resume/share_resume_request');
 
 /**
  * Controller for '/shared_resumes' URI. <br />
@@ -7,7 +7,7 @@ import ShareResumeRequest from '../modules/client/resume/share_resume_request';
  * @since 180412
  * @author TACKSU
  */
-export default {
+module.exports = {
     /**
      * Get controller. <br />
      */

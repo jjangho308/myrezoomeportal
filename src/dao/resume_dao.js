@@ -1,15 +1,15 @@
-import mysql from 'mysql';
+var mysql = require('mysql');
 
-import Env from '../core/environment';
+var Env = require('../core/environment');
 
-import AbstractDAO from "./abstract_dao";
-import ResumeModel from '../models/resume/resume';
-import SharedResumeModel from '../models/resume/shared_resume';
-import SharedResumeUrlModel from '../models/resume/shared_resume_url';
+var AbstractDAO = require('./abstract_dao');
+var ResumeModel = require('../models/resume/resume');
+var SharedResumeModel = require('../models/resume/shared_resume');
+var SharedResumeUrlModel = require('../models/resume/shared_resume_url');
 
-import ResumeQuery from './resume_query';
+var ResumeQuery = require('./resume_query');
 
-import Util from '../util/util';
+var Util = require('../util/util');
 
 /**
  * DAO of resume. <br />
@@ -436,4 +436,4 @@ class ResumeDao extends AbstractDAO {
     }
 }
 
-export default ResumeDao;
+module.exports = ResumeDao;

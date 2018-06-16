@@ -1,7 +1,7 @@
 /**
  * Environment checker. <br />
  */
-export default {
+module.exports = {
 
     developement: () => {
         return process.env.NODE_ENV == 'development';

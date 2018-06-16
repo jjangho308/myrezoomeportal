@@ -1,11 +1,11 @@
-import chai from 'chai';
-import chaihttp from 'chai-http';
+var chai = require('chai');
+var chaihttp = require('chai-http');
 
-import Managers from '../core/managers';
+var Managers = require('../core/managers');
 
-import app from '../app';
+var app = require('../app');
 
-import Util from "../util/util";
+var Util = require('../util/util');
 
 /**
  * Test suite for /resumes URL. <br />

@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from "../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
 /**
  * Update private record of given user. <br />
@@ -23,4 +23,4 @@ class DeleteRecordRequest extends AbstractClientRequestEntity {
     }
 }
 
-export default DeleteRecordRequest;
+module.exports = DeleteRecordRequest;

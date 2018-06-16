@@ -1,9 +1,9 @@
-// import express from 'express'
+// var express = require('express');
 var express = require('express');
 var router = express.Router();
-import managers from '../core/managers'
-import UserLoginHandler from '../modules/request/user_login_handler';
-import CertificateHandler from '../modules/request/certificate_handler';
+var managers = require('../core/managers');
+var UserLoginHandler = require('../modules/request/user_login_handler');
+var CertificateHandler = require('../modules/request/certificate_handler');
 
 /* move other page */
 // router.get('/', function (req, res, next) {
@@ -50,5 +50,5 @@ router.post('/', managers.token().filterToken, (req, res, next) => {
   }
 });
 
-// export default router;
+// module.exports = router;
 module.exports = router;

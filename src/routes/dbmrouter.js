@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-import Managers from "../core/managers";
+var Managers = require('../core/managers');
 
 router.post('/', (req, res, next) => {
 

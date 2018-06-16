@@ -1,5 +1,5 @@
-import Managers from '../../core/managers';
-import Env from '../../core/environment';
+var Managers = require('../../core/managers');
+var Env = require('../../core/environment');
 
 /**
  * API Access token extractor. <br />
@@ -7,7 +7,7 @@ import Env from '../../core/environment';
  * @since 18604
  * @author TACKSU
  */
-export default (req, res, next) => {
+module.exports = (req, res, next) => {
 
     var tokenManager = Managers.token();
 

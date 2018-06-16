@@ -1,7 +1,7 @@
-import reader from 'properties-reader';
+var reader = require('properties-reader');
 
-import Environment from '../../core/environment'
-import AbstractManager from "../abstract_manager";
+var Environment = require('../../core/environment');
+var AbstractManager = require('../abstract_manager');
 
 /**
  * Read configuration properties from config.properties file. <br />
@@ -82,4 +82,4 @@ PropertyManager.MySQL_DATABASE = 'mysql.database';
 /****************************************/
 PropertyManager.Nexledger_URL = 'nexledger.url';
 
-export default PropertyManager;
+module.exports = PropertyManager;

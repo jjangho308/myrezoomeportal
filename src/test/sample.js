@@ -1,5 +1,5 @@
-import managers from '../core/managers'
+var managers = require('../core/managers');
 
-export default {
+module.exports = {
     property : managers.property()
 }

@@ -1,4 +1,4 @@
-import Util from '../../util/util';
+var Util = require('../../util/util');
 
 /**
  * Abstract request class. <br />
@@ -22,4 +22,4 @@ class AbstractApiRequestEntity {
     }
 }
 
-export default AbstractApiRequestEntity;
+module.exports = AbstractApiRequestEntity;

@@ -1,10 +1,10 @@
-import mysql from 'mysql';
+var mysql = require('mysql');
 
-import orgQuery from './org_query.js';
-import OrgModel from '../models/org/org';
-import OrgInfoModel from '../models/org/org_info';
+var orgQuery = require('./org_query.js');
+var OrgModel = require('../models/org/org');
+var OrgInfoModel = require('../models/org/org_info');
 
-import AbstractDAO from './abstract_dao';
+var AbstractDAO = require('./abstract_dao');
 
 /**
  * DAO for organiation. <br />
@@ -208,4 +208,4 @@ class OrgDao extends AbstractDAO {
     }
 }
 
-export default OrgDao;
+module.exports = OrgDao;

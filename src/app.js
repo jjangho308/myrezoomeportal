@@ -1,14 +1,23 @@
-import express from 'express';
-import path from 'path';
-import favicon from 'serve-favicon';
-import logger from 'morgan';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
-import Initialize from './core/initializer';
-import rootRouter from './routes/root_route';
-import agentRouter from './routes/agent_route';
+/**
+ * Service initializer. <br />
+ */
+var Initializer = require('./core/initializer');
 
+/**
+ * Root router for multiple routers. <br />
+ */
+var rootRouter = require('./routes/root_route');
+
+/**
+ * Express application. <br />
+ */
 var app = express();
 
 // view engine setup
@@ -28,8 +37,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 //for front end angular2
 // app.use(express.static(path.join(__dirname, 'front')));
 
-app.use('/agent', agentRouter);
-
 // Root router for each pages.
 app.use('/', rootRouter);
 
@@ -46,8 +53,8 @@ app.use('/', express.static('public'));
 // });
 
 
-import ResponseError from './core/error/response_error';
-import ErrorMessage from './core/error/error_message';
+var ResponseError = require('./core/error/response_error');
+var ErrorMessage = require('./core/error/error_message');
 /**
  * Response error handler. <br />
  * 
@@ -88,6 +95,6 @@ app.use((err, req, res, next) => {
   res.render('internal_error');
 });
 
-Initialize();
+Initializer();
 
-export default app;
+module.exports = app;

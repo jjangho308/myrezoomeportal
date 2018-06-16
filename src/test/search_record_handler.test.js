@@ -1,6 +1,6 @@
-import SearchRecordRequestHandler from '../modules/client/record/search_record_handler'
-import Initializer from '../core/initializer';
-import Terminator from '../core/terminator';
+var SearchRecordRequestHandler = require('../modules/client/record/search_record_handler');
+var Initializer = require('../core/initializer');
+var Terminator = require('../core/terminator');
 
 describe('SearchRecordRequestHandler Test suit', () => {
     var HD = null;

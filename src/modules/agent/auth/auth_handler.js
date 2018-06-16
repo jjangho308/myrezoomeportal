@@ -1,6 +1,6 @@
-import AbstractAgentRequestHandler from "../abstract_agent_request_handler";
+var AbstractAgentRequestHandler = require('../abstract_agent_request_handler');
 
-import AgentRequest from '../agent_request';
+var AgentRequest = require('../agent_request');
 
 /**
  * Handler of AuthenticationRequestEntity. <br />
@@ -37,4 +37,4 @@ class AuthenticationRequestHandler extends AbstractAgentRequestHandler {
     }
 }
 
-export default AuthenticationRequestHandler;
+module.exports = AuthenticationRequestHandler;

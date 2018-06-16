@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from "../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 /**
  * Client request to create new resume by given txids. <br />
  * 
@@ -28,4 +28,4 @@ class CreateResumeRequest extends AbstractClientRequestEntity {
     }
 }
 
-export default CreateResumeRequest;
+module.exports = CreateResumeRequest;

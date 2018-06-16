@@ -1,16 +1,16 @@
-import jsonminify from 'jsonminify';
+var jsonminify = require('jsonminify');
 
-import ClientRequest from '../../client_request';
+var ClientRequest = require('../../client_request');
 
-import AbstractClientRequestHandler from "../../abstract_client_request_handler";
-import IssueCertAPIV1RequestEntity from "./api_issue_cert_entity";
+var AbstractClientRequestHandler = require('../../abstract_client_request_handler');
+var IssueCertAPIV1RequestEntity = require('./api_issue_cert_entity');
 
-import Managers from '../../../../core/managers';
+var Managers = require('../../../../core/managers');
 
-import Util from '../../../../util/util';
+var Util = require('../../../../util/util');
 
-import CertModel from '../../../../models/cert/cert';
-import SharedCertModel from '../../../../models/cert/shared_cert';
+var CertModel = require('../../../../models/cert/cert');
+var SharedCertModel = require('../../../../models/cert/shared_cert');
 
 /**
  * Handler for IssueCertAPIV1RequestEntity. <br />
@@ -205,4 +205,4 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
     }
 }
 
-export default IssueCertAPIV1RequestHandler;
+module.exports = IssueCertAPIV1RequestHandler;

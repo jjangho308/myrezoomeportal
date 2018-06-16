@@ -1,5 +1,9 @@
-import ManagerProvider from './managers'
-import AbstractManager from '../modules/abstract_manager';
+var ManagerProvider = require('./managers');
+var AbstractManager = require('../modules/abstract_manager');
+
+const FROM_DEBUG = 0;
+const FROM_UNITTEST = 1;
+const FROM_RUNTIME = 2;
 
 /**
  * Rezoome portal initialize. <br />
@@ -8,20 +12,30 @@ import AbstractManager from '../modules/abstract_manager';
  * @author TACKSU
  * @param {*} cb 
  */
-var initializer = (from) => {
+exports = (from) => {
     // Initialize managers.
     for (var i in ManagerProvider) {
-        if (ManagerProvider[i] instanceof Function) {
-            var manager = ManagerProvider[i]();
-            if (manager instanceof AbstractManager) {
-                manager.init(from);
+        ManagerProvider.forEach(manager => {
+            if (manager instanceof Function) {
+                if (manager instanceof AbstractManager) {
+                    manager.init(from || FROM_DEBUG);
+                }
             }
-        }
+        });
     }
 }
 
-initializer.FROM_DEBUG = 0;
-initializer.FROM_UNITTEST = 1;
-initializer.FROM_RUNTIME = 2
+/**
+ * Initializing point for debug session. <br />
+ */
+exports.FROM_DEBUG = FROM_DEBUG;
 
-export default initializer;
+/**
+ * Initializing point for unit test session. <br />
+ */
+exports.FROM_UNITTEST = FROM_UNITTEST;
+
+/**
+ * Initializing point for production environment. <br />
+ */
+exports.FROM_RUNTIME = FROM_RUNTIME;

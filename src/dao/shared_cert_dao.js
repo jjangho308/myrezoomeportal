@@ -1,7 +1,7 @@
-import mysql from 'mysql';
-import SharedCertModel from './shared_cert';
-import AbstractDAO from '../abstract_dao';
-import userQuery from './shared_cert_query';
+var mysql = require('mysql');
+var SharedCertModel = require('./shared_cert');
+var AbstractDAO = require('../abstract_dao');
+var userQuery = require('./shared_cert_query');
 
 
 /**
@@ -99,4 +99,4 @@ class SharedCertDAO extends AbstractDAO {
 
     }
 }
-export default SharedCertDAO;
+module.exports = SharedCertDAO;

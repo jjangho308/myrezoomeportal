@@ -1,10 +1,10 @@
-import mysql from 'mysql';
-import AbstractDAO from './abstract_dao';
-import recordQuery from './record_query';
+var mysql = require('mysql');
+var AbstractDAO = require('./abstract_dao');
+var recordQuery = require('./record_query');
 
-import BlcMapModel from '../models/record/blc_map';
-import PrivateRecord from '../models/record/private_record';
-import Util from '../util/util';
+var BlcMapModel = require('../models/record/blc_map');
+var PrivateRecord = require('../models/record/private_record');
+var Util = require('../util/util');
 
 /**
  * DAO for record. <br />
@@ -211,4 +211,4 @@ class RecordDAO extends AbstractDAO {
     }
 }
 
-export default RecordDAO;
+module.exports = RecordDAO;

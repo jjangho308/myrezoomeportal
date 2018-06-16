@@ -1,9 +1,9 @@
-import Managers from '../core/managers';
-import SearchRecordsRequest from '../modules/client/record/search_record';
-import GetPrivateRecordsRequest from '../modules/client/record/get_records_request'
-import CreatePrivateRecordRequest from '../modules/client/record/create_record_request';
-import UpdatePrivateRecordRequest from '../modules/client/record/update_record';
-import DeletePrivateRecordRequest from '../modules/client/record/delete_record_request';
+var Managers = require('../core/managers');
+var SearchRecordsRequest = require('../modules/client/record/search_record');
+var GetPrivateRecordsRequest = require('../modules/client/record/get_records_request');
+var CreatePrivateRecordRequest = require('../modules/client/record/create_record_request');
+var UpdatePrivateRecordRequest = require('../modules/client/record/update_record');
+var DeletePrivateRecordRequest = require('../modules/client/record/delete_record_request');
 
 /**
  * Controller for /records URI. <br />
@@ -11,7 +11,7 @@ import DeletePrivateRecordRequest from '../modules/client/record/delete_record_r
  * @since 180321
  * @author TACKSU
  */
-export default {
+module.exports = {
 
     /**
      * Get private record of given user. <br />

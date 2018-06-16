@@ -1,4 +1,4 @@
-import AbstractClientRequestEntity from "../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
 /**
  * Request to search user's record by given organization. <br />
@@ -38,4 +38,4 @@ class SearchRecordRequest extends AbstractClientRequestEntity {
     }
 }
 
-export default SearchRecordRequest;
+module.exports = SearchRecordRequest;

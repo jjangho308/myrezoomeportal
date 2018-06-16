@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     getSdkDownloadView: (req, res, next) => {
         res.status(200).render('developer_sdk_download');
     },

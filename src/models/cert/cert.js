@@ -1,6 +1,6 @@
-import AbstractModel from "../abstract_model";
+var AbstractModel = require('../abstract_model');
 
-import Util from '../../util/util';
+var Util = require('../../util/util');
 
 /**
  * Model declaration of Certificate. <br />
@@ -92,4 +92,4 @@ class CertModel extends AbstractModel {
     }
 }
 
-export default CertModel;
+module.exports = CertModel;

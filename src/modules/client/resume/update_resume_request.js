@@ -1,4 +1,4 @@
-import AbstractClientRequesEntity from "../abstract_client_request_entity";
+var AbstractClientRequesEntity = require('../abstract_client_request_entity');
 
 /**
  * Request to update exists resume of given user. <br />
@@ -29,4 +29,4 @@ class UpdateResumeRequest extends AbstractClientRequesEntity {
     }
 }
 
-export default UpdateResumeRequest;
+module.exports = UpdateResumeRequest;

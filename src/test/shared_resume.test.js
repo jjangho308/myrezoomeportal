@@ -1,8 +1,8 @@
-import Initialize from '../core/initializer';
-import SharedResumeDAO from '../dao/shared_resume_dao';
-import Managers from '../core/managers';
-import SharedResumeModel from '../models/resume/shared_resume';
-import Util from '../util/util';
+var Initialize = require('../core/initializer');
+var SharedResumeDAO = require('../dao/shared_resume_dao');
+var Managers = require('../core/managers');
+var SharedResumeModel = require('../models/resume/shared_resume');
+var Util = require('../util/util');
 
 /**
  * Test suit for shared_resume model and DAO. <br />

@@ -1,12 +1,12 @@
-import Initialize from '../core/initializer';
+var Initialize = require('../core/initializer');
 
-import Managers from '../core/managers';
-import DatabaseManager from '../modules/db/db';
+var Managers = require('../core/managers');
+var DatabaseManager = require('../modules/db/db');
 
-import UserDAO from '../models/user/user_dao';
-import UserModel from '../models/user/user';
+var UserDAO = require('../models/user/user_dao');
+var UserModel = require('../models/user/user');
 
-import Util from '../util/util';
+var Util = require('../util/util');
 
 /**
  * Test suit for user model and DAO. <br />

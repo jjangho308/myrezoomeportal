@@ -1,6 +1,6 @@
-import AbstractClientRequestEntity from "../abstract_client_request_entity";
+var AbstractClientRequestEntity = require('../abstract_client_request_entity');
 
-import SharedCertModel from '../../../models/cert/shared_cert';
+var SharedCertModel = require('../../../models/cert/shared_cert');
 
 /**
  * Request entity to share certificate. <br />
@@ -22,4 +22,4 @@ class ShareCertRequestEntity extends AbstractClientRequestEntity{
     }
 }
 
-export default ShareCertRequestEntity;
+module.exports = ShareCertRequestEntity;

@@ -1,4 +1,4 @@
-import AbstractAgentRequest from "../abstract_agent_request_entity";
+var AbstractAgentRequest = require('../abstract_agent_request_entity');
 
 /**
  * Response class of SearchResultRequest. <br />
@@ -44,4 +44,4 @@ class SearchResultRequest extends AbstractAgentRequest {
     }
 }
 
-export default SearchResultRequest;
+module.exports = SearchResultRequest;

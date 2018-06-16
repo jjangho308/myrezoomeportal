@@ -1,4 +1,4 @@
-import AbstractClientRequesEntity from "../abstract_client_request_entity";
+var AbstractClientRequesEntity = require('../abstract_client_request_entity');
 
 class DeleteCertificateRequest extends AbstractClientRequesEntity{
     constructor(opt){
@@ -8,4 +8,4 @@ class DeleteCertificateRequest extends AbstractClientRequesEntity{
 }
 
 
-export default DeleteCertificateRequest;
+module.exports = DeleteCertificateRequest;

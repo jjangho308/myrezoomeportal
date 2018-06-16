@@ -1,5 +1,5 @@
-import express from 'express';
-import ctrl from './developer_ctrl';
+var express = require('express');
+var ctrl = require('./developer_ctrl');
 
 
 /**
@@ -11,4 +11,4 @@ router.get('/sdk_download', ctrl.getSdkDownloadView);
 router.get('/reference/js', ctrl.getJSreferenceView);
 router.get('/reference/rest', ctrl.getOAuth2referenceView);
 
-export default router;
+module.exports = router;

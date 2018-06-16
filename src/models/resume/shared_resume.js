@@ -1,6 +1,6 @@
-import AbstractModel from "../abstract_model";
+var AbstractModel = require('../abstract_model');
 
-import Util from '../../util/util';
+var Util = require('../../util/util');
 
 /**
  * Model of sharing resume entity. <br />
@@ -63,4 +63,4 @@ class SharedResumeModel extends AbstractModel {
     }
 }
 
-export default SharedResumeModel;
+module.exports = SharedResumeModel;
