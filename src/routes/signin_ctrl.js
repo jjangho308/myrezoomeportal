@@ -30,19 +30,27 @@ module.exports = {
      * @author TACKSU
      */
     post: (req, res, next) => {
-        if (!!req.body.email && req.body.pw) {
+        if (!req.body.email) {
+            return next(new HttpResponseError({
+                code: ErrorCode.PARAM_INVALID,
+            }));
+        } else if (!!req.body.pw) {
+            return next(new HttpResponseError({
+                code: ErrorCode.PARAM_INVALID,
+            }));
+        } else {
             Managers.client().request(new SignInRequest(req.body), (err, result) => {
                 if (!!err) {
-                    next(err);
+                    return next(err);
+                } else if (!result || !result.token) {
+                    return next(new HttpResponseError({
+                        code: ErrorCode.INTERNAL_UNKNOWN,
+                    }))
                 } else {
-                    res.set('Set-Cookie', 'JWT=' + result.token)
+                    return res.set('Set-Cookie', 'JWT=' + result.token)
                         .type('application/json').status(200).json(result);
                 }
             });
-        } else {
-            next(new HttpResponseError({
-                code: ErrorCode.PARAM_INVALID
-            }));
         }
     }
 }

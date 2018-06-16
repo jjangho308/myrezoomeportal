@@ -12,30 +12,32 @@ const FROM_RUNTIME = 2;
  * @author TACKSU
  * @param {*} cb 
  */
-exports = (from) => {
+function Initializer(from) {
     // Initialize managers.
     for (var i in ManagerProvider) {
-        ManagerProvider.forEach(manager => {
-            if (manager instanceof Function) {
-                if (manager instanceof AbstractManager) {
-                    manager.init(from || FROM_DEBUG);
-                }
+        if (ManagerProvider[i] instanceof Function) {
+            var manager = ManagerProvider[i]();
+            if (manager instanceof AbstractManager) {
+                manager.init(from || FROM_DEBUG);
             }
-        });
+        }
     }
 }
+
 
 /**
  * Initializing point for debug session. <br />
  */
-exports.FROM_DEBUG = FROM_DEBUG;
+Initializer.FROM_DEBUG = FROM_DEBUG;
 
 /**
  * Initializing point for unit test session. <br />
  */
-exports.FROM_UNITTEST = FROM_UNITTEST;
+Initializer.FROM_UNITTEST = FROM_UNITTEST;
 
 /**
  * Initializing point for production environment. <br />
  */
-exports.FROM_RUNTIME = FROM_RUNTIME;
+Initializer.FROM_RUNTIME = FROM_RUNTIME;
+
+module.exports = Initializer;

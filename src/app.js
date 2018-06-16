@@ -26,31 +26,27 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+app.use(logger('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-//for front end angular2
-// app.use(express.static(path.join(__dirname, 'front')));
 
 // Root router for each pages.
 app.use('/', rootRouter);
 
 // Router for static resources.
-app.use('/', express.static('public'));
+app.use(express.static('public'));
 
 // catch 404 and forward to error handler
 // TODO TACSU Degug
-// app.use(function (req, res, next) {
-//   console.log("Not found : " + req.originalUrl);
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
+app.use((req, res, next) => {
+  console.log("Not found : " + req.originalUrl);
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 
 
 var ResponseError = require('./core/error/response_error');
@@ -92,7 +88,7 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('internal_error');
+  return res.render('internal_error');
 });
 
 Initializer();
