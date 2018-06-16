@@ -1,20 +1,21 @@
 var express = require('express');
 
-var signin_router = require('./signin_route');
-var signout_router = require('./signout_route');
-var signup_router = require('./signup_route');
-var records_router = require('./records_route');
-var certs_router = require('./certs_route');
-var resumes_router = require('./resumes_route');
-var main_router = require('./main_route');
-var client_router = require('./client_route');
-var intro_router = require('./intro_route');
-var shared_certs_router = require('./shared_certs_route');
-var shared_resumes_router = require('./shared_resumes_route');
-var verify_router = require('./verify_route');
-var api_router = require('./api/api_route');
-var oauth_router = require('./oauth/oauth_route');
-var developer_router = require('./developer_route');
+var signinRouter = require('./signin_route');
+var signoutRouter = require('./signout_route');
+var signupRouter = require('./signup_route');
+var recordsRouter = require('./records_route');
+var certsRouter = require('./certs_route');
+var resumesRouter = require('./resumes_route');
+var mainRouter = require('./main_route');
+var clientRouter = require('./client_route');
+var introRouter = require('./intro_route');
+var sharedCertsRouter = require('./shared_certs_route');
+var sharedResumesRouter = require('./shared_resumes_route');
+var verifyRouter = require('./verify_route');
+var apiRouter = require('./api/api_route');
+var oauthRouter = require('./oauth/oauth_route');
+var developerRouter = require('./developer_route');
+var agentRouter = require('./agent_route');
 
 /**
  * Root router of all http request channel. <br />
@@ -24,22 +25,24 @@ var developer_router = require('./developer_route');
  * @author TACKSU
  */
 var router = express.Router();
-router.use('/', intro_router);
-router.use('/signin', signin_router);
-router.use('/signout', signout_router);
-router.use('/signup', signup_router);
-router.use('/main', main_router);
-router.use('/record', records_router);
-router.use('/records', records_router);
-router.use('/certs', certs_router);
-router.use('/resumes', resumes_router);
-router.use('/client', client_router);
-router.use('/shared_certs', shared_certs_router);
-router.use('/shared_resumes', shared_resumes_router);
+router.use('/', introRouter);
+router.use('/signin', signinRouter);
+router.use('/signout', signoutRouter);
+router.use('/signup', signupRouter);
+router.use('/main', mainRouter);
+router.use('/record', recordsRouter);
+router.use('/records', recordsRouter);
+router.use('/certs', certsRouter);
+router.use('/resumes', resumesRouter);
+router.use('/agent', agentRouter);
+router.use('/client', clientRouter);
+router.use('/shared_certs', sharedCertsRouter);
+router.use('/shared_resumes', sharedResumesRouter);
 
-router.use('/v', verify_router);
-router.use('/api', api_router);
-router.use('/oauth2', oauth_router);
-router.use('/dev', developer_router);
+
+router.use('/v', verifyRouter);
+router.use('/api', apiRouter);
+router.use('/oauth2', oauthRouter);
+router.use('/dev', developerRouter);
 
 module.exports = router;

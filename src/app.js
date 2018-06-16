@@ -5,10 +5,19 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var Initialize = require('./core/initializer');
-var rootRouter = require('./routes/root_route');
-var agentRouter = require('./routes/agent_route');
+/**
+ * Service initializer. <br />
+ */
+var Initializer = require('./core/initializer');
 
+/**
+ * Root router for multiple routers. <br />
+ */
+var rootRouter = require('./routes/root_route');
+
+/**
+ * Express application. <br />
+ */
 var app = express();
 
 // view engine setup
@@ -27,8 +36,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //for front end angular2
 // app.use(express.static(path.join(__dirname, 'front')));
-
-app.use('/agent', agentRouter);
 
 // Root router for each pages.
 app.use('/', rootRouter);
@@ -88,6 +95,6 @@ app.use((err, req, res, next) => {
   res.render('internal_error');
 });
 
-Initialize();
+Initializer();
 
 module.exports = app;
