@@ -15,6 +15,8 @@ var Initializer = require('./core/initializer');
  */
 var rootRouter = require('./routes/root_route');
 
+var Environment = require('./core/environment');
+
 /**
  * Express application. <br />
  */
@@ -49,6 +51,8 @@ app.use((req, res, next) => {
 });
 
 
+var ErrorCode = require('./core/error/error_code');
+var HttpErrorCode = require('./core/error/http_error_code');
 var ResponseError = require('./core/error/response_error');
 var ErrorMessage = require('./core/error/error_message');
 /**
@@ -58,23 +62,39 @@ var ErrorMessage = require('./core/error/error_message');
  * @author TACKSU
  */
 app.use((err, req, res, next) => {
-  if (err instanceof ResponseError) {
-    var status = res.locals.status = err.status || 500;
+  var status = res.locals.status = err.status || 500;
 
+  var requestLocale = 'ko-kr' || 'default';
+  if (err instanceof ResponseError) {
     if (!!req.xhr) {
       res.status(status).json({
         err: {
           code: err.code,
-          msg: ErrorMessage['ko-KR'.toLowerCase()][err.code],
+          msg: ErrorMessage[requestLocale][err.code],
+          stack: !!err.cause && Environment.developement ? err.cause.stack : null,
         }
       });
     } else {
       res.locals.code = err.code;
-      res.locals.msg = ErrorMessage['ko-KR'.toLowerCase()][err.code];
+      res.locals.msg = ErrorMessage[requestLocale][err.code];
+      res.locals.stack = !!err.cause && Environment.developement ? err.cause.stack : null;
       res.status(status).render('response_error');
     }
   } else {
-    next(err);
+    if (!!req.xhr) {
+      res.status(status).json({
+        err: {
+          code: ErrorCode.INTERNAL_ERROR,
+          msg: ErrorMessage[requestLocale][ErrorCode.INTERNAL_ERROR],
+          stack: Environment.developement ? err.stack : null,
+        }
+      });
+    } else {
+      res.locals.code = ErrorCode.INTERNAL_ERROR;
+      res.locals.msg = ErrorMessage[requestLocale][ErrorCode.INTERNAL_ERROR];
+      res.locals.stack = Environment.developement ? err.stack : null;
+      res.status(status).render('response_error');
+    }
   }
 });
 

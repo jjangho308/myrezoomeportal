@@ -79,6 +79,27 @@ var IssueCertAPIV1Handler = require('./api/v1/api_issue_cert_handler');
 var GetCertViewRequestEntity = require('./certs/get_cert_view_request');
 var GetCertViewRequestHandler = require('./certs/get_cert_view_handler');
 
+
+/**
+ * ClientRequestHandler의 request function의 마지막 callback에서
+ * 아래의 세 값을 첫번째 인자로 사용하여 Request의 결과 처리를 할 수 있도록 한다.
+ */
+
+/**
+ * Result code of success. <br />
+ */
+const RESULT_SUCCESS = 0;
+
+/**
+ * Result code of pending
+ */
+const RESULT_PENDING = 1;
+
+/**
+ * Result code of failure
+ */
+const RESULT_FAILURE = 2;
+
 /**
  * Request manager from client. <br />
  * 
@@ -195,7 +216,7 @@ class ClientRequestManager extends AbstractManager {
             switch (resultCode) {
 
                 // 에러 발생시에는 Error 객체를 Client에 Response 후
-                case ClientRequestManager.RESULT_FAILURE:
+                case RESULT_FAILURE:
                     {
                         // result instanceof Error Retry?
                         this.requestMap.remove(request.mId);
@@ -203,14 +224,14 @@ class ClientRequestManager extends AbstractManager {
                         break;
                     }
 
-                case ClientRequestManager.RESULT_PENDING:
+                case RESULT_PENDING:
                     {
                         // 해당 MessageID에 Request를 저장한다.
                         cb(null, errorOrResult);
                         break;
                     }
 
-                case ClientRequestManager.RESULT_SUCCESS:
+                case RESULT_SUCCESS:
                     {
                         // result instanceof Object.
                         this.requestMap.remove(request.mId);
@@ -255,26 +276,6 @@ class ClientRequestManager extends AbstractManager {
         this.requestMap.get(mid).socket = socket;
     }
 }
-
-/**
- * ClientRequestHandler의 request function의 마지막 callback에서
- * 아래의 세 값을 첫번째 인자로 사용하여 Request의 결과 처리를 할 수 있도록 한다.
- */
-
-/**
- * Result code of success. <br />
- */
-ClientRequestManager.RESULT_SUCCESS = 0;
-
-/**
- * Result code of pending
- */
-ClientRequestManager.RESULT_PENDING = 1;
-
-/**
- * Result code of failure
- */
-ClientRequestManager.RESULT_FAILURE = 2;
 
 module.exports = ClientRequestManager
 

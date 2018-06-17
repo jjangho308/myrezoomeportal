@@ -1,7 +1,17 @@
-<h1> Internal error </h1>
-<h3> code :
-    <%= code %>
-</h3>
-<h3> Message :
-    <%= msg %>
-</h3>
+<%/*
+{
+    code : Error code,
+    msg : Error message,
+    stack : Error stack if exists,
+}
+*/%>
+    <h1> Response Error </h1>
+    <h3> code :
+        <%= code %>
+    </h3>
+    <h3> Message :
+        <%= msg %>
+    </h3>
+    <h3> Stack :
+        <%= !!stack ? stack : null %>
+    </h3>

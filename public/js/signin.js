@@ -20,12 +20,12 @@ $(document).ready(function () {
         if ($('#signin_id').val() == '') {
             $("input").css("border", "solid 1px #f59188");
             $(".error-message").css("display", "block");
-            $(".error-message").html("ID를 입력해라.");
+            $(".error-message").html("Email ID를 입력하세요.");
             return;
         } else if ($('#signin_pw').val() == '') {
             $("input").css("border", "solid 1px #f59188");
             $(".error-message").css("display", "block");
-            $(".error-message").html("PW를 입력해라.");
+            $(".error-message").html("패스워드를 입력하세요.");
             return;
         }
 

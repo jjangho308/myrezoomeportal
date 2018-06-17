@@ -3,11 +3,11 @@
  */
 module.exports = {
 
-    developement: () => {
-        return process.env.NODE_ENV == 'development';
-    },
+    developement: (() => {
+        return process.env.NODE_ENV === 'development';
+    })(),
 
-    prouction: () => {
-        return process.env.NODE_ENV == 'production';
-    }
+    prouction: (() => {
+        return process.env.NODE_ENV === 'production';
+    })(),
 }
