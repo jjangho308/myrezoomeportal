@@ -277,3 +277,7 @@ ClientRequestManager.RESULT_PENDING = 1;
 ClientRequestManager.RESULT_FAILURE = 2;
 
 module.exports = ClientRequestManager
+
+exports.RESULT_SUCCESS = 0;
+exports.RESULT_PENDING = 1;
+exports.RESULT_FAILURE = 2;

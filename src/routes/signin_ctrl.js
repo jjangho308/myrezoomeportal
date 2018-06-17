@@ -34,7 +34,7 @@ module.exports = {
             return next(new HttpResponseError({
                 code: ErrorCode.PARAM_INVALID,
             }));
-        } else if (!!req.body.pw) {
+        } else if (!req.body.pw) {
             return next(new HttpResponseError({
                 code: ErrorCode.PARAM_INVALID,
             }));
