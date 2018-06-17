@@ -273,47 +273,61 @@ $(document).ready(function () {
 
 
 
-        //convert to image
         var $childern = $(".outer-container > .inner-container");
-        console.log($childern.size())
-        // var i = 0;
+        // $childern.each(function (idx, array) {
+        //         html2canvas($(this) , {
+        //             onrendered: function (canvas) {
+        //                 var ctx = canvas.getContext('2d');
+        //                 ctx.webkitImageSmoothingEnabled = false;
+        //                 ctx.mozImageSmoothingEnabled = false;
+        //                 ctx.imageSmoothingEnabled = false;
+        //                 var img = canvas.toDataURL("image/jpeg,1.0");
+        //                 $("#printcontent").prepend("<img class=certImg id=certImg" + idx + " width=100% src=" + img + ">");
 
+        //                 if (idx === $childern.size()-1) {
+        //                             $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
+                                                               
+        //                             setTimeout( function(){
+                                       
+        //                                 window.print();
+        //                                 $.unblockUI();
+        //                                 $('.certImg').remove();  
+
+        //                             }, 3000);
+        //                 }
+        //             }
+        //         });            
+        // });
 
         
         $childern.each(function (idx, array) {
-            console.log("aa");
-            // i = i+1;
-           
+            html2canvas($(this), { scale:3 }).then(canvas => {
+                    // var ctx = canvas.getContext('2d');
+                    // ctx.webkitImageSmoothingEnabled = false;
+                    // ctx.mozImageSmoothingEnabled = false;
+                    // ctx.imageSmoothingEnabled = false;
+                    var img = canvas.toDataURL("image/jpeg" , 2);
+                    $("#printcontent").prepend("<img class=certImg id=certImg" + idx + " width=100% src=" + img + ">");
 
-                html2canvas($(this) , {
-                    onrendered: function (canvas) {
-                        var ctx = canvas.getContext('2d');
-                        ctx.webkitImageSmoothingEnabled = false;
-                        ctx.mozImageSmoothingEnabled = false;
-                        ctx.imageSmoothingEnabled = false;
-                        var img = canvas.toDataURL("image/jpeg,1.0");
-                        $("#printcontent").prepend("<img class=certImg id=certImg" + idx + " width=100% src=" + img + ">");
-
-                        if (idx === $childern.size()-1) {
-                                    var a = $('#printcontent').html();
-                                    // var loading = $('<img class=lodingImg alt="loading" src="/img/common/ajax-loader.gif" />')
-                                    $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
-                                                               
-                                    setTimeout( function(){
-                                       
-                                        window.print();
-                                        $.unblockUI();
-                                        $('.certImg').remove();  
-
-                                    }, 3000);
-                                    
+                    if (idx === $childern.size()-1) {
+                                $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
+                                                           
+                                setTimeout( function(){
                                    
-                                    
-                        }
+                                    window.print();
+                                    $.unblockUI();
+                                    $('.certImg').remove();  
+
+                                }, 3000);
                     }
-                });
-            
-        });
+                
+            });            
+    });
+
+
+        // html2canvas(document.querySelector(".inner-container") ).then(canvas => {
+        //     document.querySelector("#printcontent").appendChild(canvas)
+        // });
 
 
 

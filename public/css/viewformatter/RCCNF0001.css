@@ -172,10 +172,10 @@
     height: 40px;
 }
 
-@media screen and (min-width: 720px){
+@media screen and (min-width: 840px){
 
     .main-body {
-        font-size: 25px;
+        font-size: 15px;
     }
 
     #qrmessage {
@@ -348,7 +348,7 @@
     }
 }
 
-@media (max-width:720px) {
+@media (max-width:839px) {
     .main-body {
         font-size: 10px;
         padding: 5px 0px;
@@ -360,14 +360,17 @@
         padding: 10px 25px;
     }
 
+    .inner-container{
+	    width: 470px;
+	    height:  calc(470px * 1.41);    
+        margin: auto;
+		background: white;		
+    }
+
     .outer-container {
-        padding-top: 10px;
+        height: calc(490px * 1.41);
+        width: 490px;
     }
-
-    .inner-container {
-        width: 95%;
-    }
-
     .inner-container img {
         width: 100%
     }
@@ -522,8 +525,8 @@
 
     #chart-div img {
         position: absolute;
-        left: 160px;
-        top: 200px;
+        left: 250px;
+        top: 290px;
         width: 200px;
     }
 }
