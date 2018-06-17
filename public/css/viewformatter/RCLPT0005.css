@@ -35,6 +35,10 @@
 
 
 
+@media (min-width:840px){
+
+    
+
 #opic_cert p:nth-child(1) {position: relative; top: 9.3%; left: 50%;}
 #opic_cert p:nth-child(2) {position: relative; top: 12.5%; left: 38.5%;}
 #opic_cert p:nth-child(3) {position: relative; top: 13.8%; left: 42% }
@@ -52,8 +56,6 @@
 #opic_report p:nth-child(4) {position: relative; top: 14.6%; left: 27.5% }
 
 
-@media (min-width:840px){
-
     html{
         font-size:14px;
     }
@@ -69,7 +71,7 @@
 
 @media screen and (max-width:839px){
     
-
+    
     html{
         font-size:9px;
     }
@@ -91,18 +93,19 @@
         visibility: hidden;
         padding: 10px 25px;
     }
-
+    #opic_cert p:nth-child(1) {position: absolute; top: 11.8%; left: 47.5%; }
     #opic_cert p:nth-child(2) {position: absolute; top: 11.8%; left: 47.5%;}
-    #opic_cert p:nth-child(3) {position: absolute; top: 18%; left: 26% }
-    #opic_cert p:nth-child(4) {position: absolute; top: 18%; left: 42.5% }
-    #opic_cert p:nth-child(5) {position: absolute; top: 18%; left: 59% }
-    #opic_cert p:nth-child(6) {position: absolute; top: 18%; left: 75.5% }
-    #opic_cert p:nth-child(7) {position: absolute; top: 24.5%; left: 49% }
-    #opic_cert p:nth-child(8) {position: absolute; top: 37.3%; left: 66% }
-    #opic_cert p:nth-child(9) {position: absolute; top: 37.3%; left: 81% }
+    #opic_cert p:nth-child(3) {position: absolute; top: 18%; left: 40.5%; -webkit-transform: scale(0.75);}
+    #opic_cert p:nth-child(4) {position: absolute; top: 18%; left: 57%; -webkit-transform: scale(0.75);}
+    #opic_cert p:nth-child(5) {position: absolute; top: 18%; left: 73.5%; -webkit-transform: scale(0.75);}
+    #opic_cert p:nth-child(6) {position: absolute; top: 24%; left: 57%;-webkit-transform: scale(0.75); }
+    #opic_cert p:nth-child(7) {position: absolute; top: 37.3%; left: 67%; -webkit-transform: scale(0.8);}
+    #opic_cert p:nth-child(8) {position: absolute; top: 37.3%; left: 81%; -webkit-transform: scale(0.8);}
+    #opic_cert p:nth-child(9) {position: absolute; top: 37.3%; left: 81%; -webkit-transform: scale(0.8);}
 
-    #opic_report p:nth-child(2) {position: absolute; top: 12.5%; left: 27.5% }
-    #opic_report p:nth-child(3) {position: absolute; top: 15%; left: 27.5% }
+    #opic_report p:nth-child(1) {position: absolute; top: 12%; left: 26%; -webkit-transform: scale(0.8);}
+    #opic_report p:nth-child(2) {position: absolute; top: 14.5%; left: 26.8%; -webkit-transform: scale(0.8); }
+    #opic_report p:nth-child(3) {position: absolute; top: 17%; left: 25.6%; -webkit-transform: scale(0.8); }
     #opic_report p:nth-child(4) {position: absolute; top: 17.4%; left: 27.5% }
     #opic_report p:nth-child(5) {position: absolute; top: 21%; left: 27.5% }
 }
