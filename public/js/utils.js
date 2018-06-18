@@ -124,6 +124,13 @@ function getTxidList() {
         storagedata = sessionStorage.getItem(client_token);
     }
     var resultarray = storagedata.split(",");
+
+    for (var i in resultarray) {
+        if(resultarray[i] == '') {
+            resultarray.splice(i,1);
+        }
+    }
+
     return resultarray;
 }
 
