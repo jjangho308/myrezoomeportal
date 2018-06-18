@@ -289,8 +289,9 @@ $(document).ready(function () {
         // $(".qrcode").hide();              
 
 
+        // 
 
-        var $childern = $(".outer-container > .inner-container");
+        var $childern = $(".outer-container >.inner-container");
         // $childern.each(function (idx, array) {
         //         html2canvas($(this) , {
         //             onrendered: function (canvas) {
@@ -324,22 +325,22 @@ $(document).ready(function () {
                     // ctx.mozImageSmoothingEnabled = false;
                     // ctx.imageSmoothingEnabled = false;
                     var img = canvas.toDataURL("image/jpeg" , 2);
-                    $("#printcontent").prepend("<img class=certImg id=certImg" + idx + " width=100% src=" + img + ">");
+
+                    $("#printcontent").append("<img class=certImg id=certImg" + idx + " width=98% src=" + img + ">");
 
                     if (idx === $childern.size()-1) {
-                                $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
-                                                           
-                                setTimeout( function(){
-                                   
-                                    window.print();
-                                    $.unblockUI();
-                                    $('.certImg').remove();  
+                        $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
+                                                    
+                        setTimeout( function(){                                    
+                            window.print();
+                            $.unblockUI();
+                            $('.certImg').remove();  
 
-                                }, 3000);
+                        }, 3000);
                     }
                 
             });            
-    });
+         });
 
 
         // html2canvas(document.querySelector(".inner-container") ).then(canvas => {
