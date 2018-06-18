@@ -58,7 +58,7 @@ function loadcertlist() {
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
                 htmldiv = htmldiv + '<p>증명서</p>';
                 htmldiv = htmldiv + '<p>' + item.title + '</p>';
-                htmldiv = htmldiv + '<p>발급일시 : ' + item.date + '</p>';
+                htmldiv = htmldiv + '<p>발급일시 : ' + formatDate(item.date) + '</p>';
 
                 htmldiv = htmldiv + '<div id="more-div-' + item.certId + '" class="more-store-resume-div">';
                 htmldiv = htmldiv + '<p>복사</p>';
