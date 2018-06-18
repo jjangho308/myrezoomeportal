@@ -121,13 +121,12 @@ p{
 }
 
 
-.header  button:nth-child(3){
+.header button:nth-child(3) {
     font-weight: bold;
     font-size: 12px;
-
-  width: 40px;
-  height: 40px;
-}
+    width: 45px;
+    height: 45px;
+    border: 1px solid #ced3d6;
 
 .header #more-button-div{
     display: none;
@@ -427,6 +426,7 @@ p{
     object-fit: contain;
     /* position: absolute; */
     /* top: 23px; */
+	margin: 15px 0px 15px 0px;
 }
 
 .verify-loader {

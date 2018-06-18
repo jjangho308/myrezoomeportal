@@ -3,7 +3,7 @@ var certformatter = {
     "RCLPT0005": function viewformatter(record_data) {
 
         var opicLevel = ['NL', 'NM', 'NH', 'IL', 'IM1', 'IM2', 'IM3', 'IH', 'AL'];
-        $(".main-body").load("../../viewhtml/RCLPT0005.html", function () {
+        $(".outer-container").load("../../viewhtml/RCLPT0005.html", function () {
             var level = record_data.rating;
 
             if (!!level && opicLevel.includes(level)) {

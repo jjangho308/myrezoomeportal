@@ -331,7 +331,7 @@ $(document).ready(function () {
                     // ctx.mozImageSmoothingEnabled = false;
                     // ctx.imageSmoothingEnabled = false;                    
                     var img = canvas.toDataURL("image/jpeg" , 2);
-                    $("#printcontent").append("<img class=certImg id=certImg" + idx + " width=98% src=" + img + ">");
+                    $("#printcontent").prepend("<img class=certImg id=certImg" + idx + " width=98% src=" + img + ">");
 
                     if (idx === $childern.size()-1) {
                         $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
