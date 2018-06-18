@@ -36,13 +36,13 @@
         height : calc(840px*1.41*2);
         padding-top: 0px;
     }
-
-    .outer-container .div:nth-child(2) {
-        margin-top: 20px;
-    }
-    
+   
     .inner-container {
         height: initial;
+    }
+
+    .inner-container:nth-child(3) {
+        margin-top: 5px;
     }
     
     .qr-container div:nth-child(1){
