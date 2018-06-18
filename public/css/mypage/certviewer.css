@@ -594,7 +594,7 @@ p{
           /* margin-top: 20px; */
           background: white;
           /* font-size: 60%; */
-          /* border: solid 2px #2b2c2c; */
+          border: solid 1px #2b2c2c;
           /* margin: 20px; */
       }
   
@@ -741,7 +741,7 @@ p{
       .inner-container {
           height: 100%;
           margin: auto;
-          /* border: solid 1px #2b2c2c; */
+          border: solid 1px #2b2c2c;
       }	
   }
   
@@ -797,15 +797,9 @@ p{
 
   margin: auto;
   position: relative;
+
 }
 
-.inner-container2 {
-    margin: auto;
-    position: relative;
-    width: 820px;
-    height: 1095px;
-    /* border: solid 2px #2b2c2c;     */
-  }
 /* 
 .cert-title{
   width:100%;
@@ -1116,12 +1110,6 @@ vertical-align: -4px;
     position: absolute;
     bottom: 39px;
     right: 105px;
-}
-
-.qrcode{
-  position: absolute;
-  bottom: -110px;
-  right: 0px;
 }
 
 .modal-body{

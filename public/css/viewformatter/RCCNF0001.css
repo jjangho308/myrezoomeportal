@@ -178,14 +178,20 @@
         font-size: 15px;
     }
 
-    #qrmessage {
-        content: "";
-        visibility: hidden;
-        padding: 10px 25px;
+    .inner-container {
+        margin: auto;
     }
 
     .inner-container img {
+        width: 100%;        
+    }
+
+    .inner-container .mk-bg {
+        background-image: url(/img/mycert/mk/mk_bg.jpg);
+        background-size: 100%;
+        background-repeat: no-repeat;
         width: 100%;
+        height: 100%
     }
     
     #user-info-div img:nth-child(1) {
@@ -350,6 +356,19 @@
     .main-body-footer-decription {
         width: 840px;
     }
+
+    .qr-container div:nth-child(1){
+        position: absolute;
+        bottom: 65px;
+        right: 0px;
+    }
+
+    .qr-container p:nth-child(2) {
+        position: relative;
+        font-size: 13px;        
+        left: 5px;
+        top: -170px;
+    }
 }
 
 @media (max-width:839px) {
@@ -358,13 +377,15 @@
         padding: 5px 0px;
     }
 
-    #qrmessage {
-        content: "";
-        visibility: hidden;
-        padding: 10px 25px;
+    .inner-container .mk-bg {
+        background-image: url(/img/mycert/mk/mk_bg.jpg);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%
     }
 
-    .inner-container{
+    .inner-container {
 	    width: 470px;
 	    height:  calc(470px * 1.41);    
         margin: auto;
