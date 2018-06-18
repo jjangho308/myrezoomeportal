@@ -77,7 +77,7 @@ module.exports = {
      */
     getCertView: (req, res, next) => {
         var certId = req.params.certId;
-        if (!!certId) {
+        if (!certId) {
             return next(new ResponseError({
                 code: ErrorCode.PARAM_NO_CERT_ID,
                 status: HttpStatusCode.BAD_REQUEST,
