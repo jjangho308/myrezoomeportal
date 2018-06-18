@@ -346,6 +346,10 @@
     .main-body-footer {
         width: 840px;
     }
+
+    .main-body-footer-decription {
+        width: 840px;
+    }
 }
 
 @media (max-width:839px) {
