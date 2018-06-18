@@ -109,3 +109,13 @@ display:none;
 .dialog-header-menu {
     height: 49px;
 }
+
+.total-count {
+    font-size: 13px;
+    float: left;
+    display: inline-block;
+    line-height: 47px;
+    color: #676767;
+    margin-right: 20px;
+    opacity: 0.8;
+}
