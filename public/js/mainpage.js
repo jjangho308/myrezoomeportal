@@ -483,6 +483,9 @@ $(document).ready(function () {
                     success: function (res) {
                         loadcertlist();
                     },
+                    error: function(res) {
+                        console.log(JSON.stringify(res));
+                    },
                     contentType: 'application/json',
                 });
             }

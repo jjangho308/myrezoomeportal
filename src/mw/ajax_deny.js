@@ -14,7 +14,7 @@ var HttpStatusCode = require('../core/error/http_status_code');
  * @param {*} next 
  */
 module.exports = (req, res, next) => {
-    if (!!req.ajax) {
+    if (!!req.xhr) {
         next(new ResponseError({
             code: ErrorCode.PARAM_AJAX_DENY,
             status: HttpStatusCode.BAD_REQUEST,
