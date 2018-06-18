@@ -2,7 +2,7 @@ var express = require('express');
 
 var clientTokenAuth = require('../mw/client_auth');
 var controller = require('./client_ctrl');
-var managers = require('../core/managers');
+var ajaxOnly = require('../mw/ajax_only');
 
 var router = express.Router();
 
@@ -13,6 +13,7 @@ var router = express.Router();
  * @author TACKSU
  */
 router.post('/', clientTokenAuth);
+router.post('/', ajaxOnly);
 router.post('/', controller.post);
 
 module.exports = router;

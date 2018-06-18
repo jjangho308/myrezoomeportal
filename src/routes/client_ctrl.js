@@ -1,5 +1,9 @@
 var Managers = require('../core/managers');
 
+var ErrorCode = require('../core/error/error_code');
+var ResponseError = require('../core/error/response_error');
+var HttpStatuCode = require('../core/error/http_status_code');
+
 /**
  * /client request controller. <br />
  * 
@@ -22,10 +26,6 @@ module.exports = {
             req.body = {};
         }
 
-        // console.log('client ctrl req body cmd : ')
-        // console.log(req.body);
-        // console.log('==============================================================');
-
         // Client에서 전달된 CommandName이 매핑된 RequestEntity를 생성.
 
         if (!!req.body.cmd) {
@@ -45,17 +45,14 @@ module.exports = {
                         });
                     }
                 } else {
-                    // 이 경우가 발생하지 않도록 수정 필요
-                    // TODO Error 처리
+                    return;
                 }
             });
         } else {
-            next({
-                err: {
-                    code: 200,
-                    msg: 'Command가 존재하지 않습니다.'
-                }
-            });
+            next(new ResponseError({
+                code: ErrorCode.PARAM_NO_CMD,
+                status: HttpStatuCode.BAD_REQUEST,
+            }));
         }
     }
 }
