@@ -5,6 +5,10 @@ var CreatePrivateRecordRequest = require('../modules/client/record/create_record
 var UpdatePrivateRecordRequest = require('../modules/client/record/update_record');
 var DeletePrivateRecordRequest = require('../modules/client/record/delete_record_request');
 
+var ResponseError = require('../core/error/response_error');
+var ErrorCode = require('../core/error/error_code');
+var HttpStatusCode = require('../core/error/http_status_code');
+
 /**
  * Controller for /records URI. <br />
  * 
@@ -22,9 +26,11 @@ module.exports = {
     get: (req, res, next) => {
         Managers.client().request(new GetPrivateRecordsRequest(req.body.uId), (err, result) => {
             if (!!err) {
-                res.status(500).json(err);
+                next(err);
             } else {
-                res.json(result);
+                res.json({
+                    result: result
+                });
             }
         });
     },
@@ -38,9 +44,11 @@ module.exports = {
     post: (req, res, next) => {
         Managers.client().request(new CreatePrivateRecordRequest(req.body), (err, result) => {
             if (!!err) {
-                res.status(500).json(err);
+                next(err);
             } else {
-                res.json(result);
+                res.json({
+                    result: result
+                });
             }
         });
     },
@@ -52,10 +60,17 @@ module.exports = {
      * @author TACKSU
      */
     del: (req, res, next) => {
-        req.body.prvtId = req.params.prvtId;
+        var privateRecordId = req.params.prvtId;
+        if (!privateRecordId) {
+            return next(new ResponseError({
+                code: ErrorCode.PARAM_NO_PRIVATE_RECORD_ID,
+                status: HttpStatusCode.BAD_REQUEST,
+            }));
+        }
+        req.body.prvtId = privateRecordId;
         Managers.client().request(new DeletePrivateRecordRequest(req.body), (err, result) => {
             if (!!err) {
-                res.status(500).json(err);
+                next(err);
             } else {
                 res.json(result);
             }
@@ -69,11 +84,18 @@ module.exports = {
      * @author TACKSU
      */
     patch: (req, res, next) => {
-        var recordId = req.params.recordId;
-        req.body.recordId = req.params.recordId;
+        var privateRecordId = req.params.prvRecordId;
+        if (!privateRecordId) {
+            return next(new ResponseError({
+                code: ErrorCode.PARAM_NO_PRIVATE_RECORD_ID,
+                status: HttpStatusCode.BAD_REQUEST,
+            }));
+        }
+
+        req.body.recordId = privateRecordId;
         Managers.client().request(new UpdatePrivateRecordRequest(req.body), (err, result) => {
             if (!!err) {
-                res.status(500).json(err);
+                next(err);
             } else {
                 res.json(result);
             }

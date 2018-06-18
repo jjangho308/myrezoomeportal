@@ -28,6 +28,7 @@ exports.PARAM_AJAX_DENY = 206;
 exports.PARAM_NO_TXID = 207;
 exports.PARAM_NO_SUBID = 208;
 exports.PARAM_NO_CMD = 209;
+exports.PARAM_NO_PRIVATE_RECORD_ID = 210;
 
 // Data error
 exports.DATA_ERROR = 300;

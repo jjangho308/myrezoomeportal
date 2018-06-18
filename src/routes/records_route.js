@@ -1,6 +1,7 @@
 var express = require('express');
 var tokenAuth = require('../mw/client_auth');
 var ctrl = require('./records_ctrl');
+var ajaxOnly = require('../mw/ajax_only');
 
 /**
  * Router for records. <br />
@@ -15,15 +16,18 @@ var router = express.Router();
 // router.get('/', view);
 
 router.post('/', tokenAuth);
+router.post('/', ajaxOnly);
 router.post('/', ctrl.post);
 
 router.get('/list', tokenAuth);
 router.get('/list', ctrl.get);
 
-router.post('/:prvtId', tokenAuth);
-router.post('/:prvtId', ctrl.del);
+router.post('/:prvRecordId', tokenAuth);
+router.post('/:prvRecordId', ajaxOnly);
+router.post('/:prvRecordId', ctrl.del);
 
-router.patch('/:recordId', tokenAuth);
-router.patch('/:recordId', ctrl.patch);
+router.patch('/:prvRecordId', tokenAuth);
+router.patch('/:prvRecordId', ajaxOnly);
+router.patch('/:prvRecordId', ctrl.patch);
 
 module.exports = router;

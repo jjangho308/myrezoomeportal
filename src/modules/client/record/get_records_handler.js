@@ -13,7 +13,7 @@ var PrivateRecord = require('../../../models/record/private_record');
  * @author TACKSU
  */
 class GetRecordsRequestHandler extends AbstractClientRequestHandler {
-    
+
     constructor(opt) {
         super(opt);
     }
@@ -27,12 +27,13 @@ class GetRecordsRequestHandler extends AbstractClientRequestHandler {
      */
     request(requestEntity, cb) {
         var recordDAO = Managers.db().getRecordDAO();
-        recordDAO.getPrivateRecord({uId: requestEntity.uId}, (err, result) => {
-            if (!!err) {                
+        recordDAO.getPrivateRecord({
+            uId: requestEntity.uId
+        }, (err, result) => {
+            if (!!err) {
                 cb(ClientRequest.RESULT_FAILURE, err);
             } else {
-                cb(ClientRequest.RESULT_SUCCESS, result);                
-                //console.log(result);
+                cb(ClientRequest.RESULT_SUCCESS, result);
             }
         });
     }
