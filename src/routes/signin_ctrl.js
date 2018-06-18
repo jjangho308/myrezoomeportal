@@ -3,8 +3,9 @@ var Managers = require('../core/managers');
 var SignInRequest = require('../modules/client/user/signin_request');
 
 var ErrorCode = require('../core/error/error_code');
-var HttpErrorCode = require('../core/error/http_error_code');
 var ResponseError = require('../core/error/response_error');
+var HttpErrorCode = require('../core/error/http_status_code');
+
 
 /**
  * Controller for /signin URI. <br />

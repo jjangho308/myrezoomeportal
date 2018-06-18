@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 
 
 var ErrorCode = require('./core/error/error_code');
-var HttpErrorCode = require('./core/error/http_error_code');
+var HttpErrorCode = require('./core/error/http_status_code');
 var ResponseError = require('./core/error/response_error');
 var ErrorMessage = require('./core/error/error_message');
 /**
