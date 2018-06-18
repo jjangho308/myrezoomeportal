@@ -296,6 +296,7 @@ $(document).ready(function () {
 
         // 
 
+        $(".qr-container").show();
         var $childern = $(".outer-container >.inner-container");
         // $childern.each(function (idx, array) {
         //         html2canvas($(this) , {
@@ -328,19 +329,18 @@ $(document).ready(function () {
                     // var ctx = canvas.getContext('2d');
                     // ctx.webkitImageSmoothingEnabled = false;
                     // ctx.mozImageSmoothingEnabled = false;
-                    // ctx.imageSmoothingEnabled = false;
+                    // ctx.imageSmoothingEnabled = false;                    
                     var img = canvas.toDataURL("image/jpeg" , 2);
-
                     $("#printcontent").append("<img class=certImg id=certImg" + idx + " width=98% src=" + img + ">");
 
                     if (idx === $childern.size()-1) {
                         $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
                                                     
-                        setTimeout( function(){                                    
+                        setTimeout( function(){                                                                
                             window.print();
                             $.unblockUI();
                             $('.certImg').remove();  
-
+                            $(".qr-container").hide();
                         }, 3000);
                     }
                 

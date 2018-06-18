@@ -393,6 +393,155 @@ p{
 	line-height: 50px;
 }
 
+.inner-container {
+    margin: auto;
+}
+
+.inner-container img {
+    width: 100%;        
+}
+
+.inner-container .mk-bg {
+    background-image: url(/img/mycert/mk/mk_bg.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%
+}
+
+#user-info-div img:nth-child(1) {
+    position: absolute;
+    left: 15px;
+    top: 205px;
+    width: 113px;
+    font-family: 'Nanum Myeongjo', serif;
+}    
+
+#user-info-div p:nth-child(2) {    
+    position: absolute;
+    left: 245px;
+    top: 220px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#user-info-div p:nth-child(3) {    
+    position: absolute;
+    left: 245px;
+    top: 250px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#user-info-div p:nth-child(4) {    
+    position: absolute;
+    left: 245px;
+    top: 285px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#user-info-div p:nth-child(5) {    
+    position: absolute;
+    left: 245px;
+    top: 320px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#main-score-info-div p:nth-child(1) {
+    position: absolute;
+    left: 465px;
+    top: 230px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#main-score-info-div p:nth-child(2) {
+    position: absolute;
+    left: 655px;
+    top: 230px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#main-score-info-div p:nth-child(3) {
+    position: absolute;
+    left: 465px;
+    top: 295px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#main-score-info-div p:nth-child(4) {
+    position: absolute;
+    left: 655px;
+    top: 295px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#detail-score-info-div p:nth-child(1) {
+    position: absolute;
+    left: 230px;
+    top: 485px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#detail-score-info-div p:nth-child(2) {
+    position: absolute;
+    left: 230px;
+    top: 530px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#detail-score-info-div p:nth-child(3) {
+    position: absolute;
+    left: 230px;
+    top: 575px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#detail-score-info-div p:nth-child(4) {
+    position: absolute;
+    left: 230px;
+    top: 620px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#detail-score-info-div p:nth-child(5) {
+    position: absolute;
+    left: 230px;
+    top: 665px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#detail-score-info-div p:nth-child(6) {
+    position: absolute;
+    left: 230px;
+    top: 710px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#detail-score-info-div p:nth-child(7) {
+    position: absolute;
+    left: 340px;
+    top: 485px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#detail-score-info-div p:nth-child(8) {
+    position: absolute;
+    left: 340px;
+    top: 530px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#detail-score-info-div p:nth-child(9) {
+    position: absolute;
+    left: 340px;
+    top: 575px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+#detail-score-info-div p:nth-child(10) {
+    position: absolute;
+    left: 340px;
+    top: 620px;
+    font-family: 'Nanum Myeongjo', serif;
+}
 
 .footer-verify-right {
 	float :right;
@@ -799,6 +948,23 @@ p{
   position: relative;
 }
 
+.main-body-footer-decription {
+    width: 840px;
+}
+
+.qr-container div:nth-child(1){
+    position: absolute;
+    bottom: 65px;
+    right: 0px;
+}
+
+.qr-container p:nth-child(2) {
+    position: relative;
+    font-size: 13px;        
+    left: 5px;
+    top: -170px;
+}
+
 .inner-container2 {
     margin: auto;
     position: relative;
@@ -843,6 +1009,21 @@ p{
   text-align: left;
   letter-spacing: 4.3px;
 } */
+
+.inner-container .mk-bg {
+    background-image: url(/img/mycert/mk/mk_bg.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%
+}
+
+.inner-container {
+    width: 470px;
+    height:  calc(470px * 1.41);    
+    margin: auto;
+    background: white;		
+}
 
 .two-word-interval{
   display: inline-block;
