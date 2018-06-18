@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    var KEY_CODE_RETURN = 13;
     // var situation = 1;
 
     // $(".confirm-btn").click(function () {
@@ -53,6 +54,8 @@ $(document).ready(function () {
                 $("input").css("border", "solid 1px #f59188");
                 $(".error-message").html(error.msg);
                 $(".error-message").show();
+                console.error('SignIn error.');
+                console.error(JSON.stringify(error));
 
                 // switch (error.code) {
                 //     case 1:
@@ -101,7 +104,7 @@ $(document).ready(function () {
     });
 
     $("#signin_div").keydown(function (key) {
-        if (key.keyCode == 13) {
+        if (key.keyCode === KEY_CODE_RETURN) {
             $('#btn_signin').trigger('click');
         }
     });
