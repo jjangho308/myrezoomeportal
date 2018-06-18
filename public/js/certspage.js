@@ -159,6 +159,10 @@ $(document).ready(function () {
             data: JSON.stringify({
 
             }),
+            error: function (jqXhr, status, error) {
+                console.error(jqXhr.responseText);
+                console.error(error);
+            },
             success: function (mappingres) {
                 console.log(mappingres);
 
