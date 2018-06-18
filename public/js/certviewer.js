@@ -124,6 +124,7 @@ $(document).ready(function () {
                         //$(".main-body-footer-right").css({'background-color': '#7ed321', 'font-size': '14px','font-weight': 'bold', 'font-style': 'normal', 'font-stretch': 'normal', 'line-height': 'normal', 'letter-spacing': 'normal', 'text-align': 'right', 'color': '#ffffff'});
                         $(".main-body-footer-right").css({'background-color': '#7ed321'});
                         $(".main-body-footer-right-button1").text("검증완료");
+                        $('.footer-verify-4 > .footer-verify-center').css({'color': '#7ed321'});
 
                     }, 1000);
 
