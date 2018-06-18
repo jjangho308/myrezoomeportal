@@ -323,6 +323,9 @@ $(document).ready(function () {
                         //sId: '',
                         cert: reqcerts
                     }),
+                    error : function(jqXhr, status, error){
+                        console.log(jqXhr.responseText);
+                    },
                     success: function (res2) {
                         console.log(res2);
                         //setSocket(res.mid);
