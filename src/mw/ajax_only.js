@@ -13,7 +13,7 @@ var HttpStatusCode = require('../core/error/http_status_code');
  * @param {*} next 
  */
 module.exports = (req, res, next) => {
-    if (!!req.ajax) {
+    if (!!req.xhr) {
         return next();
     } else {
         return next(new ResponseError({
