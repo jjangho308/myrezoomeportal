@@ -56,8 +56,8 @@ function loadcertlist() {
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '")>';
                 htmldiv = htmldiv + '<p>' + item.certId.substring(0, 25) + '..<img style="z-index:999" src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=certmore("more-div-' + item.certId + '")></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
-                htmldiv = htmldiv + '<p>' + item.title + '</p>';
                 htmldiv = htmldiv + '<p>증명서</p>';
+                htmldiv = htmldiv + '<p>' + item.title + '</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + item.date + '</p>';
 
                 htmldiv = htmldiv + '<div id="more-div-' + item.certId + '" class="more-store-resume-div">';
