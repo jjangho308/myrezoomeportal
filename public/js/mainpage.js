@@ -202,8 +202,9 @@ $(document).ready(function () {
                 subCd: "CPR", // 코드 분기 필요
                 data: enc_record
             }),
-            beforeSend: function () {
-
+            error: function (jqXhr, status, error) {
+                console.error('/record Error : ' + error);
+                console.error(jqXhr.responseText);
             },
             success: function (res) {
                 $("#career-add-dialog .close-modal").click();
@@ -214,7 +215,7 @@ $(document).ready(function () {
                 $('.private-spec-body').remove();
                 getPrivateRecords();
             },
-            contentType: 'application/json',
+            contentType: 'application/json'
         });
     });
 
@@ -251,8 +252,9 @@ $(document).ready(function () {
                 subCd: "LPT", // 코드 분기 필요
                 data: enc_record
             }),
-            beforeSend: function () {
-
+            error: function (jqXhr, status, error) {
+                console.error('/record Error : ' + error);
+                console.error(jqXhr.responseText);
             },
             success: function (res) {
                 $("#language-add-dialog .close-modal").click();
@@ -299,8 +301,9 @@ $(document).ready(function () {
                 subCd: "OGC", // 코드 분기 필요
                 data: enc_record
             }),
-            beforeSend: function () {
-
+            error: function (jqXhr, status, error) {
+                console.error('/record Error : ' + error);
+                console.error(jqXhr.responseText);
             },
             success: function (res) {
                 $("#cert-add-dialog .close-modal").click();
@@ -332,9 +335,6 @@ $(document).ready(function () {
                         txid: txid,
                         subid: subid
                     }),
-                    beforeSend: function () {
-
-                    },
                     success: function (response) {
                         $("#spec-change-dialog .close-modal").click();
                         $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
@@ -366,10 +366,10 @@ $(document).ready(function () {
                         refreshview();
                     },
                     error: function (jqXhr, status, error) {
-                        console.error('Set Default Error');
+                        console.error('Set Default Error : ' + error);
                         console.error(jqXhr.responseText);
                     },
-                    contentType: 'application/json',
+                    contentType: 'application/json'
                 });
             }
         });
@@ -429,7 +429,6 @@ $(document).ready(function () {
                     }),
                     beforeSend: function () {
 
-
                         $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
                         // don't delete!!!!!  
                         //version 1 dialog. progress circle      
@@ -483,10 +482,11 @@ $(document).ready(function () {
                     success: function (res) {
                         loadcertlist();
                     },
-                    error: function(res) {
-                        console.log(JSON.stringify(res));
+                    error: function (jqXhr, status, error) {
+                        console.error('/Issue cert error : ' + error);
+                        console.error(jqXhr.responseText);
                     },
-                    contentType: 'application/json',
+                    contentType: 'application/json'
                 });
             }
         });
@@ -527,6 +527,10 @@ $(document).ready(function () {
                 }
 
             }),
+            error : function(jqXhr, status, error){
+                console.error('Search record Error : ' + error);
+                console.error(jqXhr.responseText);
+            },
             success: function (res) {
                 setSocket(res.mid);
                 clientsocket_listener();

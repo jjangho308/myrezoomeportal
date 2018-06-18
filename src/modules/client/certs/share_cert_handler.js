@@ -8,6 +8,10 @@ var SharedCertUrlModel = require('../../../models/cert/shared_cert_url');
 
 var Managers = require('../../../core/managers');
 
+var ErrorCode = require('../../../core/error/error_code');
+var ResponsError = require('../../../core/error/response_error');
+var HttpStatusCode = require('../../../core/error/http_status_code');
+
 /**
  * Handler of ShareCertRequestEntity. <br />
  * 
@@ -40,11 +44,11 @@ class ShareCertRequestHandler extends AbstractClientRequestHandler {
             certId: requestEntity.shared_cert.certid
         }, (err, result) => {
             if (!!err) {
-                cb(ClientRequest.RESULT_FAILURE, err);
+                return cb(ClientRequest.RESULT_FAILURE, err);
             } else {
                 // 아직 한번도 공유되지 않은 증명서
                 if (result == 0) {
-
+                    
                     //SHRD_YN Column Set='Y'
                     certDAO.setCert({
                         certId: requestEntity.shared_cert.certid
@@ -52,12 +56,14 @@ class ShareCertRequestHandler extends AbstractClientRequestHandler {
                         shared: true
                     }), (err, affectedRows) => {
                         if (!!err) {
-                            cb(ClientRequest.RESULT_FAILURE, err);
+                            return cb(ClientRequest.RESULT_FAILURE, err);
+
                         } else if (affectedRows == 0) {
-                            cb(ClientRequest.RESULT_FAILURE, {
-                                code: 0,
-                                msg: 'No certificate'
-                            });
+                            return cb(ClientRequest.RESULT_FAILURE, new ResponsError({
+                                code: ErrorCode.DATA_NO_CERT,
+                                status: HttpStatusCode.BAD_REQUEST,
+                            }));
+
                         } else if (affectedRows > 0) {
                             certDAO.putShared(new SharedCertModel({
                                 url: requestEntity.shared_cert.url,
@@ -98,11 +104,11 @@ class ShareCertRequestHandler extends AbstractClientRequestHandler {
                         public: requestEntity.shared_cert.public,
                         password: requestEntity.shared_cert.password,
                         expired: requestEntity.shared_cert.exp
-                    }), (err, result) => {
+                    }), (err, insertedId) => {
                         if (!!err) {
                             cb(ClientRequest.RESULT_FAILURE, err);
                         } else {
-                            cb(ClientRequest.RESULT_SUCCESS, result);
+                            cb(ClientRequest.RESULT_SUCCESS, insertedId);
                         }
                     });
                 }

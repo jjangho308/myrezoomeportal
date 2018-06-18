@@ -22,6 +22,11 @@ function certdelete(certId) {
         headers: {
             'Authorization': client_authorization
         },
+        error: function (jqXhr, status, error) {
+            console.error('Delete cert : ' + error);
+            console.error(jqXhr.responseText);
+            // TODO Handle with jqXhr.responseJSON
+        },
         success: function (result) {
             loadcertlist();
         },
@@ -43,8 +48,8 @@ function loadcertlist() {
             'Authorization': client_authorization
         },
         error: function (jqXhr, status, error) {
+            console.error('/certs/list ' + error);
             console.error(jqXhr.responseText);
-            console.error(error);
         },
         success: function (certlistres) {
             console.log(certlistres);
@@ -156,12 +161,10 @@ $(document).ready(function () {
             headers: {
                 'Authorization': client_authorization
             },
-            data: JSON.stringify({
-
-            }),
+            data: '',
             error: function (jqXhr, status, error) {
+                console.error('Get mapping error : ' + error);
                 console.error(jqXhr.responseText);
-                console.error(error);
             },
             success: function (mappingres) {
                 console.log(mappingres);
@@ -323,8 +326,9 @@ $(document).ready(function () {
                         //sId: '',
                         cert: reqcerts
                     }),
-                    error : function(jqXhr, status, error){
-                        console.log(jqXhr.responseText);
+                    error: function (jqXhr, status, error) {
+                        console.error('Cert check error : ' + error);
+                        console.error(jqXhr.responseText);
                     },
                     success: function (res2) {
                         console.log(res2);

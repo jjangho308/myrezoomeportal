@@ -58,8 +58,14 @@ $(document).ready(function () {
 
 
     $('.modal-sub-header span:nth-child(1)').click(function () {
-        $('.modal-sub-header span:nth-child(2)').css({ "border": "none", "font-weight": "normal" });
-        $(this).css({ "border-bottom": "solid 5px #4c80f1", "font-weight": "bold" });
+        $('.modal-sub-header span:nth-child(2)').css({
+            "border": "none",
+            "font-weight": "normal"
+        });
+        $(this).css({
+            "border-bottom": "solid 5px #4c80f1",
+            "font-weight": "bold"
+        });
         $(".email-send-div").hide();
         $(".cert-create-div").show();
     });
@@ -67,15 +73,26 @@ $(document).ready(function () {
 
 
     $('.modal-sub-header span:nth-child(2)').click(function () {
-        $('.modal-sub-header span:nth-child(1)').css({ "border": "none", "font-weight": "normal" });
-        $(this).css({ "border-bottom": "solid 5px #4c80f1", "font-weight": "bold" });
+        $('.modal-sub-header span:nth-child(1)').css({
+            "border": "none",
+            "font-weight": "normal"
+        });
+        $(this).css({
+            "border-bottom": "solid 5px #4c80f1",
+            "font-weight": "bold"
+        });
         $(".email-send-div").show();
         $(".cert-create-div").hide();
     });
 
     $(".main-body-footer-right").click(function (event) {
-        if(verifyisclicked == 0) {
-            $(".main-body-footer-right").css({'width': '100px','height': '40px','border-radius': '4px','background-color': '#e2e8f0'});
+        if (verifyisclicked == 0) {
+            $(".main-body-footer-right").css({
+                'width': '100px',
+                'height': '40px',
+                'border-radius': '4px',
+                'background-color': '#e2e8f0'
+            });
             verifyisclicked = 1;
             var htmldiv = '<div class="footer-verify-1">';
             htmldiv = htmldiv + '<div class="footer-verify-left">' + "STEP1" + '</div>';
@@ -84,7 +101,9 @@ $(document).ready(function () {
             htmldiv = htmldiv + '</div>';
             $('.main-body-footer').append(htmldiv);
 
-            $('html').animate({scrollTop : ($('.main-body-footer').offset().top)}, 600);
+            $('html').animate({
+                scrollTop: ($('.main-body-footer').offset().top)
+            }, 600);
 
             setTimeout(function () {
 
@@ -97,7 +116,9 @@ $(document).ready(function () {
                 htmldiv = htmldiv + '</div>';
                 $('.main-body-footer').append(htmldiv);
 
-                $('html').animate({scrollTop : ($('.main-body-footer').offset().top)}, 600);
+                $('html').animate({
+                    scrollTop: ($('.main-body-footer').offset().top)
+                }, 600);
 
                 setTimeout(function () {
                     $('.footer-verify-2 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
@@ -108,7 +129,9 @@ $(document).ready(function () {
                     htmldiv = htmldiv + '</div>';
                     $('.main-body-footer').append(htmldiv);
 
-                    $('html').animate({scrollTop : ($('.main-body-footer').offset().top)}, 600);
+                    $('html').animate({
+                        scrollTop: ($('.main-body-footer').offset().top)
+                    }, 600);
 
                     setTimeout(function () {
                         $('.footer-verify-3 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
@@ -119,23 +142,28 @@ $(document).ready(function () {
                         htmldiv = htmldiv + '</div>';
                         $('.main-body-footer').append(htmldiv);
 
-                        $('html').animate({scrollTop : ($('.main-body-footer').offset().top)}, 600);
+                        $('html').animate({
+                            scrollTop: ($('.main-body-footer').offset().top)
+                        }, 600);
 
                         //$(".main-body-footer-right").css({'background-color': '#7ed321', 'font-size': '14px','font-weight': 'bold', 'font-style': 'normal', 'font-stretch': 'normal', 'line-height': 'normal', 'letter-spacing': 'normal', 'text-align': 'right', 'color': '#ffffff'});
-                        $(".main-body-footer-right").css({'background-color': '#7ed321'});
+                        $(".main-body-footer-right").css({
+                            'background-color': '#7ed321'
+                        });
                         $(".main-body-footer-right-button1").text("검증완료");
-                        $('.footer-verify-4 > .footer-verify-center').css({'color': '#7ed321'});
+                        $('.footer-verify-4 > .footer-verify-center').css({
+                            'color': '#7ed321'
+                        });
 
                     }, 1000);
 
                 }, 1000);
 
             }, 1000);
-        }
-        else {
+        } else {
             alert("이미 진행중입니다");
         }
-        
+
     });
 
     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
@@ -197,7 +225,9 @@ $(document).ready(function () {
         },
         create: function (input) {
             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
-                return { email: input };
+                return {
+                    email: input
+                };
             }
             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
             if (match) {
@@ -310,9 +340,9 @@ $(document).ready(function () {
 
         //                 if (idx === $childern.size()-1) {
         //                             $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
-                                                               
+
         //                             setTimeout( function(){
-                                       
+
         //                                 window.print();
         //                                 $.unblockUI();
         //                                 $('.certImg').remove();  
@@ -323,29 +353,33 @@ $(document).ready(function () {
         //         });            
         // });
 
-        
-        $childern.each(function (idx, array) {
-            html2canvas($(this), { scale:3 }).then(canvas => {
-                    // var ctx = canvas.getContext('2d');
-                    // ctx.webkitImageSmoothingEnabled = false;
-                    // ctx.mozImageSmoothingEnabled = false;
-                    // ctx.imageSmoothingEnabled = false;                    
-                    var img = canvas.toDataURL("image/jpeg" , 2);
-                    $("#printcontent").append("<img class=certImg id=certImg" + idx + " width=98% src=" + img + ">");
 
-                    if (idx === $childern.size()-1) {
-                        $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
-                                                    
-                        setTimeout( function(){                                                                
-                            window.print();
-                            $.unblockUI();
-                            $('.certImg').remove();  
-                            $(".qr-container").hide();
-                        }, 3000);
-                    }
-                
-            });            
-         });
+        $childern.each(function (idx, array) {
+            html2canvas($(this), {
+                scale: 3
+            }).then(canvas => {
+                // var ctx = canvas.getContext('2d');
+                // ctx.webkitImageSmoothingEnabled = false;
+                // ctx.mozImageSmoothingEnabled = false;
+                // ctx.imageSmoothingEnabled = false;                    
+                var img = canvas.toDataURL("image/jpeg", 2);
+                $("#printcontent").append("<img class=certImg id=certImg" + idx + " width=98% src=" + img + ">");
+
+                if (idx === $childern.size() - 1) {
+                    $.blockUI({
+                        message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>'
+                    });
+
+                    setTimeout(function () {
+                        window.print();
+                        $.unblockUI();
+                        $('.certImg').remove();
+                        $(".qr-container").hide();
+                    }, 3000);
+                }
+
+            });
+        });
 
 
         // html2canvas(document.querySelector(".inner-container") ).then(canvas => {
@@ -455,6 +489,10 @@ function summitform() {
                 public: cert_public
             }
         }),
+        error: function (jqXhr, status, error) {
+            console.error('Share cert Error : ' + error);
+            console.error(jqXhr.responseText);
+        },
         success: function (result) {
             console.log(result);
             $('#cert-add-dialog a').click();
@@ -481,12 +519,14 @@ function generateURL() {
         },
         data: JSON.stringify({
             cmd: 'GenerateShortURL',
-
             args: {
                 prefix: 'c'
             }
-
         }),
+        error: function (jqXhr, status, error) {
+            console.error('Generate url : ' + error);
+            console.error(jqXhr.responseText);
+        },
         success: function (result) {
             $("#cert-url-input").val("https://" + window.location.host + '/v/' + result.result);
         },
