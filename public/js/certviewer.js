@@ -83,6 +83,9 @@ $(document).ready(function () {
             htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
             htmldiv = htmldiv + '</div>';
             $('.main-body-footer').append(htmldiv);
+
+            $('html').animate({scrollTop : ($('.main-body-footer').offset().top)}, 600);
+
             setTimeout(function () {
 
                 $('.footer-verify-1 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
@@ -94,6 +97,8 @@ $(document).ready(function () {
                 htmldiv = htmldiv + '</div>';
                 $('.main-body-footer').append(htmldiv);
 
+                $('html').animate({scrollTop : ($('.main-body-footer').offset().top)}, 600);
+
                 setTimeout(function () {
                     $('.footer-verify-2 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
                     var htmldiv = '<div class="footer-verify-3">';
@@ -102,6 +107,8 @@ $(document).ready(function () {
                     htmldiv = htmldiv + '<div class="footer-verify-right"><div class="verify-loader"><div class="verify-loader-item"></div><div class="verify-loader-item"></div><div class="verify-loader-item"></div></div>' + '</div>';
                     htmldiv = htmldiv + '</div>';
                     $('.main-body-footer').append(htmldiv);
+
+                    $('html').animate({scrollTop : ($('.main-body-footer').offset().top)}, 600);
 
                     setTimeout(function () {
                         $('.footer-verify-3 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
@@ -112,6 +119,7 @@ $(document).ready(function () {
                         htmldiv = htmldiv + '</div>';
                         $('.main-body-footer').append(htmldiv);
 
+                        $('html').animate({scrollTop : ($('.main-body-footer').offset().top)}, 600);
 
                     }, 1000);
 
