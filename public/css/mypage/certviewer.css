@@ -121,12 +121,13 @@ p{
 }
 
 
-.header button:nth-child(3) {
+.header  button:nth-child(3){
     font-weight: bold;
     font-size: 12px;
     width: 45px;
     height: 45px;
-    border: 1px solid #ced3d6;
+    border: solid 1px #ced3d6;
+}
 
 .header #more-button-div{
     display: none;
