@@ -427,6 +427,7 @@ p{
     object-fit: contain;
     /* position: absolute; */
     /* top: 23px; */
+	margin: 15px 0px 15px 0px;
 }
 
 .verify-loader {
