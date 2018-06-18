@@ -18,6 +18,9 @@ var oauthRouter = require('./oauth/oauth_route');
 var developerRouter = require('./developer_route');
 var agentRouter = require('./agent_route');
 
+var requestLogger = require('../mw/request_logger.js');
+var responseLogger = require('../mw/response_logger.js');
+
 /**
  * Root router of all http request channel. <br />
  * Do not split router files. <br />
@@ -26,6 +29,7 @@ var agentRouter = require('./agent_route');
  * @author TACKSU
  */
 var router = express.Router();
+router.use('/', requestLogger);
 router.use('/', introRouter);
 router.use('/signin', signinRouter);
 router.use('/signout', signoutRouter);
@@ -46,4 +50,5 @@ router.use('/api', apiRouter);
 router.use('/oauth2', oauthRouter);
 router.use('/dev', developerRouter);
 
+router.use('/', responseLogger);
 module.exports = router;
