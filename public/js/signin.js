@@ -29,13 +29,10 @@ $(document).ready(function () {
             return;
         }
 
-        var user_email = $('#signin_id').val();
-        var user_password = SHA256($('#signin_pw').val());
-
         var param = {
-            email: user_email,
-            pw: user_password
-        }
+            email: $('#signin_id').val(),
+            pw: SHA256($('#signin_pw').val())
+        };
 
         $.ajax({
             type: "POST",
@@ -43,10 +40,9 @@ $(document).ready(function () {
             data: param,
             dataType: "JSON",
             beforeSend: function () {
-                $(".error-message").css("display", "none");
+                $(".error-message").hide();
             },
             success: function (response) {
-                //genRsaKey();
                 window.location.href = "main";
             },
             error: function (response, status, error) {
@@ -56,7 +52,7 @@ $(document).ready(function () {
                 };
                 $("input").css("border", "solid 1px #f59188");
                 $(".error-message").html(error.msg);
-                $(".error-message").css("display", "block");
+                $(".error-message").show();
 
                 // switch (error.code) {
                 //     case 1:
