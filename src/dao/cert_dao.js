@@ -497,7 +497,7 @@ class CertificateDAO extends AbstractDAO {
             if (!!err) {
                 cb(err);
             } else {
-                cb(rows);
+                cb(null, rows);
             }
         })
     }

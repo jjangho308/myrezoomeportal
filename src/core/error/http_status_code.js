@@ -11,5 +11,5 @@ exports.CONFLICT = 409;
 
 exports.INTERNAL_SERVER_ERROR = 500;
 exports.NOT_IMPLEMENTED = 501;
-exports.BAD_GATEWAY = 502;
+// exports.BAD_GATEWAY = 502;
 exports.SERVICE_UNAVAILABLE = 503;

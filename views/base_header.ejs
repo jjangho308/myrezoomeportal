@@ -19,7 +19,13 @@
                             }
                         });
                         $("#header-div-signout").click(function() {
-                            sessionStorage.clear();
+                            if(!!window.localStorage){
+                                localStorage.clear();
+                            }
+                            if(!!window.sessionStorage){
+                                sessionStorage.clear();
+                            }
+                            document.cookie = 'JWT=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
                             location.href = "/signout";
                         });
                     </script>
@@ -35,7 +41,7 @@
     <div class="container">
         <div id="header-1" class="grid">
             <div>
-                <img id="user-big-icon" src"/img/myresume/user-big-icon.png">
+                <img id="user-big-icon" src="/img/myresume/user-big-icon.png">
             </div>
 
             <div>

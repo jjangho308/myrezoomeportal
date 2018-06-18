@@ -1,6 +1,8 @@
 var express = require('express');
 var ctrl = require('./main_ctrl');
 
+var Environment = require('../core/environment');
+
 var client_auth_option = require('../mw/client_auth_optional');
 
 /**
@@ -15,6 +17,8 @@ var router = express.Router();
 router.get('/', client_auth_option);
 router.get('/', ctrl.get);
 
-router.post('/edu', ctrl.edu);
+if (Environment.developement) {
+    router.post('/edu', ctrl.edu);
+}
 
 module.exports = router;

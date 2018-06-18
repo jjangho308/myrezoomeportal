@@ -19,8 +19,16 @@ exports.AUTH_NO_PERMISSON = 101;
 
 // Parameter error
 exports.PARAM_ERROR = 200;
-exports.PARAM_NO_EMAIL = 201;
-exports.PARAM_NO_PASSWORD = 202;
+exports.PARAM_NO_UID = 201;
+exports.PARAM_NO_EMAIL = 202;
+exports.PARAM_NO_PASSWORD = 203;
+exports.PARAM_NO_CERT_ID = 204;
+exports.PARAM_AJAX_ONLY = 205;
+exports.PARAM_AJAX_DENY = 206;
+exports.PARAM_NO_TXID = 207;
+exports.PARAM_NO_SUBID = 208;
+exports.PARAM_NO_CMD = 209;
+exports.PARAM_NO_PRIVATE_RECORD_ID = 210;
 
 // Data error
 exports.DATA_ERROR = 300;

@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    var KEY_CODE_RETURN = 13;
     // var situation = 1;
 
     // $(".confirm-btn").click(function () {
@@ -45,15 +46,17 @@ $(document).ready(function () {
             success: function (response) {
                 window.location.href = "main";
             },
-            error: function (response, status, error) {
-                var error = response.responseJSON.err || {
+            error: function (jqXhr, status, error) {
+                console.error(jqXhr.responseText);
+
+                var error = jqXhr.responseJSON.err || {
                     code: 1,
                     msg: '알 수 없는 오류 발생'
                 };
                 $("input").css("border", "solid 1px #f59188");
                 $(".error-message").html(error.msg);
                 $(".error-message").show();
-
+                
                 // switch (error.code) {
                 //     case 1:
                 //         {
@@ -101,9 +104,8 @@ $(document).ready(function () {
     });
 
     $("#signin_div").keydown(function (key) {
-        if (key.keyCode == 13) {
+        if (key.keyCode === KEY_CODE_RETURN) {
             $('#btn_signin').trigger('click');
         }
     });
-
 });

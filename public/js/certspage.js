@@ -42,6 +42,10 @@ function loadcertlist() {
         headers: {
             'Authorization': client_authorization
         },
+        error: function (jqXhr, status, error) {
+            console.error(jqXhr.responseText);
+            console.error(error);
+        },
         success: function (certlistres) {
             console.log(certlistres);
             var certlistresult = certlistres.result;
@@ -185,8 +189,8 @@ $(document).ready(function () {
                         var htmldiv = '<tr class="certtr">';
                         htmldiv = htmldiv + '<td>';
                         htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
-                        //htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';
-                        htmldiv = htmldiv + '<input id=' + addcertcheckboxid + ' type="checkbox" name="certcheck">';
+                        htmldiv = htmldiv + '<input id=' + addcertcheckboxid + ' type="checkbox" onclick="certckeckboxclick(' + addcertcheckboxid + ')">';
+                        //htmldiv = htmldiv + '<input id=' + addcertcheckboxid + ' type="checkbox" name="certcheck">';
                         htmldiv = htmldiv + '<label for=' + addcertcheckboxid + '></label>';
                         htmldiv = htmldiv + '</div>';
                         htmldiv = htmldiv + '</td>';
