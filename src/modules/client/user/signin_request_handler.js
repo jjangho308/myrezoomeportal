@@ -5,7 +5,7 @@ var AbstractClientRequestHandler = require('../abstract_client_request_handler')
 
 var ResponseError = require('../../../core/error/response_error');
 var ErrorCode = require('../../../core/error/error_code');
-var HttpErrorCode = require('../../../core/error/http_error_code');
+var HttpErrorCode = require('../../../core/error/http_status_code');
 
 /**
  * Handler of SigninRequestEntity. <br />
