@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 
 
 var ErrorCode = require('./core/error/error_code');
-var HttpErrorCode = require('./core/error/http_status_code');
+var HttpStatusCode = require('./core/error/http_status_code');
 var ResponseError = require('./core/error/response_error');
 var ErrorMessage = require('./core/error/error_message');
 /**
@@ -62,7 +62,7 @@ var ErrorMessage = require('./core/error/error_message');
  * @author TACKSU
  */
 app.use((err, req, res, next) => {
-  var status = res.locals.status = err.status || 500;
+  var status = res.locals.status = err.status || HttpStatusCode.INTERNAL_SERVER_ERROR;
 
   var requestLocale = 'ko-kr' || 'default';
   if (err instanceof ResponseError) {
@@ -107,7 +107,7 @@ app.use((err, req, res, next) => {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
+  res.status(err.status || HttpStatusCode.INTERNAL_SERVER_ERROR);
   return res.render('internal_error');
 });
 
