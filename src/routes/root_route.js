@@ -11,6 +11,7 @@ var clientRouter = require('./client_route');
 var introRouter = require('./intro_route');
 var sharedCertsRouter = require('./shared_certs_route');
 var sharedResumesRouter = require('./shared_resumes_route');
+
 var verifyRouter = require('./verify_route');
 var apiRouter = require('./api/api_route');
 var oauthRouter = require('./oauth/oauth_route');
