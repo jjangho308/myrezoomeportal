@@ -521,13 +521,6 @@
         padding: 5px 0px;
     }
 
-    .inner-container{
-        width: 470px;
-        height:  calc(470px * 1.41);    
-        margin: auto;
-        background: white;      
-    }
-
     .inner-container .mk-bg {
         background-image: url(/img/mycert/mk/mk_bg.jpg);
         background-size: 100%;
@@ -536,10 +529,6 @@
         height: 100%
     }
 
-    .outer-container {
-        height: calc(490px * 1.41);
-        width: 490px;
-    }
     .inner-container img {
         width: 100%
     }
