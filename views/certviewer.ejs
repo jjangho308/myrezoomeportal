@@ -17,7 +17,9 @@
 
     @media print
     {
-
+        @page { margin: 0; }
+        body { margin: 1.6cm; }
+        
         body * { visibility: hidden; }
         #printcontent * { visibility: visible; }
         /* #printcontent { position: absolute; top: 40px; left: 30px;} */

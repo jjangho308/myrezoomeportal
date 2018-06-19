@@ -7,19 +7,19 @@
                 <table>
                     <tr>
                         <td class="personinfo_name"><span>학번 : </span></td>
-                        <td class="personinfo1">XXXXXXXXXXX</td>
+                        <td class="personinfo1" ></td>
                     </tr>
                     <tr>
                         <td class="personinfo_name">성명 : </td>
-                        <td class="personinfo1">XXXXXX</td>
+                        <td class="cert-owner-name" id="cert-owner-name" ></td>
                     </tr>
                     <tr>
                         <td class="personinfo_name">성별 : </td>
-                        <td class="personinfo1">남</td>
+                        <td class="personinfo1"></td>
                     </tr>
                     <tr>
                         <td class="personinfo_name">생년월일 : </td>
-                        <td class="personinfo1">XXXXXXXXXXX</td>
+                        <td class="personinfo1" id="cert-owner-birth"></td>
                     </tr>
                 </table>
             </div>
@@ -27,23 +27,23 @@
                 <table>
                     <tr>
                         <td class="personinfo_name">대학 : </td>
-                        <td class="personinfo1">IT공과대학</td>
+                        <td class="personinfo1" id="cert-owner-uni"></td>
                     </tr>
                     <tr>
                         <td class="personinfo_name">학부(과) : </td>
-                        <td class="personinfo1">컴퓨터정보공학부 컴퓨터정보공학전공</td>
+                        <td class="personinfo1" id="cert-owner-uni-org-major"></td>
                     </tr>
                     <tr>
                         <td class="personinfo_name">제 1 전공 : </td>
-                        <td class="personinfo1">컴퓨터정보공학 전문</td>
+                        <td class="personinfo1" id="cert-owner-uni-major-name"></td>
                     </tr>
                     <tr>
                         <td class="personinfo_name">복수전공 : </td>
-                        <td class="personinfo1">XXXXXXXXXXX</td>
+                        <td class="personinfo1"></td>
                     </tr>
                     <tr>
                         <td class="personinfo_name">기타전공 : </td>
-                        <td class="personinfo1">XXXXXXXXXXX</td>
+                        <td class="personinfo1"></td>
                     </tr>
                 </table>
             </div>
@@ -51,15 +51,15 @@
                 <table>
                     <tr>
                         <td class="personinfo_name">입 학 연월일 : </td>
-                        <td class="personinfo1">XXXXXXXXXXX</td>
+                        <td class="personinfo1" id="cert-owner-uni-enter-date"></td>
                     </tr>
                     <tr>
                         <td class="personinfo_name">졸 업 연월일 : </td>
-                        <td class="personinfo1">XXXXXX</td>
+                        <td class="personinfo1" id="cert-owner-uni-gredu-date"></td>
                     </tr>
                     <tr>
                         <td class="personinfo_name">학위등록번호 : </td>
-                        <td class="personinfo1">XXXXXXXXX</td>
+                        <td class="personinfo1" id="cert-owner-uni-gredu-id"></td>
                     </tr>
                     <tr>
                         <td class="personinfo_name">학위명 : </td>
@@ -107,12 +107,16 @@
                 </table>
             </div>
        </div>
-       <div class = "cert-footer-default">
-            위의 사실을증명합니다.
+       <div class = "cert-main-agent-msg" id="univ-ower-msg">
           </div> 
-          <div class = "cert-reference-default">
-            인하대학교 교무처장
+          <div class = "cert-reference-default" style="display:flex;" >
+            
+                <p id="cert-main-agent" style="margin-left: 50px;"></p>
+                    <img class="stamp" src="/img/certviewer/stamp.png" 
+                    >
+            
+            
           </div>
-            <img class = "stamp" src="/img/certviewer/stamp.png">
+            <!-- <img class = "stamp" src="/img/certviewer/stamp.png"> -->
             <div style="display:none" id="qrcode" class="qrcode">
         </div> 
