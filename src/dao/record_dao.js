@@ -12,8 +12,6 @@ var Util = require('../util/util');
  * @since 180326
  * @author TACKSU
  */
-
-
 class RecordDAO extends AbstractDAO {
     constructor(connectionPool) {
         super(connectionPool);
@@ -23,9 +21,9 @@ class RecordDAO extends AbstractDAO {
         var query = mysql.format(recordQuery.getStoredOrgByUserId, uid);
         this.query(query, (err, result) => {
             if (err) {
-                cb(err)
+                return cb(err)
             } else {
-                cb(err, result);
+                return cb(err, result);
             }
         })
     }
@@ -41,9 +39,9 @@ class RecordDAO extends AbstractDAO {
         var query = mysql.format(recordQuery.getStoredDataByUserIdAndOrgID, [uid, orgid]);
         this.query(query, (err, result) => {
             if (err) {
-                cb(err)
+                return cb(err)
             } else {
-                cb(err, result);
+                return cb(err, result);
             }
         })
 
@@ -53,9 +51,9 @@ class RecordDAO extends AbstractDAO {
         var query = mysql.format(recordQuery.getQueuenameByOrgId, orgid);
         this.query(query, (err, result) => {
             if (err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result);
+                return cb(err, result);
             }
         })
 
@@ -65,9 +63,9 @@ class RecordDAO extends AbstractDAO {
         var query = mysql.format(recordQuery.putRecord, record);
         this.query(query, (err, result) => {
             if (err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result);
+                return cb(err, result);
             }
         })
     }
@@ -76,9 +74,9 @@ class RecordDAO extends AbstractDAO {
         var query = mysql.format(recordQuery.putRecordByGuest, record);
         this.query(query, (err, result) => {
             if (err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result);
+                return cb(err, result);
             }
         })
     }
@@ -110,46 +108,32 @@ class RecordDAO extends AbstractDAO {
             condition.BLC_MAP_ID = creteria.blcMapId;
         }
 
-        if(!!creteria.txid){
+        if (!!creteria.txid) {
             delete condition.BLC_MAP_ID;
             condition.TRX_ID = creteria.txid;
         }
-        
+
         var query = mysql.format(recordQuery.getTxid, condition);
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err, null);
+                return cb(err, null);
             } else {
                 var blcMapList = [];
                 for (var i in rows) {
                     blcMapList.push(BlcMapModel.fromRow(rows[i]));
                 }
-                cb(err, blcMapList);
+                return cb(err, blcMapList);
             }
         })
     }
 
-    /**
-     * 기 입력된 이력을 변경
-     */
-    set() {
-
-    }
-
-    /**
-     * 보류
-     */
-    del() {
-
-    }
-
-    getDefaultYn(creteria, cb) {                
+    getDefaultYn(creteria, cb) {
         var query = mysql.format(recordQuery.getDefaultYn, [creteria.uid, creteria.txid]);
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err);
-            } else {            
-                cb(rows[0]);
+                return cb(err);
+            } else {
+                return cb(rows[0]);
             }
         });
     }
@@ -158,14 +142,14 @@ class RecordDAO extends AbstractDAO {
         var query = mysql.format(recordQuery.setDefaultYnInit, [creteria.subid]);
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
                 query = mysql.format(recordQuery.setDefaultYn, [creteria.uid, creteria.txid]);
                 this.query(query, (err, rows) => {
                     if (!!err) {
-                        cb(err);
-                    } else {                
-                        cb(null, rows);
+                        return cb(err);
+                    } else {
+                        return cb(null, rows);
                     }
                 });
             }
@@ -177,35 +161,35 @@ class RecordDAO extends AbstractDAO {
         var query = mysql.format(recordQuery.issuePrivateRecord, param);
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err, null);
+                return cb(err, null);
             } else {
-                cb(err, result);
+                return cb(err, result);
             }
         });
     }
 
-    getPrivateRecord(creteria, cb) {        
-        var query = mysql.format(recordQuery.getPrivateRecord, creteria.uId);        
+    getPrivateRecord(creteria, cb) {
+        var query = mysql.format(recordQuery.getPrivateRecord, creteria.uId);
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err, null);
-            } else {    
+                return cb(err, null);
+            } else {
                 var recordList = [];
                 for (var i in rows) {
                     recordList.push(PrivateRecord.fromRow(rows[i]));
                 }
-                cb(err, recordList);
+                return cb(err, recordList);
             }
         });
     }
 
-    deletePrivateRecord(creteria, cb) {       
-        var query = mysql.format(recordQuery.delPrivateRecord, [creteria.uId, creteria.prvtId]);     
+    deletePrivateRecord(creteria, cb) {
+        var query = mysql.format(recordQuery.delPrivateRecord, [creteria.uId, creteria.prvtId]);
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err, null);
-            } else {                    
-                cb(err, rows);
+                return cb(err, null);
+            } else {
+                return cb(err, rows);
             }
         });
     }
