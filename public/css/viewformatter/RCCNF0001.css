@@ -535,175 +535,175 @@
 
     #user-info-div img:nth-child(1) {
         position: absolute;
-        left: 7px;
-        top: 115px;
-        width: 65px;        
+        left: 5px;
+        top: 90px;
+        width: 50px;        
     }    
 
     #user-info-div p:nth-child(2) {    
         position: absolute;
-        left: 130px;
-        top: 125px;
+        left: 105px;
+        top: 94px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #user-info-div p:nth-child(3) {    
         position: absolute;
-        left: 130px;
-        top: 145px;
+        left: 100px;
+        top: 108px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #user-info-div p:nth-child(4) {    
         position: absolute;
-        left: 130px;
-        top: 163px;
+        left: 104px;
+        top: 123px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #user-info-div p:nth-child(5) {    
         position: absolute;
-        left: 130px;
-        top: 182px;
+        left: 103px;
+        top: 138px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #main-score-info-div p:nth-child(1) {
         position: absolute;
-        left: 262px;
-        top: 130px;
+        left: 200px;
+        top: 100px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #main-score-info-div p:nth-child(2) {
         position: absolute;
-        left: 370px;
-        top: 130px;
+        left: 280px;
+        top: 100px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #main-score-info-div p:nth-child(3) {
         position: absolute;
-        left: 262px;
-        top: 168px;
+        left: 200px;
+        top: 130px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #main-score-info-div p:nth-child(4) {
         position: absolute;
-        left: 370px;
-        top: 168px;
+        left: 280px;
+        top: 130px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(1) {
         position: absolute;
-        left: 130px;
-        top: 275px;
+        left: 95px;
+        top: 210px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(2) {
         position: absolute;
-        left: 130px;
-        top: 300px;
+        left: 95px;
+        top: 230px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(3) {
         position: absolute;
-        left: 130px;
-        top: 325px;
+        left: 95px;
+        top: 250px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(4) {
         position: absolute;
-        left: 130px;
-        top: 350px;
+        left: 95px;
+        top: 268px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(5) {
         position: absolute;
-        left: 130px;
-        top: 375px;
+        left: 95px;
+        top: 288px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(6) {
         position: absolute;
-        left: 130px;
-        top: 400px;
+        left: 95px;
+        top: 308px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(7) {
         position: absolute;
-        left: 187px;
-        top: 275px;
+        left: 140px;
+        top: 210px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(8) {
         position: absolute;
-        left: 187px;
-        top: 300px;
+        left: 140px;
+        top: 230px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(9) {
         position: absolute;
-        left: 187px;
-        top: 325px;
+        left: 140px;
+        top: 250px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(10) {
         position: absolute;
-        left: 187px;
-        top: 350px;
+        left: 140px;
+        top: 268px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(11) {
         position: absolute;
-        left: 187px;
-        top: 375px;
+        left: 140px;
+        top: 288px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
     
     #detail-score-info-div p:nth-child(12) {
         position: absolute;
-        left: 187px;
-        top: 400px;
+        left: 140px;
+        top: 308px;
         font-family: 'Nanum Myeongjo', serif;
-        -webkit-transform: scale(0.8);
+        -webkit-transform: scale(0.7);
     }
 
     #chart-div img {
         position: absolute;
-        left: 250px;
-        top: 290px;
+        left: 175px;
+        top: 210px;
         width: 200px;
     }
 }
