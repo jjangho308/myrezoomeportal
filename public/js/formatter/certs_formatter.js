@@ -174,34 +174,12 @@
                 $('#cert-owner-uni-gredu-date').text(record_data.registList[0].change_date);
                 $('#cert-owner-uni-gredu-level').text(record_data.registList[0].course);
 
+
+                var main_agent_name = record_data.univInfo.univ_name + " " + record_data.univInfo.cert_main_agent
                 $('#cert-main-agent-msg').text(record_data.univInfo.msg1);
-                $('#cert-main-agent').text(record_data.univInfo.cert_main_agent);
+                $('#cert-main-agent').text(main_agent_name);
 
-                record_data.scoreList.sort((a, b) => {
-                    return a["year"] - b["year"] || a["semester"] - b["semester"];
-                });
-            })
-        },
-
-        "RCOGC0008": function viewformatter(record_data) {
-            //인하대 졸업증명서        
-            $(".inner-container").load("../../viewhtml/RCOGC0008.html", function () {
-                $('#cert-owner-name').text(record_data.registList[0].name);
-                $('#cert-owner-birth').text(record_data.registList[0].birth);
-                $('#cert-owner-uni').text(record_data.registList[0].uni_course);
-                $('#cert-owner-uni-org-major').text(record_data.registList[0].univ_affiliation);
-                $('#cert-owner-uni-enter-date').text(record_data.registList[0].admission_date);
-                $('#cert-owner-uni-gredu-date').text(record_data.registList[0].change_date);
-                $('#cert-owner-uni-gredu-id').text(record_data.registList[0].std_no);
-
-            });
-
-            generateQRCode();
-        },
-
-        "RCOGC0009": function viewformatter(record_data) {
-            //인하대 성적증명서
-            $(".inner-container").load("../../viewhtml/RCOGC0009.html", function () {
+                //
                 record_data.scoreList.sort((a, b) => {
                     return a["year"] - b["year"] || a["semester"] - b["semester"];
                 });
@@ -268,10 +246,29 @@
                     totalagree + "</td></tr>";
 
                 $('.sungjuk_sector_' + sector).append(htmldiv);
+                //
+
+            })
+            
+            generateQRCode();
+        },
+
+        "RCOGC0008": function viewformatter(record_data) {
+            //인하대 졸업증명서        
+            $(".inner-container").load("../../viewhtml/RCOGC0008.html", function () {
+                $('#cert-owner-name').text(record_data.registList[0].name);
+                $('#cert-owner-birth').text(record_data.registList[0].birth);
+                $('#cert-owner-uni').text(record_data.registList[0].uni_course);
+                $('#cert-owner-uni-org-major').text(record_data.registList[0].univ_affiliation);
+                $('#cert-owner-uni-enter-date').text(record_data.registList[0].admission_date);
+                $('#cert-owner-uni-gredu-date').text(record_data.registList[0].change_date);
+                $('#cert-owner-uni-gredu-id').text(record_data.registList[0].std_no);
+
             });
 
             generateQRCode();
         },
+
 
         "RCOGC0010": function viewformatter(record_data) {
             //계명대 졸업증명서   
