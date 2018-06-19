@@ -164,7 +164,7 @@ p{
 
 .main-body-footer {
 	margin: auto;
-	width: 100%;
+	width: 840px;
     padding: 10px;
 }
 
@@ -172,7 +172,7 @@ p{
     position: relative;
     top: 5px;
     margin: auto;
-    width: 100%;
+    width: 840px;
     font-size: 10px;
     font-weight: normal;
     font-style: normal;
