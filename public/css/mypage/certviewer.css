@@ -751,7 +751,7 @@ p{
   
       .inner-container {
         width: 360px;
-        height: calc(470px * 1.41);
+        height: calc(360px * 1.41);
         margin: auto;
         background: white;
       }	

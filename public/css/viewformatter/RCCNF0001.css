@@ -529,10 +529,6 @@
         height: 100%
     }
 
-    .outer-container {
-        height: calc(490px * 1.41);
-        width: 490px;
-    }
     .inner-container img {
         width: 100%
     }
