@@ -592,7 +592,8 @@ p{
   
       .outer-container{
           width: 840px;
-          height: 1188px;          
+          height: 1188px; 
+	  border: solid 1px #dfe5ef; /* 신규추가 */
       }
   
       .inner-container{
@@ -601,7 +602,7 @@ p{
           /* margin-top: 20px; */
           background: white;
           /* font-size: 60%; */
-          border: solid 1px #2b2c2c;
+          /*border: solid 1px #2b2c2c;*/
           /* margin: 20px; */
       }
   
