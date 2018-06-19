@@ -31,8 +31,7 @@ class GetCertViewRequestHandler extends AbstractClientRequestHandler {
      */
     request(requestEntity, done) {
         if (!requestEntity.uId || !requestEntity.certId) {
-            done(ClientRequest.RESULT_FAILURE, new ResponseError(ErrorCode.PARAM_INVALID));
-            return;
+            return done(ClientRequest.RESULT_FAILURE, new ResponseError(ErrorCode.PARAM_ERROR));
         }
         var certDAO = Managers.db().getCertDAO();
         certDAO.getCert({
@@ -40,26 +39,22 @@ class GetCertViewRequestHandler extends AbstractClientRequestHandler {
             certId: requestEntity.certId,
         }, (err, certModels) => {
             if (!!err) {
-                done(ClientRequest.RESULT_FAILURE, err);
-                return;
+                return done(ClientRequest.RESULT_FAILURE, err);
             } else if (certModels.length == 0) {
-                done(ClientRequest.RESULT_FAILURE, new ResponseError(ErrorCode.DATA_NO_CERT));
-                return;
+                return done(ClientRequest.RESULT_FAILURE, new ResponseError(ErrorCode.DATA_NO_CERT));
             } else {
                 certDAO.getCertData({
                     certId: requestEntity.certId
                 }, (err, certData) => {
                     if (!!err) {
-                        done(ClientRequest.RESULT_FAILURE, err);
-                        return;
+                        return done(ClientRequest.RESULT_FAILURE, err);
                     } else {
                         var crypto = Managers.crypto();
                         crypto.decryptAESECB(certData.encryptedData, crypto.getSystemSymmetricKey(), (err, decrypted) => {
                             if (!!err) {
-                                done(ClientRequest.RESULT_FAILURE, err);
-                                return;
-                            } else {                                                              ;
-                                done(ClientRequest.RESULT_SUCCESS, {
+                                return done(ClientRequest.RESULT_FAILURE, err);
+                            } else {;
+                                return done(ClientRequest.RESULT_SUCCESS, {
                                     title: certData.title,
                                     txid: certData.txid,
                                     createdDate: certData.createdDate,

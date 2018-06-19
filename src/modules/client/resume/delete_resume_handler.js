@@ -16,7 +16,7 @@ class DeleteResumeHandler extends AbstractClientRequestHandler {
             console.log("eeeee");
             console.log(result);
 
-            cb(ClientRequest.RESULT_SUCCESS, {
+            return cb(ClientRequest.RESULT_SUCCESS, {
                 value: true
             });
 

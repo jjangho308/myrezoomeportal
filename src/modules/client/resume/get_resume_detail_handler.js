@@ -34,25 +34,29 @@ class GetResumeDetailRequestHandler extends AbstractClientRequestHandler {
      * @param {function(number, object)} done callback function.
      */
     request(requestEntity, done) {
-        
+
         var resumeDAO = Managers.db().getResumeDAO();
         resumeDAO.getResume({
             uId: requestEntity.uId,
             rsmId: requestEntity.rsmId
         }, (err, resumeList) => {
             if (!!err) {
-                done(ClientRequest.RESULT_FAILURE, err);
+                return done(ClientRequest.RESULT_FAILURE, err);
             } else {
                 var resumeModel = resumeList[0];
                 resumeDAO.getResumeRecords({
                     rsmId: resumeModel.rsmId
-                }, (err, records) => {   
+                }, (err, records) => {
+                    if (!!err) {
+                        return done(ClientRequest.RESULT_FAILURE, err);
+                    }
+
                     records.sort((a, b) => {
                         return a.order - b.order;
                     });
-                    resumeModel.records = records; 
-                    console.log(resumeModel);
-                    done(ClientRequest.RESULT_SUCCESS, resumeModel);
+                    resumeModel.records = records;
+                    console.debug(resumeModel);
+                    return done(ClientRequest.RESULT_SUCCESS, resumeModel);
                 });
             }
         })

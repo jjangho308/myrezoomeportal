@@ -48,7 +48,7 @@ class ShareCertRequestHandler extends AbstractClientRequestHandler {
             } else {
                 // 아직 한번도 공유되지 않은 증명서
                 if (result == 0) {
-                    
+
                     //SHRD_YN Column Set='Y'
                     certDAO.setCert({
                         certId: requestEntity.shared_cert.certid

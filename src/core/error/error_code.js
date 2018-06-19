@@ -30,6 +30,8 @@ exports.PARAM_NO_SUBID = 208;
 exports.PARAM_NO_CMD = 209;
 exports.PARAM_NO_PRIVATE_RECORD_ID = 210;
 exports.PARAM_NO_PHONE = 211;
+exports.PARAM_NO_PREFIX = 212;
+exports.PARAM_INVALID_PREFIX = 213;
 
 // Data error
 exports.DATA_ERROR = 300;
@@ -37,6 +39,8 @@ exports.DATA_NO_EMAIL = 301;
 exports.DATA_NO_PHONE_NUM = 302;
 exports.DATA_PASSWORD_INCORRECT = 303;
 exports.DATA_NO_CERT = 304;
+exports.DATA_NO_BLCMAP = 305;
+exports.DATA_NO_ORG = 306;
 
 /**
  * API Error code set. <br />
