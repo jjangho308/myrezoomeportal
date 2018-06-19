@@ -16,6 +16,9 @@
                 <h1>개인회원 로그인</h1>
 
                 <div id="signin_div" class="login-container">
+                    <%if (url !== '') { %>
+                        <p align="center">로그인이 필요한 서비스입니다.</p>
+                    <% } %>
                     <p>이메일</p>
                     <input id="signin_id" type="email" placeholder="이메일을 입력해주세요." value="test@naver.com">
 
