@@ -246,58 +246,51 @@
 <div id="nexledger-txid-info-dialog" class="modal">
     <div>
         <h3>거래 상세정보</h3>
-    <div style="width: 580px; height: 533px;">
-        <!-- Contens -->
-        <div class="popup-contents popup-overflowHidden" style="overflow-y:auto !important">
-            <div class="popup-table02 mgt5">
-                <table>
-                    <colgroup>
-                        <col style="width:126px">
-                        <col style="">
-                    </colgroup>
-                    <tbody>
-                        <tr>
-                            <th>ID</th>
-                            <td id="tx_id">58af4a7836336521014d45ad0d6046303d6c730e9e16d1939f0c99e17ae234bb</td>
-                        </tr>
-                        <tr>
-                            <th data-i18n="admin_ctn_from_address">발신 주소</th>
-                            <td id="fromaddress"></td>
-                        </tr>
-                        <tr id="toAddress">
-                            <th data-i18n="admin_ctn_to_address">수신 주소</th>
-                        <td style="float:left">1Ly3treLpoF1MqbmXKFpYxzznoxNYS9MTi</td><td style="float:right">99,990,000</td><td style="float:left">155WAnc5m7RFjjLgQJjQN82nr7xjYXN2wg</td><td style="float:right">10,000</td><td style="float:left"></td><td style="float:right">0</td></tr>
-                        <tr>
-                            <th data-i18n="admin_ctn_ouput">Output</th>
-                            <td id="total_volume">100,000,000</td>
-                        </tr>
-                        <tr>
-                            <th data-i18n="admin_ctn_tx_fee">거래 수수료</th>
-                            <td id="transactionfee">0</td>
-                        </tr>
-                        <tr>
-                            <th data-i18n="admin_ctn_total_tx">총 거래 건수</th>
-                            <td id="total_output">100,000,000</td>
-                        </tr>
-                        <tr>
-                            <th>크기</th>
-                            <td id="txsize">311 Byte</td>
-                        </tr>
-                        <tr id="input_script">
-                            <th data-i18n="admin_ctn_input_script">입력 스크립트</th>
-                        <td>PUSHDATA(71)[3044022012e30d59b8c246c41e764c6241e3e2145c7c72af1d2c6dcf147ef8b8063b3a0d022015053df8c08d2343f5e60d7a35f183ebac8cc99acdbc5fb7d0d909eebc829d7201] PUSHDATA(65)[04a5c24897343b8a210101be4949e1c6178882ba5059bce517884261f0eb0bff6d023a2e670d1c72bed97beefd2fcb626e89f866c0e1e43930eb6bc061b35293e2]</td></tr>
-                        <tr id="output_script">
-                            <th data-i18n="admin_ctn_output_script">출력 스크립트</th>
-                        <td>DUP HASH160 PUSHDATA(20)[db04197f41fa5f37fc9550ba4d55e9db2229fafb] EQUALVERIFY CHECKSIG</td><td>DUP HASH160 PUSHDATA(20)[2cba840c33515e265a1c8ab425a8d6c5e4443201] EQUALVERIFY CHECKSIG</td><td>RETURN PUSHDATA(43)[7b2268617368223a226464646464646464646464646464646464646464646464646464646464646464227d]</td></tr>
-                        <tr>
-                            <th>OP return</th>
-                            <td id="opReturnCode">{"hash":"dddddddddddddddddddddddddddddddd"}</td>
-                        </tr>
-                    </tbody>
-                </table>
+    </div>
+
+    <div>
+        <div>
+            <div class="nexledger-txid-info-dialog-left">ID</div>
+            <div class="nexledger-txid-info-dialog-right" id="tx_id">cd9492f1ea2aa9f1f3f423c749beade523f7594b145e0ea3dde5101346688a45</div>
+        </div>
+        <div>
+            <div class="nexledger-txid-info-dialog-left">발신주소</div>
+            <div class="nexledger-txid-info-dialog-right" id="fromaddress">22222</div>
+        </div>
+        <div>
+            <div class="nexledger-txid-info-dialog-left">수신주소</div>
+            <div class="nexledger-txid-info-dialog-right">
+                <div class="nexledger-txid-info-dialog-center" id="toAddress"><p>1Ly3treLpoF1MqbmXKFpYxzznoxNYS9MTi</p><p>1E1TZd4Uh1NSvyRy9oKuL78VSrp3A9RXuG</p></div>
+                <div id="toOutput"><p>99,970,000</p><p>10,000</p></div>
             </div>
         </div>
-    <!-- Contens end-->
+        <div>
+            <div class="nexledger-txid-info-dialog-left">Output</div>
+            <div class="nexledger-txid-info-dialog-right" id="total_volume">99,980,000</div>
+        </div>
+        <div>
+            <div class="nexledger-txid-info-dialog-left">총 거래액수</div>
+            <div class="nexledger-txid-info-dialog-right" id="total_output">99,980,000</div>
+        </div>
+        <div>
+            <div class="nexledger-txid-info-dialog-left">크기</div>
+            <div class="nexledger-txid-info-dialog-right" id="txsize">343 Byte</div>
+        </div>
+        <div>
+            <div class="nexledger-txid-info-dialog-left">입력스크립트</div>
+            <div class="nexledger-txid-info-dialog-right" id="input_script">
+                    PUSHDATA(71)[304402205cb0b00b84d6b17707474c966b5d5776bff9a463cef8012d852257f7a45f9f19022068d92021cef8d098837648580c8f78f518f6ee5585adae4a370d063f4f84e2aa01] PUSHDATA(65)[04a5c24897343b8a210101be4949e1c6178882ba5059bce517884261f0eb0bff6d023a2e670d1c72bed97beefd2fcb626e89f866c0e1e43930eb6bc061b35293e2]</div>
+        </div>
+        <div>
+            <div class="nexledger-txid-info-dialog-left">출력스크립트</div>
+            <div class="nexledger-txid-info-dialog-right" id="output_script">DUP HASH160 PUSHDATA(20)[db04197f41fa5f37fc9550ba4d55e9db2229fafb] EQUALVERIFY CHECKSIG
+                    DUP HASH160 PUSHDATA(20)[8eafcef352aaaa86a6d482113478ce03b6b649f6] EQUALVERIFY CHECKSIG
+                    RETURN PUSHDATA(75)[7b2268617368223a2239666332646338633438333230316165326631643133376362623936306366666561323462666330656366313631333635333366306564663730366563323533227d]</div>
+        </div>
+        <div>
+            <div class="nexledger-txid-info-dialog-close">Close</div>
+        </div>
+        
     </div>
 </div>
     

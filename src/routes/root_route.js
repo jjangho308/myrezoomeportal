@@ -17,9 +17,11 @@ var apiRouter = require('./api/api_route');
 var oauthRouter = require('./oauth/oauth_route');
 var developerRouter = require('./developer_route');
 var agentRouter = require('./agent_route');
+var nexledgerRouter = require('./nexledger_route');
 
 var requestLogger = require('../mw/request_logger.js');
 var responseLogger = require('../mw/response_logger.js');
+
 
 /**
  * Root router of all http request channel. <br />
@@ -43,7 +45,7 @@ router.use('/agent', agentRouter);
 router.use('/client', clientRouter);
 router.use('/shared_certs', sharedCertsRouter);
 router.use('/shared_resumes', sharedResumesRouter);
-
+router.use('/nexledger', nexledgerRouter);
 
 router.use('/v', verifyRouter);
 router.use('/api', apiRouter);
