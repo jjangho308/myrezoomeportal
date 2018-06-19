@@ -198,9 +198,9 @@ class CertificateDAO extends AbstractDAO {
             if (!!err) {
                 return cb(err);
             } else {
-                connection.beginTransaction((txerr)=> {
-                    if (txerr) {
-                        return cb(txerr);
+                connection.beginTransaction((txErr) => {
+                    if (txErr) {
+                        return cb(txErr);
                     } else {
                         var condition = {};
                         //make query
@@ -224,10 +224,9 @@ class CertificateDAO extends AbstractDAO {
                                 connection.query(selectShareCertQuery, (err, result) => {
                                     if (!!err) {
 
-                                        console.log(err);
-                                        connection.rollback(function () {
-                                            console.error("rollback error");
-                                            cb(500, err);
+                                        console.error(JSON.stringify(err));
+                                        connection.rollback(() => {
+                                            return cb(err);
                                         })
                                     } else {
                                         console.log(result);
@@ -235,23 +234,19 @@ class CertificateDAO extends AbstractDAO {
                                             var usrCertSharedDelQuery = mysql.format(CertQuery.delShared, [condition, {
                                                 DEL_YN: 'N'
                                             }]);
-                                            //console.log(usrCertSharedDelQuery);
+
                                             connection.query(usrCertSharedDelQuery, (err, result) => {
                                                 if (!!err) {
-
-                                                    console.log(err);
                                                     connection.rollback(function () {
                                                         console.error("rollback error");
-                                                        cb(500, err);
+                                                        cb(err);
                                                     })
                                                 } else if (result.affectedRows > 0) {
-                                                    connection.commit(function (err) {
+                                                    connection.commit((err) => {
                                                         if (!!err) {
-
-                                                            console.log(err);
+                                                            console.log(JSON.stringify(err));
                                                             connection.rollback(function () {
-                                                                console.error("rollback error");
-                                                                cb(500, err);
+                                                                return cb(err);
                                                             })
                                                         }
                                                         //정상처리
@@ -264,10 +259,9 @@ class CertificateDAO extends AbstractDAO {
                                         } else {
                                             connection.commit(function (err) {
                                                 if (!!err) {
-                                                    console.log(err);
+                                                    console.log(JSON.stringify(err));
                                                     connection.rollback(function () {
-                                                        console.error("rollback error");
-                                                        cb(500, err);
+                                                        return cb(err);
                                                     })
                                                 }
                                                 //정상처리
@@ -277,13 +271,13 @@ class CertificateDAO extends AbstractDAO {
                                             })
                                         }
                                     }
-                                })
+                                });
                             }
-                        })
+                        });
                     }
                 });
             }
-        })
+        });
     }
 
     /**

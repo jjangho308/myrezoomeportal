@@ -143,13 +143,13 @@ class ResumeDao extends AbstractDAO {
 
         this.connectionPool.getConnection((err, connection) => {
             if (!!err) {
-                console.log(err);
+                console.error(JSON.stringify(err));
                 cb(err);
             } else {
-                connection.beginTransaction(function (err) {
+                connection.beginTransaction((err) => {
                     if (err) {
-                        console.log(err);
-                        cb(err)
+                        console.error(JSON.stringify(err));
+                        return cb(err);
                     } else {
                         var condition = {};
 
@@ -161,89 +161,83 @@ class ResumeDao extends AbstractDAO {
                         connection.query(usrResumeDelQuery, (err, result) => {
 
                             if (!!err) {
-                                console.log(err);
-                                connection.rollback(function () {
-                                    console.error("rollback error");
-                                    cb(500, err);
-                                })
+                                console.error(JSON.stringify(err));
+                                connection.rollback(() => {
+                                    return cb(err);
+                                });
                             }
 
                             //TCDA_USR_RSM이 삭제가 제대로 되었을때.
                             else if (result.affectedRows > 0) {
 
-                                var usrResumeSharedDelQuery = mysql.format(ResumeQuery.delResumeRecords, [condition, { DEL_YN: 'N' }]);
+                                var usrResumeSharedDelQuery = mysql.format(ResumeQuery.delResumeRecords, [condition, {
+                                    DEL_YN: 'N'
+                                }]);
 
                                 //TCDA_RSM_DATA와 TCDA_USR_RSM은 1:1 관계이다.
                                 //TCDA_USR_RSM이 있다면 TCDA_RSM_DATA는 무조건 존재한다
                                 //TCDA_USR_RSM이 삭제된다면 DATA는 같이 삭제되어야 한다.
                                 connection.query(usrResumeSharedDelQuery, (err, result) => {
                                     if (!!err) {
-
-                                        console.log(err);
-                                        connection.rollback(function () {
-                                            console.error("rollback error");
-                                            cb(500, err);
+                                        console.error(JSON.stringify(err));
+                                        connection.rollback(() => {
+                                            return cb(err);
                                         })
                                     } else if (result.affectedRows > 0) {
 
                                         //TCDA_USR_RSM과 TCDA_RSM_DATA가 동시에 지워진 상황
                                         //TCDA_RSM_SHR_INFO Table을 select하여 있다면 update 치고 없다면 직전상황까지 commit한다.
-                                        var selectResumeSharedInfo = mysql.format(ResumeQuery.isShareURL, [condition, { DEL_YN: 'N' }]);
+                                        var selectResumeSharedInfo = mysql.format(ResumeQuery.isShareURL, [condition, {
+                                            DEL_YN: 'N'
+                                        }]);
 
                                         connection.query(selectResumeSharedInfo, (err, result) => {
                                             if (!!err) {
-
-
-                                                console.log(err);
-                                                connection.rollback(function () {
-                                                    console.error("rollback error");
-                                                    cb(500, err);
+                                                console.error(JSON.stringify(err));
+                                                connection.rollback(() => {
+                                                    return cb(err);
                                                 })
                                             }
 
                                             //URL 공유가 한번이라도 완료되었다면
                                             else if (result.length > 0) {
 
-                                                var deleteResumeSharedInfoQuery = mysql.format(ResumeQuery.delUrl, [condition, { DEL_YN: 'N' }]);
+                                                var deleteResumeSharedInfoQuery = mysql.format(ResumeQuery.delUrl, [condition, {
+                                                    DEL_YN: 'N'
+                                                }]);
 
                                                 connection.query(deleteResumeSharedInfoQuery, (err, result) => {
                                                     if (!!err) {
-                                                        console.log(err);
-                                                        connection.rollback(function () {
-                                                            console.error("rollback error");
-                                                            cb(500, err);
+                                                        console.error(JSON.stringify(err));
+                                                        connection.rollback(() => {
+                                                            return cb(err);
                                                         })
                                                     } else if (result.affectedRows > 0) {
-                                                        connection.commit(function (err) {
+                                                        connection.commit((err)=> {
                                                             if (!!err) {
-                                                                console.log(err);
+                                                                console.error(JSON.stringify(err));
                                                                 connection.rollback(function () {
-                                                                    console.error("rollback error");
-                                                                    cb(500, err);
+                                                                    return cb(err);
                                                                 })
                                                             }
-
-                                                            console.log("tranaction sucess");
                                                             consnection.release();
-                                                            cb(200, "sucess");
+                                                            return cb(null, result.affectedRows);
                                                         })
                                                     }
-                                                })
-                                                console.log(result);
+                                                });
                                             }
                                             //한번도 URL 공유를 한적이 없다면..
                                             //TCDA_USR_RSM 테이블과 TCDA_RSM_DATA 테이블을 삭제한 것 까지 commit한다.
                                             else {
-                                                connection.commit(function (err) {
+                                                connection.commit((err) => {
                                                     if (!!err) {
-                                                        console.log(err);
+                                                        console.error(JSON.stringify(err));
                                                         connection.rollback(function () {
-                                                            console.error("rollback error");
-                                                            cb(500, "fail!!!");
+                                                            return cb(err);
                                                         })
                                                     }
                                                     //정상처리
-                                                    cb(200, "sucess");
+                                                    return cb(null, result.affectedRows);
                                                 })
                                             }
                                         })
