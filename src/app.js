@@ -86,13 +86,13 @@ app.use((err, req, res, next) => {
         err: {
           code: ErrorCode.INTERNAL_ERROR,
           msg: ErrorMessage[requestLocale][ErrorCode.INTERNAL_ERROR],
-          stack: Environment.developement ? err.stack : null,
+          stack: err.stack, //Environment.developement ? err.stack : null,
         }
       });
     } else {
       res.locals.code = ErrorCode.INTERNAL_ERROR;
       res.locals.msg = ErrorMessage[requestLocale][ErrorCode.INTERNAL_ERROR];
-      res.locals.stack = Environment.developement ? err.stack : null;
+      res.locals.stack = err.stack //Environment.developement ? err.stack : null;
       res.status(status).render('response_error');
     }
   }
