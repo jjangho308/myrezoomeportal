@@ -28,6 +28,7 @@ body * { visibility: hidden; }
 
 body{
     margin: 0;
+	background-color: #F2F5F8;
 }
 p{
     margin: 0px;
