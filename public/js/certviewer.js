@@ -471,6 +471,12 @@ function setCertViewer(tx_id) {
     certformatter[record.subid](record.data);
 }
 
+var certUrl;
+function setDefaultUrl(url) {    
+    certUrl = window.location.protocol + "//" + window.location.host + '/v/' + url;    
+    console.log(certUrl);    
+}
+
 function generateURL() {
 
     $.ajax({
@@ -488,7 +494,7 @@ function generateURL() {
 
         }),
         success: function (result) {
-            $("#cert-url-input").val("https://" + window.location.host + '/v/' + result.result);
+            $("#cert-url-input").val(window.location.protocol + "//" + window.location.host + '/v/' + result.result);
         },
         contentType: 'application/json'
     });

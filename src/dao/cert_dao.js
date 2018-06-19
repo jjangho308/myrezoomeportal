@@ -516,7 +516,7 @@ class CertificateDAO extends AbstractDAO {
             CERT_ID: creteria.certId,
         };
 
-        var query = mysql.format(CertQuery.getCertData, creteria);
+        var query = mysql.format(CertQuery.getCertData, [creteria, creteria]);        
         this.query(query, (err, cursor) => {
             if (!!err) {
                 cb(err, null);

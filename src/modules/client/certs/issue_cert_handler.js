@@ -59,8 +59,9 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                 console.log(request.cert.record);
                 // TODO request.cert.record 'data', 'subid' 를 제외한 필요없는 컬럼 삭제
                 crypto.encryptAESECB(JSON.stringify(request.cert.record), crypto.getSystemSymmetricKey(), (err, encrypted)=> {
+                    var certId = Util.uuid();
                     var certModel = new CertModel({
-                        certId: Util.uuid(),
+                        certId: certId,
                         uId: request.uId,
                         txId: blcMapModels[0].txid,
                         encryptedData: encrypted
@@ -73,8 +74,26 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                         if (!!err) {
                             cb(ClientRequest.RESULT_FAILURE, err);
                         } else {
-                            cb(ClientRequest.RESULT_SUCCESS, {
-                                result:"success" 
+
+                            var sharedUrl = Util.randomStr({
+                                length: 6,
+                                prefix: 'c'
+                            });
+
+                            certDAO.putShared(new SharedCertModel({
+                                url: sharedUrl,
+                                certId: certId,
+                                public: "Y",
+                                password: "",
+                                expired: ""
+                            }), (err, result) => {
+                                if (!!err) {
+                                    cb(ClientRequest.RESULT_FAILURE, err);
+                                } else {
+                                    cb(ClientRequest.RESULT_SUCCESS, {
+                                        result:"success" 
+                                    });
+                                }
                             });
                         }
                     });

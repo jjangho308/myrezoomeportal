@@ -55,13 +55,14 @@ class GetCertViewRequestHandler extends AbstractClientRequestHandler {
                     } else {
                         var crypto = Managers.crypto();
                         crypto.decryptAESECB(certData.encryptedData, crypto.getSystemSymmetricKey(), (err, decrypted) => {
-                            if (!!err) {
+                            if (!!err) {    
                                 done(ClientRequest.RESULT_FAILURE, err);
                                 return;
-                            } else {                                                              ;
+                            } else { 
                                 done(ClientRequest.RESULT_SUCCESS, {
                                     title: certData.title,
                                     txid: certData.txid,
+                                    url: certData.url,
                                     createdDate: certData.createdDate,
                                     record: decrypted,
                                 });

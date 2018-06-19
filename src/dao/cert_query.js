@@ -53,5 +53,5 @@ module.exports = {
     /**
      * Query to 
      */
-    getCertData: 'SELECT TCD.TRX_ID as txid, TCD.ENC_CERT_DATA as encryptedData, TSB.SUB_NM as title, TCD.CRTD_DT as createdDate from rezoome_db.TCDA_CERT_DATA as TCD	INNER JOIN TCDA_BLC_MAP AS TBM ON (TBM.TRX_ID = TCD.TRX_ID) INNER JOIN TCCO_SUB AS TSB ON (TBM.SUB_ID = TSB.SUB_ID) WHERE ?',
+    getCertData: 'SELECT TCD.TRX_ID as txid, TCD.ENC_CERT_DATA as encryptedData, TSB.SUB_NM as title, TCD.CRTD_DT as createdDate, (SELECT URL FROM TCDA_CERT_SHR_INFO WHERE ? ORDER BY CRTD_DT LIMIT 1) as url from rezoome_db.TCDA_CERT_DATA as TCD	INNER JOIN TCDA_BLC_MAP AS TBM ON (TBM.TRX_ID = TCD.TRX_ID) INNER JOIN TCCO_SUB AS TSB ON (TBM.SUB_ID = TSB.SUB_ID) WHERE ?',
 }
