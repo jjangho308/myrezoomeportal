@@ -138,7 +138,7 @@ $(document).ready(function () {
                         var htmldiv = '<div class="footer-verify-4">';
                         htmldiv = htmldiv + '<div class="footer-verify-left">' + "RESULT" + '</div>';
                         htmldiv = htmldiv + '<div class="footer-verify-center">' + "정상적인 데이터로 확인되었습니다." + '</div>';
-                        htmldiv = htmldiv + '<div class="footer-verify-right">' + '<a>트랜잭션 히스토리 조회</a>' + '</div>';
+                        htmldiv = htmldiv + '<div class="footer-verify-right">' + '<a>트랜잭션 조회</a>' + '</div>';
                         htmldiv = htmldiv + '</div>';
                         $('.main-body-footer').append(htmldiv);
 
@@ -355,31 +355,27 @@ $(document).ready(function () {
 
 
         $childern.each(function (idx, array) {
-            html2canvas($(this), {
-                scale: 3
-            }).then(canvas => {
-                // var ctx = canvas.getContext('2d');
-                // ctx.webkitImageSmoothingEnabled = false;
-                // ctx.mozImageSmoothingEnabled = false;
-                // ctx.imageSmoothingEnabled = false;                    
-                var img = canvas.toDataURL("image/jpeg", 2);
-                $("#printcontent").append("<img class=certImg id=certImg" + idx + " width=98% src=" + img + ">");
+            html2canvas($(this), { scale:3 }).then(canvas => {
+                    // var ctx = canvas.getContext('2d');
+                    // ctx.webkitImageSmoothingEnabled = false;
+                    // ctx.mozImageSmoothingEnabled = false;
+                    // ctx.imageSmoothingEnabled = false;                    
+                    var img = canvas.toDataURL("image/jpeg" , 2);
+                    $("#printcontent").prepend("<img class=certImg id=certImg" + idx + " width=98% src=" + img + ">");
 
-                if (idx === $childern.size() - 1) {
-                    $.blockUI({
-                        message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>'
-                    });
-
-                    setTimeout(function () {
-                        window.print();
-                        $.unblockUI();
-                        $('.certImg').remove();
-                        $(".qr-container").hide();
-                    }, 3000);
-                }
-
-            });
-        });
+                    if (idx === $childern.size()-1) {
+                        $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
+                                                    
+                        setTimeout( function(){                                                                
+                            window.print();
+                            $.unblockUI();
+                            $('.certImg').remove();  
+                            $(".qr-container").hide();
+                        }, 3000);
+                    }
+                
+            });            
+         });
 
 
         // html2canvas(document.querySelector(".inner-container") ).then(canvas => {

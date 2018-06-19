@@ -559,12 +559,16 @@ window.onload = function () {
         for (var i = 0; i < pagetxidlist.length; i++) {
             try {
                 var objuserdata = getData(pagetxidlist[i]);
-                refreshview(objuserdata);
+                oridata.push(objuserdata);
+                
             } catch (exception) {
                 console.log(exception);
                 continue;
             }
+            
         }
+        $('.spec-body-default').show();
+        refreshview(oridata);
         $('#initial-dialog .close-modal').click();
     } else {
         //session storage dont have user info(txid list)

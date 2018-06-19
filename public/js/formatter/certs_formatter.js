@@ -3,6 +3,7 @@ var certformatter = {
     "RCLPT0005": function viewformatter(record_data) {
 
         var opicLevel = ['NL', 'NM', 'NH', 'IL', 'IM1', 'IM2', 'IM3', 'IH', 'AL'];
+        // $(".outer-container").load("../../viewhtml/RCLPT0005.html", function () {
         $(".main-body").load("../../viewhtml/RCLPT0005.html", function () {
             var level = record_data.rating;
 
@@ -17,21 +18,21 @@ var certformatter = {
                 var url2 = '/img/mycert/opic/report/report_' + level + '.jpg';
                 
                 var width = $("#opic_cert").css("width").replace(/[^-\d\.]/g, '');;
-                var height = width * 1.411;
+                var height = width * 1.41;
 
-                $("#opic_cert").attr("width", "100%");
-                $("#opic_cert").css("background-image", 'url(' + url1 + ')');                
-                $("#opic_cert").css("background-size", '100%');
-                $("#opic_cert").css("background-repeat", 'no-repeat');
-                $("#opic_cert").css("width", '100%');
-                $("#opic_cert").css("height", height + "px");
+                $("#opic_cert").attr("width", "100%")
+                .css("background-image", 'url(' + url1 + ')')
+                .css("background-size", '100%')
+                .css("background-repeat", 'no-repeat')
+                .css("width", '100%')
+                .css("height", height + "px");
                 
-                $("#opic_report").attr("width", "100%");
-                $("#opic_report").css("background-image", 'url(' + url2 + ')');                
-                $("#opic_report").css("background-size", '100%');
-                $("#opic_report").css("background-repeat", 'no-repeat');
-                $("#opic_report").css("width", '100%');
-                $("#opic_report").css("height", height + "px");
+                $("#opic_report").attr("width", "100%")
+                .css("background-image", 'url(' + url2 + ')')
+                .css("background-size", '100%')
+                .css("background-repeat", 'no-repeat')
+                .css("width", '100%')
+                .css("height", height + "px");
             }
 
             var width = $("#opic_cert").css("width");

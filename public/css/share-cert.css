@@ -238,36 +238,6 @@ background-color:#dadada;
 	margin: 0px 32px 0px 0px;
 }
 
-.verify-loader {
-	width: 90px;
-	height: 20px;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	margin-left: -10px;
-	transform: translate(-50%, -50%);
-	font-size: 0;
-}
-
-.verify-loader-item {
-	display: inline-block;
-	width: 10px;
-	height: 10px;
-	margin-left: 5px;
-	border-radius: 50%;
-	background: black;
-	
-	animation: anim .8s infinite linear;
-}
-
-.verify-loader-item:nth-child(2) {
-	animation-delay: -.6s;
-}
-
-.verify-loader-item:nth-child(3) {
-	animation-delay: -.4s;
-}
-
 @keyframes anim {
 	0%   { transform: translateY(0); opacity: .2; }
 	50%  { transform: translateY(-10px); opacity: .6; }
