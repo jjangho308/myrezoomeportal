@@ -196,11 +196,11 @@ class CertificateDAO extends AbstractDAO {
 
         this.connectionPool.getConnection((err, connection) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                connection.beginTransaction(function (err) {
-                    if (err) {
-                        cb(err);
+                connection.beginTransaction((txerr)=> {
+                    if (txerr) {
+                        return cb(txerr);
                     } else {
                         var condition = {};
                         //make query
@@ -213,12 +213,10 @@ class CertificateDAO extends AbstractDAO {
 
                         connection.query(usrCertDelQuery, (err, result) => {
                             if (!!err) {
-
-                                console.log(err);
-                                connection.rollback(function () {
-                                    console.error("rollback error");
-                                    cb(500, err);
-                                })
+                                console.error(JSON.stringify(err));
+                                connection.rollback(() => {
+                                    return cb(err);
+                                });
                             } else if (result.affectedRows > 0) {
 
                                 var selectShareCertQuery = mysql.format(CertQuery.getShared, condition);

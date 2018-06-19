@@ -12,6 +12,10 @@ var NexledgerService = require('../../blockchain/nexledgerservice');
 
 var Util = require('../../../util/util');
 
+var ErrorCode = require('../../../core/error/error_code');
+var ResponseError = require('../../../core/error/response_error');
+var HttpStatusError = require('../../../core/error/http_status_code');
+
 /**
  * Handler for SearchRecordRequest. <br />
  * 이력 검색 요청 핸들러.
@@ -52,11 +56,12 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         }, (err, userModels) => {
 
             // 회원 정보가 없다면 즉시 Failure
-            if (!!err || userModels.length <= 0) {
-                done(ClientRequestManager.RESULT_FAILURE, {
-                    code: 200,
-                    msg: 'No user exists.'
-                });
+            if (!!err){
+                done(ClientRequestManager.RESULT_FAILURE, err);
+            } else if(userModels.length <= 0) {
+                done(ClientRequestManager.RESULT_FAILURE, new ResponseError({
+                    code : ErrorCode.DATA_NO_EMAIL,
+                }));
                 return;
             } else {
                 // FIXME 1회만 Done을 호출하기 위해서 여기서 호출
@@ -120,10 +125,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                         orgcode: clientRequestEntity.orgcode
                                     }, (dbError, foundOrgs) => {
                                         if (!!dbError) {
-                                            reject({
-                                                code: 200,
-                                                msg: 'Error'
-                                            });
+                                            reject(dbError);
                                             return;
                                         } else if (foundOrgs.length == 0) {
                                             reject({
