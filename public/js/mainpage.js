@@ -563,6 +563,7 @@ window.onload = function () {
             }
             
         }
+        $('.spec-body-default').show();
         refreshview(oridata);
         $('#initial-dialog .close-modal').click();
     } else {
