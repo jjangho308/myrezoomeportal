@@ -737,7 +737,7 @@ p{
       }
   
       .outer-container {        
-        width: 470px;
+        width: 360px;
         height: calc(100%*1.41);
         padding-top: 10px;
                     
@@ -748,7 +748,7 @@ p{
       }
   
       .inner-container {
-        width: 470px;
+        width: 360px;
         height: calc(470px * 1.41);
         margin: auto;
         background: white;
@@ -758,7 +758,7 @@ p{
   @media (max-width:420px) {
       .header {
           /* width: 324px; */
-          width: 105%;
+          width: 100%;
       }
 
       .outer-container{
