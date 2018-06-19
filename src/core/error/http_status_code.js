@@ -4,6 +4,8 @@
  * @since 180617
  * @author TACKSU
  */
+exports.SUCCESS = 200;
+
 exports.MOVE_PERM = 301;
 exports.SEE_OTHER = 303;
 
