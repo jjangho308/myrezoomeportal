@@ -737,8 +737,8 @@ p{
       }
   
       .outer-container {        
-          width: 100%;
-          height: calc(100%*1.41);
+        width: 470px;
+        height: calc(100%*1.41);
           padding-top: 10px;
                     
             margin: auto;
@@ -747,9 +747,10 @@ p{
       }
   
       .inner-container {
-          height: 100%;
-          margin: auto;
-          border: solid 1px #2b2c2c;
+        width: 470px;
+        height: calc(470px * 1.41);
+        margin: auto;
+        background: white;
       }	
   }
   
@@ -1021,10 +1022,10 @@ vertical-align: -4px;
     color: #676767;
 }
 
-.period-div input {
+.period-div input{
     margin-left: -3px;
     width: 151px;
-    color: #676767;
+        color: #676767;
     font-size: 13px;
     font-weight: normal;
     margin-bottom: 0px;
