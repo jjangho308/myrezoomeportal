@@ -2,6 +2,10 @@ var Managers = require('../core/managers');
 
 var Env = require('../core/environment');
 
+var ErrorCode = require('../core/error/error_code');
+var ResponseError = require('../core/error/response_error');
+var HttpStatusCode = require('../core/error/http_status_code');
+
 /**
  * Token authentication middleware. <br />
  * 
@@ -18,7 +22,12 @@ module.exports = (req, res, next) => {
         req.cookies.JWT;
 
     if (!token) {
-        next(new Error("No token error"));
+        return res.status(HttpStatusCode.SEE_OTHER).redirect('/signin?url=' + `${req.protocol}://${req.hostname}:${req.originalUrl}`);
+        // next(new ResponseError({
+        //     code: ErrorCode.AUTH_ERROR,
+        //     status: HttpStatusCode.UNAUTHORIZED,
+        //     redirect : '/',
+        // }));
     }
     try {
         // req.params에는 넣어도 다음 middle ware로 전달이 안됨.
@@ -27,7 +36,11 @@ module.exports = (req, res, next) => {
         req.body.uId = verified.data.uId;
         next();
     } catch (err) {
-        console.error(err.stack);
-        next(err);
+        return res.status(HttpStatusCode.SEE_OTHER).redirect('/signin?url=' + `${req.protocol}://${req.hostname}:${req.originalUrl}`);
+        // next(new ResponseError({
+        //     code: ErrorCode.AUTH_ERROR,
+        //     status: HttpStatusCode.UNAUTHORIZED,
+        //     redirect : '/',
+        // }));
     }
 }
