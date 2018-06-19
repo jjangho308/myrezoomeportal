@@ -236,7 +236,7 @@ p{
 
 .main-body-footer-1 {
 	float:left;
-	width: 135px;
+	width: 19%;
 	height: 18px;
 	font-size: 12px;
 	font-weight: normal;
@@ -250,7 +250,7 @@ p{
 
 .main-body-footer-2 {
 	float:left;
-	width: 150px;
+	width: 21%;
 	height: 18px;
 	font-size: 12px;
 	font-weight: normal;
@@ -263,7 +263,8 @@ p{
 }
 
 .main-body-footer-3 {
-	width: 400px;
+    float:left;
+	width: 55%;
 	height: 18px;
 	font-size: 12px;
 	font-weight: normal;
@@ -278,14 +279,14 @@ p{
 .main-body-footer-4 {
 	float: left;
 	border: initial;
-	width: 135px;
+	width: 19%;
 	height: 18px;
 }
 
 .main-body-footer-5 {
 	float: left;
 	border: initial;
-	width: 150px;
+	width: 21%;
 	height: 18px;
 	color: #878d91;
 	font-weight: bold;
@@ -296,7 +297,8 @@ p{
 .main-body-footer-6 {
 	float: left;
 	border: initial;
-	width: calc(100% - 400px);
+    /* width: calc(100% - 400px); */
+    width: 55%;
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
 	overflow: hidden;
@@ -751,6 +753,51 @@ p{
           margin: auto;
           border: solid 1px #2b2c2c;
       }	
+      .main-body-footer {
+            margin: auto;
+            width: 490px;
+            padding: 10px;
+        }
+        
+        .main-body-footer-decription {
+            position: relative;
+            top: 5px;
+            margin: auto;
+            width: 490px;
+            font-size: 10px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            /* line-height: 2.5; */
+            letter-spacing: normal;
+            border-top: 1px solid #dfe5ef;
+            color: #878d91;
+        }
+
+        .footer-verify-1 {
+            width: 490px;
+        }
+
+        .footer-verify-2 {
+            width: 490px;
+        }
+
+        .footer-verify-3 {
+            width: 490px;
+        }
+
+        .footer-verify-4 {
+            width: 490px;
+        }
+
+        .footer-verify-left {
+            margin-left: 10px;
+        }
+        .footer-verify-right {
+            margin-left: 10px;
+            width: 85px;
+            margin-right: 10px;
+        }
   }
   
   @media (max-width:420px) {

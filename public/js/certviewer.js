@@ -115,7 +115,7 @@ $(document).ready(function () {
                         var htmldiv = '<div class="footer-verify-4">';
                         htmldiv = htmldiv + '<div class="footer-verify-left">' + "RESULT" + '</div>';
                         htmldiv = htmldiv + '<div class="footer-verify-center">' + "정상적인 데이터로 확인되었습니다." + '</div>';
-                        htmldiv = htmldiv + '<div class="footer-verify-right">' + '<a>트랜잭션 히스토리 조회</a>' + '</div>';
+                        htmldiv = htmldiv + '<div class="footer-verify-right">' + '<a>트랜잭션 조회</a>' + '</div>';
                         htmldiv = htmldiv + '</div>';
                         $('.main-body-footer').append(htmldiv);
 
