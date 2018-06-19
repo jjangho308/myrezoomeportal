@@ -512,9 +512,6 @@ $(document).ready(function () {
                 $('.spec-body').remove();
                 $('.spec-body-default').css("display", "none");
                 $('.spec-body-loading').css("display", "block");
-
-
-
             },
             data: JSON.stringify({
                 cmd: 'SearchRecord',
@@ -541,10 +538,7 @@ $(document).ready(function () {
             },
             contentType: 'application/json',
         });
-
     });
-
-
 });
 
 window.onload = function () {
@@ -560,12 +554,12 @@ window.onload = function () {
             try {
                 var objuserdata = getData(pagetxidlist[i]);
                 oridata.push(objuserdata);
-                
+
             } catch (exception) {
-                console.log(exception);
+                console.error(exception);
                 continue;
             }
-            
+
         }
         $('.spec-body-default').show();
         refreshview(oridata);
