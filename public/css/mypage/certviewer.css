@@ -592,7 +592,8 @@ p{
   
       .outer-container{
           width: 840px;
-          height: 1188px;          
+          height: 1188px; 
+	  border: solid 1px #dfe5ef;
       }
   
       .inner-container{
