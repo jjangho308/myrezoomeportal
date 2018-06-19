@@ -42,6 +42,10 @@ function loadcertlist() {
         headers: {
             'Authorization': client_authorization
         },
+        error: function (jqXhr, status, error) {
+            console.error(jqXhr.responseText);
+            console.error(error);
+        },
         success: function (certlistres) {
             console.log(certlistres);
             var certlistresult = certlistres.result;
@@ -52,9 +56,9 @@ function loadcertlist() {
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '")>';
                 htmldiv = htmldiv + '<p>' + item.certId.substring(0, 25) + '..<img style="z-index:999" src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=certmore("more-div-' + item.certId + '")></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
-                htmldiv = htmldiv + '<p>' + item.title + '</p>';
                 htmldiv = htmldiv + '<p>증명서</p>';
-                htmldiv = htmldiv + '<p>발급일시 : ' + item.date + '</p>';
+                htmldiv = htmldiv + '<p>' + item.title + '</p>';
+                htmldiv = htmldiv + '<p>발급일시 : ' + formatDate(item.date) + '</p>';
 
                 htmldiv = htmldiv + '<div id="more-div-' + item.certId + '" class="more-store-resume-div">';
                 htmldiv = htmldiv + '<p>복사</p>';
@@ -155,6 +159,10 @@ $(document).ready(function () {
             data: JSON.stringify({
 
             }),
+            error: function (jqXhr, status, error) {
+                console.error(jqXhr.responseText);
+                console.error(error);
+            },
             success: function (mappingres) {
                 console.log(mappingres);
 
@@ -185,7 +193,7 @@ $(document).ready(function () {
                         var htmldiv = '<tr class="certtr">';
                         htmldiv = htmldiv + '<td>';
                         htmldiv = htmldiv + '<div class="checkbox checkbox-primary">';
-                        //htmldiv = htmldiv + '<input id='+ addcertcheckboxid +' type="checkbox" onclick="certckeckboxclick('+addcertcheckboxid+')">';
+                        //htmldiv = htmldiv + '<input id=' + addcertcheckboxid + ' type="checkbox" onclick="certckeckboxclick(' + addcertcheckboxid + ')">';
                         htmldiv = htmldiv + '<input id=' + addcertcheckboxid + ' type="checkbox" name="certcheck">';
                         htmldiv = htmldiv + '<label for=' + addcertcheckboxid + '></label>';
                         htmldiv = htmldiv + '</div>';
@@ -315,6 +323,9 @@ $(document).ready(function () {
                         //sId: '',
                         cert: reqcerts
                     }),
+                    error : function(jqXhr, status, error){
+                        console.log(jqXhr.responseText);
+                    },
                     success: function (res2) {
                         console.log(res2);
                         //setSocket(res.mid);

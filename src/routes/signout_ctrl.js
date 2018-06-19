@@ -20,12 +20,9 @@ module.exports = {
      * @author TACKSU
      */
     get: (req, res, next) => {
-        console.log("ctrl signout ctrl");
-        res.set('Set-Cookie', '')
-                        .type('application/json').status(302).redirect('/');
-        //res.render('index', {});
-        //res.redirect('/');
-
+        // TODO 토큰 체크같은게 필요없나?
+        // SignOut 상태에서 이 Route로 들어와도 아무 문제 없는건가?
+        res.clearCookie('JWT')
+            .type('application/json').status(302).redirect('/');
     },
-
 }

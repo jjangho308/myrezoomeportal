@@ -1,5 +1,5 @@
 var ErrorCode = require('./error_code');
-var ErrorMessage = require('./error_message');
+var ErrorMessage = require('./error_message').default;
 
 /**
  * Rezoome internal error to response via HTTP Response. <br />
@@ -7,7 +7,7 @@ var ErrorMessage = require('./error_message');
  * @since 180417
  * @author TACKSU
  */
-class HttpResponseError {
+class ResponseError {
 
     /**
      * Default constructor. <br />
@@ -24,12 +24,10 @@ class HttpResponseError {
     constructor(opt) {
         if (typeof opt === 'number') {
             this.code = opt;
-            // this.message = ErrorMessage['default'][this.code];
         } else if (opt instanceof Object) {
             this.code = opt.code;
             this.status = opt.status;
             this.cause = opt.cause;
-            // this.message = ErrorMessage[opt.locale || 'default'][this.code];
         }
     }
 
@@ -48,4 +46,4 @@ class HttpResponseError {
     }
 }
 
-module.exports = HttpResponseError;
+module.exports = ResponseError;

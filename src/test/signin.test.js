@@ -13,7 +13,7 @@ describe('Sign In test suite', () => {
         chai.use(chaihttp);
     });
 
-    it('Paramter insufficient', done => {
+    it('Paramter insufficient on ajax', done => {
         chai.request(app)
             .post('/signin')
             .set('Content-Type', 'application/json')
@@ -23,6 +23,20 @@ describe('Sign In test suite', () => {
             })
             .end((err, res) => {
                 console.log(JSON.stringify(res.body));
+                done();
+            });
+    });
+
+    it('Paramter insufficient on normal', done => {
+        chai.request(app)
+            .post('/signin')
+            .set('Content-Type', 'application/json')
+            .send({
+                email: 'test@naver.com',
+            })
+            .end((err, res) => {
+                console.log(JSON.stringify(res.error.text));
+                expect(res).to.have.status(400);
                 done();
             });
     });

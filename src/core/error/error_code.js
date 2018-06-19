@@ -7,24 +7,32 @@
  * @since 180508
  * @author TACKSU
  */
-module.exports = {
 
-    // General internal error codes.
-    INTERNAL_ERROR: 1,
-    INTERNAL_UNKNOWN: 2,
-    INTERNAL_NO_RESPONSE: 3,
+// Internal error codes.
+exports.INTERNAL_ERROR = 1;
+exports.INTERNAL_UNKNOWN = 2;
+exports.INTERNAL_NO_RESPONSE = 3;
 
-    // Authorizations error
-    AUTH_ERROR: 100,
-    AUTH_NO_PERMISSON: 101,
+// Authorization error
+exports.AUTH_ERROR = 100;
+exports.AUTH_NO_PERMISSON = 101;
 
-    // Parameter error
-    PARAM_INVALID: 200,
+// Parameter error
+exports.PARAM_ERROR = 200;
+exports.PARAM_NO_UID = 201;
+exports.PARAM_NO_EMAIL = 202;
+exports.PARAM_NO_PASSWORD = 203;
+exports.PARAM_NO_CERT_ID = 204;
+exports.PARAM_AJAX_ONLY = 205;
+exports.PARAM_AJAX_DENY = 206;
+exports.PARAM_NO_TXID = 207;
+exports.PARAM_NO_SUBID = 208;
+exports.PARAM_NO_CMD = 209;
+exports.PARAM_NO_PRIVATE_RECORD_ID = 210;
 
-    // Data error
-    DATA_ERROR: 300,
-    DATA_NO_USER_ID: 301,
-    DATA_NO_PHONE_NUM: 302,
-    DATA_PASSWORD_INCORRECT: 303,
-    DATA_NO_CERT: 304,
-};
+// Data error
+exports.DATA_ERROR = 300;
+exports.DATA_NO_EMAIL = 301;
+exports.DATA_NO_PHONE_NUM = 302;
+exports.DATA_PASSWORD_INCORRECT = 303;
+exports.DATA_NO_CERT = 304;

@@ -11,11 +11,15 @@ var clientRouter = require('./client_route');
 var introRouter = require('./intro_route');
 var sharedCertsRouter = require('./shared_certs_route');
 var sharedResumesRouter = require('./shared_resumes_route');
+
 var verifyRouter = require('./verify_route');
 var apiRouter = require('./api/api_route');
 var oauthRouter = require('./oauth/oauth_route');
 var developerRouter = require('./developer_route');
 var agentRouter = require('./agent_route');
+
+var requestLogger = require('../mw/request_logger.js');
+var responseLogger = require('../mw/response_logger.js');
 
 /**
  * Root router of all http request channel. <br />
@@ -25,6 +29,7 @@ var agentRouter = require('./agent_route');
  * @author TACKSU
  */
 var router = express.Router();
+router.use('/', requestLogger);
 router.use('/', introRouter);
 router.use('/signin', signinRouter);
 router.use('/signout', signoutRouter);
@@ -45,4 +50,5 @@ router.use('/api', apiRouter);
 router.use('/oauth2', oauthRouter);
 router.use('/dev', developerRouter);
 
+router.use('/', responseLogger);
 module.exports = router;

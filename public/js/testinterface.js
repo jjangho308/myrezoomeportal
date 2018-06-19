@@ -137,7 +137,7 @@ function test_setTestData() {
                {
                    "data": "{\"ea_asset\":\"49\",\"ex_name\":\"매경TEST\",\"ea_exam_time\":\"20180324\",\"re_grade\":\"보통\",\"re_point0\":\"565\",\"re_point1\":\"44.8139\",\"re_point2\":\"325\",\"re_point3\":\"240\",\"re_point4\":\"60\",\"re_point5\":\"150\",\"re_point6\":\"34.4418\",\"re_point7\":\"175\",\"re_point8\":\"250\",\"re_point9\":\"36.9755\",\"re_point10\":\"90\",\"re_point11\":\"100\",\"re_point12\":\"5.14648\",\"re_point13\":\"50\",\"re_point14\":\"150\",\"re_point15\":\"40.4592\",\"re_point16\":\"120\",\"re_point17\":\"250\",\"re_point18\":\"77.0388\",\"re_point19\":\"70\",\"re_point20\":\"100\",\"re_point21\":\"37.2922\",\"re_point22\":\"40\",\"re_point23\":\"70\",\"re_point24\":\"90\",\"re_point25\":\"33.3333\",\"re_point26\":\"48\",\"re_point27\":\"70\",\"re_point28\":\"38.6698\",\"re_point29\":\"65.7118\",\"re_point30\":\"64.8377\",\"re_point31\":\"34.9169\",\"re_point32\":\"61.8369\",\"re_point33\":\"63.2304\",\"re_point34\":\"0\"}",
                    "hash": "4406db28e9620c4cd538f512dd82fee6dfc0bdf64e3a27148c672e09ee65207e",
-                   "txid": "5eb7e3a558615deab8cdb3e5e5fcc4a17ae035c5ec1de2541e680e4108c8e984",
+                   "txid": "7f39d318220956148f3917fcbfe62db92f47e3a4e010a52c75afd99410b6a764",
                    "subid": "RCCNF0001",
                    "stored": "Y",
                    "dftYn": "N"
@@ -170,7 +170,7 @@ function test_setTestData() {
            {
                "data": "{\"cname\":\"박헌욱 (PARK HEONUG)\",\"grcode\":\"OBB0003\",\"birthday\":\"1987 / 01 / 23\",\"ctestday\":\"2014 / 09 / 28\",\"testtype\":\"OPIc (ENGLISH)\",\"cnation\":\"OPIc 특별시험\",\"clevel\":\"NOVICE LOW - ENGLISH\",\"cissudate\":\"2018 / 05 / 30\",\"name\":\"박헌욱\",\"ename\":\"PARK HEONUG\",\"opidate\":\"Sep 28 2014  6:24PM\",\"issudate\":\"20180530\",\"subj\":\"OPI003\",\"year\":\"2014\",\"subjseq\":\"66797\",\"started\":\"201409281820\",\"ended\":\"201409281930\",\"rating\":\"NL\",\"areacd\":\"A\",\"exroomno\":\"A0068\",\"exroomnm\":\"OPIc역삼교육센터\",\"addr\":\"서울강남구 역삼동 718-5 멀티스퀘어 6층(구 삼성SDS멀티캠퍼스 건물)\",\"levels\":\"1\",\"code\":\"NL\",\"codenm\":\"Novice Low\",\"freebillchk\":\"N\",\"realyear\":\"2014\",\"useend\":\"2016/09/27\",\"examid\":null,\"language\":\"English\",\"testdate\":\"September28,2014\",\"imsubscore\":null,\"subjnm\":\"OPIc 특별시험\"}",
                "hash": "332ca60e27587689dfdbd71754abf3e6e8c81fe4ca8424b5afb746886d3fbf01",
-               "txid": "db8c4ec73fa3bb9e13cd1d2315428010bd0f121da57a1eed389bf765ecc5c5e0",
+               "txid": "da8b4f42eca588336a94c3a27a5c1bb04b5d351ff6c575506fd9a9c6929fffe1",
                "subid": "RCLPT0005",
                "stored": "Y",
                "dftYn": "N"

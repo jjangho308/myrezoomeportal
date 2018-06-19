@@ -2,6 +2,7 @@ var express = require('express');
 
 var ctrl = require('./shared_certs_ctrl');
 var client_auth = require('../mw/client_auth');
+var ajaxOnly = require('../mw/ajax_only');
 
 /**
  * Router for /shared_certs URI. <br />
@@ -11,10 +12,8 @@ var client_auth = require('../mw/client_auth');
  */
 var router = express.Router();
 
-router.get('/', client_auth);
-router.get('/', ctrl.get);
-
 router.post('/', client_auth);
+router.post('/', ajaxOnly);
 router.post('/', ctrl.post);
 
 module.exports = router;

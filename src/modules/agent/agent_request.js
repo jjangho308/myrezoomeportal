@@ -14,6 +14,9 @@ var KeyProvisionRequestHandler = require('./keyprovision/keyprovision_handler');
 var AuthenticationRequestEntity = require('./auth/auth_request');
 var AuthenticationRequestHandler = require('./auth/auth_handler');
 
+const RESULT_SUCCESS = 0;
+const RESULT_PENDING = 1;
+const RESULT_FAILURE = 2;
 /**
  * Agent request manager. <br />
  * 
@@ -24,7 +27,6 @@ var AuthenticationRequestHandler = require('./auth/auth_handler');
  * @author TACKSU
  */
 class AgentRequestManager extends AbstractManager {
-
     /**
      * Default constructor. <br />
      * 
@@ -103,14 +105,14 @@ class AgentRequestManager extends AbstractManager {
                     switch (resultCode) {
 
                         // 에러 발생시에는 Error 객체를 Client에 Response 후 
-                        case AgentRequestManager.RESULT_FAILURE:
+                        case RESULT_FAILURE:
                             {
                                 // result instanceof Error Retry?
                                 cb(result, null);
                                 break;
                             }
 
-                        case AgentRequestManager.RESULT_PENDING:
+                        case RESULT_PENDING:
                             {
                                 // result instanceof Object and Keep request.
                                 this.requestMap.set(request.mId, request);
@@ -118,7 +120,7 @@ class AgentRequestManager extends AbstractManager {
                                 break;
                             }
 
-                        case AgentRequestManager.RESULT_SUCCESS:
+                        case RESULT_SUCCESS:
                             {
                                 // result instanceof Object.
                                 cb(null, result);
@@ -134,22 +136,8 @@ class AgentRequestManager extends AbstractManager {
     }
 }
 
-/**
- * Result code for sucess. <br />
- * 
- */
-AgentRequestManager.RESULT_SUCCESS = 0;
+module.exports = AgentRequestManager;
 
-/**
- * Result code for pending. <br />
- * 
- */
-AgentRequestManager.RESULT_PENDING = 1;
-
-/**
- * Result code for failured. <br />
- * 
- */
-AgentRequestManager.RESULT_FAILURE = 1;
-
-module.exports = AgentRequestManager
+exports.RESULT_SUCCESS = RESULT_SUCCESS;
+exports.RESULT_PENDING = RESULT_PENDING;
+exports.RESULT_FAILURE = RESULT_FAILURE;
