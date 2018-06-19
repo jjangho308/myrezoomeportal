@@ -3,7 +3,7 @@
  * 
  */
 ! function (_window) {
-    var opciLevel = ['NL', 'NM', 'NH', 'IL', 'IM1', 'IM2', 'IM3', 'IH', 'AL'];
+    var opicLevel = ['NL', 'NM', 'NH', 'IL', 'IM1', 'IM2', 'IM3', 'IH', 'AL'];
 
     window.certformatter = {
 
