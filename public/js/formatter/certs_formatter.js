@@ -17,7 +17,7 @@ var certformatter = {
                 var url2 = '/img/mycert/opic/report/report_' + level + '.jpg';
                 
                 var width = $("#opic_cert").css("width").replace(/[^-\d\.]/g, '');;
-                var height = width * 1.411;
+                var height = width * 1.41;
 
                 $("#opic_cert").attr("width", "100%");
                 $("#opic_cert").css("background-image", 'url(' + url1 + ')');                

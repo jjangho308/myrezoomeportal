@@ -78,13 +78,13 @@
 
 	.inner-container{
 	    width: 470px;
-	    height:  calc(470px * 1.41);    
+	    height:  calc(470px * 1.4);    
         margin: auto;
 		background: white;		
     }
 
     .outer-container {
-        height: calc(490px * 1.41 * 2);
+        height: calc(490px * 1.4 * 2);
         width: 490px;
     }
 

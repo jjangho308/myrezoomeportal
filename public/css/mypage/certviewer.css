@@ -682,7 +682,7 @@ p{
   
       .outer-container {        
           width: 100%;
-          height: calc(100%*1.41);
+          height: calc(100%*1.40);
           padding-top: 10px;
                     
             margin: auto;
