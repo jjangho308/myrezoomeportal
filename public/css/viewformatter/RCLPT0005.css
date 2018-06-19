@@ -60,6 +60,16 @@
         top: -200px;
     }
 
+    .qr-container p:nth-child(3) {
+        position: relative;
+        font-size: 11px;
+        left: 5px;
+        top: -99px;
+        color: #838383;
+        padding: 5px 5px 0px 40px;
+    }
+
+
     #certno {
         font-size: 11px;
         font-weight: 500;
