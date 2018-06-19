@@ -527,7 +527,7 @@ $(document).ready(function () {
                 }
 
             }),
-            error : function(jqXhr, status, error){
+            error: function (jqXhr, status, error) {
                 console.error('Search record Error : ' + error);
                 console.error(jqXhr.responseText);
             },
@@ -568,8 +568,13 @@ window.onload = function () {
         $('#initial-dialog .close-modal').click();
     } else {
         //session storage dont have user info(txid list)
-        genRsaKey();
-        request_agent();
+        genRsaKey(function (err, keypair) {
+            if (!!err) {
+                console.error(JSON.stringify(err));
+            } else if (!!keypair) {
+                request_agent();
+            }
+        });
     }
 
     getPrivateRecords();
@@ -751,7 +756,7 @@ function refreshview(records) {
                     subid = subidTmp;
                 }
             } catch (exception) {
-                //console.log(exception);
+                console.error(JSON.stringify(exception));
                 continue;
             }
         }

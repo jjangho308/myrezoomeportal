@@ -57,18 +57,67 @@ function setData(record) {
     addTxidList(record.txid);
 }
 
-function genRsaKey() {
-    rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
-    console.log(rsaKeypair);
-    setRSAKey(rsaKeypair);
+/**
+ * Generate RSA Keypair on worker thread or Promise. <br />
+ * 
+ * @since 180619
+ * @author TACKSU
+ */
+function genRsaKey(callback) {
+    if (!!window.Worker) {
+        var generateWorker = new Worker('js/generate_keypair_worker.js');
+        generateWorker.postMessage([0]); // 의미없음
+        return generateWorker.onmessage = function (workerResult) {
+            if (!!workerResult.data) {
+                setRSAKey(JSON.parse(workerResult.data));
+                callback(null, workerResult);
+            } else {
+                callback(new Error("Couldn't generate RSA Keypair"));
+            }
+        }
+    }
+
+    if (!!window.Promise) {
+        return new Promise(function (resolve, reject) {
+                try {
+                    resolve(KEYUTIL.generateKeypair("RSA", 2048));
+                } catch (e) {
+                    reject(e);
+                }
+            })
+            .then(function (rsaKeyPair) {
+                return {
+                    rsakey_pub: KEYUTIL.getJWKFromKey(rsaKeyPair.pubKeyObj),
+                    rsakey_prv: KEYUTIL.getJWKFromKey(rsaKeyPair.prvKeyObj)
+                }
+            })
+            .then(function (rsaKeypair) {
+                setRSAKey(rsaKeypair);
+                callback(null, rsaKeypair);
+            })
+            .catch(function (e) {
+                console.error(e);
+            });
+    }
+
+    return setTimeout(function () {
+        try {
+            rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);
+            rsaKeypair = {
+                rsakey_pub: KEYUTIL.getJWKFromKey(rsaKeyPair.pubKeyObj),
+                rsakey_prv: KEYUTIL.getJWKFromKey(rsaKeyPair.prvKeyObj)
+            };
+            setRSAKey(rsaKeypair);
+            !!callback ? callback(null, rsaKeypair) : null;
+        } catch (e) {
+            !!callback ? callback(e) : null;
+        }
+    }, 0);
 }
 
 function setRSAKey(rsaKeypair) {
-    rsakey_prv = KEYUTIL.getJWKFromKey(rsaKeypair.prvKeyObj);
-    rsakey_pub = KEYUTIL.getJWKFromKey(rsaKeypair.pubKeyObj);
-
-    sessionStorage.setItem("rsa_prv", JSON.stringify(rsakey_prv));
-    sessionStorage.setItem("rsa_pub", JSON.stringify(rsakey_pub));
+    sessionStorage.setItem("rsa_prv", JSON.stringify(rsaKeypair.rsakey_prv));
+    sessionStorage.setItem("rsa_pub", JSON.stringify(rsaKeypair.rsakey_pub));
 
 }
 
@@ -126,8 +175,8 @@ function getTxidList() {
     var resultarray = storagedata.split(",");
 
     for (var i in resultarray) {
-        if(resultarray[i] == '') {
-            resultarray.splice(i,1);
+        if (resultarray[i] == '') {
+            resultarray.splice(i, 1);
         }
     }
 
