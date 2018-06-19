@@ -24,7 +24,6 @@ class CryptoManager extends AbstractManager {
         super(opt);
     }
 
-
     /**
      * Initializer. <br />
      * 

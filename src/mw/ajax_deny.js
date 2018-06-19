@@ -9,7 +9,7 @@ var HttpStatusCode = require('../core/error/http_status_code');
  * @since 180618
  * @author TACKSU
  * 
- * @param {} req 
+ * @param {*} req 
  * @param {*} res 
  * @param {*} next 
  */

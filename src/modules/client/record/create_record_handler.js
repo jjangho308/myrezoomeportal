@@ -39,9 +39,9 @@ class CreateRecordRequestHandler extends AbstractClientRequestHandler {
 
         recordDAO.issuePrivateRecord(privateRecord, (err, result) => {
             if (!!err) {                
-                cb(ClientRequest.RESULT_FAILURE, err);
+                return cb(ClientRequest.RESULT_FAILURE, err);
             } else {
-                cb(ClientRequest.RESULT_SUCCESS, result);
+                return cb(ClientRequest.RESULT_SUCCESS, result);
             }
         });
     }

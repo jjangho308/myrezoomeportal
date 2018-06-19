@@ -31,9 +31,9 @@ class GetRecordsRequestHandler extends AbstractClientRequestHandler {
             uId: requestEntity.uId
         }, (err, result) => {
             if (!!err) {
-                cb(ClientRequest.RESULT_FAILURE, err);
+                return cb(ClientRequest.RESULT_FAILURE, err);
             } else {
-                cb(ClientRequest.RESULT_SUCCESS, result);
+                return cb(ClientRequest.RESULT_SUCCESS, result);
             }
         });
     }
