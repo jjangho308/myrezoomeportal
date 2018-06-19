@@ -16,7 +16,7 @@
                 <h1>개인회원 로그인</h1>
 
                 <div id="signin_div" class="login-container">
-                    <%if (url !== '') { %>
+                    <%if (!!locals.url) { %>
                         <p align="center">로그인이 필요한 서비스입니다.</p>
                     <% } %>
                     <p>이메일</p>

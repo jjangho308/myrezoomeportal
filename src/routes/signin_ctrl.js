@@ -22,9 +22,8 @@ module.exports = {
      * @author TACKSU
      */
     get: (req, res, next) => {
-
         // URL이 전달될 경우는 다른 페이지에서 SignIn이 필요해서 전달된 경우임
-        res.locals.url = req.query.url || '';
+        res.locals.url = req.query.url;
         res.render('signin');
     },
 
