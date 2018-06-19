@@ -28,6 +28,7 @@ body * { visibility: hidden; }
 
 body{
     margin: 0;
+	background-color: #F2F5F8;
 }
 p{
     margin: 0px;
@@ -1199,9 +1200,10 @@ vertical-align: -4px;
 
 
 .stamp{
-    position: absolute;
-    bottom: 39px;
-    right: 105px;
+    margin-left: 15px;
+    margin-top: -20px;
+    width: 100px;
+    height: 100px;
 }
 
 .modal-body{

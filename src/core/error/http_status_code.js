@@ -4,6 +4,12 @@
  * @since 180617
  * @author TACKSU
  */
+exports.SUCCESS = 200;
+
+exports.MOVE_PERM = 301;
+exports.SEE_OTHER = 303;
+
+
 exports.BAD_REQUEST = 400;
 exports.UNAUTHORIZED = 401;
 exports.NOT_FOUND = 404;

@@ -7,11 +7,11 @@
 */%>
     <h1> Response Error </h1>
     <h3> code :
-        <%= code %>
+        <%= locals.code %>
     </h3>
     <h3> Message :
-        <%= msg %>
+        <%= locals.msg %>
     </h3>
     <h3> Stack :
-        <%= !!stack ? stack : null %>
+        <%= locals.stack %>
     </h3>

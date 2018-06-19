@@ -43,7 +43,7 @@ class UpdateResumeHandler extends AbstractClientRequestHandler {
             rsmId: requestEntity.resume.rsmId
         }, requestEntity, (err, affectedRows) => {
             if (!!err) {
-                cb(ClientRequest.RESULT_FAILURE, err);
+                return cb(ClientRequest.RESULT_FAILURE, err);
             } else {
                 cb(ClientRequest.RESULT_SUCCESS, affectedRows);
             }

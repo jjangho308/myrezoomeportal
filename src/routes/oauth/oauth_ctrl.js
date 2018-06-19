@@ -5,6 +5,10 @@ var UserModel = require('../../models/user/user');
 
 var Util = require('../../util/util');
 
+var ErrorCode = require('../../core/error/error_code');
+var ResponseError = require('../../core/error/response_error');
+var HttpStatusCode = require('../../core/error/http_status_code');
+
 /**
  * Controller for '/oauth2' URI. <br />`
  * 
@@ -29,8 +33,10 @@ var defaultController = {
         // 없으면 빈값을 전달하여 기준값으로 삼게 한다.
         var phone = req.query.phone;
         if (!phone) {
-            // TODO Invalid paramter exception.
-            // next(new InvalidException);
+            return next(new ResponseError({
+                code: ErrorCode.PARAM_NO_PHONE,
+                status: HttpStatusCode.BAD_REQUEST,
+            }));
         } else {
             Managers.db().getUserDAO().getByPhone(phone, (err, users) => {
                 if (!!err) {
@@ -62,28 +68,16 @@ var defaultController = {
      * }
      */
     litesignup: (req, res, next) => {
-        // POST method만 허용
-        if ('POST' !== req.method) {
-            next({
-                err: {}
-            });
-            return;
-        }
         // 핸드폰 번호와 ci값을 기준으로 password 입력 없이
         // 가볍게 sign up 하는 기능
         // 임시 패스워드를 발급하여 가입을 시킴
 
         var phone = req.body.phone;
         if (!phone) {
-            // TODO Invalid parameter exception
-            next({
-                err: {
-                    code: 200,
-                    msg: 'Invalid parameter'
-                }
-            });
-        // } else if (true) {
-            // TODO Phone number string validation check.
+            return next(new ResponseError({
+                code: ErrorCode.PARAM_NO_PHONE,
+                status: HttpStatusCode.BAD_REQUEST,
+            }));
         } else {
             Managers.db().getUserDAO().put(new UserModel({
                 phone: phone,
@@ -112,34 +106,36 @@ var defaultController = {
             clientSecret = req.body.client_secret,
             phone = req.body.phone,
             ci = req.body.ci,
-            password = req.body.password;       
-                
+            password = req.body.password;
+
         if (!phone) {
-            // TODO Invalid parameter. 
-            // } else if (!ci) {
-            //     // TODO Invalid parameter.
-        } else {
-            Managers.db().getUserDAO().get({
-                phone: phone
-            }, (err, userModels) => {
-                if (!!err) {
-                    next(err);
-                } else {                    
-                    if(userModels[0].pw == password) {
-                        res.send({
-                            code: Buffer.from(Managers.token().issueToken({
-                                clientId: clientId,
-                                uId: userModels[0].uId
-                            })).toString('base64')
-                        });
-                    } else {
-                        res.send({
-                            code: 'password mismatch'
-                        });
-                    }
-                }
-            });
+            return next(new ResponseError({
+                code: ErrorCode.PARAM_NO_PHONE,
+                status: HttpStatusCode.BAD_REQUEST,
+            }));
         }
+
+        Managers.db().getUserDAO().get({
+            phone: phone
+        }, (err, userModels) => {
+            if (!!err) {
+                next(err);
+            } else {
+                if (userModels[0].pw == password) {
+                    res.send({
+                        code: Buffer.from(Managers.token().issueToken({
+                            clientId: clientId,
+                            uId: userModels[0].uId
+                        })).toString('base64')
+                    });
+                } else {
+                    return next(new ResponseError({
+                        code: ErrorCode.DATA_PASSWORD_INCORRECT,
+                        status: HttpStatusCode.BAD_REQUEST,
+                    }))
+                }
+            }
+        });
     },
 
     /**

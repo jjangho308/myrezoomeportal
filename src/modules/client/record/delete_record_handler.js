@@ -35,11 +35,14 @@ class DeleteRecordHandler extends AbstractClientRequestHandler {
     request(requestEntity, cb) {
 
         var recordDAO = Managers.db().getRecordDAO();
-        recordDAO.deletePrivateRecord({uId: requestEntity.record.uId, prvtId: requestEntity.record.prvtId}, (err, result) => {
-            if (!!err) {                
-                cb(ClientRequest.RESULT_FAILURE, err);
+        recordDAO.deletePrivateRecord({
+            uId: requestEntity.record.uId,
+            prvtId: requestEntity.record.prvtId
+        }, (err, result) => {
+            if (!!err) {
+                return cb(ClientRequest.RESULT_FAILURE, err);
             } else {
-                cb(ClientRequest.RESULT_SUCCESS, result);
+                return cb(ClientRequest.RESULT_SUCCESS, result);
             }
         });
     }

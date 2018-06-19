@@ -61,7 +61,7 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                     txid: request.resume.data[idx].txid
                 }, (err, bcModelList) => {
                     if (!!err) {
-                        cb(ClientRequest.RESULT_FAILURE, err);
+                        return cb(ClientRequest.RESULT_FAILURE, err);
                     } else if (bcModelList.length > 0) {
                         bcIdList.push({
                             order: request.resume.data[idx].order,
@@ -74,13 +74,13 @@ class CreateResumeHandler extends AbstractClientRequestHandler {
                             var resumeDAO = Managers.db().getResumeDAO();
                             resumeDAO.putResume(resumeModel, (err, insertId) => {                               
                                 if (!!err) {
-                                    cb(ClientRequest.RESULT_FAILURE, err);
+                                    return cb(ClientRequest.RESULT_FAILURE, err);
                                 } else {
                                     resumeDAO.getResume({
                                         sId: insertId
                                     }, (err, resumeList) => {                                        
                                         if (!!err) {
-                                            cb(ClientRequest.RESULT_FAILURE, err);
+                                            return cb(ClientRequest.RESULT_FAILURE, err);
                                         } else if (resumeList.length > 0) {                                     
                                             //TODO plain text를 암호화 된 message로 변환할 것.
                                             if(!!request.resume.data){

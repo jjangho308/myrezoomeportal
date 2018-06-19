@@ -56,7 +56,7 @@ $(document).ready(function () {
                 $("input").css("border", "solid 1px #f59188");
                 $(".error-message").html(error.msg);
                 $(".error-message").show();
-                
+
                 // switch (error.code) {
                 //     case 1:
                 //         {

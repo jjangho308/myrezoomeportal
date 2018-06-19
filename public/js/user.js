@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     $("#signup").click(function () {
         window.location.href = "/signup";
-    }); 
+    });
 
     $('#btn_signin').on('click', function () {
         if ($('#signin_id').val() == '') {
@@ -25,35 +25,35 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            type: "POST",  
-            url: "/signin",   
+            type: "POST",
+            url: "/signin",
             data: param,
             dataType: "JSON",
-            beforeSend: function() {
+            beforeSend: function () {
                 $('#loading').show();
             },
-            success: function(response) {
+            success: function (response) {
                 genRsaKey();
 
                 window.location.href = "main";
             },
-            error:function(request, status, error){
-                if(request.responseJSON == "USER_IS_NOT_FOUND") {
+            error: function (request, status, error) {
+                if (request.responseJSON == "USER_IS_NOT_FOUND") {
                     alert("등록된 이메일이 없다.");
-                } else if(request.responseJSON == "MISMATCH_PASSWORD") {
+                } else if (request.responseJSON == "MISMATCH_PASSWORD") {
                     alert("비밀번호가 일치하지 않는다.");
                 }
             }
         });
     });
 
-    $("#signin_div").keydown(function(key) {
-        if (key.keyCode == 13) {            
+    $("#signin_div").keydown(function (key) {
+        if (key.keyCode == 13) {
             $('#btn_signin').trigger('click');
         }
     });
 
-    $('#btn_signup').click(function () {        
+    $('#btn_signup').click(function () {
         if ($('#signup_id').val() == '') {
             alert("id empty");
             return;
@@ -90,47 +90,47 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            type: "POST",  
-            url: "/signup",   
+            type: "POST",
+            url: "/signup",
             data: param,
             dataType: "JSON",
-            success: function(response) {
+            success: function (response) {
                 $("#signup_div").hide();
                 $("#signup_complete_div").show();
                 $("#signup_complete_name").html(familyname + firstname);
                 //window.location.href = "signin";
             },
-            error:function(request, status, error){
-                if(request.responseJSON.code == "ER_DUP_ENTRY"){
-                    alert("이미 가입된 이메일 정보가 있다.");  
+            error: function (request, status, error) {
+                if (request.responseJSON.code == "ER_DUP_ENTRY") {
+                    alert("이미 가입된 이메일 정보가 있다.");
                 }
             }
         });
     });
 
-    $('#btn_main').click(function () {        
+    $('#btn_main').click(function () {
         var param = {
             email: $('#signup_id').val(),
             pw: SHA256($('#signup_pw').val()),
         }
         $.ajax({
-            type: "POST",  
-            url: "/signin",   
+            type: "POST",
+            url: "/signin",
             data: param,
             dataType: "JSON",
-            success: function(response) {
+            success: function (response) {
                 genRsaKey();
 
                 window.location.href = "main";
             },
-            error:function(request, status, error){
-                if(request.responseJSON == "USER_IS_NOT_FOUND") {
+            error: function (request, status, error) {
+                if (request.responseJSON == "USER_IS_NOT_FOUND") {
                     alert("등록된 이메일이 없다.");
-                } else if(request.responseJSON == "MISMATCH_PASSWORD") {
+                } else if (request.responseJSON == "MISMATCH_PASSWORD") {
                     alert("비밀번호가 일치하지 않는다.");
                 }
             }
-        });        
+        });
     });
 
 

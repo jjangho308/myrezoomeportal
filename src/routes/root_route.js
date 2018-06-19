@@ -53,4 +53,5 @@ router.use('/oauth2', oauthRouter);
 router.use('/dev', developerRouter);
 
 router.use('/', responseLogger);
+
 module.exports = router;
