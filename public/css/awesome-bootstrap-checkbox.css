@@ -162,7 +162,7 @@
   display: inline-block;
   vertical-align: 15px;
   position: relative;
-  padding-left: 5px; }
+  padding-left: 10px; }
 .abc-radio label::before {
   content: "";
   display: inline-block;
