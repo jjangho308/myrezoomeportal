@@ -46,9 +46,9 @@ class ResumeDao extends AbstractDAO {
         var query = mysql.format(ResumeQuery.put, resumeRow);
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result.insertId);
+                return cb(err, result.insertId);
             }
         })
     }
@@ -86,13 +86,13 @@ class ResumeDao extends AbstractDAO {
         var query = ResumeQuery.get + where;
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
                 var returnValue = [];
                 for (var i in result) {
                     returnValue.push(ResumeModel.fromRow(result[i]));
                 }
-                cb(err, returnValue);
+                return cb(err, returnValue);
             }
         });
     }
@@ -122,9 +122,9 @@ class ResumeDao extends AbstractDAO {
         var query = mysql.format(ResumeQuery.set, [resumeModel.toRow(), condition]);
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result.affectedRows);
+                return cb(err, result.affectedRows);
             }
         })
     }
@@ -144,7 +144,7 @@ class ResumeDao extends AbstractDAO {
         this.connectionPool.getConnection((err, connection) => {
             if (!!err) {
                 console.error(JSON.stringify(err));
-                cb(err);
+                return cb(err);
             } else {
                 connection.beginTransaction((err) => {
                     if (err) {
@@ -213,7 +213,7 @@ class ResumeDao extends AbstractDAO {
                                                             return cb(err);
                                                         })
                                                     } else if (result.affectedRows > 0) {
-                                                        connection.commit((err)=> {
+                                                        connection.commit((err) => {
                                                             if (!!err) {
                                                                 console.error(JSON.stringify(err));
                                                                 connection.rollback(function () {
@@ -272,9 +272,9 @@ class ResumeDao extends AbstractDAO {
         var query = mysql.format(ResumeQuery.putResumeRecords, param);
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result.insertId);
+                return cb(err, result.insertId);
             }
         })
     }
@@ -298,13 +298,13 @@ class ResumeDao extends AbstractDAO {
         var query = mysql.format(ResumeQuery.getResumeRecords, condition);
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
                 var result = [];
                 for (var i in rows) {
                     result.push(SharedResumeModel.fromRow(rows[i]));
                 }
-                cb(err, result);
+                return cb(err, result);
             }
         })
     }
@@ -327,9 +327,9 @@ class ResumeDao extends AbstractDAO {
         var query = mysql.format(ResumeQuery.setResumeRecords, [sharedResume.toRow(), condition]);
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result.affectedRows);
+                return cb(err, result.affectedRows);
             }
         })
     }
@@ -362,9 +362,9 @@ class ResumeDao extends AbstractDAO {
         var query = mysql.format(ResumeQuery.putUrl, param);
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result.insertId);
+                return cb(err, result.insertId);
             }
         })
     }
@@ -377,9 +377,9 @@ class ResumeDao extends AbstractDAO {
         var query = mysql.format(ResumeQuery.getUrl, condition);
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, {
+                return cb(err, {
                     txId: rows[0].TRX_ID,
                     passcode: rows[0].PASSCODE,
                     certId: rows[0].CERT_ID,
@@ -412,9 +412,9 @@ class ResumeDao extends AbstractDAO {
         var query = mysql.format(ResumeQuery.setUrl, [sharedUrl.toRow(), condition]);
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result.affectedRows);
+                return cb(err, result.affectedRows);
             }
         })
     }
