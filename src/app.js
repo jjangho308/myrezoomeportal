@@ -71,13 +71,13 @@ app.use((err, req, res, next) => {
         err: {
           code: err.code,
           msg: ErrorMessage[requestLocale][err.code],
-          stack: !!err.cause && Environment.developement ? err.cause.stack : null,
+          stack: err.cause.stack, //!!err.cause && Environment.developement ? err.cause.stack : null,
         }
       });
     } else {
       res.locals.code = err.code;
       res.locals.msg = ErrorMessage[requestLocale][err.code];
-      res.locals.stack = !!err.cause && Environment.developement ? err.cause.stack : null;
+      res.locals.stack = err.cause.stack; //!!err.cause && Environment.developement ? err.cause.stack : null;
       res.status(status).render('response_error');
     }
   } else {
