@@ -68,11 +68,18 @@ function genRsaKey(callback) {
         var generateWorker = new Worker('js/generate_keypair_worker.js');
         generateWorker.postMessage([0]); // 의미없음
         return generateWorker.onmessage = function (workerResult) {
-            if (!!workerResult.data) {
-                setRSAKey(JSON.parse(workerResult.data));
-                callback(null, workerResult);
-            } else {
+            try {
+                if (!!workerResult.data) {
+                    setRSAKey(JSON.parse(workerResult.data));
+                    callback(null, workerResult);
+                } else {
+                    callback(new Error("Couldn't generate RSA Keypair"));
+                }
+            } catch (e) {
+                console.error(JSON.stringify(e));
                 callback(new Error("Couldn't generate RSA Keypair"));
+            } finally {
+                generateWorker.terminate();
             }
         }
     }
