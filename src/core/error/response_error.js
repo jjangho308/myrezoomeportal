@@ -28,6 +28,7 @@ class ResponseError {
             this.code = opt.code;
             this.status = opt.status;
             this.cause = opt.cause;
+            this.redirect = opt.redirect;
         }
     }
 

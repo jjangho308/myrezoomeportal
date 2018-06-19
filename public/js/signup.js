@@ -1,14 +1,14 @@
-$(document).ready(function(){
+$(document).ready(function () {
     //최상단 체크박스 클릭
-    $("#box-all").click(function(){
+    $("#box-all").click(function () {
         //클릭되었으면
-        if($("#box-all").prop("checked")){
+        if ($("#box-all").prop("checked")) {
             //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
-            $("input[name=agreement]").prop("checked",true);
+            $("input[name=agreement]").prop("checked", true);
             //클릭이 안되있으면
-        }else{
+        } else {
             //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
-            $("input[name=agreement]").prop("checked",false);
+            $("input[name=agreement]").prop("checked", false);
         }
     });
 
@@ -19,31 +19,31 @@ $(document).ready(function(){
     //     $(".agreement-div").css("margin-top", "-18px");
     // })
 
-    $(".phone-send").click(function(){
+    $(".phone-send").click(function () {
         $(".error-message").css("display", "none");
         $(".info-message-1").css("display", "block");
 
         $(".phone-send").prop("disabled", "true");
         $(".phone-confirm").prop("disabled", false);
     });
-    
-    $(".phone-confirm").click(function(){
+
+    $(".phone-confirm").click(function () {
         $(".info-message-2").css("display", "block");
         $(".agreement-div").css("margin-top", "-18px");
     });
 
     $('#btn_signup').click(function () {
 
-        $("input").css("border", "solid 1px #ced3d6");  
+        $("input").css("border", "solid 1px #ced3d6");
         $(".error-message").css("display", "none");
-        
+
         if ($('#signup_id').val() == '') {
-            $("input").eq(0).css("border", "solid 1px #f59188");            
+            $("input").eq(0).css("border", "solid 1px #f59188");
             $(".error-message").eq(0).css("display", "block");
             $(".error-message").eq(0).html("ID입력해라");
             return;
         } else if ($('#signup_pw').val() == '') {
-            $("input").eq(1).css("border", "solid 1px #f59188");            
+            $("input").eq(1).css("border", "solid 1px #f59188");
             $(".error-message").eq(1).css("display", "block");
             $(".error-message").eq(1).html("PW입력해라");
             return;
@@ -65,7 +65,7 @@ $(document).ready(function(){
         var carrier_name = $("#signup_carrierName").val();
 
         if (user_password != user_password_confirm) {
-            $("input").eq(2).css("border", "solid 1px #f59188");            
+            $("input").eq(2).css("border", "solid 1px #f59188");
             $(".error-message").eq(2).css("display", "block");
             $(".error-message").eq(2).html("PW가 다르다");
             return;
@@ -84,20 +84,20 @@ $(document).ready(function(){
         }
 
         $.ajax({
-            type: "POST",  
-            url: "/signup",   
+            type: "POST",
+            url: "/signup",
             data: param,
             dataType: "JSON",
-            success: function(response) {
+            success: function (response) {
                 location.href = "/signup/success";
                 // $("#signup_div").hide();
                 // $("#signup_complete_div").show();
                 // $("#signup_complete_name").html(familyname + firstname);
                 //window.location.href = "signin";
             },
-            error:function(request, status, error){
-                if(request.responseJSON.code == "ER_DUP_ENTRY"){
-                    $("input").eq(0).css("border", "solid 1px #f59188");            
+            error: function (request, status, error) {
+                if (request.responseJSON.code == "ER_DUP_ENTRY") {
+                    $("input").eq(0).css("border", "solid 1px #f59188");
                     $(".error-message").eq(0).css("display", "block");
                     $(".error-message").eq(0).html("이미가입된ID가있다");
                 }
@@ -106,4 +106,3 @@ $(document).ready(function(){
     });
 
 })
-

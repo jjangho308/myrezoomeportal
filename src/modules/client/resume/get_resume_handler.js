@@ -4,6 +4,9 @@ var GetResumeRequestEntity = require('./get_resume_request');
 var ClientRequest = require('../client_request');
 var Managers = require('../../../core/managers');
 
+var ErrorCodes = require('../../../core/error/error_code');
+var ResponseError = require('../../../core/error/error_code');
+
 /**
  * Handler of {@link GetResumeRequestEntity}. <br />
  * 
@@ -34,14 +37,14 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
      * @param {function(number, object)} done callback function.
      */
     request(requestEntity, done) {
-        
+
         var resumeDAO = Managers.db().getResumeDAO();
         resumeDAO.getResume({
             uId: requestEntity.uId,
             rsmId: requestEntity.rsmId
         }, (err, resumeList) => {
             if (!!err) {
-                done(ClientRequest.RESULT_FAILURE, ErrorContainer.DB);
+                return done(ClientRequest.RESULT_FAILURE, err);
             } else if (resumeList.length == 0) {
                 //done(ClientRequest.RESULT_FAILURE, ErrorContainer.PARAMETER);
                 //TODO List 확인 필요 택수!
@@ -55,7 +58,7 @@ class GetResumeRequestHandler extends AbstractClientRequestHandler {
                         // Remove 'sId' field.
                         delete resumeList[idx].sId;
                         completedResume++;
-                        if (completedResume == resumeList.length) {                            
+                        if (completedResume == resumeList.length) {
                             done(ClientRequest.RESULT_SUCCESS, resumeList);
                         }
                     })(i);

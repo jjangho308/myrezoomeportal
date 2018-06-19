@@ -77,6 +77,7 @@ $(document).ready(function(){
             beforeSend: function() {
                 
             },
+            
             success: function (res) {
                 $("#cert-add-dialog .close-modal").click();
                 $("#alarm-div span").text("사용자 이력 수기 입력했다.");

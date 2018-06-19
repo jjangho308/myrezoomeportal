@@ -4,7 +4,8 @@ var AbstractAgentRequestHandler = require('../../agent/abstract_agent_request_ha
 
 var ClientRequest = require('../client_request');
 
-var ErrroCodes = require('../../../core/error/error_code');
+var ErrorCodes = require('../../../core/error/error_code');
+var ResponseError = require('../../../core/error/response_error');
 
 /**
  * Handler of GenerateShortUrlRequest. <br />
@@ -39,10 +40,9 @@ class GenerateShortUrlHandler extends AbstractAgentRequestHandler {
     request(requestEntity, done) {
         var prefix = requestEntity.prefix;
         if (!prefix) {
-            done(ClientRequest.RESULT_FAILURE, {
-                code: ErrroCodes.INVALID_PARAMETER,
-                msg: '접두어가 존재하지 않습니다.'
-            });
+            done(ClientRequest.RESULT_FAILURE, new ResponseError({
+                code : ErrorCodes.PARAM_NO_PREFIX,
+            }));
         } else {
             var shortUrlString = randomstring.generate({
                 length: 6,
@@ -58,10 +58,9 @@ class GenerateShortUrlHandler extends AbstractAgentRequestHandler {
                     }
                 default:
                     {
-                        done(ClientRequest.RESULT_FAILURE, {
-                            code: ErrroCodes.INVALID_PARAMETER,
-                            msg: '허용된 접두어가 아닙니다.'
-                        });
+                        done(ClientRequest.RESULT_FAILURE, new ResponseError({
+                            code : ErrorCodes.PARAM_INVALID_PREFIX,
+                        }));
                         break;
                     }
             }

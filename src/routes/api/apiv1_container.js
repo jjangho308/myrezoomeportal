@@ -37,7 +37,7 @@ module.exports = {
 
         Managers.client().request(entity, (err, result) => {
             if (!!err) {
-                next(err);
+                return next(err);
             }
             res.send(result);
         });

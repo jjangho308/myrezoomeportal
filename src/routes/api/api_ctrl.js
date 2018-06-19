@@ -2,6 +2,10 @@ var Managers = require('../../core/managers');
 var ApiRequest = require('../../modules/api/common/api_request');
 var v1Container = require('./apiv1_container');
 
+var ErrorCode = require('../../core/error/error_code');
+var ResponseError = require('../../core/error/response_error');
+var HttpStatusCode = require('../../core/error/http_status_code');
+
 module.exports = (() => {
     var apiContainer = {
         'v1': v1Container
@@ -18,34 +22,28 @@ module.exports = (() => {
         var version = req.params.version || 'v1';
         var command = req.params.command;
         if (!command) {
-            next({
-                err: {
-                    code: 200,
-                    msg: 'API command is null'
-                }
-            });
+            return next(new ResponseError({
+                code : ErrorCode.API_NO_CMD,
+                status : HttpStatusCode.BAD_REQUEST,
+            }));
         }
 
-        // API Version이 맞지 않은 경우
+        // API Version이 없는 경우
         if (!apiContainer[version]) {
-            next({
-                err: {
-                    code: 200,
-                    msg: 'API version is not valid'
-                }
-            });
+            return next(new ResponseError({
+                code : ErrorCode.API_VERSION_INVALID,
+                status : HttpStatusCode.NOT_FOUND,
+            }));
         }
 
         // API Command가 없을 경우 에러 처리
         if (!apiContainer[version][command]) {
-            next({
-                err: {
-                    code: 200,
-                    msg: 'No API command exists'
-                }
-            });
+            return next(new ResponseError({
+                code : ErrorCode.API_NO_CMD,
+                status : HttpStatusCode.BAD_REQUEST,
+            }));
         }
 
-        apiContainer[version][command](req, res, next);
+        return apiContainer[version][command](req, res, next);
     }
 })();

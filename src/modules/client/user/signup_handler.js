@@ -55,9 +55,9 @@ class SignupRequestHandler extends AbstractClientRequestHandler {
 
         userDAO.put(userModel, (err, insertId) => {
             if (!!err) {
-                cb(ClientRequest.RESULT_FAILURE, err);
+                return cb(ClientRequest.RESULT_FAILURE, err);
             } else {
-                cb(ClientRequest.RESULT_SUCCESS, insertId);
+                return cb(ClientRequest.RESULT_SUCCESS, insertId);
             }
         });
     }

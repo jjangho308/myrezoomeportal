@@ -8,6 +8,9 @@ var Util = require('../../../util/util');
 var CertModel = require('../../../models/cert/cert');
 var SharedCertModel = require('../../../models/cert/shared_cert');
 
+var ErrorCode = require('../../../core/error/error_code');
+var ResponseError = require('../../../core/error/response_error');
+
 /**
  * Handler of IssueCertificateRequestEntity. <br />
  * 
@@ -39,21 +42,19 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
         var certDAO = Managers.db().getCertDAO();
         var recordDAO = Managers.db().getRecordDAO();
 
-        console.log("==================issue_cert_handeler request===========")
-        console.log(request);
+        console.debug("==================issue_cert_handeler request===========")
+        console.debug(request);
 
         recordDAO.getBlockChainMap({
             txid: request.cert.txid
         }, (err, blcMapModels) => {
             if (!!err) {
-                cb(ClientRequest.RESULT_FAILURE, err);
+                return cb(ClientRequest.RESULT_FAILURE, err);
             } else if (blcMapModels.length == 0) {
-                cb(ClientRequest.RESULT_FAILURE, {
-                    code: 1,
-                    msg: 'No blockchain map'
-                });
+                return cb(ClientRequest.RESULT_FAILURE, new ResponseError({
+                    code: ErrorCode.DATA_NO_BLCMAP,
+                }));
             } else {
-                //TODO Plain text를 암호화 된 message로 변환할 것.
                 var crypto = Managers.crypto();
                 console.log("==================issue_cert_handeler cert record===========")
                 console.log(request.cert.record);
@@ -67,14 +68,13 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                         encryptedData: encrypted
                     });
 
-                    console.log("==================issue_cert_handeler===========")
-                    console.log(certModel);
-    
+                    console.debug("==================issue_cert_handeler===========")
+                    console.debug(certModel);
+
                     certDAO.putCert(certModel, (err, insertId) => {
                         if (!!err) {
-                            cb(ClientRequest.RESULT_FAILURE, err);
+                            return cb(ClientRequest.RESULT_FAILURE, err);
                         } else {
-
                             var sharedUrl = Util.randomStr({
                                 length: 6,
                                 prefix: 'c'
@@ -99,7 +99,7 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                     });
                 });
             }
-        })
+        });
     }
 }
 

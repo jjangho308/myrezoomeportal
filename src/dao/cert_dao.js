@@ -58,13 +58,13 @@ class CertificateDAO extends AbstractDAO {
         var query = mysql.format(CertQuery.getCert, condition);
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else if (rows.length > 0) {
                 var result = [];
                 for (var i in rows) {
                     result.push(CertModel.fromRow(rows[i]));
                 }
-                cb(err, result);
+                return cb(err, result);
             }
         })
     }
@@ -106,7 +106,7 @@ class CertificateDAO extends AbstractDAO {
 
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err, null);
+                return cb(err, null);
             } else {
 
                 var certList = [];
@@ -123,7 +123,7 @@ class CertificateDAO extends AbstractDAO {
                         date: rows[i].CRTD_DT
                     });
                 }
-                cb(err, certList);
+                return cb(err, certList);
             }
         })
     }
@@ -143,10 +143,10 @@ class CertificateDAO extends AbstractDAO {
 
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
                 //console.log(result);
-                cb(err, result.insertId);
+                return cb(err, result.insertId);
             }
         })
     }
@@ -157,10 +157,10 @@ class CertificateDAO extends AbstractDAO {
 
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
                 //console.log(result);
-                cb(err, result.insertId);
+                return cb(err, result.insertId);
             }
         })
     }
@@ -184,9 +184,9 @@ class CertificateDAO extends AbstractDAO {
         var query = mysql.format(CertQuery.setCert, [param, condition]);
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result.affectedRows);
+                return cb(err, result.affectedRows);
             }
         })
     }
@@ -196,11 +196,11 @@ class CertificateDAO extends AbstractDAO {
 
         this.connectionPool.getConnection((err, connection) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                connection.beginTransaction(function (err) {
-                    if (err) {
-                        cb(err);
+                connection.beginTransaction((txErr) => {
+                    if (txErr) {
+                        return cb(txErr);
                     } else {
                         var condition = {};
                         //make query
@@ -213,12 +213,10 @@ class CertificateDAO extends AbstractDAO {
 
                         connection.query(usrCertDelQuery, (err, result) => {
                             if (!!err) {
-
-                                console.log(err);
-                                connection.rollback(function () {
-                                    console.error("rollback error");
-                                    cb(500, err);
-                                })
+                                console.error(JSON.stringify(err));
+                                connection.rollback(() => {
+                                    return cb(err);
+                                });
                             } else if (result.affectedRows > 0) {
 
                                 var selectShareCertQuery = mysql.format(CertQuery.getShared, condition);
@@ -226,10 +224,9 @@ class CertificateDAO extends AbstractDAO {
                                 connection.query(selectShareCertQuery, (err, result) => {
                                     if (!!err) {
 
-                                        console.log(err);
-                                        connection.rollback(function () {
-                                            console.error("rollback error");
-                                            cb(500, err);
+                                        console.error(JSON.stringify(err));
+                                        connection.rollback(() => {
+                                            return cb(err);
                                         })
                                     } else {
                                         console.log(result);
@@ -237,55 +234,50 @@ class CertificateDAO extends AbstractDAO {
                                             var usrCertSharedDelQuery = mysql.format(CertQuery.delShared, [condition, {
                                                 DEL_YN: 'N'
                                             }]);
-                                            //console.log(usrCertSharedDelQuery);
+
                                             connection.query(usrCertSharedDelQuery, (err, result) => {
                                                 if (!!err) {
-
-                                                    console.log(err);
                                                     connection.rollback(function () {
                                                         console.error("rollback error");
-                                                        cb(500, err);
+                                                        return cb(err);
                                                     })
                                                 } else if (result.affectedRows > 0) {
-                                                    connection.commit(function (err) {
+                                                    connection.commit((err) => {
                                                         if (!!err) {
-
-                                                            console.log(err);
+                                                            console.log(JSON.stringify(err));
                                                             connection.rollback(function () {
-                                                                console.error("rollback error");
-                                                                cb(500, err);
+                                                                return cb(err);
                                                             })
                                                         }
                                                         //정상처리
                                                         console.log("tranaction sucess")
                                                         connection.release();
-                                                        cb(null, result.affectedRows);
+                                                        return cb(null, result.affectedRows);
                                                     })
                                                 }
                                             })
                                         } else {
                                             connection.commit(function (err) {
                                                 if (!!err) {
-                                                    console.log(err);
+                                                    console.log(JSON.stringify(err));
                                                     connection.rollback(function () {
-                                                        console.error("rollback error");
-                                                        cb(500, err);
+                                                        return cb(err);
                                                     })
                                                 }
                                                 //정상처리
                                                 console.log("tranaction sucess")
                                                 connection.release();
-                                                cb(null, result.affectedRows);
+                                                return cb(null, result.affectedRows);
                                             })
                                         }
                                     }
-                                })
+                                });
                             }
-                        })
+                        });
                     }
                 });
             }
-        })
+        });
     }
 
     /**
@@ -308,9 +300,9 @@ class CertificateDAO extends AbstractDAO {
         var query = mysql.format(CertQuery.putShared, param);
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result.insertId);
+                return cb(err, result.insertId);
             }
         });
     }
@@ -344,9 +336,9 @@ class CertificateDAO extends AbstractDAO {
         var query = mysql.format(CertQuery.getShared, condition);
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, SharedCertModel.fromRow(rows));
+                return cb(err, SharedCertModel.fromRow(rows));
             }
         });
     }
@@ -374,9 +366,9 @@ class CertificateDAO extends AbstractDAO {
         var query = mysql.format(CertQuery.setShared, [sharedCertModel.toRow(), condition])
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result.affectedRows);
+                return cb(err, result.affectedRows);
             }
         });
     }
@@ -409,9 +401,9 @@ class CertificateDAO extends AbstractDAO {
         var query = mysql.format(CertQuery.putUrl, param);
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result.insertId);
+                return cb(err, result.insertId);
             }
         })
     }
@@ -431,9 +423,9 @@ class CertificateDAO extends AbstractDAO {
         var query = mysql.format(CertQuery.setUrl, [param, condition]);
         this.query(query, (err, result) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(err, result.affectedRows);
+                return cb(err, result.affectedRows);
             }
         })
     }
@@ -455,10 +447,10 @@ class CertificateDAO extends AbstractDAO {
         var query = mysql.format(CertQuery.getSharedUrl, condition);
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
                 if (rows != null || rows != undefined) {
-                    cb(err, {
+                    return cb(err, {
                         txId: rows[0].TRX_ID,
                         passcode: rows[0].PASSCODE,
                         certId: rows[0].CERT_ID,
@@ -470,7 +462,7 @@ class CertificateDAO extends AbstractDAO {
                         encData: rows[0].ENC_CERT_DATA
                     });
                 } else {
-                    cb(err);
+                    return cb(err);
                 }
             }
         })
@@ -495,9 +487,9 @@ class CertificateDAO extends AbstractDAO {
         var query = mysql.format(CertQuery.getSubName);
         this.query(query, (err, rows) => {
             if (!!err) {
-                cb(err);
+                return cb(err);
             } else {
-                cb(null, rows);
+                return cb(null, rows);
             }
         })
     }
@@ -519,9 +511,9 @@ class CertificateDAO extends AbstractDAO {
         var query = mysql.format(CertQuery.getCertData, [creteria, creteria]);        
         this.query(query, (err, cursor) => {
             if (!!err) {
-                cb(err, null);
+                return cb(err, null);
             } else {
-                cb(null, cursor.length > 0 ? cursor[0] : {});
+                return cb(null, cursor.length > 0 ? cursor[0] : {});
             }
         });
     }

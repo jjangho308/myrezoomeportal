@@ -31,7 +31,8 @@
 body {
     font-family: 'Spoqa Han Sans';
     min-width: 1680px;
-    -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-text-stroke: 1px rgba(0,0,0,0.1);
+    -webkit-font-smoothing: antialiased;
 }
 
 a {

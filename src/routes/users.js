@@ -1,64 +1,64 @@
-var express = require('express');
-var UserLoginHandler = require('../modules/request/user_login_handler');
-var SearchRequestHandler = require('../modules/request/search_record_handler');
-var CertificateHandler = require('../modules/request/certificate_handler');
-var router = express.Router();
+// var express = require('express');
+// var UserLoginHandler = require('../modules/request/user_login_handler');
+// var SearchRequestHandler = require('../modules/request/search_record_handler');
+// var CertificateHandler = require('../modules/request/certificate_handler');
+// var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.render('login');
-});
+// /* GET users listing. */
+// router.get('/', function (req, res, next) {
+//   res.render('login');
+// });
 
-router.get('/main', function (req, res, next) {
-  res.render('main', { token: req.query.token });
-  //res.redirect('main');
-});
+// router.get('/main', function (req, res, next) {
+//   res.render('main', { token: req.query.token });
+//   //res.redirect('main');
+// });
 
-router.get('/pdf', function (req, res, next) {
-  res.render('pdfview', { pdf: req.query.file });
-  //res.redirect('main');
-});
+// router.get('/pdf', function (req, res, next) {
+//   res.render('pdfview', { pdf: req.query.file });
+//   //res.redirect('main');
+// });
 
-router.post('/', function (req, res, next) {
+// router.post('/', function (req, res, next) {
 
-  // var clientReq = JSON.parse(req.body);
-  // var cmd = clientReq.cmd;
-  // console.log(clientReq);
+//   // var clientReq = JSON.parse(req.body);
+//   // var cmd = clientReq.cmd;
+//   // console.log(clientReq);
 
-  var cmd = req.body.cmd;
+//   var cmd = req.body.cmd;
 
-  if (cmd == 'Login') {
-    var userLogin = new UserLoginHandler();
-    try {
-      userLogin.process(req.body, res);
-    } catch (exception) {
-      console.log(exception);
-    }
-  } else if (cmd == 'Search') {
-    var search = new SearchRequestHandler();
-    try {
-      search.process(req.body, res);
-    } catch (exception) {
-      console.log(exception);
-    }
-  } else if (cmd == 'Certificate') {
-    var certificate = new CertificateHandler();
+//   if (cmd == 'Login') {
+//     var userLogin = new UserLoginHandler();
+//     try {
+//       userLogin.process(req.body, res);
+//     } catch (exception) {
+//       console.log(exception);
+//     }
+//   } else if (cmd == 'Search') {
+//     var search = new SearchRequestHandler();
+//     try {
+//       search.process(req.body, res);
+//     } catch (exception) {
+//       console.log(exception);
+//     }
+//   } else if (cmd == 'Certificate') {
+//     var certificate = new CertificateHandler();
 
-    // var REZOOME_CERTIFICATE = {};
-    // REZOOME_CERTIFICATE.name = "아무개";
-    // REZOOME_CERTIFICATE.birthday = "2000.01.01";
-    // REZOOME_CERTIFICATE.grade = "AL3";
-    // REZOOME_CERTIFICATE.publish_date = "2018년 01월 01일";
-    // REZOOME_CERTIFICATE.orgname = "오픽";
-    // REZOOME_CERTIFICATE.hash = "ssdfawefasdfv234r34trefwerfswerf";
+//     // var REZOOME_CERTIFICATE = {};
+//     // REZOOME_CERTIFICATE.name = "아무개";
+//     // REZOOME_CERTIFICATE.birthday = "2000.01.01";
+//     // REZOOME_CERTIFICATE.grade = "AL3";
+//     // REZOOME_CERTIFICATE.publish_date = "2018년 01월 01일";
+//     // REZOOME_CERTIFICATE.orgname = "오픽";
+//     // REZOOME_CERTIFICATE.hash = "ssdfawefasdfv234r34trefwerfswerf";
 
-    try {
-      certificate.process(req.body, res);
-    } catch (exception) {
-      console.log(exception);
-    }
-  }
+//     try {
+//       certificate.process(req.body, res);
+//     } catch (exception) {
+//       console.log(exception);
+//     }
+//   }
 
-});
+// });
 
-module.exports = router;
+// module.exports = router;
