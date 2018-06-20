@@ -476,9 +476,7 @@ p{
 /**/
 
 #nexledger-txid-info-dialog {
-    position: relative;
-    left:35%;
-    bottom: 160%;
+    position: absolute;
     width: 730px;
     height: 800px;
 }

@@ -162,6 +162,10 @@ $(document).ready(function () {
 
                         $('#txinfoget-bt').click(function(event){
                             $("#nexledger-txid-info-dialog").css('display','block');
+
+                            var dislogoffettop = $("#txinfoget-bt").offset().top - $("#nexledger-txid-info-dialog").height();
+                            var dislogoffetleft = $("#txinfoget-bt").offset().left - $("#nexledger-txid-info-dialog").width();
+                            $("#nexledger-txid-info-dialog").css({'left':dislogoffetleft+'px','top':dislogoffettop+'px'});
                         });
 
                     }, 1000);
@@ -402,7 +406,7 @@ function nexledgerInfoView(reqtxid) {
 
             $("#total_volume").text(res2.result.total_volume);
             $("#total_output").text(res2.result.output);
-            $("#txsize").text(res2.result.txid);
+            $("#txsize").text(res2.result.txsize + " byte");
             
             tempstr = '';
             for(var i=0;i < res2.result.input_script.length; i++) {
