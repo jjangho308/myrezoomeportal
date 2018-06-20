@@ -475,11 +475,46 @@ p{
 }
 /**/
 
+#nexledger-txid-info-dialog {
+    position: relative;
+    left:35%;
+    bottom: 160%;
+    width: 730px;
+    height: 730px;
+}
 
+.nexledger-txid-info-dialog-left {
+    float: left;
+    width: 100px;
+}
 
+.nexledger-txid-info-dialog-center {
+    float: left;
+    width: 80%;
+}
 
+.nexledger-txid-info-dialog-right {
+    float: left;
+    width: 80%;    
+    word-wrap: break-word;
+}
 
-
+.nexledger-txid-info-dialog-close {
+    position: relative;
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #4c80f1;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 37px;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    float: right;
+    margin: 0px 10px 0px 0px;
+}
 
 /**/
 #popup-dialog{

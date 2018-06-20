@@ -646,11 +646,16 @@ function getPrivateRecords() {
             $('.private-spec-body').remove();
         },
         success: function (res) {
-            for (var i in res) {
-                var data = JSON.parse(res[i].data);
-                data.certPrvtId = res[i].certPrvtId;
-                formatter[res[i].subCd](data);
-            }
+            res.result.forEach(function(item, idx){
+                var data = JSON.parse(item.data);
+                data.certPrvtId = item.certPrvtId;
+                formatter[item.subCd](data);
+            });
+            // for (var i in res.result) {
+            //     var data = JSON.parse(res[i].data);
+            //     data.certPrvtId = res[i].certPrvtId;
+            //     formatter[res[i].subCd](data);
+            // }
         }
     });
 }
