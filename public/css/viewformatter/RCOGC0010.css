@@ -4,6 +4,24 @@ table {
     width: 100%;
 }
 
+/* .stamp & .inner-container 공통으로 쓰이나, 졸업증명서 전용 스탬프와 위치값 입력 시작 */
+.stamp {
+    margin-left: -95px;
+    margin-top: -20px;
+    width: 100px;
+    height: 100px;
+}
+
+.inner-container {
+    margin: auto;
+    position: relative;
+    border: 2px solid #666666;
+    width: 95%;
+    height:90%;
+}
+
+/* 공통 부분 중복 입력 종료 */ 
+
 .personinfo1 {
     width: 100%;
 }
