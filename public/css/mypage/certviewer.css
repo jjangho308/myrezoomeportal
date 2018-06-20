@@ -489,15 +489,27 @@ p{
 }
 
 .nexledger-txid-info-dialog-center {
-    float: left;
     width: 80%;
+    height: 48px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
 }
 
 .nexledger-txid-info-dialog-right {
     float: left;
     width: 80%;    
     word-wrap: break-word;
-    height: 24px;
+
+    line-height: 1.2em;
+    height: 48px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
 }
 
 .nexledger-txid-info-dialog-close {

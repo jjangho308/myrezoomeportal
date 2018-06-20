@@ -423,7 +423,7 @@
             }
         });
 
-        setInterval(function () {
+        var mytimer = setInterval(function () {
             var dataURL = myChart.toBase64Image();
             canvas.replaceWith($("<img></img>").attr("src", dataURL));
         }, 100);

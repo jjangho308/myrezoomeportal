@@ -185,19 +185,31 @@ $(document).ready(function () {
 
                                     var tempstr = '';
                                     for(var i=0;i < res2.result.fromaddress.length; i++) {
-                                        tempstr = tempstr + res2.result.fromaddress[i];
+                                        tempstr = tempstr + '<p>' + res2.result.fromaddress[i] + '</p>';
                                     }
-                                    $("#fromaddress").text(tempstr);
+                                    $("#fromaddress").html(tempstr);
 
                                     tempstr = '';
                                     for(var i=0;i < res2.result.toaddress.length; i++) {
-                                        tempstr = tempstr + res2.result.toaddress[i];
+                                        tempstr = tempstr + '<p>' + res2.result.toaddress[i] + '</p>';
                                     }
-                                    $("#toAddress").text(tempstr);
+                                    $("#toAddress").html(tempstr);
 
-                                    $("#total_volume").text(res2.total_volume);
-                                    $("#total_output").text(res2.output);
+                                    $("#total_volume").text(res2.result.total_volume);
+                                    $("#total_output").text(res2.result.output);
+                                    $("#txsize").text(res2.result.txid);
                                     
+                                    tempstr = '';
+                                    for(var i=0;i < res2.result.input_script.length; i++) {
+                                        tempstr = tempstr + '<p>' + res2.result.input_script[i] + '</p>';
+                                    }
+                                    $("#input_script").html(tempstr);
+                                    
+                                    tempstr = '';
+                                    for(var i=0;i < res2.result.output_script.length; i++) {
+                                        tempstr = tempstr + '<p>' + res2.result.output_script[i] + '</p>';
+                                    }
+                                    $("#output_script").html(tempstr);
                                 }                                
                             });
                         });
