@@ -163,3 +163,9 @@ cursor: pointer;
     margin-left: 39px;
     cursor: pointer;
 }
+
+.resumes-container-new:focus,.resumes-container-new:hover {
+box-shadow:0 2px 5px 0 rgba(191,191,191,0.5);
+/* border: dotted 1px #cccccc; */
+/*background: url("/img/mycert/rectangle-6.svg");*/
+}
