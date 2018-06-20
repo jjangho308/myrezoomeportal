@@ -36,6 +36,11 @@ class Validator {
         return this;
     }
 
+    uuid(patternException) {
+        this.pattern = '/[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}/gm';
+        this.patternException = patternException;
+    }
+
     validate(arg) {
         if (!!this.mandatory && (arg === null || arg === undefined)) {
             throw this.mandatoryException;
@@ -45,6 +50,8 @@ class Validator {
             throw this.patternException;
         }
     }
+
+
 }
 
 

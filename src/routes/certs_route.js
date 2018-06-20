@@ -3,8 +3,6 @@ var ctrl = require('./certs_ctrl');
 var tokenAuth = require('../mw/client_auth');
 var ajaxOnly = require('../mw/ajax_only');
 
-var validate = require('../mw/param_validator');
-
 /**
  * Router for /certs URI. <br />
  * 
@@ -29,22 +27,6 @@ router.get('/:certId', ctrl.getCertView);
 
 // 증명서 생성 ajax request controller
 router.post('/', tokenAuth);
-router.post('/', validate([
-    validate("phone")
-    .mandatory(new ResponseError({
-
-    }))
-    .email(new ResponseError({
-        code: 1,
-    })),
-
-    validate('uId')
-    .optional(),
-
-    validate('data')
-    .mandatory()
-    .base64(),
-]));
 router.post('/', ajaxOnly);
 router.post('/', ctrl.post);
 //router.post('/', view);
