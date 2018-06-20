@@ -136,7 +136,6 @@
 
                 generateQRCode();
                 createChart(record_data);
-                
             });
         },
         "RCOGC0009": function viewformatter(record_data) {
@@ -231,9 +230,8 @@
                 $('.sungjuk_sector_' + sector).append(htmldiv);
                 //
 
-            })
-            
-            generateQRCode();
+                generateQRCode();
+            });            
         },
 
         "RCOGC0008": function viewformatter(record_data) {
@@ -253,9 +251,10 @@
                 var main_agent_name = record_data.univInfo.univ_name + " " + record_data.univInfo.cert_main_agent
                 $('#cert-main-agent-msg').text(record_data.univInfo.msg1);
                 $('#cert-main-agent').text(main_agent_name);
+                
+                $(".cert_doc_id").html("발급번호 : " + certId);
+                generateQRCode();
             });
-            $(".cert_doc_id").html("발급번호 : " + certId);
-            generateQRCode();
         },
 
 
@@ -270,8 +269,9 @@
                 $('#cert-owner-uni-gredu-date').text(record_data.registList[0].change_date);
                 $('#cert-owner-uni-gredu-id').text(record_data.registList[0].std_no);
 
+                generateQRCode();
             });
-            generateQRCode();
+            
         },
 
         "RCOGC0011": function viewformatter(record_data) {
@@ -343,9 +343,9 @@
                     totalagree + "</td></tr>";
 
                 $('.sungjuk_sector_' + sector).append(htmldiv);
-            });
 
-            generateQRCode();
+                generateQRCode();
+            });            
         },
     };
 

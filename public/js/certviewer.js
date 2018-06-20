@@ -512,8 +512,8 @@ function setDefaultUrl(url) {
 }
 
 var certId;
-function setCertId(certId) {    
-    certId = certId;
+function setCertId(certid) {    
+    certId = certid;
 }
 
 function generateURL() {
