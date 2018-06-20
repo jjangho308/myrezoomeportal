@@ -133,27 +133,10 @@
                     .next().html(parseFloat(record_data.re_point15).toFixed(2))
                     .next().html(parseFloat(record_data.re_point18).toFixed(2))
                     .next().html(parseFloat(record_data.re_point21).toFixed(2));
-                // $("#detail-score-info-div").children('p').eq(1).html(record_data.re_point7 + "/" + record_data.re_point8);
-                // $("#detail-score-info-div").children('p').eq(2).html(record_data.re_point10 + "/" + record_data.re_point11);
-                // $("#detail-score-info-div").children('p').eq(3).html(record_data.re_point13 + "/" + record_data.re_point14);
-                // $("#detail-score-info-div").children('p').eq(4).html(record_data.re_point16 + "/" + record_data.re_point17);
-                // $("#detail-score-info-div").children('p').eq(5).html(record_data.re_point19 + "/" + record_data.re_point20);
-                // $("#detail-score-info-div").children('p').eq(6).html(parseFloat(record_data.re_point6).toFixed(2));
-                // $("#detail-score-info-div").children('p').eq(7).html(parseFloat(record_data.re_point9).toFixed(2));
-                // $("#detail-score-info-div").children('p').eq(8).html(parseFloat(record_data.re_point12).toFixed(2));
-                // $("#detail-score-info-div").children('p').eq(9).html(parseFloat(record_data.re_point15).toFixed(2));
-                // $("#detail-score-info-div").children('p').eq(10).html(parseFloat(record_data.re_point18).toFixed(2));
-                // $("#detail-score-info-div").children('p').eq(11).html(parseFloat(record_data.re_point21).toFixed(2));
 
                 generateQRCode();
                 createChart(record_data);
-
-                // html2canvas($(".inner-container"), {
-                //     onrendered: function(canvas) {
-                //         var img = canvas.toDataURL();
-                //         $($(".inner-container")).html("<img src=" + img + ">");
-                //     }
-                // });
+                
             });
         },
         "RCOGC0009": function viewformatter(record_data) {
@@ -256,14 +239,20 @@
         "RCOGC0008": function viewformatter(record_data) {
             //인하대 졸업증명서        
             $(".inner-container").load("../../viewhtml/RCOGC0008.html", function () {
+
+                $('#cert-owner-id').text(record_data.registList[0].std_no);
                 $('#cert-owner-name').text(record_data.registList[0].name);
                 $('#cert-owner-birth').text(record_data.registList[0].birth);
-                $('#cert-owner-uni').text(record_data.registList[0].uni_course);
-                $('#cert-owner-uni-org-major').text(record_data.registList[0].univ_affiliation);
+                $('#cert-owner-uni').text(record_data.registList[0].univ_affiliation);
+                $('#cert-owner-uni-org-major').text(record_data.registList[0].univ_group);
+                $('#cert-owner-uni-major-name').text(record_data.registList[0].major_first);                
                 $('#cert-owner-uni-enter-date').text(record_data.registList[0].admission_date);
                 $('#cert-owner-uni-gredu-date').text(record_data.registList[0].change_date);
-                $('#cert-owner-uni-gredu-id').text(record_data.registList[0].std_no);
+                $('#cert-owner-uni-gredu-id').text("임의값");
 
+                var main_agent_name = record_data.univInfo.univ_name + " " + record_data.univInfo.cert_main_agent
+                $('#cert-main-agent-msg').text(record_data.univInfo.msg1);
+                $('#cert-main-agent').text(main_agent_name);
             });
 
             generateQRCode();
@@ -282,17 +271,6 @@
                 $('#cert-owner-uni-gredu-id').text(record_data.registList[0].std_no);
 
             });
-            // var htmldiv = '<div>';
-            //     htmldiv = htmldiv + "<p>이름 : " +record_data.registList[0].name + '</p>';
-            //     htmldiv = htmldiv + "<p>생년월일 : " +record_data.registList[0].birth + '</p>';
-            //     htmldiv = htmldiv + "<p>대학 : " +record_data.registList.univ_name + '</p>';
-            //     htmldiv = htmldiv + "<p>소속 : " +record_data.registList[0].univ_affiliation + '</p>';
-            //     htmldiv = htmldiv + "<p>입학일자 : " +record_data.registList[0].admission_date + '</p>';
-            //     htmldiv = htmldiv + "<p>졸업일자 : " +record_data.registList[0].change_date + '</p>';
-
-            // htmldiv = htmldiv + '</div>';
-            // $('#cert-body-div').append(htmldiv);
-
             generateQRCode();
         },
 
