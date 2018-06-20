@@ -13,13 +13,13 @@
                 // "--require",
                 // "babel-core/register",
                 // "-u",
-                "tdd",
+                // "tdd",
                 "--colors"
             ],
             "stopOnEntry": false,
             "cwd": "${workspaceRoot}",
             "env": {
-                "NODE_ENV": "testing"
+                "NODE_ENV": "development"
             },
             "runtimeArgs": [
                 "--nolazy"
@@ -31,11 +31,30 @@
             // ]
         },
         {
+            "name": "Auto refresh debugging",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/nodemon/bin/nodemon",
+            "program": "${workspaceFolder}\\bin\\www",
+            "restart": true,
+            "console": "integratedTerminal",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "args": [
+                "--inpsect-brk=0.0.0.0:9229",
+                "--nolazy",
+            ],
+            "internalConsoleOptions": "neverOpen",
+        },
+        {
             "type": "node",
             "request": "attach",
             "name": "Attach to local",
             "port": 9229,
-            "protocol": "inspector"
+            "protocol": "inspector",
+            "smartStep": true,
+            "restart": true,
         },
         {
             "type": "node",
@@ -44,7 +63,7 @@
             "address": "localhost",
             "port": 19229,
             "localRoot": "${workspaceFolder}",
-            "remoteRoot": "/home/rezoome/git/rezoome/",
+            "remoteRoot": "/home/rezoomer/git/rezoome",
             "protocol": "inspector"
         },
         {
@@ -54,9 +73,10 @@
             "address": "localhost",
             "port": 29229,
             "localRoot": "${workspaceFolder}",
-            "remoteRoot": "/home/rezoome/git/rezoome/",
+            "remoteRoot": "/home/rezoomer/git/rezoome",
             "protocol": "inspector"
         },
+
         {
             "type": "node",
             "request": "launch",
@@ -78,6 +98,6 @@
             "outFiles": [
                 "${workspaceRoot}/dist"
             ]
-        }
+        },
     ]
 }
