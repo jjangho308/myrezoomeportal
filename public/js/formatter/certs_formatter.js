@@ -232,6 +232,7 @@
                 $('.sungjuk_sector_' + sector).append(htmldiv);
                 //
 
+                $(".cert_doc_id").html("발급번호 : " + certId);
                 generateQRCode();
             });            
         },
@@ -277,6 +278,7 @@
                 $('#cert-main-agent-msg').text(record_data.univInfo.msg1);
                 $('#cert-main-agent').text(main_agent_name);
 
+                $(".cert_doc_id").html("발급번호 : " + certId);
                 generateQRCode();
             });
             
@@ -372,7 +374,7 @@
                     totalagree + "</td></tr>";
 
                 $('.sungjuk_sector_' + sector).append(htmldiv);
-
+                $(".cert_doc_id").html("발급번호 : " + certId);
                 generateQRCode();
             });            
         },
