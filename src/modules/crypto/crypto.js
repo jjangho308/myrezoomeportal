@@ -118,10 +118,10 @@ class CryptoManager extends AbstractManager {
         crypto.randomBytes(this.spec.symLength, ((err, key) => {
             if (!!err) {
                 console.error(err.stack);
-                cb(err);
+                return cb(err);
                 return;
             }
-            cb(null, key.toString(this.spec.encode));
+            return cb(null, key.toString(this.spec.encode));
         }).bind(this));
     }
 
@@ -241,7 +241,7 @@ class CryptoManager extends AbstractManager {
                 var decipher = crypto.createDecipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), Buffer.from(iv, this.spec.encode));
                 var decrypted = decipher.update(encrypted, this.spec.encode, 'utf8');
                 decrypted += decipher.final('utf8');
-                cb(null, decrypted);
+                return cb(null, decrypted);
             } catch (err) {
                 if (!!err) {
                     console.error(err.stack);
@@ -276,7 +276,7 @@ class CryptoManager extends AbstractManager {
                     b: 2048
                 });
 
-                cb(null, {
+                return cb(null, {
                     public: rsa.exportKey('pkcs8-public-der'),
                     private: rsa.exportKey('pkcs8-private-der')
                 });
@@ -344,7 +344,7 @@ class CryptoManager extends AbstractManager {
                     encryptionScheme: 'pkcs1'
                 });
                 var decrypted = rsa.decrypt(encryptedBuffer);
-                cb(null, decrypted);
+                return cb(null, decrypted);
             } catch (err) {
                 if (!!err) {
                     console.error(err.stack);
