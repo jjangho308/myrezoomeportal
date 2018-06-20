@@ -72,12 +72,14 @@ app.use((err, req, res, next) => {
           code: err.code,
           msg: ErrorMessage[requestLocale][err.code],
           stack: !!err.cause && Environment.developement ? err.cause.stack : null,
+          info : err.info,
         }
       });
     } else {
       res.locals.code = err.code;
       res.locals.msg = ErrorMessage[requestLocale][err.code];
       res.locals.stack = !!err.cause && Environment.developement ? err.cause.stack : null;
+      res.locals.info = err.info;
       res.status(status).render('response_error');
     }
   } else {
@@ -87,12 +89,14 @@ app.use((err, req, res, next) => {
           code: ErrorCode.INTERNAL_ERROR,
           msg: ErrorMessage[requestLocale][ErrorCode.INTERNAL_ERROR],
           stack: Environment.developement ? err.stack : null,
+          info : err.info,
         }
       });
     } else {
       res.locals.code = ErrorCode.INTERNAL_ERROR;
       res.locals.msg = ErrorMessage[requestLocale][ErrorCode.INTERNAL_ERROR];
       res.locals.stack = Environment.developement ? err.stack : null;
+      res.locals.info = err.info;
       res.status(status).render('response_error');
     }
   }

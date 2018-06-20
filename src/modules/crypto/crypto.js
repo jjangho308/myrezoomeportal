@@ -3,6 +3,9 @@ var NodeRSA = require('node-rsa');
 
 var AbstractManager = require('../abstract_manager');
 
+var ErrorCode = require('../../core/error/error_code');
+var ResponseError = require('../../core/error/response_error');
+
 /**
  * CryptoManager. <br />
  * 
@@ -115,10 +118,10 @@ class CryptoManager extends AbstractManager {
         crypto.randomBytes(this.spec.symLength, ((err, key) => {
             if (!!err) {
                 console.error(err.stack);
-                cb(err);
+                return cb(err);
                 return;
             }
-            cb(null, key.toString(this.spec.encode));
+            return cb(null, key.toString(this.spec.encode));
         }).bind(this));
     }
 
@@ -134,7 +137,7 @@ class CryptoManager extends AbstractManager {
             this.generatePRN(this.spec.ivLength, ((err, iv) => {
                 if (!!err) {
                     console.error(err.stack);
-                    cb(err);
+                    return cb(err);
                     return;
                 }
                 try {
@@ -142,11 +145,15 @@ class CryptoManager extends AbstractManager {
                     cipher.setAutoPadding(true);
                     var encrypted = cipher.update(plain, 'utf8', this.spec.encode);
                     encrypted += cipher.final(this.spec.encode);
-                    cb(null, iv.toString(this.spec.encode), encrypted);
+                    return cb(null, iv.toString(this.spec.encode), encrypted);
                 } catch (err) {
                     if (!!err) {
                         console.error(err.stack);
-                        cb(err);
+                        return cb(new ResponseError({
+                            code: ErrorCode.INTERNAL_CRYPTO,
+                            cause: err,
+                            info: `PlainMessage : ${plain}`,
+                        }));
                         return;
                     }
                 }
@@ -171,12 +178,16 @@ class CryptoManager extends AbstractManager {
                 cipher.setAutoPadding(true);
                 var encrypted = cipher.update(plain, 'utf8', this.spec.encode);
                 encrypted += cipher.final(this.spec.encode);
-                cb(null, encrypted);
+                return cb(null, encrypted);
             } catch (err) {
                 if (!!err) {
                     console.error(err.stack);
-                    cb(err);
-                    return;
+                    return cb(new ResponseError({
+                        type: 'AESECB',
+                        code: ErrorCode.INTERNAL_CRYPTO,
+                        cause: err,
+                        info: `PlainMessage : ${plain}`,
+                    }));
                 }
             }
         }).bind(this));
@@ -198,12 +209,19 @@ class CryptoManager extends AbstractManager {
                 var decipher = crypto.createDecipher(this.spec.symAlg, Buffer.from(key, this.spec.encode));
                 var decrypted = decipher.update(encrypted, this.spec.encode, 'utf8');
                 decrypted += decipher.final('utf8');
-                cb(null, decrypted);
+                return cb(null, decrypted);
             } catch (err) {
                 if (!!err) {
                     console.error(err.stack);
-                    cb(err);
-                    return;
+                    return cb(new ResponseError({
+                        code: ErrorCode.INTERNAL_CRYPTO,
+                        cause: err,
+                        info: {
+                            type: 'AESECB',
+                            encrypted: encrypted,
+                            key: key,
+                        },
+                    }));
                 }
             }
         }).bind(this));
@@ -223,12 +241,20 @@ class CryptoManager extends AbstractManager {
                 var decipher = crypto.createDecipheriv(this.spec.symAlg, Buffer.from(key, this.spec.encode), Buffer.from(iv, this.spec.encode));
                 var decrypted = decipher.update(encrypted, this.spec.encode, 'utf8');
                 decrypted += decipher.final('utf8');
-                cb(null, decrypted);
+                return cb(null, decrypted);
             } catch (err) {
                 if (!!err) {
                     console.error(err.stack);
-                    cb(err);
-                    return;
+                    return cb(new ResponseError({
+                        code: ErrorCode.INTERNAL_CRYPTO,
+                        cause: err,
+                        info: {
+                            type: 'AESCBC',
+                            encrypted: encrypted,
+                            key: key,
+                            iv: iv,
+                        },
+                    }));
                 }
             }
         });
@@ -246,20 +272,18 @@ class CryptoManager extends AbstractManager {
         process.nextTick(() => {
             try {
                 var rsa = new NodeRSA({
-
                     // TODO Change to property.
                     b: 2048
                 });
 
-                cb(null, {
+                return cb(null, {
                     public: rsa.exportKey('pkcs8-public-der'),
                     private: rsa.exportKey('pkcs8-private-der')
                 });
             } catch (err) {
                 if (!!err) {
                     console.error(err.stack);
-                    cb(err);
-                    return;
+                    return cb(err);
                 }
             }
         });
@@ -285,12 +309,19 @@ class CryptoManager extends AbstractManager {
                     encryptionScheme: 'pkcs1'
                 });
                 var encrypted = rsa.encrypt(dataBuffer);
-                cb(null, encrypted);
+                return cb(null, encrypted);
             } catch (err) {
                 if (!!err) {
                     console.error(err.stack);
-                    cb(err);
-                    return;
+                    return cb(new ResponseError({
+                        code: ErrorCode.INTERNAL_CRYPTO,
+                        cause: err,
+                        info: {
+                            type: 'RSA',
+                            plain: dataBuffer.toString('utf-8'),
+                            key: key.toString('utf8'),
+                        },
+                    }));
                 }
             }
         });
@@ -313,12 +344,19 @@ class CryptoManager extends AbstractManager {
                     encryptionScheme: 'pkcs1'
                 });
                 var decrypted = rsa.decrypt(encryptedBuffer);
-                cb(null, decrypted);
+                return cb(null, decrypted);
             } catch (err) {
                 if (!!err) {
                     console.error(err.stack);
-                    cb(err);
-                    return;
+                    return cb(new ResponseError({
+                        code: ErrorCode.INTERNAL_CRYPTO,
+                        cause: err,
+                        info: {
+                            type: 'RSA',
+                            encrypted: encryptedBuffer.toString('utf-8'),
+                            key: privateKey.toString('utf8'),
+                        },
+                    }));
                 }
             }
         });
