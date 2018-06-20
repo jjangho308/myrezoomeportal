@@ -254,7 +254,7 @@
                 $('#cert-main-agent-msg').text(record_data.univInfo.msg1);
                 $('#cert-main-agent').text(main_agent_name);
             });
-
+            $(".cert_doc_id").html("발급번호 : " + certId);
             generateQRCode();
         },
 
