@@ -19,7 +19,7 @@ module.exports = (() => {
          * @since 180305
          * @author TACKSU
          */
-        uuid: function () {
+        uuid: () => {
             return uuidv4();
         },
 
@@ -33,7 +33,7 @@ module.exports = (() => {
             if (yn == undefined) {
                 return yn;
             }
-            return yn == 'Y' ? true : false;
+            return yn == 'Y';
         },
 
         /**
@@ -43,7 +43,7 @@ module.exports = (() => {
          * @author TACKSU
          */
         boolToFlag: (value) => {
-            if (value == undefined) {
+            if (value == undefined || value == null) {
                 return undefined;
             }
             return value ? 'Y' : 'N';
