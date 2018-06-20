@@ -4,17 +4,21 @@
         <p class="cert_title">졸 업 증 명서</p>
         <div class="cert-body-default">
           
-            <div class="body-line">성<span class="two-interval"></span>명</span>  :  <span id="cert-owner-name">XXX</span></div>
-            <div class="body-line"><span>생<span class="four-interval"></span>년<span class="four-interval"></span>월<span class="four-interval"></span>일</span>  :  <span id="cert-owner-birth">XXX</span></div>
-            <div class="body-line"><span>대<span class="two-interval"></span>학</span>  :  <span id="cert-owner-uni">XXX</span></div>
-            <div class="body-line"><span>소<span class="two-interval"></span>속</span>  :  <span id="cert-owner-uni-org-major">XXX</span></div>
-            <div class="body-line"><span>이수 전공 (학위명)</span>  :  <span id="cert-owner-uni-major-name">XXX</span></div>
-            <div class="body-line"><span>입<span class="four-interval"></span>학<span class="four-interval"></span>일<span class="four-interval"></span>자</span>  :  <span id="cert-owner-uni-enter-date">XXX</span></div>
-            <div class="body-line"><span>졸<span class="four-interval"></span>업<span class="four-interval"></span>일<span class="four-interval"></span>자</span>  :  <span id="cert-owner-uni-gredu-date">XXX</span></div>
-            <div class="body-line"><span>학<span class="four-interval"></span>위<span class="four-interval"></span>번<span class="four-interval"></span>호</span>  :  <span id="cert-owner-uni-gredu-id">XXX</span></div>
+            <div class="body-line">학<span class="two-interval"></span>번</span><span class="four-interval"></span>:<span class="four-interval"></span><span id="cert-owner-id"></span></div>
+            <div class="body-line">성<span class="two-interval"></span>명</span><span class="four-interval"></span>:<span class="four-interval"></span><span id="cert-owner-name"></span></div>
+            <div class="body-line"><span>생<span class="four-interval"></span>년<span class="four-interval"></span>월<span class="four-interval"></span>일</span><span class="four-interval"></span>:<span class="four-interval"></span><span id="cert-owner-birth">XXX</span></div>
+            <div class="body-line"><span>대<span class="two-interval"></span>학</span><span class="four-interval"></span>:<span class="four-interval"></span><span id="cert-owner-uni"></span></div>
+            <div class="body-line"><span>소<span class="two-interval"></span>속</span><span class="four-interval"></span>:<span class="four-interval"></span><span id="cert-owner-uni-org-major"></span></div>
+            <div class="body-line"><span>이<span class="four-interval"></span>수<span class="four-interval"></span>전<span class="four-interval"></span>공</span><span class="four-interval"></span>:<span class="four-interval"></span><span id="cert-owner-uni-major-name">XXX</span></div>
+            <div class="body-line"><span>입<span class="four-interval"></span>학<span class="four-interval"></span>일<span class="four-interval"></span>자</span><span class="four-interval"></span>:<span class="four-interval"></span><span id="cert-owner-uni-enter-date">XXX</span></div>
+            <div class="body-line"><span>졸<span class="four-interval"></span>업<span class="four-interval"></span>일<span class="four-interval"></span>자</span><span class="four-interval"></span>:<span class="four-interval"></span><span id="cert-owner-uni-gredu-date">XXX</span></div>
+            <div class="body-line"><span>학<span class="four-interval"></span>위<span class="four-interval"></span>번<span class="four-interval"></span>호</span><span class="four-interval"></span>:<span class="four-interval"></span><span id="cert-owner-uni-gredu-id">XXX</span></div>
 
         </div>
-       <div class = "cert-footer-default">
+        
+        
+        
+        <!-- <div class = "cert-footer-default">
             위의 사실을증명합니다.
           </div> 
           <div class = "cert-reference-default">
@@ -25,4 +29,13 @@
         </div> 
         <script>
           $('.main-body-footer-4').text("인하대학교");
-        </script>
+        </script> -->
+
+        <div class = "cert-main-agent-msg" id="cert-main-agent-msg"></div> 
+        <div class = "cert-reference-default" style="display:flex;" >
+            <p id="cert-main-agent" style="margin-left: 50px;"></p>
+            <img class="stamp" src="/img/certviewer/stamp.png">
+        </div>
+            <!-- <img class = "stamp" src="/img/certviewer/stamp.png"> -->
+            <div style="display:none" id="qrcode" class="qrcode">
+        </div> 

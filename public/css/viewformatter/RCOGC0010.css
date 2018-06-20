@@ -17,6 +17,8 @@ table {
     text-align: center;
     font-family: 'Spoqa Han Sans';
     font-size:48px;
+    margin-top: 10%;
+
 }
 
 .sector_col_name {
@@ -54,6 +56,12 @@ table {
     border-right:0px;
 }
 
+.cert-main-agent-msg {
+    text-align: center;
+    margin-top: 100px;
+}
+
+
 .cert-reference-default {
     font-family: 'Nanum Myeongjo';
     font-size: 34px;
@@ -64,7 +72,6 @@ table {
     width: 100%;
     z-index: 1;
     margin: 60px 0px 0px 0px;
-    bottom:-185px;
 }
 
 .cert-footer-default {
@@ -76,14 +83,14 @@ table {
     text-align: center;
     margin: 50px 0px 0px 0px;
     width: 100%;
-    bottom:-185px;
+    bottom:-45px;
 }
 
 .cert-body-default {
     height: 50%;
     position: relative;
-    left:10%;
-    top:20px;
+    left:25%;
+    top:10%;
     font-family: 'Spoqa Han Sans';
 }
 

@@ -4,7 +4,8 @@ var Env = require('../core/environment');
 var ErrorCode = require('../core/error/error_code');
 var ResponseError = require('../core/error/response_error');
 var HttpStatusCode = require('../core/error/http_status_code');
-var httpclient = require('http');
+//var httpclient = require('http');
+var request = require('request');
 
 module.exports = {
 
@@ -18,9 +19,8 @@ module.exports = {
      * @author TACKSU
      */
     getTxinfoByTxid: (req, res, next) => {
-        console.log("=====Nexledger CTRL 0=====");
+
         var txid = req.body.txid;
-        console.log(txid);
         if (!txid) {
             return next(new ResponseError({
                 code: ErrorCode.PARAM_NO_CERT_ID,
@@ -30,41 +30,21 @@ module.exports = {
             req.body.txid = req.params.txid;
 
             var parampath = '/monitor/getTransactionByTXId?tx_id=' + txid;
-            console.log("=====Nexledger CTRL 1=====");
-            console.log(parampath);
 
             var options = {
-                //hostname: 'http://devadminexternalelb-2109283886.ap-northeast-2.elb.amazonaws.com',
-                hostname: 'devadminexternalelb-2109283886.ap-northeast-2.elb.amazonaws.com',
-                port: 28080,
-                path: parampath,
-                headers: {
+                url: 'http://devadminexternalelb-2109283886.ap-northeast-2.elb.amazonaws.com:28080' + parampath,
+                headers:{
                     'handsome':'kyc'
                 }
-              };
-             
-            // function handleResponse(response) {
-            //   var serverData = '';
-            //   response.on('data', function (chunk) {
-            //     serverData += chunk;
-            //   });
-            //   response.on('end', function () {
-            //     console.log("received server data:");
-            //     console.log(serverData);
-            //   });
-            // }
-             
-            httpclient.request(options, function(httpclientresponse){
-                console.log("=====Nexledger CTRL 2=====");
-                console.log(httpclientresponse.data);
-                console.log("=====Nexledger CTRL 3=====");
-                console.log(httpclientresponse);
+            }
+
+            request(options, function(error, response, body){
+                var resinfo = JSON.parse(body);
+
                 res.json({
-                    result: httpclientresponse
+                    result: resinfo
                 });
-            }).end();
-            
-            
+            });            
         }
     }
 }
