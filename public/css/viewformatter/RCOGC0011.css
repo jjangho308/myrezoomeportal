@@ -7,16 +7,35 @@ table {
 .personinfo1 {
     width: 100%;
 }
+/*공통이나, 성적증명서 용으로 두개 활용 */
 
-.cert_doc_id {
-
+.inner-container{
+	    margin: auto;
+    position: relative;
+    border: 2px solid #666666;
+    width: 95%;
+    height: 90%;
 }
+
+.personinfo_outter{
+	display: flex;
+    font-size: 75%;
+}
+.cert_doc_id {font-size: 11px;font-weight: 500;padding: 15px 0px 3px 45px;color: #838383;}
 
 .cert_title {
     width:100%;
     text-align: center;
+    /* width: 100%; */
+    text-align: center;
+    font-family: 'Nanum Myeongjo';
+    font-size: 25px;
+    font-weight: bold;
+    /* margin-top: 10%; */
+    letter-spacing: 25px;
 }
 
+.cert-main-agent-msg{text-align: center;margin-top: 72px;font-family: 'nanum myeongjo';letter-spacing: 10px;font-weight: bold;font-size: 20px;}
 .sector_col_name {
     border-bottom: 1px solid black;
 }
@@ -61,8 +80,9 @@ table {
     position: relative;
     width: 100%;
     text-align: center;
-    z-index: 1;
-    margin: 60px 0px 0px 0px;
+    /* z-index: 1; */
+    margin: 50px;
+    left: 6%;
 }
 
 .cert-footer-default {
@@ -98,6 +118,7 @@ table {
 .personinfo_name {
     width:15%;
     text-align:right;
+    letter-spacing: 1.5px;
 }
 
 @media screen and (max-width: 1000px){
