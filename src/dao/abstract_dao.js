@@ -1,3 +1,6 @@
+var ErrorCode = require('../core/error/error_code');
+var ResponseError = require('../core/error/response_error');
+
 /**
  * Abstraction of DAO. <br />
  * 
@@ -31,14 +34,22 @@ class AbstractDAO {
         this.connectionPool.getConnection((err, connection) => {
             if (!!err) {
                 console.error(err.stack);
-                cb(err);
+                return cb(new ResponseError({
+                    code: ErrorCode.INTERNAL_DB,
+                    cause: err,
+                }));
             } else {
                 connection.query(query, (err, result) => {
                     connection.release();
                     if (!!err) {
                         console.error(err.stack);
+                        return cb(new ResponseError({
+                            code: ErrorCode.INTERNAL_DB,
+                            cause: err,
+                            info: err.sql,
+                        }));
                     }
-                    cb(err, result);
+                    return cb(null, result);
                 });
             }
         });
