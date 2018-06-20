@@ -412,6 +412,7 @@ $(document).ready(function () {
 
 
     $('#cert-issue-button').click(function () {
+        var modal = false;
         $(".spec-detail-div input:checkbox").each(function (i) {
             if ($(this).is(':checked')) {
                 var id = $(this).attr("id");
@@ -432,7 +433,7 @@ $(document).ready(function () {
                     }),
                     beforeSend: function () {
 
-                        $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+                        // $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
                         // don't delete!!!!!  
                         //version 1 dialog. progress circle      
                         //         setTimeout(function() {
@@ -453,38 +454,50 @@ $(document).ready(function () {
                         //             $(".spec-detail-div input:checkbox:checked").click();
                         //         }, 3000);
 
-                        var current_active = 0;
+                        if (!modal) {
+                            modal = true;
+                            var current_active = 0;
 
-                        $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
-
-                        var mytimer = setInterval(function () {
-                            $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#dadada");
-                            current_active += 1;
-
-                            if (current_active > 5) {
-                                current_active = 0;
-                                clearInterval(mytimer);
-                            }
                             $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
 
+                            var functionId = setInterval(function () {
+                                $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#dadada");
+                                current_active += 1;
+                                if (current_active > 5) {
+                                    current_active = 0;
+                                }
+                                $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
+                            }, 1000);
 
-                        }, 1000);
+                            setTimeout(function () {
 
-                        setTimeout(function () {
+                                $("#cert-line-dialog .close-modal").click();
+                                $("#alarm-div").css("display", "block");
+                                $("#alarm-div").css("margin-right", "-224px");
+                                $("#select-footer").hide();
+                                $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+                                $(".spec-detail-div input:checkbox").attr("checked", false);
 
-                            $("#alarm-div").css("display", "block");
-                            $("#alarm-div").css("margin-right", "-224px");
 
-                            $("#select-footer").animateCss("fadeOutDown");
 
-                            $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+                                $('.spec-body').css({
+                                    "border": "none",
+                                    "border-bottom": "solid 1px #dfe5ef",
+                                    "background-color": "white"
+                                });
 
-                            $("#cert-line-dialog .close-modal").click();
-                        }, 3000);
+                                clearInterval(functionId);
 
+                                setTimeout(function () {
+                                    $("#alarm-div").hide();
+                                    modal = false;
+                                }, 1000);
+
+                            }, 3000);
+                        }
                     },
                     success: function (res) {
-                        loadcertlist();
+                        //loadcertlist();
                     },
                     error: function (jqXhr, status, error) {
                         console.error('/Issue cert error : ' + error);
@@ -650,7 +663,7 @@ function getPrivateRecords() {
             $('.private-spec-body').remove();
         },
         success: function (res) {
-            res.result.forEach(function(item, idx){
+            res.result.forEach(function (item, idx) {
                 var data = JSON.parse(item.data);
                 data.certPrvtId = item.certPrvtId;
                 formatter[item.subCd](data);

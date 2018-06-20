@@ -276,10 +276,7 @@ $(document).ready(function () {
 
     $('#add-cert-dialog .confirm-btn').click(function () {
         $("#add-cert-dialog  .close-modal").click();
-
-
         var current_active = 0;
-
         $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
 
         var mytimer = setInterval(function () {
@@ -291,8 +288,6 @@ $(document).ready(function () {
                 clearInterval(mytimer);
             }
             $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
-
-
         }, 1000);
 
         setTimeout(function () {

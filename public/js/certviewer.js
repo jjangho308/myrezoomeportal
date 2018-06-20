@@ -383,34 +383,11 @@ $(document).ready(function () {
         // $(".qrcode").hide();              
 
 
-        // 
+        
 
         $(".qr-container").show();
         var $childern = $(".outer-container >.inner-container");
-        // $childern.each(function (idx, array) {
-        //         html2canvas($(this) , {
-        //             onrendered: function (canvas) {
-        //                 var ctx = canvas.getContext('2d');
-        //                 ctx.webkitImageSmoothingEnabled = false;
-        //                 ctx.mozImageSmoothingEnabled = false;
-        //                 ctx.imageSmoothingEnabled = false;
-        //                 var img = canvas.toDataURL("image/jpeg,1.0");
-        //                 $("#printcontent").prepend("<img class=certImg id=certImg" + idx + " width=100% src=" + img + ">");
-
-        //                 if (idx === $childern.size()-1) {
-        //                             $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
-
-        //                             setTimeout( function(){
-
-        //                                 window.print();
-        //                                 $.unblockUI();
-        //                                 $('.certImg').remove();  
-
-        //                             }, 3000);
-        //                 }
-        //             }
-        //         });            
-        // });
+        //var $childern = $(".main-body >.outer-container");
 
 
         $childern.each(function (idx, array) {
@@ -435,73 +412,6 @@ $(document).ready(function () {
                 
             });            
          });
-
-
-        // html2canvas(document.querySelector(".inner-container") ).then(canvas => {
-        //     document.querySelector("#printcontent").appendChild(canvas)
-        // });
-
-
-
-        // html2canvas($(".inner-container"), {
-        //     onrendered: function(canvas) {
-        //         var img = canvas.toDataURL();      
-        //         console.log(img);              
-        //         $($("#printcontent")).html("<img id=certImg width=100% src=" + img + ">");
-        //         window.print();
-        //         $('#certImg').remove();
-        //     }
-        // });
-
-
-
-
-        // html2canvas(document.querySelector(".inner-container")).then(canvas => {
-        //     document.querySelector("#printcontent").appendChild(canvas)
-        // });
-
-
-        // document.querySelector('#certImg').remove();
-        //         const body = document.querySelector('body'); 
-        //         console.log(body);
-
-        // $(".header").hide();
-        // $("#footer").hide();
-        // $(".main-body-footer").hide();
-        // $(".qrcode").show();             
-
-        // const html = document.querySelector('html');        
-        // const body = document.querySelector('body');        
-        // const printContents = document.querySelector('.main-body').innerHTML;
-
-
-        // const printDiv = document.createElement("DIV");
-        // printDiv.setAttribute("id" , "printcontent");
-
-
-        // printDiv.innerHTML = printContents;
-
-
-        // w.document.write($('.print-div').html());
-        //window.print();
-        // w.close();
-
-        // while( body.firstChild){
-        //     body.removeChild(body.firstChild);
-        // }
-
-        // body.appendChild(printDiv);
-
-        // console.log(html)
-        // window.print();
-        // document.body.style.display = 'block';
-        // printDiv.style.display = 'none';
-
-        // $(".header").show();
-        // $("#footer").show();   
-        // $(".main-body-footer").show();            
-        // $(".qrcode").hide();             
-
 
     });
 });
