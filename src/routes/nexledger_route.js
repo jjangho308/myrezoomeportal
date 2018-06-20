@@ -10,7 +10,7 @@ var tokenAuth = require('../mw/client_auth');
  */
 var router = express.Router();
 
-router.get('/', tokenAuth);
+router.get('/get_txinfo', tokenAuth);
 router.post('/get_txinfo', ctrl.getTxinfoByTxid);
 
 module.exports = router;
