@@ -4,13 +4,29 @@ table {
     width: 100%;
 }
 
+/* .stamp & .inner-container 공통으로 쓰이나, 졸업증명서 전용 스탬프와 위치값 입력 시작 */
+.stamp {
+    margin-left: -95px;
+    margin-top: -20px;
+    width: 100px;
+    height: 100px;
+}
+
+.inner-container {
+    margin: auto;
+    position: relative;
+    border: 2px solid #666666;
+    width: 95%;
+    height:90%;
+}
+
+/* 공통 부분 중복 입력 종료 */ 
+
 .personinfo1 {
     width: 100%;
 }
 
-.cert_doc_id {
-
-}
+.cert_doc_id {font-size: 11px;font-weight: 500;padding: 15px 0px 3px 45px;color: #838383;}
 
 .cert_title {
     width:100%;
@@ -18,7 +34,13 @@ table {
     font-family: 'Spoqa Han Sans';
     font-size:48px;
     margin-top: 10%;
-
+    width: 100%;
+    text-align: center;
+    font-family: 'Nanum Myeongjo';
+    font-size: 34px;
+    font-weight: bold;
+    margin-top: 10%;
+    letter-spacing: 35px;
 }
 
 .sector_col_name {
@@ -58,7 +80,11 @@ table {
 
 .cert-main-agent-msg {
     text-align: center;
-    margin-top: 100px;
+    margin-top: 72px;
+    font-family: 'nanum myeongjo';
+    letter-spacing: 10px;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 
@@ -68,10 +94,11 @@ table {
     font-weight: bold;
     letter-spacing: 30px;
     text-align: center;
+    left: 8%;
     position: relative;
     width: 100%;
     z-index: 1;
-    margin: 60px 0px 0px 0px;
+    margin: 115px 50px 50px 50px;
 }
 
 .cert-footer-default {
@@ -89,8 +116,8 @@ table {
 .cert-body-default {
     height: 50%;
     position: relative;
-    left:25%;
-    top:10%;
+    left: 23%;
+    top: 9%;
     font-family: 'Spoqa Han Sans';
 }
 
@@ -119,18 +146,19 @@ table {
 }
 
 .two-interval {
-    width: 114px;
+    width: 130px;
     display: inline-block;
 }
 
 .four-interval {
-    width:26px;
+    width: 26px;
     display: inline-block;
 }
 
 .body-line {
-    height: 60px;
-    font-size:20px;
+    height: 50px;
+    font-size: 17px;
+    letter-spacing: 10px;
 }
 
 @media screen and (max-width: 1000px){

@@ -69,7 +69,9 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                                     encrypted: true,
                                                     iv: encodedIV,
                                                     data: encryptedData,
-                                                    created: shareModel.created
+                                                    created: shareModel.created,
+                                                    certId: shareModel.certId,
+                                                    url: shareModel.url
                                                 };
                                                 done(ClientRequest.RESULT_SUCCESS, verifyData);
                                             }
@@ -79,7 +81,9 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                             encrypted: false,
                                             iv: "",
                                             data: JSON.parse(decrypted),
-                                            created: shareModel.created
+                                            created: shareModel.created,
+                                            certId: shareModel.certId,
+                                            url: shareModel.url
                                         };
                                         done(ClientRequest.RESULT_SUCCESS, verifyData);
                                     }
@@ -90,9 +94,10 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                         encrypted: false,
                                         iv: '',
                                         data: "관리자에게 문의하시오",
-                                        created: shareModel.created
-                                    };
-                                    
+                                        created: shareModel.created,
+                                        certId: shareModel.certId,
+                                        url: shareModel.url
+                                    };                                    
                                     done(ClientRequest.RESULT_FAILURE, verifyData);
                                 }
                             });

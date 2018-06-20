@@ -20,6 +20,7 @@ class ResponseError {
      * @param {Number} opt.status HTTP Status code for this error.
      * @param {Error} opt.cause Root cause error.
      * @param {String} opt.locale Locale for error message.
+     * @param {*} opt.info Additional information for exception.
      */
     constructor(opt) {
         if (typeof opt === 'number') {
@@ -29,6 +30,7 @@ class ResponseError {
             this.status = opt.status;
             this.cause = opt.cause;
             this.redirect = opt.redirect;
+            this.info = opt.info;
         }
     }
 
