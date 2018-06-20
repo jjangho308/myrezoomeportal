@@ -86,6 +86,8 @@
                 // $("#opic_report").children('p').eq(2).html(record_data.testdate);
                 // $("#opic_report").children('p').eq(3).html(record_data.examid);
 
+                $("#certno").html("인증서번호 : " + certId);
+
                 generateQRCode();
 
                 // html2canvas($(".inner-container"), {
