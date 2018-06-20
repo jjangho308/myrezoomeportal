@@ -12,6 +12,8 @@
 exports.INTERNAL_ERROR = 1;
 exports.INTERNAL_UNKNOWN = 2;
 exports.INTERNAL_NO_RESPONSE = 3;
+exports.INTERNAL_DB = 4;
+exports.INTERNAL_CRYPTO = 5;
 
 // Authorization error
 exports.AUTH_ERROR = 100;
