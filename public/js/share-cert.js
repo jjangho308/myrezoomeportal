@@ -1,5 +1,7 @@
 var certdata;
 var verifyisclicked = 0;
+var certUrl;
+var certId;
 
 $(document).ready(function () {
 
@@ -196,9 +198,11 @@ function verify(passcode) {
 }
 
 function setData(data) {
-    var verifyData = JSON.parse(data);
-
+    var verifyData = JSON.parse(data);    
     certdata = verifyData;
+
+    certId = verifyData.certId;
+    certUrl = verifyData.url;
 
     /*
     var passcode = '43214321';

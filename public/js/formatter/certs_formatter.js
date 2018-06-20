@@ -86,6 +86,8 @@
                 // $("#opic_report").children('p').eq(2).html(record_data.testdate);
                 // $("#opic_report").children('p').eq(3).html(record_data.examid);
 
+                $("#certno").html("인증서번호 : " + certId);
+
                 generateQRCode();
 
                 // html2canvas($(".inner-container"), {
@@ -282,7 +284,7 @@
 
         "RCOGC0011": function viewformatter(record_data) {
             //계명대 성적증명서        
-            $(".inner-container").load("../../viewhtml/RCOGC0010.html", function () {
+            $(".inner-container").load("../../viewhtml/RCOGC0009.html", function () {
                 $('#cert-owner-uni-gredu-id').text(record_data.registList[0].std_no);
 
                 $('#cert-owner-name').text(record_data.registList[0].name);

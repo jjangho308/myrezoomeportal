@@ -1,5 +1,7 @@
 var record;
 var verifyisclicked = 0;
+var certUrl;
+var certId;
 
 $(document).ready(function () {
 
@@ -505,13 +507,11 @@ function setCertViewer(tx_id) {
     certformatter[record.subid](record.data);
 }
 
-var certUrl;
 function setDefaultUrl(url) {    
     certUrl = window.location.protocol + "//" + window.location.host + '/v/' + url;    
     console.log(certUrl);    
 }
 
-var certId;
 function setCertId(certid) {    
     certId = certid;
 }
