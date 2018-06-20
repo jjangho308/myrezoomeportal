@@ -497,6 +497,7 @@ p{
     float: left;
     width: 80%;    
     word-wrap: break-word;
+    height: 24px;
 }
 
 .nexledger-txid-info-dialog-close {

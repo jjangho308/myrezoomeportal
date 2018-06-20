@@ -138,7 +138,7 @@ $(document).ready(function () {
                         var htmldiv = '<div class="footer-verify-4">';
                         htmldiv = htmldiv + '<div class="footer-verify-left">' + "RESULT" + '</div>';
                         htmldiv = htmldiv + '<div class="footer-verify-center">' + "정상적인 데이터로 확인되었습니다." + '</div>';
-                        htmldiv = htmldiv + '<div class="footer-verify-right">' + '<a>트랜잭션 조회</a>' + '</div>';
+                        htmldiv = htmldiv + '<div id="txinfoget-bt" class="footer-verify-right">' + '<a>트랜잭션 조회</a>' + '</div>';
                         htmldiv = htmldiv + '</div>';
                         $('.main-body-footer').append(htmldiv);
 
@@ -153,6 +153,51 @@ $(document).ready(function () {
                         $(".main-body-footer-right-button1").text("검증완료");
                         $('.footer-verify-4 > .footer-verify-center').css({
                             'color': '#7ed321'
+                        });
+
+                        $('#txinfoget-bt').click(function(event){
+
+                            $("#nexledger-txid-info-dialog").css('display','block');
+                            var reqtxid = $('.main-body-footer-6').text();
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '/nexledger/get_txinfo',
+                                // headers: {
+                                //     'Authorization': client_authorization
+                                // },
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                    //uId: 'SearchRecord',
+                                    //sId: '',
+                                    txid: reqtxid
+                                }),
+                                error: function (jqXhr, status, error) {
+                                    console.error('Cert check error : ' + error);
+                                    console.error(jqXhr.responseText);
+                                },
+                                success: function (res2) {
+                                    console.log(res2);
+                                    $("#tx_id").text(reqtxid);
+                                    //$("#fromaddress").text(res2.result.fromaddress);
+
+                                    var tempstr = '';
+                                    for(var i=0;i < res2.result.fromaddress.length; i++) {
+                                        tempstr = tempstr + res2.result.fromaddress[i];
+                                    }
+                                    $("#fromaddress").text(tempstr);
+
+                                    tempstr = '';
+                                    for(var i=0;i < res2.result.toaddress.length; i++) {
+                                        tempstr = tempstr + res2.result.toaddress[i];
+                                    }
+                                    $("#toAddress").text(tempstr);
+
+                                    $("#total_volume").text(res2.total_volume);
+                                    $("#total_output").text(res2.output);
+                                    
+                                }                                
+                            });
                         });
 
                     }, 1000);
