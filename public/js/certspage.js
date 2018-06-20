@@ -294,6 +294,9 @@ $(document).ready(function () {
             $("#cert-line-dialog  .close-modal").click();
             $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
             $('#alarm-div').css("display", "block");
+            setTimeout(function () {
+                $('#alarm-div').hide();
+            }, 1000);
         }, 3000);
 
 
