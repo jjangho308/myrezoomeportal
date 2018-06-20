@@ -195,7 +195,7 @@
                 $('#cert-owner-uni-gredu-id').text(record_data.registList[0].std_no);
 
             });
-
+            $(".cert_doc_id").html("발급번호 : " + certId);
             generateQRCode();
         },
 
