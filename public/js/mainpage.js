@@ -416,7 +416,10 @@ $(document).ready(function () {
             if ($(this).is(':checked')) {
                 var id = $(this).attr("id");
                 var sdata = sessionStorage.getItem(id);
-                var jsondata = JSON.parse(sdata);
+
+                var reqcerts = {};
+                reqcerts.txid = id;
+                reqcerts.record = JSON.parse(sdata);
 
                 $.ajax({
                     type: 'POST',
@@ -425,7 +428,7 @@ $(document).ready(function () {
                         'Authorization': client_authorization
                     },
                     data: JSON.stringify({
-                        cert: jsondata
+                        cert: reqcerts
                     }),
                     beforeSend: function () {
 
