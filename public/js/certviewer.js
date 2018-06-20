@@ -511,6 +511,11 @@ function setDefaultUrl(url) {
     console.log(certUrl);    
 }
 
+var certId;
+function setCertId(certId) {    
+    certId = certId;
+}
+
 function generateURL() {
 
     $.ajax({
