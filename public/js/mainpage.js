@@ -432,7 +432,7 @@ $(document).ready(function () {
                     }),
                     beforeSend: function () {
 
-                        $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+                       // $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
                         // don't delete!!!!!  
                         //version 1 dialog. progress circle      
                         //         setTimeout(function() {
@@ -460,30 +460,38 @@ $(document).ready(function () {
                         setInterval(function () {
                             $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#dadada");
                             current_active += 1;
-
                             if (current_active > 5) {
                                 current_active = 0;
                             }
                             $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
-
-
                         }, 1000);
 
                         setTimeout(function () {
 
+                            $("#cert-line-dialog .close-modal").click();
                             $("#alarm-div").css("display", "block");
                             $("#alarm-div").css("margin-right", "-224px");
-
-                            $("#select-footer").animateCss("fadeOutDown");
-
+                            $("#select-footer").hide();
                             $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+                            $(".spec-detail-div input:checkbox").attr("checked", false);
 
-                            $("#cert-line-dialog .close-modal").click();
+
+                            
+                            $('.spec-body').css({
+                                "border": "none",
+                                "border-bottom": "solid 1px #dfe5ef",
+                                "background-color": "white"
+                            });
+
+                            setTimeout(function () {
+                                $("#alarm-div").hide();
+                                
+                            }, 1000);
+                            
                         }, 3000);
-
                     },
-                    success: function (res) {
-                        loadcertlist();
+                    success: function (res) {                        
+                        //loadcertlist();
                     },
                     error: function (jqXhr, status, error) {
                         console.error('/Issue cert error : ' + error);
