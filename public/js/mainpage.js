@@ -415,6 +415,8 @@ $(document).ready(function () {
         $(".spec-detail-div input:checkbox").each(function (i) {
             if ($(this).is(':checked')) {
                 var id = $(this).attr("id");
+                var sdata = sessionStorage.getItem(id);
+
                 var reqcerts = {};
                 reqcerts.txid = id;
                 reqcerts.record = JSON.parse(sdata);
@@ -426,7 +428,7 @@ $(document).ready(function () {
                         'Authorization': client_authorization
                     },
                     data: JSON.stringify({
-                        cert: jsondatajsondata
+                        cert: reqcerts
                     }),
                     beforeSend: function () {
 
