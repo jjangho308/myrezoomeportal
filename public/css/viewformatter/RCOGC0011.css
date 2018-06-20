@@ -130,6 +130,32 @@ table {
     letter-spacing: 1.5px;
 }
 
+.qr-container div:nth-child(1){
+    position: absolute;
+    bottom: -55px;
+    right: 39px;
+    width: 50px;
+    height: 50px;
+}
+
+.qr-container p:nth-child(2) {
+    position: relative;
+    font-size: 11px;
+    left: 5px;
+    top: -30px;
+    color: #838383;
+    padding: 5px 5px 0px 40px;
+}
+
+.qr-container p:nth-child(3) {
+    position: relative;
+    font-size: 11px;
+    left: 5px;
+    top: -30px;
+    color: #838383;
+    padding: 5px 5px 0px 40px;
+}
+
 @media screen and (max-width: 1000px){
     .personinfo_outter {
         font-size: 65%;

@@ -440,7 +440,7 @@
             // fill: jq('#img-buffer')[0],
 
             text: certUrl,
-            size: 100,
+            size: 75,
             radius: 0.5,
             quiet: 1, // 흰색 여백, 숫자 높을수록 바깥 여백이 넓어지고 내용이 작아짐
 
