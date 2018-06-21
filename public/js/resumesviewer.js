@@ -13,9 +13,9 @@ $(document).ready(function () {
 		$(".header").hide();
 		$("#footer").hide();
 
-		const html = document.querySelector('html');
-		const printContents = document.querySelector('.main-body').innerHTML;
-		const printDiv = document.createElement("DIV");
+		var html = document.querySelector('html');
+		var printContents = document.querySelector('.main-body').innerHTML;
+		var printDiv = document.createElement("DIV");
 		printDiv.className = "print-div";
 
 		html.appendChild(printDiv);
