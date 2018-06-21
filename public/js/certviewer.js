@@ -320,7 +320,15 @@ $(document).ready(function () {
         $(".qr-container").show();          
 
         const html = document.querySelector('html'); 
-        const printContents = document.querySelector('.outer-container').innerHTML;
+        var $childern = $(".outer-container >.inner-container");
+        // const printContents = document.querySelector('.outer-container').innerHTML;
+        var printContents = "";
+
+        $childern.each(function (idx, array) {
+            printContents += $(this).html();
+        });
+        
+        
         const printDiv = document.createElement("DIV");
         printDiv.className = "print-div";
 
@@ -329,12 +337,14 @@ $(document).ready(function () {
         document.body.style.display = 'none';        
         window.print();
         document.body.style.display = 'block';
-        printDiv.style.display = 'none';
+        printDiv.remove();
 
         $(".header").show();        
         $(".main-body-footer").show();            
         $(".main-body-footer-decription").show();            
         $(".qr-container").hide();             
+
+
 
 
         // $(".outer-container").printObject({           

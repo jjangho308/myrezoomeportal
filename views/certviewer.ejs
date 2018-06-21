@@ -18,25 +18,30 @@
     @media print
     {
         
-        
+/*         
         body * { visibility: hidden; }
-        #printcontent * { visibility: visible; }
-        /* #printcontent { position: absolute; top: 40px; left: 30px;} */
-        #printcontent { position: absolute; top: 20px; left: 8px;  width:100%}        * {
-            /* -webkit-print-color-adjust: exact;         */
-        }
-        /* .inner-container{page-break-before:always;} */
-        .certImg{page-break-before:always;} 
+        #print-div * { visibility: visible; }
+        .qr-container * { visibility: visible; } */
+        
 
-        .inner-container * { visibility: visible; margin: 0;
+        /* #printcontent { position: absolute; top: 40px; left: 30px;} */
+        #printcontent { position: absolute; top: 20px; left: 8px;  width:100%}        
+        * {
+            size: A4;
+            margin: 0;
+            -webkit-print-color-adjust: exact;        
+        }        
+        /* .certImg{page-break-before:always;}  */
+
+        /* .inner-container * { visibility: visible; margin: 0;
        border: initial;
        border-radius: initial;
        min-height: initial;
        box-shadow: initial;
        background: initial;        
        
-       }        
-       .inner-container{page-break-after:always;}
+       }         */
+       /* .print-div > .inner-container{page-break-after:always;} */
 
     }
 
