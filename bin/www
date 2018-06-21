@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // This snippet set default environment to 'development'
-process.env.NODE_ENV = process.env.NODE_ENV || 'stage';
+process.env.NODE_ENV = process.env.NODE_ENV || 'local';
 
 /**
  * Module dependencies.
