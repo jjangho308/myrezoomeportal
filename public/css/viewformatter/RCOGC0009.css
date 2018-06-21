@@ -169,3 +169,22 @@ table {
 		font-size:60%;
 	}
 }
+
+@media print{
+    .qr-container div:nth-child(1){
+        position: absolute;
+        bottom: -85px;
+        right: 0px;
+        width:75px;
+        height: 75px;
+    }
+
+    .qr-container p:nth-child(n) {
+        position: relative;
+        font-size: 11px;
+        left: 5px;
+        top: 60px;
+        color: #838383;
+        padding: 5px 5px 0px 40px;
+    }
+}

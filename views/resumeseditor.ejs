@@ -2,7 +2,7 @@
 <%- include('base_main_dialog') -%>
 
 <head>
-    <link rel="stylesheet" href="/css/mypage/resumeseditor.css">
+    <link rel="stylesheet" href="/css/mypage/resumeseditor<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.css">
     <script src="/js/formatter/resumes_formatter.js"></script>
     <script src="/js/resumeseditor.js"></script>
 </head>

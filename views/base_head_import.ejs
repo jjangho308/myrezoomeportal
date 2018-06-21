@@ -23,13 +23,13 @@ UserModel render용 키 정보 :
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
-    <link rel="stylesheet" href="/css/animate.min.css">
-    <link rel="stylesheet" href="/css/selectize.css">
+    <link rel="stylesheet" href="/css/libs/animate.min.css">
+    <link rel="stylesheet" href="/css/libs/selectize.css">
     <meta name="description" content="">
-    <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/scrollbar.css">
-    <link rel="stylesheet" href="/css/mypage/main.css">
-    <link rel="stylesheet" href="/css/awesome-bootstrap-checkbox.css" />
+    <link rel="stylesheet" href="/css/common<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.css">
+    <link rel="stylesheet" href="/css/libs/scrollbar.css">
+    <link rel="stylesheet" href="/css/mypage/main<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.css">
+    <link rel="stylesheet" href="/css/libs/awesome-bootstrap-checkbox.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 
@@ -41,8 +41,8 @@ UserModel render용 키 정보 :
 
 
     <script src="/js/selectize.js"></script>
-    <link rel="stylesheet" href="/css/datepicker.css">
-    <link rel="stylesheet" href="/css/progressbar.css">
+    <!-- <link rel="stylesheet" href="/css/datepicker.css"> -->
+    <link rel="stylesheet" href="/css/libs/progressbar.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
     <script src="/js/utils.js"></script>
