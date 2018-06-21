@@ -739,12 +739,28 @@ function refreshview(records) {
                     var jsonData = record.data;
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
+
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 0;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
+
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
                 } else if (subid != subidTmp) {
                     var jsonData = record.data;
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
+
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 0;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
+
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
                 }
@@ -766,12 +782,28 @@ function refreshview(records) {
                     var jsonData = record.data;
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
+
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 0;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
+
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
                 } else if (subid != subidTmp) {
                     var jsonData = record.data;
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
+
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 0;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
+                    
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
                 }
