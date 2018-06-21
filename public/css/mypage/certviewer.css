@@ -480,6 +480,10 @@ p{
     height: 800px;
 }
 
+.nexledger-txid-info-dialog-body {
+    overflow-y: auto;
+}
+
 .nexledger-txid-info-dialog-left {
     float: left;
     width: 100px;
