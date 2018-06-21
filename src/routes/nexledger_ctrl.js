@@ -39,11 +39,17 @@ module.exports = {
             }
 
             request(options, function(error, response, body){
-                var resinfo = JSON.parse(body);
+                try {
+                    var resinfo = JSON.parse(body);
 
-                res.json({
-                    result: resinfo
-                });
+                    res.json({
+                        result: resinfo
+                    });
+                }
+                catch(nexledgerexception) {
+                    next("Nexledger ADMIN CONNECTION ERR");
+                }
+                
             });            
         }
     }
