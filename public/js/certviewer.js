@@ -326,14 +326,14 @@ $(document).ready(function () {
         $(".qr-container").show();          
 
         const html = document.querySelector('html'); 
-        var $childern = $(".outer-container >.inner-container");
-        // const printContents = document.querySelector('.outer-container').innerHTML;
+        var $childern = $(".outer-container");       
         var printContents = "";
 
         $childern.each(function (idx, array) {
             printContents += $(this).html();
         });
         
+        // const printContents = document.querySelector('.outer-container').innerHTML;
         
         const printDiv = document.createElement("DIV");
         printDiv.className = "print-div";

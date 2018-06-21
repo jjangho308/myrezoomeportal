@@ -718,17 +718,6 @@
         background-color: white;         
     }   
 
-    .print-div {
-        width: 210mm;        
-        height: 297mm;      
-        padding: 10px 10px;  
-        border: 1px #888 dotted;
-    }
-
-    .inner-container img {
-        width: 100%;        
-    }
-
     .qr-container div:nth-child(1){
         position: absolute;
         bottom: 110px;
