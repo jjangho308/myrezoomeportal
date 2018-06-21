@@ -477,12 +477,17 @@ p{
 
 #nexledger-txid-info-dialog {
     width: 730px;
-    height: 800px;
+   /* height: 800px;*/
 }
 
 .nexledger-txid-info-dialog-left {
     float: left;
     width: 100px;
+    margin-left: 40px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #676767;
+}
 }
 
 .nexledger-txid-info-dialog-center {
@@ -497,21 +502,23 @@ p{
 
 .nexledger-txid-info-dialog-right {
     float: left;
-    width: 80%;    
+    width: 68%;
     word-wrap: break-word;
-
     line-height: 1.2em;
-    height: 48px;
+    height: 38px;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     word-wrap: break-word;
+    color: #676767;
+    font-size: 13px;
+    font-weight: 500;
 }
 
 .nexledger-txid-info-dialog-close {
     position: relative;
-    width: 100px;
+    width: 115px;
     height: 40px;
     border-radius: 4px;
     background-color: #4c80f1;
@@ -519,11 +526,12 @@ p{
     font-style: normal;
     font-stretch: normal;
     line-height: 37px;
+    font-size: 13px;
     letter-spacing: normal;
     text-align: center;
     color: #ffffff;
     float: right;
-    margin: 0px 10px 0px 0px;
+    margin: 0px 35px 34px 0px;
 }
 
 /**/
@@ -1228,4 +1236,13 @@ vertical-align: -4px;
 .abc-radio input[type="radio"] {
 
      display: none;
+}
+
+
+/* 트랜젝션 히스토리 조회 */
+.transaction-title{
+	    padding-left: 40px;
+    padding-bottom: 19px;
+    border-bottom: solid 1px #ced3d6;
+    color: #676767;
 }
