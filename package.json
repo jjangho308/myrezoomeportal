@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon --delay 2 ./bin/www",
-    "svr1" : "nodemon --delay 2 ./bin/www svr1",
-    "svr2" : "nodemon --delay 2 ./bin/www svr2",
+    "svr1": "nodemon --delay 2 ./bin/www svr1",
+    "svr2": "nodemon --delay 2 ./bin/www svr2",
     "debug": "nodemon --delay 2 --inspect-brk=0.0.0.0:9229 ./bin/www",
     "test": "mocha --require babel-core/register ./src/test/*.test.js",
     "//start-with-babel": "nodemon --exec npm run babel-node -- ./bin/www",
@@ -46,6 +46,8 @@
     "sys": "0.0.1"
   },
   "devDependencies": {
-    "mocha": "^5.0.1"
+    "mocha": "^5.0.1",
+    "uglify-js": "^3.4.1",
+    "uglifycss": "0.0.29"
   }
 }
