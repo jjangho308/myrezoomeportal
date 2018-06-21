@@ -11,14 +11,36 @@ table {
     width: 100px;
     height: 100px;
 }
-
+/* 
 .inner-container {
     margin: auto;
     position: relative;
     border: 2px solid #666666;
     width: 95%;
     height:90%;
-}
+} */
+
+.outer-container{
+
+    
+    /* padding: 20mm; set contents area */
+    /* margin: 10mm auto; */
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .inner-container {
+    /* margin: auto;
+    position: relative;
+    border: 2px solid #666666; */
+    width: 210mm;
+    min-height: 297mm;
+    padding: 0;
+    border: 1px #888 dotted;
+    height: 257mm;
+ }
+
 
 /* 공통 부분 중복 입력 종료 */ 
 
