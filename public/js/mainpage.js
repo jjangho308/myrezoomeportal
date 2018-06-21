@@ -604,32 +604,9 @@ function change_default_cert(subid) {
             var record = getData(txidList[i]);
             var dftYn = record.dftYn;
             var subidTmp = record.subid;
-            var jsonData = record.data;
+            
             if (subid == subidTmp) {
-                var htmldiv = '<tr class="change_cert">';
-                htmldiv = htmldiv + '<td>';
-                htmldiv = htmldiv + '<div id=change_cert_' + subid + ' class="abc-radio">';
-                if (dftYn == "Y") {
-                    htmldiv = htmldiv + '<input id=change_cert_' + record.txid + ' type="radio" name="spec-change" checked>';
-                } else {
-                    htmldiv = htmldiv + '<input id=change_cert_' + record.txid + ' type="radio" name="spec-change">';
-                }
-                htmldiv = htmldiv + '<label for=change_cert_' + record.txid + '></label>';
-                htmldiv = htmldiv + '</div>';
-                htmldiv = htmldiv + '</td>';
-                if(jsonData.ctestday != undefined) {
-                    htmldiv = htmldiv + '<td>' + formatDate(jsonData.ctestday) + '</td>';
-                }
-                else if(jsonData.ea_exam_time != undefined) {
-                    htmldiv = htmldiv + '<td>' + formatDate(jsonData.ea_exam_time) + '</td>';
-                }
-                htmldiv = htmldiv + '<td>' + jsonData.userid + '</td>';
-                htmldiv = htmldiv + '<td>' + jsonData.name + '</td>';
-                htmldiv = htmldiv + '<td>' + dftYn + '</td>';
-                htmldiv = htmldiv + '<td>' + jsonData.rating + '</td>';
-                htmldiv = htmldiv + '<td></td>';
-                htmldiv = htmldiv + '</tr>';
-                $("#spec-change-table").append(htmldiv);
+                record_change_formatter[subidTmp](record);
             }
         } catch (exception) {
             continue;
