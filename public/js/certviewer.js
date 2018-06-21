@@ -144,7 +144,7 @@ $(document).ready(function () {
                         var htmldiv = '<div class="footer-verify-4">';
                         htmldiv = htmldiv + '<div class="footer-verify-left">' + "RESULT" + '</div>';
                         htmldiv = htmldiv + '<div class="footer-verify-center">' + "정상적인 데이터로 확인되었습니다." + '</div>';
-                        htmldiv = htmldiv + '<div id="txinfoget-bt" class="footer-verify-right">' + '<a>트랜잭션 조회</a>' + '</div>';
+                        htmldiv = htmldiv + '<div id="txinfoget-bt" class="footer-verify-right">' + '<a href="#nexledger-txid-info-dialog" rel="modal:open">트랜잭션 조회</a>' + '</div>';
                         htmldiv = htmldiv + '</div>';
                         $('.main-body-footer').append(htmldiv);
 
@@ -166,11 +166,11 @@ $(document).ready(function () {
                                 alert("Nexledger Admin Connection ERR");
                             }
                             else {
-                                $("#nexledger-txid-info-dialog").css('display','block');
+                                //$("#nexledger-txid-info-dialog").css('display','block');
 
-                                var dislogoffettop = $("#txinfoget-bt").offset().top - $("#nexledger-txid-info-dialog").height();
-                                var dislogoffetleft = $("#txinfoget-bt").offset().left - $("#nexledger-txid-info-dialog").width();
-                                $("#nexledger-txid-info-dialog").css({'left':dislogoffetleft+'px','top':dislogoffettop+'px'});
+                                //var dislogoffettop = $("#txinfoget-bt").offset().top - $("#nexledger-txid-info-dialog").height();
+                                //var dislogoffetleft = $("#txinfoget-bt").offset().left - $("#nexledger-txid-info-dialog").width();
+                                //$("#nexledger-txid-info-dialog").css({'left':dislogoffetleft+'px','top':dislogoffettop+'px'});
                             }
                         });
 
@@ -432,7 +432,7 @@ function nexledgerInfoView(reqtxid) {
             $("#output_script").css("height","200px");
 
             $(".nexledger-txid-info-dialog-close").click(function(event){
-                $("#nexledger-txid-info-dialog").css("display","none");
+                $("#nexledger-txid-info-dialog .close-modal").click();
             });
             
         }                                
