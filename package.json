@@ -8,6 +8,7 @@
     "svr2": "nodemon --delay 2 ./bin/www svr2",
     "debug": "nodemon --delay 2 --inspect-brk=0.0.0.0:9229 ./bin/www",
     "test": "mocha --require babel-core/register ./src/test/*.test.js",
+    "build": "node build.js",
     "//start-with-babel": "nodemon --exec npm run babel-node -- ./bin/www",
     "//build-with-babel": "./node_modules/.bin/babel ./src/**/*.js --out-dir dist --source-maps",
     "//babel-node": "babel-node --presets es2015"
