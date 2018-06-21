@@ -17,8 +17,8 @@ class PropertyManager extends AbstractManager {
 
     init() {
         super.init();
-        this.filePath = Environment.developement ? './config/debug.properties' : './config/config.properties';
-        this.properties = reader('./config/debug.properties');
+        this.filePath = `./config/${process.env.NODE_ENV || 'local'}.properties`;
+        this.properties = reader(this.filePath);
     }
 
     /**
