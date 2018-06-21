@@ -279,12 +279,13 @@ $(document).ready(function () {
         var current_active = 0;
         $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
 
-        setInterval(function () {
+        var mytimer = setInterval(function () {
             $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#dadada");
             current_active += 1;
 
             if (current_active > 5) {
                 current_active = 0;
+                clearInterval(mytimer);
             }
             $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
         }, 1000);
@@ -293,6 +294,9 @@ $(document).ready(function () {
             $("#cert-line-dialog  .close-modal").click();
             $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
             $('#alarm-div').css("display", "block");
+            setTimeout(function () {
+                $('#alarm-div').hide();
+            }, 1000);
         }, 3000);
 
 

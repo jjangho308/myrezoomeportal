@@ -265,12 +265,13 @@ $(document).ready(function () {
 
         $(`#resumes-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
 
-        setInterval(function () {
+        var mytimer = setInterval(function () {
             $(`#resumes-line-dialog #circle-${current_active}`).css("background-color", "#dadada");
             current_active += 1;
 
             if (current_active > 5) {
                 current_active = 0;
+                clearInterval(mytimer);
             }
             $(`#resumes-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
 

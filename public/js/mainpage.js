@@ -460,7 +460,7 @@ $(document).ready(function () {
 
                             $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
 
-                            setInterval(function () {
+                            var functionId = setInterval(function () {
                                 $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#dadada");
                                 current_active += 1;
                                 if (current_active > 5) {
@@ -485,6 +485,8 @@ $(document).ready(function () {
                                     "border-bottom": "solid 1px #dfe5ef",
                                     "background-color": "white"
                                 });
+
+                                clearInterval(functionId);
 
                                 setTimeout(function () {
                                     $("#alarm-div").hide();
