@@ -45,12 +45,12 @@ UserModel render용 키 정보 :
         <link rel="stylesheet" href="/css/libs/progressbar.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
-        <script src="/js/utils.js"></script>
-        <script src="/js/formatter/view_formatter.js"></script>
+        <script src="/js/utils<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.js"></script>
+        <script src="/js/formatter/view_formatter<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.js"></script>
         <script src="/js/libs/scrollbar.js"></script>
 
-        <script src="/js/common.js"></script>
-        <script src="/js/testinterface.js"></script>
+        <script src="/js/common<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.js"></script>
+        <script src="/js/testinterface<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     </head>

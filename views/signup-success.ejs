@@ -2,7 +2,7 @@
 <%- include('base_all_dialog') -%>
 
 <head>
-    <script src="/js/signup.js"></script>
+    <script src="/js/signup<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.js"></script>
     <link rel="stylesheet" href="/css/navbar-default<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.css">
     <link rel="stylesheet" href="/css/signup<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.css">
 </head>

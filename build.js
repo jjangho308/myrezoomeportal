@@ -19,7 +19,7 @@ const uglifycss = require('uglifycss');
 
 const sep = path.sep;
 
-const jsroot = `.${sep}public${sep}js${sep}`;
+const jsroot = `.${sep}public${sep}js`;
 const cssroot = `.${sep}public${sep}css`;
 
 console.info('Minifying Javscript files...')
@@ -29,13 +29,12 @@ console.info('Minifying CSS files...')
 minifyPublicCSS(cssroot);
 
 function minifyPublicJS(file) {
-
     fs.stat(file, (err, stats) => {
         if (stats.isDirectory()) {
             if (!file.endsWith('libs')) {
                 fs.readdir(file, (err, files) => {
                     files.forEach(subFile => {
-                        minifyPublicCSS(`${file}${sep}${subFile}`);
+                        minifyPublicJS(`${file}${sep}${subFile}`);
                     })
                 });
             }
@@ -43,6 +42,9 @@ function minifyPublicJS(file) {
             fs.readFile(file, {
                 encoding: 'utf8',
             }, (err, data) => {
+                if (!!err) {
+                    console.error(err);
+                }
                 var result = uglifyjs.minify(data, {
                     output: {
                         beautify: false,
@@ -51,17 +53,18 @@ function minifyPublicJS(file) {
                 if (!!result.error) {
                     console.log(`Minify error : ${file}`);
                     console.error(result.error);
+                } else {
+                    var targetFile = file.replace('.js', '.min.js');
+                    fs.writeFile(targetFile, result.code, err => {
+                        if (!!err) {
+                            console.error(`File write error : ${file}`);
+                            console.error(err);
+                        } else {
+                            console.info(`From  : ${file}`);
+                            console.info(`To    : ${targetFile}`);
+                        }
+                    });
                 }
-                var targetFile = file.replace('.js', '.min.js');
-                fs.writeFile(targetFile, JSON.stringify(result), err => {
-                    if (!!err) {
-                        console.error(`File write error : ${file}`);
-                        console.error(err);
-                    } else {
-                        console.info(`From  : ${file}`);
-                        console.info(`To    : ${targetFile}`);
-                    }
-                });
             });
         }
     });
@@ -69,7 +72,6 @@ function minifyPublicJS(file) {
 
 
 function minifyPublicCSS(file) {
-    console.info('Minify : ' + file);
     fs.stat(file, (err, stats) => {
         if (stats.isDirectory()) {
             if (!file.endsWith('libs')) {
@@ -89,7 +91,7 @@ function minifyPublicCSS(file) {
                     console.error(minified.error);
                 }
                 var targetFile = file.replace('.css', '.min.css');
-                fs.writeFile(targetFile, minified.result, err => {
+                fs.writeFile(targetFile, minified, err => {
                     if (!!err) {
                         console.error(`File write error : ${file}`);
                         console.error(err);

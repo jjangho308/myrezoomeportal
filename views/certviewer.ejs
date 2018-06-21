@@ -7,8 +7,8 @@
 <%- include('base_head_import') -%>
 <head>
     <link rel="stylesheet" href="../css/mypage/certviewer.css">
-    <script src="/js/formatter/certs_formatter.js"></script>
-    <script src="../js/certviewer.js"></script>
+    <script src="/js/formatter/certs_formatter<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.js"></script>
+    <script src="../js/certviewer<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.js"></script>
     <script src="../js/libs/jquery-qrcode-0.14.0.min.js"></script>
     <script src="../js/libs/html2canvas.min.js"></script> 
     <script src="../js/libs/blockui/jquery.blockUI.js"></script>
