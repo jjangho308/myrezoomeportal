@@ -12,5 +12,6 @@ var Environment = require('../core/environment');
  */
 module.exports = (req, res, next)=>{
     res.locals.env = process.env.NODE_ENV;
+    res.locals.min = res.locals.env === 'development' || res.locals.env === 'local' ? '' : '.min'
     next();
 }
