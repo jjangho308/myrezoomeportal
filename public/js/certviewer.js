@@ -2,6 +2,7 @@ var record;
 var verifyisclicked = 0;
 var certUrl;
 var certId;
+var nexledgerErr = 0;
 
 $(document).ready(function () {
 
@@ -161,11 +162,16 @@ $(document).ready(function () {
                         });
 
                         $('#txinfoget-bt').click(function(event){
-                            $("#nexledger-txid-info-dialog").css('display','block');
+                            if(nexledgerErr == 1) {
+                                alert("Nexledger Admin Connection ERR");
+                            }
+                            else {
+                                $("#nexledger-txid-info-dialog").css('display','block');
 
-                            var dislogoffettop = $("#txinfoget-bt").offset().top - $("#nexledger-txid-info-dialog").height();
-                            var dislogoffetleft = $("#txinfoget-bt").offset().left - $("#nexledger-txid-info-dialog").width();
-                            $("#nexledger-txid-info-dialog").css({'left':dislogoffetleft+'px','top':dislogoffettop+'px'});
+                                var dislogoffettop = $("#txinfoget-bt").offset().top - $("#nexledger-txid-info-dialog").height();
+                                var dislogoffetleft = $("#txinfoget-bt").offset().left - $("#nexledger-txid-info-dialog").width();
+                                $("#nexledger-txid-info-dialog").css({'left':dislogoffetleft+'px','top':dislogoffettop+'px'});
+                            }
                         });
 
                     }, 1000);
@@ -384,8 +390,11 @@ function nexledgerInfoView(reqtxid) {
             txid: reqtxid
         }),
         error: function (jqXhr, status, error) {
-            console.error('Cert check error : ' + error);
+            $("#nexledger-txid-info-dialog").css('display','none');
+            console.error('Nexledger Connection Error : ' + error);
             console.error(jqXhr.responseText);
+            nexledgerErr = 1;
+            //alert("Nexledger Admin Connection ERR");
         },
         success: function (res2) {
             console.log(res2);
