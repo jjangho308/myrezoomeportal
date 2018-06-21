@@ -19,8 +19,10 @@ var developerRouter = require('./developer_route');
 var agentRouter = require('./agent_route');
 var nexledgerRouter = require('./nexledger_route');
 
-var requestLogger = require('../mw/request_logger.js');
-var responseLogger = require('../mw/response_logger.js');
+var requestLogger = require('../mw/request_logger');
+var responseLogger = require('../mw/response_logger');
+
+var enviroment = require('../mw/environment');
 
 
 /**
@@ -32,6 +34,8 @@ var responseLogger = require('../mw/response_logger.js');
  */
 var router = express.Router();
 router.use('/', requestLogger);
+router.use('/', enviroment);
+
 router.use('/', introRouter);
 router.use('/signin', signinRouter);
 router.use('/signout', signoutRouter);
