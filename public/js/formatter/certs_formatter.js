@@ -13,45 +13,34 @@
                 var level = record_data.rating;
 
                 if (!!level && opicLevel.includes(level)) {
-                    // $("#opic_cert img").attr("src", '/img/mycert/opic/cert/cert_' + level + '.jpg');
-                    // $("#opic_report img").attr("src", '/img/mycert/opic/report/report_' + level + '.jpg');
+                    $("#opic_cert img").attr("src", '/img/mycert/opic/cert/cert_' + level + '.jpg');
+                    $("#opic_report img").attr("src", '/img/mycert/opic/report/report_' + level + '.jpg');
 
-                    // $("#opic_cert img").attr("width", '100%');
-                    // $("#opic_report img").attr("width", '100%');
+                    $("#opic_cert img").attr("width", '100%');
+                    $("#opic_report img").attr("width", '100%');
 
-                    var url1 = '/img/mycert/opic/cert/cert_' + level + '.jpg';
-                    var url2 = '/img/mycert/opic/report/report_' + level + '.jpg';
+                    // var url1 = '/img/mycert/opic/cert/cert_' + level + '.jpg';
+                    // var url2 = '/img/mycert/opic/report/report_' + level + '.jpg';
 
-                    var width = $("#opic_cert").css("width").replace(/[^-\d\.]/g, '');;
-                    var height = width * 1.41;
+                    // var width = $("#opic_cert").css("width").replace(/[^-\d\.]/g, '');;
+                    // var height = width * 1.41;
 
-                    $("#opic_cert").attr("width", "100%")
-                        .css({
-                            "background-image": 'url(' + url1 + ')',
-                            "background-size": '100%',
-                            "background-repeat": 'no-repeat',
-                            "width": '100%',
-                            "height": height + "px"
-                        });
-                    // .css("background-image", 'url(' + url1 + ')')
-                    //     .css("background-size", '100%')
-                    //     .css("background-repeat", 'no-repeat')
-                    //     .css("width", '100%')
-                    //     .css("height", height + "px");
-
-                    $("#opic_report").attr("width", "100%")
-                        .css({
-                            "background-image": 'url(' + url2 + ')',
-                            "background-size": '100%',
-                            "background-repeat": 'no-repeat',
-                            "width": '100%',
-                            "height": height + "px"
-                        });
-                    // .css("background-image", 'url(' + url2 + ')')
-                    // .css("background-size", '100%')
-                    // .css("background-repeat", 'no-repeat')
-                    // .css("width", '100%')
-                    // .css("height", height + "px");
+                    // $("#opic_cert").attr("width", "100%")
+                    //     .css({
+                    //         "background-image": 'url(' + url1 + ')',
+                    //         "background-size": '100%',
+                    //         "background-repeat": 'no-repeat',
+                    //         "width": '100%',
+                    //         "height": height + "px"
+                    //     });
+                    // $("#opic_report").attr("width", "100%")
+                    //     .css({
+                    //         "background-image": 'url(' + url2 + ')',
+                    //         "background-size": '100%',
+                    //         "background-repeat": 'no-repeat',
+                    //         "width": '100%',
+                    //         "height": height + "px"
+                    //     });
                 }
 
                 var width = $("#opic_cert").css("width");
