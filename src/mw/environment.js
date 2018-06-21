@@ -10,8 +10,7 @@ var Environment = require('../core/environment');
  * @param {*} rest 
  * @param {*} next 
  */
-module.exports = (req, rest, next)=>{
+module.exports = (req, res, next)=>{
     res.locals.env = process.env.NODE_ENV;
-
     next();
 }
