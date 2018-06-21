@@ -1,3 +1,6 @@
+
+
+
 .qrcode {
     position: absolute;
     bottom: 0px;
@@ -173,12 +176,8 @@
         width: 100%;        
     }
 
-    .inner-container .mk-bg {
-        background-image: url(/img/mycert/mk/mk_bg.jpg);
-        background-size: 100%;
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 100%
+    .inner-container .mk-bg {        
+        width: 100%;        
     }
     
     #user-info-div img:nth-child(1) {
@@ -338,26 +337,15 @@
 
     .qr-container div:nth-child(1){
         position: absolute;
-        bottom: 15px;
-        right: 39px;
-        width: 50px;
-        height: 50px;
+        bottom: 100px;
+        right: -1px;
     }
 
-    .qr-container p:nth-child(2) {
+    .qr-container p:nth-child(n) {
         position: relative;
         font-size: 11px;
         left: 5px;
-        top: -99px;
-        color: #838383;
-        padding: 5px 5px 0px 40px;
-    }
-
-    .qr-container p:nth-child(3) {
-        position: relative;
-        font-size: 11px;
-        left: 5px;
-        top: -99px;
+        top: 0px;
         color: #838383;
         padding: 5px 5px 0px 40px;
     }
@@ -528,7 +516,7 @@
       }
 }
 
-@media (max-width:839px) {
+@media screen and (max-width:839px) {
     .main-body {
         font-size: 10px;
         padding: 5px 0px;
@@ -718,5 +706,200 @@
         left: 175px;
         top: 210px;
         width: 200px;
+    }
+}
+
+
+@media print {
+    .inner-container {        
+        width: 210mm;        
+        height: 297mm;      
+        padding: 10px 10px;  
+        border: 1px #888 dotted;
+    }
+
+    .inner-container img {
+        width: 100%;        
+    }
+
+    .qr-container div:nth-child(1){
+        position: absolute;
+        bottom: 80px;
+        right: 39px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .qr-container p:nth-child(2) {
+        position: relative;
+        font-size: 11px;
+        left: 5px;
+        top: -150px;
+        color: #838383;
+        padding: 5px 5px 0px 40px;
+    }
+
+    .qr-container p:nth-child(3) {
+        position: relative;
+        font-size: 11px;
+        left: 5px;
+        top: -150px;
+        color: #838383;
+        padding: 5px 5px 0px 40px;
+    }
+
+    #user-info-div img:nth-child(1) {
+        position: absolute;
+        left: 15px;
+        top: 215px;
+        width: 113px;
+        font-family: 'Nanum Myeongjo', serif;
+    }    
+
+    #user-info-div p:nth-child(2) {    
+        position: absolute;
+        left: 245px;
+        top: 250px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #user-info-div p:nth-child(3) {    
+        position: absolute;
+        left: 245px;
+        top: 250px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #user-info-div p:nth-child(4) {    
+        position: absolute;
+        left: 245px;
+        top: 285px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #user-info-div p:nth-child(5) {    
+        position: absolute;
+        left: 245px;
+        top: 320px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #main-score-info-div p:nth-child(1) {
+        position: absolute;
+        left: 465px;
+        top: 230px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #main-score-info-div p:nth-child(2) {
+        position: absolute;
+        left: 655px;
+        top: 230px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #main-score-info-div p:nth-child(3) {
+        position: absolute;
+        left: 465px;
+        top: 295px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #main-score-info-div p:nth-child(4) {
+        position: absolute;
+        left: 655px;
+        top: 295px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(1) {
+        position: absolute;
+        left: 230px;
+        top: 485px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(2) {
+        position: absolute;
+        left: 230px;
+        top: 530px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(3) {
+        position: absolute;
+        left: 230px;
+        top: 575px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(4) {
+        position: absolute;
+        left: 230px;
+        top: 620px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(5) {
+        position: absolute;
+        left: 230px;
+        top: 665px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(6) {
+        position: absolute;
+        left: 230px;
+        top: 710px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(7) {
+        position: absolute;
+        left: 340px;
+        top: 485px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(8) {
+        position: absolute;
+        left: 340px;
+        top: 530px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(9) {
+        position: absolute;
+        left: 340px;
+        top: 575px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(10) {
+        position: absolute;
+        left: 340px;
+        top: 620px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(11) {
+        position: absolute;
+        left: 340px;
+        top: 665px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+    
+    #detail-score-info-div p:nth-child(12) {
+        position: absolute;
+        left: 340px;
+        top: 710px;
+        font-family: 'Nanum Myeongjo', serif;
+    }
+
+    #chart-div img {
+        position: absolute;
+        left: 360px;
+        top: 478px;
+        width: 500px;
     }
 }

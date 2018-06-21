@@ -359,59 +359,73 @@ $(document).ready(function () {
     });
 
     $("#btn_print").click(function (event) {
-        // $(".header").hide();
-        // $("#footer").hide();
-        // $(".main-body-footer").hide();
-        // $(".qrcode").show();             
+        
+        $(".header").hide();        
+        $(".main-body-footer").hide();
+        $(".main-body-footer-decription").hide();
+        $(".qr-container").show();          
 
-        // const html = document.querySelector('html'); 
-        // const printContents = document.querySelector('.main-body').innerHTML;
-        // const printDiv = document.createElement("DIV");
-        // printDiv.className = "print-div";
+        const html = document.querySelector('html'); 
+        const printContents = document.querySelector('.outer-container').innerHTML;
+        const printDiv = document.createElement("DIV");
+        printDiv.className = "print-div";
 
-        // html.appendChild(printDiv);
-        // printDiv.innerHTML = printContents;
-        // document.body.style.display = 'none';
-        // console.log(html)
-        // window.print();
-        // document.body.style.display = 'block';
-        // printDiv.style.display = 'none';
+        html.appendChild(printDiv);
+        printDiv.innerHTML = printContents;
+        document.body.style.display = 'none';        
+        window.print();
+        document.body.style.display = 'block';
+        printDiv.style.display = 'none';
 
-        // $(".header").show();
-        // $("#footer").show();   
-        // $(".main-body-footer").show();            
-        // $(".qrcode").hide();              
+        $(".header").show();        
+        $(".main-body-footer").show();            
+        $(".main-body-footer-decription").show();            
+        $(".qr-container").hide();             
 
 
+        // $(".outer-container").printObject({           
+        //     header: "<h2> rezoome </h2>",           
+        //     footer: '#####',            
+        // });        
+        //$(".outer-container").printObject(); 
         
 
-        $(".qr-container").show();
-        var $childern = $(".outer-container >.inner-container");
+        // $(".qr-container").show();
+        // window.print();
+        //var $childern = $(".outer-container >.inner-container");
         //var $childern = $(".main-body >.outer-container");
 
 
-        $childern.each(function (idx, array) {
-            html2canvas($(this), { scale:3 }).then(canvas => {
-                    // var ctx = canvas.getContext('2d');
-                    // ctx.webkitImageSmoothingEnabled = false;
-                    // ctx.mozImageSmoothingEnabled = false;
-                    // ctx.imageSmoothingEnabled = false;                    
-                    var img = canvas.toDataURL("image/jpeg" , 2);
-                    $("#printcontent").prepend("<img class=certImg id=certImg" + idx + " width=98% src=" + img + ">");
+        // $childern.each(function (idx, array) {
+        //     html2canvas($(this), { scale:3 }).then(canvas => {
+        //             // var ctx = canvas.getContext('2d');
+        //             // ctx.webkitImageSmoothingEnabled = false;
+        //             // ctx.mozImageSmoothingEnabled = false;
+        //             // ctx.imageSmoothingEnabled = false;                    
+        //             var img = canvas.toDataURL("image/jpeg" , 2);
+        //             $("#printcontent").prepend("<img class=certImg id=certImg" + idx + " width=98% src=" + img + ">");
 
-                    if (idx === $childern.size()-1) {
-                        $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
+        //             if (idx === $childern.size()-1) {
+        //                 $.blockUI({ message: '<h1><img src="/img/common/ajax-loader.gif" /> 최신 레쥬메 AI 블록체인 인쇄모듈 준비중</h1>' });
                                                     
-                        setTimeout( function(){                                                                
-                            window.print();
-                            $.unblockUI();
-                            $('.certImg').remove();  
-                            $(".qr-container").hide();
-                        }, 3000);
-                    }
+        //                 setTimeout( function(){                                                                
+        //                     window.print();
+        //                     $.unblockUI();
+        //                     $('.certImg').remove();  
+        //                     $(".qr-container").hide();
+        //                 }, 3000);
+        //             }
                 
-            });            
-         });
+        //     });            
+        //  });
+        // $childern.each(function (idx, array) {
+        //     setTimeout( function(){                                                                
+        //         window.print();
+        //         $.unblockUI();
+        //         // $('.certImg').remove();  
+        //         $(".qr-container").hide();
+        //     }, 1000);
+        // });
 
     });
 });
