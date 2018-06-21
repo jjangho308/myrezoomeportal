@@ -76,26 +76,26 @@ $(document).ready(function () {
 
     $('#education-add-dialog .add-span').click(function () {
         console.log("#education-add-dialog .add-span clicked");
-        $("#major-div").append(` 
-            <div class="error-range major-div">
-                <div class="select-100">
-                    <select name="select-1">
-                            <option value="1">전공</option>
-                            <option value="2">부전공</option>
-                            <option value="3">복수전공</option>
-                    </select>
-                </div>
-                <div class="select-100">
-                    <select name="select-2">
-                            <option value="volvo">학사</option>
-                            <option value="saab">석사</option>
-                    </select>
-                </div>
+        $("#major-div").append(
+            '<div class="error-range major-div">' +
+            '<div class="select-100">' +
+            '<select name="select-1">' +
+            '<option value="1">전공</option>' +
+            '<option value="2">부전공</option>' +
+            '<option value="3">복수전공</option>' +
+            '</select>' +
+            '</div>' +
+            '<div class="select-100">' +
+            '<select name="select-2">' +
+            '<option value="volvo">학사</option>' +
+            '<option value="saab">석사</option>' +
+            '</select>' +
+            '</div>' +
 
-                <input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">
-                <img src="/img/myresume/close-white.svg"/>
-                <div class="error-message">전공을 입력해주세요.</div>
-            </div>`);
+            '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
+            '<img src="/img/myresume/close-white.svg"/>' +
+            '<div class="error-message">전공을 입력해주세요.</div>' +
+            '</div>');
         $("select").selectize();
     });
 
@@ -458,15 +458,15 @@ $(document).ready(function () {
                             modal = true;
                             var current_active = 0;
 
-                            $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
+                            $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
 
                             var functionId = setInterval(function () {
-                                $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#dadada");
+                                $('#cert-line-dialog #circle-' + current_active).css("background-color", "#dadada");
                                 current_active += 1;
                                 if (current_active > 5) {
                                     current_active = 0;
                                 }
-                                $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
+                                $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
                             }, 1000);
 
                             setTimeout(function () {
@@ -548,7 +548,7 @@ $(document).ready(function () {
             success: function (res) {
                 setSocket(res.mid);
                 clientsocket_listener();
-                setTimeout(() => {
+                setTimeout(function () {
                     $('.spec-body-loading').hide();
                     $('.spec-body-default').show();
                 }, 1500);
@@ -711,7 +711,7 @@ function request_agent() {
             setSocket(res.mid);
             clientsocket_listener();
             // loading css start
-            setTimeout(() => {
+            setTimeout(function(){
                 $('.spec-body-loading').hide();
                 $('.spec-body-default').show();
                 refreshview(null);
