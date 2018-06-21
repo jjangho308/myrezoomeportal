@@ -714,6 +714,10 @@
 
     /* -webkit-print-color-adjust: exact; */
 
+    .inner-container img {
+        width: 100%;        
+    }
+    
     html {
         background-color: white;         
     }   

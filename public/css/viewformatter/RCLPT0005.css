@@ -134,7 +134,10 @@
 
 
 @media print{
-
+    
+    .inner-container img {
+        width: 100%;        
+    }
     html{
         font-size:14px;
     }    
