@@ -429,17 +429,34 @@ function base64toHEX(base64) {
 
 
 function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
 
-    if (month.length < 2) {
-        month = '0' + month;
+    if(date.length == 8) {
+        //YYYYMMDD
+        var year = date.substring(0,4),
+            month = date.substring(4,6),
+            day = date.substring(6,8);
+        return [year, month, day].join('-');
     }
-    if (day.length < 2) {
-        day = '0' + day;
+    else if(date.length == 14) {
+        //YYYY / MM / DD
+        var year = date.substring(0,4),
+            month = date.substring(7,9),
+            day = date.substring(12,14);
+        return [year, month, day].join('-');
     }
+    else {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
 
-    return [year, month, day].join('-');
+        if (month.length < 2) {
+            month = '0' + month;
+        }
+        if (day.length < 2) {
+            day = '0' + day;
+        }
+
+        return [year, month, day].join('-');
+    }
 }
