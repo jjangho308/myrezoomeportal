@@ -263,17 +263,17 @@ $(document).ready(function () {
 
         var current_active = 0;
 
-        $(`#resumes-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
+        $('#resumes-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
 
         var mytimer = setInterval(function () {
-            $(`#resumes-line-dialog #circle-${current_active}`).css("background-color", "#dadada");
+            $('#resumes-line-dialog #circle-' + current_active).css("background-color", "#dadada");
             current_active += 1;
 
             if (current_active > 5) {
                 current_active = 0;
                 clearInterval(mytimer);
             }
-            $(`#resumes-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
+            $('#resumes-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
 
 
         }, 1000);

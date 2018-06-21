@@ -5,7 +5,7 @@
 ! function (_window) {
     var opicLevel = ['NL', 'NM', 'NH', 'IL', 'IM1', 'IM2', 'IM3', 'IH', 'AL'];
 
-    window.certformatter = {
+    _window.certformatter = {
 
         "RCLPT0005": function viewformatter(record_data) {
             // $(".outer-container").load("../../viewhtml/RCLPT0005.html", function () {
@@ -153,7 +153,7 @@
                 $('#cert-main-agent').text(main_agent_name);
 
                 //
-                record_data.scoreList.sort((a, b) => {
+                record_data.scoreList.sort(function (a, b) {
                     return a["year"] - b["year"] || a["semester"] - b["semester"];
                 });
 
@@ -223,7 +223,7 @@
 
                 $(".cert_doc_id").html("발급번호 : " + certId);
                 generateQRCode();
-            });            
+            });
         },
 
         "RCOGC0008": function viewformatter(record_data) {
@@ -235,7 +235,7 @@
                 $('#cert-owner-birth').text(record_data.registList[0].birth);
                 $('#cert-owner-uni').text(record_data.registList[0].univ_affiliation);
                 $('#cert-owner-uni-org-major').text(record_data.registList[0].univ_group);
-                $('#cert-owner-uni-major-name').text(record_data.registList[0].major_first);                
+                $('#cert-owner-uni-major-name').text(record_data.registList[0].major_first);
                 $('#cert-owner-uni-enter-date').text(record_data.registList[0].admission_date);
                 $('#cert-owner-uni-gredu-date').text(record_data.registList[0].change_date);
                 $('#cert-owner-uni-gredu-id').text("임의값");
@@ -243,7 +243,7 @@
                 var main_agent_name = record_data.univInfo.univ_name + " " + record_data.univInfo.cert_main_agent
                 $('#cert-main-agent-msg').text(record_data.univInfo.msg1);
                 $('#cert-main-agent').text(main_agent_name);
-                
+
                 $(".cert_doc_id").html("발급번호 : " + certId);
                 generateQRCode();
             });
@@ -258,7 +258,7 @@
                 $('#cert-owner-birth').text(record_data.registList[0].birth);
                 $('#cert-owner-uni').text(record_data.registList[0].univ_affiliation);
                 $('#cert-owner-uni-org-major').text(record_data.registList[0].univ_group);
-                $('#cert-owner-uni-major-name').text(record_data.registList[0].major_first);                
+                $('#cert-owner-uni-major-name').text(record_data.registList[0].major_first);
                 $('#cert-owner-uni-enter-date').text(record_data.registList[0].admission_date);
                 $('#cert-owner-uni-gredu-date').text(record_data.registList[0].change_date);
                 $('#cert-owner-uni-gredu-id').text("임의값");
@@ -270,7 +270,7 @@
                 $(".cert_doc_id").html("발급번호 : " + certId);
                 generateQRCode();
             });
-            
+
         },
 
         "RCOGC0011": function viewformatter(record_data) {
@@ -297,7 +297,7 @@
                 $('#cert-main-agent').text(main_agent_name);
 
                 //
-                record_data.scoreList.sort((a, b) => {
+                record_data.scoreList.sort(function(a, b) {
                     return a["year"] - b["year"] || a["semester"] - b["semester"];
                 });
 
@@ -365,7 +365,7 @@
                 $('.sungjuk_sector_' + sector).append(htmldiv);
                 $(".cert_doc_id").html("발급번호 : " + certId);
                 generateQRCode();
-            });            
+            });
         },
     };
 

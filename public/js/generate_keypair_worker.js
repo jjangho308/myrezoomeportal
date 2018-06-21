@@ -8,7 +8,7 @@
 window = {};
 
 onmessage = function generateRSAKeyPair(args) {
-    importScripts('/js/jsrsasign/jsrsasign-all-min.js');
+    importScripts('/js/libs/jsrsasign/jsrsasign-all-min.js');
     console.log('Generate RSA Key pair start');
     try {
         rsaKeypair = KEYUTIL.generateKeypair("RSA", 2048);

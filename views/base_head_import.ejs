@@ -16,42 +16,42 @@ UserModel render용 키 정보 :
     imgsrc : 프로필 사진 주소,
 }
 %>
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <link rel="stylesheet" href="/css/libs/animate.min.css">
-    <link rel="stylesheet" href="/css/libs/selectize.css">
-    <meta name="description" content="">
-    <link rel="stylesheet" href="/css/common<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.css">
-    <link rel="stylesheet" href="/css/libs/scrollbar.css">
-    <link rel="stylesheet" href="/css/mypage/main<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.css">
-    <link rel="stylesheet" href="/css/libs/awesome-bootstrap-checkbox.css" />
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <link rel="stylesheet" href="/css/libs/animate.min.css">
+        <link rel="stylesheet" href="/css/libs/selectize.css">
+        <meta name="description" content="">
+        <link rel="stylesheet" href="/css/common<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.css">
+        <link rel="stylesheet" href="/css/libs/scrollbar.css">
+        <link rel="stylesheet" href="/css/mypage/main<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.css">
+        <link rel="stylesheet" href="/css/libs/awesome-bootstrap-checkbox.css" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
 
-    <script src="/js/selectize.js"></script>
-    <!-- <link rel="stylesheet" href="/css/datepicker.css"> -->
-    <link rel="stylesheet" href="/css/libs/progressbar.css">
+        <script src="/js/libs/selectize.js"></script>
+        <!-- <link rel="stylesheet" href="/css/datepicker.css"> -->
+        <link rel="stylesheet" href="/css/libs/progressbar.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
-    <script src="/js/utils.js"></script>
-    <script src="/js/formatter/view_formatter.js"></script>
-    <script src="/js/formatter/record_change_formatter.js"></script>
-    <script src="/js/scrollbar.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
+        <script src="/js/utils<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.js"></script>
+        <script src="/js/formatter/view_formatter<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.js"></script>
+        <script src="/js/formatter/record_change_formatter.js"></script>
+        <script src="/js/libs/scrollbar.js"></script>
 
-    <script src="/js/common.js"></script>
-    <script src="/js/testinterface.js"></script>
+        <script src="/js/common<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.js"></script>
+        <script src="/js/testinterface<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-</head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    </head>

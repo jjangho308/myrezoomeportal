@@ -25,10 +25,10 @@ $(document).ready(function () {
 
             var current_active = 0;
 
-            $(`#circle-${current_active}`).css("background-color", "#4a90e2");
+            $('#circle-' + current_active).css("background-color", "#4a90e2");
 
             var mytimer = setInterval(function () {
-                $(`#circle-${current_active}`).css("background-color", "#dadada");
+                $('#circle-' + current_active).css("background-color", "#dadada");
                 current_active += 1;
 
                 if (current_active == 2) {
@@ -37,7 +37,7 @@ $(document).ready(function () {
                     certformatter[json_decrypted.subid](json_decrypted.data);
                     clearInterval(mytimer);
                 }
-                $(`#circle-${current_active}`).css("background-color", "#4a90e2");
+                $('#circle-' + current_active).css("background-color", "#4a90e2");
 
             }, 1000);
         }
@@ -46,27 +46,39 @@ $(document).ready(function () {
     }
 
     $("#btn_print").click(function (event) {
-        $(".header").hide();
-        $("#footer").hide();
-        $(".main-body-footer").hide();
-        $(".qrcode").show();
+        $("#btn_print").click(function (event) {
 
-        const html = document.querySelector('html');
-        const printContents = document.querySelector('.main-body').innerHTML;
-        const printDiv = document.createElement("DIV");
-        printDiv.className = "print-div";
+            $(".header").hide();
+            $(".main-body-footer").hide();
+            $(".main-body-footer-decription").hide();
+            $(".qr-container").show();
 
-        html.appendChild(printDiv);
-        printDiv.innerHTML = printContents;
-        document.body.style.display = 'none';
-        window.print();
-        document.body.style.display = 'block';
-        printDiv.style.display = 'none';
+            var html = document.querySelector('html');
+            var $childern = $(".outer-container");
+            var printContents = "";
 
-        $(".header").show();
-        $("#footer").show();
-        $(".main-body-footer").show();
-        $(".qrcode").hide();
+            $childern.each(function (idx, array) {
+                printContents += $(this).html();
+            });
+
+            // const printContents = document.querySelector('.outer-container').innerHTML;
+
+            var printDiv = document.createElement("DIV");
+            printDiv.className = "print-div";
+
+            html.appendChild(printDiv);
+            printDiv.innerHTML = printContents;
+            document.body.style.display = 'none';
+            window.print();
+            document.body.style.display = 'block';
+            printDiv.remove();
+
+            $(".header").show();
+            $(".main-body-footer").show();
+            $(".main-body-footer-decription").show();
+            $(".qr-container").hide();
+
+        });
     });
 
     $(".main-body-footer-right").click(function (event) {
@@ -175,10 +187,10 @@ function verify(passcode) {
 
         var current_active = 0;
 
-        $(`#circle-${current_active}`).css("background-color", "#4a90e2");
+        $('#circle-' + current_active).css("background-color", "#4a90e2");
 
         var mytimer = setInterval(function () {
-            $(`#circle-${current_active}`).css("background-color", "#dadada");
+            $('#circle-' + current_active).css("background-color", "#dadada");
             current_active += 1;
 
             if (current_active > 2) {
@@ -187,7 +199,7 @@ function verify(passcode) {
                 $("#cert-verify").css("display", "none");
                 $("#cert-viewer").css("display", "block");
             }
-            $(`#circle-${current_active}`).css("background-color", "#4a90e2");
+            $('#circle-' + current_active).css("background-color", "#4a90e2");
 
         }, 1000);
     } catch (exception) {
@@ -199,7 +211,7 @@ function verify(passcode) {
 }
 
 function setData(data) {
-    var verifyData = JSON.parse(data);    
+    var verifyData = JSON.parse(data);
     certdata = verifyData;
 
     certId = verifyData.certId;
