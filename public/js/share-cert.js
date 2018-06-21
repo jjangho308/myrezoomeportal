@@ -25,10 +25,10 @@ $(document).ready(function () {
 
             var current_active = 0;
 
-            $(`#circle-${current_active}`).css("background-color", "#4a90e2");
+            $('#circle-' + current_active).css("background-color", "#4a90e2");
 
             var mytimer = setInterval(function () {
-                $(`#circle-${current_active}`).css("background-color", "#dadada");
+                $('#circle-' + current_active).css("background-color", "#dadada");
                 current_active += 1;
 
                 if (current_active == 2) {
@@ -37,7 +37,7 @@ $(document).ready(function () {
                     certformatter[json_decrypted.subid](json_decrypted.data);
                     clearInterval(mytimer);
                 }
-                $(`#circle-${current_active}`).css("background-color", "#4a90e2");
+                $('#circle-' + current_active).css("background-color", "#4a90e2");
 
             }, 1000);
         }
@@ -51,9 +51,9 @@ $(document).ready(function () {
         $(".main-body-footer").hide();
         $(".qrcode").show();
 
-        const html = document.querySelector('html');
-        const printContents = document.querySelector('.main-body').innerHTML;
-        const printDiv = document.createElement("DIV");
+        var html = document.querySelector('html');
+        var printContents = document.querySelector('.main-body').innerHTML;
+        var printDiv = document.createElement("DIV");
         printDiv.className = "print-div";
 
         html.appendChild(printDiv);
@@ -175,10 +175,10 @@ function verify(passcode) {
 
         var current_active = 0;
 
-        $(`#circle-${current_active}`).css("background-color", "#4a90e2");
+        $('#circle-' + current_active).css("background-color", "#4a90e2");
 
         var mytimer = setInterval(function () {
-            $(`#circle-${current_active}`).css("background-color", "#dadada");
+            $('#circle-' + current_active).css("background-color", "#dadada");
             current_active += 1;
 
             if (current_active > 2) {
@@ -187,7 +187,7 @@ function verify(passcode) {
                 $("#cert-verify").css("display", "none");
                 $("#cert-viewer").css("display", "block");
             }
-            $(`#circle-${current_active}`).css("background-color", "#4a90e2");
+            $('#circle-' + current_active).css("background-color", "#4a90e2");
 
         }, 1000);
     } catch (exception) {
@@ -199,7 +199,7 @@ function verify(passcode) {
 }
 
 function setData(data) {
-    var verifyData = JSON.parse(data);    
+    var verifyData = JSON.parse(data);
     certdata = verifyData;
 
     certId = verifyData.certId;
