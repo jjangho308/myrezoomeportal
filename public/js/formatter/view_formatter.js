@@ -80,7 +80,7 @@
 
             if ($('#spec-body-RCOGC0009').length > 0) {
                 // 인하대 성적증명서가 이미 있다면
-                $('#edu-p-RCOGC0008').text(record.registList[0].course + ' / ' + record.registList[0].status);
+                $('#edu-p-RCOGC0008').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0008').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0008" class="spec-body">';
@@ -95,7 +95,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right">';
                 htmldiv = htmldiv + '<p>인하대학교</p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0008">' + record.registList[0].course + ' / ' + record.registList[0].status + '</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0008">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status + '</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0009"></p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
@@ -148,7 +148,7 @@
 
             if ($('#spec-body-RCOGC0011').length > 0) {
                 // 계명대 성적증명서가 이미 있다면
-                $('#edu-p-RCOGC0010').text(record.registList[0].course + ' / ' + record.registList[0].status);
+                $('#edu-p-RCOGC0010').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0010').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0010" class="spec-body">';
@@ -163,7 +163,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>계명대</p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0010">' + record.registList[0].course + ' / ' + record.registList[0].status + '</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0010">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status + '</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0011">' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
@@ -213,7 +213,7 @@
             // 경기대 졸업증명서
             if ($('#spec-body-RCOGC0013').length > 0) {
                 // 경기대 성적증명서가 이미 있다면
-                $('#edu-p-RCOGC0012').text(record.registList[0].course + ' / ' + record.registList[0].status);
+                $('#edu-p-RCOGC0012').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0012').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0012" class="spec-body">';
@@ -228,7 +228,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>경기대</p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0012">' + record.registList[0].course + ' / ' + record.registList[0].status + '</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0012">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status + '</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
@@ -278,7 +278,7 @@
             // 중앙대 졸업증명서
             if ($('#spec-body-RCOGC0015').length > 0) {
                 // 중앙대 성적증명서가 이미 있다면
-                $('#edu-p-RCOGC0014').text(record.registList[0].course + ' / ' + record.registList[0].status);
+                $('#edu-p-RCOGC0014').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0014').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0014" class="spec-body">';
@@ -293,7 +293,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>중앙대</p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0014">' + record.registList[0].course + ' / ' + record.registList[0].status + '</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0014">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status + '</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0015">' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
