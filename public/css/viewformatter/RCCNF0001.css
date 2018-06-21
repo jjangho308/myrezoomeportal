@@ -717,15 +717,15 @@
     .inner-container img {
         width: 100%;        
     }
-    
+
     html {
         background-color: white;         
     }   
 
     .qr-container div:nth-child(1){
         position: absolute;
-        bottom: 110px;
-        right: 45px;
+        bottom: 100px;
+        right: 10px;
     }
 
     .qr-container p:nth-child(n) {
