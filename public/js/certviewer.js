@@ -5,7 +5,7 @@
     var certId;
     var nexledgerErr = 0;
 
-    $(document).ready(function () {
+    $(_win.document).ready(function () {
 
         //common
         client_token = getCookie("JWT");
@@ -53,8 +53,6 @@
         $('.email-send-div  .expire-period-label').click(function () {
             $('.email-send-div  .period-div').show();
         });
-
-
 
         $(".expire-period").datepicker();
 
