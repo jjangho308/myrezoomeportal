@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // This snippet set default environment to 'development'
-process.env.NODE_ENV = process.env.NODE_ENV || 'local';
+process.env.NODE_ENV = process.env.NODE_ENV || 'stage';
 
 /**
  * Module dependencies.
@@ -9,7 +9,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'local';
 var app = require('../src/app');
 var http = require('http');
 var debug = require('debug')('rezoome:server');
-var socketHandler = require('../src/core/socket_handler');
+var socketioHandler = require('../src/core/socket_handler');
 var SocketIO = require('socket.io');
 
 /**
@@ -33,7 +33,7 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 var io = SocketIO(server);
-io.on('connection', socketHandler)
+io.on('connection', socketioHandler)
 
 /**
  * Normalize a port into a number, string, or false.

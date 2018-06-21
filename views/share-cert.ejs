@@ -1,8 +1,8 @@
 <%- include('base_head_import') -%>
 <head>
-    <link rel="stylesheet" href="/css/mypage/certviewer.css">
+    <link rel="stylesheet" href="/css/mypage/certviewer<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.css">
     <!-- <link rel="stylesheet" href="/css/share-cert-viewer.css"> -->
-    <link rel="stylesheet" href="/css/share-cert.css"> 
+    <link rel="stylesheet" href="/css/share-cert<%= locals.env === 'development' || locals.env === 'local' ? '' : '.min' %>.css"> 
 
     <script type="text/javascript" src="/js/crypto-js/crypto-js.js"></script>
     <script src="../js/jquery-qrcode-0.14.0.min.js"></script>

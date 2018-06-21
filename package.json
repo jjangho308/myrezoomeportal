@@ -6,7 +6,7 @@
     "start": "nodemon --delay 2 ./bin/www",
     "svr1" : "nodemon --delay 2 ./bin/www svr1",
     "svr2" : "nodemon --delay 2 ./bin/www svr2",
-    "debug": "nodemon --inspect-brk=0.0.0.0:9229 ./bin/www",
+    "debug": "nodemon --delay 2 --inspect-brk=0.0.0.0:9229 ./bin/www",
     "test": "mocha --require babel-core/register ./src/test/*.test.js",
     "//start-with-babel": "nodemon --exec npm run babel-node -- ./bin/www",
     "//build-with-babel": "./node_modules/.bin/babel ./src/**/*.js --out-dir dist --source-maps",
