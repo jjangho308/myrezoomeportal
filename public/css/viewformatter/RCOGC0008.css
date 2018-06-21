@@ -197,9 +197,18 @@ table {
     padding: 5px 5px 0px 40px;
 }
 
-
-@media screen and (max-width: 1000px){
-
+@media screen and (max-width:839px) {
+    .inner-container {
+        -webkit-transform: scale(0.43);
+        position: relative;
+        top: -337px;
+        left: -218px;
+    } 
+    
+    .outer-container {
+        width: 360px;
+        height: calc(360px*1.41);        
+    }
 }
 
 
@@ -227,8 +236,8 @@ table {
         position: absolute;
         bottom: -90px;
         right: 0px;
-        width: 75px;
-        height: 75px;
+        width: 100px;
+        height: 100px;
     }
 
     .qr-container p:nth-child(n) {
