@@ -617,7 +617,12 @@ function change_default_cert(subid) {
                 htmldiv = htmldiv + '<label for=change_cert_' + record.txid + '></label>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</td>';
-                htmldiv = htmldiv + '<td>' + formatDate(jsonData.ctestday) + '</td>';
+                if(jsonData.ctestday != undefined) {
+                    htmldiv = htmldiv + '<td>' + formatDate(jsonData.ctestday) + '</td>';
+                }
+                else if(jsonData.ea_exam_time != undefined) {
+                    htmldiv = htmldiv + '<td>' + formatDate(jsonData.ea_exam_time) + '</td>';
+                }
                 htmldiv = htmldiv + '<td>' + jsonData.userid + '</td>';
                 htmldiv = htmldiv + '<td>' + jsonData.name + '</td>';
                 htmldiv = htmldiv + '<td>' + dftYn + '</td>';
