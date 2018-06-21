@@ -741,7 +741,7 @@ function refreshview(records) {
                     jsonData.subid = subidTmp;
 
                     if(recordList[subidTmp] == undefined) {
-                        jsonData.count = 0;
+                        jsonData.count = 1;
                     }
                     else {
                         jsonData.count = recordList[subidTmp].count + 1;
@@ -755,7 +755,7 @@ function refreshview(records) {
                     jsonData.subid = subidTmp;
 
                     if(recordList[subidTmp] == undefined) {
-                        jsonData.count = 0;
+                        jsonData.count = 1;
                     }
                     else {
                         jsonData.count = recordList[subidTmp].count + 1;
@@ -763,6 +763,14 @@ function refreshview(records) {
 
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
+                }
+                else {
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 1;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
                 }
             } catch (exception) {
                 continue;
@@ -784,7 +792,7 @@ function refreshview(records) {
                     jsonData.subid = subidTmp;
 
                     if(recordList[subidTmp] == undefined) {
-                        jsonData.count = 0;
+                        jsonData.count = 1;
                     }
                     else {
                         jsonData.count = recordList[subidTmp].count + 1;
@@ -798,14 +806,22 @@ function refreshview(records) {
                     jsonData.subid = subidTmp;
 
                     if(recordList[subidTmp] == undefined) {
-                        jsonData.count = 0;
+                        jsonData.count = 1;
                     }
                     else {
                         jsonData.count = recordList[subidTmp].count + 1;
                     }
-                    
+
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
+                }
+                else {
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 1;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
                 }
             } catch (exception) {
                 console.error(JSON.stringify(exception));
