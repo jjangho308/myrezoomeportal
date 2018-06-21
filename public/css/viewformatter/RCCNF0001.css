@@ -714,7 +714,11 @@
 
     /* -webkit-print-color-adjust: exact; */
 
-    .inner-container {        
+    html {
+        background-color: white;         
+    }   
+
+    .print-div {
         width: 210mm;        
         height: 297mm;      
         padding: 10px 10px;  
@@ -727,8 +731,8 @@
 
     .qr-container div:nth-child(1){
         position: absolute;
-        bottom: 100px;
-        right: 15px;
+        bottom: 110px;
+        right: 45px;
     }
 
     .qr-container p:nth-child(n) {
