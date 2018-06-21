@@ -739,14 +739,38 @@ function refreshview(records) {
                     var jsonData = record.data;
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
+
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 1;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
+
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
                 } else if (subid != subidTmp) {
                     var jsonData = record.data;
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
+
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 1;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
+
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
+                }
+                else {
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 1;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
                 }
             } catch (exception) {
                 continue;
@@ -766,14 +790,38 @@ function refreshview(records) {
                     var jsonData = record.data;
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
+
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 1;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
+
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
                 } else if (subid != subidTmp) {
                     var jsonData = record.data;
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
+
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 1;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
+
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
+                }
+                else {
+                    if(recordList[subidTmp] == undefined) {
+                        jsonData.count = 1;
+                    }
+                    else {
+                        jsonData.count = recordList[subidTmp].count + 1;
+                    }
                 }
             } catch (exception) {
                 console.error(JSON.stringify(exception));

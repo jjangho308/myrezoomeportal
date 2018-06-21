@@ -625,6 +625,23 @@ padding:22px 10px 17px;
     animation: loading 1s linear infinite forwards
 }
 
+.spec-body-count {
+  width: 30px;
+  height: 15px;
+  border-radius: 3px;
+  background-color: #babecd;
+  margin: 0px 0px 0px 10px;
+  padding: 1px 10px 1px 10px;
+  font-size: 9px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
 @keyframes loading {
     0% {
         background-position-x: -800px;
