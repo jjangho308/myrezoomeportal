@@ -107,6 +107,9 @@ $(document).ready(function () {
                 scrollTop: ($('.main-body-footer').offset().top)
             }, 600);
 
+            var reqtxid = $('.main-body-footer-6').text();
+            nexledgerInfoView(reqtxid);
+
             setTimeout(function () {
 
                 $('.footer-verify-1 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
@@ -158,60 +161,11 @@ $(document).ready(function () {
                         });
 
                         $('#txinfoget-bt').click(function(event){
-
                             $("#nexledger-txid-info-dialog").css('display','block');
-                            var reqtxid = $('.main-body-footer-6').text();
 
-                            $.ajax({
-                                type: 'POST',
-                                url: '/nexledger/get_txinfo',
-                                // headers: {
-                                //     'Authorization': client_authorization
-                                // },
-                                contentType: 'application/json',
-                                data: JSON.stringify({
-                                    //uId: 'SearchRecord',
-                                    //sId: '',
-                                    txid: reqtxid
-                                }),
-                                error: function (jqXhr, status, error) {
-                                    console.error('Cert check error : ' + error);
-                                    console.error(jqXhr.responseText);
-                                },
-                                success: function (res2) {
-                                    console.log(res2);
-                                    $("#tx_id").text(reqtxid);
-                                    //$("#fromaddress").text(res2.result.fromaddress);
-
-                                    var tempstr = '';
-                                    for(var i=0;i < res2.result.fromaddress.length; i++) {
-                                        tempstr = tempstr + '<p>' + res2.result.fromaddress[i] + '</p>';
-                                    }
-                                    $("#fromaddress").html(tempstr);
-
-                                    tempstr = '';
-                                    for(var i=0;i < res2.result.toaddress.length; i++) {
-                                        tempstr = tempstr + '<p>' + res2.result.toaddress[i] + '</p>';
-                                    }
-                                    $("#toAddress").html(tempstr);
-
-                                    $("#total_volume").text(res2.result.total_volume);
-                                    $("#total_output").text(res2.result.output);
-                                    $("#txsize").text(res2.result.txid);
-                                    
-                                    tempstr = '';
-                                    for(var i=0;i < res2.result.input_script.length; i++) {
-                                        tempstr = tempstr + '<p>' + res2.result.input_script[i] + '</p>';
-                                    }
-                                    $("#input_script").html(tempstr);
-                                    
-                                    tempstr = '';
-                                    for(var i=0;i < res2.result.output_script.length; i++) {
-                                        tempstr = tempstr + '<p>' + res2.result.output_script[i] + '</p>';
-                                    }
-                                    $("#output_script").html(tempstr);
-                                }                                
-                            });
+                            var dislogoffettop = $("#txinfoget-bt").offset().top - $("#nexledger-txid-info-dialog").height();
+                            var dislogoffetleft = $("#txinfoget-bt").offset().left - $("#nexledger-txid-info-dialog").width();
+                            $("#nexledger-txid-info-dialog").css({'left':dislogoffetleft+'px','top':dislogoffettop+'px'});
                         });
 
                     }, 1000);
@@ -429,6 +383,66 @@ $(document).ready(function () {
 
     });
 });
+
+function nexledgerInfoView(reqtxid) {
+    $.ajax({
+        type: 'POST',
+        url: '/nexledger/get_txinfo',
+        // headers: {
+        //     'Authorization': client_authorization
+        // },
+        contentType: 'application/json',
+        data: JSON.stringify({
+            //uId: 'SearchRecord',
+            //sId: '',
+            txid: reqtxid
+        }),
+        error: function (jqXhr, status, error) {
+            console.error('Cert check error : ' + error);
+            console.error(jqXhr.responseText);
+        },
+        success: function (res2) {
+            console.log(res2);
+            $("#tx_id").text(reqtxid);
+            //$("#fromaddress").text(res2.result.fromaddress);
+
+            var tempstr = '';
+            for(var i=0;i < res2.result.fromaddress.length; i++) {
+                tempstr = tempstr + res2.result.fromaddress[i] + '<br>';
+            }
+            $("#fromaddress").html(tempstr);
+
+            tempstr = '';
+            for(var i=0;i < res2.result.toaddress.length; i++) {
+                tempstr = tempstr + res2.result.toaddress[i] + '<br>';
+            }
+            $("#toAddress").html(tempstr);
+
+            $("#total_volume").text(res2.result.total_volume);
+            $("#total_output").text(res2.result.output);
+            $("#txsize").text(res2.result.txsize + " byte");
+            
+            tempstr = '';
+            for(var i=0;i < res2.result.input_script.length; i++) {
+                tempstr = tempstr + res2.result.input_script[i] + '<br>';
+            }
+            $("#input_script").html(tempstr);
+            $("#input_script").css("height","175px");
+            
+            tempstr = '';
+            for(var i=0;i < res2.result.output_script.length; i++) {
+                tempstr = tempstr + res2.result.output_script[i] + '<br>';
+            }
+            $("#output_script").html(tempstr);
+            $("#output_script").css("height","200px");
+
+            $(".nexledger-txid-info-dialog-close").click(function(event){
+                $("#nexledger-txid-info-dialog").css("display","none");
+            });
+            
+        }                                
+    });
+}
 
 function summitform() {
     var cert_id = window.location.href.split('/')[4];
