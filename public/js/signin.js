@@ -49,10 +49,8 @@ $(document).ready(function () {
             error: function (jqXhr, status, error) {
                 console.error(jqXhr.responseText);
 
-                var error = jqXhr.responseJSON.err || {
-                    code: 1,
-                    msg: '알 수 없는 오류 발생'
-                };
+                var error = jqXhr.responseJSON.err;
+                error.msg = error.msg || '알 수 없는 오류 발생';
                 $("input").css("border", "solid 1px #f59188");
                 $(".error-message").html(error.msg);
                 $(".error-message").show();
