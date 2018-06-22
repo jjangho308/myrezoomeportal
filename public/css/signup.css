@@ -38,11 +38,11 @@ li a {
     color: #ffffff;
 }
 
-
 #home_icon {
-    width: 158px;
-    height: 18px;
+    width: 193px;
+    height: 30px;
     object-fit: contain;
+    margin-top: -10px;
 }
 
 .grid {
