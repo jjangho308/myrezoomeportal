@@ -164,6 +164,10 @@ table {
         top:   -12px;
         text-align: center;
         -webkit-transform: scale(0.8);
+
+        font-family: 'Nanum Myeongjo';
+        font-size: 12px;
+        letter-spacing: 10px;
     }    
     .personinfo_outter{
         width:450px;
@@ -188,21 +192,31 @@ table {
         position: relative;
         left:   5px;
         top : -18px;        
+
+        font-family: 'Nanum Myeongjo';
+        font-size: 10px;
+        letter-spacing: 10px;
     }
 
     .cert-reference-default{
         -webkit-transform: scale(0.9);
         position: relative;
-        left:   76px;
-        top : -19px;        
+        left:  40px;
+        top : -10px;  
+        
+        font-family: 'Nanum Myeongjo';
+        font-size: 10px;
+        letter-spacing: 10px;
     }
 
     .stamp{
         -webkit-transform: scale(0.3);
         position: relative;
-        left:   -61px;
-        top : -19px;   
+        left:   -79px;
+        top : -25px;   
     }
+
+/**/
 
 
 }
