@@ -9,168 +9,206 @@ table {
 }
 
 /*.inner-container&.stamp 공통이나, 성적증명서 용으로 두개 활용 시작 */
-
-.inner-container{
-    margin: auto;
-    position: relative;
-    border: 2px solid #666666;
-    width: 95%;
-    height: 90%;
-}
-
-.stamp{
-    margin-left: -95px;
-    margin-top: -25px;
-    width: 100px;
-    height: 100px;
-}
-
-/* 종료 */
-.personinfo_outter{
-    display: flex;
-    font-size: 75%;
-}
-.cert_doc_id {font-size: 11px;font-weight: 500;padding: 15px 0px 3px 45px;color: #838383;}
-
-.cert_title {
-    width:100%;
-    text-align: center;
-    /* width: 100%; */
-    text-align: center;
-    font-family: 'Nanum Myeongjo';
-    font-size: 25px;
-    font-weight: bold;
-    /* margin-top: 10%; */
-    letter-spacing: 25px;
-}
-
-.cert-main-agent-msg{text-align: center;margin-top: 72px;font-family: 'nanum myeongjo';letter-spacing: 10px;font-weight: bold;font-size: 20px;}
-.sector_col_name {
-    border-bottom: 1px solid black;
-}
-
-.sungjuk_sector_1 {
-    border: 0px;
-}
-
-.sungjuk_sector_2 {
-    border: 0px;
-}
-
-.sungjuk_sector_3 {
-    border: 0px;
-}
-
-.sungjuk_sector_1_div {
-    border: 1px solid black;
-    height: 100%;
-    border-left:0px;
-}
-
-.sungjuk_sector_2_div {
-    border: 1px solid black;
-    height: 100%;
-    border-left:0px;
-}
-
-.sungjuk_sector_3_div {
-    border: 1px solid black;
-    height: 100%;
-    border-left:0px;
-    border-right:0px;
-}
-
-.cert-reference-default {
-    font-family: 'Nanum Myeongjo';
-    font-size: 34px;
-    font-weight: bold;
-    letter-spacing: 30px;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    text-align: center;
-    /* z-index: 1; */
-    margin: 50px;
-    left: 6%;
-}
-
-.cert-footer-default {
-    position: relative;
-    font-family: 'Nanum Myeongjo';
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 10px;
-    text-align: center;
-    margin: 50px 0px 0px 0px;
-    width: 100%;
-}
-
-.persoinfodiv1 {
-    border: 1px solid black;
-    border-left: 0px;
-    border-bottom:0px;
-}
-
-.persoinfodiv2 {
-    border: 1px solid black;
-    border-left: 0px;
-    border-bottom:0px;
-}
-
-.persoinfodiv3 {
-    border: 1px solid black;
-    border-left: 0px;
-    border-right: 0px;
-    border-bottom:0px;
-}
-
-.personinfo_name {
-    width:15%;
-    text-align:right;
-    letter-spacing: 1.5px;
-}
-
-.qr-container div:nth-child(1){
-    position: absolute;
-    bottom: -55px;
-    right: 39px;
-    width: 50px;
-    height: 50px;
-}
-
-.qr-container p:nth-child(2) {
-    position: relative;
-    font-size: 11px;
-    left: 5px;
-    top: -30px;
-    color: #838383;
-    padding: 5px 5px 0px 40px;
-}
-
-.qr-container p:nth-child(3) {
-    position: relative;
-    font-size: 11px;
-    left: 5px;
-    top: -30px;
-    color: #838383;
-    padding: 5px 5px 0px 40px;
-}
-
-@media screen and (max-width: 1000px){
-    .personinfo_outter {
-        font-size: 65%;
-    }
-
+@media screen and (min-width:840px) {
     .inner-container{
-        width: 550px;
-        height: 1000px;
-        margin: 20px 15px 52px 15px;
-        background: white;
-        font-size:60%;
+        margin: auto;
+        position: relative;
+        border: 2px solid #666666;
+        width: 95%;
+        height: 90%;
+    }
+
+    .stamp{
+        margin-left: -95px;
+        margin-top: -25px;
+        width: 100px;
+        height: 100px;
+    }
+
+    /* 종료 */
+    .personinfo_outter{
+        display: flex;
+        font-size: 75%;
+    }
+    .cert_doc_id {font-size: 11px;font-weight: 500;padding: 15px 0px 3px 45px;color: #838383;}
+
+    .cert_title {
+        width:100%;
+        text-align: center;
+        /* width: 100%; */
+        text-align: center;
+        font-family: 'Nanum Myeongjo';
+        font-size: 25px;
+        font-weight: bold;
+        /* margin-top: 10%; */
+        letter-spacing: 25px;
+    }
+
+    .cert-main-agent-msg{text-align: center;margin-top: 72px;font-family: 'nanum myeongjo';letter-spacing: 10px;font-weight: bold;font-size: 20px;}
+    
+    .sector_col_name {
+        border-bottom: 1px solid black;
+    }
+    
+
+    .sungjuk_sector_1_div {
+        border: 1px solid black;
+        height: 100%;
+        border-left:0px;
+    }
+
+    .sungjuk_sector_2_div {
+        border: 1px solid black;
+        height: 100%;
+        border-left:0px;
+    }
+
+    .sungjuk_sector_3_div {
+        border: 1px solid black;
+        height: 100%;
+        border-left:0px;
+        border-right:0px;
+    }
+
+    .cert-reference-default {
+        font-family: 'Nanum Myeongjo';
+        font-size: 34px;
+        font-weight: bold;
+        letter-spacing: 30px;
+        text-align: center;
+        position: relative;
+        width: 100%;
+        text-align: center;
+        /* z-index: 1; */
+        margin: 50px;
+        left: 6%;
+    }
+
+    .cert-footer-default {
+        position: relative;
+        font-family: 'Nanum Myeongjo';
+        font-size: 20px;
+        font-weight: bold;
+        letter-spacing: 10px;
+        text-align: center;
+        margin: 50px 0px 0px 0px;
+        width: 100%;
+    }
+
+    .persoinfodiv1 {
+        border: 1px solid black;
+        border-left: 0px;
+        border-bottom:0px;
+    }
+
+    .persoinfodiv2 {
+        border: 1px solid black;
+        border-left: 0px;
+        border-bottom:0px;
+    }
+
+    .persoinfodiv3 {
+        border: 1px solid black;
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom:0px;
+    }
+
+    .personinfo_name {
+        width:15%;
+        text-align:right;
+        letter-spacing: 1.5px;
+    }
+
+    .qr-container div:nth-child(1){
+        position: absolute;
+        bottom: -55px;
+        right: 39px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .qr-container p:nth-child(2) {
+        position: relative;
+        font-size: 11px;
+        left: 5px;
+        top: -30px;
+        color: #838383;
+        padding: 5px 5px 0px 40px;
+    }
+
+    .qr-container p:nth-child(3) {
+        position: relative;
+        font-size: 11px;
+        left: 5px;
+        top: -30px;
+        color: #838383;
+        padding: 5px 5px 0px 40px;
     }
 }
 
-@media print{
+@media screen and (max-width: 839px){
+
+    .inner-container {
+        font-size: 12px;
+        top: -26px;
+    }
+
+    .cert_doc_id{
+        position: relative;
+        left:   -103px;
+        -webkit-transform: scale(0.4);
+    }
+    .cert_title{
+        position: relative;
+        top:   -12px;
+        text-align: center;
+        -webkit-transform: scale(0.8);
+    }    
+    .personinfo_outter{
+        width:450px;
+        position: relative;
+        left:   -39px;
+        top:-21px;
+        -webkit-transform: scale(0.8);
+    }    
+
+    .sungjuk_outer{
+        width:600px;        
+        height: 508px;
+        -webkit-transform: scale(0.58);
+        position: relative;
+        left:   -120px;
+        top : -58px;
+        
+    }
+
+    .cert-main-agent-msg{
+        -webkit-transform: scale(0.6);
+        position: relative;
+        left:   5px;
+        top : -18px;        
+    }
+
+    .cert-reference-default{
+        -webkit-transform: scale(0.9);
+        position: relative;
+        left:   76px;
+        top : -19px;        
+    }
+
+    .stamp{
+        -webkit-transform: scale(0.3);
+        position: relative;
+        left:   -61px;
+        top : -19px;   
+    }
+
+
+}
+
+
+@media print and (min-width:840px){
     .qr-container div:nth-child(1){
         position: absolute;
         bottom: -85px;
@@ -187,4 +225,145 @@ table {
         color: #838383;
         padding: 5px 5px 0px 40px;
     }
+}
+
+
+@media print{
+
+    .inner-container {
+        -webkit-transform: scale(1.2);
+        position: relative;        
+        top : 170px;   
+    }
+
+    .cert_doc_id{
+        position: relative;
+        left:   -70px;
+        -webkit-transform: scale(0.8);
+    }
+    .cert_title{
+        position: relative;
+        top:   20px;
+        text-align: center;
+        -webkit-transform: scale(1.2);
+
+        font-family: 'Nanum Myeongjo';
+        font-size: 25px;
+        letter-spacing: 20px;
+    }    
+
+    .personinfo_outter{
+        position: relative;
+        top:   50px;
+        text-align: center;
+    }    
+
+    .sungjuk_outer{
+        position: relative;
+        top:   50px;
+        /* text-align: center; */
+    }
+
+    
+    .persoinfodiv1 {
+        border: 1px solid black;
+        /* border-left: 0px; */
+        border-bottom:0px;
+    }
+
+    .persoinfodiv2 {
+        border: 1px solid black;
+        border-left: 0px;
+        border-bottom:0px;
+    }
+    .persoinfodiv3 {
+        border: 1px solid black;
+        border-left: 0px;
+        border-bottom:0px;
+    }
+
+    .sector_col_name {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    .sungjuk_sector_1_div {
+        border: 1px solid black;
+        height: 100%;
+        border-top:0px;
+        /* border-bottom:0px; */
+        /* border-left:0px; */
+    }
+
+    .sungjuk_sector_2_div {
+        border: 1px solid black;
+        height: 100%;
+        border-left:0px;
+        border-top:0px;
+    }
+
+    .sungjuk_sector_3_div {
+        border: 1px solid black;
+        height: 100%;
+        border-left:0px;
+        border-top:0px;
+        /* border-right:0px; */
+    }
+
+
+
+
+    .personinfo_name{
+        text-align: right;
+    }
+
+    .cert-main-agent-msg{
+        font-family: 'Nanum Myeongjo';
+        font-size: 15px;
+        font-weight: bold;
+        letter-spacing: 10px;
+
+        position: relative;
+        top : 40px;
+        
+    }
+    .cert-reference-default{        
+        -webkit-transform: scale(2);
+        position: relative;
+        left:   450px;
+        top : 120px;    
+        
+        font-family: 'Nanum Myeongjo';
+        font-size: 15px;
+        font-weight: bold;
+        letter-spacing: 15px;
+    }
+
+    .stamp{
+        -webkit-transform: scale(0.5);
+        position: relative;
+        left:  -85px;
+        top : -18px;       }
+
+    .qr-container div:nth-child(1){
+        
+        position: absolute;
+        bottom: -85px;
+        right: 0px;
+        width:75px;
+        height: 75px;
+    }
+
+    .qr-container p:nth-child(n) {
+        -webkit-transform: scale(0.8);
+        position: relative;
+        font-size: 11px;
+        left: -120px;
+        top: 150px;
+        color: #838383;
+        padding: 5px 5px 0px 40px;
+
+    }
+
+
 }
