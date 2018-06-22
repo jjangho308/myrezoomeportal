@@ -182,7 +182,7 @@ table {
 
 .qr-container div:nth-child(1){
     position: absolute;
-    bottom: -57px;
+    bottom: -110px;;
     right: 25px;
     width: 75px;
     height: 75px;
@@ -197,11 +197,19 @@ table {
     padding: 5px 5px 0px 40px;
 }
 
-
-@media screen and (max-width: 1000px){
-
+@media screen and (max-width:839px) {
+    .inner-container {
+        -webkit-transform: scale(0.43);
+        position: relative;
+        top: -337px;
+        left: -218px;
+    } 
+    
+    .outer-container {
+        width: 360px;
+        height: calc(360px*1.41);        
+    }
 }
-
 
 @media print {
 
@@ -218,17 +226,17 @@ table {
 
     .stamp {
         margin-left: -95px;
-        margin-top: -20px;
+        margin-top: -20px; 
         width: 100px;
         height: 100px;
     }
 
     .qr-container div:nth-child(1){
         position: absolute;
-        bottom: -90px;
+        bottom: -110px;
         right: 0px;
-        width: 75px;
-        height: 75px;
+        width: 100px;
+        height: 100px;
     }
 
     .qr-container p:nth-child(n) {
@@ -239,6 +247,8 @@ table {
         color: #838383;
         padding: 5px 5px 0px 40px;
     }
+
+   
 
   
 }

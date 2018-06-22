@@ -2,8 +2,8 @@
     <%- include('base_all_dialog') -%>
 
         <head>
-            <script type="text/javascript" src="js/crypto-js/crypto-js.js"></script>
-            <script src="js/jsrsasign/jsrsasign-all-min.js"></script>
+            <script type="text/javascript" src="js/libs/crypto-js/crypto-js.js"></script>
+            <script src="js/libs/jsrsasign/jsrsasign-all-min.js"></script>
             <script src="js/utils.js"></script>
             <script src="js/signin.js"></script>
             <link rel="stylesheet" href="css/navbar-default.css">
@@ -18,22 +18,22 @@
                 <div id="signin_div" class="login-container">
                     <%if (!!locals.url) { %>
                         <p align="center">로그인이 필요한 서비스입니다.</p>
-                    <% } %>
-                    <p>이메일</p>
-                    <input id="signin_id" type="email" placeholder="이메일을 입력해주세요." value="test@naver.com">
+                        <% } %>
+                            <p>이메일</p>
+                            <input id="signin_id" type="email" placeholder="이메일을 입력해주세요." <%= locals.test ? 'value=test@naver.com' : ''%>>
 
-                    <p>비밀번호</p>
-                    <input id="signin_pw" type="password" placeholder="비밀번호를 입력해주세요." value="123">
-                    <div class="error-message">ID또는 비밀번호가 잘못 입력되었습니다.</div>
+                            <p>비밀번호</p>
+                            <input id="signin_pw" type="password" placeholder="비밀번호를 입력해주세요." <%= locals.test ? 'value=123' : ''%>>
+                            <div class="error-message">ID또는 비밀번호가 잘못 입력되었습니다.</div>
 
-                    <button id="btn_signin" class="login-button">로그인</button>
+                            <button id="btn_signin" class="login-button">로그인</button>
 
-                    <div class="signup">
-                        <a href="/signup">회원가입</a>
-                    </div>
-                    <div class="find-password-div">
-                        <a href="#find-password-dialog" rel="modal:open">비밀번호 찾기</a>
-                    </div>
+                            <div class="signup">
+                                <a href="/signup">회원가입</a>
+                            </div>
+                            <div class="find-password-div">
+                                <a href="#find-password-dialog" rel="modal:open">비밀번호 찾기</a>
+                            </div>
                 </div>
 
 

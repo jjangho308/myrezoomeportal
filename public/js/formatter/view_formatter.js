@@ -19,7 +19,7 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>OPIC</p>';
-            htmldiv = htmldiv + '<p>' + record.testtype + '</p>';
+            htmldiv = htmldiv + '<p>' + record.testtype + '<span class="spec-body-count">+' + record.count + '</span></p>';
             htmldiv = htmldiv + '<p>' + record.rating + '</p>';
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")>변경</button>';
             htmldiv = htmldiv + '</div>';

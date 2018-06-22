@@ -57,7 +57,7 @@ function loadcertlist() {
             $(".cert-container").remove();
             $('#certlistcount').text(certlistresult.length + '건');
             var divContainer = $('#cert-grid-div');
-            certlistresult.forEach(item => {
+            certlistresult.forEach(function (item) {
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '")>';
                 htmldiv = htmldiv + '<p>' + item.certId.substring(0, 25) + '..<img style="z-index:999" src="/img/resume-store/more.svg" alt="" class="more-store-resume" onclick=certmore("more-div-' + item.certId + '")></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
@@ -277,17 +277,17 @@ $(document).ready(function () {
     $('#add-cert-dialog .confirm-btn').click(function () {
         $("#add-cert-dialog  .close-modal").click();
         var current_active = 0;
-        $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
+        $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
 
         var mytimer = setInterval(function () {
-            $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#dadada");
+            $('#cert-line-dialog #circle-' + current_active).css("background-color", "#dadada");
             current_active += 1;
 
             if (current_active > 5) {
                 current_active = 0;
                 clearInterval(mytimer);
             }
-            $(`#cert-line-dialog #circle-${current_active}`).css("background-color", "#4a90e2");
+            $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
         }, 1000);
 
         setTimeout(function () {

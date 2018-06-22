@@ -190,21 +190,18 @@ table {
         top : -18px;        
     }
 
-    .cert-reference-default{
-        -webkit-transform: scale(0.9);
-        position: relative;
-        left:   76px;
-        top : -19px;        
+@media screen and (max-width: 1000px){
+    .personinfo_outter {
+        font-size: 65%;
     }
 
-    .stamp{
-        -webkit-transform: scale(0.3);
-        position: relative;
-        left:   -61px;
-        top : -19px;   
+    .inner-container{
+        width: 550px;
+        height: 1000px;
+        margin: 20px 15px 52px 15px;
+        background: white;
+        font-size:60%;
     }
-
-
 }
 
 
@@ -365,5 +362,5 @@ table {
 
     }
 
-
+}
 }
