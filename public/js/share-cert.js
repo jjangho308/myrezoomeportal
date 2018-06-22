@@ -46,7 +46,7 @@ $(document).ready(function () {
     }
 
     $("#btn_print").click(function (event) {
-        $("#btn_print").click(function (event) {
+        
 
             $(".header").hide();
             $(".main-body-footer").hide();
@@ -78,7 +78,7 @@ $(document).ready(function () {
             $(".main-body-footer-decription").show();
             $(".qr-container").hide();
 
-        });
+        
     });
 
     $(".main-body-footer-right").click(function (event) {
