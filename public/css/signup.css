@@ -142,10 +142,7 @@ input{
     margin-right: 6px;
 }
 
-.agreement-div span{
-
-      padding-left: 6px;
-}
+.agreement-div span{padding-left: 6px;font-size: 14px;}
 
 .agreement-top div{
 
@@ -169,15 +166,10 @@ input{
   padding: 11px 11px 27px;
 }
 
-.agreement-body a{
-
-    float: right;
-  color: #a9afb3;
-  text-decoration: underline;
-}
+.agreement-body a{float: right;color: #a9afb3;text-decoration: underline;font-size: 14px;margin-top: 2px;}
 
 .agreement-body > div{
-    margin-bottom: 13px; 
+    margin-bottom: 10px;
 }
 
 .signup-button{
