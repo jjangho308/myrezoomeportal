@@ -11,13 +11,17 @@
 <body>
     <%- include('base_header_default') -%>
 
-    <h1>개인회원 회원가입</h1>
+    <h1>회원가입</h1>
 
     <div class="signup-container">
         <p class="title">이메일</p>
-        <input id="signup_id"  placeholder="로그인에 사용할 이메일을 입력해주세요." />
-        <div class="error-message">이미 가입되어 있는 이메일입니다.</div>
+        <div class="confirm-phone-input">
 
+            <input id="confirm-phone-input" placeholder="로그인에 사용할 이메일을 입력해주세요.">
+            <div class="error-message">이미 가입되어 있는 이메일입니다.</div>
+            
+        </div>
+        <button class="phone-send border-btn" disabled="">중복체크</button>
         <p class="title">비밀번호</p>
         <input id="signup_pw" type="password" placeholder="영문자, 숫자, 특수문자 조합 8~12자" />
         <div class="error-message">영문자, 숫자, 특수문자 조합 8~12자로 입력해주세요.</div>
