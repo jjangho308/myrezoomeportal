@@ -642,6 +642,10 @@ padding:22px 10px 17px;
   color: #ffffff;
 }
 
+#spec-change-table-col-3 {
+  width:100px;
+}
+
 @keyframes loading {
     0% {
         background-position-x: -800px;
