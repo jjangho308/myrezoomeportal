@@ -101,6 +101,9 @@ $(document).ready(function () {
                 scrollTop: ($('.main-body-footer').offset().top)
             }, 600);
 
+            var reqtxid = $('.main-body-footer-6').text();
+            nexledgerInfoView(reqtxid);
+
             setTimeout(function () {
 
                 $('.footer-verify-1 > .footer-verify-right').html('<img src="/img/certviewer/shape.svg" class="Shape">');
@@ -134,13 +137,34 @@ $(document).ready(function () {
                         var htmldiv = '<div class="footer-verify-4">';
                         htmldiv = htmldiv + '<div class="footer-verify-left">' + "RESULT" + '</div>';
                         htmldiv = htmldiv + '<div class="footer-verify-center">' + "정상적인 데이터로 확인되었습니다." + '</div>';
-                        htmldiv = htmldiv + '<div class="footer-verify-right">' + '<a>트랜잭션 히스토리 조회</a>' + '</div>';
+                        htmldiv = htmldiv + '<div id="txinfoget-bt" class="footer-verify-right">' + '<a href="#nexledger-txid-info-dialog" rel="modal:open">트랜잭션 조회</a>' + '</div>';
                         htmldiv = htmldiv + '</div>';
                         $('.main-body-footer').append(htmldiv);
 
                         $('html').animate({
                             scrollTop: ($('.main-body-footer').offset().top)
                         }, 600);
+
+                        //$(".main-body-footer-right").css({'background-color': '#7ed321', 'font-size': '14px','font-weight': 'bold', 'font-style': 'normal', 'font-stretch': 'normal', 'line-height': 'normal', 'letter-spacing': 'normal', 'text-align': 'right', 'color': '#ffffff'});
+                        $(".main-body-footer-right").css({
+                            'background-color': '#7ed321'
+                        });
+                        $(".main-body-footer-right-button1").text("검증완료");
+                        $('.footer-verify-4 > .footer-verify-center').css({
+                            'color': '#7ed321'
+                        });
+
+                        $('#txinfoget-bt').click(function (event) {
+                            if (nexledgerErr == 1) {
+                                alert("Nexledger Admin Connection ERR");
+                            } else {
+                                //$("#nexledger-txid-info-dialog").css('display','block');
+
+                                //var dislogoffettop = $("#txinfoget-bt").offset().top - $("#nexledger-txid-info-dialog").height();
+                                //var dislogoffetleft = $("#txinfoget-bt").offset().left - $("#nexledger-txid-info-dialog").width();
+                                //$("#nexledger-txid-info-dialog").css({'left':dislogoffetleft+'px','top':dislogoffettop+'px'});
+                            }
+                        });
 
                     }, 1000);
 
@@ -208,6 +232,69 @@ function verify(passcode) {
     }
 
     // }
+}
+
+function nexledgerInfoView(reqtxid) {
+    $.ajax({
+        type: 'POST',
+        url: '/nexledger/get_txinfo',
+        // headers: {
+        //     'Authorization': client_authorization
+        // },
+        contentType: 'application/json',
+        data: JSON.stringify({
+            //uId: 'SearchRecord',
+            //sId: '',
+            txid: reqtxid
+        }),
+        error: function (jqXhr, status, error) {
+            $("#nexledger-txid-info-dialog").css('display', 'none');
+            console.error('Nexledger Connection Error : ' + error);
+            console.error(jqXhr.responseText);
+            nexledgerErr = 1;
+            //alert("Nexledger Admin Connection ERR");
+        },
+        success: function (res2) {
+            console.log(res2);
+            $("#tx_id").text(reqtxid);
+            //$("#fromaddress").text(res2.result.fromaddress);
+
+            var tempstr = '';
+            for (var i = 0; i < res2.result.fromaddress.length; i++) {
+                tempstr = tempstr + res2.result.fromaddress[i] + '<br>';
+            }
+            $("#fromaddress").html(tempstr);
+
+            tempstr = '';
+            for (var i = 0; i < res2.result.toaddress.length; i++) {
+                tempstr = tempstr + res2.result.toaddress[i] + '<br>';
+            }
+            $("#toAddress").html(tempstr);
+
+            $("#total_volume").text(res2.result.total_volume);
+            $("#total_output").text(res2.result.output);
+            $("#txsize").text(res2.result.txsize + " byte");
+
+            tempstr = '';
+            for (var i = 0; i < res2.result.input_script.length; i++) {
+                tempstr = tempstr + res2.result.input_script[i] + '<br>';
+            }
+            $("#input_script").html(tempstr);
+            $("#input_script").css("height", "175px");
+
+            tempstr = '';
+            for (var i = 0; i < res2.result.output_script.length; i++) {
+                tempstr = tempstr + res2.result.output_script[i] + '<br>';
+            }
+            $("#output_script").html(tempstr);
+            $("#output_script").css("height", "200px");
+
+            $(".nexledger-txid-info-dialog-close").click(function (event) {
+                $("#nexledger-txid-info-dialog .close-modal").click();
+            });
+
+        }
+    });
 }
 
 function setData(data) {
