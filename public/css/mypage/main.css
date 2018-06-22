@@ -646,6 +646,10 @@ padding:22px 10px 17px;
   width:100px;
 }
 
+#spec-change-table td:nth-child(4) {
+  width:100px;
+}
+
 @keyframes loading {
     0% {
         background-position-x: -800px;
