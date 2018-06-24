@@ -18,8 +18,8 @@ class DeleteRecordRequest extends AbstractClientRequestEntity {
      */
     constructor(opt) {
         super(opt);
-
-        this.record = opt;
+        this.uId = opt.uId;
+        this.recordId = opt.recordId;
     }
 }
 

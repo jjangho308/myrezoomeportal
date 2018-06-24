@@ -175,7 +175,7 @@ $(document).ready(function () {
         var role = $("#career-role").val();
         var start_date = $("#career-startdate").val();
         var end_date = $("#career-enddate").val();
-        var status = $("#career-status").val();    
+        var status = $("#career-status").val();
 
         // cert format
         var param = {
@@ -230,24 +230,24 @@ $(document).ready(function () {
 
         var is_error = false;
 
-        $("#language-add-dialog input[type=text]").each(function() {                
-            if($(this).val() == "") {                                      
+        $("#language-add-dialog input[type=text]").each(function () {
+            if ($(this).val() == "") {
                 is_error = true;
-                if($(this).hasClass("study-period")) {
+                if ($(this).hasClass("study-period")) {
                     $(this).addClass("error");
                     $(this).find(".error-message").show();
                 } else {
                     $(this).addClass("error");
-                    $(this).next().show();     
+                    $(this).next().show();
                 }
             } else {
-                if($(this).hasClass("study-period")) {
+                if ($(this).hasClass("study-period")) {
                     $(this).removeClass("error");
                     $(this).find(".error-message").hide();
                 } else {
                     $(this).removeClass("error");
-                    $(this).next().hide();  
-                }                  
+                    $(this).next().hide();
+                }
             }
         });
 
@@ -264,7 +264,7 @@ $(document).ready(function () {
         // cert encryption
         var enc_record = JSON.stringify(param);
 
-        if(!is_error) {
+        if (!is_error) {
             $.ajax({
                 type: 'POST',
                 url: '/record',
@@ -286,7 +286,7 @@ $(document).ready(function () {
                     $('#alarm-div').css("display", "block");
                     $('#alarm-div').css("margin-right", "-108px");
 
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $("#alarm-div").hide();
                     }, 1000);
 
@@ -307,25 +307,25 @@ $(document).ready(function () {
         var end_date = $("#certadd_enddate").val();
         var expiry = $("#certadd_expireYn").is(':checked');
 
-        if(name == "") {
+        if (name == "") {
             alert("이름");
             $("#cert-name").focus();
             return;
         }
 
-        if(grade == "") {
+        if (grade == "") {
             alert("성적");
             $("#cert-grade").focus();
             return;
         }
 
-        if(start_date == "") {
+        if (start_date == "") {
             alert("시작일");
             $("#certadd_startdate").focus();
             return;
         }
 
-        if(end_date == "") {
+        if (end_date == "") {
             alert("종료일");
             $("#certadd_enddate").focus();
             return;
@@ -363,7 +363,7 @@ $(document).ready(function () {
                 $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
                 $('#alarm-div').css("display", "block");
 
-                setTimeout(function(){
+                setTimeout(function () {
                     $("#alarm-div").hide();
                 }, 1000);
 
@@ -392,6 +392,10 @@ $(document).ready(function () {
                         txid: txid,
                         subid: subid
                     }),
+                    error: function (jqXhr, status, error) {
+                        console.error('Set default Error : ' + error);
+                        console.error(jqXhr.responseText);
+                    },
                     success: function (response) {
                         $("#spec-change-dialog .close-modal").click();
                         $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
@@ -677,14 +681,18 @@ function change_default_cert(subid) {
 
 function delete_private_record(prvtId) {
     $.ajax({
-        type: 'POST',
-        url: '/record/' + prvtId,
+        type: 'DELETE',
+        url: '/records/' + prvtId,
         headers: {
             'Authorization': client_authorization
         },
         beforeSend: function () {
             //clean view
-            $('.private-spec-body').remove();
+            // $('.private-spec-body').remove();
+        },
+        error: function (jqXhr, status, error) {
+            console.error('Delete private record Error : ' + error);
+            console.error(jqXhr.responseText);
         },
         success: function (res) {
             getPrivateRecords();
@@ -695,7 +703,7 @@ function delete_private_record(prvtId) {
 function getPrivateRecords() {
     $.ajax({
         type: 'GET',
-        url: '/record/list',
+        url: '/records/list',
         headers: {
             'Authorization': client_authorization
         },

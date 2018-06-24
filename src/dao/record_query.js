@@ -25,7 +25,6 @@ module.exports = {
     setDefaultYn: "UPDATE " + BLC_MAP_TABLE + " SET `DFT_YN` = 'Y' WHERE `UID` = ? AND `TRX_ID` = ?",
 
     issuePrivateRecord: "INSERT INTO " + CERT_PRVT_TABLE + " SET ?",
-    getPrivateRecord: "SELECT * FROM " + CERT_PRVT_TABLE + " WHERE `DEL_YN` = 'N' AND `UID` = ?",
-    getPrivateRecordId: "SELECT * FROM" + CERT_PRVT_TABLE + " WHERE `DEL_TN` = 'N' AND ?",
+    getPrivateRecord: "SELECT * FROM " + CERT_PRVT_TABLE + " WHERE `DEL_YN` = 'N' ",
     delPrivateRecord: "UPDATE " + CERT_PRVT_TABLE + " SET `DEL_YN` = 'Y' WHERE `UID` = ? AND `CERT_PRVT_ID` = ?",
 }

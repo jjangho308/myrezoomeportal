@@ -88,28 +88,28 @@ class RecordDAO extends AbstractDAO {
 
     }
 
-    /**
-     * 사용자의 수기 입력한 이력을 가져옴
-     */
-    getPrivateRecord(creteria) {
-        var uId = creteria.uId;
-        var recordId = creteria.recordId;
+    // /**
+    //  * 사용자의 수기 입력한 이력을 가져옴
+    //  */
+    // getPrivateRecord(creteria) {
+    //     var uId = creteria.uId;
+    //     var recordId = creteria.recordId;
 
-        var query = mysql.format(recordQuery.getPrivateRecordId, {
-            CERT_PRVT_ID: recordId,
-        });
-        this.query(query, (err, cursor) => {
-            if (!!err) {
-                console.error(err);
-            } else {
-                var returnValue = [];
-                for (var row in cursor) {
-                    returnValue.push(PrivateRecord.fromRow(row));
-                }
-                cb(null, returnValue);
-            }
-        });
-    }
+    //     var query = mysql.format(recordQuery.getPrivateRecordId, {
+    //         CERT_PRVT_ID: recordId,
+    //     });
+    //     this.query(query, (err, cursor) => {
+    //         if (!!err) {
+    //             console.error(err);
+    //         } else {
+    //             var returnValue = [];
+    //             for (var row in cursor) {
+    //                 returnValue.push(PrivateRecord.fromRow(row));
+    //             }
+    //             cb(null, returnValue);
+    //         }
+    //     });
+    // }
 
     /**
      * Select transaction id from blockchain map table. <br />s
@@ -184,7 +184,10 @@ class RecordDAO extends AbstractDAO {
     }
 
     getPrivateRecord(creteria, cb) {
-        var query = mysql.format(recordQuery.getPrivateRecord, creteria.uId);
+        var condition = !!creteria.uId ? 'AND `UID` = ' + mysql.escape(creteria.uId) : '';
+        condition += !!creteria.recordId ? 'AND `CERT_PRVT_ID` = ' + mysql.escape(creteria.recordId) : '';
+
+        var query = recordQuery.getPrivateRecord + condition;
         this.query(query, (err, rows) => {
             if (!!err) {
                 return cb(err, null);
@@ -199,12 +202,13 @@ class RecordDAO extends AbstractDAO {
     }
 
     deletePrivateRecord(creteria, cb) {
-        var query = mysql.format(recordQuery.delPrivateRecord, [creteria.uId, creteria.prvtId]);
-        this.query(query, (err, rows) => {
+        var query = mysql.format(recordQuery.delPrivateRecord, [creteria.uId, creteria.recordId]);
+        this.query(query, (err, affectedRows) => {
             if (!!err) {
+                console.error(err);
                 return cb(err, null);
             } else {
-                return cb(err, rows);
+                return cb(null, affectedRows);
             }
         });
     }
