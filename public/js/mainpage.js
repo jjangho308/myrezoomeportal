@@ -403,12 +403,11 @@ $(document).ready(function () {
                 $("#select-footer").hide();
                 $("#main-footer").css("margin-bottom", "0px");
             } else {
+                $("#main-footer").css("margin-bottom", "71px");
                 $("#select-footer span:nth-child(2)").text(numberOfChecked + "건의");
                 $("#select-footer").show();
-                $("#main-footer").css("margin-bottom", "71px");
             }
         });
-        event.stopPropagation();
     });
 
 
