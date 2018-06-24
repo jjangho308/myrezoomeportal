@@ -45,13 +45,13 @@
 }
 
 .navbar-default li:nth-child(3) {
-    border-left: 1px solid gray;
-    margin-right: -5px;
+    /*border-left: 1px solid gray;*/
+    /*margin-right: -5px;*/
 }
 
 .navbar-default li:nth-child(4) {
-    border-left: 1px solid gray;
-    margin-right: -5px;
+    /*border-left: 1px solid gray;*/
+   /* margin-right: -5px;*/
 }
 
 .navbar-default li a {
