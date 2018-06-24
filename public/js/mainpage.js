@@ -375,7 +375,7 @@ $(document).ready(function () {
         });
     });
 
-    $('.spec-detail-div').click(function () {
+    $('.spec-detail-div').click(function (event) {
         $(".spec-detail-div input:checkbox").each(function (i) {
             if ($(this).is(':checked')) {
                 $(this).closest('.spec-body').css({
@@ -403,9 +403,9 @@ $(document).ready(function () {
                 $("#select-footer").hide();
                 $("#main-footer").css("margin-bottom", "0px");
             } else {
+                $("#main-footer").css("margin-bottom", "71px");
                 $("#select-footer span:nth-child(2)").text(numberOfChecked + "건의");
                 $("#select-footer").show();
-                $("#main-footer").css("margin-bottom", "71px");
             }
         });
     });
@@ -492,7 +492,7 @@ $(document).ready(function () {
                                     $("#alarm-div").hide();
                                     modal = false;
 
-                                    window.location.href="./certs";
+                                    window.location.href = "./certs";
                                 }, 1000);
 
                             }, 3000);
@@ -606,7 +606,7 @@ function change_default_cert(subid) {
             var record = getData(txidList[i]);
             var dftYn = record.dftYn;
             var subidTmp = record.subid;
-            
+
             if (subid == subidTmp) {
                 record_change_formatter[subidTmp](record);
             }
@@ -695,7 +695,7 @@ function request_agent() {
             setSocket(res.mid);
             clientsocket_listener();
             // loading css start
-            setTimeout(function(){
+            setTimeout(function () {
                 $('.spec-body-loading').hide();
                 $('.spec-body-default').show();
                 refreshview(null);
@@ -724,10 +724,9 @@ function refreshview(records) {
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
 
-                    if(recordList[subidTmp] == undefined) {
+                    if (recordList[subidTmp] == undefined) {
                         jsonData.count = 1;
-                    }
-                    else {
+                    } else {
                         jsonData.count = recordList[subidTmp].count + 1;
                     }
 
@@ -738,21 +737,18 @@ function refreshview(records) {
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
 
-                    if(recordList[subidTmp] == undefined) {
+                    if (recordList[subidTmp] == undefined) {
                         jsonData.count = 1;
-                    }
-                    else {
+                    } else {
                         jsonData.count = recordList[subidTmp].count + 1;
                     }
 
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
-                }
-                else {
-                    if(recordList[subidTmp] == undefined) {
+                } else {
+                    if (recordList[subidTmp] == undefined) {
                         jsonData.count = 1;
-                    }
-                    else {
+                    } else {
                         jsonData.count = recordList[subidTmp].count + 1;
                     }
                 }
@@ -775,10 +771,9 @@ function refreshview(records) {
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
 
-                    if(recordList[subidTmp] == undefined) {
+                    if (recordList[subidTmp] == undefined) {
                         jsonData.count = 1;
-                    }
-                    else {
+                    } else {
                         jsonData.count = recordList[subidTmp].count + 1;
                     }
 
@@ -789,21 +784,18 @@ function refreshview(records) {
                     jsonData.chkid = record.txid;
                     jsonData.subid = subidTmp;
 
-                    if(recordList[subidTmp] == undefined) {
+                    if (recordList[subidTmp] == undefined) {
                         jsonData.count = 1;
-                    }
-                    else {
+                    } else {
                         jsonData.count = recordList[subidTmp].count + 1;
                     }
 
                     recordList[subidTmp] = jsonData;
                     subid = subidTmp;
-                }
-                else {
-                    if(recordList[subidTmp] == undefined) {
+                } else {
+                    if (recordList[subidTmp] == undefined) {
                         jsonData.count = 1;
-                    }
-                    else {
+                    } else {
                         jsonData.count = recordList[subidTmp].count + 1;
                     }
                 }
