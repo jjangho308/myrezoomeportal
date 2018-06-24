@@ -192,7 +192,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: '/record',
+            url: '/records',
             headers: {
                 'Authorization': client_authorization
             },
@@ -230,9 +230,9 @@ $(document).ready(function () {
         var is_error = false;
 
         $("#langadd_lang").val("E");
-        $("#language-add-dialog input[type=text]").not("#langadd_lang-selectized").each(function() {               
+        $("#language-add-dialog input[type=text]").not("#langadd_lang-selectized").each(function () {
 
-            if($(this).val() == "") {
+            if ($(this).val() == "") {
                 is_error = true;
                 if ($(this).hasClass("study-period")) {
                     $(this).addClass("error");
@@ -268,7 +268,7 @@ $(document).ready(function () {
         if (!is_error) {
             $.ajax({
                 type: 'POST',
-                url: '/record',
+                url: '/records',
                 headers: {
                     'Authorization': client_authorization
                 },
@@ -309,24 +309,24 @@ $(document).ready(function () {
 
         var is_error = false;
 
-        $("#cert-add-dialog input[type=text]").each(function() {                
-            if($(this).val() == "") {                                      
+        $("#cert-add-dialog input[type=text]").each(function () {
+            if ($(this).val() == "") {
                 is_error = true;
-                if($(this).hasClass("study-period")) {
+                if ($(this).hasClass("study-period")) {
                     $(this).addClass("error");
                     $("#cert-add-dialog .error-message-period").show();
                 } else {
                     $(this).addClass("error");
-                    $(this).next().show();     
+                    $(this).next().show();
                 }
             } else {
-                if($(this).hasClass("study-period")) {
+                if ($(this).hasClass("study-period")) {
                     $(this).removeClass("error");
                     $("#cert-add-dialog .error-message-period").hide();
                 } else {
                     $(this).removeClass("error");
-                    $(this).next().hide();  
-                }                  
+                    $(this).next().hide();
+                }
             }
         });
 
@@ -342,7 +342,7 @@ $(document).ready(function () {
         // cert encryption
         var enc_record = JSON.stringify(param);
 
-        if(!is_error) {
+        if (!is_error) {
             $.ajax({
                 type: 'POST',
                 url: '/record',
@@ -363,7 +363,7 @@ $(document).ready(function () {
                     $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
                     $('#alarm-div').css("display", "block");
 
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $("#alarm-div").hide();
                     }, 1000);
 
@@ -680,24 +680,32 @@ function change_default_cert(subid) {
 }
 
 function delete_private_record(prvtId) {
-    $.ajax({
-        type: 'DELETE',
-        url: '/records/' + prvtId,
-        headers: {
-            'Authorization': client_authorization
-        },
-        beforeSend: function () {
-            //clean view
-            // $('.private-spec-body').remove();
-        },
-        error: function (jqXhr, status, error) {
-            console.error('Delete private record Error : ' + error);
-            console.error(jqXhr.responseText);
-        },
-        success: function (res) {
-            getPrivateRecords();
-        }
-    });
+    // $.ajax({
+    //     type: 'DELETE',
+    //     url: '/records/' + prvtId,
+    //     headers: {
+    //         'Authorization': client_authorization
+    //     },
+    //     beforeSend: function () {
+    //         //clean view
+    //         // $('.private-spec-body').remove();
+    //     },
+    //     error: function (jqXhr, status, error) {
+    //         console.error('Delete private record Error : ' + error);
+    //         console.error(jqXhr.responseText);
+    //     },
+    //     success: function (res) {
+    //         getPrivateRecords();
+    //     }
+    // });
+}
+
+function singletonCallback(opt1, opt2, opt3, opt4){
+    debugger;
+}
+
+function buttonCallback(opt1, opt2, opt3, opt4){
+    debugger;
 }
 
 function getPrivateRecords() {
@@ -711,12 +719,20 @@ function getPrivateRecords() {
             //clean view
             $('.private-spec-body').remove();
         },
+        error: function (jqXhr, status, error) {
+            console.error('Get private record Error : ' + error);
+            console.error(jqXhr.responseText);
+        },
         success: function (res) {
             res.result.forEach(function (item, idx) {
                 var data = JSON.parse(item.data);
                 data.certPrvtId = item.certPrvtId;
-                formatter[item.subCd](data);
+                if(item.subCd in formatter){
+                    formatter[item.subCd](data);
+                }
             });
+            $('.private-spec-body').on('click', singletonCallback);
+            $('.private-spec-body button').on('click', buttonCallback);
             // for (var i in res.result) {
             //     var data = JSON.parse(res[i].data);
             //     data.certPrvtId = res[i].certPrvtId;
