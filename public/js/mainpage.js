@@ -221,7 +221,7 @@ $(document).ready(function () {
         var role = $("#career-role").val();
         var start_date = $("#career-startdate").val();
         var end_date = $("#career-enddate").val();
-        var status = $("#career-status").val();    
+        var status = $("#career-status").val();
 
         // cert format
         var param = {
@@ -280,21 +280,21 @@ $(document).ready(function () {
 
             if($(this).val() == "") {
                 is_error = true;
-                if($(this).hasClass("study-period")) {
+                if ($(this).hasClass("study-period")) {
                     $(this).addClass("error");
                     $("#language-add-dialog .error-message-period").show();
                 } else {
                     $(this).addClass("error");
-                    $(this).next().show();     
+                    $(this).next().show();
                 }
             } else {
-                if($(this).hasClass("study-period")) {
+                if ($(this).hasClass("study-period")) {
                     $(this).removeClass("error");
                     $("#language-add-dialog .error-message-period").hide();
                 } else {
                     $(this).removeClass("error");
-                    $(this).next().hide();  
-                }                  
+                    $(this).next().hide();
+                }
             }
         });
 
@@ -311,7 +311,7 @@ $(document).ready(function () {
         // cert encryption
         var enc_record = JSON.stringify(param);
 
-        if(!is_error) {
+        if (!is_error) {
             $.ajax({
                 type: 'POST',
                 url: '/record',
@@ -333,7 +333,7 @@ $(document).ready(function () {
                     $('#alarm-div').css("display", "block");
                     $('#alarm-div').css("margin-right", "-108px");
 
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $("#alarm-div").hide();
                     }, 1000);
 
@@ -438,6 +438,10 @@ $(document).ready(function () {
                         txid: txid,
                         subid: subid
                     }),
+                    error: function (jqXhr, status, error) {
+                        console.error('Set default Error : ' + error);
+                        console.error(jqXhr.responseText);
+                    },
                     success: function (response) {
                         $("#spec-change-dialog .close-modal").click();
                         $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
@@ -723,14 +727,18 @@ function change_default_cert(subid) {
 
 function delete_private_record(prvtId) {
     $.ajax({
-        type: 'POST',
-        url: '/record/' + prvtId,
+        type: 'DELETE',
+        url: '/records/' + prvtId,
         headers: {
             'Authorization': client_authorization
         },
         beforeSend: function () {
             //clean view
-            $('.private-spec-body').remove();
+            // $('.private-spec-body').remove();
+        },
+        error: function (jqXhr, status, error) {
+            console.error('Delete private record Error : ' + error);
+            console.error(jqXhr.responseText);
         },
         success: function (res) {
             getPrivateRecords();
@@ -741,7 +749,7 @@ function delete_private_record(prvtId) {
 function getPrivateRecords() {
     $.ajax({
         type: 'GET',
-        url: '/record/list',
+        url: '/records/list',
         headers: {
             'Authorization': client_authorization
         },
