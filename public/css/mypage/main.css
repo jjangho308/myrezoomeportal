@@ -278,8 +278,9 @@ width:auto;
 height:auto;
 max-width:60px;
 max-height:60px;
-vertical-align:-50px;
+/*vertical-align:-50px;*/
 border-radius:5px;
+	margin-top:5px;
 }
 
 .spec-center img:nth-child(2) {

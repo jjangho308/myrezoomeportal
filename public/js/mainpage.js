@@ -160,11 +160,57 @@ $(document).ready(function () {
             range.find(".error-message").css("display", "none");
         }
 
-        if (is_error == false) {
-            $("#education-add-dialog .close-modal").click();
-            $("#alarm-div span").text("학력이 추가되었습니다.");
-            $('#alarm-div').css("display", "block");
-            $('#alarm-div').css("margin-right", "-108px");
+        var school_name = $("#school").val();
+        var degree = $("#score").val();
+        var total_degree = $("#total_score").val();
+        var start_date = $("#edu-startdate").val();
+        var end_date = $("#edu-enddate").val();
+        var status = $("#study-field").val();
+
+        // cert format
+        var param = {
+            school_name: school_name,
+            degree: degree + "/" + total_degree,
+            startdate: start_date,
+            enddate: end_date,
+            status: status
+        }
+
+        // cert encryption
+        var enc_record = JSON.stringify(param);
+
+        if (!is_error) {
+            $.ajax({
+                type: 'POST',
+                url: '/record',
+                headers: {
+                    'Authorization': client_authorization
+                },
+                data: JSON.stringify({
+                    orgCd: "UNV", // 코드 분기 필요
+                    subCd: "UNV", // 코드 분기 필요
+                    data: enc_record
+                }),
+                error: function (jqXhr, status, error) {
+                    console.error('/record Error : ' + error);
+                    console.error(jqXhr.responseText);
+                },
+                success: function (res) {
+                    $("#education-add-dialog .close-modal").click();
+                    $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
+                    $('#alarm-div').css("display", "block");
+                    $('#alarm-div').css("margin-right", "-108px");
+
+                    setTimeout(function () {
+                        $("#alarm-div").hide();
+                    }, 1000);
+
+                    //clean view
+                    $('.private-spec-body').remove();
+                    getPrivateRecords();
+                },
+                contentType: 'application/json',
+            });
         }
     });
 
@@ -680,33 +726,42 @@ function change_default_cert(subid) {
 }
 
 function delete_private_record(prvtId) {
-    // $.ajax({
-    //     type: 'DELETE',
-    //     url: '/records/' + prvtId,
-    //     headers: {
-    //         'Authorization': client_authorization
-    //     },
-    //     beforeSend: function () {
-    //         //clean view
-    //         // $('.private-spec-body').remove();
-    //     },
-    //     error: function (jqXhr, status, error) {
-    //         console.error('Delete private record Error : ' + error);
-    //         console.error(jqXhr.responseText);
-    //     },
-    //     success: function (res) {
-    //         getPrivateRecords();
-    //     }
-    // });
+    $.ajax({
+        type: 'DELETE',
+        url: '/records/' + prvtId,
+        headers: {
+            'Authorization': client_authorization
+        },
+        beforeSend: function () {
+            //clean view
+            // $('.private-spec-body').remove();
+        },
+        error: function (jqXhr, status, error) {
+            console.error('Delete private record Error : ' + error);
+            console.error(jqXhr.responseText);
+        },
+        success: function (res) {
+            $("#alarm-div span").text("정상적으로 삭제 완료되었습니다.");
+            $('#alarm-div').css("display", "block");
+            $('#alarm-div').css("margin-right", "-108px");
+
+            setTimeout(function () {
+                $("#alarm-div").hide();
+            }, 1000);
+
+            getPrivateRecords();
+        }
+    });
 }
 
-function singletonCallback(opt1, opt2, opt3, opt4){
+function singletonCallback(opt1, opt2, opt3, opt4) {
     debugger;
 }
 
-function buttonCallback(opt1, opt2, opt3, opt4){
+function buttonCallback(opt1, opt2, opt3, opt4) {
     debugger;
 }
+
 
 function getPrivateRecords() {
     $.ajax({
@@ -727,7 +782,7 @@ function getPrivateRecords() {
             res.result.forEach(function (item, idx) {
                 var data = JSON.parse(item.data);
                 data.certPrvtId = item.certPrvtId;
-                if(item.subCd in formatter){
+                if (item.subCd in formatter) {
                     formatter[item.subCd](data);
                 }
             });

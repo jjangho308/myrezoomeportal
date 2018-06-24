@@ -34,9 +34,8 @@
         <div class="error-range">
             <select name="select-0" id="school">
                 <option value="" disabled selected>교육기관의 이름을 입력해주세요. Ex) 한양대학교
-
-                    <option value="volvo">서울대학교</option>
-                    <option value="saab">한양대학교</option>
+                    <option value="서울대학교">서울대학교</option>
+                    <option value="한양대학교">한양대학교</option>
             </select>
             <div class="error-message">학교명을 입력해주세요.</div>
         </div>
@@ -66,45 +65,38 @@
         </div>
 
         <p>재학 기간</p>
-
         <div class="error-range">
             <button class="calendar">
                 <img src="/img/myresume/icon-calendar.svg" alt="">
             </button>
-            <input type="text" class="form-control study-period" placeholder="YYYY-MM-DD" />
+            <input id="edu-startdate" type="text" class="form-control study-period" placeholder="YYYY-MM-DD" />
             <span id="study-period-span">~</span>
             <button class="calendar">
                 <img src="/img/myresume/icon-calendar.svg" alt="">
             </button>
-            <input type="text" class="form-control study-period" placeholder="YYYY-MM-DD" />
+            <input id="edu-enddate" type="text" class="form-control study-period" placeholder="YYYY-MM-DD" />
 
             <div id="is-graduate" class="select-100 study-field-div">
                 <select name="select-3" id="study-field">
-                    <option value="volvo">졸업</option>
-                    <option value="qwd">졸업예정</option>
-                    <option value="awdwa">수료</option>
+                    <option value="졸업">졸업</option>
+                    <option value="졸업예정">졸업예정</option>
+                    <option value="수료">수료</option>
                 </select>
             </div>
 
             <div class="error-message">재학기간을 입력해주세요.</div>
         </div>
 
-
         <p>학점</p>
-
         <div class="error-range">
             <input type="text" id="score" placeholder="Ex) 4.0">
-
             <span id="grade-span">/</span>
             <div class="select-100">
-                <select name="select-4">
-
-                    <option value="saab">4.5</option>
-                    <option value="volvo">4.3</option>
+                <select id="total_score" name="select-4">
+                    <option value="4.5">4.5</option>
+                    <option value="4.3">4.3</option>
                 </select>
-
             </div>
-
             <div class="error-message">학점을 입력해주세요.</div>
         </div>
     </div>
