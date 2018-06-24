@@ -16,4 +16,10 @@ $(document).ready(function () {
         location.href = "/";
     });
 
+    $("#index-v-button").click(function(){
+        var offset = $(".body-div").offset();
+        $('html, body').animate({scrollTop : offset.top}, 400);
+        
+    }); 
+
 });
