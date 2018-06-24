@@ -741,6 +741,14 @@ function delete_private_record(prvtId) {
             console.error(jqXhr.responseText);
         },
         success: function (res) {
+            $("#alarm-div span").text("정상적으로 삭제 완료되었습니다.");
+            $('#alarm-div').css("display", "block");
+            $('#alarm-div').css("margin-right", "-108px");
+
+            setTimeout(function(){
+                $("#alarm-div").hide();
+            }, 1000);
+
             getPrivateRecords();
         }
     });
