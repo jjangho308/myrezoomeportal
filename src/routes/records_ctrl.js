@@ -26,9 +26,9 @@ module.exports = {
     get: (req, res, next) => {
         Managers.client().request(new GetPrivateRecordsRequest(req.body.uId), (err, result) => {
             if (!!err) {
-                next(err);
+                return next(err);
             } else {
-                res.json({
+                return res.json({
                     result: result
                 });
             }
@@ -44,9 +44,9 @@ module.exports = {
     post: (req, res, next) => {
         Managers.client().request(new CreatePrivateRecordRequest(req.body), (err, result) => {
             if (!!err) {
-                next(err);
+                return next(err);
             } else {
-                res.json({
+                return res.json({
                     result: result
                 });
             }
@@ -54,25 +54,27 @@ module.exports = {
     },
 
     /**
-     * Create new private record entity to database. <br />
+     * Delete private record entry. <br />
      * 
      * @since 180402
      * @author TACKSU
      */
-    del: (req, res, next) => {
-        var privateRecordId = req.params.prvtId;
+    delete: (req, res, next) => {
+        var privateRecordId = req.params.recordId;
         if (!privateRecordId) {
             return next(new ResponseError({
                 code: ErrorCode.PARAM_NO_PRIVATE_RECORD_ID,
                 status: HttpStatusCode.BAD_REQUEST,
             }));
         }
-        req.body.prvtId = privateRecordId;
+        req.body.recordId = privateRecordId;
         Managers.client().request(new DeletePrivateRecordRequest(req.body), (err, result) => {
             if (!!err) {
-                next(err);
+                return next(err);
             } else {
-                res.json(result);
+                return res.json({
+                    resutl: result
+                });
             }
         });
     },
@@ -95,9 +97,9 @@ module.exports = {
         req.body.recordId = privateRecordId;
         Managers.client().request(new UpdatePrivateRecordRequest(req.body), (err, result) => {
             if (!!err) {
-                next(err);
+                return next(err);
             } else {
-                res.json(result);
+                return res.json(result);
             }
         });
     }

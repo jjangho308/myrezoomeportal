@@ -94,6 +94,21 @@ class RecordDAO extends AbstractDAO {
     getPrivateRecord(creteria) {
         var uId = creteria.uId;
         var recordId = creteria.recordId;
+
+        var query = mysql.format(recordQuery.getPrivateRecordId, {
+            CERT_PRVT_ID: recordId,
+        });
+        this.query(query, (err, cursor) => {
+            if (!!err) {
+                console.error(err);
+            } else {
+                var returnValue = [];
+                for (var row in cursor) {
+                    returnValue.push(PrivateRecord.fromRow(row));
+                }
+                cb(null, returnValue);
+            }
+        });
     }
 
     /**
