@@ -160,11 +160,57 @@ $(document).ready(function () {
             range.find(".error-message").css("display", "none");
         }
 
-        if (is_error == false) {
-            $("#education-add-dialog .close-modal").click();
-            $("#alarm-div span").text("학력이 추가되었습니다.");
-            $('#alarm-div').css("display", "block");
-            $('#alarm-div').css("margin-right", "-108px");
+        var school_name = $("#school").val();
+        var degree = $("#score").val();
+        var total_degree = $("#total_score").val();
+        var start_date = $("#edu-startdate").val();
+        var end_date = $("#edu-enddate").val();
+        var status = $("#study-field").val();    
+
+        // cert format
+        var param = {
+            school_name: school_name,
+            degree: degree + "/" + total_degree,
+            startdate: start_date,
+            enddate: end_date,
+            status: status
+        }
+
+        // cert encryption
+        var enc_record = JSON.stringify(param);
+
+        if(!is_error) {
+            $.ajax({
+                type: 'POST',
+                url: '/record',
+                headers: {
+                    'Authorization': client_authorization
+                },
+                data: JSON.stringify({
+                    orgCd: "UNV", // 코드 분기 필요
+                    subCd: "UNV", // 코드 분기 필요
+                    data: enc_record
+                }),
+                error: function (jqXhr, status, error) {
+                    console.error('/record Error : ' + error);
+                    console.error(jqXhr.responseText);
+                },
+                success: function (res) {
+                    $("#education-add-dialog .close-modal").click();
+                    $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
+                    $('#alarm-div').css("display", "block");
+                    $('#alarm-div').css("margin-right", "-108px");
+
+                    setTimeout(function(){
+                        $("#alarm-div").hide();
+                    }, 1000);
+
+                    //clean view
+                    $('.private-spec-body').remove();
+                    getPrivateRecords();
+                },
+                contentType: 'application/json',
+            });
         }
     });
 

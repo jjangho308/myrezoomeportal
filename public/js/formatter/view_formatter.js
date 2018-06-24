@@ -338,6 +338,30 @@
             }
         },
 
+        "UNV": function viewformatter(record) {
+            console.log(record);
+            // Private record
+            var htmldiv = '<div class="private-spec-body">';
+            htmldiv = htmldiv + '<div class="spec-left">';
+            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-center">';
+            htmldiv = htmldiv + '<img src="img/main/icon-university.svg" alt="">';
+            htmldiv = htmldiv + '<img src="img/myresume/off.svg" title="기관에서 연동안된 이력입니다.">';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-right">';
+            htmldiv = htmldiv + '<p>' + record.school_name + '</p>';
+            htmldiv = htmldiv + '<p>' + record.status + '</p>';
+            htmldiv = htmldiv + '<p>' + record.degree + '</p>';
+            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '</div>';
+            $('#spec_edu_detail').append(htmldiv);
+            $('#spec_edu_detail > .spec-body-default').hide();
+        },
+
         "CPR": function viewformatter(record) {
             // Private record
             var htmldiv = '<div class="private-spec-body">';
