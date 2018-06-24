@@ -363,6 +363,7 @@
 
         "OGC": function viewformatter(record) {
             // Private record
+            console.log(record);
             var htmldiv = '<div class="private-spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<span></span>';
@@ -386,6 +387,7 @@
 
         "LPT": function viewformatter(record) {
             // Private record
+            console.log(record);
             var htmldiv = '<div class="private-spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
             htmldiv = htmldiv + '<span></span>';
@@ -399,7 +401,7 @@
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>사용자입력</p>';
             htmldiv = htmldiv + '<p>' + record.name + '</p>';
-            htmldiv = htmldiv + '<p>' + record.grade + '</p>';
+            htmldiv = htmldiv + '<p>' + record.score + '</p>';
             htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
