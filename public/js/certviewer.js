@@ -160,6 +160,10 @@
                                 'color': '#7ed321'
                             });
 
+                            //Verify button Disable
+                            $('.main-body-footer-right').attr("disabled", true);
+                            $('.main-body-footer-right').off('click');
+
                             $('#txinfoget-bt').click(function (event) {
                                 if (nexledgerErr == 1) {
                                     alert("Nexledger Admin Connection ERR");
