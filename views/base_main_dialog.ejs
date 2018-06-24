@@ -145,12 +145,11 @@
         <p>자격명</p>
         
         <input type="text" id="cert-name" placeholder="자격증의 이름을 입력해주세요. EX) 정보처리기사">
-        
+        <div class="error-message">자격명을 입력해주세요.</div>
 
         <p>성적</p>
-
             <input type="text" id="cert-grade" placeholder="성적을 입력해주세요. EX) 취득">
-        
+            <div class="error-message">성적을 입력해주세요.</div>
         <p>유효 기간</p>
 
         <div>
@@ -159,13 +158,15 @@
             <span id="study-period-span">~</span>
             <button class="calendar"><img src="/img/myresume/icon-calendar.svg" alt=""></button>
             <input id="certadd_enddate" type="text" class="form-control study-period" placeholder="YYYY-MM-DD" />
-
+            
             <div id="expire-checkbox">
                 <input id="certadd_expireYn" class="styled" type="checkbox">
                 <label for="certadd_expireYn">
                     만료기간 없음
                 </label>
             </div>                    
+            
+            <div class="error-message">자격기간을 입력해주세요.</div>
         </div>
 
     </div>
@@ -179,8 +180,7 @@
     <p>이력 추가 - 외국어<span>레쥬메 서비스를 통해 사용하고 싶은 이력을 추가할 수 있습니다.</span></p>
     <div class="modal-body">
 
-        <p>시험명</p>
-        
+        <p>시험명</p>        
             <div class="select-100">
             <select id="langadd_lang" name="select-1">
                     <option value="eng">영어</option>
@@ -189,12 +189,13 @@
             </select>
         </div>
         <input type="text" id="language-name" placeholder="어학 시험명을 입력해주세요. EX) OPIc">
-        
+        <div class="error-message">어학 시험명을 입력해주세요.</div>
 
         <p>성적</p>
-            <input type="text" id="language-grade" placeholder="성적을 입력해주세요. EX) Advanced Low">            
-        <p>유효 기간</p>
+        <input type="text" id="language-grade" placeholder="성적을 입력해주세요. EX) Advanced Low">            
+        <div class="error-message">성적을 입력해주세요.</div>
 
+        <p>유효 기간</p>
         <div>
             <button class="calendar"><img src="/img/myresume/icon-calendar.svg" alt=""></button>
             <input type="text" id="langadd_startdate" class="form-control study-period"  placeholder="YYYY-MM-DD"/>
@@ -208,6 +209,7 @@
                     만료기간 없음
                 </label>
             </div>                    
+            <div class="error-message">어학시험 기간을 입력해주세요.</div>
         </div>
     </div>
     <div class="modal-footer">

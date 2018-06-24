@@ -20,6 +20,7 @@ module.exports = {
                 console.log(result);
                 console.log("==================================================");
                 if (req.body.shortUrl.substring(0, 1) == 'c') {
+                    console.log(result);
                     res.render('share-cert', {
                         data: result
                     });

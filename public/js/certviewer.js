@@ -321,6 +321,8 @@
         });
 
         $("#btn_print").click(function (event) {
+            // generate QR before print 
+            generateQRCode();
 
             $(".header").hide();
             $(".main-body-footer").hide();

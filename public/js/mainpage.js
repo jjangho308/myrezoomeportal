@@ -113,7 +113,6 @@ $(document).ready(function () {
             $("#school").next().next().css("display", "none");
         }
 
-
         $(".major").each(function () {
             var element = $(this);
 
@@ -176,7 +175,7 @@ $(document).ready(function () {
         var role = $("#career-role").val();
         var start_date = $("#career-startdate").val();
         var end_date = $("#career-enddate").val();
-        var status = $("#career-status").val();
+        var status = $("#career-status").val();    
 
         // cert format
         var param = {
@@ -210,6 +209,7 @@ $(document).ready(function () {
                 $("#career-add-dialog .close-modal").click();
                 $("#alarm-div span").text("사용자 이력 수기 입력했다.");
                 $('#alarm-div').css("display", "block");
+                $('#alarm-div').css("margin-right", "-108px");
 
                 //clean view
                 $('.private-spec-body').remove();
@@ -228,6 +228,29 @@ $(document).ready(function () {
         var end_date = $("#langadd_enddate").val();
         var expiry = $("#langadd_expireYn").is(':checked');
 
+        var is_error = false;
+
+        $("#language-add-dialog input[type=text]").each(function() {                
+            if($(this).val() == "") {                                      
+                is_error = true;
+                if($(this).hasClass("study-period")) {
+                    $(this).addClass("error");
+                    $(this).find(".error-message").show();
+                } else {
+                    $(this).addClass("error");
+                    $(this).next().show();     
+                }
+            } else {
+                if($(this).hasClass("study-period")) {
+                    $(this).removeClass("error");
+                    $(this).find(".error-message").hide();
+                } else {
+                    $(this).removeClass("error");
+                    $(this).next().hide();  
+                }                  
+            }
+        });
+
         // cert format
         var param = {
             lang: lang,
@@ -241,33 +264,39 @@ $(document).ready(function () {
         // cert encryption
         var enc_record = JSON.stringify(param);
 
-        $.ajax({
-            type: 'POST',
-            url: '/record',
-            headers: {
-                'Authorization': client_authorization
-            },
-            data: JSON.stringify({
-                orgCd: "EDI", // 코드 분기 필요
-                subCd: "LPT", // 코드 분기 필요
-                data: enc_record
-            }),
-            error: function (jqXhr, status, error) {
-                console.error('/record Error : ' + error);
-                console.error(jqXhr.responseText);
-            },
-            success: function (res) {
-                $("#language-add-dialog .close-modal").click();
-                $("#alarm-div span").text("사용자 이력 수기 입력했다.");
-                $('#alarm-div').css("display", "block");
+        if(!is_error) {
+            $.ajax({
+                type: 'POST',
+                url: '/record',
+                headers: {
+                    'Authorization': client_authorization
+                },
+                data: JSON.stringify({
+                    orgCd: "EDI", // 코드 분기 필요
+                    subCd: "LPT", // 코드 분기 필요
+                    data: enc_record
+                }),
+                error: function (jqXhr, status, error) {
+                    console.error('/record Error : ' + error);
+                    console.error(jqXhr.responseText);
+                },
+                success: function (res) {
+                    $("#language-add-dialog .close-modal").click();
+                    $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
+                    $('#alarm-div').css("display", "block");
+                    $('#alarm-div').css("margin-right", "-108px");
 
-                //clean view
-                $('.private-spec-body').remove();
-                getPrivateRecords();
-            },
-            contentType: 'application/json',
-        });
+                    setTimeout(function(){
+                        $("#alarm-div").hide();
+                    }, 1000);
 
+                    //clean view
+                    $('.private-spec-body').remove();
+                    getPrivateRecords();
+                },
+                contentType: 'application/json',
+            });
+        }
     });
 
     $('#cert-add-dialog .confirm-btn').click(function () {
@@ -277,6 +306,30 @@ $(document).ready(function () {
         var start_date = $("#certadd_startdate").val();
         var end_date = $("#certadd_enddate").val();
         var expiry = $("#certadd_expireYn").is(':checked');
+
+        if(name == "") {
+            alert("이름");
+            $("#cert-name").focus();
+            return;
+        }
+
+        if(grade == "") {
+            alert("성적");
+            $("#cert-grade").focus();
+            return;
+        }
+
+        if(start_date == "") {
+            alert("시작일");
+            $("#certadd_startdate").focus();
+            return;
+        }
+
+        if(end_date == "") {
+            alert("종료일");
+            $("#certadd_enddate").focus();
+            return;
+        }
 
         // cert format
         var param = {
@@ -307,8 +360,12 @@ $(document).ready(function () {
             },
             success: function (res) {
                 $("#cert-add-dialog .close-modal").click();
-                $("#alarm-div span").text("사용자 이력 수기 입력했다.");
+                $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
                 $('#alarm-div').css("display", "block");
+
+                setTimeout(function(){
+                    $("#alarm-div").hide();
+                }, 1000);
 
                 //clean view
                 $('.private-spec-body').remove();

@@ -46,7 +46,8 @@ $(document).ready(function () {
     }
 
     $("#btn_print").click(function (event) {
-        
+            // generate QR before print 
+            generateQRCode();
 
             $(".header").hide();
             $(".main-body-footer").hide();
@@ -204,8 +205,6 @@ function verify(passcode) {
             json_decrypted = certdata.data;
         }
 
-        certformatter[json_decrypted.subid](json_decrypted.data);
-
         $(".main-container").css("display", "none");
         $(".loading-container").css("display", "block");
 
@@ -220,6 +219,7 @@ function verify(passcode) {
             if (current_active > 2) {
                 clearInterval(mytimer);
                 current_active = 0;
+                certformatter[json_decrypted.subid](json_decrypted.data);
                 $("#cert-verify").css("display", "none");
                 $("#cert-viewer").css("display", "block");
             }

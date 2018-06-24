@@ -15,7 +15,7 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+            htmldiv = htmldiv + '<img src="img/myresume/on.svg" alt="">';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>OPIC</p>';
@@ -39,7 +39,7 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/mktest.png" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+            htmldiv = htmldiv + '<img src="img/myresume/on.svg" alt="">';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>매경TEST</p>';
@@ -62,7 +62,7 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+            htmldiv = htmldiv + '<img src="img/myresume/on.svg" alt="">';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
             htmldiv = htmldiv + '<p>OPIC</p>';
@@ -91,7 +91,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+                htmldiv = htmldiv + '<img src="img/myresume/on.svg" alt="">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right">';
                 htmldiv = htmldiv + '<p>인하대학교</p>';
@@ -128,7 +128,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+                htmldiv = htmldiv + '<img src="img/myresume/on.svg" alt="">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right">';
                 htmldiv = htmldiv + '<p>인하대학교</p>';
@@ -159,7 +159,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kmu.jpg" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+                htmldiv = htmldiv + '<img src="img/myresume/on.svg" alt="">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>계명대</p>';
@@ -194,7 +194,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kmu.jpg" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+                htmldiv = htmldiv + '<img src="img/myresume/on.svg" alt="">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>계명대</p>';
@@ -224,7 +224,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kyungki.gif" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+                htmldiv = htmldiv + '<img src="img/myresume/on.svg" alt="">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>경기대</p>';
@@ -259,7 +259,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kyungki.gif" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+                htmldiv = htmldiv + '<img src="img/myresume/on.svg" alt="">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>경기대</p>';
@@ -289,7 +289,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/cau.png" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+                htmldiv = htmldiv + '<img src="img/myresume/on.svg" alt="">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>중앙대</p>';
@@ -324,7 +324,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/cau.png" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.png" alt="">';
+                htmldiv = htmldiv + '<img src="img/myresume/on.svg" alt="">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>중앙대</p>';

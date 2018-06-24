@@ -18,29 +18,6 @@
 
                     $("#opic_cert img").attr("width", '100%');
                     $("#opic_report img").attr("width", '100%');
-
-                    // var url1 = '/img/mycert/opic/cert/cert_' + level + '.jpg';
-                    // var url2 = '/img/mycert/opic/report/report_' + level + '.jpg';
-
-                    // var width = $("#opic_cert").css("width").replace(/[^-\d\.]/g, '');;
-                    // var height = width * 1.41;
-
-                    // $("#opic_cert").attr("width", "100%")
-                    //     .css({
-                    //         "background-image": 'url(' + url1 + ')',
-                    //         "background-size": '100%',
-                    //         "background-repeat": 'no-repeat',
-                    //         "width": '100%',
-                    //         "height": height + "px"
-                    //     });
-                    // $("#opic_report").attr("width", "100%")
-                    //     .css({
-                    //         "background-image": 'url(' + url2 + ')',
-                    //         "background-size": '100%',
-                    //         "background-repeat": 'no-repeat',
-                    //         "width": '100%',
-                    //         "height": height + "px"
-                    //     });
                 }
 
                 var width = $("#opic_cert").css("width");
@@ -61,33 +38,9 @@
                     .next().html(record_data.language)
                     .next().html(record_data.testdate)
                     .next().html(record_data.examid);
-                // $("#opic_cert").children('p').eq(0).html(record_data.cname);
-                // $("#opic_cert").children('p').eq(1).html(record_data.examid);
-                // $("#opic_cert").children('p').eq(2).html(record_data.birthday);
-                // $("#opic_cert").children('p').eq(3).html(record_data.ctestday);
-                // $("#opic_cert").children('p').eq(4).html(record_data.testtype);
-                // $("#opic_cert").children('p').eq(5).html(record_data.clevel);
-                // $("#opic_cert").children('p').eq(6).html(record_data.cissudate);
-                // $("#opic_cert").children('p').eq(7).html(record_data.useend);
-
-                // $("#opic_report").children('p').eq(0).html(record_data.ename);
-                // $("#opic_report").children('p').eq(1).html(record_data.language);
-                // $("#opic_report").children('p').eq(2).html(record_data.testdate);
-                // $("#opic_report").children('p').eq(3).html(record_data.examid);
-
                 $("#certno").html("인증서번호 : " + certId);
 
-                generateQRCode();
-
-                // html2canvas($(".inner-container"), {
-                //     onrendered: function(canvas) {
-                //         var img = canvas.toDataURL();
-                //         console.log(img);
-                //         $($(".inner-container")).html("<img src=" + img + ">");
-                //         window.open(img);            
-                //     }
-                // });
-
+                // generateQRCode();
             });
         },
 
@@ -99,19 +52,11 @@
                 $("#user-info-div").children('p').eq(0).html("박헌욱")
                     .next().html("870123-1111111")
                     .next().html("1234567")
-                    .next().html("2017.07.16");
-                // $("#user-info-div").children('p').eq(1).html("870123-1111111");
-                // $("#user-info-div").children('p').eq(2).html("1234567");
-                // $("#user-info-div").children('p').eq(3).html("2017.07.16");
-
+                    .next().html("2017.07.16");  
                 $("#main-score-info-div").children('p').eq(0).html(record_data.grade)
                     .next().html(parseFloat(record_data.re_point1).toFixed(2))
                     .next().html(record_data.re_point2)
-                    .next().html(record_data.re_point3);
-                // $("#main-score-info-div").children('p').eq(1).html(parseFloat(record_data.re_point1).toFixed(2));
-                // $("#main-score-info-div").children('p').eq(2).html(record_data.re_point2);
-                // $("#main-score-info-div").children('p').eq(3).html(record_data.re_point3);
-
+                    .next().html(record_data.re_point3);                
                 $("#detail-score-info-div").children('p').eq(0).html(record_data.re_point4 + "/" + record_data.re_point5)
                     .next().html(record_data.re_point7 + "/" + record_data.re_point8)
                     .next().html(record_data.re_point10 + "/" + record_data.re_point11)
@@ -125,7 +70,7 @@
                     .next().html(parseFloat(record_data.re_point18).toFixed(2))
                     .next().html(parseFloat(record_data.re_point21).toFixed(2));
 
-                generateQRCode();
+                //generateQRCode();
                 createChart(record_data);
             });
         },
@@ -222,7 +167,7 @@
                 //
 
                 $(".cert_doc_id").html("발급번호 : " + certId);
-                generateQRCode();
+                // generateQRCode();
             });
         },
 
@@ -245,7 +190,7 @@
                 $('#cert-main-agent').text(main_agent_name);
 
                 $(".cert_doc_id").html("발급번호 : " + certId);
-                generateQRCode();
+                // generateQRCode();
             });
         },
 
@@ -268,7 +213,7 @@
                 $('#cert-main-agent').text(main_agent_name);
 
                 $(".cert_doc_id").html("발급번호 : " + certId);
-                generateQRCode();
+                // generateQRCode();
             });
 
         },
@@ -364,7 +309,7 @@
 
                 $('.sungjuk_sector_' + sector).append(htmldiv);
                 $(".cert_doc_id").html("발급번호 : " + certId);
-                generateQRCode();
+                // generateQRCode();
             });
         },
     };
