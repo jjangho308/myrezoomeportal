@@ -1,13 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="8" viewBox="0 0 15 8">
-    <defs>
-        <rect id="a" width="9" height="2" x="3" y="3" rx="1"/>
-    </defs>
-    <g fill="none" fill-rule="evenodd">
-        <g fill="#FFF" stroke="#D9D9D9" stroke-width="2">
-            <circle cx="4" cy="4" r="4"/>
-            <circle cx="11" cy="4" r="4"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>27752CA4-8BC4-48C3-A2A8-4F29AF30726C</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ico/rezoome/off">
+            <circle id="Oval-4" fill="#D7DDE3" cx="10" cy="10" r="10"></circle>
+            <g id="Group-2" transform="translate(3.800000, 7.000000)">
+                <g id="Group" transform="translate(0.200000, 0.000000)">
+                    <circle id="Oval-3" stroke="#FFFFFF" stroke-width="1.5" fill="#D7DDE3" cx="3" cy="3" r="3"></circle>
+                    <circle id="Oval-3" stroke="#FFFFFF" stroke-width="1.5" fill="#D7DDE3" cx="9" cy="3" r="3"></circle>
+                    <path d="M3.4851179,1.80014947 L3.4851179,1.80008801 L8.30005112,1.80008609 C8.96276432,1.80008583 9.49999974,2.33732082 9.5,3.00003422 C9.5,3.66170333 8.96361144,4.19809203 8.30194246,4.19809203 C8.30039197,4.19809137 8.30039197,4.19809137 8.29883288,4.198088 C5.86649998,4.19175045 4.26391932,4.19238505 3.49696731,4.1999588 C2.83429441,4.20650278 2.29178695,3.67460521 2.28524297,3.01193231 C2.27869899,2.34925942 2.81059656,1.80675196 3.47326945,1.80020798 C3.47919358,1.80015923 3.47919358,1.80015923 3.4851179,1.80014947 Z" id="Rectangle-17" stroke="#D7DDE3" fill="#FFFFFF"></path>
+                </g>
+            </g>
         </g>
-        <use fill="#D0D0D0" xlink:href="#a"/>
-        <rect width="10.5" height="3.5" x="2.25" y="2.25" stroke="#FFF" stroke-width="1.5" rx="1.75"/>
     </g>
 </svg>

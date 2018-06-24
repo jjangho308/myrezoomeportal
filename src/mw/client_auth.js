@@ -8,6 +8,8 @@ var HttpStatusCode = require('../core/error/http_status_code');
 
 /**
  * Token authentication middleware. <br />
+ * Token이 없는 채로 Token이 필요한 페이지에 접근시
+ * Signin page로 redirection. <br />
  * 
  * @since 180310
  * @author TACKSU

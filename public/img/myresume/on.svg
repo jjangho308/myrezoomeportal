@@ -1,11 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="10" viewBox="0 0 17 10">
-    <defs>
-        <rect id="a" width="9" height="2" x="3" y="3" rx="1"/>
-    </defs>
-    <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
-        <circle cx="4" cy="4" r="4" fill="#FFF" stroke="#73DC00" stroke-width="2"/>
-        <circle cx="11" cy="4" r="4" fill="#FFF" stroke="#73DC00" stroke-width="2"/>
-        <use fill="#73DC00" xlink:href="#a"/>
-        <rect width="10.5" height="3.5" x="2.25" y="2.25" stroke="#FFF" stroke-width="1.5" rx="1.75"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>D0F778DE-8DB7-4A08-AEFD-C13C3FB23753</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Cnt/공통/MyRezoome/basic" transform="translate(-345.000000, -20.000000)">
+            <g id="ico/rezoome/on" transform="translate(345.000000, 20.000000)">
+                <circle id="Oval-4" fill="#73DC00" cx="10" cy="10" r="10"></circle>
+                <g id="Group-2" stroke-width="1" transform="translate(3.800000, 7.000000)">
+                    <g id="Group" transform="translate(0.200000, 0.000000)">
+                        <circle id="Oval-3" stroke="#FFFFFF" stroke-width="1.5" fill="#73DC00" cx="3" cy="3" r="3"></circle>
+                        <circle id="Oval-3" stroke="#FFFFFF" stroke-width="1.5" fill="#73DC00" cx="9" cy="3" r="3"></circle>
+                        <path d="M3.4851179,1.80014947 L3.4851179,1.80008801 L8.30005112,1.80008609 C8.96276432,1.80008583 9.49999974,2.33732082 9.5,3.00003422 C9.5,3.66170333 8.96361144,4.19809203 8.30194246,4.19809203 C8.30039197,4.19809137 8.30039197,4.19809137 8.29883288,4.198088 C5.86649998,4.19175045 4.26391932,4.19238505 3.49696731,4.1999588 C2.83429441,4.20650278 2.29178695,3.67460521 2.28524297,3.01193231 C2.27869899,2.34925942 2.81059656,1.80675196 3.47326945,1.80020798 C3.47919358,1.80015923 3.47919358,1.80015923 3.4851179,1.80014947 Z" id="Rectangle-17" stroke="#73DC00" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
     </g>
 </svg>
