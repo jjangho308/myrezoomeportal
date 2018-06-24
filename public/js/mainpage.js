@@ -491,6 +491,8 @@ $(document).ready(function () {
                                 setTimeout(function () {
                                     $("#alarm-div").hide();
                                     modal = false;
+
+                                    window.location.href="./certs";
                                 }, 1000);
 
                             }, 3000);

@@ -202,6 +202,18 @@ $(document).ready(function () {
                         htmldiv = htmldiv + '</div>';
                         htmldiv = htmldiv + '</td>';
                         htmldiv = htmldiv + '<td>' + category + '</td>';
+
+                        //응시일 추가
+                        if(viewdata.data.ea_exam_time != undefined) {
+                            htmldiv = htmldiv + '<td>' + formatDate(viewdata.data.ea_exam_time) + '</td>';
+                        }
+                        else if(viewdata.data.ctestday != undefined) {
+                            htmldiv = htmldiv + '<td>' + formatDate(viewdata.data.ctestday) + '</td>';
+                        }
+                        else {
+                            htmldiv = htmldiv + '<td>' + '</td>';
+                        }
+                        
                         htmldiv = htmldiv + '<td>' + subname + '</td>';
                         htmldiv = htmldiv + '</tr>';
 
