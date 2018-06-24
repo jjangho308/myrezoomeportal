@@ -10,13 +10,9 @@ var request = require('request');
 module.exports = {
 
     /**
-     * Function to get certificates by given condition. <br />
      * 
-     * Ajax Request일때는 주어진 회원 ID가 가지고 있는 모든 증명서 목록을 반환함.
-     * Normal Request일때는 증명서 조회 HTML 페이지를 반환한다.
-     * 
-     * @since 180322
-     * @author TACKSU
+     * @since 180622
+     * @author KWANGWOOK
      */
     getTxinfoByTxid: (req, res, next) => {
 
