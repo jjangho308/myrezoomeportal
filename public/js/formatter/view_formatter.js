@@ -14,7 +14,7 @@
             htmldiv = htmldiv + '<span>' + formatDate(record.ctestday) + '</span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
+            htmldiv = htmldiv + '<img src="img/main/opic-logo.png" alt="">';
             htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
@@ -38,7 +38,7 @@
             htmldiv = htmldiv + '<span>' + formatDate(record.ea_exam_time) + '</span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/mktest.png" alt="">';
+            htmldiv = htmldiv + '<img src="img/main/mk-logo.png" alt="">';
             htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
@@ -61,7 +61,7 @@
             htmldiv = htmldiv + '<span></span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
+            htmldiv = htmldiv + '<img src="img/main/mk-logo.png" alt="">';
             htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
@@ -90,7 +90,7 @@
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0008">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
-                htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg" alt="">';
+                htmldiv = htmldiv + '<img src="img/main/inha-logo.png" alt="">';
                 htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right">';
@@ -127,7 +127,7 @@
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0008">' + '</span>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
-                htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/t_inha05_400x400.jpg" alt="">';
+                htmldiv = htmldiv + '<img src="img/main/inha-logo.png" alt="">';
                 htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right">';
@@ -158,7 +158,7 @@
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0010">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
-                htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kmu.jpg" alt="">';
+                htmldiv = htmldiv + '<img src="img/main/kmu-logo.png" alt="">';
                 htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
@@ -193,7 +193,7 @@
                 htmldiv = htmldiv + '<span></span>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
-                htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kmu.jpg" alt="">';
+                htmldiv = htmldiv + '<img src="img/main/kmu-logo.png" alt="">';
                 htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
@@ -223,7 +223,7 @@
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
-                htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kyungki.gif" alt="">';
+                htmldiv = htmldiv + '<img src="img/main/kgu-logo.png" alt="">';
                 htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
@@ -258,7 +258,7 @@
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012"></span>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
-                htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/kyungki.gif" alt="">';
+                htmldiv = htmldiv + '<img src="img/main/kgu-logo.png" alt="">';
                 htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
@@ -288,7 +288,7 @@
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0014">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
-                htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/cau.png" alt="">';
+                htmldiv = htmldiv + '<img src="img/main/cau-logo.png" alt="">';
                 htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
@@ -323,7 +323,7 @@
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0014"></span>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
-                htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/cau.png" alt="">';
+                htmldiv = htmldiv + '<img src="img/main/cau-logo.png" alt="">';
                 htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
