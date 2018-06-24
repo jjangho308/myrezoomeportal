@@ -30,4 +30,8 @@ router.patch('/:prvRecordId', tokenAuth);
 router.patch('/:prvRecordId', ajaxOnly);
 router.patch('/:prvRecordId', ctrl.patch);
 
+router.delete('/:recordId', tokenAuth);
+router.delete('/:recordId', ajaxOnly);
+router.delete('/:recordId', ctrl.delete);
+
 module.exports = router;

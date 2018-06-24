@@ -54,20 +54,20 @@ module.exports = {
     },
 
     /**
-     * Create new private record entity to database. <br />
+     * Delete private record entry. <br />
      * 
      * @since 180402
      * @author TACKSU
      */
-    del: (req, res, next) => {
-        var privateRecordId = req.params.prvtId;
+    delete: (req, res, next) => {
+        var privateRecordId = req.params.recordId;
         if (!privateRecordId) {
             return next(new ResponseError({
                 code: ErrorCode.PARAM_NO_PRIVATE_RECORD_ID,
                 status: HttpStatusCode.BAD_REQUEST,
             }));
         }
-        req.body.prvtId = privateRecordId;
+        req.body.recordId = privateRecordId;
         Managers.client().request(new DeletePrivateRecordRequest(req.body), (err, result) => {
             if (!!err) {
                 next(err);
