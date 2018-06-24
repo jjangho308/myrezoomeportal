@@ -220,7 +220,6 @@ $(document).ready(function () {
     });
 
     $('#language-add-dialog .confirm-btn').click(function () {
-
         var lang = $("#langadd_lang").val();
         var name = $("#language-name").val();
         var score = $("#language-grade").val();
@@ -230,12 +229,14 @@ $(document).ready(function () {
 
         var is_error = false;
 
-        $("#language-add-dialog input[type=text]").each(function () {
-            if ($(this).val() == "") {
+        $("#langadd_lang").val("E");
+        $("#language-add-dialog input[type=text]").not("#langadd_lang-selectized").each(function() {               
+
+            if($(this).val() == "") {
                 is_error = true;
                 if ($(this).hasClass("study-period")) {
                     $(this).addClass("error");
-                    $(this).find(".error-message").show();
+                    $("#language-add-dialog .error-message-period").show();
                 } else {
                     $(this).addClass("error");
                     $(this).next().show();
@@ -243,7 +244,7 @@ $(document).ready(function () {
             } else {
                 if ($(this).hasClass("study-period")) {
                     $(this).removeClass("error");
-                    $(this).find(".error-message").hide();
+                    $("#language-add-dialog .error-message-period").hide();
                 } else {
                     $(this).removeClass("error");
                     $(this).next().hide();
@@ -300,36 +301,34 @@ $(document).ready(function () {
     });
 
     $('#cert-add-dialog .confirm-btn').click(function () {
-
         var name = $("#cert-name").val();
         var grade = $("#cert-grade").val();
         var start_date = $("#certadd_startdate").val();
         var end_date = $("#certadd_enddate").val();
         var expiry = $("#certadd_expireYn").is(':checked');
 
-        if (name == "") {
-            alert("이름");
-            $("#cert-name").focus();
-            return;
-        }
+        var is_error = false;
 
-        if (grade == "") {
-            alert("성적");
-            $("#cert-grade").focus();
-            return;
-        }
-
-        if (start_date == "") {
-            alert("시작일");
-            $("#certadd_startdate").focus();
-            return;
-        }
-
-        if (end_date == "") {
-            alert("종료일");
-            $("#certadd_enddate").focus();
-            return;
-        }
+        $("#cert-add-dialog input[type=text]").each(function() {                
+            if($(this).val() == "") {                                      
+                is_error = true;
+                if($(this).hasClass("study-period")) {
+                    $(this).addClass("error");
+                    $("#cert-add-dialog .error-message-period").show();
+                } else {
+                    $(this).addClass("error");
+                    $(this).next().show();     
+                }
+            } else {
+                if($(this).hasClass("study-period")) {
+                    $(this).removeClass("error");
+                    $("#cert-add-dialog .error-message-period").hide();
+                } else {
+                    $(this).removeClass("error");
+                    $(this).next().hide();  
+                }                  
+            }
+        });
 
         // cert format
         var param = {
@@ -343,37 +342,38 @@ $(document).ready(function () {
         // cert encryption
         var enc_record = JSON.stringify(param);
 
-        $.ajax({
-            type: 'POST',
-            url: '/record',
-            headers: {
-                'Authorization': client_authorization
-            },
-            data: JSON.stringify({
-                orgCd: "STI", // 코드 분기 필요
-                subCd: "OGC", // 코드 분기 필요
-                data: enc_record
-            }),
-            error: function (jqXhr, status, error) {
-                console.error('/record Error : ' + error);
-                console.error(jqXhr.responseText);
-            },
-            success: function (res) {
-                $("#cert-add-dialog .close-modal").click();
-                $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
-                $('#alarm-div').css("display", "block");
+        if(!is_error) {
+            $.ajax({
+                type: 'POST',
+                url: '/record',
+                headers: {
+                    'Authorization': client_authorization
+                },
+                data: JSON.stringify({
+                    orgCd: "STI", // 코드 분기 필요
+                    subCd: "OGC", // 코드 분기 필요
+                    data: enc_record
+                }),
+                error: function (jqXhr, status, error) {
+                    console.error('/record Error : ' + error);
+                    console.error(jqXhr.responseText);
+                },
+                success: function (res) {
+                    $("#cert-add-dialog .close-modal").click();
+                    $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
+                    $('#alarm-div').css("display", "block");
 
-                setTimeout(function () {
-                    $("#alarm-div").hide();
-                }, 1000);
+                    setTimeout(function(){
+                        $("#alarm-div").hide();
+                    }, 1000);
 
-                //clean view
-                $('.private-spec-body').remove();
-                getPrivateRecords();
-            },
-            contentType: 'application/json',
-        });
-
+                    //clean view
+                    $('.private-spec-body').remove();
+                    getPrivateRecords();
+                },
+                contentType: 'application/json',
+            });
+        }
     });
 
     $('#spec-change-dialog .confirm-btn').click(function () {

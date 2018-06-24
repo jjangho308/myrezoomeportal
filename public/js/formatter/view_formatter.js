@@ -361,6 +361,30 @@
             $('#spec_career_detail > .spec-body-default').hide();
         },
 
+        "LPT": function viewformatter(record) {
+            // Private record
+            var htmldiv = '<div class="private-spec-body">';
+            htmldiv = htmldiv + '<div class="spec-left">';
+            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-center">';
+            htmldiv = htmldiv + '<img src="img/main/icon-foreign-language.svg" alt="">';
+            htmldiv = htmldiv + '<img src="img/myresume/off.svg" title="기관에서 연동안된 이력입니다.">';
+            htmldiv = htmldiv + '';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-right">';
+            htmldiv = htmldiv + '<p>사용자입력</p>';
+            htmldiv = htmldiv + '<p>' + record.name + '</p>';
+            htmldiv = htmldiv + '<p>' + record.score + '</p>';
+            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '</div>';
+            $('#spec_forign_lang').append(htmldiv);
+            $('#spec_forign_lang > .spec-body-default').hide();
+        },
+
         "OGC": function viewformatter(record) {
             // Private record
             var htmldiv = '<div class="private-spec-body">';
@@ -370,7 +394,8 @@
             htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
+            htmldiv = htmldiv + '<img src="img/main/icon-certificates.svg" alt="">';
+            htmldiv = htmldiv + '<img src="img/myresume/off.svg" title="기관에서 연동안된 이력입니다.">';
             htmldiv = htmldiv + '';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
@@ -382,29 +407,6 @@
             htmldiv = htmldiv + '</div>';
             $('#spec_certification').append(htmldiv);
             $('#spec_certification > .spec-body-default').hide();
-        },
-
-        "LPT": function viewformatter(record) {
-            // Private record
-            var htmldiv = '<div class="private-spec-body">';
-            htmldiv = htmldiv + '<div class="spec-left">';
-            htmldiv = htmldiv + '<span></span>';
-            htmldiv = htmldiv + '<span></span>';
-            htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
-            htmldiv = htmldiv + '';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>사용자입력</p>';
-            htmldiv = htmldiv + '<p>' + record.name + '</p>';
-            htmldiv = htmldiv + '<p>' + record.grade + '</p>';
-            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '</div>';
-            $('#spec_forign_lang').append(htmldiv);
-            $('#spec_forign_lang > .spec-body-default').hide();
         },
     };
 }(window);
