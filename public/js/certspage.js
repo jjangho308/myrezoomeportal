@@ -95,7 +95,7 @@ function loadcertlist() {
 
                 if(fromnowsecond < 300) {
                     console.log("300 under");
-                    htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '" style="border-color:green;border-width:2px;")>';
+                    htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '" style="border-color:#4c80f1;")>';
                 }
                 
                 htmldiv = htmldiv + '<p><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certdelete("' + item.certId + '")></p>';
