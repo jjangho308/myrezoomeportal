@@ -355,8 +355,7 @@ $(document).ready(function () {
 
         setTimeout(function () {
             //$("#cert-line-dialog  .close-modal").click();
-            $("#cert-line-dialog").parent().fadeOut('slow'); // rollback when issue
-            $(".jquery-modal blocker current")
+            $("#cert-line-dialog").parent().fadeOut('slow'); // rollback when issue            
             $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
             $('#alarm-div').css("display", "block");
             setTimeout(function(){                
