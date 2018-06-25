@@ -740,7 +740,7 @@ color:#676767;
   height: 19px;
   border-radius: 3px;
   background-color: #d8d8d8;
-  margin-bottom: 19px;
+  /*margin-bottom: 19px;*/
   }	
 
   #main-body .default-2{
@@ -752,26 +752,27 @@ color:#676767;
 
 
 .spec-left .default{
-	    margin-left: 8px;
-  width: 164px;
-  height: 14px;
-  border-radius: 3px;
-  background-color: #d8d8d8;
-
+    margin-left: 17px;
+    width: 164px;
+    height: 14px;
+    border-radius: 3px;
+    background-color: #d8d8d8;
 }
 
 .spec-center .default{
   width: 60px;
   height: 60px;
+  margin-left: 20px;
   border-radius: 3px;
   background-color: #e9e9e9;
 
 }
 
   #main-body  .spec-right .default-1{
-	display: inline-block;
-	width: 240px;
+  display: inline-block;
+  width: 240px;
   height: 16px;
+  margin-left: 20px;
   border-radius: 3px;
   background-color: #e9e9e9;
 }
@@ -781,6 +782,7 @@ color:#676767;
 	width: 270px;
   height: 16px;
   border-radius: 3px;
+	  margin-left: 20px;
   background-color: #e9e9e9;
 }
 
