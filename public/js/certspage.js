@@ -1,4 +1,6 @@
 var reqparam = [];
+var sortingField = "date"; // or subId 
+var sortingOrder = "desc"; // or asc
 
 function certckeckboxclick(uniqueid) {
     var sdata = sessionStorage.getItem(uniqueid);
@@ -51,12 +53,29 @@ function loadcertlist() {
             console.error('/certs/list ' + error);
             console.error(jqXhr.responseText);
         },
-        success: function (certlistres) {
+        success: function (certlistres) {            
             console.log(certlistres);
             var certlistresult = certlistres.result;
             $(".cert-container").remove();
             $('#certlistcount').text(certlistresult.length + '건');
             var divContainer = $('#cert-grid-div');
+            console.log(sortingField);
+            certlistresult.sort(function(a, b){                                
+                if(sortingField == 'date') {
+                    if(sortingOrder == 'asc') {                    
+                        return Number(new Date(a.date)) - Number(new Date(b.date));                
+                    } else if(sortingOrder == 'desc') {
+                        return Number(new Date(b.date)) - Number(new Date(a.date));                
+                    }             
+                } else if(sortingField == 'subId') {
+                    if(sortingOrder == 'asc') {                    
+                        return a.subId < b.subId ? -1 : a.subId > b.subId ? 1 : 0;                
+                    } else if(sortingOrder == 'desc') {
+                        return b.subId > a.subId ? -1 : a.subId < b.subId ? 1 : 0;               
+                    }
+                }                
+            });
+
             certlistresult.forEach(function (item) {
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '")>';
                 htmldiv = htmldiv + '<p><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certmore("more-div-' + item.certId + '")></p>';
@@ -251,37 +270,41 @@ $(document).ready(function () {
             element.css("display", "none");
 
     });
-
-    $(".option-open").click(function () {
+    
+    $(".option-open").eq(0).click(function () {
         var element = $(".sub-info-select-div");
-
-
         if (element.css("display") == "none")
             element.css("display", "block");
         else
             element.css("display", "none");
+        loadcertlist();
+    });
 
-        element = $(".sub-info img:nth-child(2)");
-        console.log(element.attr("src"));
+    $(".option-open").eq(1).click(function () { 
+        element = $(".sub-info img:nth-child(2)");        
         if (element.attr("src").indexOf("path-2") >= 0) {
-            console.log("sadasd");
+            sortingOrder = "asc";
             element.attr("src", element.attr("src").replace("path-2", "path-1"));
         } else if (element.attr("src").indexOf("path-1") >= 0) {
-            console.log("sada2sd");
+            sortingOrder = "desc";
             element.attr("src", element.attr("src").replace("path-1", "path-2"));
         }
-
-
+        loadcertlist();
     });
 
     $(".sub-info-select-p").click(function () {
         $(".sub-info-select-p").removeClass("active");
         $(this).addClass("active");
-
         $(".sub-info-select-div").css("display", "none");
-
         $("p.option-open").text($(this).text());
 
+        if($(this).text() == '최신 발급일 순') {
+            sortingField = 'date';
+        } else if($(this).text() == '발급 기관 순') {
+            sortingField = 'subId';
+        }
+
+        loadcertlist();
     });
 
 
