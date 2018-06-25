@@ -633,8 +633,10 @@ p{
           height: 100vh; 
   
           background:  #f2f5f8;
-      }
-  
+        }
+        #btn_download{
+            display: block;
+        }
       .main-body{
           background-color: #f2f5f8;
           padding: 35px 0px;
@@ -736,6 +738,9 @@ p{
             min-width: 470px;
         }
 
+        #btn_download{
+            display: none;
+        }
   
       .main-body {
           padding: 0px;
@@ -896,6 +901,9 @@ p{
           width: 100%;
       }
 
+      #btn_download{
+        display: none;
+    }
       .outer-container{
         /* width: 324px; */
         /* width: 100%; */
