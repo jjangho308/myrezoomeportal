@@ -265,11 +265,11 @@
 
         $("#more-button").click(function () {
 
-            if ($("#more-button-div").css("display") == "none") {
-                $("#more-button-div").show();
-            } else {
-                $("#more-button-div").hide();
-            }
+            // if ($("#more-button-div").css("display") == "none") {
+            //     $("#more-button-div").show();
+            // } else {
+            //     $("#more-button-div").hide();
+            // }
 
         });
 
@@ -322,39 +322,35 @@
 
         // donwload PDF
         $("#btn_download").click(function (event) {
-            // html2canvas(document.body, {
-            //     onrendered: function(canvas) {
-            //       var pdf = new jsPDF();
-            //       var marginLeft=20;
-            //       var marginRight=20
-            //       pdf.addImage(canvas.toDataURL("image/jpeg"),"jpeg",marginLeft,marginRight)
-            //       window.location=pdf.output("datauristring")
-            //     }
-            //   });
-            //
                 generateQRCode();
-
-                $(".qr-container").show();
-                // var $childern = $(".main-body >.outer-container");
-                var $childern = $(".inner-container");
                 
+                $(".qr-container").show();
+                var $childern = $(".main-body >.outer-container");
 
-                            $childern.each(function (idx, array) {
-                                html2canvas($(this), {
-                                    onrendered: function(canvas) {
-                                    var pdf = new jsPDF('p', 'mm',[297,210]);
-                                    
-                                    pdf.addImage(canvas.toDataURL("image/png"),"png", 10,10,190,277)                                    
-                                    // window.location=pdf.output("datauristring")
-                                    pdf.save('cert_pdf_' +(idx+1)+'.pdf');
-                                    }
-                                  });       
-                            });
-                            $(".qr-container").hide();
-            //
-
-
-
+                // var $childern = $(".inner-container");
+                
+                var chilSize = $childern.size();
+                var size = 0;
+                var pdf = new jsPDF('p', 'mm',[297,210]);
+                
+                $childern.each(function (idx, array) {
+                    html2canvas($(this), {
+                        onrendered: function(canvas) {
+                            size++;
+                            pdf.addImage(canvas.toDataURL("image/png"),"png", 10,10,190,277);
+                            if(size != chilSize){
+                                pdf.addPage();                                
+                            }
+                           
+                            if (size === chilSize) {                                
+                                pdf.save('rezoome_cert.pdf');
+                            }
+                            
+                        }
+                    });       
+                });
+                            
+            $(".qr-container").hide();
         });
 
 
@@ -559,7 +555,7 @@ function summitform() {
 function setCertViewer(tx_id) {
     record = getData(tx_id);
     console.log(record);
-    $("#cert_title").html(record.subid);
+    $("#cert_title").html(record.data.subjnm);
     certformatter[record.subid](record.data);
 }
 

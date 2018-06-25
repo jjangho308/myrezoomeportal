@@ -213,9 +213,9 @@ $(document).ready(function () {
                     $('#alarm-div').css("display", "block");
                     $('#alarm-div').css("margin-right", "-108px");
 
-                    setTimeout(function () {
-                        $("#alarm-div").hide();
-                    }, 3000);
+                    setTimeout(function(){                
+                        $('#alarm-div').fadeOut('slow');
+                    }, 2000);
 
                     //clean view
                     $('.private-spec-body').remove();
@@ -280,6 +280,7 @@ $(document).ready(function () {
     });
 
     $('#language-add-dialog .confirm-btn').click(function () {
+        var issuer = $("#language-issuer").val();
         var lang = $("#langadd_lang").val();
         var name = $("#language-name").val();
         var score = $("#language-grade").val();
@@ -314,6 +315,7 @@ $(document).ready(function () {
 
         // cert format
         var param = {
+            issuer: issuer,
             lang: lang,
             name: name,
             score: score,
@@ -347,9 +349,9 @@ $(document).ready(function () {
                     $('#alarm-div').css("display", "block");
                     $('#alarm-div').css("margin-right", "-108px");
 
-                    setTimeout(function () {
-                        $("#alarm-div").hide();
-                    }, 3000);
+                    setTimeout(function(){                
+                        $('#alarm-div').fadeOut('slow');
+                    }, 2000);
 
                     //clean view
                     $('.private-spec-body').remove();
@@ -362,6 +364,7 @@ $(document).ready(function () {
     });
 
     $('#cert-add-dialog .confirm-btn').click(function () {
+        var issuer = $("#cert-issuer").val();
         var name = $("#cert-name").val();
         var grade = $("#cert-grade").val();
         var start_date = $("#certadd_startdate").val();
@@ -393,6 +396,7 @@ $(document).ready(function () {
 
         // cert format
         var param = {
+            issuer: issuer,
             name: name,
             grade: grade,
             startdate: start_date,
@@ -424,9 +428,9 @@ $(document).ready(function () {
                     $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
                     $('#alarm-div').css("display", "block");
 
-                    setTimeout(function () {
-                        $("#alarm-div").hide();
-                    }, 3000);
+                    setTimeout(function(){                
+                        $('#alarm-div').fadeOut('slow');
+                    }, 2000);
 
                     //clean view
                     $('.private-spec-body').remove();
@@ -463,6 +467,10 @@ $(document).ready(function () {
                         $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
                         $('#alarm-div').css("display", "block");
                         $('#alarm-div').css("margin-right", "-142px");
+
+                        setTimeout(function(){                
+                            $('#alarm-div').fadeOut('slow');
+                        }, 2000);
 
                         // sessionStrage update
                         var txidList = getTxidList();
@@ -501,6 +509,7 @@ $(document).ready(function () {
     $('.spec-detail-div').click(function (event) {
         $(".spec-detail-div input:checkbox").each(function (i) {
             if ($(this).is(':checked')) {
+                $(this.parentNode.parentNode).find("input:checkbox:not(:checked)")[0].checked = true;
                 $(this).closest('.spec-body').css({
                     "border": "solid 1px #4c80f1",
                     "border-radius": "4px",
@@ -590,11 +599,13 @@ $(document).ready(function () {
                                     current_active = 0;
                                 }
                                 $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
-                            }, 1000);
+                            }, 300);
 
                             setTimeout(function () {
 
-                                $("#cert-line-dialog .close-modal").click();
+                                //$("#cert-line-dialog .close-modal").click();
+                                $("#cert-line-dialog").parent().fadeOut('slow'); // rollback when issue
+                                
                                 $("#alarm-div").css("display", "block");
                                 $("#alarm-div").css("margin-right", "-224px");
                                 $("#select-footer").hide();
@@ -643,6 +654,8 @@ $(document).ready(function () {
         var emptyarray = [];
         setTxidList(emptyarray);
 
+        $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
+
         $.ajax({
             type: 'POST',
             url: '/client',
@@ -681,6 +694,15 @@ $(document).ready(function () {
             contentType: 'application/json',
         });
     });
+
+    document.getElementById("spec_forign_lang_targetdiv").addEventListener("private_deleted", function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length) {
+            $(event.currentTarget).show();
+        }
+    }, true);
 });
 
 window.onload = function () {
@@ -741,7 +763,7 @@ function change_default_cert(subid) {
     $('#spec-change-dialog').modal('show');
 }
 
-function delete_private_record(prvtId) {
+function delete_private_record(prvtId, cb) {
     $.ajax({
         type: 'DELETE',
         url: '/records/' + prvtId,
@@ -755,27 +777,29 @@ function delete_private_record(prvtId) {
         error: function (jqXhr, status, error) {
             console.error('Delete private record Error : ' + error);
             console.error(jqXhr.responseText);
+            cb(jqXhr.responseJSON);
         },
         success: function (res) {
             $("#alarm-div span").text("정상적으로 삭제 완료되었습니다.");
             $('#alarm-div').css("display", "block");
             $('#alarm-div').css("margin-right", "-108px");
 
-            setTimeout(function () {
-                $("#alarm-div").hide();
-            }, 1000);
+            setTimeout(function(){                
+                $('#alarm-div').fadeOut('slow');
+            }, 2000);
 
-            getPrivateRecords();
+            // getPrivateRecords();
+            cb(null, res);
         }
     });
 }
 
 function singletonCallback(opt1, opt2, opt3, opt4) {
-    debugger;
+    // debugger;
 }
 
 function buttonCallback(opt1, opt2, opt3, opt4) {
-    debugger;
+    // debugger;
 }
 
 
@@ -804,23 +828,23 @@ function getPrivateRecords() {
             });
             $('.private-spec-body').on('click', singletonCallback);
             $('.private-spec-body button').on('click', buttonCallback);
-            
-            if($("#spec_edu_detail .spec-body").length > 0
-                || $("#spec_edu_detail .private-spec-body").length > 0) {
-                $('#spec_edu_detail > .spec-body-default').hide();               
-            } 
-    
-            if($("#spec_forign_lang .spec-body").length > 0
-                || $("#spec_forign_lang .private-spec-body").length > 0) {
+
+            if ($("#spec_edu_detail .spec-body").length > 0 ||
+                $("#spec_edu_detail .private-spec-body").length > 0) {
+                $('#spec_edu_detail > .spec-body-default').hide();
+            }
+
+            if ($("#spec_forign_lang .spec-body").length > 0 ||
+                $("#spec_forign_lang .private-spec-body").length > 0) {
                 $('#spec_forign_lang > .spec-body-default').hide();
-            } 
-    
-            if($("#spec_certification .spec-body").length > 0
-                || $("#spec_certification .private-spec-body").length > 0) {
+            }
+
+            if ($("#spec_certification .spec-body").length > 0 ||
+                $("#spec_certification .private-spec-body").length > 0) {
                 $('#spec_certification > .spec-body-default').hide();
-            } 
-        
-            
+            }
+
+
             // for (var i in res.result) {
             //     var data = JSON.parse(res[i].data);
             //     data.certPrvtId = res[i].certPrvtId;
@@ -980,19 +1004,19 @@ function refreshview(records) {
         formatter[subid](recordList[i]);
     }
 
-    if($("#spec_edu_detail .spec-body").length > 0
-        || $("#spec_edu_detail .private-spec-body").length > 0) {
-        $('#spec_edu_detail > .spec-body-default').hide();        
-    } 
+    if ($("#spec_edu_detail .spec-body").length > 0 ||
+        $("#spec_edu_detail .private-spec-body").length > 0) {
+        $('#spec_edu_detail > .spec-body-default').hide();
+    }
 
-    if($("#spec_forign_lang .spec-body").length > 0
-        || $("#spec_forign_lang .private-spec-body").length > 0) {
-        $('#spec_forign_lang > .spec-body-default').hide();       
-    } 
+    if ($("#spec_forign_lang .spec-body").length > 0 ||
+        $("#spec_forign_lang .private-spec-body").length > 0) {
+        $('#spec_forign_lang > .spec-body-default').hide();
+    }
 
-    if($("#spec_certification .spec-body").length > 0
-        || $("#spec_certification .private-spec-body").length > 0) {
-        $('#spec_certification > .spec-body-default').hide();        
+    if ($("#spec_certification .spec-body").length > 0 ||
+        $("#spec_certification .private-spec-body").length > 0) {
+        $('#spec_certification > .spec-body-default').hide();
     }
 }
 

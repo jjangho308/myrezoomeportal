@@ -13,9 +13,11 @@ table {
     .inner-container{
         margin: auto;
         position: relative;
-        border: 2px solid #666666;
-        width: 95%;
-        height: 90%;
+        border: 1px solid #666666;
+        /* width: 95%;
+        height: 90%; */
+        width: 210mm;
+        height: 288mm;
     }
 
     .stamp{
@@ -30,7 +32,12 @@ table {
         display: flex;
         font-size: 75%;
     }
-    .cert_doc_id {font-size: 11px;font-weight: 500;padding: 15px 0px 3px 45px;color: #838383;}
+    .cert_doc_id {
+        font-size: 11px;
+        font-weight: 500;
+        padding: 15px 0px 3px 45px;
+        color: #838383;
+    }
 
     .cert_title {
         width:100%;
@@ -122,17 +129,17 @@ table {
 
     .qr-container div:nth-child(1){
         position: absolute;
-        bottom: -55px;
-        right: 39px;
-        width: 50px;
-        height: 50px;
+        bottom: -45px;
+        right: 33px;
+        width: 40px;
+        height: 40px;
     }
 
     .qr-container p:nth-child(2) {
         position: relative;
         font-size: 11px;
-        left: 5px;
-        top: -30px;
+        left: -41px;
+        top: -27px;
         color: #838383;
         padding: 5px 5px 0px 40px;
     }
@@ -140,7 +147,7 @@ table {
     .qr-container p:nth-child(3) {
         position: relative;
         font-size: 11px;
-        left: 5px;
+        left: -41px;
         top: -30px;
         color: #838383;
         padding: 5px 5px 0px 40px;

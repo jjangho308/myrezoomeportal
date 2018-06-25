@@ -30,6 +30,13 @@ function certdelete(certId) {
             // TODO Handle with jqXhr.responseJSON
         },
         success: function (result) {
+            $("#alarm-div span").text("증명서 삭제가 완료되었습니다.");
+            $('#alarm-div').css("display", "block");
+
+            setTimeout(function(){                
+                $('#alarm-div').fadeOut('slow');
+            }, 2000);
+
             loadcertlist();
         },
         contentType: 'application/json'
@@ -58,8 +65,7 @@ function loadcertlist() {
             var certlistresult = certlistres.result;
             $(".cert-container").remove();
             $('#certlistcount').text(certlistresult.length + '건');
-            var divContainer = $('#cert-grid-div');
-            console.log(sortingField);
+            var divContainer = $('#cert-grid-div');            
             certlistresult.sort(function(a, b){                                
                 if(sortingField == 'date') {
                     if(sortingOrder == 'asc') {                    
@@ -77,21 +83,44 @@ function loadcertlist() {
             });
 
             certlistresult.forEach(function (item) {
+
+                var current_time = new Date();
+                var item_time_convert = new Date(item.date);
+                var fromnowsecond =  (current_time - item_time_convert) / 1000;
+                console.log("====current time - data create time====");
+                console.log(fromnowsecond);
+
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '")>';
-                htmldiv = htmldiv + '<p><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certmore("more-div-' + item.certId + '")></p>';
-                htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
+
+                if(fromnowsecond < 300) {
+                    console.log("300 under");
+                    htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '") style="border-color:#4c80f1;")>';
+                }
+                
+                htmldiv = htmldiv + '<p><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certdelete("' + item.certId + '")></p>';
+
+                // 일단 subid 별로 하나씩 분기 태우지만 subcd 같은 공통 코드를 통해 졸업서, 성적서 등등으로 구분할수 있어야함.
+                if(item.subId == 'RCOGC0014' || item.subId == 'RCOGC0012' || item.subId == 'RCOGC0010' || item.subId == 'RCOGC0008') {
+                    htmldiv = htmldiv + '<img src="img/mycert/icon-certs-gradu.svg" alt="">';
+                } else if(item.subId == 'RCOGC0015' || item.subId == 'RCOGC0013' || item.subId == 'RCOGC0011' || item.subId == 'RCOGC0009') {
+                    htmldiv = htmldiv + '<img src="img/mycert/icon-certs-score.svg" alt="">';
+                } else {
+                    htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
+                }
+
                 htmldiv = htmldiv + '<p>증명서</p>';
                 htmldiv = htmldiv + '<p>' + item.title + '</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + formatDateYYYYMMDDHHMM(item.date) + '</p>';
 
-                htmldiv = htmldiv + '<div id="more-div-' + item.certId + '" class="more-store-resume-div">';
-                htmldiv = htmldiv + '<p>복사</p>';
-                htmldiv = htmldiv + '<p onclick=certdelete("' + item.certId + '")>삭제</p>';
-                htmldiv = htmldiv + '<p>공유내역</p>';
-                htmldiv = htmldiv + '</div>';
+                // htmldiv = htmldiv + '<div id="more-div-' + item.certId + '" class="more-store-resume-div">';
+                // htmldiv = htmldiv + '<p>복사</p>';
+                // htmldiv = htmldiv + '<p onclick=certdelete("' + item.certId + '")>삭제</p>';
+                // htmldiv = htmldiv + '<p>공유내역</p>';
+                // htmldiv = htmldiv + '</div>';
 
                 htmldiv = htmldiv + '</div>';
-                divContainer.append(htmldiv);
+
+                divContainer.append(htmldiv);                
             });
             // for(var i in certlistresult) {
             //     var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+ item.certId +'")>';                
@@ -319,19 +348,20 @@ $(document).ready(function () {
             current_active += 1;
 
             if (current_active > 5) {
-                current_active = 0;
-                clearInterval(mytimer);
+                current_active = 0;                
             }
             $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
-        }, 1000);
+        }, 300);
 
         setTimeout(function () {
-            $("#cert-line-dialog  .close-modal").click();
+            //$("#cert-line-dialog  .close-modal").click();
+            $("#cert-line-dialog").parent().fadeOut('slow'); // rollback when issue            
             $("#alarm-div span").text('증명서 발급이 완료되었습니다.  "증명서보관함"에서 확인해주세요.');
             $('#alarm-div').css("display", "block");
-            setTimeout(function () {
-                $('#alarm-div').hide();
-            }, 1000);
+            setTimeout(function(){                
+                clearInterval(mytimer);
+                $('#alarm-div').fadeOut('slow');
+            }, 2000);
         }, 3000);
 
 
