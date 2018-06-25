@@ -335,8 +335,8 @@
                 generateQRCode();
 
                 $(".qr-container").show();
-                // var $childern = $(".main-body >.outer-container");
-                var $childern = $(".inner-container");
+                var $childern = $(".main-body >.outer-container");
+                // var $childern = $(".inner-container");
                 
 
                             $childern.each(function (idx, array) {
