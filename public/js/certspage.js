@@ -360,7 +360,7 @@ $(document).ready(function () {
             $('#alarm-div').css("display", "block");
             setTimeout(function () {
                 $('#alarm-div').hide();
-            }, 1000);
+            }, 2000);
         }, 3000);
 
 
