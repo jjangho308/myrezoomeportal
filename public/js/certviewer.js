@@ -265,11 +265,11 @@
 
         $("#more-button").click(function () {
 
-            if ($("#more-button-div").css("display") == "none") {
-                $("#more-button-div").show();
-            } else {
-                $("#more-button-div").hide();
-            }
+            // if ($("#more-button-div").css("display") == "none") {
+            //     $("#more-button-div").show();
+            // } else {
+            //     $("#more-button-div").hide();
+            // }
 
         });
 
@@ -335,8 +335,8 @@
                 generateQRCode();
 
                 $(".qr-container").show();
-                // var $childern = $(".main-body >.outer-container");
-                var $childern = $(".inner-container");
+                var $childern = $(".main-body >.outer-container");
+                // var $childern = $(".inner-container");
                 
 
                             $childern.each(function (idx, array) {
@@ -559,7 +559,7 @@ function summitform() {
 function setCertViewer(tx_id) {
     record = getData(tx_id);
     console.log(record);
-    $("#cert_title").html(record.subid);
+    $("#cert_title").html(record.data.subjnm);
     certformatter[record.subid](record.data);
 }
 

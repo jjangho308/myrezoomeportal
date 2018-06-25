@@ -147,13 +147,17 @@
 </div>
 
 <div id="cert-add-dialog" class="modal">
+
     <p>이력 추가 - 자격
         <span>레쥬메 서비스를 통해 사용하고 싶은 이력을 추가할 수 있습니다.</span>
     </p>
     <div class="modal-body">
 
-        <p>자격명</p>
+        <p>발급기관</p>
+        <input type="text" id="cert-issuer" placeholder="발급기관을 입력해주세요. EX) 청와대">            
+        <div class="error-message">발급기관을 입력해주세요.</div>
 
+        <p>자격명</p>
         <input type="text" id="cert-name" placeholder="자격증의 이름을 입력해주세요. EX) 정보처리기사">
         <div class="error-message">자격명을 입력해주세요.</div>
 
@@ -196,12 +200,16 @@
     </p>
     <div class="modal-body">
 
+        <p>발급기관</p>
+        <input type="text" id="language-issuer" placeholder="발급기관을 입력해주세요. EX) YBM">            
+        <div class="error-message">발급기관을 입력해주세요.</div>
+
         <p>시험명</p>        
             <div class="select-100">
             <select id="langadd_lang" name="select-1">
-                <option value="eng">영어</option>
-                <option value="chn">중국어</option>
-                <option value="etc">기타</option>
+                <option value="영어">영어</option>
+                <option value="중국어">중국어</option>
+                <option value="기타">기타</option>
             </select>
         </div>
         <input type="text" id="language-name" placeholder="어학 시험명을 입력해주세요. EX) OPIc">

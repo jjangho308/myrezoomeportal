@@ -185,7 +185,7 @@ module.exports = {
      * @since ?
      * @author ?
      */
-    setDefault: (req, res, next) => {
+    setDefault: (req, res, next) => {       
         // /certs AJAX request
         if (!!req.xhr) {
             if (!req.body.uId) {
@@ -213,10 +213,10 @@ module.exports = {
                 uid: req.body.uId,
                 txid: req.body.txid,
                 subid: req.body.subid
-            };
+            };            
 
-            Managers.db().getRecordDAO().setDefaultYn(data, (err, result) => {
-                if (!err) {
+            Managers.db().getRecordDAO().setDefaultYn(data, (err, result) => {                
+                if (!!err) {
                     next(err);
                 } else {
                     res.json(result);
