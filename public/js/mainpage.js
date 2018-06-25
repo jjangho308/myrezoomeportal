@@ -496,6 +496,7 @@ $(document).ready(function () {
     $('.spec-detail-div').click(function (event) {
         $(".spec-detail-div input:checkbox").each(function (i) {
             if ($(this).is(':checked')) {
+                $(this.parentNode.parentNode).find("input:checkbox:not(:checked)")[0].checked = true;
                 $(this).closest('.spec-body').css({
                     "border": "solid 1px #4c80f1",
                     "border-radius": "4px",
