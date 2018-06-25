@@ -273,7 +273,7 @@ width:124px;
 vertical-align:middle;
 }
 
-.spec-center img:nth-child(1) {width:auto;height:auto;max-width:60px;max-height:60px;vertical-align: -15px;border-radius:5px;margin-top: 0px;float:left;}
+.spec-center img:nth-child(1) {width:auto;height:auto;max-width:60px;max-height:60px;/* vertical-align: -18px; */border-radius:5px;margin-top: 5px;float:left;}
 
 .spec-center img:nth-child(2) {
     position: absolute;
@@ -282,7 +282,6 @@ vertical-align:middle;
     margin-left: 30px;
     margin-top: 4px;
 }
-
 
 .spec-hover-detail-1{
       display: none;
@@ -328,7 +327,7 @@ position:relative;
 margin-bottom:-31px;
 top:-53px;
 float:right;
-right:-73px;
+right:-60px;
 width:70px;
 height:30px;
 border-radius:3px;
