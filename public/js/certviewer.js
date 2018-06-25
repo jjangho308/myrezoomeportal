@@ -320,6 +320,46 @@
             summitform();
         });
 
+        // donwload PDF
+        $("#btn_download").click(function (event) {
+            // html2canvas(document.body, {
+            //     onrendered: function(canvas) {
+            //       var pdf = new jsPDF();
+            //       var marginLeft=20;
+            //       var marginRight=20
+            //       pdf.addImage(canvas.toDataURL("image/jpeg"),"jpeg",marginLeft,marginRight)
+            //       window.location=pdf.output("datauristring")
+            //     }
+            //   });
+            //
+                generateQRCode();
+
+                $(".qr-container").show();
+                // var $childern = $(".main-body >.outer-container");
+                var $childern = $(".inner-container");
+                
+
+                            $childern.each(function (idx, array) {
+                                html2canvas($(this), {
+                                    onrendered: function(canvas) {
+                                    var pdf = new jsPDF('p', 'mm',[297,210]);
+                                    
+                                    pdf.addImage(canvas.toDataURL("image/png"),"png", 10,10,190,277)                                    
+                                    // window.location=pdf.output("datauristring")
+                                    pdf.save('cert_pdf_' +(idx+1)+'.pdf');
+                                    }
+                                  });       
+                            });
+                            $(".qr-container").hide();
+            //
+
+
+
+        });
+
+
+
+
         $("#btn_print").click(function (event) {
             // generate QR before print 
             generateQRCode();
