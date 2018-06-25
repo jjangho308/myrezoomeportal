@@ -201,9 +201,9 @@ $(document).ready(function () {
                     $('#alarm-div').css("display", "block");
                     $('#alarm-div').css("margin-right", "-108px");
 
-                    setTimeout(function () {
-                        $("#alarm-div").hide();
-                    }, 3000);
+                    setTimeout(function(){                
+                        $('#alarm-div').fadeOut('slow');
+                    }, 2000);
 
                     //clean view
                     $('.private-spec-body').remove();
@@ -336,9 +336,9 @@ $(document).ready(function () {
                     $('#alarm-div').css("display", "block");
                     $('#alarm-div').css("margin-right", "-108px");
 
-                    setTimeout(function () {
-                        $("#alarm-div").hide();
-                    }, 3000);
+                    setTimeout(function(){                
+                        $('#alarm-div').fadeOut('slow');
+                    }, 2000);
 
                     //clean view
                     $('.private-spec-body').remove();
@@ -350,7 +350,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#cert-add-dialog .confirm-btn').click(function () { 
+    $('#cert-add-dialog .confirm-btn').click(function () {
         var issuer = $("#cert-issuer").val();
         var name = $("#cert-name").val();
         var grade = $("#cert-grade").val();
@@ -415,9 +415,9 @@ $(document).ready(function () {
                     $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
                     $('#alarm-div').css("display", "block");
 
-                    setTimeout(function () {
-                        $("#alarm-div").hide();
-                    }, 3000);
+                    setTimeout(function(){                
+                        $('#alarm-div').fadeOut('slow');
+                    }, 2000);
 
                     //clean view
                     $('.private-spec-body').remove();
@@ -454,6 +454,10 @@ $(document).ready(function () {
                         $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
                         $('#alarm-div').css("display", "block");
                         $('#alarm-div').css("margin-right", "-142px");
+
+                        setTimeout(function(){                
+                            $('#alarm-div').fadeOut('slow');
+                        }, 2000);
 
                         // sessionStrage update
                         var txidList = getTxidList();
@@ -492,6 +496,7 @@ $(document).ready(function () {
     $('.spec-detail-div').click(function (event) {
         $(".spec-detail-div input:checkbox").each(function (i) {
             if ($(this).is(':checked')) {
+                $(this.parentNode.parentNode).find("input:checkbox:not(:checked)")[0].checked = true;
                 $(this).closest('.spec-body').css({
                     "border": "solid 1px #4c80f1",
                     "border-radius": "4px",
@@ -633,7 +638,7 @@ $(document).ready(function () {
 
         var emptyarray = [];
         setTxidList(emptyarray);
-        
+
         $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
 
         $.ajax({
@@ -679,7 +684,7 @@ $(document).ready(function () {
         event.stopPropagation();
         event.preventDefault();
 
-        if ($("#spec_forign_lang .private-spec-body").length == 0) {
+        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length) {
             $(event.currentTarget).show();
         }
     }, true);
@@ -764,9 +769,9 @@ function delete_private_record(prvtId, cb) {
             $('#alarm-div').css("display", "block");
             $('#alarm-div').css("margin-right", "-108px");
 
-            setTimeout(function () {
-                $("#alarm-div").hide();
-            }, 1000);
+            setTimeout(function(){                
+                $('#alarm-div').fadeOut('slow');
+            }, 2000);
 
             // getPrivateRecords();
             cb(null, res);
