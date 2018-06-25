@@ -81,13 +81,11 @@ margin-right:0;
 }
 
 .cert-container p:nth-child(1)>img {
-    position: absolute;
     width: 15px;
-    height:16px;
-    top: -24px;
-    right: -15px;
-    cursor: pointer;
-    padding: 24px;
+    height: 16px;    
+    cursor: pointer;    
+    float: right;
+    display: inline-table;
 }
 
 .cert-container img:nth-child(2) {
