@@ -73,7 +73,7 @@ module.exports = {
                 return next(err);
             } else {
                 return res.json({
-                    resutl: result
+                    result: result
                 });
             }
         });

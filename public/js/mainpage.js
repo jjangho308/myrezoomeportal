@@ -672,6 +672,15 @@ $(document).ready(function () {
             contentType: 'application/json',
         });
     });
+
+    document.getElementById("spec_forign_lang_targetdiv").addEventListener("private_deleted", function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        if ($("#spec_forign_lang .private-spec-body").length == 0) {
+            $(event.currentTarget).show();
+        }
+    }, true);
 });
 
 window.onload = function () {
@@ -732,7 +741,7 @@ function change_default_cert(subid) {
     $('#spec-change-dialog').modal('show');
 }
 
-function delete_private_record(prvtId) {
+function delete_private_record(prvtId, cb) {
     $.ajax({
         type: 'DELETE',
         url: '/records/' + prvtId,
@@ -746,6 +755,7 @@ function delete_private_record(prvtId) {
         error: function (jqXhr, status, error) {
             console.error('Delete private record Error : ' + error);
             console.error(jqXhr.responseText);
+            cb(jqXhr.responseJSON);
         },
         success: function (res) {
             $("#alarm-div span").text("정상적으로 삭제 완료되었습니다.");
@@ -756,7 +766,8 @@ function delete_private_record(prvtId) {
                 $("#alarm-div").hide();
             }, 1000);
 
-            getPrivateRecords();
+            // getPrivateRecords();
+            cb(null, res);
         }
     });
 }
@@ -795,23 +806,23 @@ function getPrivateRecords() {
             });
             $('.private-spec-body').on('click', singletonCallback);
             $('.private-spec-body button').on('click', buttonCallback);
-            
-            if($("#spec_edu_detail .spec-body").length > 0
-                || $("#spec_edu_detail .private-spec-body").length > 0) {
-                $('#spec_edu_detail > .spec-body-default').hide();               
-            } 
-    
-            if($("#spec_forign_lang .spec-body").length > 0
-                || $("#spec_forign_lang .private-spec-body").length > 0) {
+
+            if ($("#spec_edu_detail .spec-body").length > 0 ||
+                $("#spec_edu_detail .private-spec-body").length > 0) {
+                $('#spec_edu_detail > .spec-body-default').hide();
+            }
+
+            if ($("#spec_forign_lang .spec-body").length > 0 ||
+                $("#spec_forign_lang .private-spec-body").length > 0) {
                 $('#spec_forign_lang > .spec-body-default').hide();
-            } 
-    
-            if($("#spec_certification .spec-body").length > 0
-                || $("#spec_certification .private-spec-body").length > 0) {
+            }
+
+            if ($("#spec_certification .spec-body").length > 0 ||
+                $("#spec_certification .private-spec-body").length > 0) {
                 $('#spec_certification > .spec-body-default').hide();
-            } 
-        
-            
+            }
+
+
             // for (var i in res.result) {
             //     var data = JSON.parse(res[i].data);
             //     data.certPrvtId = res[i].certPrvtId;
@@ -971,19 +982,19 @@ function refreshview(records) {
         formatter[subid](recordList[i]);
     }
 
-    if($("#spec_edu_detail .spec-body").length > 0
-        || $("#spec_edu_detail .private-spec-body").length > 0) {
-        $('#spec_edu_detail > .spec-body-default').hide();        
-    } 
+    if ($("#spec_edu_detail .spec-body").length > 0 ||
+        $("#spec_edu_detail .private-spec-body").length > 0) {
+        $('#spec_edu_detail > .spec-body-default').hide();
+    }
 
-    if($("#spec_forign_lang .spec-body").length > 0
-        || $("#spec_forign_lang .private-spec-body").length > 0) {
-        $('#spec_forign_lang > .spec-body-default').hide();       
-    } 
+    if ($("#spec_forign_lang .spec-body").length > 0 ||
+        $("#spec_forign_lang .private-spec-body").length > 0) {
+        $('#spec_forign_lang > .spec-body-default').hide();
+    }
 
-    if($("#spec_certification .spec-body").length > 0
-        || $("#spec_certification .private-spec-body").length > 0) {
-        $('#spec_certification > .spec-body-default').hide();        
+    if ($("#spec_certification .spec-body").length > 0 ||
+        $("#spec_certification .private-spec-body").length > 0) {
+        $('#spec_certification > .spec-body-default').hide();
     }
 }
 
