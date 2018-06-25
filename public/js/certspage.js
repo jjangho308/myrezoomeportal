@@ -30,7 +30,7 @@ function certdelete(certId) {
             // TODO Handle with jqXhr.responseJSON
         },
         success: function (result) {
-            $("#alarm-div span").text("정상적으로 삭제 완료되었습니다.");
+            $("#alarm-div span").text("증명서 삭제가 완료되었습니다.");
             $('#alarm-div').css("display", "block");
 
             setTimeout(function () {
