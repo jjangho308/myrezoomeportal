@@ -1250,3 +1250,7 @@ vertical-align: -4px;
     border-bottom: solid 1px #ced3d6;
     color: #676767;
 }
+
+.transaction-link{
+	color: #878d91;
+}
