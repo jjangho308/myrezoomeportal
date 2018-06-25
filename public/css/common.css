@@ -389,7 +389,7 @@ input[type="checkbox"] {
     content: '';
     position: absolute;
     left: 0;
-    /*top: 3px;*/
+    top: 0px;
     width: 19px;
     height: 19px;
     border: 1px solid #ccc;
