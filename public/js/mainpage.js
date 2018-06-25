@@ -586,11 +586,13 @@ $(document).ready(function () {
                                     current_active = 0;
                                 }
                                 $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
-                            }, 1000);
+                            }, 300);
 
                             setTimeout(function () {
 
-                                $("#cert-line-dialog .close-modal").click();
+                                //$("#cert-line-dialog .close-modal").click();
+                                $("#cert-line-dialog").parent().fadeOut('slow'); // rollback when issue
+                                
                                 $("#alarm-div").css("display", "block");
                                 $("#alarm-div").css("margin-right", "-224px");
                                 $("#select-footer").hide();
