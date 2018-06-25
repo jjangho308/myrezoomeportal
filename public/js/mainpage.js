@@ -350,7 +350,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#cert-add-dialog .confirm-btn').click(function () { 
+    $('#cert-add-dialog .confirm-btn').click(function () {
         var issuer = $("#cert-issuer").val();
         var name = $("#cert-name").val();
         var grade = $("#cert-grade").val();
@@ -683,7 +683,7 @@ $(document).ready(function () {
         event.stopPropagation();
         event.preventDefault();
 
-        if ($("#spec_forign_lang .private-spec-body").length == 0) {
+        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length) {
             $(event.currentTarget).show();
         }
     }, true);
