@@ -23,8 +23,8 @@ li:nth-child(1) {
 }
 
 li:nth-child(3) {
-    border-left: 1px solid gray;
-    margin-right: -5px;
+    /* border-left: 1px solid gray;*/
+    /* margin-right: -5px; */
 }
 
 li a {

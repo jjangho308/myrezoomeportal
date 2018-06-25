@@ -15,7 +15,7 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/opic-logo.png" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
+            htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>OPIC</p>';
@@ -39,7 +39,7 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/mk-logo.png" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
+            htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>매경TEST</p>';
@@ -62,7 +62,7 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/mk-logo.png" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
+            htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
             htmldiv = htmldiv + '<p>OPIC</p>';
@@ -91,7 +91,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/inha-logo.png" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
+                htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right">';
                 htmldiv = htmldiv + '<p>인하대학교</p>';
@@ -128,7 +128,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/inha-logo.png" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
+                htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right">';
                 htmldiv = htmldiv + '<p>인하대학교</p>';
@@ -159,7 +159,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/kmu-logo.png" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
+                htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>계명대</p>';
@@ -194,7 +194,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/kmu-logo.png" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
+                htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>계명대</p>';
@@ -224,7 +224,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/kgu-logo.png" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
+                htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>경기대</p>';
@@ -259,7 +259,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/kgu-logo.png" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
+                htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>경기대</p>';
@@ -289,7 +289,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/cau-logo.png" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
+                htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>중앙대</p>';
@@ -324,7 +324,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/cau-logo.png" alt="">';
-                htmldiv = htmldiv + '<img src="img/myresume/on.svg" title="기관에서 연동된 이력입니다.">';
+                htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>중앙대</p>';
@@ -349,7 +349,7 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/icon-university.svg" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/off.svg" title="기관에서 연동안된 이력입니다.">';
+            htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" "></div>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>' + record.school_name + '</p>';
@@ -395,7 +395,7 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/icon-foreign-language.svg" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/off.svg" title="기관에서 연동안된 이력입니다.">';
+            htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" "></div>';
             htmldiv = htmldiv + '';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
@@ -419,7 +419,7 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/icon-certificates.svg" alt="">';
-            htmldiv = htmldiv + '<img src="img/myresume/off.svg" title="기관에서 연동안된 이력입니다.">';
+            htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" "></div>';
             htmldiv = htmldiv + '';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
