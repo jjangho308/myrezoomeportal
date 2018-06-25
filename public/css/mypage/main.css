@@ -925,7 +925,7 @@ color:#676767;
 .spec-check {
 display:inline-block;
 width:20px;
-     padding: 0 10px 0 20px;
+padding: 0 5px 0 20px;
 }
 
 .spec-check span {
@@ -936,7 +936,12 @@ padding-left:12px;
 
 
 
-.spec-date {display:inline-block;width: 200px;padding: 0 0px 0 20px;vertical-align: -3px;}
+.spec-date {
+    display: inline-block;
+    width: 200px;
+    padding: 0px 10px 0px 15px;
+    vertical-align: 0px;
+}
 
 .spec-date span {
 font-size:13px;
