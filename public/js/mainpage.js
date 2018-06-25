@@ -182,7 +182,7 @@ $(document).ready(function () {
         if (!is_error) {
             $.ajax({
                 type: 'POST',
-                url: '/record',
+                url: '/records',
                 headers: {
                     'Authorization': client_authorization
                 },
@@ -393,7 +393,7 @@ $(document).ready(function () {
         if (!is_error) {
             $.ajax({
                 type: 'POST',
-                url: '/record',
+                url: '/records',
                 headers: {
                     'Authorization': client_authorization
                 },
