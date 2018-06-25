@@ -553,8 +553,7 @@
                 specCheckContainer.appendChild(function () {
                     var checkbox = document.createElement("input");
                     checkbox.setAttribute("type", "checkbox");
-                    checkbox.setAttribute("disabled", "true");
-                    checkbox.style("visibility", "hidden");
+                    checkbox.setAttribute("disabled", "true");                    
                     return checkbox;
                 }());
                 specCheckContainer.appendChild(document.createElement("label"));
