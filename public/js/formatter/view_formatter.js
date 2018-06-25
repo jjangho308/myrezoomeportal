@@ -451,7 +451,7 @@
             var htmldiv = '<div class="private-spec-body">';
    
                htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" disabled/>';
+               htmldiv = htmldiv + '<input style="visibility:hidden" type="checkbox" disabled/>';
                htmldiv = htmldiv + '<label><label/>';
                htmldiv = htmldiv + '</div>';
                htmldiv = htmldiv + '<div class="spec-date">';
@@ -485,7 +485,7 @@
    
           
                htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" disabled/>';
+               htmldiv = htmldiv + '<input style="visibility:hidden" type="checkbox" disabled/>';
                htmldiv = htmldiv + '<label><label/>';
                htmldiv = htmldiv + '</div>';
                htmldiv = htmldiv + '<div class="spec-date">';
@@ -554,6 +554,7 @@
                     var checkbox = document.createElement("input");
                     checkbox.setAttribute("type", "checkbox");
                     checkbox.setAttribute("disabled", "true");
+                    checkbox.style("visibility", "hidden");
                     return checkbox;
                 }());
                 specCheckContainer.appendChild(document.createElement("label"));
