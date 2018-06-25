@@ -82,6 +82,7 @@
                 // 인하대 성적증명서가 이미 있다면
                 $('#edu-p-RCOGC0008').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0008').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
+                $('#spec-body-RCOGC0009').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0008" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-left">';
@@ -117,6 +118,7 @@
             if ($('#spec-body-RCOGC0008').length > 0) {
                 // 인하대 졸업증명서가 이미 있다면
                 $('#edu-p-RCOGC0009').text((total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
+                $('#spec-body-RCOGC0008').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
 
                 var htmldiv = '<div id="spec-body-RCOGC0009" class="spec-body">';
@@ -150,6 +152,7 @@
                 // 계명대 성적증명서가 이미 있다면
                 $('#edu-p-RCOGC0010').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0010').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
+                $('#spec-body-RCOGC0011').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0010" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-left">';
@@ -184,6 +187,7 @@
             if ($('#spec-body-RCOGC0010').length > 0) {
                 // 계명대 졸업증명서가 이미 있다면
                 $('#edu-p-RCOGC0011').text((total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
+                $('#spec-body-RCOGC0010').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
 
                 var htmldiv = '<div id="spec-body-RCOGC0011" class="spec-body">';
@@ -215,6 +219,7 @@
                 // 경기대 성적증명서가 이미 있다면
                 $('#edu-p-RCOGC0012').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0012').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
+                $('#spec-body-RCOGC0013').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0012" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-left">';
@@ -250,6 +255,7 @@
             if ($('#spec-body-RCOGC0012').length > 0) {
                 // 경기대 졸업증명서가 이미 있다면
                 $('#edu-p-RCOGC0013').text((total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
+                $('#spec-body-RCOGC0012').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0013" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-left">';
@@ -280,6 +286,7 @@
                 // 중앙대 성적증명서가 이미 있다면
                 $('#edu-p-RCOGC0014').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0014').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
+                $('#spec-body-RCOGC0015').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0014" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-left">';
@@ -315,6 +322,7 @@
             if ($('#spec-body-RCOGC0014').length > 0) {
                 // 중앙대 졸업증명서가 이미 있다면
                 $('#edu-p-RCOGC0015').text((total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
+                $('#spec-body-RCOGC0014').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0015" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-left">';
