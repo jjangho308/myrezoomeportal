@@ -838,7 +838,7 @@ p{
         .main-body-footer-5 {
             float: left;
             border: initial;
-            width: 19%;
+            width: 15%;
             height: 18px;
             -webkit-transform: scale(0.8);
             margin-left: -10px;
@@ -847,14 +847,14 @@ p{
         .main-body-footer-6 {
             float: left;
             border: initial;
-            width: 70%;
+            width: 60%;
             height: 18px;
             color: #878d91;
             font-weight: bold;
             margin-top: 5px;
             font-size: 13px;
             -webkit-transform: scale(0.8);
-            margin-left: -30px;
+            margin-left: -8px;
         }
 
         .footer-verify-1 {
@@ -886,8 +886,6 @@ p{
 
         #nexledger-txid-info-dialog{
             -webkit-transform: scale(0.6);
-            margin-top: -600px;
-             margin-left: -100px;
         }
 
   }
