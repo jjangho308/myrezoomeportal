@@ -548,10 +548,13 @@
             specContainer.className = "private-spec-body"
             specContainer.appendChild(function () {
                 var specLeftContainer = document.createElement("div");
-                specLeftContainer.className = "spec-left";
+                specLeftContainer.className = "spec-check";
 
                 specLeftContainer.appendChild(document.createElement("span"));
                 specLeftContainer.appendChild(document.createElement("span"));
+              
+                var specLeftContainer = document.createElement("div");
+                specLeftContainer.className = "spec-date";
                 specLeftContainer.appendChild(function () {
                     var span = document.createElement("span");
                     span.innerHTML = record.startdate + ' ~ ' + record.enddate;
