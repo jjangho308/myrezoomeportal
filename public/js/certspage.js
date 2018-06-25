@@ -65,6 +65,15 @@ function loadcertlist() {
                 htmldiv = htmldiv + '<p>' + item.title + '</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + formatDateYYYYMMDDHHMM(item.date) + '</p>';
 
+                var current_time = new Date();
+                var item_time_convert = new Date(item.date);
+                var fromnowsecond =  (current_time - item_time_convert) / 1000;
+                console.log("====current time - data create time====");
+                console.log(fromnowsecond);
+                if(fromnowsecond < 300) {
+                    console.log("300 under");
+                }
+
                 htmldiv = htmldiv + '<div id="more-div-' + item.certId + '" class="more-store-resume-div">';
                 htmldiv = htmldiv + '<p>복사</p>';
                 htmldiv = htmldiv + '<p onclick=certdelete("' + item.certId + '")>삭제</p>';
