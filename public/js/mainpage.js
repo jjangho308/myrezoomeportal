@@ -201,9 +201,9 @@ $(document).ready(function () {
                     $('#alarm-div').css("display", "block");
                     $('#alarm-div').css("margin-right", "-108px");
 
-                    setTimeout(function () {
-                        $("#alarm-div").hide();
-                    }, 3000);
+                    setTimeout(function(){                
+                        $('#alarm-div').fadeOut('slow');
+                    }, 2000);
 
                     //clean view
                     $('.private-spec-body').remove();
@@ -336,9 +336,9 @@ $(document).ready(function () {
                     $('#alarm-div').css("display", "block");
                     $('#alarm-div').css("margin-right", "-108px");
 
-                    setTimeout(function () {
-                        $("#alarm-div").hide();
-                    }, 3000);
+                    setTimeout(function(){                
+                        $('#alarm-div').fadeOut('slow');
+                    }, 2000);
 
                     //clean view
                     $('.private-spec-body').remove();
@@ -415,9 +415,9 @@ $(document).ready(function () {
                     $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
                     $('#alarm-div').css("display", "block");
 
-                    setTimeout(function () {
-                        $("#alarm-div").hide();
-                    }, 3000);
+                    setTimeout(function(){                
+                        $('#alarm-div').fadeOut('slow');
+                    }, 2000);
 
                     //clean view
                     $('.private-spec-body').remove();
@@ -454,6 +454,10 @@ $(document).ready(function () {
                         $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
                         $('#alarm-div').css("display", "block");
                         $('#alarm-div').css("margin-right", "-142px");
+
+                        setTimeout(function(){                
+                            $('#alarm-div').fadeOut('slow');
+                        }, 2000);
 
                         // sessionStrage update
                         var txidList = getTxidList();
@@ -633,7 +637,7 @@ $(document).ready(function () {
 
         var emptyarray = [];
         setTxidList(emptyarray);
-        
+
         $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
 
         $.ajax({
@@ -764,9 +768,9 @@ function delete_private_record(prvtId, cb) {
             $('#alarm-div').css("display", "block");
             $('#alarm-div').css("margin-right", "-108px");
 
-            setTimeout(function () {
-                $("#alarm-div").hide();
-            }, 1000);
+            setTimeout(function(){                
+                $('#alarm-div').fadeOut('slow');
+            }, 2000);
 
             // getPrivateRecords();
             cb(null, res);
