@@ -451,8 +451,8 @@
             var htmldiv = '<div class="private-spec-body">';
    
                htmldiv = htmldiv + '<div class="spec-check">';
-              htmldiv = htmldiv + '<span></span>';
-              htmldiv = htmldiv + '<span></span>';
+               htmldiv = htmldiv + '<input type="checkbox" disabled/>';
+               htmldiv = htmldiv + '<label><label/>';
                htmldiv = htmldiv + '</div>';
                htmldiv = htmldiv + '<div class="spec-date">';
                htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
@@ -485,8 +485,8 @@
    
           
                htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<span></span>';
-               htmldiv = htmldiv + '<span></span>';
+               htmldiv = htmldiv + '<input type="checkbox" disabled/>';
+               htmldiv = htmldiv + '<label><label/>';
                htmldiv = htmldiv + '</div>';
                htmldiv = htmldiv + '<div class="spec-date">';
                htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
@@ -547,11 +547,22 @@
             var specContainer = document.createElement("div");
             specContainer.className = "private-spec-body"
             specContainer.appendChild(function () {
-                var specLeftContainer = document.createElement("div");
-                specLeftContainer.className = "spec-left";
+                var specCheckContainer = document.createElement("div");
+                specCheckContainer.className = "spec-check";
 
-                specLeftContainer.appendChild(document.createElement("span"));
-                specLeftContainer.appendChild(document.createElement("span"));
+                specCheckContainer.appendChild(function () {
+                    var checkbox = document.createElement("input");
+                    checkbox.setAttribute("type", "checkbox");
+                    checkbox.setAttribute("disabled", "true");
+                    return checkbox;
+                }());
+                specCheckContainer.appendChild(document.createElement("label"));
+                return specCheckContainer;
+            }());
+
+            specContainer.appendChild(function () {
+                var specLeftContainer = document.createElement("div");
+                specLeftContainer.className = "spec-date"; 
                 specLeftContainer.appendChild(function () {
                     var span = document.createElement("span");
                     span.innerHTML = record.startdate + ' ~ ' + record.enddate;
@@ -657,8 +668,8 @@
             var htmldiv = '<div class="private-spec-body">';
         
                htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<span></span>';
-               htmldiv = htmldiv + '<span></span>';
+               htmldiv = htmldiv + '<input type="checkbox" disabled/>';
+               htmldiv = htmldiv + '<label><label/>';
                htmldiv = htmldiv + '</div>';
                htmldiv = htmldiv + '<div class="spec-date">';
                htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
