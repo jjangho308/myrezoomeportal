@@ -80,7 +80,7 @@
 
             if ($('#spec-body-RCOGC0009').length > 0) {
                 // 인하대 성적증명서가 이미 있다면
-                $('#edu-p-RCOGC0008').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status);
+                $('#edu-p-RCOGC0008').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0008').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0008" class="spec-body">';
@@ -95,7 +95,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right">';
                 htmldiv = htmldiv + '<p>인하대학교</p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0008">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status + '</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0008">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status + '</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0009"></p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
@@ -148,7 +148,7 @@
 
             if ($('#spec-body-RCOGC0011').length > 0) {
                 // 계명대 성적증명서가 이미 있다면
-                $('#edu-p-RCOGC0010').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status);
+                $('#edu-p-RCOGC0010').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0010').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0010" class="spec-body">';
@@ -163,7 +163,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>계명대</p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0010">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status + '</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0010">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status + '</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0011">' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
@@ -213,7 +213,7 @@
             // 경기대 졸업증명서
             if ($('#spec-body-RCOGC0013').length > 0) {
                 // 경기대 성적증명서가 이미 있다면
-                $('#edu-p-RCOGC0012').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status);
+                $('#edu-p-RCOGC0012').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0012').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0012" class="spec-body">';
@@ -228,7 +228,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>경기대</p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0012">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status + '</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0012">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status + '</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
@@ -278,7 +278,7 @@
             // 중앙대 졸업증명서
             if ($('#spec-body-RCOGC0015').length > 0) {
                 // 중앙대 성적증명서가 이미 있다면
-                $('#edu-p-RCOGC0014').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status);
+                $('#edu-p-RCOGC0014').text(record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status);
                 $('#edu-span-edu-p-RCOGC0014').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0014" class="spec-body">';
@@ -293,7 +293,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>중앙대</p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0014">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status + '</p>';
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0014">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status + '</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0015">' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
@@ -385,27 +385,140 @@
             $('#spec_career_detail > .spec-body-default').hide();
         },
 
+        /**
+         * TODO innerHTML -> DOM manipulation으로 동작하는 코드 대표적으로 변환해봄
+         * TODO 나중에 이걸로 다 바꾸어야 함.
+         * 
+         * @author TACKSU
+         */
         "LPT": function viewformatter(record) {
             // Private record
-            var htmldiv = '<div class="private-spec-body">';
-            htmldiv = htmldiv + '<div class="spec-left">';
-            htmldiv = htmldiv + '<span></span>';
-            htmldiv = htmldiv + '<span></span>';
-            htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="img/main/icon-foreign-language.svg" alt="">';
-            htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" "></div>';
-            htmldiv = htmldiv + '';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>사용자입력</p>';
-            htmldiv = htmldiv + '<p>' + record.name + '</p>';
-            htmldiv = htmldiv + '<p>' + record.score + '</p>';
-            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '</div>';
-            $('#spec_forign_lang').append(htmldiv);
+            // var htmldiv = '<div class="private-spec-body">';
+            // htmldiv = htmldiv + '<div class="spec-left">';
+            // htmldiv = htmldiv + '<span></span>';
+            // htmldiv = htmldiv + '<span></span>';
+            // htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
+            // htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '<div class="spec-center">';
+            // htmldiv = htmldiv + '<img src="img/main/icon-foreign-language.svg" alt="">';
+            // htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" "></div>';
+            // htmldiv = htmldiv + '';
+            // htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '<div class="spec-right">';
+            // htmldiv = htmldiv + '<p>사용자입력</p>';
+            // htmldiv = htmldiv + '<p>' + record.name + '</p>';
+            // htmldiv = htmldiv + '<p>' + record.score + '</p>';
+            // htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
+            // htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '</div>';
+            // $('#spec_forign_lang').append(htmldiv);
+            // $('#spec_forign_lang > .spec-body-default').hide();
+
+            var specContainer = document.createElement("div");
+            specContainer.className = "private-spec-body"
+            specContainer.appendChild(function () {
+                var specLeftContainer = document.createElement("div");
+                specLeftContainer.className = "spec-left";
+
+                specLeftContainer.appendChild(document.createElement("span"));
+                specLeftContainer.appendChild(document.createElement("span"));
+                specLeftContainer.appendChild(function () {
+                    var span = document.createElement("span");
+                    span.innerHTML = record.startdate + ' ~ ' + record.enddate;
+                    return span;
+                }());
+
+                return specLeftContainer;
+            }());
+
+            specContainer.appendChild(function () {
+                var specCenterContainer = document.createElement("div");
+                specCenterContainer.className = "spec-center";
+
+                specCenterContainer.appendChild(function () {
+                    var languageImg = document.createElement("img");
+                    languageImg.src = "img/main/icon-foreign-language.svg";
+                    languageImg.alt = "";
+                    return languageImg;
+                }());
+
+                specCenterContainer.appendChild(function () {
+                    var specVerifyContainer = document.createElement("div");
+                    specVerifyContainer.className = "spec-verify-img";
+                    specVerifyContainer.setAttribute("data-tooltip-text", "수기로 입력한 이력입니다.");
+
+                    specVerifyContainer.appendChild(function () {
+                        var imgContainer = document.createElement("img");
+                        imgContainer.src = "img/myresume/off.svg";
+                        return imgContainer;
+                    }());
+                    return specVerifyContainer;
+                }());
+
+                return specCenterContainer;
+            }());
+
+            specContainer.appendChild(function () {
+                var specRightContainer = document.createElement("div");
+                specRightContainer.className = "spec-right";
+
+                specRightContainer.appendChild(function () {
+                    var p = document.createElement("p");
+                    p.innerHTML = "사용자입력";
+                    return p;
+                }());
+
+                specRightContainer.appendChild(function () {
+                    var p = document.createElement("p");
+                    p.innerHTML = record.name;
+                    return p;
+                }());
+
+                specRightContainer.appendChild(function () {
+                    var p = document.createElement("p");
+                    p.innerHTML = record.score;
+                    return p;
+                }());
+
+                specRightContainer.appendChild(function () {
+                    var deleteButton = document.createElement("button");
+                    deleteButton.innerHTML = "삭제";
+                    deleteButton.addEventListener("click", deletePrivateButtonEventListener, true);
+                    return deleteButton;
+                }());
+
+                function deletePrivateButtonEventListener(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    var privateRecordId = event.currentTarget.nextElementSibling.value;
+                    if (!privateRecordId) {
+                        return console.error("No record Id");
+                    }
+                    delete_private_record(privateRecordId, function (container) {
+                        return function (err, response) {
+                            if (!!err) {
+                                return console.error(err);
+                            } else if (response.result === true) {
+                                container.remove();
+                                var privateDeletedEvent = document.createEvent('Event');
+                                privateDeletedEvent.initEvent('private_deleted', true, true);
+                                document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
+                            }
+                        };
+                    }(event.currentTarget.parentElement.parentElement));
+                }
+
+                specRightContainer.appendChild(function () {
+                    var certIdInput = document.createElement("input");
+                    certIdInput.value = record.certPrvtId;
+                    certIdInput.type = "hidden";
+                    return certIdInput;
+                }());
+
+                return specRightContainer;
+            }());
+
+            $('#spec_forign_lang').append(specContainer);
             $('#spec_forign_lang > .spec-body-default').hide();
         },
 

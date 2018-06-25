@@ -203,12 +203,12 @@ class RecordDAO extends AbstractDAO {
 
     deletePrivateRecord(creteria, cb) {
         var query = mysql.format(recordQuery.delPrivateRecord, [creteria.uId, creteria.recordId]);
-        this.query(query, (err, affectedRows) => {
+        this.query(query, (err, result) => {
             if (!!err) {
                 console.error(err);
                 return cb(err, null);
             } else {
-                return cb(null, affectedRows);
+                return cb(null, result.affectedRows);
             }
         });
     }
