@@ -265,11 +265,11 @@
 
         $("#more-button").click(function () {
 
-            if ($("#more-button-div").css("display") == "none") {
-                $("#more-button-div").show();
-            } else {
-                $("#more-button-div").hide();
-            }
+            // if ($("#more-button-div").css("display") == "none") {
+            //     $("#more-button-div").show();
+            // } else {
+            //     $("#more-button-div").hide();
+            // }
 
         });
 
