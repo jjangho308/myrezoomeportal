@@ -104,13 +104,13 @@ $(document).ready(function () {
 
         var is_error = false;
 
-        if ($("#school").next().find(".item").text() == "") {
-            $("#school").next().find(".selectize-input").addClass("error");
-            $("#school").next().next().css("display", "block");
+        if ($("#school").val() == "") {
+            $("#school").addClass("error");
+            $("#school").next().css("display", "block");
             is_error = true;
         } else {
-            $("#school").next().find(".selectize-input").removeClass("error");
-            $("#school").next().next().css("display", "none");
+            $("#school").removeClass("error");
+            $("#school").next().css("display", "none");
         }
 
         $(".major").each(function () {
@@ -758,11 +758,11 @@ function delete_private_record(prvtId) {
 }
 
 function singletonCallback(opt1, opt2, opt3, opt4) {
-    debugger;
+    // debugger;
 }
 
 function buttonCallback(opt1, opt2, opt3, opt4) {
-    debugger;
+    // debugger;
 }
 
 

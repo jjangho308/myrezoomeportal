@@ -30,6 +30,13 @@ function certdelete(certId) {
             // TODO Handle with jqXhr.responseJSON
         },
         success: function (result) {
+            $("#alarm-div span").text("정상적으로 삭제 완료되었습니다.");
+            $('#alarm-div').css("display", "block");
+
+            setTimeout(function () {
+                $("#alarm-div").hide();
+            }, 3000);
+
             loadcertlist();
         },
         contentType: 'application/json'
@@ -58,8 +65,7 @@ function loadcertlist() {
             var certlistresult = certlistres.result;
             $(".cert-container").remove();
             $('#certlistcount').text(certlistresult.length + '건');
-            var divContainer = $('#cert-grid-div');
-            console.log(sortingField);
+            var divContainer = $('#cert-grid-div');            
             certlistresult.sort(function(a, b){                                
                 if(sortingField == 'date') {
                     if(sortingOrder == 'asc') {                    
@@ -78,17 +84,17 @@ function loadcertlist() {
 
             certlistresult.forEach(function (item) {
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '")>';
-                htmldiv = htmldiv + '<p><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certmore("more-div-' + item.certId + '")></p>';
+                htmldiv = htmldiv + '<p><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certdelete("' + item.certId + '")></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
                 htmldiv = htmldiv + '<p>증명서</p>';
                 htmldiv = htmldiv + '<p>' + item.title + '</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + formatDateYYYYMMDDHHMM(item.date) + '</p>';
 
-                htmldiv = htmldiv + '<div id="more-div-' + item.certId + '" class="more-store-resume-div">';
-                htmldiv = htmldiv + '<p>복사</p>';
-                htmldiv = htmldiv + '<p onclick=certdelete("' + item.certId + '")>삭제</p>';
-                htmldiv = htmldiv + '<p>공유내역</p>';
-                htmldiv = htmldiv + '</div>';
+                // htmldiv = htmldiv + '<div id="more-div-' + item.certId + '" class="more-store-resume-div">';
+                // htmldiv = htmldiv + '<p>복사</p>';
+                // htmldiv = htmldiv + '<p onclick=certdelete("' + item.certId + '")>삭제</p>';
+                // htmldiv = htmldiv + '<p>공유내역</p>';
+                // htmldiv = htmldiv + '</div>';
 
                 htmldiv = htmldiv + '</div>';
                 divContainer.append(htmldiv);
