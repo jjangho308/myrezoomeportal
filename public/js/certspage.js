@@ -89,7 +89,6 @@ function loadcertlist() {
                 var fromnowsecond =  (current_time - item_time_convert) / 1000;
                 console.log("====current time - data create time====");
                 console.log(fromnowsecond);
-                
 
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '")>';
 
@@ -99,7 +98,16 @@ function loadcertlist() {
                 }
                 
                 htmldiv = htmldiv + '<p><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certdelete("' + item.certId + '")></p>';
-                htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
+
+                // 일단 subid 별로 하나씩 분기 태우지만 subcd 같은 공통 코드를 통해 졸업서, 성적서 등등으로 구분할수 있어야함.
+                if(item.subId == 'RCOGC0014' || item.subId == 'RCOGC0012' || item.subId == 'RCOGC0010' || item.subId == 'RCOGC0008') {
+                    htmldiv = htmldiv + '<img src="img/mycert/icon-certs-gradu.svg" alt="">';
+                } else if(item.subId == 'RCOGC0015' || item.subId == 'RCOGC0013' || item.subId == 'RCOGC0011' || item.subId == 'RCOGC0009') {
+                    htmldiv = htmldiv + '<img src="img/mycert/icon-certs-score.svg" alt="">';
+                } else {
+                    htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
+                }
+
                 htmldiv = htmldiv + '<p>증명서</p>';
                 htmldiv = htmldiv + '<p>' + item.title + '</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + formatDateYYYYMMDDHHMM(item.date) + '</p>';
