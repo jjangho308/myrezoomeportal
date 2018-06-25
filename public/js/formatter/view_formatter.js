@@ -18,7 +18,7 @@
             htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>OPIC</p>';
+            htmldiv = htmldiv + '<p>OPIc</p>';
             htmldiv = htmldiv + '<p>' + record.testtype + '<span class="spec-body-count">+' + record.count + '</span></p>';
             htmldiv = htmldiv + '<p>' + record.rating + '</p>';
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")>변경</button>';
@@ -65,7 +65,7 @@
             htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
-            htmldiv = htmldiv + '<p>OPIC</p>';
+            htmldiv = htmldiv + '<p>OPIc</p>';
             htmldiv = htmldiv + '<p>English Writing</p>';
             htmldiv = htmldiv + '<p>' + record + '</p>';
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")>변경</button>';
@@ -162,7 +162,7 @@
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
-                htmldiv = htmldiv + '<p>계명대</p>';
+                htmldiv = htmldiv + '<p>계명대학교</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0010">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status + '</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0011">' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
@@ -197,7 +197,7 @@
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
-                htmldiv = htmldiv + '<p>계명대</p>';
+                htmldiv = htmldiv + '<p>계명대학교</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0010"></p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0011">' + (total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
@@ -227,7 +227,7 @@
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
-                htmldiv = htmldiv + '<p>경기대</p>';
+                htmldiv = htmldiv + '<p>경기대학교</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0012">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status + '</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
@@ -262,7 +262,7 @@
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
-                htmldiv = htmldiv + '<p>경기대</p>';
+                htmldiv = htmldiv + '<p>경기대학교</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0012"></p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + (total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
@@ -292,7 +292,7 @@
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
-                htmldiv = htmldiv + '<p>중앙대</p>';
+                htmldiv = htmldiv + '<p>중앙대학교</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0014">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' +record.registList[0].status + '</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0015">' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
@@ -327,7 +327,7 @@
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
-                htmldiv = htmldiv + '<p>중앙대</p>';
+                htmldiv = htmldiv + '<p>중앙대학교</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0014"></p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0015">' + (total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
@@ -386,6 +386,7 @@
         },
 
         "LPT": function viewformatter(record) {
+            console.log(record);
             // Private record
             var htmldiv = '<div class="private-spec-body">';
             htmldiv = htmldiv + '<div class="spec-left">';
@@ -399,8 +400,8 @@
             htmldiv = htmldiv + '';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>사용자입력</p>';
-            htmldiv = htmldiv + '<p>' + record.name + '</p>';
+            htmldiv = htmldiv + '<p>' + record.issuer + '</p>';
+            htmldiv = htmldiv + '<p>' + record.name + '(' + record.lang + ')</p>';
             htmldiv = htmldiv + '<p>' + record.score + '</p>';
             htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
             htmldiv = htmldiv + '</div>';
@@ -423,7 +424,7 @@
             htmldiv = htmldiv + '';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>사용자입력</p>';
+            htmldiv = htmldiv + '<p>' + record.issuer + '</p>';
             htmldiv = htmldiv + '<p>' + record.name + '</p>';
             htmldiv = htmldiv + '<p>' + record.grade + '</p>';
             htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';

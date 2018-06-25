@@ -267,6 +267,7 @@ $(document).ready(function () {
     });
 
     $('#language-add-dialog .confirm-btn').click(function () {
+        var issuer = $("#language-issuer").val();
         var lang = $("#langadd_lang").val();
         var name = $("#language-name").val();
         var score = $("#language-grade").val();
@@ -301,6 +302,7 @@ $(document).ready(function () {
 
         // cert format
         var param = {
+            issuer: issuer,
             lang: lang,
             name: name,
             score: score,
@@ -348,7 +350,8 @@ $(document).ready(function () {
         }
     });
 
-    $('#cert-add-dialog .confirm-btn').click(function () {
+    $('#cert-add-dialog .confirm-btn').click(function () { 
+        var issuer = $("#cert-issuer").val();
         var name = $("#cert-name").val();
         var grade = $("#cert-grade").val();
         var start_date = $("#certadd_startdate").val();
@@ -380,6 +383,7 @@ $(document).ready(function () {
 
         // cert format
         var param = {
+            issuer: issuer,
             name: name,
             grade: grade,
             startdate: start_date,

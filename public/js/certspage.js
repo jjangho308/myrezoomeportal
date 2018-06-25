@@ -83,7 +83,21 @@ function loadcertlist() {
             });
 
             certlistresult.forEach(function (item) {
+
+                var current_time = new Date();
+                var item_time_convert = new Date(item.date);
+                var fromnowsecond =  (current_time - item_time_convert) / 1000;
+                console.log("====current time - data create time====");
+                console.log(fromnowsecond);
+                
+
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '")>';
+
+                if(fromnowsecond < 300) {
+                    console.log("300 under");
+                    htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '" style="border-color:#4c80f1;")>';
+                }
+                
                 htmldiv = htmldiv + '<p><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certdelete("' + item.certId + '")></p>';
                 htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
                 htmldiv = htmldiv + '<p>증명서</p>';
@@ -97,7 +111,8 @@ function loadcertlist() {
                 // htmldiv = htmldiv + '</div>';
 
                 htmldiv = htmldiv + '</div>';
-                divContainer.append(htmldiv);
+
+                divContainer.append(htmldiv);                
             });
             // for(var i in certlistresult) {
             //     var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+ item.certId +'")>';                
