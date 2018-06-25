@@ -939,7 +939,7 @@ padding-left:12px;
 .spec-date {
     display: inline-block;
     width: 200px;
-    padding: 0px 10px 0px 15px;
+    padding: 0px 10px 0px 0px;
     vertical-align: 0px;
 }
 
