@@ -758,11 +758,11 @@ function delete_private_record(prvtId) {
 }
 
 function singletonCallback(opt1, opt2, opt3, opt4) {
-    debugger;
+    // debugger;
 }
 
 function buttonCallback(opt1, opt2, opt3, opt4) {
-    debugger;
+    // debugger;
 }
 
 
