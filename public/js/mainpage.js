@@ -203,10 +203,11 @@ $(document).ready(function () {
 
                     setTimeout(function () {
                         $("#alarm-div").hide();
-                    }, 1000);
+                    }, 3000);
 
                     //clean view
                     $('.private-spec-body').remove();
+                    $('#spec_edu_detail > .spec-body-default').hide();
                     getPrivateRecords();
                 },
                 contentType: 'application/json',
@@ -335,10 +336,11 @@ $(document).ready(function () {
 
                     setTimeout(function () {
                         $("#alarm-div").hide();
-                    }, 1000);
+                    }, 3000);
 
                     //clean view
                     $('.private-spec-body').remove();
+                    $('#spec_forign_lang > .spec-body-default').hide();
                     getPrivateRecords();
                 },
                 contentType: 'application/json',
@@ -411,10 +413,11 @@ $(document).ready(function () {
 
                     setTimeout(function () {
                         $("#alarm-div").hide();
-                    }, 1000);
+                    }, 3000);
 
                     //clean view
                     $('.private-spec-body').remove();
+                    $('#spec_certification > .spec-body-default').hide();
                     getPrivateRecords();
                 },
                 contentType: 'application/json',
@@ -788,6 +791,23 @@ function getPrivateRecords() {
             });
             $('.private-spec-body').on('click', singletonCallback);
             $('.private-spec-body button').on('click', buttonCallback);
+            
+            if($("#spec_edu_detail .spec-body").length > 0
+                || $("#spec_edu_detail .private-spec-body").length > 0) {
+                $('#spec_edu_detail > .spec-body-default').hide();               
+            } 
+    
+            if($("#spec_forign_lang .spec-body").length > 0
+                || $("#spec_forign_lang .private-spec-body").length > 0) {
+                $('#spec_forign_lang > .spec-body-default').hide();
+            } 
+    
+            if($("#spec_certification .spec-body").length > 0
+                || $("#spec_certification .private-spec-body").length > 0) {
+                $('#spec_certification > .spec-body-default').hide();
+            } 
+        
+            
             // for (var i in res.result) {
             //     var data = JSON.parse(res[i].data);
             //     data.certPrvtId = res[i].certPrvtId;
@@ -945,6 +965,21 @@ function refreshview(records) {
     for (var i in recordList) {
         var subid = recordList[i].subid;
         formatter[subid](recordList[i]);
+    }
+
+    if($("#spec_edu_detail .spec-body").length > 0
+        || $("#spec_edu_detail .private-spec-body").length > 0) {
+        $('#spec_edu_detail > .spec-body-default').hide();        
+    } 
+
+    if($("#spec_forign_lang .spec-body").length > 0
+        || $("#spec_forign_lang .private-spec-body").length > 0) {
+        $('#spec_forign_lang > .spec-body-default').hide();       
+    } 
+
+    if($("#spec_certification .spec-body").length > 0
+        || $("#spec_certification .private-spec-body").length > 0) {
+        $('#spec_certification > .spec-body-default').hide();        
     }
 }
 
