@@ -633,6 +633,8 @@ $(document).ready(function () {
 
         var emptyarray = [];
         setTxidList(emptyarray);
+        
+        $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
 
         $.ajax({
             type: 'POST',
