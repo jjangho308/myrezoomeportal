@@ -92,7 +92,6 @@ $(document).ready(function () {
                 '<div class="select-100">' +
                 '<select name="select-2">' +
                 '<option value="volvo">학사</option>' +
-                '<option value="saab">석사</option>' +
                 '</select>' +
                 '</div>' +
     
@@ -1189,6 +1188,30 @@ function getTargetdivid(subid) {
 }
 
 function clearAddSpanEdu() {
+    debugger;
+    $("#education-add-dialog #school").removeClass("error");
+    $("#education-add-dialog #school").next().css("display", "none");
+
+    var element = $("#education-add-dialog .major");
+    var range = element.closest(".error-range");
+    element.removeClass("error");
+    range.find(".items ").removeClass("error");
+    range.find(".error-message").css("display", "none");
+
+    var period = $("#education-add-dialog .study-period");
+    var range = period.closest(".error-range");
+    period.removeClass("error");
+    range.find("button").removeClass("error");
+    range.find(".items").removeClass("error");
+    range.find(".error-message").css("display", "none");
+
+    var range = $("#education-add-dialog #score").closest(".error-range");
+
+    $("#education-add-dialog #score").removeClass("error");
+    range.find(".items").removeClass("error");
+    range.find(".error-message").css("display", "none");
+
+
     $("#education-add-dialog #school").val("");
     $("#education-add-dialog #first-major").val("");
     $("#education-add-dialog #edu-startdate").val("");
@@ -1199,6 +1222,23 @@ function clearAddSpanEdu() {
 }
 
 function clearAddSpanCert() {
+    $("#cert-add-dialog #cert-issuer").removeClass("error");
+    $("#cert-add-dialog #cert-issuer").next().css("display", "none");
+
+    $("#cert-add-dialog #cert-name").removeClass("error");
+    $("#cert-add-dialog #cert-name").next().css("display", "none");
+
+    $("#cert-add-dialog #cert-grade").removeClass("error");
+    $("#cert-add-dialog #cert-grade").next().css("display", "none");
+
+    $("#cert-add-dialog #certadd_startdate").removeClass("error");
+    $("#cert-add-dialog #certadd_startdate").next().css("display", "none");
+
+    $("#cert-add-dialog #certadd_enddate").removeClass("error");
+    $("#cert-add-dialog #certadd_enddate").next().css("display", "none");
+
+    $("#cert-add-dialog .error-message-period").hide();
+
     $("#cert-add-dialog #cert-issuer").val("");
     $("#cert-add-dialog #cert-name").val("");
     $("#cert-add-dialog #cert-grade").val("");
@@ -1207,6 +1247,23 @@ function clearAddSpanCert() {
 }
 
 function clearAddSpanLang() {
+    $("#language-add-dialog #language-name").removeClass("error");
+    $("#language-add-dialog #language-name").next().css("display", "none");
+
+    $("#language-add-dialog #language-issuer").removeClass("error");
+    $("#language-add-dialog #language-issuer").next().css("display", "none");
+
+    $("#language-add-dialog #language-grade").removeClass("error");
+    $("#language-add-dialog #language-grade").next().css("display", "none");
+
+    $("#language-add-dialog #langadd_startdate").removeClass("error");
+    $("#language-add-dialog #langadd_startdate").next().css("display", "none");
+
+    $("#language-add-dialog #langadd_enddate").removeClass("error");
+    $("#language-add-dialog #langadd_enddate").next().css("display", "none");
+
+    $("#language-add-dialog .error-message-period").hide();
+
     $("#language-add-dialog #language-name").val("");
     $("#language-add-dialog #language-issuer").val("");
     $("#language-add-dialog #language-grade").val("");
