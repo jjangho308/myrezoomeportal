@@ -91,7 +91,9 @@ input {
 }
 
 input:focus {
-    border: solid 1px #749ffa;
+    /* border: solid 1px #4c80f1; */
+    outline: 0;    
+    border: 1px solid #a2a2a2;
 }
 
 input:-moz-read-only {
@@ -630,6 +632,12 @@ th:nth-child(6) {
     border: solid 1px #ced3d6;
     padding: 3px 11px;
     vertical-align: top;
+}
+
+.modal-body input:focus 
+{
+    outline: 0px;    
+    /*border: 1px solid #a1a1a1;*/
 }
 
 /*
