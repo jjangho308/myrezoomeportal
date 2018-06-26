@@ -39,7 +39,7 @@ height: 380px;
 }
 
 #add-cert-dialog th:nth-child(3) {
-    width: 64px;
+    width: 80px;
 }
 
 
@@ -52,7 +52,7 @@ height: 380px;
 }
 
 #add-cert-dialog td:nth-child(3) {
-    width: 64px;
+    width: 80px;
 }
 
 
@@ -168,6 +168,12 @@ border:solid 1px #c3cdd8;
 box-shadow:0 2px 5px 0 rgba(191,191,191,0.5);
 /* border: dotted 1px #cccccc; */
 /*background: url("/img/mycert/rectangle-6.svg");*/
+}
+
+.certnewimg {
+    position: absolute;
+    top: 44px;
+    left: 128px;
 }
 
 
