@@ -602,9 +602,18 @@ th:nth-child(6) {
     margin: 15px 10px 0px 0px;
 }
 
+.modal .cancel-btn:focus {
+    outline:0;
+}
+
+
 .modal .confirm-btn {
     float: right;
     margin: 15px 36px 0px 0px;
+}
+
+.modal .confirm-btn:focus {
+    outline:0;
 }
 
 .modal-body {
