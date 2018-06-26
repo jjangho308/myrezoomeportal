@@ -82,7 +82,6 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
 
                         // NexLedger에 hash 데이터 있는지부터 확인
                         nex.getbyaddress(null, userWalletAddress, (userBCHashes) => {
-
                             if (!!userBCHashes) {
                                 // NexLedger에 이미 Hash가 저장되어 있는지 확인
                                 var found = false;
@@ -99,9 +98,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                     // 있다면 txid 가져온 다음에 아래 로직 수행.
                                     return;
                                 } else {
-                                    nex.put(null, userWalletAddress, {
-                                        hash: hashedRawData
-                                    }, (nexBody) => {
+                                    nex.put(null, userWalletAddress, {hash: hashedRawData}, 0, (nexBody) => {                                                                            
                                         var txid = nexBody.result.txid;
 
                                         // 일단 BLCMap DB에 넣음
@@ -112,8 +109,10 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                             "200", // FIXME Org code로 박아야 함 (임시)
                                             "RCCNF0001" // TODO 이걸 사실상 SubID로 인식해야 하나 (임시)
                                         ];
+                                        
 
                                         Managers.db().getRecordDAO().putRecord(blcmapinsertData, (putRecordResponse) => {
+                                            
                                             console.log(putRecordResponse);
                                         });
 
@@ -149,8 +148,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                                             url: sharedUrl,
                                                             public: "Y"
                                                         });
-
-                                                        certDao.putShared(sharedCert, (err, insertSharedId) => {
+                                                        certDao.putShared(sharedCert, (err, insertSharedId) => {                                                           
                                                             if (!!err) {
                                                                 return done(ClientRequest.RESULT_FAILURE, err);
                                                             } else if (insertSharedId > 0) {
