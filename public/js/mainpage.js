@@ -876,45 +876,47 @@ function getPrivateRecords() {
         },
         success: function (res) {
             // debugger;
-            res.result.sort(function (a, b) {
-                try {
-                    return Date.parse(a.created || 0) - Date.parse(b.created || 0);
-                } catch (e) {
-                    console.error(e);
-                    return 0;
+            setTimeout(function () {
+                res.result.sort(function (a, b) {
+                    try {
+                        return Date.parse(a.created || 0) - Date.parse(b.created || 0);
+                    } catch (e) {
+                        console.error(e);
+                        return 0;
+                    }
+                })
+                res.result.forEach(function (item, idx) {
+                    var data = JSON.parse(item.data);
+                    data.certPrvtId = item.certPrvtId;
+                    if (item.subCd in view_formatter) {
+                        view_formatter[item.subCd](data);
+                    }
+                });
+                $('.private-spec-body').on('click', singletonCallback);
+                $('.private-spec-body button').on('click', buttonCallback);
+
+                if ($("#spec_edu_detail .spec-body").length > 0 ||
+                    $("#spec_edu_detail .private-spec-body").length > 0) {
+                    $('#spec_edu_detail > .spec-body-default').hide();
                 }
-            })
-            res.result.forEach(function (item, idx) {
-                var data = JSON.parse(item.data);
-                data.certPrvtId = item.certPrvtId;
-                if (item.subCd in view_formatter) {
-                    view_formatter[item.subCd](data);
+
+                if ($("#spec_forign_lang .spec-body").length > 0 ||
+                    $("#spec_forign_lang .private-spec-body").length > 0) {
+                    $('#spec_forign_lang > .spec-body-default').hide();
                 }
-            });
-            $('.private-spec-body').on('click', singletonCallback);
-            $('.private-spec-body button').on('click', buttonCallback);
 
-            if ($("#spec_edu_detail .spec-body").length > 0 ||
-                $("#spec_edu_detail .private-spec-body").length > 0) {
-                $('#spec_edu_detail > .spec-body-default').hide();
-            }
-
-            if ($("#spec_forign_lang .spec-body").length > 0 ||
-                $("#spec_forign_lang .private-spec-body").length > 0) {
-                $('#spec_forign_lang > .spec-body-default').hide();
-            }
-
-            if ($("#spec_certification .spec-body").length > 0 ||
-                $("#spec_certification .private-spec-body").length > 0) {
-                $('#spec_certification > .spec-body-default').hide();
-            }
+                if ($("#spec_certification .spec-body").length > 0 ||
+                    $("#spec_certification .private-spec-body").length > 0) {
+                    $('#spec_certification > .spec-body-default').hide();
+                }
 
 
-            // for (var i in res.result) {
-            //     var data = JSON.parse(res[i].data);
-            //     data.certPrvtId = res[i].certPrvtId;
-            //     formatter[res[i].subCd](data);
-            // }
+                // for (var i in res.result) {
+                //     var data = JSON.parse(res[i].data);
+                //     data.certPrvtId = res[i].certPrvtId;
+                //     formatter[res[i].subCd](data);
+                // }
+            }, 2000)
         }
     });
 }
