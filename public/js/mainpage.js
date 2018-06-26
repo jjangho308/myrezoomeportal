@@ -4,13 +4,6 @@ require socket.is
 */
 
 $(document).ready(function () {
-
-    // comment by hyunsu for running
-    //socket = io();
-    /*
-        view init empty set
-    */
-
     $(".study-period").datepicker();
     $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
 
@@ -85,31 +78,38 @@ $(document).ready(function () {
     })
 
     $('#education-add-dialog .add-span').click(function () {
-        $("#major-div").append(
-            '<div id="add-major">' +
-            '<div class="error-range major-div">' +
-            '<div class="select-100">' +
-            '<select name="select-1">' +
-            '<option value="1">전공</option>' +
-            '<option value="2">부전공</option>' +
-            '<option value="3">복수전공</option>' +
-            '</select>' +
-            '</div>' +
-            '<div class="select-100">' +
-            '<select name="select-2">' +
-            '<option value="volvo">학사</option>' +
-            '<option value="saab">석사</option>' +
-            '</select>' +
-            '</div>' +
-
-            '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
-            '<img src="/img/myresume/close-white.svg"/>' +
-            '<div class="error-message">전공을 입력해주세요.</div>' +
-            '</div>' +
-            '</div>'
-        );
+        if($("#education-add-dialog #add-major").length < 2){
+            $("#major-div").append(
+                '<div id="add-major">' +
+                '<div class="error-range major-div">' +
+                '<div class="select-100">' +
+                '<select name="select-1">' +
+                '<option value="1">전공</option>' +
+                '<option value="2">부전공</option>' +
+                '<option value="3">복수전공</option>' +
+                '</select>' +
+                '</div>' +
+                '<div class="select-100">' +
+                '<select name="select-2">' +
+                '<option value="volvo">학사</option>' +
+                '</select>' +
+                '</div>' +
+    
+                '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
+                
+                '<img id="add-major-delete" src="/img/myresume/close-white.svg" onclick="addMajorDelete(this)"/>' +
+                
+                '<div class="error-message">전공을 입력해주세요.</div>' +
+                '</div>'+
+                '</div>'
+            );
+        }else{
+            console.log("학력은 3건이상 넣을 수 없습니다.")
+        }
         $("select").selectize();
     });
+
+    
 
 
     $('#education-add-dialog .confirm-btn').click(function () {
@@ -507,9 +507,28 @@ $(document).ready(function () {
     });
 
     $('.spec-detail-div').click(function (event) {
+        try {
+            if($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {
+                //대학교 케이스
+                var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
+                parentparentNodeChecknot[0].checked = true;
+                parentparentNodeChecknot[1].checked = true;
+                event.preventDefault();
+            }
+            
+            else if($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 2) {
+                var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:checked");
+                parentparentNodeChecknot[0].checked = false;
+                parentparentNodeChecknot[1].checked = false;
+                event.preventDefault();
+            }
+            
+        }catch(exception) {
+            console.log(exception);
+        }
         $(".spec-detail-div input:checkbox").each(function (i) {
             if ($(this).is(':checked')) {
-                $(this.parentNode.parentNode).find("input:checkbox:not(:checked)")[0].checked = true;
+                       
                 $(this).closest('.spec-body').css({
                     "border": "solid 1px #4c80f1",
                     "border-radius": "4px",
@@ -519,6 +538,14 @@ $(document).ready(function () {
                 // $(this).closest('.spec-body').children('.spec-right').last().children().eq(3).children().css({"color":"#ffffff", "border": "solid 1px #dfe5ef"});
                 // $("#btn_change_"+$(this).closest('.spec-body').children('.spec-right').last().children().eq(3).attr("id").substring(11)).hide();
             } else {
+
+                
+                // if($(".spec-detail-div input:checkbox:checked").length > 0) {
+                //     var parentparentNode = $(".spec-detail-div input:checkbox:checked")[0].parentNode.parentNode;
+                //     $(parentparentNode).find("input:checkbox:checked")[0].checked = false;
+                // }
+                
+
                 $(this).closest('.spec-body').css({
                     "border": "none",
                     "border-bottom": "solid 1px #dfe5ef",
@@ -700,7 +727,7 @@ $(document).ready(function () {
     });
 
     document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
-        debugger;
+        // debugger;
         event.stopPropagation();
         event.preventDefault();
 
@@ -710,7 +737,7 @@ $(document).ready(function () {
     }, true);
 
     document.getElementById("spec_certification_targetdiv").addEventListener("record_updated", function (event) {
-        debugger;
+        // debugger;
         event.stopPropagation();
         event.preventDefault();
 
@@ -720,7 +747,7 @@ $(document).ready(function () {
     }, true);
 
     document.getElementById("spec_forign_lang_targetdiv").addEventListener("record_updated", function (event) {
-        debugger;
+        // debugger;
         event.stopPropagation();
         event.preventDefault();
 
@@ -728,7 +755,10 @@ $(document).ready(function () {
             $(event.currentTarget).show();
         }
     }, true);
+
 });
+
+
 
 window.onload = function () {
     socket = io();
@@ -1042,7 +1072,7 @@ function refreshview(records) {
         view_formatter[subid](recordList[i]);
     }
 
-    debugger;
+    //debugger;
     if ($("#spec_edu_detail .spec-body").length > 0 ||
         $("#spec_edu_detail .private-spec-body").length > 0) {
         $('#spec_edu_detail > .spec-body-default').hide();
@@ -1158,6 +1188,30 @@ function getTargetdivid(subid) {
 }
 
 function clearAddSpanEdu() {
+    debugger;
+    $("#education-add-dialog #school").removeClass("error");
+    $("#education-add-dialog #school").next().css("display", "none");
+
+    var element = $("#education-add-dialog .major");
+    var range = element.closest(".error-range");
+    element.removeClass("error");
+    range.find(".items ").removeClass("error");
+    range.find(".error-message").css("display", "none");
+
+    var period = $("#education-add-dialog .study-period");
+    var range = period.closest(".error-range");
+    period.removeClass("error");
+    range.find("button").removeClass("error");
+    range.find(".items").removeClass("error");
+    range.find(".error-message").css("display", "none");
+
+    var range = $("#education-add-dialog #score").closest(".error-range");
+
+    $("#education-add-dialog #score").removeClass("error");
+    range.find(".items").removeClass("error");
+    range.find(".error-message").css("display", "none");
+
+
     $("#education-add-dialog #school").val("");
     $("#education-add-dialog #first-major").val("");
     $("#education-add-dialog #edu-startdate").val("");
@@ -1168,6 +1222,23 @@ function clearAddSpanEdu() {
 }
 
 function clearAddSpanCert() {
+    $("#cert-add-dialog #cert-issuer").removeClass("error");
+    $("#cert-add-dialog #cert-issuer").next().css("display", "none");
+
+    $("#cert-add-dialog #cert-name").removeClass("error");
+    $("#cert-add-dialog #cert-name").next().css("display", "none");
+
+    $("#cert-add-dialog #cert-grade").removeClass("error");
+    $("#cert-add-dialog #cert-grade").next().css("display", "none");
+
+    $("#cert-add-dialog #certadd_startdate").removeClass("error");
+    $("#cert-add-dialog #certadd_startdate").next().css("display", "none");
+
+    $("#cert-add-dialog #certadd_enddate").removeClass("error");
+    $("#cert-add-dialog #certadd_enddate").next().css("display", "none");
+
+    $("#cert-add-dialog .error-message-period").hide();
+
     $("#cert-add-dialog #cert-issuer").val("");
     $("#cert-add-dialog #cert-name").val("");
     $("#cert-add-dialog #cert-grade").val("");
@@ -1176,9 +1247,33 @@ function clearAddSpanCert() {
 }
 
 function clearAddSpanLang() {
+    $("#language-add-dialog #language-name").removeClass("error");
+    $("#language-add-dialog #language-name").next().css("display", "none");
+
+    $("#language-add-dialog #language-issuer").removeClass("error");
+    $("#language-add-dialog #language-issuer").next().css("display", "none");
+
+    $("#language-add-dialog #language-grade").removeClass("error");
+    $("#language-add-dialog #language-grade").next().css("display", "none");
+
+    $("#language-add-dialog #langadd_startdate").removeClass("error");
+    $("#language-add-dialog #langadd_startdate").next().css("display", "none");
+
+    $("#language-add-dialog #langadd_enddate").removeClass("error");
+    $("#language-add-dialog #langadd_enddate").next().css("display", "none");
+
+    $("#language-add-dialog .error-message-period").hide();
+
     $("#language-add-dialog #language-name").val("");
     $("#language-add-dialog #language-issuer").val("");
     $("#language-add-dialog #language-grade").val("");
     $("#language-add-dialog #langadd_startdate").val("");
     $("#language-add-dialog #langadd_enddate").val("");
+}
+
+function addMajorDelete(event){
+    console.log(this);
+}
+function addMajorDelete(imgElement){
+    $(imgElement).parent().parent().remove();
 }
