@@ -700,7 +700,7 @@ $(document).ready(function () {
         event.stopPropagation();
         event.preventDefault();
 
-        if ($("#spec_edu_detail_targetdiv .private-spec-body").length == 0 && $("#spec_edu_detail_targetdiv .spec-body").length == 0) {
+        if ($("#spec_edu_detail .private-spec-body").length == 0 && $("#spec_edu_detail .spec-body").length == 0) {
             $(event.currentTarget).show();
         }
     }, true);
@@ -841,11 +841,20 @@ function getPrivateRecords() {
             console.error(jqXhr.responseText);
         },
         success: function (res) {
+            // debugger;
+            res.result.sort(function(a, b){
+                try{
+                    return Date.parse(a.created || 0) - Date.parse(b.created || 0);
+                }catch(e){
+                    console.error(e);
+                    return 0;
+                }
+            })
             res.result.forEach(function (item, idx) {
                 var data = JSON.parse(item.data);
                 data.certPrvtId = item.certPrvtId;
-                if (item.subCd in formatter) {
-                    formatter[item.subCd](data);
+                if (item.subCd in view_formatter) {
+                    view_formatter[item.subCd](data);
                 }
             });
             $('.private-spec-body').on('click', singletonCallback);
@@ -1023,7 +1032,7 @@ function refreshview(records) {
 
     for (var i in recordList) {
         var subid = recordList[i].subid;
-        formatter[subid](recordList[i]);
+        view_formatter[subid](recordList[i]);
     }
 
     if ($("#spec_edu_detail .spec-body").length > 0 ||

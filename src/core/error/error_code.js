@@ -57,3 +57,4 @@ exports.API_NO_CMD = 801;
 // Invalid api version name
 exports.API_VERSION_INVALID = 802;
 exports.API_UNAUTHORIZED = 803;
+exports.API_NO_USER = 804;
