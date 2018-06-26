@@ -40,7 +40,7 @@
                     .next().html(record_data.examid);
                 $("#certno").html("인증서번호 : " + certId);
 
-                // generateQRCode();
+                generateQRCode();
             });
         },
 
@@ -70,7 +70,7 @@
                     .next().html(parseFloat(record_data.re_point18).toFixed(2))
                     .next().html(parseFloat(record_data.re_point21).toFixed(2));
 
-                //generateQRCode();
+                generateQRCode();
                 createChart(record_data);
             });
         },
@@ -167,7 +167,7 @@
                 //
 
                 $(".cert_doc_id").html("발급번호 : " + certId);
-                // generateQRCode();
+                generateQRCode();
             });
         },
 
@@ -190,7 +190,7 @@
                 $('#cert-main-agent').text(main_agent_name);
 
                 $(".cert_doc_id").html("발급번호 : " + certId);
-                // generateQRCode();
+                generateQRCode();
             });
         },
 
@@ -213,7 +213,7 @@
                 $('#cert-main-agent').text(main_agent_name);
 
                 $(".cert_doc_id").html("발급번호 : " + certId);
-                // generateQRCode();
+                generateQRCode();
             });
 
         },
@@ -309,7 +309,7 @@
 
                 $('.sungjuk_sector_' + sector).append(htmldiv);
                 $(".cert_doc_id").html("발급번호 : " + certId);
-                // generateQRCode();
+                generateQRCode();
             });
         },
     };
@@ -391,7 +391,7 @@
             //image: jq('#img-buffer')[0]
         };
 
-        $('#qrcode').empty().qrcode(options);
+        $('#qrcode').empty().qrcode(options);        
     };
 
     _window.dateconverter = function dateconverter() {
