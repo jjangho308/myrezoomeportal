@@ -98,7 +98,7 @@ $(document).ready(function () {
     
                 '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
                 
-                '<img id="add-major-delete" src="/img/myresume/close-white.svg" onclick="addMajorDelete()"/>' +
+                '<img id="add-major-delete" src="/img/myresume/close-white.svg" onclick="addMajorDelete(this)"/>' +
                 
                 '<div class="error-message">전공을 입력해주세요.</div>' +
                 '</div>'+
@@ -1216,4 +1216,7 @@ function clearAddSpanLang() {
 
 function addMajorDelete(event){
     console.log(this);
+}
+function addMajorDelete(imgElement){
+    $(imgElement).parent().parent().remove();
 }
