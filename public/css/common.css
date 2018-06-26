@@ -91,7 +91,9 @@ input {
 }
 
 input:focus {
-    border: solid 1px #749ffa;
+    /* border: solid 1px #4c80f1; */
+    outline: 0;    
+    border: 1px solid #a2a2a2;
 }
 
 input:-moz-read-only {
