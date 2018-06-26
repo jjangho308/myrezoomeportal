@@ -321,8 +321,7 @@
         });
 
         // donwload PDF
-        $("#btn_download").click(function (event) {
-                generateQRCode();
+        $("#btn_download").click(function (event) {                
                 
                 $(".qr-container").show();
                 var $childern = $(".main-body >.outer-container");
@@ -357,8 +356,6 @@
 
 
         $("#btn_print").click(function (event) {
-            // generate QR before print 
-            generateQRCode();
 
             $(".header").hide();
             $(".main-body-footer").hide();
