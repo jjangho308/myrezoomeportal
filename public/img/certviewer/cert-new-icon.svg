@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <g fill="none" fill-rule="evenodd" transform="translate(2 2)">
+        <circle cx="8" cy="8" r="9" fill="#4A90E2" stroke="#FFF" stroke-width="2"/>
+        <text fill="#FFF" font-family="SpoqaHanSans-Bold, SpoqaHanSans" font-size="8" font-weight="bold">
+            <tspan x="5.004" y="11">N</tspan>
+        </text>
+    </g>
+</svg>
