@@ -39,7 +39,7 @@ height: 380px;
 }
 
 #add-cert-dialog th:nth-child(3) {
-    width: 64px;
+    width: 80px;
 }
 
 
@@ -52,7 +52,7 @@ height: 380px;
 }
 
 #add-cert-dialog td:nth-child(3) {
-    width: 64px;
+    width: 80px;
 }
 
 
