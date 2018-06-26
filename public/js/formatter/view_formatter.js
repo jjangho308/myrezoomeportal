@@ -3,6 +3,92 @@
 */
 
 ! function (_win) {
+
+    /**
+     * Delete a single private record. <br />
+     * 
+     * @since 180626
+     * @author TACKSU
+     */
+    function deletePrivateRecord(recordId, recordContainer, eventName, eventTargetId) {
+        ajaxDeletePrivateRecord(recordId, function (err, response) {
+            debugger;
+            if (!!err) {
+                return console.error(err);
+            } else if (response.result === true) {
+                recordContainer.remove();
+                var privateDeletedEvent = document.createEvent('Event');
+                privateDeletedEvent.initEvent(eventName, true, true);
+                document.getElementById(eventTargetId).dispatchEvent(privateDeletedEvent);
+            }
+        });
+    }
+
+    // var deletePrivateCert = function (event) {
+    //     debugger;
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    //     var privateRecordId = event.currentTarget.nextElementSibling.value;
+    //     if (!privateRecordId) {
+    //         return console.error("No record Id");
+    //     }
+    //     delete_private_record(privateRecordId, function (container) {
+    //         return function (err, response) {
+    //             if (!!err) {
+    //                 return console.error(err);
+    //             } else if (response.result === true) {
+    //                 container.remove();
+    //                 var privateDeletedEvent = document.createEvent('Event');
+    //                 privateDeletedEvent.initEvent('cert_private_deleted', true, true);
+    //                 document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
+    //             }
+    //         };
+    //     }(event.currentTarget.parentElement.parentElement));
+    // };
+
+    // var deletePrivateEdu = function (event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    //     var privateRecordId = event.currentTarget.nextElementSibling.value;
+    //     if (!privateRecordId) {
+    //         return console.error("No record Id");
+    //     }
+    //     delete_private_record(privateRecordId, function (container) {
+    //         return function (err, response) {
+    //             if (!!err) {
+    //                 return console.error(err);
+    //             } else if (response.result === true) {
+    //                 container.remove();
+    //                 var privateDeletedEvent = document.createEvent('Event');
+    //                 privateDeletedEvent.initEvent('edu_private_deleted', true, true);
+    //                 document.getElementById("spec_forign_edu_targetdiv").dispatchEvent(privateDeletedEvent);
+    //             }
+    //         };
+    //     }(event.currentTarget.parentElement.parentElement));
+    // };
+
+    // var deletePrivateLanguage = function (event) {
+    //     debugger;
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    //     var privateRecordId = event.currentTarget.nextElementSibling.value;
+    //     if (!privateRecordId) {
+    //         return console.error("No record Id");
+    //     }
+    //     delete_private_record(privateRecordId, function (container) {
+    //         return function (err, response) {
+    //             if (!!err) {
+    //                 return console.error(err);
+    //             } else if (response.result === true) {
+    //                 container.remove();
+    //                 var privateDeletedEvent = document.createEvent('Event');
+    //                 privateDeletedEvent.initEvent('lang_private_deleted', true, true);
+    //                 document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
+    //             }
+    //         };
+    //     }(event.currentTarget.parentElement.parentElement));
+    // }
+
     var formatter = _win.formatter = {
         "RCLPT0005": function viewformatter(record) {
             // opic
@@ -443,57 +529,134 @@
         "UNV": function viewformatter(record) {
             console.log(record);
             // Private record
-            var htmldiv = '<div class="private-spec-body">';
+            // var htmldiv = '<div class="private-spec-body">';
 
-            htmldiv = htmldiv + '<div class="spec-check">';
-            htmldiv = htmldiv + '<input style="visibility:hidden" type="checkbox" disabled/>';
-            htmldiv = htmldiv + '<label><label/>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-date">';
-            htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-            htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '<div class="spec-check">';
+            // htmldiv = htmldiv + '<input style="visibility:hidden" type="checkbox" disabled/>';
+            // htmldiv = htmldiv + '<label><label/>';
+            // htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '<div class="spec-date">';
+            // htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
+            // htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '<div class="spec-center">';
+            // htmldiv = htmldiv + '<img src="img/main/icon-university.svg" alt="">';
+            // htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" /></div>';
+            // htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '<div class="spec-right">';
+            // htmldiv = htmldiv + '<p>' + record.school_name + '</p>';
+            // htmldiv = htmldiv + '<p>' + record.status + '</p>';
+            // htmldiv = htmldiv + '<p>' + record.degree + '</p>';
+            // htmldiv = htmldiv + '<button onclick=deletePrivateEdu()>삭제</button>';
+            // htmldiv = htmldiv + '<input type="hidden" value="' + record.certPrvtId + '" />';
+            // htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '</div>';
+            // $('#spec_edu_detail').append(htmldiv);
+            // $('#spec_edu_detail > .spec-body-default').hide();
 
+            var specContainer = document.createElement("div");
+            specContainer.className = "private-spec-body"
+            specContainer.appendChild(function () {
+                var specCheckContainer = document.createElement("div");
+                specCheckContainer.className = "spec-check";
 
-            //  htmldiv = htmldiv + '<div class="spec-left">';
-            //htmldiv = htmldiv + '<span></span>';
-            //htmldiv = htmldiv + '<span></span>';
-            //htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-            //htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="img/main/icon-university.svg" alt="">';
-            htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" /></div>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>' + record.school_name + '</p>';
-            htmldiv = htmldiv + '<p>' + record.status + '</p>';
-            htmldiv = htmldiv + '<p>' + record.degree + '</p>';
-            htmldiv = htmldiv + '<button onclick=deletePrivateEdu>삭제</button>';
-            htmldiv = htmldiv + '<input type="hidden" value="' + record.certPrvtId + '" />';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '</div>';
-            $('#spec_edu_detail').append(htmldiv);
+                specCheckContainer.appendChild(function () {
+                    var checkbox = document.createElement("input");
+                    checkbox.style.visibility = "hidden";
+                    checkbox.setAttribute("type", "checkbox");
+                    checkbox.setAttribute("disabled", "true");
+                    return checkbox;
+                }());
+                specCheckContainer.appendChild(document.createElement("label"));
+                return specCheckContainer;
+            }());
+
+            specContainer.appendChild(function () {
+                var specLeftContainer = document.createElement("div");
+                specLeftContainer.className = "spec-date";
+                specLeftContainer.appendChild(function () {
+                    var span = document.createElement("span");
+                    span.innerHTML = record.startdate + ' ~ ' + record.enddate;
+                    return span;
+                }());
+
+                return specLeftContainer;
+            }());
+
+            specContainer.appendChild(function () {
+                var specCenterContainer = document.createElement("div");
+                specCenterContainer.className = "spec-center";
+
+                specCenterContainer.appendChild(function () {
+                    var languageImg = document.createElement("img");
+                    languageImg.src = "img/main/icon-university.svg";
+                    languageImg.alt = "";
+                    return languageImg;
+                }());
+
+                specCenterContainer.appendChild(function () {
+                    var specVerifyContainer = document.createElement("div");
+                    specVerifyContainer.className = "spec-verify-img";
+                    specVerifyContainer.setAttribute("data-tooltip-text", "수기로 입력한 이력입니다.");
+
+                    specVerifyContainer.appendChild(function () {
+                        var imgContainer = document.createElement("img");
+                        imgContainer.src = "img/myresume/off.svg";
+                        return imgContainer;
+                    }());
+                    return specVerifyContainer;
+                }());
+
+                return specCenterContainer;
+            }());
+
+            specContainer.appendChild(function () {
+                var specRightContainer = document.createElement("div");
+                specRightContainer.className = "spec-right";
+
+                specRightContainer.appendChild(function () {
+                    var p = document.createElement("p");
+                    p.innerHTML = record.school_name;
+                    return p;
+                }());
+
+                specRightContainer.appendChild(function () {
+                    var p = document.createElement("p");
+                    p.innerHTML = record.status;
+                    return p;
+                }());
+
+                specRightContainer.appendChild(function () {
+                    var p = document.createElement("p");
+                    p.innerHTML = record.degree;
+                    return p;
+                }());
+
+                specRightContainer.appendChild(function () {
+                    var deleteButton = document.createElement("button");
+                    deleteButton.innerHTML = "삭제";
+                    deleteButton.addEventListener("click", function (event) {
+                        debugger;
+                        deletePrivateRecord(
+                            event.currentTarget.nextElementSibling.value,
+                            event.currentTarget.parentElement.parentElement,
+                            "edu_private_deleted",
+                            "spec_edu_detail_targetdiv"
+                        )
+                    }, true);
+                    return deleteButton;
+                }());
+
+                specRightContainer.appendChild(function () {
+                    var certIdInput = document.createElement("input");
+                    certIdInput.value = record.certPrvtId;
+                    certIdInput.type = "hidden";
+                    return certIdInput;
+                }());
+
+                return specRightContainer;
+            }());
+            $('#spec_edu_detail').append(specContainer);
             $('#spec_edu_detail > .spec-body-default').hide();
-
-            function deletePrivateEdu(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                var privateRecordId = event.currentTarget.nextElementSibling.value;
-                if (!privateRecordId) {
-                    return console.error("No record Id");
-                }
-                delete_private_record(privateRecordId, function (container) {
-                    return function (err, response) {
-                        if (!!err) {
-                            return console.error(err);
-                        } else if (response.result === true) {
-                            container.remove();
-                            var privateDeletedEvent = document.createEvent('Event');
-                            privateDeletedEvent.initEvent('edu_private_deleted', true, true);
-                            document.getElementById("spec_forign_edu_targetdiv").dispatchEvent(privateDeletedEvent);
-                        }
-                    };
-                }(event.currentTarget.parentElement.parentElement));
-            }
         },
 
         "CPR": function viewformatter(record) {
@@ -524,33 +687,12 @@
             htmldiv = htmldiv + '<p>' + record.company + '</p>';
             htmldiv = htmldiv + '<p>' + record.position + '</p>';
             htmldiv = htmldiv + '<p>' + record.role + '</p>';
-            htmldiv = htmldiv + '<button onclick=deletePrivateLang>삭제</button>';
+            htmldiv = htmldiv + '<button onclick=deletePrivateLang()>삭제</button>';
             htmldiv = htmldiv + '<input type="hidden" value="' + record.certPrvtId + '" />';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
             $('#spec_career_detail').append(htmldiv);
             $('#spec_career_detail > .spec-body-default').hide();
-
-            function deletePrivateLang(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                var privateRecordId = event.currentTarget.nextElementSibling.value;
-                if (!privateRecordId) {
-                    return console.error("No record Id");
-                }
-                delete_private_record(privateRecordId, function (container) {
-                    return function (err, response) {
-                        if (!!err) {
-                            return console.error(err);
-                        } else if (response.result === true) {
-                            container.remove();
-                            var privateDeletedEvent = document.createEvent('Event');
-                            privateDeletedEvent.initEvent('lang_private_deleted', true, true);
-                            document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
-                        }
-                    };
-                }(event.currentTarget.parentElement.parentElement));
-            }
         },
 
         /**
@@ -663,30 +805,17 @@
                 specRightContainer.appendChild(function () {
                     var deleteButton = document.createElement("button");
                     deleteButton.innerHTML = "삭제";
-                    deleteButton.addEventListener("click", deletePrivateLanguage, true);
+                    deleteButton.addEventListener("click", function (event) {
+                        debugger;
+                        deletePrivateRecord(
+                            event.currentTarget.nextElementSibling.value,
+                            event.currentTarget.parentElement.parentElement,
+                            "lang_private_deleted",
+                            "spec_forign_lang"
+                        )
+                    }, true);
                     return deleteButton;
                 }());
-
-                function deletePrivateLanguage(event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    var privateRecordId = event.currentTarget.nextElementSibling.value;
-                    if (!privateRecordId) {
-                        return console.error("No record Id");
-                    }
-                    delete_private_record(privateRecordId, function (container) {
-                        return function (err, response) {
-                            if (!!err) {
-                                return console.error(err);
-                            } else if (response.result === true) {
-                                container.remove();
-                                var privateDeletedEvent = document.createEvent('Event');
-                                privateDeletedEvent.initEvent('lang_private_deleted', true, true);
-                                document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
-                            }
-                        };
-                    }(event.currentTarget.parentElement.parentElement));
-                }
 
                 specRightContainer.appendChild(function () {
                     var certIdInput = document.createElement("input");
@@ -704,37 +833,134 @@
 
         "OGC": function viewformatter(record) {
             // Private record
-            var htmldiv = '<div class="private-spec-body">';
+            // var htmldiv = '<div class="private-spec-body">';
 
-            htmldiv = htmldiv + '<div class="spec-check">';
-            htmldiv = htmldiv + '<input type="checkbox" disabled/>';
-            htmldiv = htmldiv + '<label><label/>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-date">';
-            htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-            htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '<div class="spec-check">';
+            // htmldiv = htmldiv + '<input type="checkbox" disabled/>';
+            // htmldiv = htmldiv + '<label><label/>';
+            // htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '<div class="spec-date">';
+            // htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
+            // htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '<div class="spec-center">';
+            // htmldiv = htmldiv + '<img src="img/main/icon-certificates.svg" alt="">';
+            // htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" "></div>';
+            // htmldiv = htmldiv + '';
+            // htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '<div class="spec-right">';
+            // htmldiv = htmldiv + '<p>' + record.issuer + '</p>';
+            // htmldiv = htmldiv + '<p>' + record.name + '</p>';
+            // htmldiv = htmldiv + '<p>' + record.grade + '</p>';
+            // htmldiv = htmldiv + '<button onclick=deletePrivateCert()>삭제</button>';
+            // htmldiv = htmldiv + '<input type="hidden" value="' + record.certPrvtId + '" />';
+            // htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '</div>';
+            // $('#spec_certification').append(htmldiv);
+            // $('#spec_certification > .spec-body-default').hide();
 
+            var specContainer = document.createElement("div");
+            specContainer.className = "private-spec-body"
+            specContainer.appendChild(function () {
+                var specCheckContainer = document.createElement("div");
+                specCheckContainer.className = "spec-check";
 
+                specCheckContainer.appendChild(function () {
+                    var checkbox = document.createElement("input");
+                    checkbox.setAttribute("type", "checkbox");
+                    checkbox.setAttribute("disabled", "true");
+                    return checkbox;
+                }());
+                specCheckContainer.appendChild(document.createElement("label"));
+                return specCheckContainer;
+            }());
 
+            specContainer.appendChild(function () {
+                var specLeftContainer = document.createElement("div");
+                specLeftContainer.className = "spec-date";
+                specLeftContainer.appendChild(function () {
+                    var span = document.createElement("span");
+                    span.innerHTML = record.startdate + ' ~ ' + record.enddate;
+                    return span;
+                }());
 
-            //  htmldiv = htmldiv + '<div class="spec-left">';
-            //  htmldiv = htmldiv + '<span></span>';
-            //  htmldiv = htmldiv + '<span></span>';
-            //  htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-            //  htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-center">';
-            htmldiv = htmldiv + '<img src="img/main/icon-certificates.svg" alt="">';
-            htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" "></div>';
-            htmldiv = htmldiv + '';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>' + record.issuer + '</p>';
-            htmldiv = htmldiv + '<p>' + record.name + '</p>';
-            htmldiv = htmldiv + '<p>' + record.grade + '</p>';
-            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
-            htmldiv = htmldiv + '</div>';
-            htmldiv = htmldiv + '</div>';
-            $('#spec_certification').append(htmldiv);
+                return specLeftContainer;
+            }());
+
+            specContainer.appendChild(function () {
+                var specCenterContainer = document.createElement("div");
+                specCenterContainer.className = "spec-center";
+
+                specCenterContainer.appendChild(function () {
+                    var languageImg = document.createElement("img");
+                    languageImg.src = "img/main/icon-certificates.svg";
+                    languageImg.alt = "";
+                    return languageImg;
+                }());
+
+                specCenterContainer.appendChild(function () {
+                    var specVerifyContainer = document.createElement("div");
+                    specVerifyContainer.className = "spec-verify-img";
+                    specVerifyContainer.setAttribute("data-tooltip-text", "수기로 입력한 이력입니다.");
+
+                    specVerifyContainer.appendChild(function () {
+                        var imgContainer = document.createElement("img");
+                        imgContainer.src = "img/myresume/off.svg";
+                        return imgContainer;
+                    }());
+                    return specVerifyContainer;
+                }());
+
+                return specCenterContainer;
+            }());
+
+            specContainer.appendChild(function () {
+                var specRightContainer = document.createElement("div");
+                specRightContainer.className = "spec-right";
+
+                specRightContainer.appendChild(function () {
+                    var p = document.createElement("p");
+                    p.innerHTML = record.issuer;
+                    return p;
+                }());
+
+                specRightContainer.appendChild(function () {
+                    var p = document.createElement("p");
+                    p.innerHTML = record.name;
+                    return p;
+                }());
+
+                specRightContainer.appendChild(function () {
+                    var p = document.createElement("p");
+                    p.innerHTML = record.grade;
+                    return p;
+                }());
+
+                specRightContainer.appendChild(function () {
+                    var deleteButton = document.createElement("button");
+                    deleteButton.innerHTML = "삭제";
+                    deleteButton.addEventListener("click", function (event) {
+                        debugger;
+                        deletePrivateRecord(
+                            event.currentTarget.nextElementSibling.value,
+                            event.currentTarget.parentElement.parentElement,
+                            "cert_private_deleted",
+                            "spec_certification_targetdiv"
+                        )
+                    }, true);
+                    return deleteButton;
+                }());
+
+                specRightContainer.appendChild(function () {
+                    var certIdInput = document.createElement("input");
+                    certIdInput.value = record.certPrvtId;
+                    certIdInput.type = "hidden";
+                    return certIdInput;
+                }());
+
+                return specRightContainer;
+            }());
+
+            $('#spec_certification').append(specContainer);
             $('#spec_certification > .spec-body-default').hide();
         },
     };

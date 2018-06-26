@@ -71,16 +71,16 @@ $(document).ready(function () {
         });
         window.location = "main";
     });
-    
-    $('#add-span-edu').click(function(){
+
+    $('#add-span-edu').click(function () {
         clearAddSpanEdu();
     })
 
-    $('#add-span-cert').click(function(){
+    $('#add-span-cert').click(function () {
         clearAddSpanCert();
     })
 
-    $('#add-span-lang').click(function(){
+    $('#add-span-lang').click(function () {
         clearAddSpanLang();
     })
 
@@ -105,7 +105,7 @@ $(document).ready(function () {
             '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
             '<img src="/img/myresume/close-white.svg"/>' +
             '<div class="error-message">전공을 입력해주세요.</div>' +
-            '</div>'+
+            '</div>' +
             '</div>'
         );
         $("select").selectize();
@@ -605,7 +605,7 @@ $(document).ready(function () {
 
                                 //$("#cert-line-dialog .close-modal").click();
                                 $("#cert-line-dialog").parent().fadeOut('slow'); // rollback when issue
-                                
+
                                 $("#alarm-div").css("display", "block");
                                 $("#alarm-div").css("margin-right", "-224px");
                                 $("#select-footer").hide();
@@ -696,28 +696,31 @@ $(document).ready(function () {
     });
 
     document.getElementById("spec_edu_detail_targetdiv").addEventListener("edu_private_deleted", function (event) {
+        debugger;
         event.stopPropagation();
         event.preventDefault();
 
-        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length) {
+        if ($("#spec_edu_detail_targetdiv .private-spec-body").length == 0 && $("#spec_edu_detail_targetdiv .spec-body").length == 0) {
             $(event.currentTarget).show();
         }
     }, true);
 
     document.getElementById("spec_certification_targetdiv").addEventListener("cert_private_deleted", function (event) {
+        debugger;
         event.stopPropagation();
         event.preventDefault();
 
-        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length) {
+        if ($("#spec_certification .private-spec-body").length == 0 && $("#spec_certification .spec-body").length == 0) {
             $(event.currentTarget).show();
         }
     }, true);
 
     document.getElementById("spec_forign_lang_targetdiv").addEventListener("lang_private_deleted", function (event) {
+        debugger;
         event.stopPropagation();
         event.preventDefault();
 
-        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length) {
+        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length == 0) {
             $(event.currentTarget).show();
         }
     }, true);
@@ -782,7 +785,7 @@ function change_default_cert(subid) {
     $('#spec-change-dialog').modal('show');
 }
 
-function delete_private_record(prvtId, cb) {
+function ajaxDeletePrivateRecord(prvtId, cb) {
     $.ajax({
         type: 'DELETE',
         url: '/records/' + prvtId,
@@ -1137,24 +1140,24 @@ function getTargetdivid(subid) {
     }
 }
 
-function clearAddSpanEdu (){
+function clearAddSpanEdu() {
     $("#education-add-dialog #school").val("");
     $("#education-add-dialog #first-major").val("");
     $("#education-add-dialog #edu-startdate").val("");
     $("#education-add-dialog #edu-enddate").val("");
     $("#education-add-dialog #score").val("");
-    
+
     $("#education-add-dialog #add-major").remove();
 }
 
-function clearAddSpanCert (){
+function clearAddSpanCert() {
     $("#cert-add-dialog #cert-name").val("");
     $("#cert-add-dialog #cert-grade").val("");
     $("#cert-add-dialog #certadd_startdate").val("");
     $("#cert-add-dialog #certadd_enddate").val("");
 }
 
-function clearAddSpanLang(){
+function clearAddSpanLang() {
     $("#language-add-dialog #language-name").val("");
     $("#language-add-dialog #language-grade").val("");
     $("#language-add-dialog #langadd_startdate").val("");
