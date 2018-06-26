@@ -1150,7 +1150,8 @@ function clearAddSpanEdu() {
     $("#education-add-dialog #add-major").remove();
 }
 
-function clearAddSpanCert() {
+function clearAddSpanCert (){
+    $("#cert-add-dialog #cert-issuer").val("");
     $("#cert-add-dialog #cert-name").val("");
     $("#cert-add-dialog #cert-grade").val("");
     $("#cert-add-dialog #certadd_startdate").val("");
@@ -1159,6 +1160,7 @@ function clearAddSpanCert() {
 
 function clearAddSpanLang() {
     $("#language-add-dialog #language-name").val("");
+    $("#language-add-dialog #language-issuer").val("");
     $("#language-add-dialog #language-grade").val("");
     $("#language-add-dialog #langadd_startdate").val("");
     $("#language-add-dialog #langadd_enddate").val("");

@@ -184,7 +184,7 @@ table {
 .qr-container div:nth-child(1){
     position: absolute;
     bottom: -80px;
-    right: 25px;
+    right: -2px;
     width: 75px;
     height: 75px;
 }
@@ -192,7 +192,7 @@ table {
 .qr-container p:nth-child(n) {
     position: relative;
     font-size: 11px;
-    left: 5px;
+    left: -40px;
     top: 70px;
     color: #838383;
     padding: 5px 5px 0px 40px;
