@@ -6,29 +6,30 @@
     var formatter = _win.formatter = {
         "RCLPT0005": function viewformatter(record) {
             // opic
-
             var htmldiv = '<div class="spec-body">';
-          // htmldiv = htmldiv + '<div class="spec-left">';
-          // htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-          // htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-          // htmldiv = htmldiv + '<span>' + formatDate(record.ctestday) + '</span>';
-          //  htmldiv = htmldiv + '</div>';
-           htmldiv = htmldiv + '<div class="spec-check">';
-           htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-           htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-           htmldiv = htmldiv + '</div>';
-           htmldiv = htmldiv + '<div class="spec-date">';
-           htmldiv = htmldiv + '<span>' + formatDate(record.ctestday) + '</span>';
-           htmldiv = htmldiv + '</div>';
+            // htmldiv = htmldiv + '<div class="spec-left">';
+            // htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+            // htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+            // htmldiv = htmldiv + '<span>' + formatDate(record.ctestday) + '</span>';
+            //  htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-check">';
+            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-date">';
+            htmldiv = htmldiv + '<span>' + formatDate(record.ctestday) + '</span>';
+            htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/opic-logo.png" alt="">';
             htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>OPIc</p>';
-            htmldiv = htmldiv + '<p>' + record.testtype + '<span class="spec-body-count">+' + record.count + '</span></p>';
+            // htmldiv = htmldiv + '<p>' + record.testtype + '<span class="spec-body-count">+' + record.count + '</span></p>';
+            htmldiv = htmldiv + '<p>' + record.language + '</p>';
             htmldiv = htmldiv + '<p>' + record.rating + '</p>';
-            htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+            // htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+            htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")><span class="spec-body-btn-name">더 보기</span><span class="spec-body-count">+' + record.count + '</span></button>';
             htmldiv = htmldiv + '</div>';
 
             htmldiv = htmldiv + '</div>';
@@ -44,17 +45,18 @@
             htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-date">';
-            htmldiv = htmldiv + '<span>' + (record.ea_exam_time != null ? formatDate(record.ea_exam_time) : "") + '</span>';
-            htmldiv = htmldiv + '</div>'; 
+            htmldiv = htmldiv + '<span>' + record.ea_exam_time != null ? formatDate(record.ea_exam_time) : "" + '</span>';
+            htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/mk-logo.png" alt="">';
             htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>매경TEST</p>';
-            htmldiv = htmldiv + '<p>제 ' + record.ea_asset + '회<span class="spec-body-count">+' + record.count + '</span></p>';
+            //htmldiv = htmldiv + '<p>제 ' + record.ea_asset + '회<span class="spec-body-count">+' + record.count + '</span></p>';
+            htmldiv = htmldiv + '<p>제 ' + record.ea_asset + '회</p>';
             htmldiv = htmldiv + '<p>' + record.re_grade + ', ' + record.re_point0 + '</p>';
-            htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")>변경</button>';
+            htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")><span class="spec-body-btn-name">더 보기</span><span class="spec-body-count">+' + record.count + '</span></button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
             $('#spec_certification').append(htmldiv);
@@ -64,18 +66,18 @@
         "RCLPT0006": function viewformatter(record) {
             //OPIC ENGlish writing
             var htmldiv = '<div class="spec-body">';
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-               htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span>' + formatDate(record.ctestday) + '</span>';
-               htmldiv = htmldiv + '</div>'; 
-          //  htmldiv = htmldiv + '<div class="spec-left">';
-          //  htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-          //  htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-          //  htmldiv = htmldiv + '<span></span>';
-          //  htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-check">';
+            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-date">';
+            htmldiv = htmldiv + '<span>' + formatDate(record.ctestday) + '</span>';
+            htmldiv = htmldiv + '</div>';
+            //  htmldiv = htmldiv + '<div class="spec-left">';
+            //  htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+            //  htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+            //  htmldiv = htmldiv + '<span></span>';
+            //  htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/mk-logo.png" alt="">';
             htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -101,21 +103,21 @@
                 $('#spec-body-RCOGC0009').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0008" class="spec-body">';
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-               htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0008">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
-               htmldiv = htmldiv + '</div>'; 
-              
+                htmldiv = htmldiv + '<div class="spec-check">';
+                htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '<div class="spec-date">';
+                htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0008">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
+                htmldiv = htmldiv + '</div>';
+
                 //htmldiv = htmldiv + '<div class="spec-left">';
                 // htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
                 //htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
                 //htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0008">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
                 //htmldiv = htmldiv + '</div>';
-              
-              
+
+
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/inha-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -148,20 +150,20 @@
             } else {
 
                 var htmldiv = '<div id="spec-body-RCOGC0009" class="spec-body">';
-               
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-               htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0008">' + '</span>';
-               htmldiv = htmldiv + '</div>';             
-            //  htmldiv = htmldiv + '<div class="spec-left">';
-            //    htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            //    htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            //    //htmldiv = htmldiv + '<span>' + record.registList[0].admission_date + '~' + record.registList[0].change_date +'</span>';
-            //    htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0008">' + '</span>';
-            //    htmldiv = htmldiv + '</div>';
+
+                htmldiv = htmldiv + '<div class="spec-check">';
+                htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '<div class="spec-date">';
+                htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0008">' + '</span>';
+                htmldiv = htmldiv + '</div>';
+                //  htmldiv = htmldiv + '<div class="spec-left">';
+                //    htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                //    htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                //    //htmldiv = htmldiv + '<span>' + record.registList[0].admission_date + '~' + record.registList[0].change_date +'</span>';
+                //    htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0008">' + '</span>';
+                //    htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/inha-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -189,20 +191,20 @@
                 $('#spec-body-RCOGC0011').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0010" class="spec-body">';
-            
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-               htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0010">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
-               htmldiv = htmldiv + '</div>'; 
-          
-            //  htmldiv = htmldiv + '<div class="spec-left">';
-            //    htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            //    htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            //    htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0010">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
-            //    htmldiv = htmldiv + '</div>';
+
+                htmldiv = htmldiv + '<div class="spec-check">';
+                htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '<div class="spec-date">';
+                htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0010">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
+                htmldiv = htmldiv + '</div>';
+
+                //  htmldiv = htmldiv + '<div class="spec-left">';
+                //    htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                //    htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                //    htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0010">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
+                //    htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/kmu-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -234,16 +236,16 @@
             } else {
 
                 var htmldiv = '<div id="spec-body-RCOGC0011" class="spec-body">';
- 
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-               htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span></span>';
-               htmldiv = htmldiv + '</div>'; 
-              
-              
+
+                htmldiv = htmldiv + '<div class="spec-check">';
+                htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '<div class="spec-date">';
+                htmldiv = htmldiv + '<span></span>';
+                htmldiv = htmldiv + '</div>';
+
+
                 //htmldiv = htmldiv + '<div class="spec-left">';
                 //htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
                 //htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
@@ -275,22 +277,22 @@
                 $('#spec-body-RCOGC0013').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0012" class="spec-body">';
-               
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-               htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
-               htmldiv = htmldiv + '</div>'; 
-              
-              
-              
-            //  htmldiv = htmldiv + '<div class="spec-left">';
-            //    htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            //    htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            //    htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
-            //    htmldiv = htmldiv + '</div>';
+
+                htmldiv = htmldiv + '<div class="spec-check">';
+                htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '<div class="spec-date">';
+                htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
+                htmldiv = htmldiv + '</div>';
+
+
+
+                //  htmldiv = htmldiv + '<div class="spec-left">';
+                //    htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                //    htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                //    htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
+                //    htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/kgu-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -322,22 +324,22 @@
                 $('#spec-body-RCOGC0012').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0013" class="spec-body">';
-      
-              
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-               htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012"></span>';
-               htmldiv = htmldiv + '</div>'; 
-              
-              
-              //  htmldiv = htmldiv + '<div class="spec-left">';
-              //  htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-              //  htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-              //  htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012"></span>';
-              //  htmldiv = htmldiv + '</div>';
+
+
+                htmldiv = htmldiv + '<div class="spec-check">';
+                htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '<div class="spec-date">';
+                htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012"></span>';
+                htmldiv = htmldiv + '</div>';
+
+
+                //  htmldiv = htmldiv + '<div class="spec-left">';
+                //  htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                //  htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                //  htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012"></span>';
+                //  htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/kgu-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -364,14 +366,14 @@
                 $('#spec-body-RCOGC0015').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0014" class="spec-body">';
-     
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-               htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0014">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
-               htmldiv = htmldiv + '</div>'; 
+
+                htmldiv = htmldiv + '<div class="spec-check">';
+                htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '<div class="spec-date">';
+                htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0014">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
+                htmldiv = htmldiv + '</div>';
 
                 //htmldiv = htmldiv + '<div class="spec-left">';
                 //htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
@@ -409,21 +411,21 @@
                 $('#spec-body-RCOGC0014').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
                 var htmldiv = '<div id="spec-body-RCOGC0015" class="spec-body">';
-           
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-               htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0014"></span>';
-               htmldiv = htmldiv + '</div>'; 
-              
-  
-               // htmldiv = htmldiv + '<div class="spec-left">';
-               // htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-               // htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-               // htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0014"></span>';
-               // htmldiv = htmldiv + '</div>';
+
+                htmldiv = htmldiv + '<div class="spec-check">';
+                htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                htmldiv = htmldiv + '</div>';
+                htmldiv = htmldiv + '<div class="spec-date">';
+                htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0014"></span>';
+                htmldiv = htmldiv + '</div>';
+
+
+                // htmldiv = htmldiv + '<div class="spec-left">';
+                // htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+                // htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+                // htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0014"></span>';
+                // htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/cau-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -444,51 +446,73 @@
             console.log(record);
             // Private record
             var htmldiv = '<div class="private-spec-body">';
-   
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input style="visibility:hidden" type="checkbox" disabled/>';
-               htmldiv = htmldiv + '<label><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-               htmldiv = htmldiv + '</div>'; 
-          
-          
-          //  htmldiv = htmldiv + '<div class="spec-left">';
+
+            htmldiv = htmldiv + '<div class="spec-check">';
+            htmldiv = htmldiv + '<input style="visibility:hidden" type="checkbox" disabled/>';
+            htmldiv = htmldiv + '<label><label/>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-date">';
+            htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
+            htmldiv = htmldiv + '</div>';
+
+
+            //  htmldiv = htmldiv + '<div class="spec-left">';
             //htmldiv = htmldiv + '<span></span>';
             //htmldiv = htmldiv + '<span></span>';
             //htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
             //htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/icon-university.svg" alt="">';
-            htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" "></div>';
+            htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" /></div>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
             htmldiv = htmldiv + '<p>' + record.school_name + '</p>';
             htmldiv = htmldiv + '<p>' + record.status + '</p>';
             htmldiv = htmldiv + '<p>' + record.degree + '</p>';
-            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
+            htmldiv = htmldiv + '<button onclick=deletePrivateEdu><span class="spec-body-btn-name">삭제</span></button>';
+            htmldiv = htmldiv + '<input type="hidden" value="' + record.certPrvtId + '" />';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
             $('#spec_edu_detail').append(htmldiv);
             $('#spec_edu_detail > .spec-body-default').hide();
+
+            function deletePrivateEdu(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                var privateRecordId = event.currentTarget.nextElementSibling.value;
+                if (!privateRecordId) {
+                    return console.error("No record Id");
+                }
+                delete_private_record(privateRecordId, function (container) {
+                    return function (err, response) {
+                        if (!!err) {
+                            return console.error(err);
+                        } else if (response.result === true) {
+                            container.remove();
+                            var privateDeletedEvent = document.createEvent('Event');
+                            privateDeletedEvent.initEvent('edu_private_deleted', true, true);
+                            document.getElementById("spec_forign_edu_targetdiv").dispatchEvent(privateDeletedEvent);
+                        }
+                    };
+                }(event.currentTarget.parentElement.parentElement));
+            }
         },
 
         "CPR": function viewformatter(record) {
             // Private record
             var htmldiv = '<div class="private-spec-body">';
-   
-          
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input style="visibility:hidden" type="checkbox" disabled/>';
-               htmldiv = htmldiv + '<label><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-               htmldiv = htmldiv + '</div>';  
-          
-          
-          
+
+
+            htmldiv = htmldiv + '<div class="spec-check">';
+            htmldiv = htmldiv + '<input style="visibility:hidden" type="checkbox" disabled/>';
+            htmldiv = htmldiv + '<label><label/>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-date">';
+            htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
+            htmldiv = htmldiv + '</div>';
+
+
+
             // htmldiv = htmldiv + '<div class="spec-left">';
             //htmldiv = htmldiv + '<span></span>';
             //htmldiv = htmldiv + '<span></span>';
@@ -502,11 +526,33 @@
             htmldiv = htmldiv + '<p>' + record.company + '</p>';
             htmldiv = htmldiv + '<p>' + record.position + '</p>';
             htmldiv = htmldiv + '<p>' + record.role + '</p>';
-            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
+            htmldiv = htmldiv + '<button onclick=deletePrivateLang><span class="spec-body-btn-name">삭제</span></button>';
+            htmldiv = htmldiv + '<input type="hidden" value="' + record.certPrvtId + '" />';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
             $('#spec_career_detail').append(htmldiv);
             $('#spec_career_detail > .spec-body-default').hide();
+
+            function deletePrivateLang(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                var privateRecordId = event.currentTarget.nextElementSibling.value;
+                if (!privateRecordId) {
+                    return console.error("No record Id");
+                }
+                delete_private_record(privateRecordId, function (container) {
+                    return function (err, response) {
+                        if (!!err) {
+                            return console.error(err);
+                        } else if (response.result === true) {
+                            container.remove();
+                            var privateDeletedEvent = document.createEvent('Event');
+                            privateDeletedEvent.initEvent('lang_private_deleted', true, true);
+                            document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
+                        }
+                    };
+                }(event.currentTarget.parentElement.parentElement));
+            }
         },
 
         /**
@@ -548,7 +594,7 @@
                 specCheckContainer.appendChild(function () {
                     var checkbox = document.createElement("input");
                     checkbox.setAttribute("type", "checkbox");
-                    checkbox.setAttribute("disabled", "true");                    
+                    checkbox.setAttribute("disabled", "true");
                     return checkbox;
                 }());
                 specCheckContainer.appendChild(document.createElement("label"));
@@ -557,7 +603,7 @@
 
             specContainer.appendChild(function () {
                 var specLeftContainer = document.createElement("div");
-                specLeftContainer.className = "spec-date"; 
+                specLeftContainer.className = "spec-date";
                 specLeftContainer.appendChild(function () {
                     var span = document.createElement("span");
                     span.innerHTML = record.startdate + ' ~ ' + record.enddate;
@@ -618,12 +664,12 @@
 
                 specRightContainer.appendChild(function () {
                     var deleteButton = document.createElement("button");
-                    deleteButton.innerHTML = "삭제";
-                    deleteButton.addEventListener("click", deletePrivateButtonEventListener, true);
+                    deleteButton.innerHTML = "<span class='spec-body-btn-name'>삭제</span>";
+                    deleteButton.addEventListener("click", deletePrivateLanguage, true);
                     return deleteButton;
                 }());
 
-                function deletePrivateButtonEventListener(event) {
+                function deletePrivateLanguage(event) {
                     event.preventDefault();
                     event.stopPropagation();
                     var privateRecordId = event.currentTarget.nextElementSibling.value;
@@ -637,7 +683,7 @@
                             } else if (response.result === true) {
                                 container.remove();
                                 var privateDeletedEvent = document.createEvent('Event');
-                                privateDeletedEvent.initEvent('private_deleted', true, true);
+                                privateDeletedEvent.initEvent('lang_private_deleted', true, true);
                                 document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
                             }
                         };
@@ -661,23 +707,23 @@
         "OGC": function viewformatter(record) {
             // Private record
             var htmldiv = '<div class="private-spec-body">';
-        
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" disabled/>';
-               htmldiv = htmldiv + '<label><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-               htmldiv = htmldiv + '</div>';  
-          
-          
-          
-          
-          //  htmldiv = htmldiv + '<div class="spec-left">';
-          //  htmldiv = htmldiv + '<span></span>';
-          //  htmldiv = htmldiv + '<span></span>';
-          //  htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-          //  htmldiv = htmldiv + '</div>';
+
+            htmldiv = htmldiv + '<div class="spec-check">';
+            htmldiv = htmldiv + '<input type="checkbox" disabled/>';
+            htmldiv = htmldiv + '<label><label/>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-date">';
+            htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
+            htmldiv = htmldiv + '</div>';
+
+
+
+
+            //  htmldiv = htmldiv + '<div class="spec-left">';
+            //  htmldiv = htmldiv + '<span></span>';
+            //  htmldiv = htmldiv + '<span></span>';
+            //  htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
+            //  htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/icon-certificates.svg" alt="">';
             htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="수기로 입력한 이력입니다."><img src="img/myresume/off.svg" "></div>';
@@ -687,7 +733,7 @@
             htmldiv = htmldiv + '<p>' + record.issuer + '</p>';
             htmldiv = htmldiv + '<p>' + record.name + '</p>';
             htmldiv = htmldiv + '<p>' + record.grade + '</p>';
-            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
+            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")><span class="spec-body-btn-name">삭제</span></button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
             $('#spec_certification').append(htmldiv);
