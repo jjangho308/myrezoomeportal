@@ -71,16 +71,16 @@ $(document).ready(function () {
         });
         window.location = "main";
     });
-    
-    $('#add-span-edu').click(function(){
+
+    $('#add-span-edu').click(function () {
         clearAddSpanEdu();
     })
 
-    $('#add-span-cert').click(function(){
+    $('#add-span-cert').click(function () {
         clearAddSpanCert();
     })
 
-    $('#add-span-lang').click(function(){
+    $('#add-span-lang').click(function () {
         clearAddSpanLang();
     })
 
@@ -613,7 +613,7 @@ $(document).ready(function () {
 
                                 //$("#cert-line-dialog .close-modal").click();
                                 $("#cert-line-dialog").parent().fadeOut('slow'); // rollback when issue
-                                
+
                                 $("#alarm-div").css("display", "block");
                                 $("#alarm-div").css("margin-right", "-224px");
                                 $("#select-footer").hide();
@@ -673,7 +673,7 @@ $(document).ready(function () {
             beforeSend: function () {
                 //clean view
                 $('.spec-body').remove();
-                $('.spec-body-default').css("display", "none");
+                $('.spec-body-default').hide();
                 $('.spec-body-loading').css("display", "block");
             },
             data: JSON.stringify({
@@ -696,36 +696,43 @@ $(document).ready(function () {
                 clientsocket_listener();
                 setTimeout(function () {
                     $('.spec-body-loading').hide();
-                    $('.spec-body-default').show();
+                    var privateDeletedEvent = document.createEvent('Event');
+                    privateDeletedEvent.initEvent("record_updated", true, true);
+                    document.getElementById("spec_edu_detail_targetdiv").dispatchEvent(privateDeletedEvent);
+                    document.getElementById("spec_certification_targetdiv").dispatchEvent(privateDeletedEvent);
+                    document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
                 }, 1500);
             },
             contentType: 'application/json',
         });
     });
 
-    document.getElementById("spec_edu_detail_targetdiv").addEventListener("edu_private_deleted", function (event) {
+    document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
+        debugger;
         event.stopPropagation();
         event.preventDefault();
 
-        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length) {
+        if ($("#spec_edu_detail .private-spec-body").length == 0 && $("#spec_edu_detail .spec-body").length == 0) {
             $(event.currentTarget).show();
         }
     }, true);
 
-    document.getElementById("spec_certification_targetdiv").addEventListener("cert_private_deleted", function (event) {
+    document.getElementById("spec_certification_targetdiv").addEventListener("record_updated", function (event) {
+        debugger;
         event.stopPropagation();
         event.preventDefault();
 
-        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length) {
+        if ($("#spec_certification .private-spec-body").length == 0 && $("#spec_certification .spec-body").length == 0) {
             $(event.currentTarget).show();
         }
     }, true);
 
-    document.getElementById("spec_forign_lang_targetdiv").addEventListener("lang_private_deleted", function (event) {
+    document.getElementById("spec_forign_lang_targetdiv").addEventListener("record_updated", function (event) {
+        debugger;
         event.stopPropagation();
         event.preventDefault();
 
-        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length) {
+        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length == 0) {
             $(event.currentTarget).show();
         }
     }, true);
@@ -790,7 +797,7 @@ function change_default_cert(subid) {
     $('#spec-change-dialog').modal('show');
 }
 
-function delete_private_record(prvtId, cb) {
+function ajaxDeletePrivateRecord(prvtId, cb) {
     $.ajax({
         type: 'DELETE',
         url: '/records/' + prvtId,
@@ -846,11 +853,20 @@ function getPrivateRecords() {
             console.error(jqXhr.responseText);
         },
         success: function (res) {
+            // debugger;
+            res.result.sort(function (a, b) {
+                try {
+                    return Date.parse(a.created || 0) - Date.parse(b.created || 0);
+                } catch (e) {
+                    console.error(e);
+                    return 0;
+                }
+            })
             res.result.forEach(function (item, idx) {
                 var data = JSON.parse(item.data);
                 data.certPrvtId = item.certPrvtId;
-                if (item.subCd in formatter) {
-                    formatter[item.subCd](data);
+                if (item.subCd in view_formatter) {
+                    view_formatter[item.subCd](data);
                 }
             });
             $('.private-spec-body').on('click', singletonCallback);
@@ -898,7 +914,6 @@ function request_agent() {
         },
         data: JSON.stringify({
             cmd: 'SearchRecord',
-
             args: {
                 pkey: 'asdfasdf',
                 update: false,
@@ -917,7 +932,11 @@ function request_agent() {
             // loading css start
             setTimeout(function () {
                 $('.spec-body-loading').hide();
-                $('.spec-body-default').show();
+                var privateDeletedEvent = document.createEvent('Event');
+                privateDeletedEvent.initEvent("record_updated", true, true);
+                document.getElementById("spec_edu_detail_targetdiv").dispatchEvent(privateDeletedEvent);
+                document.getElementById("spec_certification_targetdiv").dispatchEvent(privateDeletedEvent);
+                document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
                 refreshview(null);
             }, 1500);
 
@@ -1028,9 +1047,10 @@ function refreshview(records) {
 
     for (var i in recordList) {
         var subid = recordList[i].subid;
-        formatter[subid](recordList[i]);
+        view_formatter[subid](recordList[i]);
     }
 
+    debugger;
     if ($("#spec_edu_detail .spec-body").length > 0 ||
         $("#spec_edu_detail .private-spec-body").length > 0) {
         $('#spec_edu_detail > .spec-body-default').hide();
@@ -1145,17 +1165,17 @@ function getTargetdivid(subid) {
     }
 }
 
-function clearAddSpanEdu (){
+function clearAddSpanEdu() {
     $("#education-add-dialog #school").val("");
     $("#education-add-dialog #first-major").val("");
     $("#education-add-dialog #edu-startdate").val("");
     $("#education-add-dialog #edu-enddate").val("");
     $("#education-add-dialog #score").val("");
-    
+
     $("#education-add-dialog #add-major").remove();
 }
 
-function clearAddSpanCert (){
+function clearAddSpanCert() {
     $("#cert-add-dialog #cert-issuer").val("");
     $("#cert-add-dialog #cert-name").val("");
     $("#cert-add-dialog #cert-grade").val("");
@@ -1163,7 +1183,7 @@ function clearAddSpanCert (){
     $("#cert-add-dialog #certadd_enddate").val("");
 }
 
-function clearAddSpanLang(){
+function clearAddSpanLang() {
     $("#language-add-dialog #language-name").val("");
     $("#language-add-dialog #language-issuer").val("");
     $("#language-add-dialog #language-grade").val("");

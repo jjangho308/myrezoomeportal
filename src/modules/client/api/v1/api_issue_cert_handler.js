@@ -12,6 +12,9 @@ var Util = require('../../../../util/util');
 var CertModel = require('../../../../models/cert/cert');
 var SharedCertModel = require('../../../../models/cert/shared_cert');
 
+var ErrorCode = require('../../../../core/error/error_code');
+var ResponseError = require('../../../../core/error/response_error');
+
 /**
  * Handler for IssueCertAPIV1RequestEntity. <br />
  * 
@@ -64,32 +67,16 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
             uId: uId
         }, (err, userModels) => {
             if (!!err) {
-                done(ClientRequest.RESULT_FAILURE, {
-                    err: {
-                        code: 500,
-                        msg: 'Internal error'
-                    }
-                });
-                return;
+                return done(ClientRequest.RESULT_FAILURE, err);
             } else if (userModels.length == 0) {
-                done(ClientRequest.RESULT_FAILURE, {
-                    err: {
-                        code: 200,
-                        msg: 'No user found'
-                    }
-                });
-                return;
+                return done(ClientRequest.RESULT_FAILURE, new ResponseError({
+                    code: ErrorCode.API_NO_USER,
+                }));
             } else {
                 var userWalletAddress = userModels[0].bcWalletAddr;
                 Util.sha256(JSON.stringify(data), (hashedRawData) => {
                     if (!!err) {
-                        done(ClientRequest.RESULT_FAILURE, {
-                            err: {
-                                code: 500,
-                                msg: 'Internal error'
-                            }
-                        });
-                        return;
+                        return done(ClientRequest.RESULT_FAILURE, err);
                     } else {
                         var nex = Managers.nex();
 
@@ -100,16 +87,13 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                 // NexLedger에 이미 Hash가 저장되어 있는지 확인
                                 var found = false;
 
-                                if(!!userBCHashes.result) {
+                                if (!!userBCHashes.result) {
                                     found = false;
-                                }
-                                else {
+                                } else {
                                     userBCHashes.result.forEach((item) => {
                                         found = found || (item.hash === hashedRawData);
                                     });
                                 }
-
-                                
 
                                 if (found) {
                                     // 있다면 txid 가져온 다음에 아래 로직 수행.
@@ -140,12 +124,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                             "subid": "RCCNF0001"
                                         }), crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
                                             if (!!err) {
-                                                done(ClientRequest.RESULT_FAILURE, {
-                                                    err: {
-                                                        code: 500,
-                                                        msg: 'Internal error'
-                                                    }
-                                                });
+                                                return done(ClientRequest.RESULT_FAILURE, err);
                                             } else {
                                                 var certId = Util.uuid();
                                                 var certModel = new CertModel({
@@ -157,12 +136,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                                 var certDao = Managers.db().getCertDAO();
                                                 certDao.putCert(certModel, (err, insertCertId) => {
                                                     if (!!err) {
-                                                        done(ClientRequest.RESULT_FAILURE, {
-                                                            err: {
-                                                                code: 500,
-                                                                msg: 'Internal error'
-                                                            }
-                                                        });
+                                                        return done(ClientRequest.RESULT_FAILURE, err);
                                                     } else if (insertCertId > 0) {
 
                                                         var sharedUrl = Util.randomStr({
@@ -178,14 +152,9 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
 
                                                         certDao.putShared(sharedCert, (err, insertSharedId) => {
                                                             if (!!err) {
-                                                                done(ClientRequest.RESULT_FAILURE, {
-                                                                    err: {
-                                                                        code: 500,
-                                                                        msg: 'Internal error'
-                                                                    }
-                                                                });
+                                                                return done(ClientRequest.RESULT_FAILURE, err);
                                                             } else if (insertSharedId > 0) {
-                                                                done(ClientRequest.RESULT_SUCCESS, {
+                                                                return done(ClientRequest.RESULT_SUCCESS, {
                                                                     url: 'https://dev.rezoome.io/v/' + sharedUrl
                                                                 });
                                                             }
