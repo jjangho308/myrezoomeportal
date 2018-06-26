@@ -45,9 +45,7 @@ $(document).ready(function () {
         console.error(exception);
     }
 
-    $("#btn_print").click(function (event) {
-            // generate QR before print 
-            generateQRCode();
+    $("#btn_print").click(function (event) {           
 
             $(".header").hide();
             $(".main-body-footer").hide();

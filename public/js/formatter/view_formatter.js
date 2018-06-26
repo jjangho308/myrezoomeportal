@@ -44,13 +44,8 @@
             htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-date">';
-            htmldiv = htmldiv + '<span>' + formatDate(record.ctestday) + '</span>';
+            htmldiv = htmldiv + '<span>' + record.ea_exam_time != null ? formatDate(record.ea_exam_time) : "" + '</span>';
             htmldiv = htmldiv + '</div>';
-            //htmldiv = htmldiv + '<div class="spec-left">';
-            // htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            //htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-            // htmldiv = htmldiv + '<span>' + formatDate(record.ea_exam_time) + '</span>';
-            //htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/mk-logo.png" alt="">';
             htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -451,8 +446,8 @@
             var htmldiv = '<div class="private-spec-body">';
 
             htmldiv = htmldiv + '<div class="spec-check">';
-            htmldiv = htmldiv + '<span></span>';
-            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<input style="visibility:hidden" type="checkbox" disabled/>';
+            htmldiv = htmldiv + '<label><label/>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-date">';
             htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
@@ -505,13 +500,16 @@
             // Private record
             var htmldiv = '<div class="private-spec-body">';
 
+
             htmldiv = htmldiv + '<div class="spec-check">';
-            htmldiv = htmldiv + '<span></span>';
-            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<input style="visibility:hidden" type="checkbox" disabled/>';
+            htmldiv = htmldiv + '<label><label/>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-date">';
             htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
             htmldiv = htmldiv + '</div>';
+
+
 
             // htmldiv = htmldiv + '<div class="spec-left">';
             //htmldiv = htmldiv + '<span></span>';
@@ -588,11 +586,22 @@
             var specContainer = document.createElement("div");
             specContainer.className = "private-spec-body"
             specContainer.appendChild(function () {
-                var specLeftContainer = document.createElement("div");
-                specLeftContainer.className = "spec-left";
+                var specCheckContainer = document.createElement("div");
+                specCheckContainer.className = "spec-check";
 
-                specLeftContainer.appendChild(document.createElement("span"));
-                specLeftContainer.appendChild(document.createElement("span"));
+                specCheckContainer.appendChild(function () {
+                    var checkbox = document.createElement("input");
+                    checkbox.setAttribute("type", "checkbox");
+                    checkbox.setAttribute("disabled", "true");
+                    return checkbox;
+                }());
+                specCheckContainer.appendChild(document.createElement("label"));
+                return specCheckContainer;
+            }());
+
+            specContainer.appendChild(function () {
+                var specLeftContainer = document.createElement("div");
+                specLeftContainer.className = "spec-date";
                 specLeftContainer.appendChild(function () {
                     var span = document.createElement("span");
                     span.innerHTML = record.startdate + ' ~ ' + record.enddate;
@@ -698,8 +707,8 @@
             var htmldiv = '<div class="private-spec-body">';
 
             htmldiv = htmldiv + '<div class="spec-check">';
-            htmldiv = htmldiv + '<span></span>';
-            htmldiv = htmldiv + '<span></span>';
+            htmldiv = htmldiv + '<input type="checkbox" disabled/>';
+            htmldiv = htmldiv + '<label><label/>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-date">';
             htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';

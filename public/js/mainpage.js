@@ -71,12 +71,22 @@ $(document).ready(function () {
         });
         window.location = "main";
     });
+    
+    $('#add-span-edu').click(function(){
+        clearAddSpanEdu();
+    })
 
+    $('#add-span-cert').click(function(){
+        clearAddSpanCert();
+    })
 
+    $('#add-span-lang').click(function(){
+        clearAddSpanLang();
+    })
 
     $('#education-add-dialog .add-span').click(function () {
-        console.log("#education-add-dialog .add-span clicked");
         $("#major-div").append(
+            '<div id="add-major">' +
             '<div class="error-range major-div">' +
             '<div class="select-100">' +
             '<select name="select-1">' +
@@ -95,7 +105,9 @@ $(document).ready(function () {
             '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
             '<img src="/img/myresume/close-white.svg"/>' +
             '<div class="error-message">전공을 입력해주세요.</div>' +
-            '</div>');
+            '</div>'+
+            '</div>'
+        );
         $("select").selectize();
     });
 
@@ -208,6 +220,7 @@ $(document).ready(function () {
                     //clean view
                     $('.private-spec-body').remove();
                     $('#spec_edu_detail > .spec-body-default').hide();
+
                     getPrivateRecords();
                 },
                 contentType: 'application/json',
@@ -496,6 +509,7 @@ $(document).ready(function () {
     $('.spec-detail-div').click(function (event) {
         $(".spec-detail-div input:checkbox").each(function (i) {
             if ($(this).is(':checked')) {
+                $(this.parentNode.parentNode).find("input:checkbox:not(:checked)")[0].checked = true;
                 $(this).closest('.spec-body').css({
                     "border": "solid 1px #4c80f1",
                     "border-radius": "4px",
@@ -585,11 +599,13 @@ $(document).ready(function () {
                                     current_active = 0;
                                 }
                                 $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
-                            }, 1000);
+                            }, 300);
 
                             setTimeout(function () {
 
-                                $("#cert-line-dialog .close-modal").click();
+                                //$("#cert-line-dialog .close-modal").click();
+                                $("#cert-line-dialog").parent().fadeOut('slow'); // rollback when issue
+                                
                                 $("#alarm-div").css("display", "block");
                                 $("#alarm-div").css("margin-right", "-224px");
                                 $("#select-footer").hide();
@@ -1119,5 +1135,28 @@ function getTargetdivid(subid) {
     } else if (subid == 'RCOGC0008') {
         //inha
     }
+}
 
+function clearAddSpanEdu (){
+    $("#education-add-dialog #school").val("");
+    $("#education-add-dialog #first-major").val("");
+    $("#education-add-dialog #edu-startdate").val("");
+    $("#education-add-dialog #edu-enddate").val("");
+    $("#education-add-dialog #score").val("");
+    
+    $("#education-add-dialog #add-major").remove();
+}
+
+function clearAddSpanCert (){
+    $("#cert-add-dialog #cert-name").val("");
+    $("#cert-add-dialog #cert-grade").val("");
+    $("#cert-add-dialog #certadd_startdate").val("");
+    $("#cert-add-dialog #certadd_enddate").val("");
+}
+
+function clearAddSpanLang(){
+    $("#language-add-dialog #language-name").val("");
+    $("#language-add-dialog #language-grade").val("");
+    $("#language-add-dialog #langadd_startdate").val("");
+    $("#language-add-dialog #langadd_enddate").val("");
 }
