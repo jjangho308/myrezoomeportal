@@ -39,18 +39,13 @@
         "RCCNF0001": function viewformatter(record) {
             //mktest
             var htmldiv = '<div class="spec-body">';
-               htmldiv = htmldiv + '<div class="spec-check">';
-               htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-               htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-               htmldiv = htmldiv + '</div>';
-               htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span>' + (record.ctestday != null ? formatDate(record.ctestday) : "") + '</span>';
-               htmldiv = htmldiv + '</div>'; 
-          //htmldiv = htmldiv + '<div class="spec-left">';
-           // htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
-            //htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
-           // htmldiv = htmldiv + '<span>' + formatDate(record.ea_exam_time) + '</span>';
-            //htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-check">';
+            htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
+            htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
+            htmldiv = htmldiv + '</div>';
+            htmldiv = htmldiv + '<div class="spec-date">';
+            htmldiv = htmldiv + '<span>' + (record.ea_exam_time != null ? formatDate(record.ea_exam_time) : "") + '</span>';
+            htmldiv = htmldiv + '</div>'; 
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/mk-logo.png" alt="">';
             htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
