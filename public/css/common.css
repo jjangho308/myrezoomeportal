@@ -597,6 +597,10 @@ th:nth-child(6) {
     vertical-align: top;
 }
 
+.modal button : focus {
+outline:0;
+}
+
 .modal .cancel-btn {
     float: right;
     margin: 15px 10px 0px 0px;
