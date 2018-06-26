@@ -1,4 +1,4 @@
-var IssueCertEntity = require('../../modules/client/api/v1/api_issue_cert_entity');
+var APIIssueCertEntity = require('../../modules/client/api/v1/api_issue_cert_entity');
 var IssueCertHandler = require('../../modules/client/api/v1/api_issue_cert_handler');
 
 var Managers = require('../../core/managers');
@@ -29,7 +29,7 @@ module.exports = {
         // Raw data of Client server
         var data = req.body.data;
 
-        var entity = new IssueCertEntity({
+        var entity = new APIIssueCertEntity({
             uId: uId,
             clientId: clientId,
             data: data
