@@ -85,31 +85,39 @@ $(document).ready(function () {
     })
 
     $('#education-add-dialog .add-span').click(function () {
-        $("#major-div").append(
-            '<div id="add-major">' +
-            '<div class="error-range major-div">' +
-            '<div class="select-100">' +
-            '<select name="select-1">' +
-            '<option value="1">전공</option>' +
-            '<option value="2">부전공</option>' +
-            '<option value="3">복수전공</option>' +
-            '</select>' +
-            '</div>' +
-            '<div class="select-100">' +
-            '<select name="select-2">' +
-            '<option value="volvo">학사</option>' +
-            '<option value="saab">석사</option>' +
-            '</select>' +
-            '</div>' +
-
-            '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
-            '<img src="/img/myresume/close-white.svg"/>' +
-            '<div class="error-message">전공을 입력해주세요.</div>' +
-            '</div>' +
-            '</div>'
-        );
+        if($("#education-add-dialog #add-major").length < 2){
+            $("#major-div").append(
+                '<div id="add-major">' +
+                '<div class="error-range major-div">' +
+                '<div class="select-100">' +
+                '<select name="select-1">' +
+                '<option value="1">전공</option>' +
+                '<option value="2">부전공</option>' +
+                '<option value="3">복수전공</option>' +
+                '</select>' +
+                '</div>' +
+                '<div class="select-100">' +
+                '<select name="select-2">' +
+                '<option value="volvo">학사</option>' +
+                '<option value="saab">석사</option>' +
+                '</select>' +
+                '</div>' +
+    
+                '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
+                
+                '<img id="add-major-delete" src="/img/myresume/close-white.svg" onclick="addMajorDelete()"/>' +
+                
+                '<div class="error-message">전공을 입력해주세요.</div>' +
+                '</div>'+
+                '</div>'
+            );
+        }else{
+            console.log("학력은 3건이상 넣을 수 없습니다.")
+        }
         $("select").selectize();
     });
+
+    
 
 
     $('#education-add-dialog .confirm-btn').click(function () {
@@ -507,9 +515,28 @@ $(document).ready(function () {
     });
 
     $('.spec-detail-div').click(function (event) {
+        try {
+            if($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {
+                //대학교 케이스
+                var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
+                parentparentNodeChecknot[0].checked = true;
+                parentparentNodeChecknot[1].checked = true;
+                event.preventDefault();
+            }
+            
+            else if($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 2) {
+                var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:checked");
+                parentparentNodeChecknot[0].checked = false;
+                parentparentNodeChecknot[1].checked = false;
+                event.preventDefault();
+            }
+            
+        }catch(exception) {
+            console.log(exception);
+        }
         $(".spec-detail-div input:checkbox").each(function (i) {
             if ($(this).is(':checked')) {
-                $(this.parentNode.parentNode).find("input:checkbox:not(:checked)")[0].checked = true;
+                       
                 $(this).closest('.spec-body').css({
                     "border": "solid 1px #4c80f1",
                     "border-radius": "4px",
@@ -519,6 +546,14 @@ $(document).ready(function () {
                 // $(this).closest('.spec-body').children('.spec-right').last().children().eq(3).children().css({"color":"#ffffff", "border": "solid 1px #dfe5ef"});
                 // $("#btn_change_"+$(this).closest('.spec-body').children('.spec-right').last().children().eq(3).attr("id").substring(11)).hide();
             } else {
+
+                
+                // if($(".spec-detail-div input:checkbox:checked").length > 0) {
+                //     var parentparentNode = $(".spec-detail-div input:checkbox:checked")[0].parentNode.parentNode;
+                //     $(parentparentNode).find("input:checkbox:checked")[0].checked = false;
+                // }
+                
+
                 $(this).closest('.spec-body').css({
                     "border": "none",
                     "border-bottom": "solid 1px #dfe5ef",
@@ -665,7 +700,7 @@ $(document).ready(function () {
             beforeSend: function () {
                 //clean view
                 $('.spec-body').remove();
-                $('.spec-body-default').css("display", "none");
+                $('.spec-body-default').hide();
                 $('.spec-body-loading').css("display", "block");
             },
             data: JSON.stringify({
@@ -688,14 +723,18 @@ $(document).ready(function () {
                 clientsocket_listener();
                 setTimeout(function () {
                     $('.spec-body-loading').hide();
-                    $('.spec-body-default').show();
+                    var privateDeletedEvent = document.createEvent('Event');
+                    privateDeletedEvent.initEvent("record_updated", true, true);
+                    document.getElementById("spec_edu_detail_targetdiv").dispatchEvent(privateDeletedEvent);
+                    document.getElementById("spec_certification_targetdiv").dispatchEvent(privateDeletedEvent);
+                    document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
                 }, 1500);
             },
             contentType: 'application/json',
         });
     });
 
-    document.getElementById("spec_edu_detail_targetdiv").addEventListener("edu_private_deleted", function (event) {
+    document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
         debugger;
         event.stopPropagation();
         event.preventDefault();
@@ -705,7 +744,7 @@ $(document).ready(function () {
         }
     }, true);
 
-    document.getElementById("spec_certification_targetdiv").addEventListener("cert_private_deleted", function (event) {
+    document.getElementById("spec_certification_targetdiv").addEventListener("record_updated", function (event) {
         debugger;
         event.stopPropagation();
         event.preventDefault();
@@ -715,7 +754,7 @@ $(document).ready(function () {
         }
     }, true);
 
-    document.getElementById("spec_forign_lang_targetdiv").addEventListener("lang_private_deleted", function (event) {
+    document.getElementById("spec_forign_lang_targetdiv").addEventListener("record_updated", function (event) {
         debugger;
         event.stopPropagation();
         event.preventDefault();
@@ -842,10 +881,10 @@ function getPrivateRecords() {
         },
         success: function (res) {
             // debugger;
-            res.result.sort(function(a, b){
-                try{
+            res.result.sort(function (a, b) {
+                try {
                     return Date.parse(a.created || 0) - Date.parse(b.created || 0);
-                }catch(e){
+                } catch (e) {
                     console.error(e);
                     return 0;
                 }
@@ -902,7 +941,6 @@ function request_agent() {
         },
         data: JSON.stringify({
             cmd: 'SearchRecord',
-
             args: {
                 pkey: 'asdfasdf',
                 update: false,
@@ -921,7 +959,11 @@ function request_agent() {
             // loading css start
             setTimeout(function () {
                 $('.spec-body-loading').hide();
-                $('.spec-body-default').show();
+                var privateDeletedEvent = document.createEvent('Event');
+                privateDeletedEvent.initEvent("record_updated", true, true);
+                document.getElementById("spec_edu_detail_targetdiv").dispatchEvent(privateDeletedEvent);
+                document.getElementById("spec_certification_targetdiv").dispatchEvent(privateDeletedEvent);
+                document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
                 refreshview(null);
             }, 1500);
 
@@ -1035,6 +1077,7 @@ function refreshview(records) {
         view_formatter[subid](recordList[i]);
     }
 
+    debugger;
     if ($("#spec_edu_detail .spec-body").length > 0 ||
         $("#spec_edu_detail .private-spec-body").length > 0) {
         $('#spec_edu_detail > .spec-body-default').hide();
@@ -1159,7 +1202,7 @@ function clearAddSpanEdu() {
     $("#education-add-dialog #add-major").remove();
 }
 
-function clearAddSpanCert (){
+function clearAddSpanCert() {
     $("#cert-add-dialog #cert-issuer").val("");
     $("#cert-add-dialog #cert-name").val("");
     $("#cert-add-dialog #cert-grade").val("");
@@ -1173,4 +1216,8 @@ function clearAddSpanLang() {
     $("#language-add-dialog #language-grade").val("");
     $("#language-add-dialog #langadd_startdate").val("");
     $("#language-add-dialog #langadd_enddate").val("");
+}
+
+function addMajorDelete(event){
+    console.log(this);
 }

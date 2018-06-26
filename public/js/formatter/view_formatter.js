@@ -10,7 +10,7 @@
      * @since 180626
      * @author TACKSU
      */
-    function deletePrivateRecord(recordId, recordContainer, eventName, eventTargetId) {
+    function deletePrivateRecord(recordId, recordContainer, eventTargetId) {
         if (!!ajaxDeletePrivateRecord) {
             ajaxDeletePrivateRecord(recordId, function (err, response) {
                 if (!!err) {
@@ -18,7 +18,7 @@
                 } else if (response.result === true) {
                     recordContainer.remove();
                     var privateDeletedEvent = document.createEvent('Event');
-                    privateDeletedEvent.initEvent(eventName, true, true);
+                    privateDeletedEvent.initEvent("record_updated", true, true);
                     document.getElementById(eventTargetId).dispatchEvent(privateDeletedEvent);
                 }
             });
@@ -565,7 +565,6 @@
                         deletePrivateRecord(
                             event.currentTarget.nextElementSibling.value,
                             event.currentTarget.parentElement.parentElement,
-                            "edu_private_deleted",
                             "spec_edu_detail_targetdiv"
                         )
                     }, true);
@@ -725,7 +724,6 @@
                         deletePrivateRecord(
                             event.currentTarget.nextElementSibling.value,
                             event.currentTarget.parentElement.parentElement,
-                            "lang_private_deleted",
                             "spec_forign_lang"
                         )
                     }, true);
@@ -857,7 +855,6 @@
                         deletePrivateRecord(
                             event.currentTarget.nextElementSibling.value,
                             event.currentTarget.parentElement.parentElement,
-                            "cert_private_deleted",
                             "spec_certification_targetdiv"
                         )
                     }, true);
