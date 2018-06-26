@@ -63,6 +63,11 @@ margin: auto;
     color: #ffffff;
 }
 
+#resume-start-btn:focus{
+  outline:0;
+}
+
+
 .title-2{
     font-size: 35px;
     color: #2b2c2c;
@@ -201,6 +206,11 @@ top: 229px;
 .bottom-div button:hover{
   background-color: #131f2a;
 }
+
+.bottom-div button:focus{
+  outline:0;
+}
+
 .navbar-default {
     background-color: initial;
     border: initial;
