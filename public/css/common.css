@@ -722,15 +722,15 @@ input:checked+.slide-toggle::after {
 
 .sub-info-select-div-signout {
     display: none;
-    width: 120px;
+    width: 150px;
     height: 40px;
     border-radius: 4px;
     box-shadow: 0 1px 3px 0 rgba(207,207,207,0.5);
     background-color: #fff;
     border: solid 1px #ced3d6;
     position: absolute;
-    top: 50px;
-    right: 130px;
+    top: 53px;
+    right: 225px;
     transform: none;
     z-index: 2;
 }
