@@ -31,15 +31,15 @@ $(document).ready(function () {
                 $('#circle-' + current_active).css("background-color", "#dadada");
                 current_active += 1;
 
-                if (current_active == 2) {
+                if (current_active == 6) {
                     $("#cert-verify").css("display", "none");
                     $("#cert-viewer").css("display", "block");
-                    certformatter[json_decrypted.subid](json_decrypted.data);
+                    certformatter[json_decrypted.subid](json_decrypted.data);                   
                     clearInterval(mytimer);
                 }
                 $('#circle-' + current_active).css("background-color", "#4a90e2");
 
-            }, 1000);
+            }, 300);
         }
     } catch (exception) {
         console.error(exception);
