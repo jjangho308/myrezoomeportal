@@ -22,12 +22,12 @@ router.post('/', ctrl.post);
 router.get('/list', tokenAuth);
 router.get('/list', ctrl.get);
 
-router.post('/:prvRecordId', tokenAuth);
-router.post('/:prvRecordId', ajaxOnly);
-router.post('/:prvRecordId', ctrl.del);
-
 router.patch('/:prvRecordId', tokenAuth);
 router.patch('/:prvRecordId', ajaxOnly);
 router.patch('/:prvRecordId', ctrl.patch);
+
+router.delete('/:recordId', tokenAuth);
+router.delete('/:recordId', ajaxOnly);
+router.delete('/:recordId', ctrl.delete);
 
 module.exports = router;

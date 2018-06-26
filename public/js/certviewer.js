@@ -143,7 +143,7 @@
                             var htmldiv = '<div class="footer-verify-4">';
                             htmldiv = htmldiv + '<div class="footer-verify-left">' + "RESULT" + '</div>';
                             htmldiv = htmldiv + '<div class="footer-verify-center">' + "정상적인 데이터로 확인되었습니다." + '</div>';
-                            htmldiv = htmldiv + '<div id="txinfoget-bt" class="footer-verify-right">' + '<a href="#nexledger-txid-info-dialog" rel="modal:open">트랜잭션 조회</a>' + '</div>';
+                            htmldiv = htmldiv + '<div id="txinfoget-bt" class="footer-verify-right">' + '<a href="#nexledger-txid-info-dialog" rel="modal:open" class="transaction-link">트랜잭션 조회</a>' + '</div>';
                             htmldiv = htmldiv + '</div>';
                             $('.main-body-footer').append(htmldiv);
 
@@ -159,6 +159,10 @@
                             $('.footer-verify-4 > .footer-verify-center').css({
                                 'color': '#7ed321'
                             });
+
+                            //Verify button Disable
+                            $('.main-body-footer-right').attr("disabled", true);
+                            $('.main-body-footer-right').off('click');
 
                             $('#txinfoget-bt').click(function (event) {
                                 if (nexledgerErr == 1) {
@@ -261,11 +265,11 @@
 
         $("#more-button").click(function () {
 
-            if ($("#more-button-div").css("display") == "none") {
-                $("#more-button-div").show();
-            } else {
-                $("#more-button-div").hide();
-            }
+            // if ($("#more-button-div").css("display") == "none") {
+            //     $("#more-button-div").show();
+            // } else {
+            //     $("#more-button-div").hide();
+            // }
 
         });
 
@@ -315,6 +319,41 @@
         $('.confirm-btn').click(function () {
             summitform();
         });
+
+        // donwload PDF
+        $("#btn_download").click(function (event) {                
+                
+                $(".qr-container").show();
+                var $childern = $(".main-body >.outer-container");
+
+                // var $childern = $(".inner-container");
+                
+                var chilSize = $childern.size();
+                var size = 0;
+                var pdf = new jsPDF('p', 'mm',[297,210]);
+                
+                $childern.each(function (idx, array) {
+                    html2canvas($(this), {
+                        onrendered: function(canvas) {
+                            size++;
+                            pdf.addImage(canvas.toDataURL("image/png"),"png", 10,10,190,277);
+                            if(size != chilSize){
+                                pdf.addPage();                                
+                            }
+                           
+                            if (size === chilSize) {                                
+                                pdf.save('rezoome_cert.pdf');
+                            }
+                            
+                        }
+                    });       
+                });
+                            
+            $(".qr-container").hide();
+        });
+
+
+
 
         $("#btn_print").click(function (event) {
 
@@ -513,7 +552,7 @@ function summitform() {
 function setCertViewer(tx_id) {
     record = getData(tx_id);
     console.log(record);
-    $("#cert_title").html(record.subid);
+    $("#cert_title").html(record.data.subjnm);
     certformatter[record.subid](record.data);
 }
 

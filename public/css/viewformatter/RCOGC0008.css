@@ -28,6 +28,7 @@ table {
     border-radius: 5px;
     background: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    height: 1210px;
  }
  
  .inner-container {
@@ -182,8 +183,8 @@ table {
 
 .qr-container div:nth-child(1){
     position: absolute;
-    bottom: -110px;;
-    right: 25px;
+    bottom: -80px;
+    right: -2px;
     width: 75px;
     height: 75px;
 }
@@ -191,7 +192,7 @@ table {
 .qr-container p:nth-child(n) {
     position: relative;
     font-size: 11px;
-    left: 5px;
+    left: -40px;
     top: 70px;
     color: #838383;
     padding: 5px 5px 0px 40px;

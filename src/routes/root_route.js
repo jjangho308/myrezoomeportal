@@ -41,7 +41,7 @@ router.use('/signin', signinRouter);
 router.use('/signout', signoutRouter);
 router.use('/signup', signupRouter);
 router.use('/main', mainRouter);
-router.use('/record', recordsRouter);
+// router.use('/record', recordsRouter);
 router.use('/records', recordsRouter);
 router.use('/certs', certsRouter);
 router.use('/resumes', resumesRouter);

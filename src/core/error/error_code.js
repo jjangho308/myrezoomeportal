@@ -43,6 +43,7 @@ exports.DATA_PASSWORD_INCORRECT = 303;
 exports.DATA_NO_CERT = 304;
 exports.DATA_NO_BLCMAP = 305;
 exports.DATA_NO_ORG = 306;
+exports.DATA_NO_RECORD = 307;
 
 /**
  * API Error code set. <br />

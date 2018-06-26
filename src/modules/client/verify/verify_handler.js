@@ -71,7 +71,8 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                                     data: encryptedData,
                                                     created: shareModel.created,
                                                     certId: shareModel.certId,
-                                                    url: shareModel.url
+                                                    url: shareModel.url,
+                                                    txid : shareModel.txId
                                                 };
                                                 done(ClientRequest.RESULT_SUCCESS, verifyData);
                                             }
@@ -83,7 +84,8 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                             data: JSON.parse(decrypted),
                                             created: shareModel.created,
                                             certId: shareModel.certId,
-                                            url: shareModel.url
+                                            url: shareModel.url,
+                                            txid : shareModel.txId
                                         };
                                         done(ClientRequest.RESULT_SUCCESS, verifyData);
                                     }

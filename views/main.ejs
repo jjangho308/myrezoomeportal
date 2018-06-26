@@ -6,7 +6,7 @@
     <script type="text/javascript" src="js/libs/crypto-js/crypto-js.js"></script>
     <script src="js/libs/jsrsasign/jsrsasign-all-min.js"></script>
     <!-- <script src="js/aesutil.js"></script> -->
-    <link rel="stylesheet" href="css/initial-resume.css">
+    <!-- <link rel="stylesheet" href="css/initial-resume.css"> -->
     <script src="js/mainpage.js"></script>
     <script src="js/generate_keypair_worker.js"></script>
 </head>
@@ -17,7 +17,7 @@
         <div class="container">
             <div id="myresume-div">      
                      <div class="grid myresume-grid">
-                    <p>레쥬메</p>
+                    <p>내 프로필</p>
                     <p>연계된 기관들로부터 불러온 이력사항을 클릭하여, 증명서 발급 및 이력서를 쉽게 생성할수 있습니다.</p>
                     <img id="refresh_record" src="img/myresume/reload.svg" />
                     <p id="updateTime">업데이트 : <script>currentDate('<%= modified %>')</script></p>                                        
@@ -25,7 +25,7 @@
                         <div id="spec_edu_detail" class="spec-detail-div">
                             <div class="spec-title">
                                 <span>학력</span>
-                                <span><a href="#education-add-dialog" rel="modal:open"  class="add-span">+ 추가</a></span>
+                                <span><a href="#education-add-dialog" rel="modal:open" class="add-span" id="add-span-edu">+ 추가</a></span>
                             </div>
 
                             <div id="spec_edu_detail_targetdiv" class="spec-body-default" style="display:none">
@@ -34,11 +34,10 @@
                             <!-- loading start-->
 
                             <div class="spec-body-loading">
-                                <div class="spec-left">
+                                <div class="spec-left"> 
                                     <input type="checkbox" id="box-1" />
                                     <label for="box-1"></label>
                                     <div class="default"></div>
-
                                 </div>
                                 <div class="spec-center">
                                     <div class="default"></div>
@@ -127,7 +126,7 @@
                             <div class="spec-title">
 
                                 <span>외국어</span>
-                                <span><a href="#language-add-dialog" rel="modal:open" class="add-span">+ 추가</a></span>
+                                <span><a href="#language-add-dialog" rel="modal:open" class="add-span" id="add-span-lang">+ 추가</a></span>
 
                             </div>
                             
@@ -178,7 +177,7 @@
                             <div class="spec-title">
 
                                 <span>자격</span>
-                                <span><a href="#cert-add-dialog" rel="modal:open"  class="add-span">+ 추가</a></span>
+                                <span><a href="#cert-add-dialog" rel="modal:open"  class="add-span" id="add-span-cert">+ 추가</a></span>
 
                             </div>
                             <div id="spec_certification_targetdiv" class="spec-body-default" style="display:none">

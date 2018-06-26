@@ -4,16 +4,16 @@
         <head>
             <script type="text/javascript" src="js/libs/crypto-js/crypto-js.js"></script>
             <script src="js/libs/jsrsasign/jsrsasign-all-min.js"></script>
-            <script src="js/utils.js"></script>
-            <script src="js/signin.js"></script>
-            <link rel="stylesheet" href="css/navbar-default.css">
-            <link rel="stylesheet" href="css/signin.css">
+            <script src="js/utils<%= locals.min %>.js"></script>
+            <script src="js/signin<%= locals.min %>.js"></script>
+            <link rel="stylesheet" href="css/navbar-default<%= locals.min %>.css">
+            <link rel="stylesheet" href="css/signin<%= locals.min %>.css">
         </head>
 
         <body>
             <%- include('base_header_default') -%>
 
-                <h1>개인회원 로그인</h1>
+                <h1>로그인</h1>
 
                 <div id="signin_div" class="login-container">
                     <%if (!!locals.url) { %>

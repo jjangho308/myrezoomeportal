@@ -23,8 +23,8 @@ li:nth-child(1) {
 }
 
 li:nth-child(3) {
-    border-left: 1px solid gray;
-    margin-right: -5px;
+    /* border-left: 1px solid gray;*/
+    /* margin-right: -5px; */
 }
 
 li a {
@@ -38,11 +38,11 @@ li a {
     color: #ffffff;
 }
 
-
 #home_icon {
-    width: 158px;
-    height: 18px;
+    width: 193px;
+    height: 30px;
     object-fit: contain;
+    margin-top: -10px;
 }
 
 .grid {
@@ -142,10 +142,7 @@ input{
     margin-right: 6px;
 }
 
-.agreement-div span{
-
-      padding-left: 6px;
-}
+.agreement-div span{padding-left: 6px;font-size: 14px;}
 
 .agreement-top div{
 
@@ -169,15 +166,10 @@ input{
   padding: 11px 11px 27px;
 }
 
-.agreement-body a{
-
-    float: right;
-  color: #a9afb3;
-  text-decoration: underline;
-}
+.agreement-body a{float: right;color: #a9afb3;text-decoration: underline;font-size: 14px;margin-top: 2px;}
 
 .agreement-body > div{
-    margin-bottom: 13px; 
+    margin-bottom: 10px;
 }
 
 .signup-button{

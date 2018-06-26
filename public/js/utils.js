@@ -460,3 +460,46 @@ function formatDate(date) {
         return [year, month, day].join('-');
     }
 }
+
+function formatDateYYYYMMDDHHMM(date) {
+
+    if(date.length == 8) {
+        //YYYYMMDD
+        var year = date.substring(0,4),
+            month = date.substring(4,6),
+            day = date.substring(6,8);
+        return [year, month, day].join('-');
+    }
+    else if(date.length == 14) {
+        //YYYY / MM / DD
+        var year = date.substring(0,4),
+            month = date.substring(7,9),
+            day = date.substring(12,14);
+        return [year, month, day].join('-');
+    }
+    else {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear(),
+            hour = d.getHours(),
+            minute = d.getMinutes();
+            
+
+        if (month.length < 2) {
+            month = '0' + month;
+        }
+        if (day.length < 2) {
+            day = '0' + day;
+        }
+
+        var converttext = [year, month, day].join('-') + " " + pad(hour,2) + ":" + pad(minute,2);
+
+        return converttext;
+    }
+}
+
+function pad(n, width) {
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+  }

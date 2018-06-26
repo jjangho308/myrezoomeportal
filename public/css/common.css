@@ -205,6 +205,20 @@ textarea:-ms-input-placeholder {
     padding: 0 20px;
 }
 
+#footer span:nth-child(6) {
+    float: right;
+    font-size: 8px;
+    color: #676767;
+    font-weight: 700;
+}
+
+#footer span:nth-child(7) {
+    float: right;
+    font-size: 12px;
+    color: #676767;
+    font-weight: 500;
+    padding: 0 20px;
+}
 /*
 select{
   height: 40px;
@@ -375,7 +389,7 @@ input[type="checkbox"] {
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
+    top: 0px;
     width: 19px;
     height: 19px;
     border: 1px solid #ccc;
@@ -398,20 +412,20 @@ input[type="checkbox"] {
 [type="checkbox"]:checked+label:after {
     background: url("/img/common/shape.svg");
     background-repeat: no-repeat;
-    background-position: 5px 5px;
+    background-position: 5px 6px;
     content: "";
     position: absolute;
-    top: 0.5px;
-    height: 19px;
-    width: 19px;
-    left: 0.5px;
+    top: 0px;
+    height: 20px;
+    width: 20px;
+    left: 0px;
     border-radius: 3px;
     font-size: 12px;
     text-align: center;
     color: white;
     background-color: #4778d9;
     transition: all .2s;
-    border: 0.5px solid #4778d9;
+    border: 1px solid #4778d9;
     border-radius: 3px;
 }
 
@@ -703,4 +717,32 @@ input:checked+.slide-toggle::before {
 input:checked+.slide-toggle::after {
     -webkit-transform: translate3d(20px, 0, 0);
     transform: translate3d(20px, 0, 0);
+}
+
+
+.sub-info-select-div-signout {
+    display: none;
+    width: 120px;
+    height: 40px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(207,207,207,0.5);
+    background-color: #fff;
+    border: solid 1px #ced3d6;
+    position: absolute;
+    top: 50px;
+    right: 130px;
+    transform: none;
+    z-index: 2;
+}
+
+.sub-info-select-signout-p {
+    width: auto;
+    transform: initial;
+    font-size: 13px;
+    text-align: left;
+    line-height: 38px;
+    color: #676767;
+    margin: 0;
+    padding: 0 15px;
+    cursor: pointer;
 }

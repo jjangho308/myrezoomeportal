@@ -24,17 +24,17 @@
     
     .qr-container div:nth-child(1){
         position: absolute;
-        bottom: 15px;
+        
         right: 39px;
-        width: 50px;
-        height: 50px;
+        width: 75px;
+        height: 75px;
     }
 
     .qr-container p:nth-child(2) {
         position: relative;
         font-size: 11px;
         left: 5px;
-        top: -99px;
+        /* top: -99px; */
         color: #838383;
         padding: 5px 5px 0px 40px;
     }
@@ -43,7 +43,7 @@
         position: relative;
         font-size: 11px;
         left: 5px;
-        top: -99px;
+        /* top: -99px; */
         color: #838383;
         padding: 5px 5px 0px 40px;
     }
@@ -109,25 +109,29 @@
     }
 
 
-    /* .outer-container {
-        height: calc(490px * 1.4 * 2);
-        width: 490px;
-    } */
-
+    #certno {
+        font-size: 11px;
+        font-weight: 500;
+        padding: 15px 0px 3px 45px;
+        color: #838383;
+        -webkit-transform: scale(0.6);
+        margin-left: -97px;
+        margin-bottom: -8px;
+    }
     /* #opic_cert p:nth-child(1) {position: absolute; top: 16%; left: 44.5%;-webkit-transform: scale(0.8); } */
-    #opic_cert p:nth-child(2) {position: absolute; top: 78px; left: 140px;-webkit-transform: scale(0.7);}
+    #opic_cert p:nth-child(2) {position: absolute; top: 67px; left: 128px;-webkit-transform: scale(0.6);}
     #opic_cert p:nth-child(3) {position: absolute; top: 100px; left: 100px; -webkit-transform: scale(0.7);}
-    #opic_cert p:nth-child(4) {position: absolute; top: 110px; left: 120px; -webkit-transform: scale(0.7);}
-    #opic_cert p:nth-child(5) {position: absolute; top: 110px; left: 181px; -webkit-transform: scale(0.7);}
-    #opic_cert p:nth-child(6) {position: absolute; top: 110px; left: 244px;-webkit-transform: scale(0.7); }
-    #opic_cert p:nth-child(7) {position: absolute; top: 140px; left: 181px; -webkit-transform: scale(0.7);}
-    #opic_cert p:nth-child(8) {position: absolute; top: 210px; left: 210px; -webkit-transform: scale(0.6);}
-    #opic_cert p:nth-child(9) {position: absolute; top: 210px; left: 285px; -webkit-transform: scale(0.6);}
+    #opic_cert p:nth-child(4) {position: absolute; top: 102px; left: 142px; -webkit-transform: scale(0.7);}
+    #opic_cert p:nth-child(5) {position: absolute; top: 102px; left: 200px; -webkit-transform: scale(0.7);}
+    #opic_cert p:nth-child(6) {position: absolute; top: 102px; left: 261px;-webkit-transform: scale(0.7); }
+    #opic_cert p:nth-child(7) {position: absolute; top: 131px; left: 181px; -webkit-transform: scale(0.7);}
+    #opic_cert p:nth-child(8) {position: absolute; top: 201px; left: 236px; -webkit-transform: scale(0.6);}
+    #opic_cert p:nth-child(9) {position: absolute; top: 201px; left: 285px; -webkit-transform: scale(0.6);}
 
     /* #opic_report p:nth-child(1) {position: absolute; top: 50px; left: 60px; -webkit-transform: scale(0.7);} */
-    #opic_report p:nth-child(2) {position: absolute; top: 60px; left: 60px; -webkit-transform: scale(0.6); }
-    #opic_report p:nth-child(3) {position: absolute; top: 72px; left: 60px; -webkit-transform: scale(0.6); }
-    #opic_report p:nth-child(4) {position: absolute; top: 85px; left: 60px; -webkit-transform: scale(0.6);}
+    #opic_report p:nth-child(2) {position: absolute; top: 60px; left: 87px; -webkit-transform: scale(0.6); }
+    #opic_report p:nth-child(3) {position: absolute; top: 72px; left: 94px; -webkit-transform: scale(0.6); }
+    #opic_report p:nth-child(4) {position: absolute; top: 85px; left: 83px; -webkit-transform: scale(0.6);}
     #opic_report p:nth-child(5) {position: absolute; top: 21%; left: 27.5%; -webkit-transform: scale(0.6);}
 }
 

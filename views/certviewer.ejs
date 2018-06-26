@@ -12,6 +12,8 @@
     <script src="../js/libs/jquery-qrcode-0.14.0.min.js"></script>
     <script src="../js/libs/html2canvas.min.js"></script> 
     <script src="../js/libs/blockui/jquery.blockUI.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+    
     <meta name="viewport" content="width=device-width, initial-scale=0.5" />
     <style type="text/css">
 
@@ -59,7 +61,7 @@
     </button>
     </a>
 
-   <button class="border-btn">다운로드</button>
+   <button id="btn_download" class="border-btn">다운로드</button>
    <button id="btn_print" class="border-btn">인쇄</button>
    
     <div id="more-button-div">
@@ -122,7 +124,7 @@
        
     <div class="modal-sub-header">
         <span>증명서 링크 생성</span>
-        <span>이메일로 전송</span>
+        <!-- <span>이메일로 전송</span> -->
         
     </div>
       
@@ -182,11 +184,9 @@
 
         </div>
         
-        <div class="email-send-div">
+        <!-- <div class="email-send-div">
             <input type="text" id="email-send-input" placeholder="증명서를 전송할 이메일주소를 입력하고, 엔터키를 눌러주세요.">
-            
-<!--        <textarea name="" id="" cols="30" rows="10" valign='middle' placeholder="메일 본문 메시지 추가(선택 사항)"></textarea>-->
-        <div id="wrap">
+            <div id="wrap">
           <div class="area dummy"></div>
           <textarea class="area" placeholder="메일 본문 메시지 추가(선택 사항)"></textarea>
         </div>
@@ -236,7 +236,7 @@
 
             </div>
             
-        </div>
+        </div> -->
         
     </div>
     <div class="modal-footer">
@@ -248,7 +248,7 @@
 
 <div id="nexledger-txid-info-dialog" class="modal">
     <div>
-        <h3 class="transaction-title">거래 상세정보</h3>
+        <h3 class="transaction-title">블록체인 검증내역</h3>
     </div>
 
     <div class="nexledger-txid-info-dialog-body">
@@ -256,10 +256,10 @@
             <div class="nexledger-txid-info-dialog-left">ID</div>
             <div class="nexledger-txid-info-dialog-right" id="tx_id"></div>
         </div>
-        <div>
+       <!-- <div>
             <div class="nexledger-txid-info-dialog-left">발신주소</div>
             <div class="nexledger-txid-info-dialog-right" id="fromaddress"></div>
-        </div>
+        </div> -->
         <div>
             <div class="nexledger-txid-info-dialog-left">수신주소</div>
             <div class="nexledger-txid-info-dialog-right">

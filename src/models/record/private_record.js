@@ -3,7 +3,7 @@ var AbstractModel = require('../abstract_model');
 var Util = require('../../util/util');
 
 class PrivateRecord extends AbstractModel {
-/**
+    /**
      * Default constructor. <br />
      * 
      * @since 180419
@@ -13,16 +13,16 @@ class PrivateRecord extends AbstractModel {
      */
     constructor(opt) {
         super(opt);
-        
-        this.sId = opt.sId;        
-        this.certPrvtId = opt.certPrvtId;        
+
+        this.sId = opt.sId;
+        this.certPrvtId = opt.certPrvtId;
         this.uId = opt.uId;
-        this.orgCd = opt.orgCd;        
-        this.subCd = opt.subCd;        
+        this.orgCd = opt.orgCd;
+        this.subCd = opt.subCd;
         this.data = opt.data;
         this.order = opt.order;
         this.dsplYn = opt.dsplYn;
-        this.delYn = opt.delYn;        
+        this.delYn = opt.delYn;
         this.modified = opt.modified;
         this.created = opt.created;
         Util.trim(this);
@@ -46,7 +46,7 @@ class PrivateRecord extends AbstractModel {
             data: row.ENC_PRVT_DATA,
             order: row.ORDER,
             dsplYn: row.DSPL_YN,
-            delYn: row.DEL_YN,            
+            delYn: row.DEL_YN,
             modified: row.MDFID_DT,
             created: row.CRTD_DT
         })
@@ -69,7 +69,7 @@ class PrivateRecord extends AbstractModel {
             ENC_PRVT_DATA: this.data,
             ORDER: this.order,
             DSPL_YN: this.dsplYn,
-            DEL_YN: this.delYn,            
+            DEL_YN: this.delYn,
             MDFID_DT: this.modified,
             CRTD_DT: this.created
         })
