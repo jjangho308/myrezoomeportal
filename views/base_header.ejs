@@ -14,25 +14,26 @@
                     
                     <!--<div id="header-div-signout" style="width:100px;position: relative;display: none;top:13px;left:90px;background-color: #3c435f;color: #FFF;font-size: 14px;cursor: pointer;">Sing out</div>-->
                     <script>
-                        $('#header-signout').click(function(){
-                            if($(".sub-info-select-div-signout").css("display") == "none"){
-                                $(".sub-info-select-div-signout").show();
-                            }
-                            else{
-                                $(".sub-info-select-div-signout").hide();
-                            }
-                        });
+                        $(document).ready(function(){                                                        
+                            $('#header-signout').click(function(){
+                                if($(".sub-info-select-div-signout").css("display") == "none"){
+                                    $(".sub-info-select-div-signout").show();
+                                } else{
+                                    $(".sub-info-select-div-signout").hide();
+                                }
+                            });
 
-                        $("#header-div-signout").click(function() {
-                            if(!!window.localStorage){
-                                localStorage.clear();
-                            }
-                            if(!!window.sessionStorage){
-                                sessionStorage.clear();
-                            }
-                            document.cookie = 'JWT=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
-                            location.href = "/signout";
-                        });
+                            $("#header-div-signout").click(function() {
+                                if(!!window.localStorage){
+                                    localStorage.clear();
+                                }
+                                if(!!window.sessionStorage){
+                                    sessionStorage.clear();
+                                }
+                                document.cookie = 'JWT=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+                                location.href = "/signout";
+                            });
+                        });                        
                     </script>
                 </li>
             </ul>
