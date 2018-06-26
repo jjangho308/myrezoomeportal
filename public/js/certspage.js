@@ -84,18 +84,7 @@ function loadcertlist() {
 
             certlistresult.forEach(function (item) {
 
-                var current_time = new Date();
-                var item_time_convert = new Date(item.date);
-                var fromnowsecond =  (current_time - item_time_convert) / 1000;
-                console.log("====current time - data create time====");
-                console.log(fromnowsecond);
-
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '")>';
-
-                if(fromnowsecond < 300) {
-                    console.log("300 under");
-                    htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '") style="border-color:#4c80f1;")>';
-                }
                 
                 htmldiv = htmldiv + '<p><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certdelete("' + item.certId + '")></p>';
 
@@ -114,38 +103,25 @@ function loadcertlist() {
                     htmldiv = htmldiv + '<img src="img/mycert/icon-kgu-certs.png" alt="">';
                 }
                  
-
                 htmldiv = htmldiv + '<p>증명서</p>';
                 htmldiv = htmldiv + '<p>' + item.title + '</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + formatDateYYYYMMDDHHMM(item.date) + '</p>';
 
-                // htmldiv = htmldiv + '<div id="more-div-' + item.certId + '" class="more-store-resume-div">';
-                // htmldiv = htmldiv + '<p>복사</p>';
-                // htmldiv = htmldiv + '<p onclick=certdelete("' + item.certId + '")>삭제</p>';
-                // htmldiv = htmldiv + '<p>공유내역</p>';
-                // htmldiv = htmldiv + '</div>';
+                var current_time = new Date();
+                var item_time_convert = new Date(item.date);
+                var fromnowsecond =  (current_time - item_time_convert) / 1000;
+
+                if(fromnowsecond < 30) {
+                    console.log("30 second under");
+                    htmldiv = htmldiv + '<img class="certnewimg" src="img/certviewer/cert-new-icon.svg" alt="">';
+                    
+                }
 
                 htmldiv = htmldiv + '</div>';
 
                 divContainer.append(htmldiv);                
             });
-            // for(var i in certlistresult) {
-            //     var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("'+ item.certId +'")>';                
-            //     htmldiv = htmldiv + '<p>'+ item.certId.substring(0,25) + '..<img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certmore("more-div-'+ item.certId +'")></p>';
-            //     htmldiv = htmldiv + '<img src="img/mycert/color_2.png" alt="">';
-            //     htmldiv = htmldiv + '<p>' + item.title + '</p>';
-            //     htmldiv = htmldiv + '<p>증명서</p>';
-            //     htmldiv = htmldiv + '<p>발급일시 : ' + item.date + '</p>';
 
-            //     htmldiv = htmldiv + '<div id="more-div-'+ item.certId +'" class="more-store-resume-div">';                
-            //     htmldiv = htmldiv + '<p>복사</p>';
-            //     htmldiv = htmldiv + '<p onclick=certdelete("'+ item.certId +'")>삭제</p>';
-            //     htmldiv = htmldiv + '<p>공유내역</p>';
-            //     htmldiv = htmldiv + '</div>';
-
-            //     htmldiv = htmldiv + '</div>';
-            //     divContainer.append(htmldiv);
-            // }
         },
         contentType: 'application/json'
     });

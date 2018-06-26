@@ -4,13 +4,6 @@ require socket.is
 */
 
 $(document).ready(function () {
-
-    // comment by hyunsu for running
-    //socket = io();
-    /*
-        view init empty set
-    */
-
     $(".study-period").datepicker();
     $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
 
@@ -734,7 +727,7 @@ $(document).ready(function () {
     });
 
     document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
-        debugger;
+        // debugger;
         event.stopPropagation();
         event.preventDefault();
 
@@ -744,7 +737,7 @@ $(document).ready(function () {
     }, true);
 
     document.getElementById("spec_certification_targetdiv").addEventListener("record_updated", function (event) {
-        debugger;
+        // debugger;
         event.stopPropagation();
         event.preventDefault();
 
@@ -754,7 +747,7 @@ $(document).ready(function () {
     }, true);
 
     document.getElementById("spec_forign_lang_targetdiv").addEventListener("record_updated", function (event) {
-        debugger;
+        // debugger;
         event.stopPropagation();
         event.preventDefault();
 
@@ -762,7 +755,10 @@ $(document).ready(function () {
             $(event.currentTarget).show();
         }
     }, true);
+
 });
+
+
 
 window.onload = function () {
     socket = io();
@@ -1076,7 +1072,7 @@ function refreshview(records) {
         view_formatter[subid](recordList[i]);
     }
 
-    debugger;
+    //debugger;
     if ($("#spec_edu_detail .spec-body").length > 0 ||
         $("#spec_edu_detail .private-spec-body").length > 0) {
         $('#spec_edu_detail > .spec-body-default').hide();
@@ -1275,6 +1271,9 @@ function clearAddSpanLang() {
     $("#language-add-dialog #langadd_enddate").val("");
 }
 
+function addMajorDelete(event){
+    console.log(this);
+}
 function addMajorDelete(imgElement){
     $(imgElement).parent().parent().remove();
 }

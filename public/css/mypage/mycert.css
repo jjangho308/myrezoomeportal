@@ -170,6 +170,12 @@ box-shadow:0 2px 5px 0 rgba(191,191,191,0.5);
 /*background: url("/img/mycert/rectangle-6.svg");*/
 }
 
+.certnewimg {
+    position: absolute;
+    top: 44px;
+    left: 128px;
+}
+
 
 .table-div {
     height:300px;
