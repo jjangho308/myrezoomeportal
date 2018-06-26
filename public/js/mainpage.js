@@ -515,9 +515,28 @@ $(document).ready(function () {
     });
 
     $('.spec-detail-div').click(function (event) {
+        try {
+            if($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {
+                //대학교 케이스
+                var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
+                parentparentNodeChecknot[0].checked = true;
+                parentparentNodeChecknot[1].checked = true;
+                event.preventDefault();
+            }
+            
+            else if($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 2) {
+                var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:checked");
+                parentparentNodeChecknot[0].checked = false;
+                parentparentNodeChecknot[1].checked = false;
+                event.preventDefault();
+            }
+            
+        }catch(exception) {
+            console.log(exception);
+        }
         $(".spec-detail-div input:checkbox").each(function (i) {
             if ($(this).is(':checked')) {
-                $(this.parentNode.parentNode).find("input:checkbox:not(:checked)")[0].checked = true;
+                       
                 $(this).closest('.spec-body').css({
                     "border": "solid 1px #4c80f1",
                     "border-radius": "4px",
@@ -527,6 +546,14 @@ $(document).ready(function () {
                 // $(this).closest('.spec-body').children('.spec-right').last().children().eq(3).children().css({"color":"#ffffff", "border": "solid 1px #dfe5ef"});
                 // $("#btn_change_"+$(this).closest('.spec-body').children('.spec-right').last().children().eq(3).attr("id").substring(11)).hide();
             } else {
+
+                
+                // if($(".spec-detail-div input:checkbox:checked").length > 0) {
+                //     var parentparentNode = $(".spec-detail-div input:checkbox:checked")[0].parentNode.parentNode;
+                //     $(parentparentNode).find("input:checkbox:checked")[0].checked = false;
+                // }
+                
+
                 $(this).closest('.spec-body').css({
                     "border": "none",
                     "border-bottom": "solid 1px #dfe5ef",
