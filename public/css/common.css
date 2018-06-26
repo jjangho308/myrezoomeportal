@@ -91,7 +91,7 @@ input {
 }
 
 input:focus {
-    border: solid 1px #4c80f1;
+    border: solid 1px #749ffa;
 }
 
 input:-moz-read-only {
