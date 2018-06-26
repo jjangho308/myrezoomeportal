@@ -634,6 +634,12 @@ th:nth-child(6) {
     vertical-align: top;
 }
 
+.modal-body input:focus 
+{
+    outline: 0px;    
+    /*border: 1px solid #a1a1a1;*/
+}
+
 /*
 .modal-body select {
     color: #676767;
