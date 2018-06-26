@@ -469,7 +469,7 @@
             htmldiv = htmldiv + '<p>' + record.school_name + '</p>';
             htmldiv = htmldiv + '<p>' + record.status + '</p>';
             htmldiv = htmldiv + '<p>' + record.degree + '</p>';
-            htmldiv = htmldiv + '<button onclick=deletePrivateEdu>삭제</button>';
+            htmldiv = htmldiv + '<button onclick=deletePrivateEdu><span class="spec-body-btn-name">삭제</span></button>';
             htmldiv = htmldiv + '<input type="hidden" value="' + record.certPrvtId + '" />';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
@@ -526,7 +526,7 @@
             htmldiv = htmldiv + '<p>' + record.company + '</p>';
             htmldiv = htmldiv + '<p>' + record.position + '</p>';
             htmldiv = htmldiv + '<p>' + record.role + '</p>';
-            htmldiv = htmldiv + '<button onclick=deletePrivateLang>삭제</button>';
+            htmldiv = htmldiv + '<button onclick=deletePrivateLang><span class="spec-body-btn-name">삭제</span></button>';
             htmldiv = htmldiv + '<input type="hidden" value="' + record.certPrvtId + '" />';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
@@ -664,7 +664,7 @@
 
                 specRightContainer.appendChild(function () {
                     var deleteButton = document.createElement("button");
-                    deleteButton.innerHTML = "삭제";
+                    deleteButton.innerHTML = "<span class='spec-body-btn-name'>삭제</span>";
                     deleteButton.addEventListener("click", deletePrivateLanguage, true);
                     return deleteButton;
                 }());
@@ -733,7 +733,7 @@
             htmldiv = htmldiv + '<p>' + record.issuer + '</p>';
             htmldiv = htmldiv + '<p>' + record.name + '</p>';
             htmldiv = htmldiv + '<p>' + record.grade + '</p>';
-            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")>삭제</button>';
+            htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")><span class="spec-body-btn-name">삭제</span></button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
             $('#spec_certification').append(htmldiv);
