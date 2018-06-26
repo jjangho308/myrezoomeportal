@@ -201,7 +201,7 @@ $(document).ready(function () {
                     $('#alarm-div').css("display", "block");
                     $('#alarm-div').css("margin-right", "-108px");
 
-                    setTimeout(function(){                
+                    setTimeout(function () {
                         $('#alarm-div').fadeOut('slow');
                     }, 2000);
 
@@ -336,7 +336,7 @@ $(document).ready(function () {
                     $('#alarm-div').css("display", "block");
                     $('#alarm-div').css("margin-right", "-108px");
 
-                    setTimeout(function(){                
+                    setTimeout(function () {
                         $('#alarm-div').fadeOut('slow');
                     }, 2000);
 
@@ -415,7 +415,7 @@ $(document).ready(function () {
                     $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
                     $('#alarm-div').css("display", "block");
 
-                    setTimeout(function(){                
+                    setTimeout(function () {
                         $('#alarm-div').fadeOut('slow');
                     }, 2000);
 
@@ -455,7 +455,7 @@ $(document).ready(function () {
                         $('#alarm-div').css("display", "block");
                         $('#alarm-div').css("margin-right", "-142px");
 
-                        setTimeout(function(){                
+                        setTimeout(function () {
                             $('#alarm-div').fadeOut('slow');
                         }, 2000);
 
@@ -679,7 +679,25 @@ $(document).ready(function () {
         });
     });
 
-    document.getElementById("spec_forign_lang_targetdiv").addEventListener("private_deleted", function (event) {
+    document.getElementById("spec_edu_detail_targetdiv").addEventListener("edu_private_deleted", function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length) {
+            $(event.currentTarget).show();
+        }
+    }, true);
+
+    document.getElementById("spec_certification_targetdiv").addEventListener("cert_private_deleted", function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length) {
+            $(event.currentTarget).show();
+        }
+    }, true);
+
+    document.getElementById("spec_forign_lang_targetdiv").addEventListener("lang_private_deleted", function (event) {
         event.stopPropagation();
         event.preventDefault();
 
@@ -740,6 +758,7 @@ function change_default_cert(subid) {
                 record_change_formatter[subidTmp](record);
             }
         } catch (exception) {
+            console.error(exception);
             continue;
         }
     }
@@ -763,17 +782,17 @@ function delete_private_record(prvtId, cb) {
             console.error(jqXhr.responseText);
             cb(jqXhr.responseJSON);
         },
-        success: function (res) {
+        success: function (response) {
             $("#alarm-div span").text("정상적으로 삭제 완료되었습니다.");
             $('#alarm-div').css("display", "block");
             $('#alarm-div').css("margin-right", "-108px");
 
-            setTimeout(function(){                
+            setTimeout(function () {
                 $('#alarm-div').fadeOut('slow');
             }, 2000);
 
             // getPrivateRecords();
-            cb(null, res);
+            cb(null, response);
         }
     });
 }
