@@ -44,7 +44,7 @@
                htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
                htmldiv = htmldiv + '</div>';
                htmldiv = htmldiv + '<div class="spec-date">';
-               htmldiv = htmldiv + '<span>' + formatDate(record.ctestday) + '</span>';
+               htmldiv = htmldiv + '<span>' + (record.ctestday != null ? formatDate(record.ctestday) : "") + '</span>';
                htmldiv = htmldiv + '</div>'; 
           //htmldiv = htmldiv + '<div class="spec-left">';
            // htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
