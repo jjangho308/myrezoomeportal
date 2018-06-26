@@ -72,7 +72,7 @@ app.use((err, req, res, next) => {
           code: err.code,
           msg: ErrorMessage[requestLocale][err.code],
           stack: !!err.cause && Environment.developement ? err.cause.stack : null,
-          info : err.info,
+          info: err.info,
         }
       });
     } else {
@@ -89,7 +89,7 @@ app.use((err, req, res, next) => {
           code: ErrorCode.INTERNAL_ERROR,
           msg: ErrorMessage[requestLocale][ErrorCode.INTERNAL_ERROR],
           stack: Environment.developement ? err.stack : null,
-          info : err.info,
+          info: err.info,
         }
       });
     } else {
