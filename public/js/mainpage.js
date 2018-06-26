@@ -85,31 +85,39 @@ $(document).ready(function () {
     })
 
     $('#education-add-dialog .add-span').click(function () {
-        $("#major-div").append(
-            '<div id="add-major">' +
-            '<div class="error-range major-div">' +
-            '<div class="select-100">' +
-            '<select name="select-1">' +
-            '<option value="1">전공</option>' +
-            '<option value="2">부전공</option>' +
-            '<option value="3">복수전공</option>' +
-            '</select>' +
-            '</div>' +
-            '<div class="select-100">' +
-            '<select name="select-2">' +
-            '<option value="volvo">학사</option>' +
-            '<option value="saab">석사</option>' +
-            '</select>' +
-            '</div>' +
-
-            '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
-            '<img src="/img/myresume/close-white.svg"/>' +
-            '<div class="error-message">전공을 입력해주세요.</div>' +
-            '</div>'+
-            '</div>'
-        );
+        if($("#education-add-dialog #add-major").length < 2){
+            $("#major-div").append(
+                '<div id="add-major">' +
+                '<div class="error-range major-div">' +
+                '<div class="select-100">' +
+                '<select name="select-1">' +
+                '<option value="1">전공</option>' +
+                '<option value="2">부전공</option>' +
+                '<option value="3">복수전공</option>' +
+                '</select>' +
+                '</div>' +
+                '<div class="select-100">' +
+                '<select name="select-2">' +
+                '<option value="volvo">학사</option>' +
+                '<option value="saab">석사</option>' +
+                '</select>' +
+                '</div>' +
+    
+                '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
+                
+                '<img id="add-major-delete" src="/img/myresume/close-white.svg" onclick="addMajorDelete()"/>' +
+                
+                '<div class="error-message">전공을 입력해주세요.</div>' +
+                '</div>'+
+                '</div>'
+            );
+        }else{
+            console.log("학력은 3건이상 넣을 수 없습니다.")
+        }
         $("select").selectize();
     });
+
+    
 
 
     $('#education-add-dialog .confirm-btn').click(function () {
@@ -1161,4 +1169,8 @@ function clearAddSpanLang(){
     $("#language-add-dialog #language-grade").val("");
     $("#language-add-dialog #langadd_startdate").val("");
     $("#language-add-dialog #langadd_enddate").val("");
+}
+
+function addMajorDelete(event){
+    console.log(this);
 }
