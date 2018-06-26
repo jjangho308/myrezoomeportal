@@ -665,7 +665,7 @@ $(document).ready(function () {
             beforeSend: function () {
                 //clean view
                 $('.spec-body').remove();
-                $('.spec-body-default').css("display", "none");
+                $('.spec-body-default').hide();
                 $('.spec-body-loading').css("display", "block");
             },
             data: JSON.stringify({
@@ -688,14 +688,18 @@ $(document).ready(function () {
                 clientsocket_listener();
                 setTimeout(function () {
                     $('.spec-body-loading').hide();
-                    $('.spec-body-default').show();
+                    var privateDeletedEvent = document.createEvent('Event');
+                    privateDeletedEvent.initEvent("record_updated", true, true);
+                    document.getElementById("spec_edu_detail_targetdiv").dispatchEvent(privateDeletedEvent);
+                    document.getElementById("spec_certification_targetdiv").dispatchEvent(privateDeletedEvent);
+                    document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
                 }, 1500);
             },
             contentType: 'application/json',
         });
     });
 
-    document.getElementById("spec_edu_detail_targetdiv").addEventListener("edu_private_deleted", function (event) {
+    document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
         debugger;
         event.stopPropagation();
         event.preventDefault();
@@ -705,7 +709,7 @@ $(document).ready(function () {
         }
     }, true);
 
-    document.getElementById("spec_certification_targetdiv").addEventListener("cert_private_deleted", function (event) {
+    document.getElementById("spec_certification_targetdiv").addEventListener("record_updated", function (event) {
         debugger;
         event.stopPropagation();
         event.preventDefault();
@@ -715,7 +719,7 @@ $(document).ready(function () {
         }
     }, true);
 
-    document.getElementById("spec_forign_lang_targetdiv").addEventListener("lang_private_deleted", function (event) {
+    document.getElementById("spec_forign_lang_targetdiv").addEventListener("record_updated", function (event) {
         debugger;
         event.stopPropagation();
         event.preventDefault();
@@ -842,10 +846,10 @@ function getPrivateRecords() {
         },
         success: function (res) {
             // debugger;
-            res.result.sort(function(a, b){
-                try{
+            res.result.sort(function (a, b) {
+                try {
                     return Date.parse(a.created || 0) - Date.parse(b.created || 0);
-                }catch(e){
+                } catch (e) {
                     console.error(e);
                     return 0;
                 }
@@ -902,7 +906,6 @@ function request_agent() {
         },
         data: JSON.stringify({
             cmd: 'SearchRecord',
-
             args: {
                 pkey: 'asdfasdf',
                 update: false,
@@ -921,7 +924,11 @@ function request_agent() {
             // loading css start
             setTimeout(function () {
                 $('.spec-body-loading').hide();
-                $('.spec-body-default').show();
+                var privateDeletedEvent = document.createEvent('Event');
+                privateDeletedEvent.initEvent("record_updated", true, true);
+                document.getElementById("spec_edu_detail_targetdiv").dispatchEvent(privateDeletedEvent);
+                document.getElementById("spec_certification_targetdiv").dispatchEvent(privateDeletedEvent);
+                document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
                 refreshview(null);
             }, 1500);
 
@@ -1035,6 +1042,7 @@ function refreshview(records) {
         view_formatter[subid](recordList[i]);
     }
 
+    debugger;
     if ($("#spec_edu_detail .spec-body").length > 0 ||
         $("#spec_edu_detail .private-spec-body").length > 0) {
         $('#spec_edu_detail > .spec-body-default').hide();
@@ -1159,7 +1167,7 @@ function clearAddSpanEdu() {
     $("#education-add-dialog #add-major").remove();
 }
 
-function clearAddSpanCert (){
+function clearAddSpanCert() {
     $("#cert-add-dialog #cert-issuer").val("");
     $("#cert-add-dialog #cert-name").val("");
     $("#cert-add-dialog #cert-grade").val("");
