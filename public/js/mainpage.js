@@ -875,11 +875,10 @@ function getPrivateRecords() {
             console.error(jqXhr.responseText);
         },
         success: function (res) {
-            // debugger;
             setTimeout(function () {
                 res.result.sort(function (a, b) {
                     try {
-                        return Date.parse(a.created || 0) - Date.parse(b.created || 0);
+                        return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
                     } catch (e) {
                         console.error(e);
                         return 0;
@@ -1190,7 +1189,6 @@ function getTargetdivid(subid) {
 }
 
 function clearAddSpanEdu() {
-    debugger;
     $("#education-add-dialog #school").removeClass("error");
     $("#education-add-dialog #school").next().css("display", "none");
 
