@@ -92,7 +92,7 @@
     //     }(event.currentTarget.parentElement.parentElement));
     // }
 
-    var formatter = _win.formatter = {
+    var formatter = _win.view_formatter = {
         "RCLPT0005": function viewformatter(record) {
             var htmldiv = '<div class="spec-body">';
             htmldiv = htmldiv + '<div class="spec-check">';
