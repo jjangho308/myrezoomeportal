@@ -700,7 +700,7 @@ $(document).ready(function () {
         event.stopPropagation();
         event.preventDefault();
 
-        if ($("#spec_edu_detail_targetdiv .private-spec-body").length == 0 && $("#spec_edu_detail_targetdiv .spec-body").length == 0) {
+        if ($("#spec_edu_detail .private-spec-body").length == 0 && $("#spec_edu_detail .spec-body").length == 0) {
             $(event.currentTarget).show();
         }
     }, true);

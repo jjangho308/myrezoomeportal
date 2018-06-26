@@ -11,17 +11,20 @@
      * @author TACKSU
      */
     function deletePrivateRecord(recordId, recordContainer, eventName, eventTargetId) {
-        ajaxDeletePrivateRecord(recordId, function (err, response) {
-            debugger;
-            if (!!err) {
-                return console.error(err);
-            } else if (response.result === true) {
-                recordContainer.remove();
-                var privateDeletedEvent = document.createEvent('Event');
-                privateDeletedEvent.initEvent(eventName, true, true);
-                document.getElementById(eventTargetId).dispatchEvent(privateDeletedEvent);
-            }
-        });
+        if (!!ajaxDeletePrivateRecord) {
+            ajaxDeletePrivateRecord(recordId, function (err, response) {
+                if (!!err) {
+                    return console.error(err);
+                } else if (response.result === true) {
+                    recordContainer.remove();
+                    var privateDeletedEvent = document.createEvent('Event');
+                    privateDeletedEvent.initEvent(eventName, true, true);
+                    document.getElementById(eventTargetId).dispatchEvent(privateDeletedEvent);
+                }
+            });
+        } else {
+            console.error("AJAX script is not loaded yet.");
+        }
     }
 
     // var deletePrivateCert = function (event) {
@@ -104,9 +107,9 @@
             htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>OPIc</p>';            
+            htmldiv = htmldiv + '<p>OPIc</p>';
             htmldiv = htmldiv + '<p>' + record.language + '</p>';
-            htmldiv = htmldiv + '<p>' + record.rating + '</p>';            
+            htmldiv = htmldiv + '<p>' + record.rating + '</p>';
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")><span class="spec-body-btn-name">더 보기</span><span class="spec-body-count">+' + record.count + '</span></button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
@@ -123,13 +126,13 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-date">';
             htmldiv = htmldiv + '<span>' + (record.ea_exam_time != null ? formatDate(record.ea_exam_time) : "") + '</span>';
-            htmldiv = htmldiv + '</div>'; 
+            htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="img/main/mk-logo.png" alt="">';
             htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-right">';
-            htmldiv = htmldiv + '<p>매경TEST</p>';            
+            htmldiv = htmldiv + '<p>매경TEST</p>';
             htmldiv = htmldiv + '<p>제 ' + record.ea_asset + '회</p>';
             htmldiv = htmldiv + '<p>' + record.re_grade + ', ' + record.re_point0 + '</p>';
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")><span class="spec-body-btn-name">더 보기</span><span class="spec-body-count">+' + record.count + '</span></button>';
@@ -180,7 +183,7 @@
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-date">';
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0008">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
-                htmldiv = htmldiv + '</div>';               
+                htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/inha-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -212,14 +215,14 @@
                 $('#spec-body-RCOGC0008').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
 
-                var htmldiv = '<div id="spec-body-RCOGC0009" class="spec-body">';               
+                var htmldiv = '<div id="spec-body-RCOGC0009" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-check">';
                 htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
                 htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-date">';
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0008">' + '</span>';
-                htmldiv = htmldiv + '</div>';            
+                htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/inha-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -227,7 +230,7 @@
                 htmldiv = htmldiv + '<div class="spec-right">';
                 htmldiv = htmldiv + '<p>인하대학교</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0008"></p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0009">' + (total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';                
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0009">' + (total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
                 $('#spec_edu_detail').append(htmldiv);
@@ -245,7 +248,7 @@
                 $('#edu-span-edu-p-RCOGC0010').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
                 $('#spec-body-RCOGC0011').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
-                var htmldiv = '<div id="spec-body-RCOGC0010" class="spec-body">';            
+                var htmldiv = '<div id="spec-body-RCOGC0010" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-check">';
                 htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
                 htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
@@ -282,14 +285,14 @@
                 $('#edu-p-RCOGC0011').text((total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
                 $('#spec-body-RCOGC0010').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
-                var htmldiv = '<div id="spec-body-RCOGC0011" class="spec-body">'; 
+                var htmldiv = '<div id="spec-body-RCOGC0011" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-check">';
                 htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
                 htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-date">';
                 htmldiv = htmldiv + '<span></span>';
-                htmldiv = htmldiv + '</div>'; 
+                htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/kmu-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -315,14 +318,14 @@
                 $('#edu-span-edu-p-RCOGC0012').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
                 $('#spec-body-RCOGC0013').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
-                var htmldiv = '<div id="spec-body-RCOGC0012" class="spec-body">';               
+                var htmldiv = '<div id="spec-body-RCOGC0012" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-check">';
                 htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
                 htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-date">';
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
-                htmldiv = htmldiv + '</div>'; 
+                htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/kgu-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -330,7 +333,7 @@
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>경기대학교</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0012">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status + '</p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + '</p>';                
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
                 $('#spec_edu_detail').append(htmldiv);
@@ -352,14 +355,14 @@
                 $('#edu-p-RCOGC0013').text((total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
                 $('#spec-body-RCOGC0012').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
-                var htmldiv = '<div id="spec-body-RCOGC0013" class="spec-body">';             
+                var htmldiv = '<div id="spec-body-RCOGC0013" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-check">';
                 htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
                 htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-date">';
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0012"></span>';
-                htmldiv = htmldiv + '</div>'; 
+                htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/kgu-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -367,7 +370,7 @@
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>경기대학교</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0012"></p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + (total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';                
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + (total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
                 $('#spec_edu_detail').append(htmldiv);
@@ -384,14 +387,14 @@
                 $('#edu-span-edu-p-RCOGC0014').text(record.registList[0].admission_date + '~' + record.registList[0].change_date);
                 $('#spec-body-RCOGC0015').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
-                var htmldiv = '<div id="spec-body-RCOGC0014" class="spec-body">';     
+                var htmldiv = '<div id="spec-body-RCOGC0014" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-check">';
                 htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
                 htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-date">';
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0014">' + record.registList[0].admission_date + '~' + record.registList[0].change_date + '</span>';
-                htmldiv = htmldiv + '</div>'; 
+                htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/cau-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -399,7 +402,7 @@
                 htmldiv = htmldiv + '<div class="spec-right" id="btn_change' + record.subid + '" >';
                 htmldiv = htmldiv + '<p>중앙대학교</p>';
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0014">' + record.registList[0].course + ', ' + record.registList[0].major_first + ', ' + record.registList[0].status + '</p>';
-                htmldiv = htmldiv + '<p id="edu-p-RCOGC0015">' + '</p>';                
+                htmldiv = htmldiv + '<p id="edu-p-RCOGC0015">' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
                 $('#spec_edu_detail').append(htmldiv);
@@ -421,14 +424,14 @@
                 $('#edu-p-RCOGC0015').text((total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5');
                 $('#spec-body-RCOGC0014').append('<input type="checkbox" id="' + record.chkid + '" />');
             } else {
-                var htmldiv = '<div id="spec-body-RCOGC0015" class="spec-body">';           
+                var htmldiv = '<div id="spec-body-RCOGC0015" class="spec-body">';
                 htmldiv = htmldiv + '<div class="spec-check">';
                 htmldiv = htmldiv + '<input type="checkbox" id="' + record.chkid + '" />';
                 htmldiv = htmldiv + '<label for="' + record.chkid + '"><label/>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-date">';
                 htmldiv = htmldiv + '<span id="edu-span-edu-p-RCOGC0014"></span>';
-                htmldiv = htmldiv + '</div>'; 
+                htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '<div class="spec-center">';
                 htmldiv = htmldiv + '<img src="img/main/cau-logo.png" alt="">';
                 htmldiv = htmldiv + '<div class="spec-verify-img" data-tooltip-text="기관에서 연동된 이력입니다."><img src="img/myresume/on.svg" "></div>';
@@ -552,14 +555,13 @@
                 specRightContainer.appendChild(function () {
                     var deleteButton = document.createElement("button");
                     deleteButton.innerHTML = "삭제";
-                    deleteButton.appendChild(function(){
+                    deleteButton.appendChild(function () {
                         var span = document.createElement("span");
-                        span.className ="spec-body-btn-name";
+                        span.className = "spec-body-btn-name";
                         return span;
-                    });
-                    
+                    }());
+
                     deleteButton.addEventListener("click", function (event) {
-                        debugger;
                         deletePrivateRecord(
                             event.currentTarget.nextElementSibling.value,
                             event.currentTarget.parentElement.parentElement,
@@ -583,16 +585,17 @@
             $('#spec_edu_detail > .spec-body-default').hide();
         },
 
+        // 이력 부분은 처리하는 곳이 없네. 나중에 고쳐야 할 듯.
         "CPR": function viewformatter(record) {
             // Private record
-            var htmldiv = '<div class="private-spec-body">';         
+            var htmldiv = '<div class="private-spec-body">';
             htmldiv = htmldiv + '<div class="spec-check">';
             htmldiv = htmldiv + '<input style="visibility:hidden" type="checkbox" disabled/>';
             htmldiv = htmldiv + '<label><label/>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-date">';
             htmldiv = htmldiv + '<span>' + record.startdate + ' ~ ' + record.enddate + '</span>';
-            htmldiv = htmldiv + '</div>';            
+            htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '<div class="spec-center">';
             htmldiv = htmldiv + '<img src="https://s3.ap-northeast-2.amazonaws.com/rezoome/org_logo/opic.png" alt="">';
             htmldiv = htmldiv + '';
@@ -647,7 +650,7 @@
                 specCheckContainer.appendChild(function () {
                     var checkbox = document.createElement("input");
                     checkbox.setAttribute("type", "checkbox");
-                    checkbox.setAttribute("disabled", "true");                    
+                    checkbox.setAttribute("disabled", "true");
                     return checkbox;
                 }());
                 specCheckContainer.appendChild(document.createElement("label"));
@@ -656,7 +659,7 @@
 
             specContainer.appendChild(function () {
                 var specLeftContainer = document.createElement("div");
-                specLeftContainer.className = "spec-date"; 
+                specLeftContainer.className = "spec-date";
                 specLeftContainer.appendChild(function () {
                     var span = document.createElement("span");
                     span.innerHTML = record.startdate + ' ~ ' + record.enddate;
@@ -719,7 +722,6 @@
                     var deleteButton = document.createElement("button");
                     deleteButton.innerHTML = "<span class='spec-body-btn-name'>삭제</span>";
                     deleteButton.addEventListener("click", function (event) {
-                        debugger;
                         deletePrivateRecord(
                             event.currentTarget.nextElementSibling.value,
                             event.currentTarget.parentElement.parentElement,
@@ -852,7 +854,6 @@
                     var deleteButton = document.createElement("button");
                     deleteButton.innerHTML = "<span class='spec-body-btn-name'>삭제</span>";
                     deleteButton.addEventListener("click", function (event) {
-                        debugger;
                         deletePrivateRecord(
                             event.currentTarget.nextElementSibling.value,
                             event.currentTarget.parentElement.parentElement,
