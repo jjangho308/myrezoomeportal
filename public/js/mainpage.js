@@ -146,18 +146,28 @@ $(document).ready(function () {
         var period = $("#education-add-dialog .study-period");
         var range = period.closest(".error-range");
 
+        var date1 = new Date(period[0].value);
+        var date2 = new Date(period[1].value);
+
         if ((period[0].value == "") || (period[1].value == "")) {
             period.addClass("error");
             range.find("button").addClass("error");
             range.find(".items").addClass("error");
             range.find(".error-message").css("display", "block");
             is_error = true;
-
-        } else {
+        }else if(date1 - date2 > 0){
+            is_error= true;
+            period.addClass("error");
+            range.find("button").addClass("error");
+            range.find(".items").addClass("error");
+            range.find(".error-message").css("display", "block");
+            $("#education-add-dialog .error-message").text("시작일이 종료일 보다 클 수 없습니다.");
+        }
+        else {
             period.removeClass("error");
             range.find("button").removeClass("error");
             range.find(".items").removeClass("error");
-            range.find(".error-message").css("display", "none");
+            range.find(".error-message").css("display", "none");  
         }
 
         var range = $("#score").closest(".error-range");
@@ -288,11 +298,14 @@ $(document).ready(function () {
         var end_date = $("#langadd_enddate").val();
         var expiry = $("#langadd_expireYn").is(':checked');
 
+
+        var date1 = new Date(start_date);
+        var date2 = new Date(end_date);
+
         var is_error = false;
 
         $("#langadd_lang").val("E");
         $("#language-add-dialog input[type=text]").not("#langadd_lang-selectized").each(function () {
-
             if ($(this).val() == "") {
                 is_error = true;
                 if ($(this).hasClass("study-period")) {
@@ -302,7 +315,17 @@ $(document).ready(function () {
                     $(this).addClass("error");
                     $(this).next().show();
                 }
-            } else {
+            }
+            else if(date1 - date2 > 0){
+                 is_error=true;
+
+                 $("#language-add-dialog #langadd_startdate").addClass("error");
+                 $("#language-add-dialog #langadd_enddate").addClass("error");
+                 
+                 $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
+                 $("#language-add-dialog .error-message-period").show();
+            }
+            else {
                 if ($(this).hasClass("study-period")) {
                     $(this).removeClass("error");
                     $("#language-add-dialog .error-message-period").hide();
@@ -371,6 +394,9 @@ $(document).ready(function () {
         var end_date = $("#certadd_enddate").val();
         var expiry = $("#certadd_expireYn").is(':checked');
 
+        var date1 = new Date(start_date);
+        var date2 = new Date(end_date);
+
         var is_error = false;
 
         $("#cert-add-dialog input[type=text]").each(function () {
@@ -383,7 +409,17 @@ $(document).ready(function () {
                     $(this).addClass("error");
                     $(this).next().show();
                 }
-            } else {
+            } else if(date1 - date2 > 0){
+                is_error=true;
+
+                 $("#cert-add-dialog #certadd_startdate").addClass("error");
+                 $("#cert-add-dialog #certadd_enddate").addClass("error");
+                 
+                 $("#cert-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
+                 $("#cert-add-dialog .error-message-period").show();
+            }
+            
+            else {
                 if ($(this).hasClass("study-period")) {
                     $(this).removeClass("error");
                     $("#cert-add-dialog .error-message-period").hide();
