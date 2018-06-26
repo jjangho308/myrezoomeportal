@@ -78,7 +78,7 @@ $(document).ready(function () {
     })
 
     $('#education-add-dialog .add-span').click(function () {
-        if($("#education-add-dialog #add-major").length < 2){
+        if ($("#education-add-dialog #add-major").length < 2) {
             $("#major-div").append(
                 '<div id="add-major">' +
                 '<div class="error-range major-div">' +
@@ -94,22 +94,22 @@ $(document).ready(function () {
                 '<option value="volvo">학사</option>' +
                 '</select>' +
                 '</div>' +
-    
+
                 '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
-                
+
                 '<img id="add-major-delete" src="/img/myresume/close-white.svg" onclick="addMajorDelete(this)"/>' +
-                
+
                 '<div class="error-message">전공을 입력해주세요.</div>' +
-                '</div>'+
+                '</div>' +
                 '</div>'
             );
-        }else{
+        } else {
             console.log("학력은 3건이상 넣을 수 없습니다.")
         }
         $("select").selectize();
     });
 
-    
+
 
 
     $('#education-add-dialog .confirm-btn').click(function () {
@@ -508,27 +508,25 @@ $(document).ready(function () {
 
     $('.spec-detail-div').click(function (event) {
         try {
-            if($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {
+            if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {
                 //대학교 케이스
                 var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
                 parentparentNodeChecknot[0].checked = true;
                 parentparentNodeChecknot[1].checked = true;
                 event.preventDefault();
-            }
-            
-            else if($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 2) {
+            } else if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 2) {
                 var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:checked");
                 parentparentNodeChecknot[0].checked = false;
                 parentparentNodeChecknot[1].checked = false;
                 event.preventDefault();
             }
-            
-        }catch(exception) {
+
+        } catch (exception) {
             console.log(exception);
         }
         $(".spec-detail-div input:checkbox").each(function (i) {
             if ($(this).is(':checked')) {
-                       
+
                 $(this).closest('.spec-body').css({
                     "border": "solid 1px #4c80f1",
                     "border-radius": "4px",
@@ -539,12 +537,12 @@ $(document).ready(function () {
                 // $("#btn_change_"+$(this).closest('.spec-body').children('.spec-right').last().children().eq(3).attr("id").substring(11)).hide();
             } else {
 
-                
+
                 // if($(".spec-detail-div input:checkbox:checked").length > 0) {
                 //     var parentparentNode = $(".spec-detail-div input:checkbox:checked")[0].parentNode.parentNode;
                 //     $(parentparentNode).find("input:checkbox:checked")[0].checked = false;
                 // }
-                
+
 
                 $(this).closest('.spec-body').css({
                     "border": "none",
@@ -682,6 +680,8 @@ $(document).ready(function () {
         setTxidList(emptyarray);
 
         $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
+
+        getPrivateRecords();
 
         $.ajax({
             type: 'POST',
@@ -1271,9 +1271,10 @@ function clearAddSpanLang() {
     $("#language-add-dialog #langadd_enddate").val("");
 }
 
-function addMajorDelete(event){
+function addMajorDelete(event) {
     console.log(this);
 }
-function addMajorDelete(imgElement){
+
+function addMajorDelete(imgElement) {
     $(imgElement).parent().parent().remove();
 }
