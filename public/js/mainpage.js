@@ -30,6 +30,7 @@ $(document).ready(function () {
         }
         // $('.spec-body-default').fadeIn();
         refreshview(oridata);
+        getPrivateRecords(finishLoading);
         $('#initial-dialog .close-modal').click();
     } else {
         startLoading();
