@@ -30,6 +30,7 @@ $(document).ready(function () {
         }
         // $('.spec-body-default').fadeIn();
         refreshview(oridata);
+        getPrivateRecords(finishLoading);
         $('#initial-dialog .close-modal').click();
     } else {
         startLoading();
@@ -917,52 +918,82 @@ function buttonCallback(opt1, opt2, opt3, opt4) {
 
 
 function getPrivateRecords(callback) {
-    $.ajax({
-        type: 'GET',
-        url: '/records/list',
-        headers: {
-            'Authorization': client_authorization
-        },
-        beforeSend: function () {
-            //clean view
-            $('.private-spec-body').remove();
-        },
-        error: function (jqXhr, status, error) {
-            console.error('Get private record Error : ' + error);
-            console.error(jqXhr.responseText);
-        },
-        success: function (res) {
-            setTimeout(function () {
-                res.result.sort(function (a, b) {
-                    try {
-                        return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-                    } catch (e) {
-                        console.error(e);
-                        return 0;
-                    }
-                });
 
-                res.result.forEach(function (item, idx) {
-                    var data = JSON.parse(item.data);
-                    data.certPrvtId = item.certPrvtId;
-                    if (item.subCd in view_formatter) {
-                        view_formatter[item.subCd](data);
-                    }
-                });
+    var privaterecords = getPrivateData();
+    if(privaterecords.length > 0) {
+        privaterecords.sort(function (a, b) {
+            try {
+                return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+            } catch (e) {
+                console.error(e);
+                return 0;
+            }
+        });
 
-                $('.private-spec-body').on('click', singletonCallback);
-                $('.private-spec-body button').on('click', buttonCallback);
+        privaterecords.forEach(function (item, idx) {
+            var data = JSON.parse(item.data);
+            data.certPrvtId = item.certPrvtId;
+            if (item.subCd in view_formatter) {
+                view_formatter[item.subCd](data);
+            }
+        });
 
-                refreshview();
-                !!callback && callback instanceof Function && callback(res);
-                // for (var i in res.result) {
-                //     var data = JSON.parse(res[i].data);
-                //     data.certPrvtId = res[i].certPrvtId;
-                //     formatter[res[i].subCd](data);
-                // }
-            }, 2000)
-        }
-    });
+        $('.private-spec-body').on('click', singletonCallback);
+        $('.private-spec-body button').on('click', buttonCallback);
+
+        refreshview();
+    }
+    else {
+        $.ajax({
+            type: 'GET',
+            url: '/records/list',
+            headers: {
+                'Authorization': client_authorization
+            },
+            beforeSend: function () {
+                //clean view
+                $('.private-spec-body').remove();
+            },
+            error: function (jqXhr, status, error) {
+                console.error('Get private record Error : ' + error);
+                console.error(jqXhr.responseText);
+            },
+            success: function (res) {
+                setTimeout(function () {
+                    res.result.sort(function (a, b) {
+                        try {
+                            return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+                        } catch (e) {
+                            console.error(e);
+                            return 0;
+                        }
+                    });
+    
+                    res.result.forEach(function (item, idx) {
+                        var data = JSON.parse(item.data);
+                        data.certPrvtId = item.certPrvtId;
+                        if (item.subCd in view_formatter) {
+                            view_formatter[item.subCd](data);
+                        }
+                    });
+    
+                    $('.private-spec-body').on('click', singletonCallback);
+                    $('.private-spec-body button').on('click', buttonCallback);
+    
+                    refreshview();
+                    setPrivateData(res.result);
+                    !!callback && callback instanceof Function && callback(res);
+                    // for (var i in res.result) {
+                    //     var data = JSON.parse(res[i].data);
+                    //     data.certPrvtId = res[i].certPrvtId;
+                    //     formatter[res[i].subCd](data);
+                    // }
+                }, 2000)
+            }
+        });
+    }
+
+    
 }
 
 function getAgentRecords(callback) {
