@@ -92,7 +92,6 @@ function loadcertlist() {
 
                 if(fromnowsecond < 30) {
                     htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '") style="border-color:#4c80f1;")>';
-                    htmldiv = htmldiv + '<img class="certnewimg" src="img/certviewer/cert-new-icon.svg" alt="">';
                 }
                 
                 htmldiv = htmldiv + '<p class="trash-p"><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume cert-trash-img" onclick=certdelete("' + item.certId + '")></p>';
@@ -115,6 +114,9 @@ function loadcertlist() {
                 htmldiv = htmldiv + '<p class="cert-container-issue-fix-title-p">증명서</p>';
                 htmldiv = htmldiv + '<p class="cert-container-issue-title-p">' + item.title + '</p>';
                 htmldiv = htmldiv + '<p class="cert-container-issue-date-p">발급일시 : ' + formatDateYYYYMMDDHHMM(item.date) + '</p>';
+                if(fromnowsecond < 30) {
+                    htmldiv = htmldiv + '<img class="certnewimg" src="img/certviewer/cert-new-icon.svg" alt="">';
+                }
                 htmldiv = htmldiv + '</div>';
 
                 divContainer.append(htmldiv);                
