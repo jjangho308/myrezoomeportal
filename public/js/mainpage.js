@@ -29,7 +29,9 @@ $(document).ready(function () {
             }
         }
         // $('.spec-body-default').fadeIn();
-        refreshview(oridata, finishLoading);
+        refreshview(oridata, function () {
+            getPrivateRecords(finishLoading);
+        });
         $('#initial-dialog .close-modal').click();
     } else {
         startLoading();
