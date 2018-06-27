@@ -503,3 +503,17 @@ function pad(n, width) {
     n = n + '';
     return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
   }
+
+function setPrivateData(records) {
+    sessionStorage.setItem("privaterecord", JSON.stringify(records));
+}
+
+function getPrivateData() {
+    var sessionData = sessionStorage.getItem("privaterecord") || '{}';
+    try {
+        return JSON.parse(sessionData);
+    } catch (e) {
+        console.log(e);
+        return {};
+    }
+}

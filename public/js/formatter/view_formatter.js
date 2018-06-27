@@ -17,9 +17,9 @@
                     return console.error(err);
                 } else if (response.result === true) {
                     recordContainer.remove();
-                    var privateDeletedEvent = document.createEvent('Event');
-                    privateDeletedEvent.initEvent("record_updated", true, true);
-                    document.getElementById(eventTargetId).dispatchEvent(privateDeletedEvent);
+                    var privateRecordUpdateEvent = document.createEvent('Event');
+                    privateRecordUpdateEvent.initEvent("record_updated", true, true);
+                    document.getElementById(eventTargetId).dispatchEvent(privateRecordUpdateEvent);
                 }
             });
         } else {
@@ -113,8 +113,11 @@
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")><span class="spec-body-btn-name">더 보기</span><span class="spec-body-count">+' + record.count + '</span></button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
-            $('#spec_forign_lang').append(htmldiv);
-            $('#spec_forign_lang > .spec-body-default').hide();
+            var qDiv = $(htmldiv).hide();
+            $('#spec_forign_lang').append(qDiv);
+            debugger;
+            qDiv.fadeIn();
+            dispatchUpdateRecordEvent();
         },
 
         "RCCNF0001": function viewformatter(record) {
@@ -138,7 +141,9 @@
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")><span class="spec-body-btn-name">더 보기</span><span class="spec-body-count">+' + record.count + '</span></button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
-            $('#spec_certification').append(htmldiv);
+            var qDiv = $(htmldiv);
+            $('#spec_certification').append(qDiv);
+            qDiv.fadeIn();
             $('#spec_certification > .spec-body-default').hide();
         },
 
