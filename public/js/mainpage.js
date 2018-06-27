@@ -39,8 +39,12 @@ $(document).ready(function () {
         // $('.spec-body-default').fadeIn();
         $('#initial-dialog .close-modal').click();
         refreshview(oridata, function () {
-            getPrivateRecords(function (res) {
-                refreshview(null, finishLoading);
+            getPrivateRecords(function (err, res) {
+                if (!!err) {
+                    return
+                } else {
+                    return refreshview(null, finishLoading);
+                }
             });
         });
     } else {
@@ -50,8 +54,8 @@ $(document).ready(function () {
             if (!!err) {
                 console.error(JSON.stringify(err));
             } else if (!!keypair) {
-                getAgentRecords(function () {
-                    getPrivateRecords(function (res) {
+                getAgentRecords(function (err, res) {
+                    getPrivateRecords(function (err, res) {
                         refreshview(null, finishLoading);
                     });
                 });
@@ -857,13 +861,13 @@ $(document).ready(function () {
         var processingRefresh = false;
         $('#refresh_record').click(function () {
             if (processingRefresh) {
-                console.log('terminate');
+                console.log('prevent!!');
                 return;
             } else {
                 clearRecords();
                 startLoading();
                 getRSAKey();
-                var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+                window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 
                 var emptyarray = [];
                 setTxidList(emptyarray);
@@ -1013,10 +1017,11 @@ function ajaxGetPrivateRecords(callback) {
         error: function (jqXhr, status, error) {
             console.error('Get private record Error : ' + error);
             console.error(jqXhr.responseText);
+            !!callback && callback instanceof Function && callback(jqXhr.responseJSON);
         },
         success: function (res) {
             console.debug(res);
-            !!callback && callback instanceof Function && callback(res);
+            !!callback && callback instanceof Function && callback(null, res);
         }
     });
 }
@@ -1025,9 +1030,7 @@ function getPrivateRecords(callback) {
 
     var prvtRecords = getPrivateData();
     if (prvtRecords.length > 0) {
-        handlePrivateRecords(prvtRecords, function () {
-            !!callback && callback instanceof Function && callback();
-        });
+        handlePrivateRecords(prvtRecords, callback);
         // privaterecords.sort(function (a, b) {
         //     try {
         //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
@@ -1045,36 +1048,38 @@ function getPrivateRecords(callback) {
         //     }
         // });
     } else {
-        ajaxGetPrivateRecords(function (res) {
-            // setTimeout(function () {
-            setPrivateData(res.result);
-            handlePrivateRecords(res.result, function () {
-                !!callback && callback instanceof Function && callback();
-            });
-            // res.result.sort(function (a, b) {
-            //     try {
-            //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-            //     } catch (e) {
-            //         console.error(e);
-            //         return 0;
-            //     }
-            // });
+        ajaxGetPrivateRecords(function (err, res) {
+            if (!!err) {
+                return
+            } else {
+                // setTimeout(function () {
+                setPrivateData(res.result);
+                handlePrivateRecords(res.result, callback);
+                // res.result.sort(function (a, b) {
+                //     try {
+                //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+                //     } catch (e) {
+                //         console.error(e);
+                //         return 0;
+                //     }
+                // });
 
-            // res.result.forEach(function (item, idx) {
-            //     var data = JSON.parse(item.data);
-            //     data.certPrvtId = item.certPrvtId;
-            //     if (item.subCd in view_formatter) {
-            //         view_formatter[item.subCd](data);
-            //     }
-            // });
-            // refreshview();
-            // !!callback && callback instanceof Function && callback(res);
-            // for (var i in res.result) {
-            //     var data = JSON.parse(res[i].data);
-            //     data.certPrvtId = res[i].certPrvtId;
-            //     formatter[res[i].subCd](data);
-            // }
-            // }, 2000)
+                // res.result.forEach(function (item, idx) {
+                //     var data = JSON.parse(item.data);
+                //     data.certPrvtId = item.certPrvtId;
+                //     if (item.subCd in view_formatter) {
+                //         view_formatter[item.subCd](data);
+                //     }
+                // });
+                // refreshview();
+                // !!callback && callback instanceof Function && callback(res);
+                // for (var i in res.result) {
+                //     var data = JSON.parse(res[i].data);
+                //     data.certPrvtId = res[i].certPrvtId;
+                //     formatter[res[i].subCd](data);
+                // }
+                // }, 2000)
+            }
         });
     }
 
@@ -1117,11 +1122,15 @@ function ajaxSearchRecords(callback) {
                 e: jwkPub2.e
             }
         }),
-        beforeSend: function () {
-            clearRecords();
+        // beforeSend: function () {
+        //     clearRecords();
+        // },
+        error: function (jqXhr, status, error) {
+            console.error(jqXhr.responseText);
+            !!callback && callback instanceof Function && callback(jqXhr.responseJSON);
         },
         success: function (res) {
-            callback(res);
+            !!callback && callback instanceof Function && callback(null, res);
         },
     });
 }
@@ -1132,12 +1141,16 @@ function getAgentRecords(callback) {
 
     getRSAKey();
 
-    var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+    window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 
-    ajaxSearchRecords(function (res) {
-        setSocket(res.mid);
-        clientsocket_listener();
-        callback();
+    ajaxSearchRecords(function (err, res) {
+        if (!!err) {
+            return;
+        } else {
+            setSocket(res.mid);
+            clientsocket_listener();
+            return callback(err, res);
+        }
     });
 }
 
@@ -1163,7 +1176,7 @@ function refreshview(records, callback) {
     var recordList = {};
     var subid = "";
 
-    records = records || (clearRecords(), getTxidList().map(function (item) {
+    records = records || ( /*clearRecords()*/ 0, getTxidList().map(function (item) {
         return getData(item);
     }));
 
@@ -1304,14 +1317,10 @@ function refreshview(records, callback) {
     //     }
     // }
 
-    // for (var i in recordList) {
-    //     var subid = recordList[i].subid;
-    //     view_formatter[subid](recordList[i]);
-    // }
-
-    recordList.forEach(function (record) {
-        view_formatter[record.subid](record);
-    });
+    for (var i in recordList) {
+        var subid = recordList[i].subid;
+        view_formatter[subid](recordList[i]);
+    }
 
     dispatchUpdateRecordEvent();
     !!callback && callback instanceof Function && callback();
@@ -1505,7 +1514,7 @@ function startLoading(cb) {
             $(loadingDiv).fadeIn().slideDown();
 
             // 혹시나 Loading이 끝나지 않을 경우를 대비하여
-            if (idx == loading.length - 1) {
+            if (idx == loadings.length - 1) {
                 setTimeout(finishLoading, 5000);
             }
         }, idx * 200);
