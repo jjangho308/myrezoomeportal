@@ -607,7 +607,7 @@
             }());
 
             var qContainer = $(specContainer).hide();
-            $('#spec_edu_detail').append(specCqContainerontainer);
+            $('#spec_edu_detail').append(qContainer);
             qContainer.fadeIn('slow');
             $('#spec_edu_detail > .spec-body-default').hide();
         },
