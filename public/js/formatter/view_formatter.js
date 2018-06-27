@@ -113,8 +113,11 @@
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")><span class="spec-body-btn-name">더 보기</span><span class="spec-body-count">+' + record.count + '</span></button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
-            $('#spec_forign_lang').append(htmldiv);
-            $('#spec_forign_lang > .spec-body-default').hide();
+            var qDiv = $(htmldiv).hide();
+            $('#spec_forign_lang').append(qDiv);
+            debugger;
+            qDiv.fadeIn('slow');
+            dispatchUpdateRecordEvent();
         },
 
         "RCCNF0001": function viewformatter(record) {
@@ -138,7 +141,9 @@
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")><span class="spec-body-btn-name">더 보기</span><span class="spec-body-count">+' + record.count + '</span></button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
-            $('#spec_certification').append(htmldiv);
+            var qDiv = $(htmldiv);
+            $('#spec_certification').append(qDiv);
+            qDiv.fadeIn('slow');
             $('#spec_certification > .spec-body-default').hide();
         },
 
@@ -195,7 +200,9 @@
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow');
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -233,7 +240,9 @@
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0009">' + (total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow');
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -267,7 +276,9 @@
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow');
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -304,7 +315,10 @@
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow');
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -336,7 +350,10 @@
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow');
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -373,7 +390,10 @@
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + (total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow');
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -405,7 +425,10 @@
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0015">' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow');
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -443,7 +466,10 @@
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow');
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -580,7 +606,10 @@
 
                 return specRightContainer;
             }());
-            $('#spec_edu_detail').append(specContainer);
+
+            var qContainer = $(specContainer).hide();
+            $('#spec_edu_detail').append(specCqContainerontainer);
+            qContainer.fadeIn('slow');
             $('#spec_edu_detail > .spec-body-default').hide();
         },
 
@@ -740,7 +769,9 @@
                 return specRightContainer;
             }());
 
-            $('#spec_forign_lang').append(specContainer);
+            var qContainer = $(specContainer).hide();
+            qContainer.fadeIn('slow');
+            $('#spec_forign_lang').append(qContainer);
             $('#spec_forign_lang > .spec-body-default').hide();
         },
 
@@ -871,7 +902,9 @@
                 return specRightContainer;
             }());
 
-            $('#spec_certification').append(specContainer);
+            var qContainer = $(specContainer).hide();
+            $('#spec_certification').append(qContainer);
+            qContainer.fadeIn('slow');
             $('#spec_certification > .spec-body-default').hide();
         },
     };

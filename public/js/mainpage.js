@@ -772,7 +772,7 @@ $(document).ready(function () {
         });
 
         $('#refresh_record').click(function () {
-            $('.spec-body-loading').fadeIn();
+            startLoading();
             // $('.spec-body-default').hide();
             getRSAKey();
             var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
@@ -1154,7 +1154,7 @@ function startLoading(cb) {
     $(".spec-body-loading").each(function (idx, loadingDiv) {
         setTimeout(function () {
             $(loadingDiv).fadeIn().slideDown();
-        }, idx * 200)
+        }, idx * 200);
     });
 }
 
@@ -1162,7 +1162,7 @@ function finishLoading(cb) {
     $(".spec-body-loading").each(function (idx, loadingDiv) {
         setTimeout(function () {
             $(loadingDiv).fadeOut().slideUp();
-        }, idx * 200)
+        }, idx * 200);
     });
 }
 
@@ -1197,12 +1197,10 @@ function clientsocket_listener() {
             try {
                 setData(omsg.records[i]);
             } catch (exception) {
-                console.log(exception);
-                //continue;
+                console.error(exception);
             }
         }
         refreshview(omsg.records);
-
     });
 }
 
