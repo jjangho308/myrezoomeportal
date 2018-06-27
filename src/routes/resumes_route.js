@@ -2,6 +2,7 @@ var express = require('express');
 
 var tokenAuth = require('../mw/client_auth');
 var ctrl = require('./resumes_ctrl');
+var hostRedirection = require('../mw/host_redirector');
 
 /**
  * Router for '/resume' URI Request gateway. <br />
@@ -14,6 +15,7 @@ var router = express.Router();
 /**
  * Get Resume list page or json data list. <br />
  */
+router.get('/', hostRedirection);
 router.get('/', tokenAuth);
 router.get('/', ctrl.get);
 
