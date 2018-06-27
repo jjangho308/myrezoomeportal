@@ -159,7 +159,7 @@ $(document).ready(function () {
 
             var is_error = false;
 
-            if ($("#school").val() == "") {
+            if ($("#school").val() == "" || checkSpace($("#school").val())) {
                 $("#school").addClass("error");
                 $("#school").next().css("display", "block");
                 is_error = true;
@@ -173,7 +173,7 @@ $(document).ready(function () {
 
                 var range = element.closest(".error-range");
 
-                if (element.val() == "") {
+                if (element.val() == "" || checkSpace(element.val())) {
                     element.addClass("error");
                     range.find(".items ").addClass("error");
                     range.find(".error-message").css("display", "block");
@@ -192,7 +192,7 @@ $(document).ready(function () {
             var date1 = new Date(period[0].value);
             var date2 = new Date(period[1].value);
 
-            if ((period[0].value == "") || (period[1].value == "")) {
+            if ((period[0].value == "") || (period[1].value == "" || checkSpace(period[0].value) || checkSpace(period[1].value) )) {
                 period.addClass("error");
                 range.find("button").addClass("error");
                 range.find(".items").addClass("error");
@@ -395,7 +395,7 @@ $(document).ready(function () {
 
             $("#langadd_lang").val("E");
             $("#language-add-dialog input[type=text]").not("#langadd_lang-selectized").each(function () {
-                if ($(this).val() == "") {
+                if ($(this).val() == "" || checkSpace($(this).val())) {
                     is_error = true;
                     if ($(this).hasClass("study-period")) {
                         $(this).addClass("error");
@@ -487,7 +487,7 @@ $(document).ready(function () {
             var is_error = false;
 
             $("#cert-add-dialog input[type=text]").each(function () {
-                if ($(this).val() == "") {
+                if ($(this).val() == "" || checkSpace($(this).val())) {
                     is_error = true;
                     if ($(this).hasClass("study-period")) {
                         $(this).addClass("error");
@@ -1367,3 +1367,5 @@ function addMajorDelete(event) {
 function addMajorDelete(imgElement) {
     $(imgElement).parent().parent().remove();
 }
+
+function checkSpace(str) { if(str.search(/\s/) != -1) { return true; } else { return false; } }
