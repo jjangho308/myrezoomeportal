@@ -953,21 +953,6 @@ function getPrivateRecords(callback) {
                 $('.private-spec-body').on('click', singletonCallback);
                 $('.private-spec-body button').on('click', buttonCallback);
 
-                // if ($("#spec_edu_detail .spec-body").length > 0 ||
-                //     $("#spec_edu_detail .private-spec-body").length > 0) {
-                //     $('#spec_edu_detail > .spec-body-default').hide();
-                // }
-
-                // if ($("#spec_forign_lang .spec-body").length > 0 ||
-                //     $("#spec_forign_lang .private-spec-body").length > 0) {
-                //     $('#spec_forign_lang > .spec-body-default').hide();
-                // }
-
-                // if ($("#spec_certification .spec-body").length > 0 ||
-                //     $("#spec_certification .private-spec-body").length > 0) {
-                //     $('#spec_certification > .spec-body-default').hide();
-                // }
-
                 refreshview();
                 !!callback && callback instanceof Function && callback(res);
                 // for (var i in res.result) {
