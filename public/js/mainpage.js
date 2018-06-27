@@ -129,10 +129,10 @@ $(document).ready(function () {
                     '<div id="add-major">' +
                     '<div class="error-range major-div">' +
                     '<div class="select-100">' +
-                    '<select name="select-1">' +
-                    '<option value="1">전공</option>' +
-                    '<option value="2">부전공</option>' +
-                    '<option value="3">복수전공</option>' +
+                    '<select id="majorstatus" name="select-1">' +
+                    '<option value="전공">전공</option>' +
+                    '<option value="부전공">부전공</option>' +
+                    '<option value="복수전공">복수전공</option>' +
                     '</select>' +
                     '</div>' +
                     '<div class="select-100">' +
@@ -263,17 +263,14 @@ $(document).ready(function () {
 
 
                 var majors = new Array;
-                // var major = $("#education-add-dialog #first-major").val();
-                // majors.push(major);
-
+                
                 $(".major").each(function () {
                     var element = $(this);
                     if (element.val() != "") {
                         majors.push(element.val());
+                        console.log(range.find("#majorstatus").val());
                     }
                 });
-
-                console.log(majors);
 
                 // cert format
                 var param = {
@@ -281,7 +278,8 @@ $(document).ready(function () {
                     degree: degree + "/" + total_degree,
                     startdate: start_date,
                     enddate: end_date,
-                    status: status
+                    status: status,
+                    majors: majors
                 }
 
                 // cert encryption
