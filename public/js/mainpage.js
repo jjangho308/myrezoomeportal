@@ -3,12 +3,47 @@ require socket.is
 <script src="/socket.io/socket.io.js"></script>
 */
 
+/**
+ * Ready initializer. <br />
+ */
 $(document).ready(function () {
+
+    var client_token = window.client_token = getCookie("JWT");
+    var client_authorization = window.client_authorization = 'Bearer ' + client_token;
+
+    socket = io();
+    //request to agent for get user info
+    var pagetxidlist = getTxidList();
+
+    if (pagetxidlist.length > 1) {
+        //sessing storage have user info (txid list)
+        var oridata = [];
+
+        for (var i = 0; i < pagetxidlist.length; i++) {
+            try {
+                var objuserdata = getData(pagetxidlist[i]);
+                oridata.push(objuserdata);
+            } catch (exception) {
+                console.error(exception);
+                continue;
+            }
+        }
+        $('.spec-body-default').show();
+        refreshview(oridata);
+        $('#initial-dialog .close-modal').click();
+    } else {
+        //session storage dont have user info(txid list)
+        genRsaKey(function (err, keypair) {
+            if (!!err) {
+                console.error(JSON.stringify(err));
+            } else if (!!keypair) {
+                request_agent();
+            }
+        });
+    }
+
     $(".study-period").datepicker();
     $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
-
-    client_token = getCookie("JWT");
-    client_authorization = 'Bearer ' + client_token;
 
     $('.spec-body-loading').show();
     $('.spec-body-default').hide();
@@ -108,9 +143,6 @@ $(document).ready(function () {
         }
         $("select").selectize();
     });
-
-
-
 
     $('#education-add-dialog .confirm-btn').click(function () {
 
@@ -290,6 +322,7 @@ $(document).ready(function () {
     });
 
     $('#language-add-dialog .confirm-btn').click(function () {
+        debugger;
         var issuer = $("#language-issuer").val();
         var lang = $("#langadd_lang").val();
         var name = $("#language-name").val();
@@ -792,46 +825,8 @@ $(document).ready(function () {
         }
     }, true);
 
-});
-
-
-
-window.onload = function () {
-    socket = io();
-    //request to agent for get user info
-    var pagetxidlist = getTxidList();
-
-    if (pagetxidlist.length > 1) {
-        //sessing storage have user info (txid list)
-        var oridata = [];
-
-        for (var i = 0; i < pagetxidlist.length; i++) {
-            try {
-                var objuserdata = getData(pagetxidlist[i]);
-                oridata.push(objuserdata);
-
-            } catch (exception) {
-                console.error(exception);
-                continue;
-            }
-
-        }
-        $('.spec-body-default').show();
-        refreshview(oridata);
-        $('#initial-dialog .close-modal').click();
-    } else {
-        //session storage dont have user info(txid list)
-        genRsaKey(function (err, keypair) {
-            if (!!err) {
-                console.error(JSON.stringify(err));
-            } else if (!!keypair) {
-                request_agent();
-            }
-        });
-    }
-
     getPrivateRecords();
-};
+});
 
 function change_default_cert(subid) {
     $(".change_cert").remove();
@@ -1171,7 +1166,6 @@ function firstLogin() {
         $('.section-1').css("display", "none");
         $('.section-3').css("display", "block");
 
-
         setTimeout(function () {
             $('.ko-progress-circle').attr('data-progress', 20);
             $('.percentage span').text("20%");
@@ -1191,8 +1185,6 @@ function firstLogin() {
                 $('.percentage img').css("display", "block");
 
             }, 1000);
-
-
 
         }, 2000);
     });
