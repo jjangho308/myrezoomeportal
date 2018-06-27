@@ -12,5 +12,7 @@ var router = express.Router();
 router.get('/', ctrl.get);
 router.get('/success', ctrl.signup_success);
 router.post('/', ctrl.post);
+router.post('/confirm', ctrl.confirm);
+
 
 module.exports = router;

@@ -29,7 +29,9 @@ $(document).ready(function () {
             }
         }
         // $('.spec-body-default').fadeIn();
-        refreshview(oridata);
+        refreshview(oridata, function () {
+            getPrivateRecords(finishLoading);
+        });
         $('#initial-dialog .close-modal').click();
     } else {
         startLoading();
@@ -787,57 +789,61 @@ $(document).ready(function () {
             });
         });
 
+        var processingRefresh = false;
         $('#refresh_record').click(function () {
-            startLoading();
-            // $('.spec-body-default').hide();
-            getRSAKey();
-            var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+            if (processingRefresh) {
+                console.log('terminate');
+                return;
+            } else {
+                clearRecords();
+                startLoading();
+                getRSAKey();
+                var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 
-            var emptyarray = [];
-            setTxidList(emptyarray);
+                var emptyarray = [];
+                setTxidList(emptyarray);
 
-            $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
-
-            getPrivateRecords();
-
-            $.ajax({
-                type: 'POST',
-                url: '/client',
-                headers: {
-                    'Authorization': client_authorization
-                },
-                beforeSend: function () {
-                    //clean view
-                    $('.spec-body').remove();
-                    $('.spec-body-default').hide();
-                    // $('.spec-body-loading').fadeIn();
-                },
-                data: JSON.stringify({
-                    cmd: 'SearchRecord',
-                    args: {
-                        pkey: 'asdfasdf',
-                        update: true,
-                        n: jwkPub2.n,
-                        e: jwkPub2.e
-                    }
-                }),
-                error: function (jqXhr, status, error) {
-                    console.error('Search record Error : ' + error);
-                    console.error(jqXhr.responseText);
-                },
-                success: function (res) {
-                    setSocket(res.mid);
-                    clientsocket_listener();
-                    setTimeout(function () {
-                        finishLoading();
-                    }, 1500);
-                },
-                contentType: 'application/json',
-            });
+                $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
+                $.ajax({
+                    type: 'POST',
+                    url: '/client',
+                    headers: {
+                        'Authorization': client_authorization
+                    },
+                    beforeSend: function () {
+                        //clean view
+                        // $('.spec-body').remove();
+                        // $('.spec-body-default').hide();
+                        // $('.spec-body-loading').fadeIn();
+                    },
+                    data: JSON.stringify({
+                        cmd: 'SearchRecord',
+                        args: {
+                            pkey: 'asdfasdf',
+                            update: true,
+                            n: jwkPub2.n,
+                            e: jwkPub2.e
+                        }
+                    }),
+                    error: function (jqXhr, status, error) {
+                        console.error('Search record Error : ' + error);
+                        console.error(jqXhr.responseText);
+                    },
+                    success: function (res) {
+                        setSocket(res.mid);
+                        clientsocket_listener();
+                        getPrivateRecords(function () {
+                            finishLoading(function () {
+                                processingRefresh = false;
+                            });
+                        });
+                    },
+                    contentType: 'application/json',
+                });
+            }
         });
 
         document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
-
             event.stopPropagation();
             event.preventDefault();
 
@@ -869,6 +875,15 @@ $(document).ready(function () {
         !!callback && callback();
     }();
 });
+
+/**
+ * 
+ * @param {*} cb 
+ */
+function clearRecords(cb) {
+    $(".spec-body").remove();
+    $(".private-spec-body").remove();
+}
 
 function change_default_cert(subid) {
     $(".change_cert").remove();
@@ -923,62 +938,79 @@ function ajaxDeletePrivateRecord(prvtId, cb) {
     });
 }
 
-function singletonCallback(opt1, opt2, opt3, opt4) {
-    // 
-}
-
-function buttonCallback(opt1, opt2, opt3, opt4) {
-    // 
-}
-
-
 function getPrivateRecords(callback) {
-    $.ajax({
-        type: 'GET',
-        url: '/records/list',
-        headers: {
-            'Authorization': client_authorization
-        },
-        beforeSend: function () {
-            //clean view
-            $('.private-spec-body').remove();
-        },
-        error: function (jqXhr, status, error) {
-            console.error('Get private record Error : ' + error);
-            console.error(jqXhr.responseText);
-        },
-        success: function (res) {
-            setTimeout(function () {
-                res.result.sort(function (a, b) {
-                    try {
-                        return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-                    } catch (e) {
-                        console.error(e);
-                        return 0;
-                    }
-                });
 
-                res.result.forEach(function (item, idx) {
-                    var data = JSON.parse(item.data);
-                    data.certPrvtId = item.certPrvtId;
-                    if (item.subCd in view_formatter) {
-                        view_formatter[item.subCd](data);
-                    }
-                });
+    var privaterecords = getPrivateData();
+    if (privaterecords.length > 0) {
+        privaterecords.sort(function (a, b) {
+            try {
+                return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+            } catch (e) {
+                console.error(e);
+                return 0;
+            }
+        });
 
-                $('.private-spec-body').on('click', singletonCallback);
-                $('.private-spec-body button').on('click', buttonCallback);
+        privaterecords.forEach(function (item, idx) {
+            var data = JSON.parse(item.data);
+            data.certPrvtId = item.certPrvtId;
+            if (item.subCd in view_formatter) {
+                view_formatter[item.subCd](data);
+            }
+        });
 
-                refreshview();
-                !!callback && callback instanceof Function && callback(res);
-                // for (var i in res.result) {
-                //     var data = JSON.parse(res[i].data);
-                //     data.certPrvtId = res[i].certPrvtId;
-                //     formatter[res[i].subCd](data);
-                // }
-            }, 2000)
-        }
-    });
+        refreshview(null, callback);
+    } else {
+        $.ajax({
+            type: 'GET',
+            url: '/records/list',
+            headers: {
+                'Authorization': client_authorization
+            },
+            beforeSend: function () {
+                //clean view
+                $('.private-spec-body').remove();
+            },
+            error: function (jqXhr, status, error) {
+                console.error('Get private record Error : ' + error);
+                console.error(jqXhr.responseText);
+            },
+            success: function (res) {
+                setTimeout(function () {
+                    res.result.sort(function (a, b) {
+                        try {
+                            return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+                        } catch (e) {
+                            console.error(e);
+                            return 0;
+                        }
+                    });
+
+                    res.result.forEach(function (item, idx) {
+                        var data = JSON.parse(item.data);
+                        data.certPrvtId = item.certPrvtId;
+                        if (item.subCd in view_formatter) {
+                            view_formatter[item.subCd](data);
+                        }
+                    });
+
+                    $('.private-spec-body').on('click', singletonCallback);
+                    $('.private-spec-body button').on('click', buttonCallback);
+
+                    setPrivateData(res.result);
+                    refreshview();
+                    !!callback && callback instanceof Function && callback(res);
+                    // for (var i in res.result) {
+                    //     var data = JSON.parse(res[i].data);
+                    //     data.certPrvtId = res[i].certPrvtId;
+                    //     formatter[res[i].subCd](data);
+                    // }
+                }, 2000)
+            }
+        });
+    }
+
+
 }
 
 function getAgentRecords(callback) {
@@ -1007,8 +1039,7 @@ function getAgentRecords(callback) {
 
         }),
         beforeSend: function () {
-            //clean view
-            $('.spec-body').remove();
+            clearRecords();
         },
         success: function (res) {
             setSocket(res.mid);
@@ -1031,7 +1062,7 @@ function dispatchUpdateRecordEvent() {
     document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(recordUpdateEvent);
 }
 
-function refreshview(records) {
+function refreshview(records, callback) {
     var recordList = {};
     var subid = "";
 
@@ -1080,7 +1111,7 @@ function refreshview(records) {
             }
         }
     } else { // 전체 화면 리플레시        
-        $('.spec-body').remove();
+        clearRecords();
 
         var txidList = getTxidList();
         for (var i in txidList) {
@@ -1134,6 +1165,7 @@ function refreshview(records) {
         view_formatter[subid](recordList[i]);
     }
     dispatchUpdateRecordEvent();
+    !!callback && callback instanceof Function && callback();
 }
 
 function startLoading(cb) {
@@ -1142,6 +1174,7 @@ function startLoading(cb) {
             $(loadingDiv).fadeIn().slideDown();
         }, idx * 200);
     });
+    !!cb && cb instanceof Function && cb();
 }
 
 function finishLoading(cb) {
@@ -1150,6 +1183,7 @@ function finishLoading(cb) {
             $(loadingDiv).fadeOut().slideUp();
         }, idx * 200);
     });
+    !!cb && cb instanceof Function && cb();
 }
 
 function clientsocket_listener() {
