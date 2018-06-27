@@ -224,11 +224,11 @@ $(document).ready(function () {
                     $("#education-add-dialog #score-error-message").text("학점 범위를 확인하세요");
                     range.find(".error-message").css("display", "block");
                     is_error = true;
-                } else {
-                    $("#score").removeClass("error");
-                    range.find(".items").removeClass("error");
-                    range.find(".error-message").css("display", "none");
-                }
+                }else{
+                $("#score").removeClass("error");
+                range.find(".items").removeClass("error");
+                range.find(".error-message").css("display", "none");
+            }
             } else if ($("#education-add-dialog #total_score").val() == 4.3) {
                 if ($("#education-add-dialog #score").val() > 4.3 || $("#education-add-dialog #score").val() < 0) {
                     $("#score").addClass("error");
@@ -236,10 +236,10 @@ $(document).ready(function () {
                     $("#education-add-dialog #score-error-message").text("학점 범위를 확인하세요");
                     range.find(".error-message").css("display", "block");
                     is_error = true;
-                } else {
-                    $("#score").removeClass("error");
-                    range.find(".items").removeClass("error");
-                    range.find(".error-message").css("display", "none");
+                }else{
+                $("#score").removeClass("error");
+                range.find(".items").removeClass("error");
+                range.find(".error-message").css("display", "none");
                 }
             }
         }
