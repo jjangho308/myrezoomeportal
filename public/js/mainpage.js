@@ -15,24 +15,35 @@ $(document).ready(function () {
     //request to agent for get user info
     var pagetxidlist = getTxidList();
 
-    if (pagetxidlist.length > 1) {
+    // 왜 0이 아니고 1 초과일때지?
+    if (pagetxidlist.length > 0) {
         //sessing storage have user info (txid list)
         var oridata = [];
-
-        for (var i = 0; i < pagetxidlist.length; i++) {
+        pagetxidlist.forEach(function (item) {
             try {
-                var objuserdata = getData(pagetxidlist[i]);
+                var objuserdata = getData(item);
                 oridata.push(objuserdata);
             } catch (exception) {
                 console.error(exception);
                 continue;
             }
-        }
-        // $('.spec-body-default').fadeIn();
-        refreshview(oridata, function () {
-            getPrivateRecords(finishLoading);
         });
+        // for (var i = 0; i < pagetxidlist.length; i++) {
+        //     try {
+        //         var objuserdata = getData(pagetxidlist[i]);
+        //         oridata.push(objuserdata);
+        //     } catch (exception) {
+        //         console.error(exception);
+        //         continue;
+        //     }
+        // }
+        // $('.spec-body-default').fadeIn();
         $('#initial-dialog .close-modal').click();
+        refreshview(oridata, function () {
+            getPrivateRecords(function (res) {
+                refreshview(null, finishLoading);
+            });
+        });
     } else {
         startLoading();
         //session storage dont have user info(txid list)
@@ -41,24 +52,77 @@ $(document).ready(function () {
                 console.error(JSON.stringify(err));
             } else if (!!keypair) {
                 getAgentRecords(function () {
-                    getPrivateRecords(finishLoading);
+                    getPrivateRecords(function (res) {
+                        refreshview(null, finishLoading);
+                    });
                 });
             }
         });
     }
 
-    $(".study-period").datepicker();
-    $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
+    /**
+     * Ajax request container. <br />
+     * 
+     * @since 180627
+     * @author TACKSU
+     */
+    var ajax = {
+        searchRecord: function (data, callback) {
 
-    // $('.spec-body-loading').fadeIn();
-    // $('.spec-body-default').hide();
+        },
 
+        getPrivateRecords: function (data, callback) {
+
+        },
+
+        createPrivateRecord: function (data, callback) {
+
+        },
+
+        deletePrivateRecord: function (recordId, callback) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/records/' + recordId,
+                headers: {
+                    'Authorization': client_authorization
+                },
+                beforeSend: function () {
+                    //clean view
+                    // $('.private-spec-body').remove();
+                },
+                error: function (jqXhr, status, error) {
+                    console.error('Delete private record Error : ' + error);
+                    console.error(jqXhr.responseText);
+                    cb(jqXhr.responseJSON);
+                },
+                success: function (response) {
+                    $("#alarm-div span").text("정상적으로 삭제 완료되었습니다.");
+                    $('#alarm-div').css("display", "block");
+                    $('#alarm-div').css("margin-right", "-108px");
+
+                    setTimeout(function () {
+                        $('#alarm-div').fadeOut('slow');
+                    }, 2000);
+
+                    // getPrivateRecords();
+                    !!cb && cb instanceof Function && cb(null, response);
+                }
+            });
+        }
+    };
+
+    ! function initializeUI() {
+        $(".study-period").datepicker();
+        $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
+        // $('.spec-body-loading').fadeIn();
+        // $('.spec-body-default').hide();
+    }();
 
     /**
      * Initialize event listeners to target HTMLElements. <br />
      * 
      */
-    ! function addEventListeners(callback) {
+    ! function initializeListeners(callback) {
         // set event for element main page
         $('#header-mycert').click(function () {
             $('#header-myresume').css({
@@ -294,9 +358,10 @@ $(document).ready(function () {
                         headers: {
                             'Authorization': client_authorization
                         },
+                        contentType: 'application/json',
                         data: JSON.stringify({
-                            orgCd: "UNV", // 코드 분기 필요
-                            subCd: "UNV", // 코드 분기 필요
+                            orgCd: "UNV", // TODO 코드 분기 필요
+                            subCd: "UNV", // TODO 코드 분기 필요
                             data: enc_record
                         }),
                         error: function (jqXhr, status, error) {
@@ -319,7 +384,6 @@ $(document).ready(function () {
 
                             getPrivateRecords();
                         },
-                        contentType: 'application/json',
                     });
                 }
             }
@@ -933,16 +997,88 @@ function ajaxDeletePrivateRecord(prvtId, cb) {
             }, 2000);
 
             // getPrivateRecords();
-            cb(null, response);
+            !!cb && cb instanceof Function && cb(null, response);
+        }
+    });
+}
+
+function ajaxGetPrivateRecords(callback) {
+    $.ajax({
+        type: 'GET',
+        url: '/records/list',
+        headers: {
+            'Authorization': client_authorization
+        },
+        error: function (jqXhr, status, error) {
+            console.error('Get private record Error : ' + error);
+            console.error(jqXhr.responseText);
+        },
+        success: function (res) {
+            console.debug(res);
+            !!callback && callback instanceof Function && callback(res);
         }
     });
 }
 
 function getPrivateRecords(callback) {
 
-    var privaterecords = getPrivateData();
-    if (privaterecords.length > 0) {
-        privaterecords.sort(function (a, b) {
+    var prvtRecords = getPrivateData();
+    if (prvtRecords.length > 0) {
+        handlePrivateRecords(prvtRecords, function () {
+            !!callback && callback instanceof Function && callback();
+        });
+        // privaterecords.sort(function (a, b) {
+        //     try {
+        //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+        //     } catch (e) {
+        //         console.error(e);
+        //         return 0;
+        //     }
+        // });
+
+        // privaterecords.forEach(function (item, idx) {
+        //     var data = JSON.parse(item.data);
+        //     data.certPrvtId = item.certPrvtId;
+        //     if (item.subCd in view_formatter) {
+        //         view_formatter[item.subCd](data);
+        //     }
+        // });
+    } else {
+        ajaxGetPrivateRecords(function (res) {
+            // setTimeout(function () {
+            setPrivateData(res.result);
+            handlePrivateRecords(res.result, function () {
+                !!callback && callback instanceof Function && callback();
+            });
+            // res.result.sort(function (a, b) {
+            //     try {
+            //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+            //     } catch (e) {
+            //         console.error(e);
+            //         return 0;
+            //     }
+            // });
+
+            // res.result.forEach(function (item, idx) {
+            //     var data = JSON.parse(item.data);
+            //     data.certPrvtId = item.certPrvtId;
+            //     if (item.subCd in view_formatter) {
+            //         view_formatter[item.subCd](data);
+            //     }
+            // });
+            // refreshview();
+            // !!callback && callback instanceof Function && callback(res);
+            // for (var i in res.result) {
+            //     var data = JSON.parse(res[i].data);
+            //     data.certPrvtId = res[i].certPrvtId;
+            //     formatter[res[i].subCd](data);
+            // }
+            // }, 2000)
+        });
+    }
+
+    function handlePrivateRecords(prvtRecords, callback) {
+        prvtRecords.sort(function (a, b) {
             try {
                 return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
             } catch (e) {
@@ -951,7 +1087,7 @@ function getPrivateRecords(callback) {
             }
         });
 
-        privaterecords.forEach(function (item, idx) {
+        prvtRecords.forEach(function (item, idx) {
             var data = JSON.parse(item.data);
             data.certPrvtId = item.certPrvtId;
             if (item.subCd in view_formatter) {
@@ -959,55 +1095,34 @@ function getPrivateRecords(callback) {
             }
         });
 
-        refreshview(null, callback);
-    } else {
-        $.ajax({
-            type: 'GET',
-            url: '/records/list',
-            headers: {
-                'Authorization': client_authorization
-            },
-            beforeSend: function () {
-                //clean view
-                $('.private-spec-body').remove();
-            },
-            error: function (jqXhr, status, error) {
-                console.error('Get private record Error : ' + error);
-                console.error(jqXhr.responseText);
-            },
-            success: function (res) {
-                setTimeout(function () {
-                    res.result.sort(function (a, b) {
-                        try {
-                            return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-                        } catch (e) {
-                            console.error(e);
-                            return 0;
-                        }
-                    });
-
-                    res.result.forEach(function (item, idx) {
-                        var data = JSON.parse(item.data);
-                        data.certPrvtId = item.certPrvtId;
-                        if (item.subCd in view_formatter) {
-                            view_formatter[item.subCd](data);
-                        }
-                    });
-
-                    setPrivateData(res.result);
-                    refreshview();
-                    !!callback && callback instanceof Function && callback(res);
-                    // for (var i in res.result) {
-                    //     var data = JSON.parse(res[i].data);
-                    //     data.certPrvtId = res[i].certPrvtId;
-                    //     formatter[res[i].subCd](data);
-                    // }
-                }, 2000)
-            }
-        });
+        !!callback && callback instanceof Function && callback();
     }
+}
 
-
+function ajaxSearchRecords(callback) {
+    $.ajax({
+        type: 'POST',
+        url: '/client',
+        headers: {
+            'Authorization': client_authorization
+        },
+        contentType: 'application/json',
+        data: JSON.stringify({
+            cmd: 'SearchRecord',
+            args: {
+                pkey: 'asdfasdf',
+                update: false,
+                n: jwkPub2.n,
+                e: jwkPub2.e
+            }
+        }),
+        beforeSend: function () {
+            clearRecords();
+        },
+        success: function (res) {
+            callback(res);
+        },
+    });
 }
 
 function getAgentRecords(callback) {
@@ -1018,38 +1133,20 @@ function getAgentRecords(callback) {
 
     var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 
-    $.ajax({
-        type: 'POST',
-        url: '/client',
-        headers: {
-            'Authorization': client_authorization
-        },
-        data: JSON.stringify({
-            cmd: 'SearchRecord',
-            args: {
-                pkey: 'asdfasdf',
-                update: false,
-                n: jwkPub2.n,
-                e: jwkPub2.e
-            }
-
-        }),
-        beforeSend: function () {
-            clearRecords();
-        },
-        success: function (res) {
-            setSocket(res.mid);
-            clientsocket_listener();
-            // loading css start
-            setTimeout(function () {
-                callback();
-            }, 1500);
-
-        },
-        contentType: 'application/json',
+    ajaxSearchRecords(function (res) {
+        setSocket(res.mid);
+        clientsocket_listener();
+        callback();
     });
 }
 
+/**
+ * Dispath "record_updated" event to refresh default div <br />
+ * for each records categories. <br />
+ * 
+ * @since 180627
+ * @author TACKSU
+ */
 function dispatchUpdateRecordEvent() {
     var recordUpdateEvent = document.createEvent('Event');
     recordUpdateEvent.initEvent("record_updated", true, true);
@@ -1058,128 +1155,165 @@ function dispatchUpdateRecordEvent() {
     document.getElementById("spec_foreign_lang_targetdiv").dispatchEvent(recordUpdateEvent);
 }
 
+/**
+ * Refresh all record divs. <br />
+ */
 function refreshview(records, callback) {
     var recordList = {};
     var subid = "";
 
-    if (records != null) {
-        for (var i in records) {
-            try {
-                var record = records[i];
-                var subidTmp = record.subid;
-                var dftYn = record.dftYn;
+    records = records || (clearRecords(), getTxidList().map(function (item) {
+        return getData(item);
+    }));
 
-                if (dftYn == "Y") {
-                    var jsonData = record.data;
-                    jsonData.chkid = record.txid;
-                    jsonData.subid = subidTmp;
+    records.forEach(function (record) {
+        try {
+            var subidTmp = record.subid;
+            var dftYn = record.dftYn;
 
-                    if (recordList[subidTmp] == undefined) {
-                        jsonData.count = 1;
-                    } else {
-                        jsonData.count = recordList[subidTmp].count + 1;
-                    }
+            if (dftYn == "Y") {
+                var jsonData = record.data;
+                jsonData.chkid = record.txid;
+                jsonData.subid = subidTmp;
 
-                    recordList[subidTmp] = jsonData;
-                    subid = subidTmp;
-                } else if (subid != subidTmp) {
-                    var jsonData = record.data;
-                    jsonData.chkid = record.txid;
-                    jsonData.subid = subidTmp;
-
-                    if (recordList[subidTmp] == undefined) {
-                        jsonData.count = 1;
-                    } else {
-                        jsonData.count = recordList[subidTmp].count + 1;
-                    }
-
-                    recordList[subidTmp] = jsonData;
-                    subid = subidTmp;
+                if (recordList[subidTmp] == undefined) {
+                    jsonData.count = 1;
                 } else {
-                    if (recordList[subidTmp] == undefined) {
-                        jsonData.count = 1;
-                    } else {
-                        jsonData.count = recordList[subidTmp].count + 1;
-                    }
+                    jsonData.count = recordList[subidTmp].count + 1;
                 }
-            } catch (exception) {
-                continue;
-            }
-        }
-    } else { // 전체 화면 리플레시        
-        clearRecords();
 
-        var txidList = getTxidList();
-        for (var i in txidList) {
-            try {
-                var record = getData(txidList[i]);
-                var subidTmp = record.subid;
-                var dftYn = record.dftYn;
+                recordList[subidTmp] = jsonData;
+                subid = subidTmp;
+            } else if (subid != subidTmp) {
+                var jsonData = record.data;
+                jsonData.chkid = record.txid;
+                jsonData.subid = subidTmp;
 
-                if (dftYn == "Y") {
-                    var jsonData = record.data;
-                    jsonData.chkid = record.txid;
-                    jsonData.subid = subidTmp;
-
-                    if (recordList[subidTmp] == undefined) {
-                        jsonData.count = 1;
-                    } else {
-                        jsonData.count = recordList[subidTmp].count + 1;
-                    }
-
-                    recordList[subidTmp] = jsonData;
-                    subid = subidTmp;
-                } else if (subid != subidTmp) {
-                    var jsonData = record.data;
-                    jsonData.chkid = record.txid;
-                    jsonData.subid = subidTmp;
-
-                    if (recordList[subidTmp] == undefined) {
-                        jsonData.count = 1;
-                    } else {
-                        jsonData.count = recordList[subidTmp].count + 1;
-                    }
-
-                    recordList[subidTmp] = jsonData;
-                    subid = subidTmp;
+                if (recordList[subidTmp] == undefined) {
+                    jsonData.count = 1;
                 } else {
-                    if (recordList[subidTmp] == undefined) {
-                        jsonData.count = 1;
-                    } else {
-                        jsonData.count = recordList[subidTmp].count + 1;
-                    }
+                    jsonData.count = recordList[subidTmp].count + 1;
                 }
-            } catch (exception) {
-                console.error(JSON.stringify(exception));
-                continue;
-            }
-        }
-    }
 
-    for (var i in recordList) {
-        var subid = recordList[i].subid;
-        view_formatter[subid](recordList[i]);
-    }
+                recordList[subidTmp] = jsonData;
+                subid = subidTmp;
+            } else {
+                if (recordList[subidTmp] == undefined) {
+                    jsonData.count = 1;
+                } else {
+                    jsonData.count = recordList[subidTmp].count + 1;
+                }
+            }
+        } catch (exception) {
+            continue;
+        }
+    });
+
+    // if (!!records) {
+    //     for (var i in records) {
+    //         try {
+    //             var record = records[i];
+    //             var subidTmp = record.subid;
+    //             var dftYn = record.dftYn;
+
+    //             if (dftYn == "Y") {
+    //                 var jsonData = record.data;
+    //                 jsonData.chkid = record.txid;
+    //                 jsonData.subid = subidTmp;
+
+    //                 if (recordList[subidTmp] == undefined) {
+    //                     jsonData.count = 1;
+    //                 } else {
+    //                     jsonData.count = recordList[subidTmp].count + 1;
+    //                 }
+
+    //                 recordList[subidTmp] = jsonData;
+    //                 subid = subidTmp;
+    //             } else if (subid != subidTmp) {
+    //                 var jsonData = record.data;
+    //                 jsonData.chkid = record.txid;
+    //                 jsonData.subid = subidTmp;
+
+    //                 if (recordList[subidTmp] == undefined) {
+    //                     jsonData.count = 1;
+    //                 } else {
+    //                     jsonData.count = recordList[subidTmp].count + 1;
+    //                 }
+
+    //                 recordList[subidTmp] = jsonData;
+    //                 subid = subidTmp;
+    //             } else {
+    //                 if (recordList[subidTmp] == undefined) {
+    //                     jsonData.count = 1;
+    //                 } else {
+    //                     jsonData.count = recordList[subidTmp].count + 1;
+    //                 }
+    //             }
+    //         } catch (exception) {
+    //             continue;
+    //         }
+    //     }
+    // } else { // 전체 화면 리플레시        
+    //     clearRecords();
+
+    //     var txidList = getTxidList();
+    //     for (var i in txidList) {
+    //         try {
+    //             var record = getData(txidList[i]);
+    //             var subidTmp = record.subid;
+    //             var dftYn = record.dftYn;
+
+    //             if (dftYn == "Y") {
+    //                 var jsonData = record.data;
+    //                 jsonData.chkid = record.txid;
+    //                 jsonData.subid = subidTmp;
+
+    //                 if (recordList[subidTmp] == undefined) {
+    //                     jsonData.count = 1;
+    //                 } else {
+    //                     jsonData.count = recordList[subidTmp].count + 1;
+    //                 }
+
+    //                 recordList[subidTmp] = jsonData;
+    //                 subid = subidTmp;
+    //             } else if (subid != subidTmp) {
+    //                 var jsonData = record.data;
+    //                 jsonData.chkid = record.txid;
+    //                 jsonData.subid = subidTmp;
+
+    //                 if (recordList[subidTmp] == undefined) {
+    //                     jsonData.count = 1;
+    //                 } else {
+    //                     jsonData.count = recordList[subidTmp].count + 1;
+    //                 }
+
+    //                 recordList[subidTmp] = jsonData;
+    //                 subid = subidTmp;
+    //             } else {
+    //                 if (recordList[subidTmp] == undefined) {
+    //                     jsonData.count = 1;
+    //                 } else {
+    //                     jsonData.count = recordList[subidTmp].count + 1;
+    //                 }
+    //             }
+    //         } catch (exception) {
+    //             console.error(JSON.stringify(exception));
+    //             continue;
+    //         }
+    //     }
+    // }
+
+    // for (var i in recordList) {
+    //     var subid = recordList[i].subid;
+    //     view_formatter[subid](recordList[i]);
+    // }
+
+    recordList.forEach(function (record) {
+        view_formatter[record.subid](record);
+    });
+
     dispatchUpdateRecordEvent();
     !!callback && callback instanceof Function && callback();
-}
-
-function startLoading(cb) {
-    $(".spec-body-loading").each(function (idx, loadingDiv) {
-        setTimeout(function () {
-            $(loadingDiv).fadeIn().slideDown();
-        }, idx * 200);
-    });
-    !!cb && cb instanceof Function && cb();
-}
-
-function finishLoading(cb) {
-    $(".spec-body-loading").each(function (idx, loadingDiv) {
-        setTimeout(function () {
-            $(loadingDiv).fadeOut().slideUp();
-        }, idx * 200);
-    });
-    !!cb && cb instanceof Function && cb();
 }
 
 function clientsocket_listener() {
@@ -1196,12 +1330,9 @@ function clientsocket_listener() {
         var aeskey_hex = base64toHEX(recv_key);
         var decryptedKey = KJUR.crypto.Cipher.decrypt(aeskey_hex, rsakey_prv);
 
-
         var orgcode = omsg.orgcode;
         for (var i = 0; i < omsg.records.length; i++) {
             var subid = omsg.records[i].subid;
-
-
             var decrypted = CryptoJS.AES.decrypt(omsg.records[i].data, CryptoJS.enc.Base64.parse(
                 decryptedKey), {
                 iv: CryptoJS.enc.Base64.parse(recv_iv)
@@ -1209,11 +1340,11 @@ function clientsocket_listener() {
             console.log(decrypted.toString(CryptoJS.enc.Utf8));
             omsg.records[i].data = decrypted.toString(CryptoJS.enc.Utf8);
 
-
             try {
                 setData(omsg.records[i]);
             } catch (exception) {
                 console.error(exception);
+                continue;
             }
         }
         refreshview(omsg.records);
@@ -1364,4 +1495,28 @@ function addMajorDelete(event) {
 
 function addMajorDelete(imgElement) {
     $(imgElement).parent().parent().remove();
+}
+
+function startLoading(cb) {
+    var loadings = $(".spec-body-loading");
+    loadings.each(function (idx, loadingDiv) {
+        setTimeout(function () {
+            $(loadingDiv).fadeIn().slideDown();
+
+            // 혹시나 Loading이 끝나지 않을 경우를 대비하여
+            if (idx == loading.length - 1) {
+                setTimeout(finishLoading, 5000);
+            }
+        }, idx * 200);
+    });
+    !!cb && cb instanceof Function && cb();
+}
+
+function finishLoading(cb) {
+    $(".spec-body-loading").each(function (idx, loadingDiv) {
+        setTimeout(function () {
+            $(loadingDiv).fadeOut().slideUp();
+        }, idx * 200);
+    });
+    !!cb && cb instanceof Function && cb();
 }
