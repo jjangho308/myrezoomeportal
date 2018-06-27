@@ -567,7 +567,17 @@
 
                 specRightContainer.appendChild(function () {
                     var p = document.createElement("p");
-                    p.innerHTML = record.status;
+
+                    var status_string="";
+
+                    if(!!record.majors && !!record.majorstatus){
+                        for(i=0; i<record.majors.length; i++){
+                            status_string=status_string+record.majors[i]+record.majorstatus[i]+",";
+                        }
+                        status_string=status_string+record.status;
+                        status_string="학사과정,"+status_string;
+                    }
+                    p.innerHTML = status_string;
                     return p;
                 }());
 

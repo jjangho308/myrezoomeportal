@@ -193,10 +193,10 @@ $(document).ready(function () {
                     '<div id="add-major">' +
                     '<div class="error-range major-div">' +
                     '<div class="select-100">' +
-                    '<select name="select-1">' +
-                    '<option value="1">전공</option>' +
-                    '<option value="2">부전공</option>' +
-                    '<option value="3">복수전공</option>' +
+                    '<select id="majorstatus" name="select-1">' +
+                    '<option value="전공">전공</option>' +
+                    '<option value="부전공">부전공</option>' +
+                    '<option value="복수전공">복수전공</option>' +
                     '</select>' +
                     '</div>' +
                     '<div class="select-100">' +
@@ -223,7 +223,7 @@ $(document).ready(function () {
 
             var is_error = false;
 
-            if ($("#school").val() == "") {
+            if ($("#school").val() == "" || checkSpace($("#school").val())) {
                 $("#school").addClass("error");
                 $("#school").next().css("display", "block");
                 is_error = true;
@@ -237,7 +237,7 @@ $(document).ready(function () {
 
                 var range = element.closest(".error-range");
 
-                if (element.val() == "") {
+                if (element.val() == "" || checkSpace(element.val())) {
                     element.addClass("error");
                     range.find(".items ").addClass("error");
                     range.find(".error-message").css("display", "block");
@@ -256,7 +256,7 @@ $(document).ready(function () {
             var date1 = new Date(period[0].value);
             var date2 = new Date(period[1].value);
 
-            if ((period[0].value == "") || (period[1].value == "")) {
+            if ((period[0].value == "") || (period[1].value == "" || checkSpace(period[0].value) || checkSpace(period[1].value))) {
                 period.addClass("error");
                 range.find("button").addClass("error");
                 range.find(".items").addClass("error");
@@ -326,18 +326,18 @@ $(document).ready(function () {
                 var status = $("#study-field").val();
 
 
+                var majorstatus = new Array;
                 var majors = new Array;
-                // var major = $("#education-add-dialog #first-major").val();
-                // majors.push(major);
 
                 $(".major").each(function () {
                     var element = $(this);
+                    var range = element.closest(".error-range");
+
                     if (element.val() != "") {
                         majors.push(element.val());
+                        majorstatus.push(range.find("#majorstatus").val());
                     }
                 });
-
-                console.log(majors);
 
                 // cert format
                 var param = {
@@ -345,7 +345,9 @@ $(document).ready(function () {
                     degree: degree + "/" + total_degree,
                     startdate: start_date,
                     enddate: end_date,
-                    status: status
+                    status: status,
+                    majors: majors,
+                    majorstatus: majorstatus
                 }
 
                 // cert encryption
@@ -457,7 +459,7 @@ $(document).ready(function () {
 
             $("#langadd_lang").val("E");
             $("#language-add-dialog input[type=text]").not("#langadd_lang-selectized").each(function () {
-                if ($(this).val() == "") {
+                if ($(this).val() == "" || checkSpace($(this).val())) {
                     is_error = true;
                     if ($(this).hasClass("study-period")) {
                         $(this).addClass("error");
@@ -549,7 +551,7 @@ $(document).ready(function () {
             var is_error = false;
 
             $("#cert-add-dialog input[type=text]").each(function () {
-                if ($(this).val() == "") {
+                if ($(this).val() == "" || checkSpace($(this).val())) {
                     is_error = true;
                     if ($(this).hasClass("study-period")) {
                         $(this).addClass("error");
@@ -1519,4 +1521,8 @@ function finishLoading(cb) {
         }, idx * 200);
     });
     !!cb && cb instanceof Function && cb();
+}
+
+function checkSpace(str) {
+    return str.search(/\s/) != -1;
 }
