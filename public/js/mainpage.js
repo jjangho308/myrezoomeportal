@@ -798,7 +798,7 @@ $(document).ready(function () {
         });
 
         document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
-
+            break;
             event.stopPropagation();
             event.preventDefault();
 
