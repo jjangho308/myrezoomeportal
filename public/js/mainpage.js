@@ -192,8 +192,8 @@ $(document).ready(function () {
             period.addClass("error");
             range.find("button").addClass("error");
             range.find(".items").addClass("error");
+            $("#education-add-dialog #error-range-period").text("시작일이 종료일 보다 클 수 없습니다.");
             range.find(".error-message").css("display", "block");
-            $("#education-add-dialog .error-message").text("시작일이 종료일 보다 클 수 없습니다.");
         }
         else {
             period.removeClass("error");
@@ -208,7 +208,14 @@ $(document).ready(function () {
             range.find(".items").addClass("error");
             range.find(".error-message").css("display", "block");
             is_error = true;
-        } else {
+        }else if(!$.isNumeric($("#education-add-dialog #score").val())){
+            $("#score").addClass("error");
+            range.find(".items").addClass("error");
+            $("#education-add-dialog #score-error-message").text("학점은 숫자만 입력 가능합니다.");
+            range.find(".error-message").css("display", "block");
+            is_error = true;
+        } 
+        else {
             $("#score").removeClass("error");
             range.find(".items").removeClass("error");
             range.find(".error-message").css("display", "none");
