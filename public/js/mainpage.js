@@ -262,6 +262,7 @@ $(document).ready(function () {
                 var status = $("#study-field").val();
 
 
+                var majorstatus = new Array;
                 var majors = new Array;
                 
                 $(".major").each(function () {
@@ -270,7 +271,7 @@ $(document).ready(function () {
                     
                     if (element.val() != "") {
                         majors.push(element.val());
-                        console.log(range.find("#majorstatus").val());
+                        majorstatus.push(range.find("#majorstatus").val());
                     }
                 });
 
@@ -281,7 +282,8 @@ $(document).ready(function () {
                     startdate: start_date,
                     enddate: end_date,
                     status: status,
-                    majors: majors
+                    majors: majors,
+                    majorstatus: majorstatus
                 }
 
                 // cert encryption
