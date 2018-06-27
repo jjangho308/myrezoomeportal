@@ -156,7 +156,7 @@ $(document).ready(function () {
         $('#education-add-dialog .confirm-btn').click(function () {
 
             var is_error = false;
-
+    
             if ($("#school").val() == "") {
                 $("#school").addClass("error");
                 $("#school").next().css("display", "block");
@@ -165,12 +165,12 @@ $(document).ready(function () {
                 $("#school").removeClass("error");
                 $("#school").next().css("display", "none");
             }
-
+    
             $(".major").each(function () {
                 var element = $(this);
-
+    
                 var range = element.closest(".error-range");
-
+    
                 if (element.val() == "") {
                     element.addClass("error");
                     range.find(".items ").addClass("error");
@@ -183,52 +183,60 @@ $(document).ready(function () {
                     range.find(".error-message").css("display", "none");
                 }
             })
-
+    
             var period = $("#education-add-dialog .study-period");
             var range = period.closest(".error-range");
-
+    
             var date1 = new Date(period[0].value);
             var date2 = new Date(period[1].value);
-
+    
             if ((period[0].value == "") || (period[1].value == "")) {
                 period.addClass("error");
                 range.find("button").addClass("error");
                 range.find(".items").addClass("error");
                 range.find(".error-message").css("display", "block");
                 is_error = true;
-            } else if (date1 - date2 > 0) {
-                is_error = true;
+            }else if(date1 - date2 > 0){
+                is_error= true;
                 period.addClass("error");
                 range.find("button").addClass("error");
                 range.find(".items").addClass("error");
+                $("#education-add-dialog #error-range-period").text("시작일이 종료일 보다 클 수 없습니다.");
                 range.find(".error-message").css("display", "block");
-                $("#education-add-dialog .error-message").text("시작일이 종료일 보다 클 수 없습니다.");
-            } else {
+            }
+            else {
                 period.removeClass("error");
                 range.find("button").removeClass("error");
                 range.find(".items").removeClass("error");
-                range.find(".error-message").css("display", "none");
+                range.find(".error-message").css("display", "none");  
             }
-
+    
             var range = $("#score").closest(".error-range");
             if ($("#score").val() == "") {
                 $("#score").addClass("error");
                 range.find(".items").addClass("error");
                 range.find(".error-message").css("display", "block");
                 is_error = true;
-            } else {
+            }else if(!$.isNumeric($("#education-add-dialog #score").val())){
+                $("#score").addClass("error");
+                range.find(".items").addClass("error");
+                $("#education-add-dialog #score-error-message").text("학점은 숫자만 입력 가능합니다.");
+                range.find(".error-message").css("display", "block");
+                is_error = true;
+            } 
+            else {
                 $("#score").removeClass("error");
                 range.find(".items").removeClass("error");
                 range.find(".error-message").css("display", "none");
             }
-
+    
             var school_name = $("#school").val();
             var degree = $("#score").val();
             var total_degree = $("#total_score").val();
             var start_date = $("#edu-startdate").val();
             var end_date = $("#edu-enddate").val();
             var status = $("#study-field").val();
-
+    
             // cert format
             var param = {
                 school_name: school_name,
@@ -237,10 +245,10 @@ $(document).ready(function () {
                 enddate: end_date,
                 status: status
             }
-
+    
             // cert encryption
             var enc_record = JSON.stringify(param);
-
+    
             if (!is_error) {
                 $.ajax({
                     type: 'POST',
@@ -262,15 +270,15 @@ $(document).ready(function () {
                         $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
                         $('#alarm-div').css("display", "block");
                         $('#alarm-div').css("margin-right", "-108px");
-
+    
                         setTimeout(function () {
                             $('#alarm-div').fadeOut('slow');
                         }, 2000);
-
+    
                         //clean view
                         $('.private-spec-body').remove();
-                        // $('#spec_edu_detail > .spec-body-default').hide();
-
+                        $('#spec_edu_detail > .spec-body-default').hide();
+    
                         getPrivateRecords();
                     },
                     contentType: 'application/json',
