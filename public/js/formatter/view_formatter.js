@@ -43,7 +43,7 @@
     //                 container.remove();
     //                 var privateDeletedEvent = document.createEvent('Event');
     //                 privateDeletedEvent.initEvent('cert_private_deleted', true, true);
-    //                 document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
+    //                 document.getElementById("spec_foreign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
     //             }
     //         };
     //     }(event.currentTarget.parentElement.parentElement));
@@ -86,7 +86,7 @@
     //                 container.remove();
     //                 var privateDeletedEvent = document.createEvent('Event');
     //                 privateDeletedEvent.initEvent('lang_private_deleted', true, true);
-    //                 document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
+    //                 document.getElementById("spec_foreign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
     //             }
     //         };
     //     }(event.currentTarget.parentElement.parentElement));
@@ -114,8 +114,9 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
             var qDiv = $(htmldiv).hide();
-            $('#spec_forign_lang').append(qDiv);
+            $('#spec_foreign_lang').append(qDiv);
             qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
+            $('#spec_foreign_lang > .spec-body-default').fadeOut();
         },
 
         "RCCNF0001": function viewformatter(record) {
@@ -142,7 +143,7 @@
             var qDiv = $(htmldiv);
             $('#spec_certification').append(qDiv);
             qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
-            $('#spec_certification > .spec-body-default').hide();
+            $('#spec_certification > .spec-body-default').fadeOut();
         },
 
         // "RCLPT0006": function viewformatter(record) {
@@ -166,8 +167,8 @@
         //     htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")>변경</button>';
         //     htmldiv = htmldiv + '</div>';
         //     htmldiv = htmldiv + '</div>';
-        //     $('#spec_forign_lang').append(htmldiv);
-        //     $('#spec_forign_lang > .spec-body-default').hide();
+        //     $('#spec_foreign_lang').append(htmldiv);
+        //     $('#spec_foreign_lang > .spec-body-default').hide();
         // },
 
         "RCOGC0008": function viewformatter(record) {
@@ -664,8 +665,8 @@
             // htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")><span class="spec-body-btn-name">삭제</span></button>';
             // htmldiv = htmldiv + '</div>';
             // htmldiv = htmldiv + '</div>';
-            // $('#spec_forign_lang').append(htmldiv);
-            // $('#spec_forign_lang > .spec-body-default').hide();
+            // $('#spec_foreign_lang').append(htmldiv);
+            // $('#spec_foreign_lang > .spec-body-default').hide();
 
             var specContainer = document.createElement("div");
             specContainer.className = "private-spec-body"
@@ -751,7 +752,7 @@
                         deletePrivateRecord(
                             event.currentTarget.nextElementSibling.value,
                             event.currentTarget.parentElement.parentElement,
-                            "spec_forign_lang"
+                            "spec_foreign_lang"
                         )
                     }, true);
                     return deleteButton;
@@ -769,8 +770,8 @@
 
             var qContainer = $(specContainer).hide();
             qContainer.fadeIn('slow', dispatchUpdateRecordEvent);
-            $('#spec_forign_lang').append(qContainer);
-            $('#spec_forign_lang > .spec-body-default').hide();
+            $('#spec_foreign_lang').append(qContainer);
+            $('#spec_foreign_lang > .spec-body-default').hide();
         },
 
         "OGC": function viewformatter(record) {

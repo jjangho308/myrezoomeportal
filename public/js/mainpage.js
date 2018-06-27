@@ -463,7 +463,7 @@ $(document).ready(function () {
 
                         //clean view
                         $('.private-spec-body').remove();
-                        // $('#spec_forign_lang > .spec-body-default').hide();
+                        // $('#spec_foreign_lang > .spec-body-default').hide();
                         getPrivateRecords();
                     },
                     contentType: 'application/json',
@@ -862,12 +862,12 @@ $(document).ready(function () {
             }
         }, true);
 
-        document.getElementById("spec_forign_lang_targetdiv").addEventListener("record_updated", function (event) {
+        document.getElementById("spec_foreign_lang_targetdiv").addEventListener("record_updated", function (event) {
 
             event.stopPropagation();
             event.preventDefault();
 
-            if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length == 0) {
+            if ($("#spec_foreign_lang .private-spec-body").length == 0 && $("#spec_foreign_lang .spec-body").length == 0) {
                 $(event.currentTarget).fadeIn();
             }
         }, true);
@@ -1055,7 +1055,7 @@ function dispatchUpdateRecordEvent() {
     recordUpdateEvent.initEvent("record_updated", true, true);
     document.getElementById("spec_edu_detail_targetdiv").dispatchEvent(recordUpdateEvent);
     document.getElementById("spec_certification_targetdiv").dispatchEvent(recordUpdateEvent);
-    document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(recordUpdateEvent);
+    document.getElementById("spec_foreign_lang_targetdiv").dispatchEvent(recordUpdateEvent);
 }
 
 function refreshview(records, callback) {
@@ -1269,7 +1269,7 @@ function getTargetdivid(subid) {
         //mk test
     } else if (subid == 'RCLPT0005') {
         //opic
-        return "spec_forign_lang";
+        return "spec_foreign_lang";
     } else if (subid == 'RCOGC0008') {
         //inha
     }
