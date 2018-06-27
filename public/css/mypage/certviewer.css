@@ -95,6 +95,11 @@ p{
     margin-left: 10px;
 }
 
+.header  button:focus{
+  outline: 0;    
+}
+
+
 .header button:nth-child(2) {
     width: 100px;
     height: 40px;

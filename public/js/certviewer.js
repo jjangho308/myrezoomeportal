@@ -322,38 +322,30 @@
 
         // donwload PDF
         $("#btn_download").click(function (event) {                
-                
-                $(".qr-container").show();
-                var $childern = $(".main-body >.outer-container");
-
-                // var $childern = $(".inner-container");
-                
-                var chilSize = $childern.size();
-                var size = 0;
-                var pdf = new jsPDF('p', 'mm',[297,210]);
-                
-                $childern.each(function (idx, array) {
-                    html2canvas($(this), {
-                        onrendered: function(canvas) {
-                            size++;
-                            pdf.addImage(canvas.toDataURL("image/png"),"png", 10,10,190,277);
-                            if(size != chilSize){
-                                pdf.addPage();                                
-                            }
-                           
-                            if (size === chilSize) {                                
-                                pdf.save('rezoome_cert.pdf');
-                            }
-                            
+            $(".qr-container").show();
+            var $children = $(".main-body >.outer-container");        
+            var childSize = $children.size();
+            var size = 0;
+            var pdf = new jsPDF('p', 'mm',[297,210]);
+            
+            $children.each(function (idx, array) {
+                console.log($(this));
+                html2canvas($(this), {
+                    onrendered: function(canvas) {
+                        size++;
+                        pdf.addImage(canvas.toDataURL("image/png"),"png", 10,10,190,277);
+                        if(size != childSize){
+                            pdf.addPage();                                
                         }
-                    });       
-                });
-                            
+                        
+                        if (size === childSize) {                                
+                            pdf.save('rezoome_cert.pdf');
+                        }                        
+                    }
+                });       
+            });                            
             $(".qr-container").hide();
         });
-
-
-
 
         $("#btn_print").click(function (event) {
 

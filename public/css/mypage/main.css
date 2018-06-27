@@ -344,6 +344,10 @@ color:#676767;
 text-decoration:none;
 }
 
+.spec-right button:focus {
+  outline:0;
+}
+
 .spec-right p {
 color:#676767;
 text-align:left;
