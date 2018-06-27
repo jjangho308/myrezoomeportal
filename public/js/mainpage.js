@@ -7,11 +7,11 @@ require socket.is
  * Ready initializer. <br />
  */
 $(document).ready(function () {
-
     var client_token = window.client_token = getCookie("JWT");
     var client_authorization = window.client_authorization = 'Bearer ' + client_token;
 
     socket = io();
+
     //request to agent for get user info
     var pagetxidlist = getTxidList();
 
@@ -28,16 +28,19 @@ $(document).ready(function () {
                 continue;
             }
         }
-        $('.spec-body-default').show();
+        // $('.spec-body-default').fadeIn();
         refreshview(oridata);
         $('#initial-dialog .close-modal').click();
     } else {
+        startLoading();
         //session storage dont have user info(txid list)
         genRsaKey(function (err, keypair) {
             if (!!err) {
                 console.error(JSON.stringify(err));
             } else if (!!keypair) {
-                request_agent();
+                getAgentRecords(function () {
+                    getPrivateRecords(finishLoading);
+                });
             }
         });
     }
@@ -45,202 +48,287 @@ $(document).ready(function () {
     $(".study-period").datepicker();
     $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
 
-    $('.spec-body-loading').show();
-    $('.spec-body-default').hide();
+    // $('.spec-body-loading').fadeIn();
+    // $('.spec-body-default').hide();
 
-    // set event for element main page
-    $('#header-mycert').click(function () {
-        $('#header-myresume').css({
-            "border": "none",
-            "font-weight": "normal"
-        });
-        $('#header-resume-store').css({
-            "border": "none",
-            "font-weight": "normal"
-        });
-        $(this).css({
-            "border-bottom": "solid 5px #4c80f1",
-            "font-weight": "bold"
-        });
 
-        window.location = "certs";
+    /**
+     * Initialize event listeners to target HTMLElements. <br />
+     * 
+     */
+    ! function addEventListeners(callback) {
+        // set event for element main page
+        $('#header-mycert').click(function () {
+            $('#header-myresume').css({
+                "border": "none",
+                "font-weight": "normal"
+            });
+            $('#header-resume-store').css({
+                "border": "none",
+                "font-weight": "normal"
+            });
+            $(this).css({
+                "border-bottom": "solid 5px #4c80f1",
+                "font-weight": "bold"
+            });
 
-    });
+            window.location = "certs";
 
-    $('#header-resume-store').click(function () {
-        $('#header-myresume').css({
-            "border": "none",
-            "font-weight": "normal"
-        });
-        $('#header-mycert').css({
-            "border": "none",
-            "font-weight": "normal"
-        });
-        $(this).css({
-            "border-bottom": "solid 5px #4c80f1",
-            "font-weight": "bold"
         });
 
-        window.location = "resumes";
-    });
+        $('#header-resume-store').click(function () {
+            $('#header-myresume').css({
+                "border": "none",
+                "font-weight": "normal"
+            });
+            $('#header-mycert').css({
+                "border": "none",
+                "font-weight": "normal"
+            });
+            $(this).css({
+                "border-bottom": "solid 5px #4c80f1",
+                "font-weight": "bold"
+            });
 
-    $('#header-myresume').click(function () {
-        $('#header-mycert').css({
-            "border": "none",
-            "font-weight": "normal"
+            window.location = "resumes";
         });
-        $('#header-resume-store').css({
-            "border": "none",
-            "font-weight": "normal"
+
+        $('#header-myresume').click(function () {
+            $('#header-mycert').css({
+                "border": "none",
+                "font-weight": "normal"
+            });
+            $('#header-resume-store').css({
+                "border": "none",
+                "font-weight": "normal"
+            });
+            $(this).css({
+                "border-bottom": "solid 5px #4c80f1",
+                "font-weight": "bold"
+            });
+            window.location = "main";
         });
-        $(this).css({
-            "border-bottom": "solid 5px #4c80f1",
-            "font-weight": "bold"
+
+        $('#add-span-edu').click(function () {
+            clearAddSpanEdu();
+        })
+
+        $('#add-span-cert').click(function () {
+            clearAddSpanCert();
+        })
+
+        $('#add-span-lang').click(function () {
+            clearAddSpanLang();
+        })
+
+        $('#education-add-dialog .add-span').click(function () {
+            if ($("#education-add-dialog #add-major").length < 2) {
+                $("#major-div").append(
+                    '<div id="add-major">' +
+                    '<div class="error-range major-div">' +
+                    '<div class="select-100">' +
+                    '<select name="select-1">' +
+                    '<option value="1">전공</option>' +
+                    '<option value="2">부전공</option>' +
+                    '<option value="3">복수전공</option>' +
+                    '</select>' +
+                    '</div>' +
+                    '<div class="select-100">' +
+                    '<select name="select-2">' +
+                    '<option value="volvo">학사</option>' +
+                    '</select>' +
+                    '</div>' +
+
+                    '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
+
+                    '<img id="add-major-delete" src="/img/myresume/close-white.svg" onclick="addMajorDelete(this)"/>' +
+
+                    '<div class="error-message">전공을 입력해주세요.</div>' +
+                    '</div>' +
+                    '</div>'
+                );
+            } else {
+                console.log("학력은 3건이상 넣을 수 없습니다.")
+            }
+            $("select").selectize();
         });
-        window.location = "main";
-    });
 
-    $('#add-span-edu').click(function () {
-        clearAddSpanEdu();
-    })
+        $('#education-add-dialog .confirm-btn').click(function () {
 
-    $('#add-span-cert').click(function () {
-        clearAddSpanCert();
-    })
+            var is_error = false;
 
-    $('#add-span-lang').click(function () {
-        clearAddSpanLang();
-    })
+            if ($("#school").val() == "") {
+                $("#school").addClass("error");
+                $("#school").next().css("display", "block");
+                is_error = true;
+            } else {
+                $("#school").removeClass("error");
+                $("#school").next().css("display", "none");
+            }
 
-    $('#education-add-dialog .add-span').click(function () {
-        if ($("#education-add-dialog #add-major").length < 2) {
-            $("#major-div").append(
-                '<div id="add-major">' +
-                '<div class="error-range major-div">' +
-                '<div class="select-100">' +
-                '<select name="select-1">' +
-                '<option value="1">전공</option>' +
-                '<option value="2">부전공</option>' +
-                '<option value="3">복수전공</option>' +
-                '</select>' +
-                '</div>' +
-                '<div class="select-100">' +
-                '<select name="select-2">' +
-                '<option value="volvo">학사</option>' +
-                '</select>' +
-                '</div>' +
+            $(".major").each(function () {
+                var element = $(this);
 
-                '<input type="text" class="major add-major" placeholder="전공을 입력해주세요. Ex) 컴퓨터 공학">' +
+                var range = element.closest(".error-range");
 
-                '<img id="add-major-delete" src="/img/myresume/close-white.svg" onclick="addMajorDelete(this)"/>' +
+                if (element.val() == "") {
+                    element.addClass("error");
+                    range.find(".items ").addClass("error");
+                    range.find(".error-message").css("display", "block");
+                    is_error = true;
+                } else {
+                    var range = element.closest(".error-range");
+                    element.removeClass("error");
+                    range.find(".items ").removeClass("error");
+                    range.find(".error-message").css("display", "none");
+                }
+            });
 
-                '<div class="error-message">전공을 입력해주세요.</div>' +
-                '</div>' +
-                '</div>'
-            );
-        } else {
-            console.log("학력은 3건이상 넣을 수 없습니다.")
-        }
-        $("select").selectize();
-    });
+            var period = $("#education-add-dialog .study-period");
+            var range = period.closest(".error-range");
 
-    $('#education-add-dialog .confirm-btn').click(function () {
+            var date1 = new Date(period[0].value);
+            var date2 = new Date(period[1].value);
 
-        var is_error = false;
+            if ((period[0].value == "") || (period[1].value == "")) {
+                period.addClass("error");
+                range.find("button").addClass("error");
+                range.find(".items").addClass("error");
+                range.find(".error-message").css("display", "block");
+                is_error = true;
+            } else if (date1 - date2 > 0) {
+                is_error = true;
+                period.addClass("error");
+                range.find("button").addClass("error");
+                range.find(".items").addClass("error");
+                $("#education-add-dialog #error-range-period").text("시작일이 종료일 보다 클 수 없습니다.");
+                range.find(".error-message").css("display", "block");
+            } else {
+                period.removeClass("error");
+                range.find("button").removeClass("error");
+                range.find(".items").removeClass("error");
+                range.find(".error-message").css("display", "none");
+            }
 
-        if ($("#school").val() == "") {
-            $("#school").addClass("error");
-            $("#school").next().css("display", "block");
-            is_error = true;
-        } else {
-            $("#school").removeClass("error");
-            $("#school").next().css("display", "none");
-        }
-
-        $(".major").each(function () {
-            var element = $(this);
-
-            var range = element.closest(".error-range");
-
-            if (element.val() == "") {
-                element.addClass("error");
-                range.find(".items ").addClass("error");
+            var range = $("#score").closest(".error-range");
+            if ($("#score").val() == "") {
+                $("#score").addClass("error");
+                range.find(".items").addClass("error");
+                range.find(".error-message").css("display", "block");
+                is_error = true;
+            } else if (!$.isNumeric($("#education-add-dialog #score").val())) {
+                $("#score").addClass("error");
+                range.find(".items").addClass("error");
+                $("#education-add-dialog #score-error-message").text("학점은 숫자만 입력 가능합니다.");
                 range.find(".error-message").css("display", "block");
                 is_error = true;
             } else {
-                var range = element.closest(".error-range");
-                element.removeClass("error");
-                range.find(".items ").removeClass("error");
-                range.find(".error-message").css("display", "none");
+                if ($("#education-add-dialog #total_score").val() == 4.5) {
+                    if ($("#education-add-dialog #score").val() > 4.5 || $("#education-add-dialog #score").val() < 0) {
+
+                        $("#score").addClass("error");
+                        range.find(".items").addClass("error");
+                        $("#education-add-dialog #score-error-message").text("학점 범위를 확인하세요");
+                        range.find(".error-message").css("display", "block");
+                        is_error = true;
+                    } else {
+                        $("#score").removeClass("error");
+                        range.find(".items").removeClass("error");
+                        range.find(".error-message").css("display", "none");
+                    }
+                } else if ($("#education-add-dialog #total_score").val() == 4.3) {
+                    if ($("#education-add-dialog #score").val() > 4.3 || $("#education-add-dialog #score").val() < 0) {
+                        $("#score").addClass("error");
+                        range.find(".items").addClass("error");
+                        $("#education-add-dialog #score-error-message").text("학점 범위를 확인하세요");
+                        range.find(".error-message").css("display", "block");
+                        is_error = true;
+                    } else {
+                        $("#score").removeClass("error");
+                        range.find(".items").removeClass("error");
+                        range.find(".error-message").css("display", "none");
+                    }
+                }
+
+                var school_name = $("#school").val();
+                var degree = $("#score").val();
+                var total_degree = $("#total_score").val();
+                var start_date = $("#edu-startdate").val();
+                var end_date = $("#edu-enddate").val();
+                var status = $("#study-field").val();
+
+                // cert format
+                var param = {
+                    school_name: school_name,
+                    degree: degree + "/" + total_degree,
+                    startdate: start_date,
+                    enddate: end_date,
+                    status: status
+                }
+
+                // cert encryption
+                var enc_record = JSON.stringify(param);
+
+                if (!is_error) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/records',
+                        headers: {
+                            'Authorization': client_authorization
+                        },
+                        data: JSON.stringify({
+                            orgCd: "UNV", // 코드 분기 필요
+                            subCd: "UNV", // 코드 분기 필요
+                            data: enc_record
+                        }),
+                        error: function (jqXhr, status, error) {
+                            console.error('/record Error : ' + error);
+                            console.error(jqXhr.responseText);
+                        },
+                        success: function (res) {
+                            $("#education-add-dialog .close-modal").click();
+                            $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
+                            $('#alarm-div').css("display", "block");
+                            $('#alarm-div').css("margin-right", "-108px");
+
+                            setTimeout(function () {
+                                $('#alarm-div').fadeOut('slow');
+                            }, 2000);
+
+                            //clean view
+                            $('.private-spec-body').remove();
+                            $('#spec_edu_detail > .spec-body-default').hide();
+
+                            getPrivateRecords();
+                        },
+                        contentType: 'application/json',
+                    });
+                }
             }
-        })
+        });
 
-        var period = $("#education-add-dialog .study-period");
-        var range = period.closest(".error-range");
+        $('#career-add-dialog .confirm-btn').click(function () {
 
-        var date1 = new Date(period[0].value);
-        var date2 = new Date(period[1].value);
+            var company = $("#career-company").val();
+            var position = $("#career-position").val();
+            var role = $("#career-role").val();
+            var start_date = $("#career-startdate").val();
+            var end_date = $("#career-enddate").val();
+            var status = $("#career-status").val();
 
-        if ((period[0].value == "") || (period[1].value == "")) {
-            period.addClass("error");
-            range.find("button").addClass("error");
-            range.find(".items").addClass("error");
-            range.find(".error-message").css("display", "block");
-            is_error = true;
-        }else if(date1 - date2 > 0){
-            is_error= true;
-            period.addClass("error");
-            range.find("button").addClass("error");
-            range.find(".items").addClass("error");
-            $("#education-add-dialog #error-range-period").text("시작일이 종료일 보다 클 수 없습니다.");
-            range.find(".error-message").css("display", "block");
-        }
-        else {
-            period.removeClass("error");
-            range.find("button").removeClass("error");
-            range.find(".items").removeClass("error");
-            range.find(".error-message").css("display", "none");  
-        }
+            // cert format
+            var param = {
+                company: company,
+                position: position,
+                role: role,
+                startdate: start_date,
+                enddate: end_date,
+                status: status
+            }
 
-        var range = $("#score").closest(".error-range");
-        if ($("#score").val() == "") {
-            $("#score").addClass("error");
-            range.find(".items").addClass("error");
-            range.find(".error-message").css("display", "block");
-            is_error = true;
-        }else if(!$.isNumeric($("#education-add-dialog #score").val())){
-            $("#score").addClass("error");
-            range.find(".items").addClass("error");
-            $("#education-add-dialog #score-error-message").text("학점은 숫자만 입력 가능합니다.");
-            range.find(".error-message").css("display", "block");
-            is_error = true;
-        } 
-        else {
-            $("#score").removeClass("error");
-            range.find(".items").removeClass("error");
-            range.find(".error-message").css("display", "none");
-        }
+            // cert encryption
+            var enc_record = JSON.stringify(param);
 
-        var school_name = $("#school").val();
-        var degree = $("#score").val();
-        var total_degree = $("#total_score").val();
-        var start_date = $("#edu-startdate").val();
-        var end_date = $("#edu-enddate").val();
-        var status = $("#study-field").val();
-
-        // cert format
-        var param = {
-            school_name: school_name,
-            degree: degree + "/" + total_degree,
-            startdate: start_date,
-            enddate: end_date,
-            status: status
-        }
-
-        // cert encryption
-        var enc_record = JSON.stringify(param);
-
-        if (!is_error) {
             $.ajax({
                 type: 'POST',
                 url: '/records',
@@ -248,8 +336,8 @@ $(document).ready(function () {
                     'Authorization': client_authorization
                 },
                 data: JSON.stringify({
-                    orgCd: "UNV", // 코드 분기 필요
-                    subCd: "UNV", // 코드 분기 필요
+                    orgCd: "ETC", // 코드 분기 필요
+                    subCd: "CPR", // 코드 분기 필요
                     data: enc_record
                 }),
                 error: function (jqXhr, status, error) {
@@ -257,582 +345,513 @@ $(document).ready(function () {
                     console.error(jqXhr.responseText);
                 },
                 success: function (res) {
-                    $("#education-add-dialog .close-modal").click();
-                    $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
+                    $("#career-add-dialog .close-modal").click();
+                    $("#alarm-div span").text("사용자 이력 수기 입력했다.");
                     $('#alarm-div').css("display", "block");
                     $('#alarm-div').css("margin-right", "-108px");
 
-                    setTimeout(function () {
-                        $('#alarm-div').fadeOut('slow');
-                    }, 2000);
-
                     //clean view
                     $('.private-spec-body').remove();
-                    $('#spec_edu_detail > .spec-body-default').hide();
-
                     getPrivateRecords();
                 },
-                contentType: 'application/json',
+                contentType: 'application/json'
             });
-        }
-    });
-
-    $('#career-add-dialog .confirm-btn').click(function () {
-
-        var company = $("#career-company").val();
-        var position = $("#career-position").val();
-        var role = $("#career-role").val();
-        var start_date = $("#career-startdate").val();
-        var end_date = $("#career-enddate").val();
-        var status = $("#career-status").val();
-
-        // cert format
-        var param = {
-            company: company,
-            position: position,
-            role: role,
-            startdate: start_date,
-            enddate: end_date,
-            status: status
-        }
-
-        // cert encryption
-        var enc_record = JSON.stringify(param);
-
-        $.ajax({
-            type: 'POST',
-            url: '/records',
-            headers: {
-                'Authorization': client_authorization
-            },
-            data: JSON.stringify({
-                orgCd: "ETC", // 코드 분기 필요
-                subCd: "CPR", // 코드 분기 필요
-                data: enc_record
-            }),
-            error: function (jqXhr, status, error) {
-                console.error('/record Error : ' + error);
-                console.error(jqXhr.responseText);
-            },
-            success: function (res) {
-                $("#career-add-dialog .close-modal").click();
-                $("#alarm-div span").text("사용자 이력 수기 입력했다.");
-                $('#alarm-div').css("display", "block");
-                $('#alarm-div').css("margin-right", "-108px");
-
-                //clean view
-                $('.private-spec-body').remove();
-                getPrivateRecords();
-            },
-            contentType: 'application/json'
-        });
-    });
-
-    $('#language-add-dialog .confirm-btn').click(function () {
-        debugger;
-        var issuer = $("#language-issuer").val();
-        var lang = $("#langadd_lang").val();
-        var name = $("#language-name").val();
-        var score = $("#language-grade").val();
-        var start_date = $("#langadd_startdate").val();
-        var end_date = $("#langadd_enddate").val();
-        var expiry = $("#langadd_expireYn").is(':checked');
-
-
-        var date1 = new Date(start_date);
-        var date2 = new Date(end_date);
-
-        var is_error = false;
-
-        $("#langadd_lang").val("E");
-        $("#language-add-dialog input[type=text]").not("#langadd_lang-selectized").each(function () {
-            if ($(this).val() == "") {
-                is_error = true;
-                if ($(this).hasClass("study-period")) {
-                    $(this).addClass("error");
-                    $("#language-add-dialog .error-message-period").show();
-                } else {
-                    $(this).addClass("error");
-                    $(this).next().show();
-                }
-            }
-            else if(date1 - date2 > 0){
-                 is_error=true;
-
-                 $("#language-add-dialog #langadd_startdate").addClass("error");
-                 $("#language-add-dialog #langadd_enddate").addClass("error");
-                 
-                 $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
-                 $("#language-add-dialog .error-message-period").show();
-            }
-            else {
-                if ($(this).hasClass("study-period")) {
-                    $(this).removeClass("error");
-                    $("#language-add-dialog .error-message-period").hide();
-                } else {
-                    $(this).removeClass("error");
-                    $(this).next().hide();
-                }
-            }
         });
 
-        // cert format
-        var param = {
-            issuer: issuer,
-            lang: lang,
-            name: name,
-            score: score,
-            startdate: start_date,
-            enddate: end_date,
-            expiry: expiry
-        }
+        $('#language-add-dialog .confirm-btn').click(function () {
+            var issuer = $("#language-issuer").val();
+            var lang = $("#langadd_lang").val();
+            var name = $("#language-name").val();
+            var score = $("#language-grade").val();
+            var start_date = $("#langadd_startdate").val();
+            var end_date = $("#langadd_enddate").val();
+            var expiry = $("#langadd_expireYn").is(':checked');
 
-        // cert encryption
-        var enc_record = JSON.stringify(param);
 
-        if (!is_error) {
-            $.ajax({
-                type: 'POST',
-                url: '/records',
-                headers: {
-                    'Authorization': client_authorization
-                },
-                data: JSON.stringify({
-                    orgCd: "EDI", // 코드 분기 필요
-                    subCd: "LPT", // 코드 분기 필요
-                    data: enc_record
-                }),
-                error: function (jqXhr, status, error) {
-                    console.error('/record Error : ' + error);
-                    console.error(jqXhr.responseText);
-                },
-                success: function (res) {
-                    $("#language-add-dialog .close-modal").click();
-                    $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
-                    $('#alarm-div').css("display", "block");
-                    $('#alarm-div').css("margin-right", "-108px");
+            var date1 = new Date(start_date);
+            var date2 = new Date(end_date);
 
-                    setTimeout(function () {
-                        $('#alarm-div').fadeOut('slow');
-                    }, 2000);
+            var is_error = false;
 
-                    //clean view
-                    $('.private-spec-body').remove();
-                    $('#spec_forign_lang > .spec-body-default').hide();
-                    getPrivateRecords();
-                },
-                contentType: 'application/json',
-            });
-        }
-    });
+            $("#langadd_lang").val("E");
+            $("#language-add-dialog input[type=text]").not("#langadd_lang-selectized").each(function () {
+                if ($(this).val() == "") {
+                    is_error = true;
+                    if ($(this).hasClass("study-period")) {
+                        $(this).addClass("error");
+                        $("#language-add-dialog .error-message-period").fadeIn();
+                    } else {
+                        $(this).addClass("error");
+                        $(this).next().fadeIn();
+                    }
+                } else if (date1 - date2 > 0) {
+                    is_error = true;
 
-    $('#cert-add-dialog .confirm-btn').click(function () {
-        var issuer = $("#cert-issuer").val();
-        var name = $("#cert-name").val();
-        var grade = $("#cert-grade").val();
-        var start_date = $("#certadd_startdate").val();
-        var end_date = $("#certadd_enddate").val();
-        var expiry = $("#certadd_expireYn").is(':checked');
+                    $("#language-add-dialog #langadd_startdate").addClass("error");
+                    $("#language-add-dialog #langadd_enddate").addClass("error");
 
-        var date1 = new Date(start_date);
-        var date2 = new Date(end_date);
-
-        var is_error = false;
-
-        $("#cert-add-dialog input[type=text]").each(function () {
-            if ($(this).val() == "") {
-                is_error = true;
-                if ($(this).hasClass("study-period")) {
-                    $(this).addClass("error");
-                    $("#cert-add-dialog .error-message-period").show();
+                    $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
+                    $("#language-add-dialog .error-message-period").fadeIn();
                 } else {
-                    $(this).addClass("error");
-                    $(this).next().show();
+                    if ($(this).hasClass("study-period")) {
+                        $(this).removeClass("error");
+                        $("#language-add-dialog .error-message-period").hide();
+                    } else {
+                        $(this).removeClass("error");
+                        $(this).next().hide();
+                    }
                 }
-            } else if(date1 - date2 > 0){
-                is_error=true;
-
-                 $("#cert-add-dialog #certadd_startdate").addClass("error");
-                 $("#cert-add-dialog #certadd_enddate").addClass("error");
-                 
-                 $("#cert-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
-                 $("#cert-add-dialog .error-message-period").show();
-            }
-            
-            else {
-                if ($(this).hasClass("study-period")) {
-                    $(this).removeClass("error");
-                    $("#cert-add-dialog .error-message-period").hide();
-                } else {
-                    $(this).removeClass("error");
-                    $(this).next().hide();
-                }
-            }
-        });
-
-        // cert format
-        var param = {
-            issuer: issuer,
-            name: name,
-            grade: grade,
-            startdate: start_date,
-            enddate: end_date,
-            expiry: expiry
-        }
-
-        // cert encryption
-        var enc_record = JSON.stringify(param);
-
-        if (!is_error) {
-            $.ajax({
-                type: 'POST',
-                url: '/records',
-                headers: {
-                    'Authorization': client_authorization
-                },
-                data: JSON.stringify({
-                    orgCd: "STI", // 코드 분기 필요
-                    subCd: "OGC", // 코드 분기 필요
-                    data: enc_record
-                }),
-                error: function (jqXhr, status, error) {
-                    console.error('/record Error : ' + error);
-                    console.error(jqXhr.responseText);
-                },
-                success: function (res) {
-                    $("#cert-add-dialog .close-modal").click();
-                    $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
-                    $('#alarm-div').css("display", "block");
-
-                    setTimeout(function () {
-                        $('#alarm-div').fadeOut('slow');
-                    }, 2000);
-
-                    //clean view
-                    $('.private-spec-body').remove();
-                    $('#spec_certification > .spec-body-default').hide();
-                    getPrivateRecords();
-                },
-                contentType: 'application/json',
             });
-        }
-    });
 
-    $('#spec-change-dialog .confirm-btn').click(function () {
-        $(".abc-radio input:radio").each(function () {
-            if ($(this).is(':checked')) {
-                var txid = $(this).attr("id").substring(12);
-                var subid = $(this).parent().attr("id").substring(12);
+            // cert format
+            var param = {
+                issuer: issuer,
+                lang: lang,
+                name: name,
+                score: score,
+                startdate: start_date,
+                enddate: end_date,
+                expiry: expiry
+            }
 
+            // cert encryption
+            var enc_record = JSON.stringify(param);
+
+            if (!is_error) {
                 $.ajax({
                     type: 'POST',
-                    url: '/certs/setDefault',
+                    url: '/records',
                     headers: {
                         'Authorization': client_authorization
                     },
                     data: JSON.stringify({
-                        txid: txid,
-                        subid: subid
+                        orgCd: "EDI", // 코드 분기 필요
+                        subCd: "LPT", // 코드 분기 필요
+                        data: enc_record
                     }),
                     error: function (jqXhr, status, error) {
-                        console.error('Set default Error : ' + error);
+                        console.error('/record Error : ' + error);
                         console.error(jqXhr.responseText);
                     },
-                    success: function (response) {
-                        $("#spec-change-dialog .close-modal").click();
-                        $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
+                    success: function (res) {
+                        $("#language-add-dialog .close-modal").click();
+                        $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
                         $('#alarm-div').css("display", "block");
-                        $('#alarm-div').css("margin-right", "-142px");
+                        $('#alarm-div').css("margin-right", "-108px");
 
                         setTimeout(function () {
                             $('#alarm-div').fadeOut('slow');
                         }, 2000);
 
-                        // sessionStrage update
-                        var txidList = getTxidList();
-                        for (var i in txidList) {
-                            try {
-                                var record = getData(txidList[i]);
-                                var dftYn = record.dftYn;
-                                var subidTmp = record.subid;
-                                var jsonData = record.data;
-                                if (subid == subidTmp) {
-                                    if (txid == record.txid) {
-                                        record.dftYn = "Y";
-                                    } else {
-                                        record.dftYn = "N";
-                                    }
-                                    record.data = JSON.stringify(record.data);
-                                    setData(record);
-                                }
-                            } catch (exception) {
-                                console.error(exception);
-                                continue;
-                            }
-                        }
-                        refreshview();
+                        //clean view
+                        $('.private-spec-body').remove();
+                        // $('#spec_forign_lang > .spec-body-default').hide();
+                        getPrivateRecords();
                     },
-                    error: function (jqXhr, status, error) {
-                        console.error('Set Default Error : ' + error);
-                        console.error(jqXhr.responseText);
-                    },
-                    contentType: 'application/json'
+                    contentType: 'application/json',
                 });
             }
         });
-    });
 
-    $('.spec-detail-div').click(function (event) {
-        try {
-            if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {
-                //대학교 케이스
-                var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
-                parentparentNodeChecknot[0].checked = true;
-                parentparentNodeChecknot[1].checked = true;
-                event.preventDefault();
-            } else if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 2) {
-                var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:checked");
-                parentparentNodeChecknot[0].checked = false;
-                parentparentNodeChecknot[1].checked = false;
-                event.preventDefault();
+        $('#cert-add-dialog .confirm-btn').click(function () {
+            var issuer = $("#cert-issuer").val();
+            var name = $("#cert-name").val();
+            var grade = $("#cert-grade").val();
+            var start_date = $("#certadd_startdate").val();
+            var end_date = $("#certadd_enddate").val();
+            var expiry = $("#certadd_expireYn").is(':checked');
+
+            var date1 = new Date(start_date);
+            var date2 = new Date(end_date);
+
+            var is_error = false;
+
+            $("#cert-add-dialog input[type=text]").each(function () {
+                if ($(this).val() == "") {
+                    is_error = true;
+                    if ($(this).hasClass("study-period")) {
+                        $(this).addClass("error");
+                        $("#cert-add-dialog .error-message-period").fadeIn();
+                    } else {
+                        $(this).addClass("error");
+                        $(this).next().fadeIn();
+                    }
+                } else if (date1 - date2 > 0) {
+                    is_error = true;
+
+                    $("#cert-add-dialog #certadd_startdate").addClass("error");
+                    $("#cert-add-dialog #certadd_enddate").addClass("error");
+
+                    $("#cert-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
+                    $("#cert-add-dialog .error-message-period").fadeIn();
+                } else {
+                    if ($(this).hasClass("study-period")) {
+                        $(this).removeClass("error");
+                        $("#cert-add-dialog .error-message-period").hide();
+                    } else {
+                        $(this).removeClass("error");
+                        $(this).next().hide();
+                    }
+                }
+            });
+
+            // cert format
+            var param = {
+                issuer: issuer,
+                name: name,
+                grade: grade,
+                startdate: start_date,
+                enddate: end_date,
+                expiry: expiry
             }
 
-        } catch (exception) {
-            console.log(exception);
-        }
-        $(".spec-detail-div input:checkbox").each(function (i) {
-            if ($(this).is(':checked')) {
+            // cert encryption
+            var enc_record = JSON.stringify(param);
 
-                $(this).closest('.spec-body').css({
-                    "border": "solid 1px #4c80f1",
-                    "border-radius": "4px",
-                    "background-color": "rgba(76, 128, 241, 0.05)"
-                });
-                // comment by hyunsu for running
-                // $(this).closest('.spec-body').children('.spec-right').last().children().eq(3).children().css({"color":"#ffffff", "border": "solid 1px #dfe5ef"});
-                // $("#btn_change_"+$(this).closest('.spec-body').children('.spec-right').last().children().eq(3).attr("id").substring(11)).hide();
-            } else {
-
-
-                // if($(".spec-detail-div input:checkbox:checked").length > 0) {
-                //     var parentparentNode = $(".spec-detail-div input:checkbox:checked")[0].parentNode.parentNode;
-                //     $(parentparentNode).find("input:checkbox:checked")[0].checked = false;
-                // }
-
-
-                $(this).closest('.spec-body').css({
-                    "border": "none",
-                    "border-bottom": "solid 1px #dfe5ef",
-                    "background-color": "white"
-                });
-                // comment by hyunsu for running
-                // $(this).closest('.spec-body').children('.spec-right').last().children().eq(3).children().css({"color":"black"});
-                // $("#btn_change_"+$(this).closest('.spec-body').children('.spec-right').last().children().eq(3).attr("id").substring(11)).show();
-            }
-
-            var numberOfChecked = $('.spec-detail-div input:checkbox:checked').length;
-
-            if (numberOfChecked == 0) {
-                $("#select-footer").hide();
-                $("#main-footer").css("margin-bottom", "0px");
-            } else {
-                $("#main-footer").css("margin-bottom", "71px");
-                $("#select-footer span:nth-child(2)").text(numberOfChecked + "건의");
-                $("#select-footer").show();
-            }
-        });
-    });
-
-
-    $('#cert-issue-button').click(function () {
-        var modal = false;
-        $(".spec-detail-div input:checkbox").each(function (i) {
-            if ($(this).is(':checked')) {
-                var id = $(this).attr("id");
-                var sdata = sessionStorage.getItem(id);
-
-                var reqcerts = {};
-                reqcerts.txid = id;
-                reqcerts.record = JSON.parse(sdata);
-
+            if (!is_error) {
                 $.ajax({
                     type: 'POST',
-                    url: '/certs',
+                    url: '/records',
                     headers: {
                         'Authorization': client_authorization
                     },
                     data: JSON.stringify({
-                        cert: reqcerts
+                        orgCd: "STI", // 코드 분기 필요
+                        subCd: "OGC", // 코드 분기 필요
+                        data: enc_record
                     }),
-                    beforeSend: function () {
-
-                        // $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
-                        // don't delete!!!!!  
-                        //version 1 dialog. progress circle      
-                        //         setTimeout(function() {
-                        //              $('.ko-progress-circle').attr('data-progress', 20);
-                        //         }, 100);
-                        //         setTimeout(function() {
-                        //              $('.ko-progress-circle').attr('data-progress', 50);
-                        //         }, 1000);
-                        //         setTimeout(function() {
-                        //              $('.ko-progress-circle').attr('data-progress', 100);
-                        //         }, 2000);
-                        //        
-                        //         setTimeout(function() {
-                        //             $("#cert-circle-dialog .close-modal").click();
-                        //             $('#select-footer').css("display","none");
-                        //             $('#alarm-div').css("display","block");
-                        //             
-                        //             $(".spec-detail-div input:checkbox:checked").click();
-                        //         }, 3000);
-
-                        if (!modal) {
-                            modal = true;
-                            var current_active = 0;
-
-                            $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
-
-                            var functionId = setInterval(function () {
-                                $('#cert-line-dialog #circle-' + current_active).css("background-color", "#dadada");
-                                current_active += 1;
-                                if (current_active > 5) {
-                                    current_active = 0;
-                                }
-                                $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
-                            }, 300);
-
-                            setTimeout(function () {
-
-                                //$("#cert-line-dialog .close-modal").click();
-                                $("#cert-line-dialog").parent().fadeOut('slow'); // rollback when issue
-
-                                $("#alarm-div").css("display", "block");
-                                $("#alarm-div").css("margin-right", "-224px");
-                                $("#select-footer").hide();
-                                $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
-                                $(".spec-detail-div input:checkbox").attr("checked", false);
-
-
-
-                                $('.spec-body').css({
-                                    "border": "none",
-                                    "border-bottom": "solid 1px #dfe5ef",
-                                    "background-color": "white"
-                                });
-
-                                clearInterval(functionId);
-
-                                setTimeout(function () {
-                                    $("#alarm-div").hide();
-                                    modal = false;
-
-                                    window.location.href = "./certs";
-                                }, 1000);
-
-                            }, 3000);
-                        }
-                    },
-                    success: function (res) {
-                        //loadcertlist();
-                    },
                     error: function (jqXhr, status, error) {
-                        console.error('/Issue cert error : ' + error);
+                        console.error('/record Error : ' + error);
                         console.error(jqXhr.responseText);
                     },
-                    contentType: 'application/json'
+                    success: function (res) {
+                        $("#cert-add-dialog .close-modal").click();
+                        $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
+                        $('#alarm-div').css("display", "block");
+
+                        setTimeout(function () {
+                            $('#alarm-div').fadeOut('slow');
+                        }, 2000);
+
+                        //clean view
+                        $('.private-spec-body').remove();
+                        // $('#spec_certification > .spec-body-default').hide();
+                        getPrivateRecords();
+                    },
+                    contentType: 'application/json',
                 });
             }
         });
-    });
 
-    $('#refresh_record').click(function () {
-        $('.spec-body-loading').show();
-        $('.spec-body-default').hide();
-        getRSAKey();
-        var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+        $('#spec-change-dialog .confirm-btn').click(function () {
+            $(".abc-radio input:radio").each(function () {
+                if ($(this).is(':checked')) {
+                    var txid = $(this).attr("id").substring(12);
+                    var subid = $(this).parent().attr("id").substring(12);
 
-        var emptyarray = [];
-        setTxidList(emptyarray);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/certs/setDefault',
+                        headers: {
+                            'Authorization': client_authorization
+                        },
+                        data: JSON.stringify({
+                            txid: txid,
+                            subid: subid
+                        }),
+                        error: function (jqXhr, status, error) {
+                            console.error('Set default Error : ' + error);
+                            console.error(jqXhr.responseText);
+                        },
+                        success: function (response) {
+                            $("#spec-change-dialog .close-modal").click();
+                            $("#alarm-div span").text("정상적으로 이력이 변경되었습니다.");
+                            $('#alarm-div').css("display", "block");
+                            $('#alarm-div').css("margin-right", "-142px");
 
-        $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
+                            setTimeout(function () {
+                                $('#alarm-div').fadeOut('slow');
+                            }, 2000);
 
-        getPrivateRecords();
+                            // sessionStrage update
+                            var txidList = getTxidList();
+                            for (var i in txidList) {
+                                try {
+                                    var record = getData(txidList[i]);
+                                    var dftYn = record.dftYn;
+                                    var subidTmp = record.subid;
+                                    var jsonData = record.data;
+                                    if (subid == subidTmp) {
+                                        if (txid == record.txid) {
+                                            record.dftYn = "Y";
+                                        } else {
+                                            record.dftYn = "N";
+                                        }
+                                        record.data = JSON.stringify(record.data);
+                                        setData(record);
+                                    }
+                                } catch (exception) {
+                                    console.error(exception);
+                                    continue;
+                                }
+                            }
+                            refreshview();
+                        },
+                        error: function (jqXhr, status, error) {
+                            console.error('Set Default Error : ' + error);
+                            console.error(jqXhr.responseText);
+                        },
+                        contentType: 'application/json'
+                    });
+                }
+            });
+        });
 
-        $.ajax({
-            type: 'POST',
-            url: '/client',
-            headers: {
-                'Authorization': client_authorization
-            },
-            beforeSend: function () {
-                //clean view
-                $('.spec-body').remove();
-                $('.spec-body-default').hide();
-                $('.spec-body-loading').css("display", "block");
-            },
-            data: JSON.stringify({
-                cmd: 'SearchRecord',
-
-                args: {
-                    pkey: 'asdfasdf',
-                    update: true,
-                    n: jwkPub2.n,
-                    e: jwkPub2.e
+        $('.spec-detail-div').click(function (event) {
+            try {
+                if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {
+                    //대학교 케이스
+                    var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
+                    parentparentNodeChecknot[0].checked = true;
+                    parentparentNodeChecknot[1].checked = true;
+                    event.preventDefault();
+                } else if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 2) {
+                    var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:checked");
+                    parentparentNodeChecknot[0].checked = false;
+                    parentparentNodeChecknot[1].checked = false;
+                    event.preventDefault();
                 }
 
-            }),
-            error: function (jqXhr, status, error) {
-                console.error('Search record Error : ' + error);
-                console.error(jqXhr.responseText);
-            },
-            success: function (res) {
-                setSocket(res.mid);
-                clientsocket_listener();
-                setTimeout(function () {
-                    $('.spec-body-loading').hide();
-                    var privateDeletedEvent = document.createEvent('Event');
-                    privateDeletedEvent.initEvent("record_updated", true, true);
-                    document.getElementById("spec_edu_detail_targetdiv").dispatchEvent(privateDeletedEvent);
-                    document.getElementById("spec_certification_targetdiv").dispatchEvent(privateDeletedEvent);
-                    document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
-                }, 1500);
-            },
-            contentType: 'application/json',
+            } catch (exception) {
+                console.log(exception);
+            }
+            $(".spec-detail-div input:checkbox").each(function (i) {
+                if ($(this).is(':checked')) {
+
+                    $(this).closest('.spec-body').css({
+                        "border": "solid 1px #4c80f1",
+                        "border-radius": "4px",
+                        "background-color": "rgba(76, 128, 241, 0.05)"
+                    });
+                    // comment by hyunsu for running
+                    // $(this).closest('.spec-body').children('.spec-right').last().children().eq(3).children().css({"color":"#ffffff", "border": "solid 1px #dfe5ef"});
+                    // $("#btn_change_"+$(this).closest('.spec-body').children('.spec-right').last().children().eq(3).attr("id").substring(11)).hide();
+                } else {
+
+
+                    // if($(".spec-detail-div input:checkbox:checked").length > 0) {
+                    //     var parentparentNode = $(".spec-detail-div input:checkbox:checked")[0].parentNode.parentNode;
+                    //     $(parentparentNode).find("input:checkbox:checked")[0].checked = false;
+                    // }
+
+
+                    $(this).closest('.spec-body').css({
+                        "border": "none",
+                        "border-bottom": "solid 1px #dfe5ef",
+                        "background-color": "white"
+                    });
+                    // comment by hyunsu for running
+                    // $(this).closest('.spec-body').children('.spec-right').last().children().eq(3).children().css({"color":"black"});
+                    // $("#btn_change_"+$(this).closest('.spec-body').children('.spec-right').last().children().eq(3).attr("id").substring(11)).fadeIn();
+                }
+
+                var numberOfChecked = $('.spec-detail-div input:checkbox:checked').length;
+
+                if (numberOfChecked == 0) {
+                    $("#select-footer").hide();
+                    $("#main-footer").css("margin-bottom", "0px");
+                } else {
+                    $("#main-footer").css("margin-bottom", "71px");
+                    $("#select-footer span:nth-child(2)").text(numberOfChecked + "건의");
+                    $("#select-footer").fadeIn();
+                }
+            });
         });
-    });
 
-    document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
-        // debugger;
-        event.stopPropagation();
-        event.preventDefault();
 
-        if ($("#spec_edu_detail .private-spec-body").length == 0 && $("#spec_edu_detail .spec-body").length == 0) {
-            $(event.currentTarget).show();
-        }
-    }, true);
+        $('#cert-issue-button').click(function () {
+            var modal = false;
+            $(".spec-detail-div input:checkbox").each(function (i) {
+                if ($(this).is(':checked')) {
+                    var id = $(this).attr("id");
+                    var sdata = sessionStorage.getItem(id);
 
-    document.getElementById("spec_certification_targetdiv").addEventListener("record_updated", function (event) {
-        // debugger;
-        event.stopPropagation();
-        event.preventDefault();
+                    var reqcerts = {};
+                    reqcerts.txid = id;
+                    reqcerts.record = JSON.parse(sdata);
 
-        if ($("#spec_certification .private-spec-body").length == 0 && $("#spec_certification .spec-body").length == 0) {
-            $(event.currentTarget).show();
-        }
-    }, true);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/certs',
+                        headers: {
+                            'Authorization': client_authorization
+                        },
+                        data: JSON.stringify({
+                            cert: reqcerts
+                        }),
+                        beforeSend: function () {
 
-    document.getElementById("spec_forign_lang_targetdiv").addEventListener("record_updated", function (event) {
-        // debugger;
-        event.stopPropagation();
-        event.preventDefault();
+                            // $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+                            // don't delete!!!!!  
+                            //version 1 dialog. progress circle      
+                            //         setTimeout(function() {
+                            //              $('.ko-progress-circle').attr('data-progress', 20);
+                            //         }, 100);
+                            //         setTimeout(function() {
+                            //              $('.ko-progress-circle').attr('data-progress', 50);
+                            //         }, 1000);
+                            //         setTimeout(function() {
+                            //              $('.ko-progress-circle').attr('data-progress', 100);
+                            //         }, 2000);
+                            //        
+                            //         setTimeout(function() {
+                            //             $("#cert-circle-dialog .close-modal").click();
+                            //             $('#select-footer').css("display","none");
+                            //             $('#alarm-div').css("display","block");
+                            //             
+                            //             $(".spec-detail-div input:checkbox:checked").click();
+                            //         }, 3000);
 
-        if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length == 0) {
-            $(event.currentTarget).show();
-        }
-    }, true);
+                            if (!modal) {
+                                modal = true;
+                                var current_active = 0;
 
-    getPrivateRecords();
+                                $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
+
+                                var functionId = setInterval(function () {
+                                    $('#cert-line-dialog #circle-' + current_active).css("background-color", "#dadada");
+                                    current_active += 1;
+                                    if (current_active > 5) {
+                                        current_active = 0;
+                                    }
+                                    $('#cert-line-dialog #circle-' + current_active).css("background-color", "#4a90e2");
+                                }, 300);
+
+                                setTimeout(function () {
+
+                                    //$("#cert-line-dialog .close-modal").click();
+                                    $("#cert-line-dialog").parent().fadeOut('slow'); // rollback when issue
+
+                                    $("#alarm-div").css("display", "block");
+                                    $("#alarm-div").css("margin-right", "-224px");
+                                    $("#select-footer").hide();
+                                    $("#alarm-div span").text("증명서 발급이 완료되었습니다. 증명서보관함에서 확인해주세요.");
+                                    $(".spec-detail-div input:checkbox").attr("checked", false);
+
+
+
+                                    $('.spec-body').css({
+                                        "border": "none",
+                                        "border-bottom": "solid 1px #dfe5ef",
+                                        "background-color": "white"
+                                    });
+
+                                    clearInterval(functionId);
+
+                                    setTimeout(function () {
+                                        $("#alarm-div").hide();
+                                        modal = false;
+
+                                        window.location.href = "./certs";
+                                    }, 1000);
+
+                                }, 3000);
+                            }
+                        },
+                        success: function (res) {
+                            //loadcertlist();
+                        },
+                        error: function (jqXhr, status, error) {
+                            console.error('/Issue cert error : ' + error);
+                            console.error(jqXhr.responseText);
+                        },
+                        contentType: 'application/json'
+                    });
+                }
+            });
+        });
+
+        $('#refresh_record').click(function () {
+            $('.spec-body-loading').fadeIn();
+            // $('.spec-body-default').hide();
+            getRSAKey();
+            var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+
+            var emptyarray = [];
+            setTxidList(emptyarray);
+
+            $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
+
+            getPrivateRecords();
+
+            $.ajax({
+                type: 'POST',
+                url: '/client',
+                headers: {
+                    'Authorization': client_authorization
+                },
+                beforeSend: function () {
+                    //clean view
+                    $('.spec-body').remove();
+                    $('.spec-body-default').hide();
+                    // $('.spec-body-loading').fadeIn();
+                },
+                data: JSON.stringify({
+                    cmd: 'SearchRecord',
+                    args: {
+                        pkey: 'asdfasdf',
+                        update: true,
+                        n: jwkPub2.n,
+                        e: jwkPub2.e
+                    }
+                }),
+                error: function (jqXhr, status, error) {
+                    console.error('Search record Error : ' + error);
+                    console.error(jqXhr.responseText);
+                },
+                success: function (res) {
+                    setSocket(res.mid);
+                    clientsocket_listener();
+                    setTimeout(function () {
+                        finishLoading();
+                    }, 1500);
+                },
+                contentType: 'application/json',
+            });
+        });
+
+        document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
+
+            event.stopPropagation();
+            event.preventDefault();
+
+            if ($("#spec_edu_detail .private-spec-body").length == 0 && $("#spec_edu_detail .spec-body").length == 0) {
+                $(event.currentTarget).fadeIn();
+            }
+        }, true);
+
+        document.getElementById("spec_certification_targetdiv").addEventListener("record_updated", function (event) {
+
+            event.stopPropagation();
+            event.preventDefault();
+
+            if ($("#spec_certification .private-spec-body").length == 0 && $("#spec_certification .spec-body").length == 0) {
+                $(event.currentTarget).fadeIn();
+            }
+        }, true);
+
+        document.getElementById("spec_forign_lang_targetdiv").addEventListener("record_updated", function (event) {
+
+            event.stopPropagation();
+            event.preventDefault();
+
+            if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length == 0) {
+                $(event.currentTarget).fadeIn();
+            }
+        }, true);
+
+        !!callback && callback();
+    }();
 });
 
 function change_default_cert(subid) {
@@ -889,15 +908,15 @@ function ajaxDeletePrivateRecord(prvtId, cb) {
 }
 
 function singletonCallback(opt1, opt2, opt3, opt4) {
-    // debugger;
+    // 
 }
 
 function buttonCallback(opt1, opt2, opt3, opt4) {
-    // debugger;
+    // 
 }
 
 
-function getPrivateRecords() {
+function getPrivateRecords(callback) {
     $.ajax({
         type: 'GET',
         url: '/records/list',
@@ -921,7 +940,8 @@ function getPrivateRecords() {
                         console.error(e);
                         return 0;
                     }
-                })
+                });
+
                 res.result.forEach(function (item, idx) {
                     var data = JSON.parse(item.data);
                     data.certPrvtId = item.certPrvtId;
@@ -929,25 +949,12 @@ function getPrivateRecords() {
                         view_formatter[item.subCd](data);
                     }
                 });
+
                 $('.private-spec-body').on('click', singletonCallback);
                 $('.private-spec-body button').on('click', buttonCallback);
 
-                if ($("#spec_edu_detail .spec-body").length > 0 ||
-                    $("#spec_edu_detail .private-spec-body").length > 0) {
-                    $('#spec_edu_detail > .spec-body-default').hide();
-                }
-
-                if ($("#spec_forign_lang .spec-body").length > 0 ||
-                    $("#spec_forign_lang .private-spec-body").length > 0) {
-                    $('#spec_forign_lang > .spec-body-default').hide();
-                }
-
-                if ($("#spec_certification .spec-body").length > 0 ||
-                    $("#spec_certification .private-spec-body").length > 0) {
-                    $('#spec_certification > .spec-body-default').hide();
-                }
-
-                
+                refreshview();
+                !!callback && callback instanceof Function && callback(res);
                 // for (var i in res.result) {
                 //     var data = JSON.parse(res[i].data);
                 //     data.certPrvtId = res[i].certPrvtId;
@@ -958,7 +965,7 @@ function getPrivateRecords() {
     });
 }
 
-function request_agent() {
+function getAgentRecords(callback) {
 
     var emptyarray = [];
     setTxidList(emptyarray);
@@ -992,13 +999,7 @@ function request_agent() {
             clientsocket_listener();
             // loading css start
             setTimeout(function () {
-                $('.spec-body-loading').hide();
-                var privateDeletedEvent = document.createEvent('Event');
-                privateDeletedEvent.initEvent("record_updated", true, true);
-                document.getElementById("spec_edu_detail_targetdiv").dispatchEvent(privateDeletedEvent);
-                document.getElementById("spec_certification_targetdiv").dispatchEvent(privateDeletedEvent);
-                document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
-                refreshview(null);
+                callback();
             }, 1500);
 
         },
@@ -1006,9 +1007,15 @@ function request_agent() {
     });
 }
 
-function refreshview(records) {
-    $('.spec-body-loading').hide();
+function dispatchUpdateRecordEvent() {
+    var recordUpdateEvent = document.createEvent('Event');
+    recordUpdateEvent.initEvent("record_updated", true, true);
+    document.getElementById("spec_edu_detail_targetdiv").dispatchEvent(recordUpdateEvent);
+    document.getElementById("spec_certification_targetdiv").dispatchEvent(recordUpdateEvent);
+    document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(recordUpdateEvent);
+}
 
+function refreshview(records) {
     var recordList = {};
     var subid = "";
 
@@ -1110,22 +1117,23 @@ function refreshview(records) {
         var subid = recordList[i].subid;
         view_formatter[subid](recordList[i]);
     }
+    dispatchUpdateRecordEvent();
+}
 
-    //debugger;
-    if ($("#spec_edu_detail .spec-body").length > 0 ||
-        $("#spec_edu_detail .private-spec-body").length > 0) {
-        $('#spec_edu_detail > .spec-body-default').hide();
-    }
+function startLoading(cb) {
+    $(".spec-body-loading").each(function (idx, loadingDiv) {
+        setTimeout(function () {
+            $(loadingDiv).fadeIn().slideDown();
+        }, idx * 200)
+    });
+}
 
-    if ($("#spec_forign_lang .spec-body").length > 0 ||
-        $("#spec_forign_lang .private-spec-body").length > 0) {
-        $('#spec_forign_lang > .spec-body-default').hide();
-    }
-
-    if ($("#spec_certification .spec-body").length > 0 ||
-        $("#spec_certification .private-spec-body").length > 0) {
-        $('#spec_certification > .spec-body-default').hide();
-    }
+function finishLoading(cb) {
+    $(".spec-body-loading").each(function (idx, loadingDiv) {
+        setTimeout(function () {
+            $(loadingDiv).fadeOut().slideUp();
+        }, idx * 200)
+    });
 }
 
 function clientsocket_listener() {
