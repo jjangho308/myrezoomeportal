@@ -25,7 +25,6 @@ $(document).ready(function () {
                 oridata.push(objuserdata);
             } catch (exception) {
                 console.error(exception);
-                continue;
             }
         });
         // for (var i = 0; i < pagetxidlist.length; i++) {
