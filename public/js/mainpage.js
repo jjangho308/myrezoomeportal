@@ -32,6 +32,7 @@ $(document).ready(function () {
         refreshview(oridata);
         $('#initial-dialog .close-modal').click();
     } else {
+        startLoading();
         //session storage dont have user info(txid list)
         genRsaKey(function (err, keypair) {
             if (!!err) {
@@ -242,7 +243,62 @@ $(document).ready(function () {
                 range.find(".error-message").css("display", "none");
                 }
             }
-        }
+
+            var school_name = $("#school").val();
+            var degree = $("#score").val();
+            var total_degree = $("#total_score").val();
+            var start_date = $("#edu-startdate").val();
+            var end_date = $("#edu-enddate").val();
+            var status = $("#study-field").val();
+
+            // cert format
+            var param = {
+                school_name: school_name,
+                degree: degree + "/" + total_degree,
+                startdate: start_date,
+                enddate: end_date,
+                status: status
+            }
+
+            // cert encryption
+            var enc_record = JSON.stringify(param);
+
+            if (!is_error) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/records',
+                    headers: {
+                        'Authorization': client_authorization
+                    },
+                    data: JSON.stringify({
+                        orgCd: "UNV", // 코드 분기 필요
+                        subCd: "UNV", // 코드 분기 필요
+                        data: enc_record
+                    }),
+                    error: function (jqXhr, status, error) {
+                        console.error('/record Error : ' + error);
+                        console.error(jqXhr.responseText);
+                    },
+                    success: function (res) {
+                        $("#education-add-dialog .close-modal").click();
+                        $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
+                        $('#alarm-div').css("display", "block");
+                        $('#alarm-div').css("margin-right", "-108px");
+
+                        setTimeout(function () {
+                            $('#alarm-div').fadeOut('slow');
+                        }, 2000);
+
+                        //clean view
+                        $('.private-spec-body').remove();
+                        $('#spec_edu_detail > .spec-body-default').hide();
+
+                        getPrivateRecords();
+                    },
+                    contentType: 'application/json',
+                });
+            }
+        });
 
         var school_name = $("#school").val();
         var degree = $("#score").val();
@@ -825,30 +881,30 @@ $(document).ready(function () {
         });
     });
 
-    document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
-        // debugger;
-        event.stopPropagation();
-        event.preventDefault();
+        document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
+
+            event.stopPropagation();
+            event.preventDefault();
 
         if ($("#spec_edu_detail .private-spec-body").length == 0 && $("#spec_edu_detail .spec-body").length == 0) {
             $(event.currentTarget).show();
         }
     }, true);
 
-    document.getElementById("spec_certification_targetdiv").addEventListener("record_updated", function (event) {
-        // debugger;
-        event.stopPropagation();
-        event.preventDefault();
+        document.getElementById("spec_certification_targetdiv").addEventListener("record_updated", function (event) {
+
+            event.stopPropagation();
+            event.preventDefault();
 
         if ($("#spec_certification .private-spec-body").length == 0 && $("#spec_certification .spec-body").length == 0) {
             $(event.currentTarget).show();
         }
     }, true);
 
-    document.getElementById("spec_forign_lang_targetdiv").addEventListener("record_updated", function (event) {
-        // debugger;
-        event.stopPropagation();
-        event.preventDefault();
+        document.getElementById("spec_forign_lang_targetdiv").addEventListener("record_updated", function (event) {
+
+            event.stopPropagation();
+            event.preventDefault();
 
         if ($("#spec_forign_lang .private-spec-body").length == 0 && $("#spec_forign_lang .spec-body").length == 0) {
             $(event.currentTarget).show();
