@@ -187,8 +187,8 @@ $(document).ready(function () {
             range.find(".items").addClass("error");
             range.find(".error-message").css("display", "block");
             is_error = true;
-        }else if(date1 - date2 > 0){
-            is_error= true;
+        } else if (date1 - date2 > 0) {
+            is_error = true;
             period.addClass("error");
             range.find("button").addClass("error");
             range.find(".items").addClass("error");
@@ -199,7 +199,7 @@ $(document).ready(function () {
             period.removeClass("error");
             range.find("button").removeClass("error");
             range.find(".items").removeClass("error");
-            range.find(".error-message").css("display", "none");  
+            range.find(".error-message").css("display", "none");
         }
 
         var range = $("#score").closest(".error-range");
@@ -208,17 +208,40 @@ $(document).ready(function () {
             range.find(".items").addClass("error");
             range.find(".error-message").css("display", "block");
             is_error = true;
-        }else if(!$.isNumeric($("#education-add-dialog #score").val())){
+        } else if (!$.isNumeric($("#education-add-dialog #score").val())) {
             $("#score").addClass("error");
             range.find(".items").addClass("error");
             $("#education-add-dialog #score-error-message").text("학점은 숫자만 입력 가능합니다.");
             range.find(".error-message").css("display", "block");
             is_error = true;
-        } 
+        }
         else {
-            $("#score").removeClass("error");
-            range.find(".items").removeClass("error");
-            range.find(".error-message").css("display", "none");
+            if ($("#education-add-dialog #total_score").val() == 4.5) {
+                if ($("#education-add-dialog #score").val() > 4.5 || $("#education-add-dialog #score").val() < 0) {
+
+                    $("#score").addClass("error");
+                    range.find(".items").addClass("error");
+                    $("#education-add-dialog #score-error-message").text("학점 범위를 확인하세요");
+                    range.find(".error-message").css("display", "block");
+                    is_error = true;
+                } else {
+                    $("#score").removeClass("error");
+                    range.find(".items").removeClass("error");
+                    range.find(".error-message").css("display", "none");
+                }
+            } else if ($("#education-add-dialog #total_score").val() == 4.3) {
+                if ($("#education-add-dialog #score").val() > 4.3 || $("#education-add-dialog #score").val() < 0) {
+                    $("#score").addClass("error");
+                    range.find(".items").addClass("error");
+                    $("#education-add-dialog #score-error-message").text("학점 범위를 확인하세요");
+                    range.find(".error-message").css("display", "block");
+                    is_error = true;
+                } else {
+                    $("#score").removeClass("error");
+                    range.find(".items").removeClass("error");
+                    range.find(".error-message").css("display", "none");
+                }
+            }
         }
 
         var school_name = $("#school").val();
@@ -356,14 +379,14 @@ $(document).ready(function () {
                     $(this).next().show();
                 }
             }
-            else if(date1 - date2 > 0){
-                 is_error=true;
+            else if (date1 - date2 > 0) {
+                is_error = true;
 
-                 $("#language-add-dialog #langadd_startdate").addClass("error");
-                 $("#language-add-dialog #langadd_enddate").addClass("error");
-                 
-                 $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
-                 $("#language-add-dialog .error-message-period").show();
+                $("#language-add-dialog #langadd_startdate").addClass("error");
+                $("#language-add-dialog #langadd_enddate").addClass("error");
+
+                $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
+                $("#language-add-dialog .error-message-period").show();
             }
             else {
                 if ($(this).hasClass("study-period")) {
@@ -449,16 +472,16 @@ $(document).ready(function () {
                     $(this).addClass("error");
                     $(this).next().show();
                 }
-            } else if(date1 - date2 > 0){
-                is_error=true;
+            } else if (date1 - date2 > 0) {
+                is_error = true;
 
-                 $("#cert-add-dialog #certadd_startdate").addClass("error");
-                 $("#cert-add-dialog #certadd_enddate").addClass("error");
-                 
-                 $("#cert-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
-                 $("#cert-add-dialog .error-message-period").show();
+                $("#cert-add-dialog #certadd_startdate").addClass("error");
+                $("#cert-add-dialog #certadd_enddate").addClass("error");
+
+                $("#cert-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
+                $("#cert-add-dialog .error-message-period").show();
             }
-            
+
             else {
                 if ($(this).hasClass("study-period")) {
                     $(this).removeClass("error");
@@ -1150,8 +1173,8 @@ function clientsocket_listener() {
 
             var decrypted = CryptoJS.AES.decrypt(omsg.records[i].data, CryptoJS.enc.Base64.parse(
                 decryptedKey), {
-                iv: CryptoJS.enc.Base64.parse(recv_iv)
-            });
+                    iv: CryptoJS.enc.Base64.parse(recv_iv)
+                });
             console.log(decrypted.toString(CryptoJS.enc.Utf8));
             omsg.records[i].data = decrypted.toString(CryptoJS.enc.Utf8);
 
