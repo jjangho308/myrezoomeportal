@@ -374,3 +374,30 @@ box-shadow:0 2px 5px 0 rgba(191,191,191,0.5);
     display: inline-table;
     margin-right: 10px;
   }
+
+  .cert-container-issue-date-p {
+    font-size: 10px;
+    padding-top: 15px;
+    border-top: solid 1px #dfe5ef;
+    color: #a9afb3;
+  }
+
+  .cert-container-issue-title-p {
+    font-size: 20px;
+    color: #838384;
+    margin-bottom: 25px;
+    height: 33px;
+  }
+
+  .cert-container-issue-fix-title-p {
+    font-size: 15px;
+    margin-bottom: 3px;
+    color: #838384;
+  }
+
+  .cert-container-org-img {
+    width: 67px;
+    height: 67px;
+    margin-bottom: 15px;
+    margin-top: -8px;
+  }
