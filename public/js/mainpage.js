@@ -821,7 +821,7 @@ $(document).ready(function () {
         });
 
         document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
-
+            
             event.stopPropagation();
             event.preventDefault();
 
@@ -1139,7 +1139,7 @@ function startLoading(cb) {
     $(".spec-body-loading").each(function (idx, loadingDiv) {
         setTimeout(function () {
             $(loadingDiv).fadeIn().slideDown();
-        }, idx * 200)
+        }, idx * 200);
     });
 }
 
@@ -1147,7 +1147,7 @@ function finishLoading(cb) {
     $(".spec-body-loading").each(function (idx, loadingDiv) {
         setTimeout(function () {
             $(loadingDiv).fadeOut().slideUp();
-        }, idx * 200)
+        }, idx * 200);
     });
 }
 
@@ -1182,12 +1182,10 @@ function clientsocket_listener() {
             try {
                 setData(omsg.records[i]);
             } catch (exception) {
-                console.log(exception);
-                //continue;
+                console.error(exception);
             }
         }
         refreshview(omsg.records);
-
     });
 }
 
