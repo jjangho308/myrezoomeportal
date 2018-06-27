@@ -1169,9 +1169,9 @@ function clientsocket_listener() {
 }
 
 function firstLogin() {
-    $(".section-1 button").click(function () {
-        $('.section-1').css("display", "none");
-        $('.section-3').css("display", "block");
+    $(".inital-section-1 button").click(function () {
+        $('.inital-section-1').css("display", "none");
+        $('.inital-section-3').css("display", "block");
 
         setTimeout(function () {
             $('.ko-progress-circle').attr('data-progress', 20);
@@ -1187,7 +1187,7 @@ function firstLogin() {
 
             setTimeout(function () {
                 $('.percentage span').css("display", "none");
-                $('.section-3 button').prop("disabled", false);
+                $('.inital-section-3 button').prop("disabled", false);
 
                 $('.percentage img').css("display", "block");
 
@@ -1196,7 +1196,7 @@ function firstLogin() {
         }, 2000);
     });
 
-    $(".section-3 button").click(function () {
+    $(".inital-section-3 button").click(function () {
         $('#initial-dialog .close-modal').click();
     });
 

@@ -24,7 +24,7 @@ module.exports = (req, res, next) => {
         req.cookies.JWT;
 
     if (!token) {
-        return res.status(HttpStatusCode.SEE_OTHER).redirect('/signin?url=' + `${req.protocol}://${req.hostname}${req.originalUrl}`);
+        return res.status(HttpStatusCode.SEE_OTHER).redirect('/signin?url=' + `${req.protocol}://${req.hostname}:${req.app.settings.port}${req.originalUrl}`);
         // next(new ResponseError({
         //     code: ErrorCode.AUTH_ERROR,
         //     status: HttpStatusCode.UNAUTHORIZED,
@@ -38,7 +38,7 @@ module.exports = (req, res, next) => {
         req.body.uId = verified.data.uId;
         next();
     } catch (err) {
-        return res.status(HttpStatusCode.SEE_OTHER).redirect('/signin?url=' + `${req.protocol}://${req.hostname}${req.originalUrl}`);
+        return res.status(HttpStatusCode.SEE_OTHER).redirect('/signin?url=' + `${req.protocol}://${req.hostname}:${req.app.settings.port}${req.originalUrl}`);
         // next(new ResponseError({
         //     code: ErrorCode.AUTH_ERROR,
         //     status: HttpStatusCode.UNAUTHORIZED,
