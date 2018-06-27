@@ -268,7 +268,7 @@ $(document).ready(function () {
 
                 $(".major").each(function () {
                     var element = $(this);
-                    if(element.val()!=""){
+                    if (element.val() != "") {
                         majors.push(element.val());
                     }
                 });
@@ -994,9 +994,6 @@ function getPrivateRecords(callback) {
                         }
                     });
 
-                    $('.private-spec-body').on('click', singletonCallback);
-                    $('.private-spec-body button').on('click', buttonCallback);
-
                     setPrivateData(res.result);
                     refreshview();
                     !!callback && callback instanceof Function && callback(res);
@@ -1014,7 +1011,6 @@ function getPrivateRecords(callback) {
 }
 
 function getAgentRecords(callback) {
-
     var emptyarray = [];
     setTxidList(emptyarray);
 
@@ -1208,8 +1204,8 @@ function clientsocket_listener() {
 
             var decrypted = CryptoJS.AES.decrypt(omsg.records[i].data, CryptoJS.enc.Base64.parse(
                 decryptedKey), {
-                    iv: CryptoJS.enc.Base64.parse(recv_iv)
-                });
+                iv: CryptoJS.enc.Base64.parse(recv_iv)
+            });
             console.log(decrypted.toString(CryptoJS.enc.Utf8));
             omsg.records[i].data = decrypted.toString(CryptoJS.enc.Utf8);
 
