@@ -266,6 +266,8 @@ $(document).ready(function () {
                 
                 $(".major").each(function () {
                     var element = $(this);
+                    var range = element.closest(".error-range");
+                    
                     if (element.val() != "") {
                         majors.push(element.val());
                         console.log(range.find("#majorstatus").val());
