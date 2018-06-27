@@ -772,7 +772,7 @@ $(document).ready(function () {
         });
 
         $('#refresh_record').click(function () {
-            $('.spec-body-loading').fadeIn();
+            startLoading();
             // $('.spec-body-default').hide();
             getRSAKey();
             var jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
@@ -821,7 +821,7 @@ $(document).ready(function () {
         });
 
         document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
-            
+
             event.stopPropagation();
             event.preventDefault();
 

@@ -115,6 +115,7 @@
             htmldiv = htmldiv + '</div>';
             var qDiv = $(htmldiv).hide();
             $('#spec_forign_lang').append(qDiv);
+            debugger;
             qDiv.fadeIn();
             dispatchUpdateRecordEvent();
         },
@@ -140,7 +141,9 @@
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")><span class="spec-body-btn-name">더 보기</span><span class="spec-body-count">+' + record.count + '</span></button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
-            $('#spec_certification').append(htmldiv);
+            var qDiv = $(htmldiv);
+            $('#spec_certification').append(qDiv);
+            qDiv.fadeIn();
             $('#spec_certification > .spec-body-default').hide();
         },
 
