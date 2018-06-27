@@ -84,7 +84,16 @@ function loadcertlist() {
 
             certlistresult.forEach(function (item) {
 
+                var current_time = new Date();
+                var item_time_convert = new Date(item.date);
+                var fromnowsecond =  (current_time - item_time_convert) / 1000;
+                
                 var htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '")>';
+
+                if(fromnowsecond < 30) {
+                    htmldiv = '<div class="cert-container" tabindex="1" onclick=certredirect("' + item.certId + '") style="border-color:#4c80f1;")>';
+                    htmldiv = htmldiv + '<img class="certnewimg" src="img/certviewer/cert-new-icon.svg" alt="">';
+                }
                 
                 htmldiv = htmldiv + '<p><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certdelete("' + item.certId + '")></p>';
 
@@ -106,17 +115,6 @@ function loadcertlist() {
                 htmldiv = htmldiv + '<p>증명서</p>';
                 htmldiv = htmldiv + '<p>' + item.title + '</p>';
                 htmldiv = htmldiv + '<p>발급일시 : ' + formatDateYYYYMMDDHHMM(item.date) + '</p>';
-
-                var current_time = new Date();
-                var item_time_convert = new Date(item.date);
-                var fromnowsecond =  (current_time - item_time_convert) / 1000;
-
-                if(fromnowsecond < 30) {
-                    console.log("30 second under");
-                    htmldiv = htmldiv + '<img class="certnewimg" src="img/certviewer/cert-new-icon.svg" alt="">';
-                    
-                }
-
                 htmldiv = htmldiv + '</div>';
 
                 divContainer.append(htmldiv);                
