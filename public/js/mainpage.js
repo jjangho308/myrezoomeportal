@@ -947,7 +947,7 @@ function getPrivateRecords() {
                     $('#spec_certification > .spec-body-default').hide();
                 }
 
-
+                
                 // for (var i in res.result) {
                 //     var data = JSON.parse(res[i].data);
                 //     data.certPrvtId = res[i].certPrvtId;
