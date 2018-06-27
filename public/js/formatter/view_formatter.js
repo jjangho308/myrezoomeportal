@@ -115,8 +115,7 @@
             htmldiv = htmldiv + '</div>';
             var qDiv = $(htmldiv).hide();
             $('#spec_forign_lang').append(qDiv);
-            qDiv.fadeIn('slow');
-            dispatchUpdateRecordEvent();
+            qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
         },
 
         "RCCNF0001": function viewformatter(record) {
@@ -142,7 +141,7 @@
             htmldiv = htmldiv + '</div>';
             var qDiv = $(htmldiv);
             $('#spec_certification').append(qDiv);
-            qDiv.fadeIn('slow');
+            qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
             $('#spec_certification > .spec-body-default').hide();
         },
 
@@ -201,7 +200,7 @@
                 htmldiv = htmldiv + '</div>';
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
-                qDiv.fadeIn('slow');
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -241,7 +240,7 @@
                 htmldiv = htmldiv + '</div>';
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
-                qDiv.fadeIn('slow');
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -277,7 +276,7 @@
                 htmldiv = htmldiv + '</div>';
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
-                qDiv.fadeIn('slow');
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -317,7 +316,7 @@
 
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
-                qDiv.fadeIn('slow');
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -352,7 +351,7 @@
 
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
-                qDiv.fadeIn('slow');
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -392,7 +391,7 @@
 
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
-                qDiv.fadeIn('slow');
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -427,7 +426,7 @@
 
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
-                qDiv.fadeIn('slow');
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -468,7 +467,7 @@
 
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
-                qDiv.fadeIn('slow');
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -608,7 +607,7 @@
 
             var qContainer = $(specContainer).hide();
             $('#spec_edu_detail').append(qContainer);
-            qContainer.fadeIn('slow');
+            qContainer.fadeIn('slow', dispatchUpdateRecordEvent);
             $('#spec_edu_detail > .spec-body-default').hide();
         },
 
@@ -769,7 +768,7 @@
             }());
 
             var qContainer = $(specContainer).hide();
-            qContainer.fadeIn('slow');
+            qContainer.fadeIn('slow', dispatchUpdateRecordEvent);
             $('#spec_forign_lang').append(qContainer);
             $('#spec_forign_lang > .spec-body-default').hide();
         },
@@ -903,7 +902,7 @@
 
             var qContainer = $(specContainer).hide();
             $('#spec_certification').append(qContainer);
-            qContainer.fadeIn('slow');
+            qContainer.fadeIn('slow', dispatchUpdateRecordEvent);
             $('#spec_certification > .spec-body-default').hide();
         },
     };
