@@ -51,9 +51,7 @@ function setData(record) {
     // dcript data
     console.log(record.data);
     record.data = JSON.parse(record.data);
-
     sessionStorage.setItem(record.txid, JSON.stringify(record));
-
     addTxidList(record.txid);
 }
 
@@ -71,13 +69,13 @@ function genRsaKey(callback) {
             try {
                 if (!!workerResult.data) {
                     setRSAKey(JSON.parse(workerResult.data));
-                    callback(null, workerResult);
+                    !!callback && callback instanceof Function && callback(null, workerResult);
                 } else {
-                    callback(new Error("Couldn't generate RSA Keypair"));
+                    !!callback && callback instanceof Function && callback(new Error("Couldn't generate RSA Keypair"));
                 }
             } catch (e) {
                 console.error(JSON.stringify(e));
-                callback(new Error("Couldn't generate RSA Keypair"));
+                !!callback && callback instanceof Function && callback(new Error("Couldn't generate RSA Keypair"));
             } finally {
                 generateWorker.terminate();
             }
@@ -100,7 +98,7 @@ function genRsaKey(callback) {
             })
             .then(function (rsaKeypair) {
                 setRSAKey(rsaKeypair);
-                callback(null, rsaKeypair);
+                !!callback && callback instanceof Function && callback(null, rsaKeypair);
             })
             .catch(function (e) {
                 console.error(e);
@@ -115,9 +113,9 @@ function genRsaKey(callback) {
                 rsakey_prv: KEYUTIL.getJWKFromKey(rsaKeyPair.prvKeyObj)
             };
             setRSAKey(rsaKeypair);
-            !!callback ? callback(null, rsaKeypair) : null;
+            !!callback && callback instanceof Function && callback(null, rsaKeypair);
         } catch (e) {
-            !!callback ? callback(e) : null;
+            !!callback && callback instanceof Function && callback(e);
         }
     }, 0);
 }
@@ -430,21 +428,19 @@ function base64toHEX(base64) {
 
 function formatDate(date) {
 
-    if(date.length == 8) {
+    if (date.length == 8) {
         //YYYYMMDD
-        var year = date.substring(0,4),
-            month = date.substring(4,6),
-            day = date.substring(6,8);
+        var year = date.substring(0, 4),
+            month = date.substring(4, 6),
+            day = date.substring(6, 8);
         return [year, month, day].join('-');
-    }
-    else if(date.length == 14) {
+    } else if (date.length == 14) {
         //YYYY / MM / DD
-        var year = date.substring(0,4),
-            month = date.substring(7,9),
-            day = date.substring(12,14);
+        var year = date.substring(0, 4),
+            month = date.substring(7, 9),
+            day = date.substring(12, 14);
         return [year, month, day].join('-');
-    }
-    else {
+    } else {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
@@ -463,28 +459,26 @@ function formatDate(date) {
 
 function formatDateYYYYMMDDHHMM(date) {
 
-    if(date.length == 8) {
+    if (date.length == 8) {
         //YYYYMMDD
-        var year = date.substring(0,4),
-            month = date.substring(4,6),
-            day = date.substring(6,8);
+        var year = date.substring(0, 4),
+            month = date.substring(4, 6),
+            day = date.substring(6, 8);
         return [year, month, day].join('-');
-    }
-    else if(date.length == 14) {
+    } else if (date.length == 14) {
         //YYYY / MM / DD
-        var year = date.substring(0,4),
-            month = date.substring(7,9),
-            day = date.substring(12,14);
+        var year = date.substring(0, 4),
+            month = date.substring(7, 9),
+            day = date.substring(12, 14);
         return [year, month, day].join('-');
-    }
-    else {
+    } else {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
             year = d.getFullYear(),
             hour = d.getHours(),
             minute = d.getMinutes();
-            
+
 
         if (month.length < 2) {
             month = '0' + month;
@@ -493,7 +487,7 @@ function formatDateYYYYMMDDHHMM(date) {
             day = '0' + day;
         }
 
-        var converttext = [year, month, day].join('-') + " " + pad(hour,2) + ":" + pad(minute,2);
+        var converttext = [year, month, day].join('-') + " " + pad(hour, 2) + ":" + pad(minute, 2);
 
         return converttext;
     }
@@ -502,4 +496,18 @@ function formatDateYYYYMMDDHHMM(date) {
 function pad(n, width) {
     n = n + '';
     return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
-  }
+}
+
+function setPrivateData(records) {
+    sessionStorage.setItem("privaterecord", JSON.stringify(records));
+}
+
+function getPrivateData() {
+    var sessionData = sessionStorage.getItem("privaterecord") || '{}';
+    try {
+        return JSON.parse(sessionData);
+    } catch (e) {
+        console.log(e);
+        return {};
+    }
+}

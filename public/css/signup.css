@@ -283,3 +283,7 @@ input[type="password"]::-webkit-input-placeholder {
     display: none;
     height: 0;
 }
+
+.error-message {
+    top: -24px;
+}

@@ -17,9 +17,9 @@
                     return console.error(err);
                 } else if (response.result === true) {
                     recordContainer.remove();
-                    var privateDeletedEvent = document.createEvent('Event');
-                    privateDeletedEvent.initEvent("record_updated", true, true);
-                    document.getElementById(eventTargetId).dispatchEvent(privateDeletedEvent);
+                    var privateRecordUpdateEvent = document.createEvent('Event');
+                    privateRecordUpdateEvent.initEvent("record_updated", true, true);
+                    document.getElementById(eventTargetId).dispatchEvent(privateRecordUpdateEvent);
                 }
             });
         } else {
@@ -43,7 +43,7 @@
     //                 container.remove();
     //                 var privateDeletedEvent = document.createEvent('Event');
     //                 privateDeletedEvent.initEvent('cert_private_deleted', true, true);
-    //                 document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
+    //                 document.getElementById("spec_foreign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
     //             }
     //         };
     //     }(event.currentTarget.parentElement.parentElement));
@@ -86,7 +86,7 @@
     //                 container.remove();
     //                 var privateDeletedEvent = document.createEvent('Event');
     //                 privateDeletedEvent.initEvent('lang_private_deleted', true, true);
-    //                 document.getElementById("spec_forign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
+    //                 document.getElementById("spec_foreign_lang_targetdiv").dispatchEvent(privateDeletedEvent);
     //             }
     //         };
     //     }(event.currentTarget.parentElement.parentElement));
@@ -113,8 +113,10 @@
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")><span class="spec-body-btn-name">더 보기</span><span class="spec-body-count">+' + record.count + '</span></button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
-            $('#spec_forign_lang').append(htmldiv);
-            $('#spec_forign_lang > .spec-body-default').hide();
+            var qDiv = $(htmldiv).hide();
+            $('#spec_foreign_lang').append(qDiv);
+            qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
+            $('#spec_foreign_lang > .spec-body-default').fadeOut();
         },
 
         "RCCNF0001": function viewformatter(record) {
@@ -138,8 +140,10 @@
             htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")><span class="spec-body-btn-name">더 보기</span><span class="spec-body-count">+' + record.count + '</span></button>';
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
-            $('#spec_certification').append(htmldiv);
-            $('#spec_certification > .spec-body-default').hide();
+            var qDiv = $(htmldiv);
+            $('#spec_certification').append(qDiv);
+            qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
+            $('#spec_certification > .spec-body-default').fadeOut();
         },
 
         // "RCLPT0006": function viewformatter(record) {
@@ -163,8 +167,8 @@
         //     htmldiv = htmldiv + '<button id="btn_change_' + record.subid + '" onclick=change_default_cert("' + record.subid + '")>변경</button>';
         //     htmldiv = htmldiv + '</div>';
         //     htmldiv = htmldiv + '</div>';
-        //     $('#spec_forign_lang').append(htmldiv);
-        //     $('#spec_forign_lang > .spec-body-default').hide();
+        //     $('#spec_foreign_lang').append(htmldiv);
+        //     $('#spec_foreign_lang > .spec-body-default').hide();
         // },
 
         "RCOGC0008": function viewformatter(record) {
@@ -195,7 +199,9 @@
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -233,7 +239,9 @@
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0009">' + (total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -267,7 +275,9 @@
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -304,7 +314,10 @@
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -336,7 +349,10 @@
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -373,7 +389,10 @@
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0013">' + (total / record.scoreStatisticList.length).toFixed(2) + ' / 4.5' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -405,7 +424,10 @@
                 htmldiv = htmldiv + '<p id="edu-p-RCOGC0015">' + '</p>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -443,7 +465,10 @@
                 //htmldiv = htmldiv + '<button id="btn_change_'+record.subid+'" onclick=change_default_cert("' + record.subid + '")>변경</button>';
                 htmldiv = htmldiv + '</div>';
                 htmldiv = htmldiv + '</div>';
-                $('#spec_edu_detail').append(htmldiv);
+
+                var qDiv = $(htmldiv);
+                $('#spec_edu_detail').append(qDiv);
+                qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
                 $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
@@ -542,7 +567,17 @@
 
                 specRightContainer.appendChild(function () {
                     var p = document.createElement("p");
-                    p.innerHTML = record.status;
+
+                    var status_string="";
+
+                    if(!!record.majors && !!record.majorstatus){
+                        for(i=0; i<record.majors.length; i++){
+                            status_string=status_string+record.majors[i]+record.majorstatus[i]+",";
+                        }
+                        status_string=status_string+record.status;
+                        status_string="학사과정,"+status_string;
+                    }
+                    p.innerHTML = status_string;
                     return p;
                 }());
 
@@ -580,7 +615,10 @@
 
                 return specRightContainer;
             }());
-            $('#spec_edu_detail').append(specContainer);
+
+            var qContainer = $(specContainer).hide();
+            $('#spec_edu_detail').append(qContainer);
+            qContainer.fadeIn('slow', dispatchUpdateRecordEvent);
             $('#spec_edu_detail > .spec-body-default').hide();
         },
 
@@ -637,8 +675,8 @@
             // htmldiv = htmldiv + '<button onclick=delete_private_record("' + record.certPrvtId + '")><span class="spec-body-btn-name">삭제</span></button>';
             // htmldiv = htmldiv + '</div>';
             // htmldiv = htmldiv + '</div>';
-            // $('#spec_forign_lang').append(htmldiv);
-            // $('#spec_forign_lang > .spec-body-default').hide();
+            // $('#spec_foreign_lang').append(htmldiv);
+            // $('#spec_foreign_lang > .spec-body-default').hide();
 
             var specContainer = document.createElement("div");
             specContainer.className = "private-spec-body"
@@ -724,7 +762,7 @@
                         deletePrivateRecord(
                             event.currentTarget.nextElementSibling.value,
                             event.currentTarget.parentElement.parentElement,
-                            "spec_forign_lang"
+                            "spec_foreign_lang"
                         )
                     }, true);
                     return deleteButton;
@@ -740,8 +778,10 @@
                 return specRightContainer;
             }());
 
-            $('#spec_forign_lang').append(specContainer);
-            $('#spec_forign_lang > .spec-body-default').hide();
+            var qContainer = $(specContainer).hide();
+            qContainer.fadeIn('slow', dispatchUpdateRecordEvent);
+            $('#spec_foreign_lang').append(qContainer);
+            $('#spec_foreign_lang > .spec-body-default').hide();
         },
 
         "OGC": function viewformatter(record) {
@@ -871,7 +911,9 @@
                 return specRightContainer;
             }());
 
-            $('#spec_certification').append(specContainer);
+            var qContainer = $(specContainer).hide();
+            $('#spec_certification').append(qContainer);
+            qContainer.fadeIn('slow', dispatchUpdateRecordEvent);
             $('#spec_certification > .spec-body-default').hide();
         },
     };

@@ -64,7 +64,7 @@
             "address": "localhost",
             "port": 19229,
             "localRoot": "${workspaceFolder}",
-            "remoteRoot": "/home/rezoomer/git/rezoome",
+            "remoteRoot": "/home/rezoomer/git/rezoome/",
             "protocol": "inspector"
         },
         {
@@ -74,7 +74,7 @@
             "address": "localhost",
             "port": 29229,
             "localRoot": "${workspaceFolder}",
-            "remoteRoot": "/home/rezoomer/git/rezoome",
+            "remoteRoot": "/home/rezoomer/git/rezoome/",
             "protocol": "inspector"
         },
 
