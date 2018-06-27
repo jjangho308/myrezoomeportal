@@ -17,9 +17,9 @@
                     return console.error(err);
                 } else if (response.result === true) {
                     recordContainer.remove();
-                    var privateDeletedEvent = document.createEvent('Event');
-                    privateDeletedEvent.initEvent("record_updated", true, true);
-                    document.getElementById(eventTargetId).dispatchEvent(privateDeletedEvent);
+                    var privateRecordUpdateEvent = document.createEvent('Event');
+                    privateRecordUpdateEvent.initEvent("record_updated", true, true);
+                    document.getElementById(eventTargetId).dispatchEvent(privateRecordUpdateEvent);
                 }
             });
         } else {
