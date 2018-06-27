@@ -1206,7 +1206,7 @@ function refreshview(records, callback) {
                 }
             }
         } catch (exception) {
-            continue;
+            console.error(exception);
         }
     });
 
