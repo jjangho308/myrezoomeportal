@@ -2,6 +2,8 @@ $(document).ready(function () {
 
     var emailPattern = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     var passwordPattern = new RegExp(/[\w]{8,12}/);
+    var phonePattern = new RegExp(/^\d{3}-\d{3,4}-\d{4}$/);
+    var confirmPhonePattern = new RegExp(/^\d{6}$/);
 
     //최상단 체크박스 클릭
     $("#box-all").click(function () {
@@ -24,9 +26,9 @@ $(document).ready(function () {
     // })
 
     document.getElementById("confirm-phone-input").addEventListener("input", function (event) {
-        if (emailPattern.test(this.value())) {
+        if (emailPattern.test($(this).val())) {
             $("input").eq(0).removeClass("input_error");
-            $(".info-message-1").show();
+            //$(".info-message-1").show();
             $(".error-message").eq(0).hide();
             $('button.phone-send')[0].disabled = this.value === "";
         } else {
@@ -35,6 +37,31 @@ $(document).ready(function () {
             $(".error-message").eq(0).show();
         }
     });
+
+    $("#signup_carrierName").on("change", function(){
+        if (phonePattern.test($("#signup_phone").val()) && $("#signup_carrierName").val() != "") {            
+            $(".phone-send").eq(1).attr("disabled", false);
+        } else {
+            $(".phone-send").eq(1).attr("disabled", true);
+        }
+    });
+
+    document.getElementById("signup_phone").addEventListener("input", function (event) {        
+        console.log($("#signup_carrierName").val());
+        if (phonePattern.test($("#signup_phone").val()) && $("#signup_carrierName").val() != "") {            
+            $(".phone-send").eq(1).attr("disabled", false);
+        } else {
+            $(".phone-send").eq(1).attr("disabled", true);
+        }
+    });
+
+    document.getElementById("confirm_verify_phone").addEventListener("input", function (event) {        
+        if (confirmPhonePattern.test($(this).val())) {            
+            $(".phone-confirm").attr("disabled", false);
+        } else {
+            $(".phone-confirm").attr("disabled", true);
+        }
+    });   
 
     document.getElementById("signup_pw").addEventListener("input", function (event) {
         if (this.value.length > 0) {
@@ -73,6 +100,7 @@ $(document).ready(function () {
         }
     });
 
+    /*
     $(".phone-send").click(function (event) {
         var value = $("#confirm-phone-input").val();
         if (!emailPattern.test(value)) {
@@ -89,6 +117,7 @@ $(document).ready(function () {
             $(".phone-confirm").prop("disabled", false);
         }
     });
+    */
 
     $(".phone-confirm").click(function () {
         $(".info-message-2").css("display", "block");
@@ -162,6 +191,18 @@ $(document).ready(function () {
                 }
             }
         });
+    });
+
+    $(".phone-send").eq(0).click(function(){
+        var email = $("#confirm-phone-input").val();
+        console.log(email);
+        
+    });
+
+    $(".phone-send").eq(1).click(function(){        
+        var telecom = $(".item").html();
+        var phone = $("#signup_phone").val();        
+        console.log(telecom + phone);
     });
 
 })
