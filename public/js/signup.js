@@ -195,8 +195,28 @@ $(document).ready(function () {
 
     $(".phone-send").eq(0).click(function(){
         var email = $("#confirm-phone-input").val();
-        console.log(email);
         
+        $.ajax({
+            type: "POST",
+            url: "/signup/confirm",
+            data: JSON.stringify({email: email}),
+            dataType: "JSON",
+            success: function (response) {                
+                if(!!response.err && response.err.code == "301") {
+                    $(".error-message").eq(0).html("이미 등록된 Email 주소입니다.").show();
+                } else {
+                    
+                }
+            },
+            error: function (request, status, error) {
+                if (request.responseJSON.code == "ER_DUP_ENTRY") {
+                    $("input").eq(0).addClass("input_error");
+                    $(".error-message").eq(0).css("display", "block");
+                    $(".error-message").eq(0).html("이미가입된ID가있다");
+                }
+            },
+            contentType: 'application/json'
+        });        
     });
 
     $(".phone-send").eq(1).click(function(){        
