@@ -115,7 +115,6 @@
             htmldiv = htmldiv + '</div>';
             var qDiv = $(htmldiv).hide();
             $('#spec_forign_lang').append(qDiv);
-            debugger;
             qDiv.fadeIn('slow');
             dispatchUpdateRecordEvent();
         },
