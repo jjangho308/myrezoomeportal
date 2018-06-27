@@ -165,7 +165,7 @@ $(document).ready(function () {
                             category = "자격";
                         } else if (subid == "RCLPT0005") {
                             category = "어학";
-                        } else if (subid == "RCOGC0008" || subid == "RCOGC0009" || subid == "RCOGC0010" || subid == "RCOGC0011") {
+                        } else if (subid == "RCOGC0008" || subid == "RCOGC0009" || subid == "RCOGC0010" || subid == "RCOGC0011" || subid == "RCOGC0012" || subid == "RCOGC0013" || subid == "RCOGC0014"|| subid == "RCOGC0015"  ) {
                             category = "학력";
                         }
 
