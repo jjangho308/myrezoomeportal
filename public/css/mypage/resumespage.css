@@ -2,7 +2,10 @@
     display: block;
 }
 
-
+  #add-resumes-dialog tbody{
+    
+  height: 380px;  
+  }
 
 #add-resumes-dialog th:nth-child(1){
     width: 61px;
