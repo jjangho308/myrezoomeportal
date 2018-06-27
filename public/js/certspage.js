@@ -95,7 +95,7 @@ function loadcertlist() {
                     htmldiv = htmldiv + '<img class="certnewimg" src="img/certviewer/cert-new-icon.svg" alt="">';
                 }
                 
-                htmldiv = htmldiv + '<p class="trash-p"><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume" onclick=certdelete("' + item.certId + '")></p>';
+                htmldiv = htmldiv + '<p class="trash-p"><img style="z-index:999" src="/img/resume-store/trash.svg" alt="" class="more-store-resume cert-trash-img" onclick=certdelete("' + item.certId + '")></p>';
 
                 // 일단 subid 별로 하나씩 분기 태우지만 subcd 같은 공통 코드를 통해 졸업서, 성적서 등등으로 구분할수 있어야함.
                 if(item.subId == 'RCOGC0008' || item.subId == 'RCOGC0009') {
