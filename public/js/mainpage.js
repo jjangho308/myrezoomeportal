@@ -253,11 +253,27 @@ $(document).ready(function () {
                 }
 
                 var school_name = $("#school").val();
+
                 var degree = $("#score").val();
                 var total_degree = $("#total_score").val();
+
                 var start_date = $("#edu-startdate").val();
                 var end_date = $("#edu-enddate").val();
                 var status = $("#study-field").val();
+
+
+                var majors = new Array;
+                // var major = $("#education-add-dialog #first-major").val();
+                // majors.push(major);
+
+                $(".major").each(function () {
+                    var element = $(this);
+                    if(element.val()!=""){
+                        majors.push(element.val());
+                    }
+                });
+
+                console.log(majors);
 
                 // cert format
                 var param = {
@@ -1192,8 +1208,8 @@ function clientsocket_listener() {
 
             var decrypted = CryptoJS.AES.decrypt(omsg.records[i].data, CryptoJS.enc.Base64.parse(
                 decryptedKey), {
-                iv: CryptoJS.enc.Base64.parse(recv_iv)
-            });
+                    iv: CryptoJS.enc.Base64.parse(recv_iv)
+                });
             console.log(decrypted.toString(CryptoJS.enc.Utf8));
             omsg.records[i].data = decrypted.toString(CryptoJS.enc.Utf8);
 
