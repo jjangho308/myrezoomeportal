@@ -958,6 +958,7 @@ $(document).ready(function () {
                 console.log('prevent!!');
                 return;
             } else {
+                processingRefresh = true;
                 clearRecords();
                 startLoading();
                 getRSAKey();
@@ -1443,11 +1444,10 @@ function refreshview(records, callback) {
         view_formatter[subid](recordList[i]);
     }
 
-    if(recordList.length == 0){
+    if (recordList.length == 0) {
         // 하나도 없을 때 event 한번 발생시킴
         dispatchUpdateRecordEvent();
-    }
-    !!callback && callback instanceof Function && callback();
+    }!!callback && callback instanceof Function && callback();
 }
 
 function clientsocket_listener() {
@@ -1632,18 +1632,23 @@ function addMajorDelete(imgElement) {
 }
 
 function startLoading(cb) {
-    var loadings = $(".spec-body-loading");
-    loadings.each(function (idx, loadingDiv) {
-        setTimeout(function () {
-            $(loadingDiv).fadeIn().slideDown();
+    this.lock = this.lock || false;
+    if (!this.lock) {
+        this.lock = true;
+        var loadings = $(".spec-body-loading");
+        loadings.each(function (idx, loadingDiv) {
+            setTimeout(function () {
+                $(loadingDiv).fadeIn().slideDown();
 
-            // 혹시나 Loading이 끝나지 않을 경우를 대비하여
-            if (idx == loadings.length - 1) {
-                setTimeout(finishLoading, 5000);
-            }
-        }, idx * 200);
-    });
-    !!cb && cb instanceof Function && cb();
+                // 혹시나 Loading이 끝나지 않을 경우를 대비하여
+                if (idx == loadings.length - 1) {
+                    this.lock = false;
+                    setTimeout(finishLoading, 5000);
+                }
+            }, idx * 200);
+        });
+        !!cb && cb instanceof Function && cb();
+    }
 }
 
 function finishLoading(cb) {
