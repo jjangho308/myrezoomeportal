@@ -7,75 +7,76 @@ require socket.is
  * Ready initializer. <br />
  */
 $(document).ready(function () {
-    var client_token = window.client_token = getCookie("JWT");
-    var client_authorization = window.client_authorization = 'Bearer ' + client_token;
-
-    socket = io();
-
-    //request to agent for get user info
-    var pagetxidlist = getTxidList();
-
-    // 왜 0이 아니고 1 초과일때지?
-    if (pagetxidlist.length > 0) {
-        //sessing storage have user info (txid list)
-        var oridata = [];
-        pagetxidlist.forEach(function (item) {
-            try {
-                var objuserdata = getData(item);
-                oridata.push(objuserdata);
-            } catch (exception) {
-                console.error(exception);
-            }
-        });
-        // for (var i = 0; i < pagetxidlist.length; i++) {
-        //     try {
-        //         var objuserdata = getData(pagetxidlist[i]);
-        //         oridata.push(objuserdata);
-        //     } catch (exception) {
-        //         console.error(exception);
-        //         continue;
-        //     }
-        // }
-        // $('.spec-body-default').fadeIn();
-        $('#initial-dialog .close-modal').click();
-        refreshview(oridata, function () {
-            getPrivateRecords(function (err, res) {
-                if (!!err) {
-                    return
-                } else {
-                    return refreshview(null, finishLoading);
-                }
-            });
-        });
-    } else {
-        startLoading();
-        //session storage dont have user info(txid list)
-        genRsaKey(function (err, keypair) {
-            if (!!err) {
-                console.error(JSON.stringify(err));
-            } else if (!!keypair) {
-                getAgentRecords(function (err, res) {
-                    getPrivateRecords(function (err, res) {
-                        refreshview(null, finishLoading);
-                    });
-                });
-            }
-        });
-    }
 
     /**
-     * Ajax request container. <br />
+     * Global variables. <br />
+     */
+    /**
+     * JWT for rezoome portal.
+     */
+    var client_token = null;
+
+    /**
+     * Authorization header with 'Bearer' prefix.
+     */
+    var client_authorization = null;
+
+    /**
+     * JSON web key container. <br />
+     */
+    var jwkPub2 = window.jwkPub2 = window.jwkPub2 || null;
+
+    /**
+     * Namespace for ajax request functions.
      * 
      * @since 180627
      * @author TACKSU
      */
     var ajax = {
         searchRecord: function (data, callback) {
-
+            $.ajax({
+                type: 'POST',
+                url: '/client',
+                headers: {
+                    'Authorization': client_authorization
+                },
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    cmd: 'SearchRecord',
+                    args: {
+                        pkey: 'asdfasdf',
+                        update: false,
+                        n: jwkPub2.n,
+                        e: jwkPub2.e
+                    }
+                }),
+                error: function (jqXhr, status, error) {
+                    console.error(jqXhr.responseText);
+                    !!callback && callback instanceof Function && callback(jqXhr.responseJSON);
+                },
+                success: function (res) {
+                    !!callback && callback instanceof Function && callback(null, res);
+                },
+            });
         },
 
-        getPrivateRecords: function (data, callback) {
-
+        getPrivateRecords: function (callback) {
+            $.ajax({
+                type: 'GET',
+                url: '/records/list',
+                headers: {
+                    'Authorization': client_authorization
+                },
+                error: function (jqXhr, status, error) {
+                    console.error('Get private record Error : ' + error);
+                    console.error(jqXhr.responseText);
+                    !!callback && callback instanceof Function && callback(jqXhr.responseJSON);
+                },
+                success: function (res) {
+                    console.debug(res);
+                    !!callback && callback instanceof Function && callback(null, res);
+                }
+            });
         },
 
         createPrivateRecord: function (data, callback) {
@@ -88,10 +89,6 @@ $(document).ready(function () {
                 url: '/records/' + recordId,
                 headers: {
                     'Authorization': client_authorization
-                },
-                beforeSend: function () {
-                    //clean view
-                    // $('.private-spec-body').remove();
                 },
                 error: function (jqXhr, status, error) {
                     console.error('Delete private record Error : ' + error);
@@ -113,6 +110,69 @@ $(document).ready(function () {
             });
         }
     };
+
+    ! function initModules() {
+        client_token = window.client_token = getCookie("JWT");
+        client_authorization = window.client_authorization = 'Bearer ' + client_token;
+
+        socket = io();
+
+        initClientKey();
+    }();
+
+
+    ! function loadRecords() {
+        //request to agent for get user info
+        var pagetxidlist = getTxidList();
+
+        // 왜 0이 아니고 1 초과일때지?
+        if (pagetxidlist.length > 0) {
+            //sessing storage have user info (txid list)
+            var oridata = [];
+            pagetxidlist.forEach(function (item) {
+                try {
+                    var objuserdata = getData(item);
+                    oridata.push(objuserdata);
+                } catch (exception) {
+                    console.error(exception);
+                }
+            });
+            // for (var i = 0; i < pagetxidlist.length; i++) {
+            //     try {
+            //         var objuserdata = getData(pagetxidlist[i]);
+            //         oridata.push(objuserdata);
+            //     } catch (exception) {
+            //         console.error(exception);
+            //         continue;
+            //     }
+            // }
+            // $('.spec-body-default').fadeIn();
+            $('#initial-dialog .close-modal').click();
+            refreshview(oridata, function () {
+                getPrivateRecords(function (err, res) {
+                    if (!!err) {
+                        return
+                    } else {
+                        return finishLoading();
+                    }
+                });
+            });
+        } else {
+            startLoading();
+            //session storage dont have user info(txid list)
+            genRsaKey(function (err, keypair) {
+                if (!!err) {
+                    console.error(JSON.stringify(err));
+                } else if (!!keypair) {
+                    getAgentRecords(function (err, res) {
+                        getPrivateRecords(function (err, res) {
+                            refreshview(null, finishLoading);
+                        });
+                    });
+                }
+            });
+        }
+    }();
 
     ! function initializeUI() {
          $(".study-period").datepicker({
@@ -271,17 +331,14 @@ $(document).ready(function () {
                 range.find(".items").addClass("error");
                 $("#education-add-dialog #error-range-period").text("시작일이 종료일 보다 클 수 없습니다.");
                 range.find(".error-message").css("display", "block");
-             } 
-             else if (!isDateFormate(period[0].value) || !isDateFormate(period[1].value)){
+            } else if (!isDateFormate(period[0].value) || !isDateFormate(period[1].value)) {
                 is_error = true;
                 period.addClass("error");
                 range.find("button").addClass("error");
                 range.find(".items").addClass("error");
                 $("#education-add-dialog #error-range-period").text("날짜 포맷을 확인하세요.");
                 range.find(".error-message").css("display", "block");
-            } 
-            
-            else {
+            } else {
                 period.removeClass("error");
                 range.find("button").removeClass("error");
                 range.find(".items").removeClass("error");
@@ -488,8 +545,7 @@ $(document).ready(function () {
 
                     $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#language-add-dialog .error-message-period").fadeIn();
-                 } 
-                else if (!isDateFormate(start_date) || !isDateFormate(end_date)) {
+                } else if (!isDateFormate(start_date) || !isDateFormate(end_date)) {
                     is_error = true;
 
                     $("#language-add-dialog #langadd_startdate").addClass("error");
@@ -497,8 +553,7 @@ $(document).ready(function () {
 
                     $("#language-add-dialog .error-message-period").text("날짜 입력 포맷을 확인하세요.");
                     $("#language-add-dialog .error-message-period").fadeIn();
-                }
-                else {
+                } else {
                     if ($(this).hasClass("study-period")) {
                         $(this).removeClass("error");
                         $("#language-add-dialog .error-message-period").hide();
@@ -590,8 +645,7 @@ $(document).ready(function () {
 
                     $("#cert-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#cert-add-dialog .error-message-period").fadeIn();
-                }  
-                else if (!isDateFormate(start_date) || !isDateFormate(end_date)){
+                } else if (!isDateFormate(start_date) || !isDateFormate(end_date)) {
                     is_error = true;
 
                     $("#cert-add-dialog #certadd_startdate").addClass("error");
@@ -599,9 +653,7 @@ $(document).ready(function () {
 
                     $("#cert-add-dialog .error-message-period").text("날짜 포맷을 확인하세요.");
                     $("#cert-add-dialog .error-message-period").fadeIn();
-                }
-                
-                else {
+                } else {
                     if ($(this).hasClass("study-period")) {
                         $(this).removeClass("error");
                         $("#cert-add-dialog .error-message-period").hide();
@@ -920,8 +972,8 @@ $(document).ready(function () {
                         args: {
                             pkey: 'asdfasdf',
                             update: true,
-                            n: jwkPub2.n,
-                            e: jwkPub2.e
+                            n: window.jwkPub2.n,
+                            e: window.jwkPub2.e
                         }
                     }),
                     error: function (jqXhr, status, error) {
@@ -1012,16 +1064,18 @@ function change_default_cert(subid) {
     $('#spec-change-dialog').modal('show');
 }
 
+/**
+ * Ajax request to delete private record. <br />
+ * 
+ * @param {String} prvtId 
+ * @param {Function} cb 
+ */
 function ajaxDeletePrivateRecord(prvtId, cb) {
     $.ajax({
         type: 'DELETE',
         url: '/records/' + prvtId,
         headers: {
             'Authorization': client_authorization
-        },
-        beforeSend: function () {
-            //clean view
-            // $('.private-spec-body').remove();
         },
         error: function (jqXhr, status, error) {
             console.error('Delete private record Error : ' + error);
@@ -1043,6 +1097,10 @@ function ajaxDeletePrivateRecord(prvtId, cb) {
     });
 }
 
+/**
+ * Ajax request to get private records. <br />
+ * @param {Function} callback 
+ */
 function ajaxGetPrivateRecords(callback) {
     $.ajax({
         type: 'GET',
@@ -1062,11 +1120,49 @@ function ajaxGetPrivateRecords(callback) {
     });
 }
 
+/**
+ * Ajax request to search records from agent. <br />
+ * 
+ * 
+ * @param {Function} callback 
+ */
+function ajaxSearchRecords(callback) {
+    $.ajax({
+        type: 'POST',
+        url: '/client',
+        headers: {
+            'Authorization': client_authorization
+        },
+        contentType: 'application/json',
+        data: JSON.stringify({
+            cmd: 'SearchRecord',
+            args: {
+                pkey: 'asdfasdf',
+                update: false,
+                n: window.jwkPub2.n,
+                e: window.jwkPub2.e
+            }
+        }),
+        error: function (jqXhr, status, error) {
+            console.error(jqXhr.responseText);
+            !!callback && callback instanceof Function && callback(jqXhr.responseJSON);
+        },
+        success: function (res) {
+            !!callback && callback instanceof Function && callback(null, res);
+        },
+    });
+}
+
+/**
+ * Load private records to attach. <br />
+ * 
+ * @param {Function} callback 
+ */
 function getPrivateRecords(callback) {
 
     var prvtRecords = getPrivateData();
     if (prvtRecords.length > 0) {
-        handlePrivateRecords(prvtRecords, callback);
+        innerProcessPrivateRecords(prvtRecords, callback);
         // privaterecords.sort(function (a, b) {
         //     try {
         //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
@@ -1090,7 +1186,7 @@ function getPrivateRecords(callback) {
             } else {
                 // setTimeout(function () {
                 setPrivateData(res.result);
-                handlePrivateRecords(res.result, callback);
+                innerProcessPrivateRecords(res.result, callback);
                 // res.result.sort(function (a, b) {
                 //     try {
                 //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
@@ -1119,7 +1215,7 @@ function getPrivateRecords(callback) {
         });
     }
 
-    function handlePrivateRecords(prvtRecords, callback) {
+    function innerProcessPrivateRecords(prvtRecords, callback) {
         prvtRecords.sort(function (a, b) {
             try {
                 return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
@@ -1141,43 +1237,15 @@ function getPrivateRecords(callback) {
     }
 }
 
-function ajaxSearchRecords(callback) {
-    $.ajax({
-        type: 'POST',
-        url: '/client',
-        headers: {
-            'Authorization': client_authorization
-        },
-        contentType: 'application/json',
-        data: JSON.stringify({
-            cmd: 'SearchRecord',
-            args: {
-                pkey: 'asdfasdf',
-                update: false,
-                n: jwkPub2.n,
-                e: jwkPub2.e
-            }
-        }),
-        // beforeSend: function () {
-        //     clearRecords();
-        // },
-        error: function (jqXhr, status, error) {
-            console.error(jqXhr.responseText);
-            !!callback && callback instanceof Function && callback(jqXhr.responseJSON);
-        },
-        success: function (res) {
-            !!callback && callback instanceof Function && callback(null, res);
-        },
-    });
+function initClientKey() {
+    getRSAKey();
+
+    window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 }
 
 function getAgentRecords(callback) {
     var emptyarray = [];
     setTxidList(emptyarray);
-
-    getRSAKey();
-
-    window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 
     ajaxSearchRecords(function (err, res) {
         if (!!err) {
@@ -1248,11 +1316,17 @@ function refreshview(records, callback) {
                 recordList[subidTmp] = jsonData;
                 subid = subidTmp;
             } else {
+                var jsonData = record.data;
+                jsonData.chkid = record.txid;
+                jsonData.subid = subidTmp;
+
                 if (recordList[subidTmp] == undefined) {
                     jsonData.count = 1;
                 } else {
                     jsonData.count = recordList[subidTmp].count + 1;
                 }
+                recordList[subidTmp] = jsonData;
+                subid = subidTmp;
             }
         } catch (exception) {
             console.error(exception);
@@ -1358,7 +1432,10 @@ function refreshview(records, callback) {
         view_formatter[subid](recordList[i]);
     }
 
-    dispatchUpdateRecordEvent();
+    if(recordList.length == 0){
+        // 하나도 없을 때 event 한번 발생시킴
+        dispatchUpdateRecordEvent();
+    }
     !!callback && callback instanceof Function && callback();
 }
 
@@ -1381,8 +1458,8 @@ function clientsocket_listener() {
             var subid = omsg.records[i].subid;
             var decrypted = CryptoJS.AES.decrypt(omsg.records[i].data, CryptoJS.enc.Base64.parse(
                 decryptedKey), {
-                    iv: CryptoJS.enc.Base64.parse(recv_iv)
-                });
+                iv: CryptoJS.enc.Base64.parse(recv_iv)
+            });
             console.log(decrypted.toString(CryptoJS.enc.Utf8));
             omsg.records[i].data = decrypted.toString(CryptoJS.enc.Utf8);
 
@@ -1574,5 +1651,9 @@ function checkSpace(str) {
 function isDateFormate(str) {
     console.log(str);
     var pattern = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
-    if (pattern.test(str)) { return true; } else { return false; }
+    if (pattern.test(str)) {
+        return true;
+    } else {
+        return false;
+    }
 }

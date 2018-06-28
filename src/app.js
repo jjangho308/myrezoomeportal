@@ -70,6 +70,7 @@ app.use((err, req, res, next) => {
       res.status(status).json({
         err: {
           code: err.code,
+          type: Object.keys(ErrorCode)[(Object.values(ErrorCode).indexOf(err.code))],
           msg: ErrorMessage[requestLocale][err.code],
           stack: !!err.cause && Environment.developement ? err.cause.stack : null,
           info: err.info instanceof Object ? JSON.stringify(err.info) : err.info,
@@ -77,6 +78,7 @@ app.use((err, req, res, next) => {
       });
     } else {
       res.locals.code = err.code;
+      res.locals.type = Object.keys(ErrorCode)[(Object.values(ErrorCode).indexOf(err.code))];
       res.locals.msg = ErrorMessage[requestLocale][err.code];
       res.locals.stack = !!err.cause && Environment.developement ? err.cause.stack : null;
       res.locals.info = err.info instanceof Object ? JSON.stringify(err.info) : err.info;

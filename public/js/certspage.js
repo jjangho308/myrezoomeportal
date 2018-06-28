@@ -122,6 +122,7 @@ function loadcertlist() {
                 divContainer.append(htmldiv);                
             });
 
+            $('body').css({"overflow": "auto"});
         },
         contentType: 'application/json'
     });
