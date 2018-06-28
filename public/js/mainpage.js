@@ -153,7 +153,6 @@ $(document).ready(function () {
                     if (!!err) {
                         return
                     } else {
-                        return finishLoading();
                     }
                 });
             });
@@ -995,9 +994,10 @@ $(document).ready(function () {
                         setSocket(res.mid);
                         clientsocket_listener();
                         getPrivateRecords(function () {
-                            finishLoading(function () {
-                                processingRefresh = false;
-                            });
+                            processingRefresh = false;
+                            // finishLoading(function () {
+                            //     processingRefresh = false;
+                            // });
                         });
                     },
                     contentType: 'application/json',
