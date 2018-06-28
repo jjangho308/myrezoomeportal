@@ -1682,7 +1682,7 @@ function startLoading(cb) {
                     this.lock = false;
                     setTimeout(finishLoading, 5000);
                 }
-            }, idx * 500);
+            }, idx * 200);
         });
         !!cb && cb instanceof Function && cb();
     }
@@ -1698,7 +1698,7 @@ function finishLoading(cb) {
                     $(loadingDiv).slideUp();
                 }, 500);
             });
-        }, idx * 500);
+        }, idx * 200);
     });
     !!cb && cb instanceof Function && cb();
 }
