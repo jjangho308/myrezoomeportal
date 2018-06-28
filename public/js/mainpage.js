@@ -1026,7 +1026,7 @@ $(document).ready(function () {
                     opacity: 0
                 }, function () {
                     setTimeout(function () {
-                        $(defaultTarget).slideDown()
+                        $(defaultTarget).slideUp();
                     }, 500);
                 });
             }
@@ -1053,7 +1053,7 @@ $(document).ready(function () {
                     opacity: 0
                 }, function () {
                     setTimeout(function () {
-                        $(defaultTarget).slideDown()
+                        $(defaultTarget).slideUp();
                     }, 500);
                 });
             }
@@ -1080,7 +1080,7 @@ $(document).ready(function () {
                     opacity: 0
                 }, function () {
                     setTimeout(function () {
-                        $(defaultTarget).slideDown()
+                        $(defaultTarget).slideUp();
                     }, 500);
                 });
             }
