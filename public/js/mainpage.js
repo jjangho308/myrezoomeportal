@@ -117,8 +117,7 @@ $(document).ready(function () {
 
         socket = io();
 
-        initClientKey();
-        !!callback && callback instanceof Function && callback();
+        initClientKey(callback);
     }(loadRecords);
 
 
