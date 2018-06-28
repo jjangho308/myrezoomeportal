@@ -272,7 +272,16 @@ $(document).ready(function () {
                 range.find(".items").addClass("error");
                 $("#education-add-dialog #error-range-period").text("시작일이 종료일 보다 클 수 없습니다.");
                 range.find(".error-message").css("display", "block");
-            } else {
+            } else if (!isDateFormate(date1) || !isDateFormate(date2)){
+                is_error = true;
+                period.addClass("error");
+                range.find("button").addClass("error");
+                range.find(".items").addClass("error");
+                $("#education-add-dialog #error-range-period").text("날짜 포맷을 확인하세요.");
+                range.find(".error-message").css("display", "block");
+            } 
+            
+            else {
                 period.removeClass("error");
                 range.find("button").removeClass("error");
                 range.find(".items").removeClass("error");
@@ -479,7 +488,7 @@ $(document).ready(function () {
 
                     $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#language-add-dialog .error-message-period").fadeIn();
-                } else if(!isDateFormate(date1) || !isDateFormate(date2)){
+                } else if (!isDateFormate(date1) || !isDateFormate(date2)) {
                     is_error = true;
 
                     $("#language-add-dialog #langadd_startdate").addClass("error");
@@ -580,7 +589,17 @@ $(document).ready(function () {
 
                     $("#cert-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#cert-add-dialog .error-message-period").fadeIn();
-                } else {
+                }  else if (!isDateFormate(date1) || !isDateFormate(date2)){
+                    is_error = true;
+
+                    $("#cert-add-dialog #certadd_startdate").addClass("error");
+                    $("#cert-add-dialog #certadd_enddate").addClass("error");
+
+                    $("#cert-add-dialog .error-message-period").text("날짜 포맷을 확인하세요.");
+                    $("#cert-add-dialog .error-message-period").fadeIn();
+                }
+                
+                else {
                     if ($(this).hasClass("study-period")) {
                         $(this).removeClass("error");
                         $("#cert-add-dialog .error-message-period").hide();
@@ -1354,8 +1373,8 @@ function clientsocket_listener() {
             var subid = omsg.records[i].subid;
             var decrypted = CryptoJS.AES.decrypt(omsg.records[i].data, CryptoJS.enc.Base64.parse(
                 decryptedKey), {
-                iv: CryptoJS.enc.Base64.parse(recv_iv)
-            });
+                    iv: CryptoJS.enc.Base64.parse(recv_iv)
+                });
             console.log(decrypted.toString(CryptoJS.enc.Utf8));
             omsg.records[i].data = decrypted.toString(CryptoJS.enc.Utf8);
 
@@ -1546,5 +1565,5 @@ function checkSpace(str) {
 
 function isDateFormate(str) {
     var pattern = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
-    if(pattern.test(str)) {return true;} else {return false;}
+    if (pattern.test(str)) { return true; } else { return false; }
 }
