@@ -175,9 +175,9 @@ $(document).ready(function () {
     }();
 
     ! function initializeUI() {
-         $(".study-period").datepicker({
-             dateFormat: "yy-mm-dd"
-         });
+        $(".study-period").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
     }();
 
     /**
@@ -779,7 +779,7 @@ $(document).ready(function () {
         $('.spec-detail-div').click(function (event) {
             try {
                 //대학교 케이스
-                if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {                    
+                if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {
                     var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
                     parentparentNodeChecknot[0].checked = true;
                     parentparentNodeChecknot[1].checked = true;
@@ -792,7 +792,7 @@ $(document).ready(function () {
                 }
 
                 //일반 케이스
-                if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 1) {                    
+                if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 1) {
                     var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
                     parentparentNodeChecknot[0].checked = true;
                     parentparentNodeChecknot[1].checked = true;
@@ -1012,8 +1012,17 @@ $(document).ready(function () {
             event.stopPropagation();
             event.preventDefault();
 
+            var defaultTarget = this;
             if ($("#spec_edu_detail .private-spec-body").length == 0 && $("#spec_edu_detail .spec-body").length == 0) {
-                $(event.currentTarget).fadeIn();
+                $(defaultTarget).css({
+                    opacity : 0
+                }).slideDown(function(){
+                    setTimeout(function(){
+                        $(defaultTarget).animate({
+                            opacity : 1
+                        });
+                    }, 500);
+                });
             }
         }, true);
 
@@ -1022,8 +1031,17 @@ $(document).ready(function () {
             event.stopPropagation();
             event.preventDefault();
 
+            var defaultTarget = this;
             if ($("#spec_certification .private-spec-body").length == 0 && $("#spec_certification .spec-body").length == 0) {
-                $(event.currentTarget).fadeIn();
+                $(defaultTarget).css({
+                    opacity : 0
+                }).slideDown(function(){
+                    setTimeout(function(){
+                        $(defaultTarget).animate({
+                            opacity : 1
+                        });
+                    }, 500);
+                });
             }
         }, true);
 
@@ -1032,15 +1050,24 @@ $(document).ready(function () {
             event.stopPropagation();
             event.preventDefault();
 
+            var defaultTarget = this;
             if ($("#spec_foreign_lang .private-spec-body").length == 0 && $("#spec_foreign_lang .spec-body").length == 0) {
-                $(event.currentTarget).fadeIn();
+                $(defaultTarget).css({
+                    opacity : 0
+                }).slideDown(function(){
+                    setTimeout(function(){
+                        $(defaultTarget).animate({
+                            opacity : 1
+                        });
+                    }, 500);
+                });
             }
         }, true);
 
         $(".calendar").click(function () {
             $(this).next().trigger("click");
             $(this).next().trigger("focus");
-            
+
         });
 
         !!callback && callback();
@@ -1253,7 +1280,6 @@ function getPrivateRecords(callback) {
 
 function initClientKey() {
     getRSAKey();
-
     window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 }
 
@@ -1641,14 +1667,22 @@ function startLoading(cb) {
         var loadings = $(".spec-body-loading");
         loadings.each(function (idx, loadingDiv) {
             setTimeout(function () {
-                $(loadingDiv).fadeIn().slideDown();
+                $(loadingDiv).css({
+                    opacity : 0
+                }).slideDown(function(){
+                    setTimeout(function(){
+                        $(loadingDiv).animate({
+                            opacity : 1
+                        });
+                    }, 500);
+                });
 
                 // 혹시나 Loading이 끝나지 않을 경우를 대비하여
                 if (idx == loadings.length - 1) {
                     this.lock = false;
                     setTimeout(finishLoading, 5000);
                 }
-            }, idx * 200);
+            }, idx * 500);
         });
         !!cb && cb instanceof Function && cb();
     }
@@ -1658,13 +1692,13 @@ function finishLoading(cb) {
     $(".spec-body-loading").each(function (idx, loadingDiv) {
         setTimeout(function () {
             $(loadingDiv).animate({
-                opacity : 0,
-                complete : function(){
-                    debugger;
+                opacity: 0
+            }, function () {
+                setTimeout(function(){
                     $(loadingDiv).slideUp();
-                }
+                }, 500);
             });
-        }, idx * 200);
+        }, idx * 500);
     });
     !!cb && cb instanceof Function && cb();
 }
