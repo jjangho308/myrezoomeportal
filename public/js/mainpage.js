@@ -1437,7 +1437,7 @@ function refreshview(records, callback) {
         view_formatter[subid](recordList[i]);
     }
 
-    // dispatchUpdateRecordEvent();
+    dispatchUpdateRecordEvent();
     !!callback && callback instanceof Function && callback();
 }
 
