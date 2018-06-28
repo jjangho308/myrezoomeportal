@@ -778,13 +778,26 @@ $(document).ready(function () {
 
         $('.spec-detail-div').click(function (event) {
             try {
-                if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {
-                    //대학교 케이스
+                //대학교 케이스
+                if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {                    
                     var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
                     parentparentNodeChecknot[0].checked = true;
                     parentparentNodeChecknot[1].checked = true;
                     event.preventDefault();
                 } else if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 2) {
+                    var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:checked");
+                    parentparentNodeChecknot[0].checked = false;
+                    parentparentNodeChecknot[1].checked = false;
+                    event.preventDefault();
+                }
+
+                //일반 케이스
+                if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 1) {                    
+                    var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
+                    parentparentNodeChecknot[0].checked = true;
+                    parentparentNodeChecknot[1].checked = true;
+                    event.preventDefault();
+                } else if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 1) {
                     var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:checked");
                     parentparentNodeChecknot[0].checked = false;
                     parentparentNodeChecknot[1].checked = false;
