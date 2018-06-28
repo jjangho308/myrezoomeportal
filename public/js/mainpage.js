@@ -117,8 +117,7 @@ $(document).ready(function () {
 
         socket = io();
 
-        initClientKey();
-        !!callback && callback instanceof Function && callback();
+        initClientKey(callback);
     }(loadRecords);
 
 
@@ -153,9 +152,7 @@ $(document).ready(function () {
                 getPrivateRecords(function (err, res) {
                     if (!!err) {
                         return
-                    } else {
-                        return finishLoading();
-                    }
+                    } else {}
                 });
             });
         } else {
@@ -176,6 +173,8 @@ $(document).ready(function () {
         $(".study-period").datepicker({
             dateFormat: "yy-mm-dd"
         });
+
+        var recordUpdateEvent = setInterval(dispatchUpdateRecordEvent, 2000);
     }();
 
     /**
@@ -996,9 +995,10 @@ $(document).ready(function () {
                         setSocket(res.mid);
                         clientsocket_listener();
                         getPrivateRecords(function () {
-                            finishLoading(function () {
-                                processingRefresh = false;
-                            });
+                            processingRefresh = false;
+                            // finishLoading(function () {
+                            //     processingRefresh = false;
+                            // });
                         });
                     },
                     contentType: 'application/json',
@@ -1021,6 +1021,14 @@ $(document).ready(function () {
                         });
                     }, 500);
                 });
+            } else {
+                $(defaultTarget).animate({
+                    opacity: 0
+                }, function () {
+                    setTimeout(function () {
+                        $(defaultTarget).slideUp();
+                    }, 500);
+                });
             }
         }, true);
 
@@ -1040,6 +1048,14 @@ $(document).ready(function () {
                         });
                     }, 500);
                 });
+            } else {
+                $(defaultTarget).animate({
+                    opacity: 0
+                }, function () {
+                    setTimeout(function () {
+                        $(defaultTarget).slideUp();
+                    }, 500);
+                });
             }
         }, true);
 
@@ -1057,6 +1073,14 @@ $(document).ready(function () {
                         $(defaultTarget).animate({
                             opacity: 1
                         });
+                    }, 500);
+                });
+            } else {
+                $(defaultTarget).animate({
+                    opacity: 0
+                }, function () {
+                    setTimeout(function () {
+                        $(defaultTarget).slideUp();
                     }, 500);
                 });
             }
