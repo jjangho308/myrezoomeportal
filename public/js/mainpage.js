@@ -175,9 +175,20 @@ $(document).ready(function () {
     ! function initializeUI() {
         debugger;
         $(".study-period").datepicker();
+        $(".ui-datepicker-calendar").removeAttr("style");
         $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
+        
         // $('.spec-body-loading').fadeIn();
         // $('.spec-body-default').hide();
+
+
+        // (   
+        //     {dateFormat:'yy/mm/dd', 
+        //     showOn: 'button',
+        //     changeMonth: true,
+        //     changeYear: true,
+        //     showButtonPanel: true}
+        // );
     }();
 
     /**
@@ -331,7 +342,8 @@ $(document).ready(function () {
                 range.find(".items").addClass("error");
                 $("#education-add-dialog #error-range-period").text("시작일이 종료일 보다 클 수 없습니다.");
                 range.find(".error-message").css("display", "block");
-            } else if (!isDateFormate(date1) || !isDateFormate(date2)) {
+             } 
+             else if (!isDateFormate(period[0].value) || !isDateFormate(period[1].value)){
                 is_error = true;
                 period.addClass("error");
                 range.find("button").addClass("error");
@@ -545,7 +557,8 @@ $(document).ready(function () {
 
                     $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#language-add-dialog .error-message-period").fadeIn();
-                } else if (!isDateFormate(date1) || !isDateFormate(date2)) {
+                 } 
+                else if (!isDateFormate(start_date) || !isDateFormate(end_date)) {
                     is_error = true;
 
                     $("#language-add-dialog #langadd_startdate").addClass("error");
@@ -645,7 +658,8 @@ $(document).ready(function () {
 
                     $("#cert-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#cert-add-dialog .error-message-period").fadeIn();
-                } else if (!isDateFormate(date1) || !isDateFormate(date2)) {
+                }  
+                else if (!isDateFormate(start_date) || !isDateFormate(end_date)){
                     is_error = true;
 
                     $("#cert-add-dialog #certadd_startdate").addClass("error");
@@ -1637,6 +1651,7 @@ function checkSpace(str) {
 }
 
 function isDateFormate(str) {
+    console.log(str);
     var pattern = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
     if (pattern.test(str)) {
         return true;

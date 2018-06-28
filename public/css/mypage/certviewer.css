@@ -497,7 +497,6 @@ p{
     font-weight: 700;
     color: #676767;
 }
-}
 
 .nexledger-txid-info-dialog-center {
     width: 80%;
@@ -1296,4 +1295,17 @@ vertical-align: -4px;
 
 .transaction-link{
 	color: #878d91;
+}
+
+.cert-set-password-info {
+    position: relative;
+    left:111px;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4a90e2;
 }
