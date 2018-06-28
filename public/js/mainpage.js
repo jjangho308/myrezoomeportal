@@ -116,6 +116,8 @@ $(document).ready(function () {
         client_authorization = window.client_authorization = 'Bearer ' + client_token;
 
         socket = io();
+
+        initClientKey();
     }();
 
 
@@ -173,22 +175,9 @@ $(document).ready(function () {
     }();
 
     ! function initializeUI() {
-        debugger;
-        $(".study-period").datepicker();
-        $(".ui-datepicker-calendar").removeAttr("style");
-        $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
-        
-        // $('.spec-body-loading').fadeIn();
-        // $('.spec-body-default').hide();
-
-
-        // (   
-        //     {dateFormat:'yy/mm/dd', 
-        //     showOn: 'button',
-        //     changeMonth: true,
-        //     changeYear: true,
-        //     showButtonPanel: true}
-        // );
+         $(".study-period").datepicker({
+             dateFormat: "yy-mm-dd"
+         });
     }();
 
     /**
@@ -342,8 +331,7 @@ $(document).ready(function () {
                 range.find(".items").addClass("error");
                 $("#education-add-dialog #error-range-period").text("시작일이 종료일 보다 클 수 없습니다.");
                 range.find(".error-message").css("display", "block");
-             } 
-             else if (!isDateFormate(period[0].value) || !isDateFormate(period[1].value)){
+            } else if (!isDateFormate(period[0].value) || !isDateFormate(period[1].value)) {
                 is_error = true;
                 period.addClass("error");
                 range.find("button").addClass("error");
@@ -557,8 +545,7 @@ $(document).ready(function () {
 
                     $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#language-add-dialog .error-message-period").fadeIn();
-                 } 
-                else if (!isDateFormate(start_date) || !isDateFormate(end_date)) {
+                } else if (!isDateFormate(start_date) || !isDateFormate(end_date)) {
                     is_error = true;
 
                     $("#language-add-dialog #langadd_startdate").addClass("error");
@@ -658,8 +645,7 @@ $(document).ready(function () {
 
                     $("#cert-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#cert-add-dialog .error-message-period").fadeIn();
-                }  
-                else if (!isDateFormate(start_date) || !isDateFormate(end_date)){
+                } else if (!isDateFormate(start_date) || !isDateFormate(end_date)) {
                     is_error = true;
 
                     $("#cert-add-dialog #certadd_startdate").addClass("error");
@@ -960,6 +946,7 @@ $(document).ready(function () {
                 console.log('prevent!!');
                 return;
             } else {
+                processingRefresh = true;
                 clearRecords();
                 startLoading();
                 getRSAKey();
@@ -986,8 +973,8 @@ $(document).ready(function () {
                         args: {
                             pkey: 'asdfasdf',
                             update: true,
-                            n: jwkPub2.n,
-                            e: jwkPub2.e
+                            n: window.jwkPub2.n,
+                            e: window.jwkPub2.e
                         }
                     }),
                     error: function (jqXhr, status, error) {
@@ -1040,6 +1027,7 @@ $(document).ready(function () {
         $(".calendar").click(function () {
             $(this).next().trigger("click");
             $(this).next().trigger("focus");
+            
         });
 
         !!callback && callback();
@@ -1152,8 +1140,8 @@ function ajaxSearchRecords(callback) {
             args: {
                 pkey: 'asdfasdf',
                 update: false,
-                n: jwkPub2.n,
-                e: jwkPub2.e
+                n: window.jwkPub2.n,
+                e: window.jwkPub2.e
             }
         }),
         error: function (jqXhr, status, error) {
@@ -1250,13 +1238,15 @@ function getPrivateRecords(callback) {
     }
 }
 
-function getAgentRecords(callback) {
-    var emptyarray = [];
-    setTxidList(emptyarray);
-
+function initClientKey() {
     getRSAKey();
 
     window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+}
+
+function getAgentRecords(callback) {
+    var emptyarray = [];
+    setTxidList(emptyarray);
 
     ajaxSearchRecords(function (err, res) {
         if (!!err) {
@@ -1330,7 +1320,7 @@ function refreshview(records, callback) {
                 var jsonData = record.data;
                 jsonData.chkid = record.txid;
                 jsonData.subid = subidTmp;
-                
+
                 if (recordList[subidTmp] == undefined) {
                     jsonData.count = 1;
                 } else {
@@ -1443,8 +1433,10 @@ function refreshview(records, callback) {
         view_formatter[subid](recordList[i]);
     }
 
-    dispatchUpdateRecordEvent();
-    !!callback && callback instanceof Function && callback();
+    if (recordList.length == 0) {
+        // 하나도 없을 때 event 한번 발생시킴
+        dispatchUpdateRecordEvent();
+    }!!callback && callback instanceof Function && callback();
 }
 
 function clientsocket_listener() {
@@ -1629,18 +1621,23 @@ function addMajorDelete(imgElement) {
 }
 
 function startLoading(cb) {
-    var loadings = $(".spec-body-loading");
-    loadings.each(function (idx, loadingDiv) {
-        setTimeout(function () {
-            $(loadingDiv).fadeIn().slideDown();
+    this.lock = this.lock || false;
+    if (!this.lock) {
+        this.lock = true;
+        var loadings = $(".spec-body-loading");
+        loadings.each(function (idx, loadingDiv) {
+            setTimeout(function () {
+                $(loadingDiv).fadeIn().slideDown();
 
-            // 혹시나 Loading이 끝나지 않을 경우를 대비하여
-            if (idx == loadings.length - 1) {
-                setTimeout(finishLoading, 5000);
-            }
-        }, idx * 200);
-    });
-    !!cb && cb instanceof Function && cb();
+                // 혹시나 Loading이 끝나지 않을 경우를 대비하여
+                if (idx == loadings.length - 1) {
+                    this.lock = false;
+                    setTimeout(finishLoading, 5000);
+                }
+            }, idx * 200);
+        });
+        !!cb && cb instanceof Function && cb();
+    }
 }
 
 function finishLoading(cb) {

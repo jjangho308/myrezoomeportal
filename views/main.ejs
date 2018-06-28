@@ -1,297 +1,310 @@
 <%- include('base_head_import') -%>
-<%- include('base_all_dialog') -%>
+    <%- include('base_all_dialog') -%>
 
-<head>
-    <link rel="stylesheet" href="css/mypage/mycert.css">
-    <script type="text/javascript" src="js/libs/crypto-js/crypto-js.js"></script>
-    <script src="js/libs/jsrsasign/jsrsasign-all-min.js"></script>
-    <script src="js/mainpage.js"></script>
-    <script src="js/generate_keypair_worker.js"></script>
-</head>
+        <head>
+            <link rel="stylesheet" href="css/mypage/mycert.css">
+            <script type="text/javascript" src="js/libs/crypto-js/crypto-js.js"></script>
+            <script src="js/libs/jsrsasign/jsrsasign-all-min.js"></script>
+            <script src="js/mainpage.js"></script>
+            <script src="js/generate_keypair_worker.js"></script>
+        </head>
 
-<body>
-    <%- include('base_header') -%>
-    <div id="main-body">
-        <div class="container">
-            <div id="myresume-div">      
-                     <div class="grid myresume-grid">
-                    <p>내 프로필</p>
-                    <p>연계된 기관들로부터 불러온 이력사항을 클릭하여, 증명서 발급 및 이력서를 쉽게 생성할수 있습니다.</p>
-                    <img id="refresh_record" src="img/myresume/reload.svg" />
-                    <p id="updateTime">업데이트 : <script>currentDate('<%= modified %>')</script></p>                                        
-                    <div class="spec-div">
-                        <div id="spec_edu_detail" class="spec-detail-div">
-                            <div class="spec-title">
-                                <span>학력</span>
-                                <span><a href="#education-add-dialog" rel="modal:open" class="add-span" id="add-span-edu">+ 추가</a></span>
+        <body>
+            <%- include('base_header') -%>
+                <div id="main-body">
+                    <div class="container">
+                        <div id="myresume-div">
+                            <div class="grid myresume-grid">
+                                <p>내 프로필</p>
+                                <p>연계된 기관들로부터 불러온 이력사항을 클릭하여, 증명서 발급 및 이력서를 쉽게 생성할수 있습니다.</p>
+                                <img id="refresh_record" src="img/myresume/reload.svg" />
+                                <p id="updateTime">업데이트 :
+                                    <script>
+                                        currentDate('<%= modified %>')
+                                    </script>
+                                </p>
+                                <div class="spec-div">
+                                    <div id="spec_edu_detail" class="spec-detail-div">
+                                        <div class="spec-title">
+                                            <span>학력</span>
+                                            <span>
+                                                <a href="#education-add-dialog" rel="modal:open" class="add-span" id="add-span-edu">+ 추가</a>
+                                            </span>
+                                        </div>
+
+                                        <div id="spec_edu_detail_targetdiv" class="spec-body-default" style="display:none">
+                                            학력 정보가 없습니다.
+                                        </div>
+
+                                        <div class="spec-body-loading">
+                                            <div class="spec-left" style="visibility: hidden">
+                                                <input type="checkbox" id="box-1" />
+                                                <label for="box-1"></label>
+                                                <div class="default"></div>
+                                            </div>
+                                            <div class="spec-center">
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-right">
+                                                <div class="default-1"></div>
+                                                <div class="default-2"></div>
+                                                <div class="default-2"></div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="spec-body-loading">
+                                            <div class="spec-left" style="visibility: hidden">
+                                                <input type="checkbox" id="box-1" />
+                                                <label for="box-1"></label>
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-center">
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-right">
+                                                <div class="default-1"></div>
+                                                <div class="default-2"></div>
+                                                <div class="default-2"></div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="spec_career_detail" class="spec-detail-div" style="display: none;">
+                                        <div class="spec-title">
+                                            <span>경력</span>
+                                            <span>
+                                                <a href="#career-add-dialog" rel="modal:open" class="add-span">+ 추가</a>
+                                            </span>
+                                        </div>
+
+                                        <div id="spec_career_detail_targetdiv" class="spec-body-default" style="display:none">
+                                            경력 정보가 없습니다.
+                                        </div>
+                                        <div class="spec-body-loading">
+                                            <div class="spec-left" style="visibility: hidden">
+                                                <input type="checkbox" id="box-1" />
+                                                <label for="box-1"></label>
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-center">
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-right">
+                                                <div class="default-1"></div>
+                                                <div class="default-2"></div>
+                                                <div class="default-2"></div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="spec-body-loading">
+                                            <div class="spec-left" style="visibility: hidden">
+                                                <input type="checkbox" id="box-1" />
+                                                <label for="box-1"></label>
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-center">
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-right">
+                                                <div class="default-1"></div>
+                                                <div class="default-2"></div>
+                                                <div class="default-2"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="spec_foreign_lang" class="spec-detail-div">
+                                        <div class="spec-title">
+
+                                            <span>외국어</span>
+                                            <span>
+                                                <a href="#language-add-dialog" rel="modal:open" class="add-span" id="add-span-lang">+ 추가</a>
+                                            </span>
+
+                                        </div>
+
+                                        <div id="spec_foreign_lang_targetdiv" class="spec-body-default" style="display:none">
+                                            외국어 성적 정보가 없습니다.
+                                        </div>
+                                        <div class="spec-body-loading">
+                                            <div class="spec-left" style="visibility: hidden">
+                                                <input type="checkbox" id="box-1" />
+                                                <label for="box-1"></label>
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-center">
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-right">
+                                                <div class="default-1"></div>
+                                                <div class="default-2"></div>
+                                                <div class="default-2"></div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="spec-body-loading">
+                                            <div class="spec-left" style="visibility: hidden">
+                                                <input type="checkbox" id="box-1" />
+                                                <label for="box-1"></label>
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-center">
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-right">
+                                                <div class="default-1"></div>
+                                                <div class="default-2"></div>
+                                                <div class="default-2"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="spec_certification" class="spec-detail-div">
+                                        <div class="spec-title">
+
+                                            <span>자격</span>
+                                            <span>
+                                                <a href="#cert-add-dialog" rel="modal:open" class="add-span" id="add-span-cert">+ 추가</a>
+                                            </span>
+
+                                        </div>
+                                        <div id="spec_certification_targetdiv" class="spec-body-default" style="display:none">
+                                            자격 정보가 없습니다.
+                                        </div>
+                                        <div class="spec-body-loading">
+                                            <div class="spec-left" style="visibility: hidden">
+                                                <input type="checkbox" id="box-1" />
+                                                <label for="box-1"></label>
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-center">
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-right">
+                                                <div class="default-1"></div>
+                                                <div class="default-2"></div>
+                                                <div class="default-2"></div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="spec-body-loading">
+                                            <div class="spec-left" style="visibility: hidden">
+                                                <input type="checkbox" id="box-1" />
+                                                <label for="box-1"></label>
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-center">
+                                                <div class="default"></div>
+
+                                            </div>
+                                            <div class="spec-right">
+                                                <div class="default-1"></div>
+                                                <div class="default-2"></div>
+                                                <div class="default-2"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
-
-                            <div id="spec_edu_detail_targetdiv" class="spec-body-default" style="display:none">
-                                학력 정보가 없습니다.
-                            </div>   
-
-                            <div class="spec-body-loading">
-                                <div class="spec-left" style="visibility: hidden"> 
-                                    <input type="checkbox" id="box-1" />
-                                    <label for="box-1"></label>
-                                    <div class="default"></div>
-                                </div>
-                                <div class="spec-center">
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-right">
-                                    <div class="default-1"></div>
-                                    <div class="default-2"></div>
-                                    <div class="default-2"></div>
-                                    
-                                </div>
-                            </div>
-
-                            <div class="spec-body-loading">
-                                <div class="spec-left" style="visibility: hidden">
-                                    <input type="checkbox" id="box-1" />
-                                    <label for="box-1"></label>
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-center">
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-right">
-                                    <div class="default-1"></div>
-                                    <div class="default-2"></div>
-                                    <div class="default-2"></div>
-                                    
-                                </div>
-                            </div>
-                          
                         </div>
-
-                        <div id="spec_career_detail" class="spec-detail-div" style="display: none;">
-                            <div class="spec-title">
-                                <span>경력</span>
-                                <span><a href="#career-add-dialog" rel="modal:open"  class="add-span">+ 추가</a></span>
-                            </div>
-
-                            <div id="spec_career_detail_targetdiv" class="spec-body-default" style="display:none">
-                                경력 정보가 없습니다. 
-                            </div>  
-                            <div class="spec-body-loading">
-                                <div class="spec-left" style="visibility: hidden">
-                                    <input type="checkbox" id="box-1"  />
-                                    <label for="box-1"></label>
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-center">
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-right">
-                                    <div class="default-1"></div>
-                                    <div class="default-2"></div>
-                                    <div class="default-2"></div>
-                                    
-                                </div>
-                            </div>
-
-                            <div class="spec-body-loading">
-                                <div class="spec-left" style="visibility: hidden">
-                                    <input type="checkbox" id="box-1"  />
-                                    <label for="box-1"></label>
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-center">
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-right">
-                                    <div class="default-1"></div>
-                                    <div class="default-2"></div>
-                                    <div class="default-2"></div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="spec_foreign_lang" class="spec-detail-div">
-                            <div class="spec-title">
-
-                                <span>외국어</span>
-                                <span><a href="#language-add-dialog" rel="modal:open" class="add-span" id="add-span-lang">+ 추가</a></span>
-
-                            </div>
-                            
-                            <div id="spec_foreign_lang_targetdiv" class="spec-body-default" style="display:none">
-                                외국어 성적 정보가 없습니다. 
-                            </div>
-                            <div class="spec-body-loading">
-                                <div class="spec-left" style="visibility: hidden">
-                                    <input type="checkbox" id="box-1"  />
-                                    <label for="box-1"></label>
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-center">
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-right">
-                                    <div class="default-1"></div>
-                                    <div class="default-2"></div>
-                                    <div class="default-2"></div>
-                                    
-                                </div>
-                            </div>
-
-                            <div class="spec-body-loading">
-                                <div class="spec-left" style="visibility: hidden">
-                                    <input type="checkbox" id="box-1"  />
-                                    <label for="box-1"></label>
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-center">
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-right">
-                                    <div class="default-1"></div>
-                                    <div class="default-2"></div>
-                                    <div class="default-2"></div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div id="spec_certification" class="spec-detail-div">
-                            <div class="spec-title">
-
-                                <span>자격</span>
-                                <span><a href="#cert-add-dialog" rel="modal:open"  class="add-span" id="add-span-cert">+ 추가</a></span>
-
-                            </div>
-                            <div id="spec_certification_targetdiv" class="spec-body-default" style="display:none">
-                                자격 정보가 없습니다. 
-                            </div>
-                            <div class="spec-body-loading">
-                                <div class="spec-left"  style="visibility: hidden">
-                                    <input type="checkbox" id="box-1" />
-                                    <label for="box-1"></label>
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-center">
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-right">
-                                    <div class="default-1"></div>
-                                    <div class="default-2"></div>
-                                    <div class="default-2"></div>
-                                    
-                                </div>
-                            </div>
-
-                            <div class="spec-body-loading">
-                                <div class="spec-left" style="visibility: hidden">
-                                    <input type="checkbox" id="box-1"  />
-                                    <label for="box-1"></label>
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-center">
-                                    <div class="default"></div>
-
-                                </div>
-                                <div class="spec-right">
-                                    <div class="default-1"></div>
-                                    <div class="default-2"></div>
-                                    <div class="default-2"></div>
-                                    
-                                </div>
-                            </div>
-                        </div>                
-                        
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <%- include('base_main_dialog') -%>
-
-    <%- include('base_footer') -%>
-    
-    <div id="initial-dialog" class="modal">
-        <div class="inital-section-1">
-            <img src="/img/initial-resume/image-1.svg" />
-            <h4>레쥬메 서비스에 오신 것을 환영합니다!</h4>
-            <p>새롭고 혁신적인 증명서 발급, 이력서 작성을 위한 준비를 시작합니다.</p>
-            <button>다음으로</button>
-        </div>
-        <div class="inital-section-2">
-            <h4><span>이수지</span>님의 영문이름은 무엇인가요?</h4>
-            <h5>영문이름(여권과 동일)을 입력하시면 보다 더 정확한 이력을 확인하실 수 있어요.</h5>
-
-            <p>First Name(성)</p>
-            <input placeholder="Hong">
-
-            <p>비밀번호</p>
-            <input placeholder="Gildong">
-            <button>다음으로</button>
-            <a>건너뛰기</a>
-        </div>
-
-        <div class="inital-section-3">
-            <h4>정보들을 조회하고 있습니다.</h4>
-            <h5>영문이름(여권과 동일)을 입력하시면 보다 더 정확한 이력을 확인하실 수 있어요.</h5>
-            <div class="ko-progress-circle" data-progress="0">
-                <div class="ko-circle">
-                    <div class="full ko-progress-circle__slice">
-                        <div class="ko-progress-circle__fill"></div>
-                    </div>
-                    <div class="ko-progress-circle__slice">
-                        <div class="ko-progress-circle__fill"></div>
-                        <div class="ko-progress-circle__fill ko-progress-circle__bar"></div>
                     </div>
                 </div>
-                <div class="ko-progress-circle__overlay"></div>
-            </div>
 
-            <div class="percentage">
-                <span>24%</span>
-                <img src="/img/initial-resume/fill-1.svg"/>
+                <%- include('base_main_dialog') -%>
 
-            </div>
-            
-            <p>레쥬메의 최첨단 Bot들이 열심히 일을 하고 있습니다.</p>
-            <button disabled>레쥬메 시작하기</button>
-            <a>건너뛰기</a>
-        </div>
-    </div>
-    <script>
-        
-        if('Y' == '<%= first %>') {
-            firstLogin();
-        }
-        else {
-            //firstLogin();
-        }
-        
-    </script>
-    <div id="select-footer">
-        <img src="img/myresume/minus-circle.png" alt="">
-        <span>2건의</span>
-        <span>이력이 선택되었습니다.</span>
-        
-        <button>···</button>
-        
-        <button>이력서 생성</button>
-        <button id="cert-issue-button"><a href="#cert-line-dialog" rel="modal:open">증명서 발급</a></button>
-    </div>       
-</body>
-</html>
+                    <%- include('base_footer') -%>
+
+                        <div id="initial-dialog" class="modal">
+                            <div class="inital-section-1">
+                                <img src="/img/initial-resume/image-1.svg" />
+                                <h4>레쥬메 서비스에 오신 것을 환영합니다!</h4>
+                                <p>새롭고 혁신적인 증명서 발급, 이력서 작성을 위한 준비를 시작합니다.</p>
+                                <button>다음으로</button>
+                            </div>
+                            <div class="inital-section-2">
+                                <h4>
+                                    <span>이수지</span>님의 영문이름은 무엇인가요?</h4>
+                                <h5>영문이름(여권과 동일)을 입력하시면 보다 더 정확한 이력을 확인하실 수 있어요.</h5>
+
+                                <p>First Name(성)</p>
+                                <input placeholder="Hong">
+
+                                <p>비밀번호</p>
+                                <input placeholder="Gildong">
+                                <button>다음으로</button>
+                                <a>건너뛰기</a>
+                            </div>
+
+                            <div class="inital-section-3">
+                                <h4>정보들을 조회하고 있습니다.</h4>
+                                <h5>영문이름(여권과 동일)을 입력하시면 보다 더 정확한 이력을 확인하실 수 있어요.</h5>
+                                <div class="ko-progress-circle" data-progress="0">
+                                    <div class="ko-circle">
+                                        <div class="full ko-progress-circle__slice">
+                                            <div class="ko-progress-circle__fill"></div>
+                                        </div>
+                                        <div class="ko-progress-circle__slice">
+                                            <div class="ko-progress-circle__fill"></div>
+                                            <div class="ko-progress-circle__fill ko-progress-circle__bar"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ko-progress-circle__overlay"></div>
+                                </div>
+
+                                <div class="percentage">
+                                    <span>24%</span>
+                                    <img src="/img/initial-resume/fill-1.svg" />
+
+                                </div>
+
+                                <p>레쥬메의 최첨단 Bot들이 열심히 일을 하고 있습니다.</p>
+                                <button disabled>레쥬메 시작하기</button>
+                                <a>건너뛰기</a>
+                            </div>
+                        </div>
+                        <div id="select-footer">
+                            <img src="img/myresume/minus-circle.png" alt="">
+                            <span>2건의</span>
+                            <span>이력이 선택되었습니다.</span>
+
+                            <button>···</button>
+
+                            <button>이력서 생성</button>
+                            <button id="cert-issue-button">
+                                <a href="#cert-line-dialog" rel="modal:open">증명서 발급</a>
+                            </button>
+                        </div>
+                        <script>
+                            if ('Y' == '<%= first %>') {
+                                firstLogin();
+                            } else {
+                                //firstLogin();
+                            }
+                        </script>
+        </body>
+
+        </html>
