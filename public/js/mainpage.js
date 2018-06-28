@@ -969,6 +969,11 @@ $(document).ready(function () {
             }
         }, true);
 
+        $(".calendar").click(function () {
+            $(this).next().trigger("click");
+            $(this).next().trigger("focus");
+        });
+
         !!callback && callback();
     }();
 });
