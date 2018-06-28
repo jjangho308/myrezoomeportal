@@ -149,7 +149,7 @@ $(document).ready(function () {
             // $('.spec-body-default').fadeIn();
             $('#initial-dialog .close-modal').click();
             refreshview(oridata, function () {
-                getPrivateRecords(function (err, res) {
+                getPrivateRecords(true, function (err, res) {
                     if (!!err) {
                         return
                     } else {}
@@ -160,7 +160,7 @@ $(document).ready(function () {
                 //session storage dont have user info(txid list)
                 // genRsaKey(function (err, keypair) {
                 getAgentRecords(function (err, res) {
-                    getPrivateRecords(function (err, res) {
+                    getPrivateRecords(false, function (err, res) {
                         refreshview(null, finishLoading);
                     });
                 });
@@ -450,7 +450,7 @@ $(document).ready(function () {
                             $('.private-spec-body').remove();
                             $('#spec_edu_detail > .spec-body-default').hide();
 
-                            getPrivateRecords();
+                            getPrivateRecords(true);
                         },
                     });
                 }
@@ -502,7 +502,7 @@ $(document).ready(function () {
 
                     //clean view
                     $('.private-spec-body').remove();
-                    getPrivateRecords();
+                    getPrivateRecords(true);
                 },
                 contentType: 'application/json'
             });
@@ -604,7 +604,7 @@ $(document).ready(function () {
                         //clean view
                         $('.private-spec-body').remove();
                         // $('#spec_foreign_lang > .spec-body-default').hide();
-                        getPrivateRecords();
+                        getPrivateRecords(true);
                     },
                     contentType: 'application/json',
                 });
@@ -702,7 +702,7 @@ $(document).ready(function () {
                         //clean view
                         $('.private-spec-body').remove();
                         // $('#spec_certification > .spec-body-default').hide();
-                        getPrivateRecords();
+                        getPrivateRecords(true);
                     },
                     contentType: 'application/json',
                 });
@@ -994,7 +994,7 @@ $(document).ready(function () {
                     success: function (res) {
                         setSocket(res.mid);
                         clientsocket_listener();
-                        getPrivateRecords(function () {
+                        getPrivateRecords(true, function () {
                             processingRefresh = false;
                             // finishLoading(function () {
                             //     processingRefresh = false;
@@ -1019,7 +1019,7 @@ $(document).ready(function () {
                         $(defaultTarget).animate({
                             opacity: 1
                         });
-                    }, 500);
+                    }, 200);
                 });
             } else {
                 $(defaultTarget).animate({
@@ -1027,7 +1027,7 @@ $(document).ready(function () {
                 }, function () {
                     setTimeout(function () {
                         $(defaultTarget).slideUp();
-                    }, 500);
+                    }, 200);
                 });
             }
         }, true);
@@ -1046,7 +1046,7 @@ $(document).ready(function () {
                         $(defaultTarget).animate({
                             opacity: 1
                         });
-                    }, 500);
+                    }, 200);
                 });
             } else {
                 $(defaultTarget).animate({
@@ -1054,7 +1054,7 @@ $(document).ready(function () {
                 }, function () {
                     setTimeout(function () {
                         $(defaultTarget).slideUp();
-                    }, 500);
+                    }, 200);
                 });
             }
         }, true);
@@ -1103,6 +1103,7 @@ $(document).ready(function () {
 function clearRecords(cb) {
     $(".spec-body").remove();
     $(".private-spec-body").remove();
+    !!cb && cb instanceof Function && cb();
 }
 
 function change_default_cert(subid) {
@@ -1221,10 +1222,10 @@ function ajaxSearchRecords(callback) {
  * 
  * @param {Function} callback 
  */
-function getPrivateRecords(callback) {
+function getPrivateRecords(update, callback) {
 
     var prvtRecords = getPrivateData();
-    if (prvtRecords.length > 0) {
+    if (prvtRecords.length > 0 && !update) {
         innerProcessPrivateRecords(prvtRecords, callback);
         // privaterecords.sort(function (a, b) {
         //     try {

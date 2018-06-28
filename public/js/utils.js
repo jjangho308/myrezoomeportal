@@ -507,7 +507,7 @@ function getPrivateData() {
     try {
         return JSON.parse(sessionData);
     } catch (e) {
-        console.log(e);
+        console.error(e);
         return {};
     }
 }
