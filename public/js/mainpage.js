@@ -174,6 +174,8 @@ $(document).ready(function () {
         $(".study-period").datepicker({
             dateFormat: "yy-mm-dd"
         });
+
+        var recordUpdateEvent = setInterval(dispatchUpdateRecordEvent, 2000);
     }();
 
     /**
