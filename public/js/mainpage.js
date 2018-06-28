@@ -152,8 +152,7 @@ $(document).ready(function () {
                 getPrivateRecords(function (err, res) {
                     if (!!err) {
                         return
-                    } else {
-                    }
+                    } else {}
                 });
             });
         } else {
@@ -1022,6 +1021,14 @@ $(document).ready(function () {
                         });
                     }, 500);
                 });
+            } else {
+                $(defaultTarget).animate({
+                    opacity: 0
+                }, function () {
+                    setTimeout(function () {
+                        $(defaultTarget).slideDown()
+                    }, 500);
+                });
             }
         }, true);
 
@@ -1041,6 +1048,14 @@ $(document).ready(function () {
                         });
                     }, 500);
                 });
+            } else {
+                $(defaultTarget).animate({
+                    opacity: 0
+                }, function () {
+                    setTimeout(function () {
+                        $(defaultTarget).slideDown()
+                    }, 500);
+                });
             }
         }, true);
 
@@ -1058,6 +1073,14 @@ $(document).ready(function () {
                         $(defaultTarget).animate({
                             opacity: 1
                         });
+                    }, 500);
+                });
+            } else {
+                $(defaultTarget).animate({
+                    opacity: 0
+                }, function () {
+                    setTimeout(function () {
+                        $(defaultTarget).slideDown()
                     }, 500);
                 });
             }
