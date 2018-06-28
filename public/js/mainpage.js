@@ -116,9 +116,20 @@ $(document).ready(function () {
 
     ! function initializeUI() {
         $(".study-period").datepicker();
+        $(".ui-datepicker-calendar").removeAttr("style");
         $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
+        
         // $('.spec-body-loading').fadeIn();
         // $('.spec-body-default').hide();
+
+
+        // (   
+        //     {dateFormat:'yy/mm/dd', 
+        //     showOn: 'button',
+        //     changeMonth: true,
+        //     changeYear: true,
+        //     showButtonPanel: true}
+        // );
     }();
 
     /**
@@ -272,14 +283,15 @@ $(document).ready(function () {
                 range.find(".items").addClass("error");
                 $("#education-add-dialog #error-range-period").text("시작일이 종료일 보다 클 수 없습니다.");
                 range.find(".error-message").css("display", "block");
-            } else if (!isDateFormate(date1) || !isDateFormate(date2)){
-                is_error = true;
-                period.addClass("error");
-                range.find("button").addClass("error");
-                range.find(".items").addClass("error");
-                $("#education-add-dialog #error-range-period").text("날짜 포맷을 확인하세요.");
-                range.find(".error-message").css("display", "block");
-            } 
+             } 
+            //  else if (!isDateFormate(date1) || !isDateFormate(date2)){
+            //     is_error = true;
+            //     period.addClass("error");
+            //     range.find("button").addClass("error");
+            //     range.find(".items").addClass("error");
+            //     $("#education-add-dialog #error-range-period").text("날짜 포맷을 확인하세요.");
+            //     range.find(".error-message").css("display", "block");
+            // } 
             
             else {
                 period.removeClass("error");
@@ -488,15 +500,16 @@ $(document).ready(function () {
 
                     $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#language-add-dialog .error-message-period").fadeIn();
-                } else if (!isDateFormate(date1) || !isDateFormate(date2)) {
-                    is_error = true;
+                 } 
+                //else if (!isDateFormate(date1) || !isDateFormate(date2)) {
+                //     is_error = true;
 
-                    $("#language-add-dialog #langadd_startdate").addClass("error");
-                    $("#language-add-dialog #langadd_enddate").addClass("error");
+                //     $("#language-add-dialog #langadd_startdate").addClass("error");
+                //     $("#language-add-dialog #langadd_enddate").addClass("error");
 
-                    $("#language-add-dialog .error-message-period").text("날짜 입력 포맷을 확인하세요.");
-                    $("#language-add-dialog .error-message-period").fadeIn();
-                }
+                //     $("#language-add-dialog .error-message-period").text("날짜 입력 포맷을 확인하세요.");
+                //     $("#language-add-dialog .error-message-period").fadeIn();
+                // }
                 else {
                     if ($(this).hasClass("study-period")) {
                         $(this).removeClass("error");
@@ -589,15 +602,16 @@ $(document).ready(function () {
 
                     $("#cert-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#cert-add-dialog .error-message-period").fadeIn();
-                }  else if (!isDateFormate(date1) || !isDateFormate(date2)){
-                    is_error = true;
+                }  
+                // else if (!isDateFormate(date1) || !isDateFormate(date2)){
+                //     is_error = true;
 
-                    $("#cert-add-dialog #certadd_startdate").addClass("error");
-                    $("#cert-add-dialog #certadd_enddate").addClass("error");
+                //     $("#cert-add-dialog #certadd_startdate").addClass("error");
+                //     $("#cert-add-dialog #certadd_enddate").addClass("error");
 
-                    $("#cert-add-dialog .error-message-period").text("날짜 포맷을 확인하세요.");
-                    $("#cert-add-dialog .error-message-period").fadeIn();
-                }
+                //     $("#cert-add-dialog .error-message-period").text("날짜 포맷을 확인하세요.");
+                //     $("#cert-add-dialog .error-message-period").fadeIn();
+                // }
                 
                 else {
                     if ($(this).hasClass("study-period")) {
