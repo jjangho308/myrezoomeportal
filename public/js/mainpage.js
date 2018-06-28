@@ -1433,7 +1433,7 @@ function refreshview(records, callback) {
         view_formatter[subid](recordList[i]);
     }
 
-    if (recordList.length == 0) {
+    if (Object.keys(recordList) == 0) {
         // 하나도 없을 때 event 한번 발생시킴
         dispatchUpdateRecordEvent();
     }!!callback && callback instanceof Function && callback();
@@ -1624,6 +1624,7 @@ function startLoading(cb) {
     this.lock = this.lock || false;
     if (!this.lock) {
         this.lock = true;
+        $(".spec-body-default").fadeOut();
         var loadings = $(".spec-body-loading");
         loadings.each(function (idx, loadingDiv) {
             setTimeout(function () {
@@ -1643,7 +1644,13 @@ function startLoading(cb) {
 function finishLoading(cb) {
     $(".spec-body-loading").each(function (idx, loadingDiv) {
         setTimeout(function () {
-            $(loadingDiv).fadeOut().slideUp();
+            $(loadingDiv).animate({
+                opacity : 0,
+                complete : function(){
+                    debugger;
+                    $(loadingDiv).slideUp();
+                }
+            });
         }, idx * 200);
     });
     !!cb && cb instanceof Function && cb();
