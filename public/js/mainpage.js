@@ -1327,11 +1327,17 @@ function refreshview(records, callback) {
                 recordList[subidTmp] = jsonData;
                 subid = subidTmp;
             } else {
+                var jsonData = record.data;
+                jsonData.chkid = record.txid;
+                jsonData.subid = subidTmp;
+                
                 if (recordList[subidTmp] == undefined) {
                     jsonData.count = 1;
                 } else {
                     jsonData.count = recordList[subidTmp].count + 1;
                 }
+                recordList[subidTmp] = jsonData;
+                subid = subidTmp;
             }
         } catch (exception) {
             console.error(exception);
