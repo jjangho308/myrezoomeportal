@@ -146,7 +146,7 @@ $(document).ready(function () {
             return;
         }
 
-        var user_email = $('#signup_id').val();
+        var user_email = $('#confirm-phone-input').val();
         var user_password = SHA256($('#signup_pw').val());
         var user_password_confirm = SHA256($('#signup_pw_confirm').val());
         var familyname = $('#signup_familyname').val();
@@ -181,7 +181,7 @@ $(document).ready(function () {
             data: param,
             dataType: "JSON",
             success: function (response) {
-                location.href = "/signup/success";
+                location.href = "/signup/success?name="+param.fullNameKO;
             },
             error: function (request, status, error) {
                 if (request.responseJSON.code == "ER_DUP_ENTRY") {

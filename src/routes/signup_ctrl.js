@@ -17,8 +17,8 @@ module.exports = {
         res.render('signup', {});
     },
 
-    signup_success: (req, res, next) => {
-        res.render('signup-success', {});
+    signup_success: (req, res, next) => {        
+        res.render('signup-success', {name: req.query.name});
     },
 
     post: (req, res, next) => {
