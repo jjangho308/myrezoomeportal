@@ -348,6 +348,25 @@
             summitform();
         });
 
+        $("#btn_send").click(function (event) {          
+            
+            $("#cert-url-input").val("");
+
+            var $children = $(".open-range-div");
+            $children.each(function (idx, array) {
+                $(this).find("input:radio[name=open-range-1]").removeAttr('checked');
+                $(this).find("input:radio[name=open-range-1]").prop('checked', false);
+            });
+
+            var $children = $(".expire-date-div");
+            $children.each(function (idx, array) {
+                $(this).find("input:radio[name=expire-date-1]").removeAttr('checked');
+                $(this).find("input:radio[name=expire-date-1]").prop('checked', false);
+            });
+            
+
+        });
+
         // donwload PDF
         $("#btn_download").click(function (event) {                
             $(".qr-container").show();
