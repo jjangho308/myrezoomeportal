@@ -479,7 +479,16 @@ $(document).ready(function () {
 
                     $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#language-add-dialog .error-message-period").fadeIn();
-                } else {
+                } else if(!isDateFormate(date1) || !isDateFormate(date2)){
+                    is_error = true;
+
+                    $("#language-add-dialog #langadd_startdate").addClass("error");
+                    $("#language-add-dialog #langadd_enddate").addClass("error");
+
+                    $("#language-add-dialog .error-message-period").text("날짜 입력 포맷을 확인하세요.");
+                    $("#language-add-dialog .error-message-period").fadeIn();
+                }
+                else {
                     if ($(this).hasClass("study-period")) {
                         $(this).removeClass("error");
                         $("#language-add-dialog .error-message-period").hide();
@@ -1533,4 +1542,9 @@ function finishLoading(cb) {
 
 function checkSpace(str) {
     return str.search(/\s/) != -1;
+}
+
+function isDateFormate(str) {
+    var pattern = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
+    if(pattern.test(str)) {return true;} else {return false;}
 }
