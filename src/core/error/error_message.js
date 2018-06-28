@@ -49,6 +49,7 @@ MSG_KR[CODE.DATA_NO_EMAIL] = '존재하지 않는 EMail 주소입니다.';
 MSG_KR[CODE.DATA_NO_PHONE_NUM] = '존재하지 않는 핸드폰 번호입니다.';
 MSG_KR[CODE.DATA_PASSWORD_INCORRECT] = '패스워드가 올바르지 않습니다.';
 MSG_KR[CODE.DATA_NO_CERT] = '인증서가 존재하지 않습니다.';
+MSG_KR[CODE.DATA_NO_SHORTURL] = '검증할 증명서가 존재하지 않습니다.'
 
 /**
  * Entire error message container for each language code. <br />
