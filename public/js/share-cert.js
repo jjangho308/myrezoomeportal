@@ -76,8 +76,33 @@ $(document).ready(function () {
             $(".main-body-footer").show();
             $(".main-body-footer-decription").show();
             $(".qr-container").hide();
+    });
 
+    // donwload PDF
+    $("#btn_download").click(function (event) {                
+        $(".qr-container").show();
+        var $children = $(".main-body >.outer-container");        
+        var childSize = $children.size();
+        var size = 0;
+        var pdf = new jsPDF('p', 'mm',[297,210]);
         
+        $children.each(function (idx, array) {
+            console.log($(this));
+            html2canvas($(this), {
+                onrendered: function(canvas) {
+                    size++;
+                    pdf.addImage(canvas.toDataURL("image/png"),"png", 10,10,190,277);
+                    if(size != childSize){
+                        pdf.addPage();                                
+                    }
+                    
+                    if (size === childSize) {                                
+                        pdf.save('rezoome_cert.pdf');
+                    }                        
+                }
+            });       
+        });                            
+        $(".qr-container").hide();
     });
 
     $(".main-body-footer-right").click(function (event) {
