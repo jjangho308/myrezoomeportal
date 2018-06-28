@@ -116,7 +116,7 @@
             var qDiv = $(htmldiv).hide();
             $('#spec_foreign_lang').append(qDiv);
             qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
-            $('#spec_foreign_lang > .spec-body-default').fadeOut();
+            // $('#spec_foreign_lang > .spec-body-default').fadeOut();
         },
 
         "RCCNF0001": function viewformatter(record) {
@@ -143,7 +143,7 @@
             var qDiv = $(htmldiv);
             $('#spec_certification').append(qDiv);
             qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
-            $('#spec_certification > .spec-body-default').fadeOut();
+            // $('#spec_certification > .spec-body-default').fadeOut();
         },
 
         // "RCLPT0006": function viewformatter(record) {
@@ -202,7 +202,7 @@
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
                 qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
-                $('#spec_edu_detail > .spec-body-default').hide();
+                // $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
 
@@ -242,7 +242,7 @@
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
                 qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
-                $('#spec_edu_detail > .spec-body-default').hide();
+                // $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
 
@@ -278,7 +278,7 @@
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
                 qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
-                $('#spec_edu_detail > .spec-body-default').hide();
+                // $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
 
@@ -318,7 +318,7 @@
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
                 qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
-                $('#spec_edu_detail > .spec-body-default').hide();
+                // $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
 
@@ -353,7 +353,7 @@
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
                 qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
-                $('#spec_edu_detail > .spec-body-default').hide();
+                // $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
 
@@ -393,7 +393,7 @@
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
                 qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
-                $('#spec_edu_detail > .spec-body-default').hide();
+                // $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
 
@@ -428,7 +428,7 @@
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
                 qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
-                $('#spec_edu_detail > .spec-body-default').hide();
+                // $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
 
@@ -469,7 +469,7 @@
                 var qDiv = $(htmldiv);
                 $('#spec_edu_detail').append(qDiv);
                 qDiv.fadeIn('slow', dispatchUpdateRecordEvent);
-                $('#spec_edu_detail > .spec-body-default').hide();
+                // $('#spec_edu_detail > .spec-body-default').hide();
             }
         },
 
@@ -618,11 +618,8 @@
 
             var qContainer = $(specContainer).hide();
             $('#spec_edu_detail').append(qContainer);
-            qContainer.fadeIn('slow', function () {
-                // debugger;
-                dispatchUpdateRecordEvent();
-            });
-            $('#spec_edu_detail > .spec-body-default').hide();
+            qContainer.fadeIn('slow', dispatchUpdateRecordEvent);
+            // $('#spec_edu_detail > .spec-body-default').hide();
         },
 
         // 이력 부분은 처리하는 곳이 없네. 나중에 고쳐야 할 듯.
@@ -649,7 +646,7 @@
             htmldiv = htmldiv + '</div>';
             htmldiv = htmldiv + '</div>';
             $('#spec_career_detail').append(htmldiv);
-            $('#spec_career_detail > .spec-body-default').hide();
+            // $('#spec_career_detail > .spec-body-default').hide();
         },
 
         /**
@@ -784,7 +781,7 @@
             var qContainer = $(specContainer).hide();
             qContainer.fadeIn('slow', dispatchUpdateRecordEvent);
             $('#spec_foreign_lang').append(qContainer);
-            $('#spec_foreign_lang > .spec-body-default').hide();
+            // $('#spec_foreign_lang > .spec-body-default').hide();
         },
 
         "OGC": function viewformatter(record) {
@@ -917,7 +914,7 @@
             var qContainer = $(specContainer).hide();
             $('#spec_certification').append(qContainer);
             qContainer.fadeIn('slow', dispatchUpdateRecordEvent);
-            $('#spec_certification > .spec-body-default').hide();
+            // $('#spec_certification > .spec-body-default').hide();
         },
     };
 }(window);
