@@ -73,11 +73,33 @@
         });
 
         $('#cert-set-password').click(function (event) {
-            var cert_set_password_info = document.createElement("div");
-            cert_set_password_info.setAttribute("class","cert-set-password-info");
-            cert_set_password_info.innerText = "비밀번호가 설정되었습니다.";
-            event.target.parentNode.append(cert_set_password_info);
-            
+
+            if($(event.target.parentNode).find(".cert-set-password-info").length == 0) {
+                var cert_set_password_info = document.createElement("div");
+                cert_set_password_info.setAttribute("class","cert-set-password-info");
+
+                if($("#shared_password").val().length > 0) {
+                    cert_set_password_info.innerText = "비밀번호가 설정되었습니다.";
+                    cert_set_password_info.style.color = "#4a90e2";
+                }
+                else {
+                    cert_set_password_info.innerText = "비밀번호가 올바르지 않습니다.";
+                    cert_set_password_info.style.color = "#ee4b3c";
+                }
+                event.target.parentNode.append(cert_set_password_info);
+            }
+            else {
+                var cert_set_password_info = $(event.target.parentNode).find(".cert-set-password-info")[0];
+
+                if($("#shared_password").val().length > 0) {
+                    cert_set_password_info.innerText = "비밀번호가 설정되었습니다.";
+                    cert_set_password_info.style.color = "#4a90e2";
+                }
+                else {
+                    cert_set_password_info.innerText = "비밀번호가 올바르지 않습니다.";
+                    cert_set_password_info.style.color = "#ee4b3c";
+                }                
+            }
         });
 
         $('.modal-sub-header span:nth-child(2)').click(function () {
