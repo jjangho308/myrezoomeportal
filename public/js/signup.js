@@ -203,9 +203,9 @@ $(document).ready(function () {
             dataType: "JSON",
             success: function (response) {                
                 if(!!response.err && response.err.code == "301") {
-                    $(".error-message").eq(0).html("이미 등록된 Email 주소입니다.").show();
+                    $(".error-message").eq(0).html("사용 가능한 Email 입니다.").show();
                 } else {
-                    
+                    $(".error-message").eq(0).html("이미 등록된 Email 입니다.").show();
                 }
             },
             error: function (request, status, error) {
