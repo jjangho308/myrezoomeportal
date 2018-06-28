@@ -417,6 +417,12 @@
             html.appendChild(printDiv);
             printDiv.innerHTML = printContents;
             document.body.style.display = 'none';
+            window.onbeforeprint = function () {
+                //do before-printing stuff
+                setTimeout( function(){                                                                
+                }, 1000);
+            }
+            
             window.print();
             document.body.style.display = 'block';
             printDiv.remove();
