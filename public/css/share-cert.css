@@ -58,6 +58,10 @@ background-color:#dadada;
     margin: 1.5px;
 }
 
+.header a:nth-child(4) > button {
+    display: none;
+}
+
 @media screen and (min-width: 1000px){
 	body{
 		background-color: #f2f5f8;

@@ -12,38 +12,38 @@ $(document).ready(function () {
     })
 
     //viewer hide
-    $('#popup-dialog a').click();
-    $("#cert-viewer").css("display", "none");
+    // $('#popup-dialog a').click();
+    // $("#cert-viewer").css("display", "none");
 
-    try {
-        if (certdata.encrypted == false) {
+    // try {
+    //     if (certdata.encrypted == false) {
             json_decrypted = certdata.data;
 
 
-            $(".main-container").css("display", "none");
-            $(".loading-container").css("display", "block");
+    //         $(".main-container").css("display", "none");
+    //         $(".loading-container").css("display", "block");
 
-            var current_active = 0;
+    //         var current_active = 0;
 
-            $('#circle-' + current_active).css("background-color", "#4a90e2");
+    //         $('#circle-' + current_active).css("background-color", "#4a90e2");
 
-            var mytimer = setInterval(function () {
-                $('#circle-' + current_active).css("background-color", "#dadada");
-                current_active += 1;
+    //         var mytimer = setInterval(function () {
+    //             $('#circle-' + current_active).css("background-color", "#dadada");
+    //             current_active += 1;
 
-                if (current_active == 6) {
+    //             if (current_active == 6) {
                     $("#cert-verify").css("display", "none");
                     $("#cert-viewer").css("display", "block");
                     certformatter[json_decrypted.subid](json_decrypted.data);                   
-                    clearInterval(mytimer);
-                }
-                $('#circle-' + current_active).css("background-color", "#4a90e2");
+    //                 clearInterval(mytimer);
+    //             }
+    //             $('#circle-' + current_active).css("background-color", "#4a90e2");
 
-            }, 300);
-        }
-    } catch (exception) {
-        console.error(exception);
-    }
+    //         }, 300);
+    //     }
+    // } catch (exception) {
+    //     console.error(exception);
+    // }
 
     $("#btn_print").click(function (event) {           
 
@@ -76,8 +76,33 @@ $(document).ready(function () {
             $(".main-body-footer").show();
             $(".main-body-footer-decription").show();
             $(".qr-container").hide();
+    });
 
+    // donwload PDF
+    $("#btn_download").click(function (event) {                
+        $(".qr-container").show();
+        var $children = $(".main-body >.outer-container");        
+        var childSize = $children.size();
+        var size = 0;
+        var pdf = new jsPDF('p', 'mm',[297,210]);
         
+        $children.each(function (idx, array) {
+            console.log($(this));
+            html2canvas($(this), {
+                onrendered: function(canvas) {
+                    size++;
+                    pdf.addImage(canvas.toDataURL("image/png"),"png", 10,10,190,277);
+                    if(size != childSize){
+                        pdf.addPage();                                
+                    }
+                    
+                    if (size === childSize) {                                
+                        pdf.save('rezoome_cert.pdf');
+                    }                        
+                }
+            });       
+        });                            
+        $(".qr-container").hide();
     });
 
     $(".main-body-footer-right").click(function (event) {

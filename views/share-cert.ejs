@@ -4,10 +4,12 @@
     <link rel="stylesheet" href="/css/share-cert<%= locals.min %>.css"> 
 
     <script type="text/javascript" src="/js/libs/crypto-js/crypto-js.js"></script>
-    <script src="../js/libs/jquery-qrcode-0.14.0.min.js"></script>
+    <script src="../js/libs/jquery-qrcode-0.14.0.min.js"></script>    
+    <script src="../js/libs/html2canvas.min.js"></script> 
+    <script src="../js/libs/blockui/jquery.blockUI.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
     <script src="/js/share-cert<%= locals.min %>.js"></script>
     <script src="/js/formatter/certs_formatter<%= locals.min %>.js"></script>
-    
     
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -77,7 +79,7 @@
 
 <div id="cert-viewer">
     <div class="header">   
-        <a href="/certs"><img style="visibility: hidden" src="../img/certviewer/wt.png" alt=""></a>
+        <a href="#"><img style="visibility: hidden" src="../img/certviewer/wt.png" alt=""></a>
         <div>
             <p>증명서 상세보기</p>
             <p></p>       
