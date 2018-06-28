@@ -44,7 +44,7 @@ $(document).ready(function () {
                 $(".error-message").hide();
             },
             success: function (response) {
-                debugger;
+                //debugger;
                 window.location.href = window.redirectionUrl || "main";
             },
             error: function (jqXhr, status, error) {

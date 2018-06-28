@@ -111,17 +111,18 @@ $(document).ready(function () {
         }
     };
 
-    ! function initModules() {
+    ! function initModules(callback) {
         client_token = window.client_token = getCookie("JWT");
         client_authorization = window.client_authorization = 'Bearer ' + client_token;
 
         socket = io();
 
         initClientKey();
-    }();
+        !!callback && callback instanceof Function && callback();
+    }(loadRecords);
 
 
-    ! function loadRecords() {
+    function loadRecords() {
         //request to agent for get user info
         var pagetxidlist = getTxidList();
 
@@ -158,26 +159,23 @@ $(document).ready(function () {
                 });
             });
         } else {
-            startLoading();
-            //session storage dont have user info(txid list)
-            genRsaKey(function (err, keypair) {
-                if (!!err) {
-                    console.error(JSON.stringify(err));
-                } else if (!!keypair) {
-                    getAgentRecords(function (err, res) {
-                        getPrivateRecords(function (err, res) {
-                            refreshview(null, finishLoading);
-                        });
+            startLoading(function () {
+                //session storage dont have user info(txid list)
+                // genRsaKey(function (err, keypair) {
+                getAgentRecords(function (err, res) {
+                    getPrivateRecords(function (err, res) {
+                        refreshview(null, finishLoading);
                     });
-                }
+                });
+                // }); 
             });
         }
-    }();
+    };
 
     ! function initializeUI() {
-         $(".study-period").datepicker({
-             dateFormat: "yy-mm-dd"
-         });
+        $(".study-period").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
     }();
 
     /**
@@ -778,13 +776,26 @@ $(document).ready(function () {
 
         $('.spec-detail-div').click(function (event) {
             try {
+                //대학교 케이스
                 if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 2) {
-                    //대학교 케이스
                     var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
                     parentparentNodeChecknot[0].checked = true;
                     parentparentNodeChecknot[1].checked = true;
                     event.preventDefault();
                 } else if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 2) {
+                    var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:checked");
+                    parentparentNodeChecknot[0].checked = false;
+                    parentparentNodeChecknot[1].checked = false;
+                    event.preventDefault();
+                }
+
+                //일반 케이스
+                if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 1) {
+                    var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
+                    parentparentNodeChecknot[0].checked = true;
+                    parentparentNodeChecknot[1].checked = true;
+                    event.preventDefault();
+                } else if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 1) {
                     var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:checked");
                     parentparentNodeChecknot[0].checked = false;
                     parentparentNodeChecknot[1].checked = false;
@@ -999,8 +1010,17 @@ $(document).ready(function () {
             event.stopPropagation();
             event.preventDefault();
 
+            var defaultTarget = this;
             if ($("#spec_edu_detail .private-spec-body").length == 0 && $("#spec_edu_detail .spec-body").length == 0) {
-                $(event.currentTarget).fadeIn();
+                $(defaultTarget).css({
+                    opacity: 0
+                }).slideDown(function () {
+                    setTimeout(function () {
+                        $(defaultTarget).animate({
+                            opacity: 1
+                        });
+                    }, 500);
+                });
             }
         }, true);
 
@@ -1009,8 +1029,17 @@ $(document).ready(function () {
             event.stopPropagation();
             event.preventDefault();
 
+            var defaultTarget = this;
             if ($("#spec_certification .private-spec-body").length == 0 && $("#spec_certification .spec-body").length == 0) {
-                $(event.currentTarget).fadeIn();
+                $(defaultTarget).css({
+                    opacity: 0
+                }).slideDown(function () {
+                    setTimeout(function () {
+                        $(defaultTarget).animate({
+                            opacity: 1
+                        });
+                    }, 500);
+                });
             }
         }, true);
 
@@ -1019,15 +1048,24 @@ $(document).ready(function () {
             event.stopPropagation();
             event.preventDefault();
 
+            var defaultTarget = this;
             if ($("#spec_foreign_lang .private-spec-body").length == 0 && $("#spec_foreign_lang .spec-body").length == 0) {
-                $(event.currentTarget).fadeIn();
+                $(defaultTarget).css({
+                    opacity: 0
+                }).slideDown(function () {
+                    setTimeout(function () {
+                        $(defaultTarget).animate({
+                            opacity: 1
+                        });
+                    }, 500);
+                });
             }
         }, true);
 
         $(".calendar").click(function () {
             $(this).next().trigger("click");
             $(this).next().trigger("focus");
-            
+
         });
 
         !!callback && callback();
@@ -1238,10 +1276,12 @@ function getPrivateRecords(callback) {
     }
 }
 
-function initClientKey() {
-    getRSAKey();
-
-    window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+function initClientKey(callback) {
+    genRsaKey(function () {
+        getRSAKey();
+        window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+        !!callback && callback instanceof Function && callback();
+    });
 }
 
 function getAgentRecords(callback) {
@@ -1433,7 +1473,7 @@ function refreshview(records, callback) {
         view_formatter[subid](recordList[i]);
     }
 
-    if (recordList.length == 0) {
+    if (Object.keys(recordList) == 0) {
         // 하나도 없을 때 event 한번 발생시킴
         dispatchUpdateRecordEvent();
     }!!callback && callback instanceof Function && callback();
@@ -1624,10 +1664,19 @@ function startLoading(cb) {
     this.lock = this.lock || false;
     if (!this.lock) {
         this.lock = true;
+        $(".spec-body-default").fadeOut();
         var loadings = $(".spec-body-loading");
         loadings.each(function (idx, loadingDiv) {
             setTimeout(function () {
-                $(loadingDiv).fadeIn().slideDown();
+                $(loadingDiv).css({
+                    opacity: 0
+                }).slideDown(function () {
+                    setTimeout(function () {
+                        $(loadingDiv).animate({
+                            opacity: 1
+                        });
+                    }, 500);
+                });
 
                 // 혹시나 Loading이 끝나지 않을 경우를 대비하여
                 if (idx == loadings.length - 1) {
@@ -1643,7 +1692,13 @@ function startLoading(cb) {
 function finishLoading(cb) {
     $(".spec-body-loading").each(function (idx, loadingDiv) {
         setTimeout(function () {
-            $(loadingDiv).fadeOut().slideUp();
+            $(loadingDiv).animate({
+                opacity: 0
+            }, function () {
+                setTimeout(function () {
+                    $(loadingDiv).slideUp();
+                }, 500);
+            });
         }, idx * 200);
     });
     !!cb && cb instanceof Function && cb();
