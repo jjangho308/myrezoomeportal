@@ -314,7 +314,7 @@
         },
     };
 
-    _window.createChart = function createChart(record) {
+    _window.createChart = function createChart(record) {        
         // radar chart drawing
         var canvas = $("#myChart");
         var myChart = new Chart(canvas, {
@@ -324,7 +324,12 @@
                 datasets: [{
                     pointStyle: 'dash',
                     label: '내 성취도',
-                    data: [record.re_point22, record.re_point23, record.re_point24, record.re_point25, record.re_point26, record.re_point27],
+                    data: [Math.floor(record.re_point22)
+                        , Math.floor(record.re_point23)
+                        , Math.floor(record.re_point24)
+                        , Math.floor(record.re_point25)
+                        , Math.floor(record.re_point26)
+                        , Math.floor(record.re_point27)],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)'
                     ],
@@ -335,7 +340,12 @@
                 }, {
                     pointStyle: 'dash',
                     label: '평균',
-                    data: [record.re_point28, record.re_point29, record.re_point30, record.re_point31, record.re_point32, record.re_point33],
+                    data: [Math.floor(record.re_point28)
+                        , Math.floor(record.re_point29)
+                        , Math.floor(record.re_point30)
+                        , Math.floor(record.re_point31)
+                        , Math.floor(record.re_point32)
+                        , Math.floor(record.re_point33)],
                     backgroundColor: [
                         'rgba(54, 162, 235, 0.2)'
 
@@ -359,8 +369,8 @@
 
         setTimeout(function () {
             var dataURL = myChart.toBase64Image();
-            canvas.replaceWith($("<img></img>").attr("src", dataURL));
-        }, 100);
+            canvas.replaceWith($("<img></img>").attr("src", dataURL).fadeIn());
+        }, 600);
     };
 
     _window.generateQRCode = function generateQRCode() {
