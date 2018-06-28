@@ -1443,7 +1443,10 @@ function refreshview(records, callback) {
         view_formatter[subid](recordList[i]);
     }
 
-    dispatchUpdateRecordEvent();
+    if(recordList.length == 0){
+        // 하나도 없을 때 event 한번 발생시킴
+        dispatchUpdateRecordEvent();
+    }
     !!callback && callback instanceof Function && callback();
 }
 
