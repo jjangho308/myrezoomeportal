@@ -115,21 +115,9 @@ $(document).ready(function () {
     };
 
     ! function initializeUI() {
-        $(".study-period").datepicker();
-        $(".ui-datepicker-calendar").removeAttr("style");
-        $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
-        
-        // $('.spec-body-loading').fadeIn();
-        // $('.spec-body-default').hide();
-
-
-        // (   
-        //     {dateFormat:'yy/mm/dd', 
-        //     showOn: 'button',
-        //     changeMonth: true,
-        //     changeYear: true,
-        //     showButtonPanel: true}
-        // );
+         $(".study-period").datepicker({
+             dateFormat: "yy-mm-dd"
+         });
     }();
 
     /**
@@ -986,6 +974,7 @@ $(document).ready(function () {
         $(".calendar").click(function () {
             $(this).next().trigger("click");
             $(this).next().trigger("focus");
+            
         });
 
         !!callback && callback();
