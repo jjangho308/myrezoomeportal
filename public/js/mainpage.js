@@ -1336,6 +1336,8 @@ function refreshview(records, callback) {
                 } else {
                     jsonData.count = recordList[subidTmp].count + 1;
                 }
+                recordList[subidTmp] = jsonData;
+                subid = subidTmp;
             }
         } catch (exception) {
             console.error(exception);
