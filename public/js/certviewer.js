@@ -72,7 +72,13 @@
             $(".cert-create-div").show();
         });
 
-
+        $('#cert-set-password').click(function (event) {
+            var cert_set_password_info = document.createElement("div");
+            cert_set_password_info.setAttribute("class","cert-set-password-info");
+            cert_set_password_info.innerText = "비밀번호가 설정되었습니다.";
+            event.target.parentNode.append(cert_set_password_info);
+            
+        });
 
         $('.modal-sub-header span:nth-child(2)').click(function () {
             $('.modal-sub-header span:nth-child(1)').css({
