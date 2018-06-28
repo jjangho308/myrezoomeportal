@@ -111,17 +111,17 @@ $(document).ready(function () {
         }
     };
 
-    ! function initModules() {
+    ! function initModules(callback) {
         client_token = window.client_token = getCookie("JWT");
         client_authorization = window.client_authorization = 'Bearer ' + client_token;
 
         socket = io();
 
-        initClientKey();
-    }();
+        initClientKey(callback);
+    }(loadRecords);
 
 
-    ! function loadRecords() {
+    function loadRecords() {
         //request to agent for get user info
         var pagetxidlist = getTxidList();
 
@@ -152,32 +152,29 @@ $(document).ready(function () {
                 getPrivateRecords(function (err, res) {
                     if (!!err) {
                         return
-                    } else {
-                        return finishLoading();
-                    }
+                    } else {}
                 });
             });
         } else {
-            startLoading();
-            //session storage dont have user info(txid list)
-            genRsaKey(function (err, keypair) {
-                if (!!err) {
-                    console.error(JSON.stringify(err));
-                } else if (!!keypair) {
-                    getAgentRecords(function (err, res) {
-                        getPrivateRecords(function (err, res) {
-                            refreshview(null, finishLoading);
-                        });
+            startLoading(function () {
+                //session storage dont have user info(txid list)
+                // genRsaKey(function (err, keypair) {
+                getAgentRecords(function (err, res) {
+                    getPrivateRecords(function (err, res) {
+                        refreshview(null, finishLoading);
                     });
-                }
+                });
+                // }); 
             });
         }
-    }();
+    };
 
     ! function initializeUI() {
         $(".study-period").datepicker({
             dateFormat: "yy-mm-dd"
         });
+
+        var recordUpdateEvent = setInterval(dispatchUpdateRecordEvent, 2000);
     }();
 
     /**
@@ -998,9 +995,10 @@ $(document).ready(function () {
                         setSocket(res.mid);
                         clientsocket_listener();
                         getPrivateRecords(function () {
-                            finishLoading(function () {
-                                processingRefresh = false;
-                            });
+                            processingRefresh = false;
+                            // finishLoading(function () {
+                            //     processingRefresh = false;
+                            // });
                         });
                     },
                     contentType: 'application/json',
@@ -1015,12 +1013,20 @@ $(document).ready(function () {
             var defaultTarget = this;
             if ($("#spec_edu_detail .private-spec-body").length == 0 && $("#spec_edu_detail .spec-body").length == 0) {
                 $(defaultTarget).css({
-                    opacity : 0
-                }).slideDown(function(){
-                    setTimeout(function(){
+                    opacity: 0
+                }).slideDown(function () {
+                    setTimeout(function () {
                         $(defaultTarget).animate({
-                            opacity : 1
+                            opacity: 1
                         });
+                    }, 500);
+                });
+            } else {
+                $(defaultTarget).animate({
+                    opacity: 0
+                }, function () {
+                    setTimeout(function () {
+                        $(defaultTarget).slideUp();
                     }, 500);
                 });
             }
@@ -1034,12 +1040,20 @@ $(document).ready(function () {
             var defaultTarget = this;
             if ($("#spec_certification .private-spec-body").length == 0 && $("#spec_certification .spec-body").length == 0) {
                 $(defaultTarget).css({
-                    opacity : 0
-                }).slideDown(function(){
-                    setTimeout(function(){
+                    opacity: 0
+                }).slideDown(function () {
+                    setTimeout(function () {
                         $(defaultTarget).animate({
-                            opacity : 1
+                            opacity: 1
                         });
+                    }, 500);
+                });
+            } else {
+                $(defaultTarget).animate({
+                    opacity: 0
+                }, function () {
+                    setTimeout(function () {
+                        $(defaultTarget).slideUp();
                     }, 500);
                 });
             }
@@ -1053,12 +1067,20 @@ $(document).ready(function () {
             var defaultTarget = this;
             if ($("#spec_foreign_lang .private-spec-body").length == 0 && $("#spec_foreign_lang .spec-body").length == 0) {
                 $(defaultTarget).css({
-                    opacity : 0
-                }).slideDown(function(){
-                    setTimeout(function(){
+                    opacity: 0
+                }).slideDown(function () {
+                    setTimeout(function () {
                         $(defaultTarget).animate({
-                            opacity : 1
+                            opacity: 1
                         });
+                    }, 500);
+                });
+            } else {
+                $(defaultTarget).animate({
+                    opacity: 0
+                }, function () {
+                    setTimeout(function () {
+                        $(defaultTarget).slideUp();
                     }, 500);
                 });
             }
@@ -1278,9 +1300,12 @@ function getPrivateRecords(callback) {
     }
 }
 
-function initClientKey() {
-    getRSAKey();
-    window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+function initClientKey(callback) {
+    genRsaKey(function () {
+        getRSAKey();
+        window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+        !!callback && callback instanceof Function && callback();
+    });
 }
 
 function getAgentRecords(callback) {
@@ -1668,11 +1693,11 @@ function startLoading(cb) {
         loadings.each(function (idx, loadingDiv) {
             setTimeout(function () {
                 $(loadingDiv).css({
-                    opacity : 0
-                }).slideDown(function(){
-                    setTimeout(function(){
+                    opacity: 0
+                }).slideDown(function () {
+                    setTimeout(function () {
                         $(loadingDiv).animate({
-                            opacity : 1
+                            opacity: 1
                         });
                     }, 500);
                 });
@@ -1694,7 +1719,7 @@ function finishLoading(cb) {
             $(loadingDiv).animate({
                 opacity: 0
             }, function () {
-                setTimeout(function(){
+                setTimeout(function () {
                     $(loadingDiv).slideUp();
                 }, 500);
             });

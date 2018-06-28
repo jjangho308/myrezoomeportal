@@ -174,3 +174,7 @@ box-shadow:0 2px 5px 0 rgba(191,191,191,0.5);
 /*background: url("/img/mycert/rectangle-6.svg");*/
         outline:0;
 }
+
+.table-div {
+    overflow-y: auto;
+}
