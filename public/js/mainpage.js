@@ -116,6 +116,8 @@ $(document).ready(function () {
         client_authorization = window.client_authorization = 'Bearer ' + client_token;
 
         socket = io();
+
+        initClientKey();
     }();
 
 
@@ -173,11 +175,10 @@ $(document).ready(function () {
     }();
 
     ! function initializeUI() {
-        debugger;
         $(".study-period").datepicker();
         $(".ui-datepicker-calendar").removeAttr("style");
         $(".study-period").datepicker("option", "dateFormat", "yy-mm-dd");
-        
+
         // $('.spec-body-loading').fadeIn();
         // $('.spec-body-default').hide();
 
@@ -342,8 +343,7 @@ $(document).ready(function () {
                 range.find(".items").addClass("error");
                 $("#education-add-dialog #error-range-period").text("시작일이 종료일 보다 클 수 없습니다.");
                 range.find(".error-message").css("display", "block");
-             } 
-             else if (!isDateFormate(period[0].value) || !isDateFormate(period[1].value)){
+            } else if (!isDateFormate(period[0].value) || !isDateFormate(period[1].value)) {
                 is_error = true;
                 period.addClass("error");
                 range.find("button").addClass("error");
@@ -557,8 +557,7 @@ $(document).ready(function () {
 
                     $("#language-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#language-add-dialog .error-message-period").fadeIn();
-                 } 
-                else if (!isDateFormate(start_date) || !isDateFormate(end_date)) {
+                } else if (!isDateFormate(start_date) || !isDateFormate(end_date)) {
                     is_error = true;
 
                     $("#language-add-dialog #langadd_startdate").addClass("error");
@@ -658,8 +657,7 @@ $(document).ready(function () {
 
                     $("#cert-add-dialog .error-message-period").text("시작일이 종료일 보다 클 수 없습니다.");
                     $("#cert-add-dialog .error-message-period").fadeIn();
-                }  
-                else if (!isDateFormate(start_date) || !isDateFormate(end_date)){
+                } else if (!isDateFormate(start_date) || !isDateFormate(end_date)) {
                     is_error = true;
 
                     $("#cert-add-dialog #certadd_startdate").addClass("error");
@@ -986,8 +984,8 @@ $(document).ready(function () {
                         args: {
                             pkey: 'asdfasdf',
                             update: true,
-                            n: jwkPub2.n,
-                            e: jwkPub2.e
+                            n: window.jwkPub2.n,
+                            e: window.jwkPub2.e
                         }
                     }),
                     error: function (jqXhr, status, error) {
@@ -1152,8 +1150,8 @@ function ajaxSearchRecords(callback) {
             args: {
                 pkey: 'asdfasdf',
                 update: false,
-                n: jwkPub2.n,
-                e: jwkPub2.e
+                n: window.jwkPub2.n,
+                e: window.jwkPub2.e
             }
         }),
         error: function (jqXhr, status, error) {
@@ -1250,13 +1248,15 @@ function getPrivateRecords(callback) {
     }
 }
 
-function getAgentRecords(callback) {
-    var emptyarray = [];
-    setTxidList(emptyarray);
-
+function initClientKey() {
     getRSAKey();
 
     window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+}
+
+function getAgentRecords(callback) {
+    var emptyarray = [];
+    setTxidList(emptyarray);
 
     ajaxSearchRecords(function (err, res) {
         if (!!err) {
@@ -1330,7 +1330,7 @@ function refreshview(records, callback) {
                 var jsonData = record.data;
                 jsonData.chkid = record.txid;
                 jsonData.subid = subidTmp;
-                
+
                 if (recordList[subidTmp] == undefined) {
                     jsonData.count = 1;
                 } else {
