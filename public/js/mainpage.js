@@ -161,7 +161,65 @@ $(document).ready(function () {
                 // genRsaKey(function (err, keypair) {
                 getAgentRecords(function (err, res) {
                     getPrivateRecords(false, function (err, res) {
-                        refreshview(null, finishLoading);
+                        refreshview(null, function () {
+                            finishLoading(function () {
+                                var processingRefresh = false;
+                                $('#refresh_record').click(function () {
+                                    if (processingRefresh) {
+                                        console.log('prevent!!');
+                                        return;
+                                    } else {
+                                        processingRefresh = true;
+                                        clearRecords();
+                                        startLoading();
+                                        getRSAKey();
+                                        window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+
+                                        var emptyarray = [];
+                                        setTxidList(emptyarray);
+
+                                        $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '/client',
+                                            headers: {
+                                                'Authorization': client_authorization
+                                            },
+                                            beforeSend: function () {
+                                                //clean view
+                                                // $('.spec-body').remove();
+                                                // $('.spec-body-default').hide();
+                                                // $('.spec-body-loading').fadeIn();
+                                            },
+                                            data: JSON.stringify({
+                                                cmd: 'SearchRecord',
+                                                args: {
+                                                    pkey: 'asdfasdf',
+                                                    update: true,
+                                                    n: window.jwkPub2.n,
+                                                    e: window.jwkPub2.e
+                                                }
+                                            }),
+                                            error: function (jqXhr, status, error) {
+                                                console.error('Search record Error : ' + error);
+                                                console.error(jqXhr.responseText);
+                                            },
+                                            success: function (res) {
+                                                setSocket(res.mid);
+                                                clientsocket_listener();
+                                                getPrivateRecords(true, function () {
+                                                    processingRefresh = false;
+                                                    // finishLoading(function () {
+                                                    //     processingRefresh = false;
+                                                    // });
+                                                });
+                                            },
+                                            contentType: 'application/json',
+                                        });
+                                    }
+                                });
+                            });
+                        });
                     });
                 });
                 // }); 
@@ -948,62 +1006,6 @@ $(document).ready(function () {
                     });
                 }
             });
-        });
-
-        var processingRefresh = false;
-        $('#refresh_record').click(function () {
-            if (processingRefresh) {
-                console.log('prevent!!');
-                return;
-            } else {
-                processingRefresh = true;
-                clearRecords();
-                startLoading();
-                getRSAKey();
-                window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
-
-                var emptyarray = [];
-                setTxidList(emptyarray);
-
-                $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
-                $.ajax({
-                    type: 'POST',
-                    url: '/client',
-                    headers: {
-                        'Authorization': client_authorization
-                    },
-                    beforeSend: function () {
-                        //clean view
-                        // $('.spec-body').remove();
-                        // $('.spec-body-default').hide();
-                        // $('.spec-body-loading').fadeIn();
-                    },
-                    data: JSON.stringify({
-                        cmd: 'SearchRecord',
-                        args: {
-                            pkey: 'asdfasdf',
-                            update: true,
-                            n: window.jwkPub2.n,
-                            e: window.jwkPub2.e
-                        }
-                    }),
-                    error: function (jqXhr, status, error) {
-                        console.error('Search record Error : ' + error);
-                        console.error(jqXhr.responseText);
-                    },
-                    success: function (res) {
-                        setSocket(res.mid);
-                        clientsocket_listener();
-                        getPrivateRecords(true, function () {
-                            processingRefresh = false;
-                            // finishLoading(function () {
-                            //     processingRefresh = false;
-                            // });
-                        });
-                    },
-                    contentType: 'application/json',
-                });
-            }
         });
 
         document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
