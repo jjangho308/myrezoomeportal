@@ -164,7 +164,6 @@ $(document).ready(function () {
                     getPrivateRecords(false, function (err, res) {
                         refreshview(null, function () {
                             finishLoading(function () {
-                                var processingRefresh = false;
                                 connectUpdateListener();
                             });
                         });
@@ -176,6 +175,7 @@ $(document).ready(function () {
     };
 
     function connectUpdateListener() {
+        var processingRefresh = false;
         $('#refresh_record').click(function () {
             if (processingRefresh) {
                 console.log('prevent!!');
