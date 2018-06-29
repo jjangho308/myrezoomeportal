@@ -2,6 +2,7 @@ var express = require('express');
 var ctrl = require('./certs_ctrl');
 var tokenAuth = require('../mw/client_auth');
 var ajaxOnly = require('../mw/ajax_only');
+var hostRedirection = require('../mw/host_redirector');
 
 /**
  * Router for /certs URI. <br />
@@ -14,6 +15,7 @@ var router = express.Router();
 //router.get('/', ctrl.get);
 
 // 증명서 보관함 페이지 controller
+router.get('/', hostRedirection);
 router.get('/', tokenAuth);
 router.get('/', ctrl.get);
 

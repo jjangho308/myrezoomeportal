@@ -70,16 +70,18 @@ app.use((err, req, res, next) => {
       res.status(status).json({
         err: {
           code: err.code,
+          type: Object.keys(ErrorCode)[(Object.values(ErrorCode).indexOf(err.code))],
           msg: ErrorMessage[requestLocale][err.code],
           stack: !!err.cause && Environment.developement ? err.cause.stack : null,
-          info: err.info,
+          info: err.info instanceof Object ? JSON.stringify(err.info) : err.info,
         }
       });
     } else {
       res.locals.code = err.code;
+      res.locals.type = Object.keys(ErrorCode)[(Object.values(ErrorCode).indexOf(err.code))];
       res.locals.msg = ErrorMessage[requestLocale][err.code];
       res.locals.stack = !!err.cause && Environment.developement ? err.cause.stack : null;
-      res.locals.info = err.info;
+      res.locals.info = err.info instanceof Object ? JSON.stringify(err.info) : err.info;
       res.status(status).render('response_error');
     }
   } else {
@@ -89,14 +91,14 @@ app.use((err, req, res, next) => {
           code: ErrorCode.INTERNAL_ERROR,
           msg: ErrorMessage[requestLocale][ErrorCode.INTERNAL_ERROR],
           stack: Environment.developement ? err.stack : null,
-          info: err.info,
+          info: err.info instanceof Object ? JSON.stringify(err.info) : err.info,
         }
       });
     } else {
       res.locals.code = ErrorCode.INTERNAL_ERROR;
       res.locals.msg = ErrorMessage[requestLocale][ErrorCode.INTERNAL_ERROR];
       res.locals.stack = Environment.developement ? err.stack : null;
-      res.locals.info = err.info;
+      res.locals.info = err.info instanceof Object ? JSON.stringify(err.info) : err.info;
       res.status(status).render('response_error');
     }
   }

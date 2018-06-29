@@ -449,8 +449,9 @@ class CertificateDAO extends AbstractDAO {
             if (!!err) {
                 return cb(err);
             } else {
-                if (rows != null || rows != undefined) {
-                    return cb(err, {
+                var result = [];
+                rows.forEach(row => {
+                    result.push({
                         txId: rows[0].TRX_ID,
                         passcode: rows[0].PASSCODE,
                         certId: rows[0].CERT_ID,
@@ -461,9 +462,8 @@ class CertificateDAO extends AbstractDAO {
                         created: rows[0].CRTD_DT,
                         encData: rows[0].ENC_CERT_DATA
                     });
-                } else {
-                    return cb(err);
-                }
+                });
+                return cb(err, result);
             }
         })
     }
@@ -508,7 +508,7 @@ class CertificateDAO extends AbstractDAO {
             CERT_ID: creteria.certId,
         };
 
-        var query = mysql.format(CertQuery.getCertData, [creteria, creteria]);        
+        var query = mysql.format(CertQuery.getCertData, [creteria, creteria]);
         this.query(query, (err, cursor) => {
             if (!!err) {
                 return cb(err, null);

@@ -17,7 +17,7 @@ var ResponseError = require('../../../core/error/response_error');
  * @since 180402
  * @author TACKSU
  */
-class IssueCertificatHandler extends AbstractClientRequestHandler {
+class IssueCertificateHandler extends AbstractClientRequestHandler {
 
     /**
      * Default constructor. <br />
@@ -59,7 +59,7 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                 console.log("==================issue_cert_handeler cert record===========")
                 console.log(request.cert.record);
                 // TODO request.cert.record 'data', 'subid' 를 제외한 필요없는 컬럼 삭제
-                crypto.encryptAESECB(JSON.stringify(request.cert.record), crypto.getSystemSymmetricKey(), (err, encrypted)=> {
+                crypto.encryptAESECB(JSON.stringify(request.cert.record), crypto.getSystemSymmetricKey(), (err, encrypted) => {
                     var certId = Util.uuid();
                     var certModel = new CertModel({
                         certId: certId,
@@ -91,7 +91,7 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
                                     cb(ClientRequest.RESULT_FAILURE, err);
                                 } else {
                                     cb(ClientRequest.RESULT_SUCCESS, {
-                                        result:"success" 
+                                        result: "success"
                                     });
                                 }
                             });
@@ -103,4 +103,4 @@ class IssueCertificatHandler extends AbstractClientRequestHandler {
     }
 }
 
-module.exports = IssueCertificatHandler;
+module.exports = IssueCertificateHandler;
