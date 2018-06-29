@@ -8,6 +8,32 @@ require socket.is
  */
 $(document).ready(function () {
 
+    Function.prototype.lock = function () {
+        this.lock = this.lock || false;
+        var locked = this.lock;
+        this.lock = true;
+        return !locked;
+    }
+
+    Function.prototype.unlock = function () {
+        this.lock = false;
+    }
+
+    /**
+     * Return async version of current function. <br />
+     * 
+     * @since 180629
+     * @author TACKSU
+     */
+    Function.prototype.async = function () {
+        var THIS = this;
+        return function () {
+            setTimeout(function () {
+                THIS.apply(THIS, arguments);
+            }, 0);
+        }
+    }
+
     /**
      * Global variables. <br />
      */
@@ -40,6 +66,12 @@ $(document).ready(function () {
     var ui = window.ui || uiModule();
     var transition = window.transition || transitionModule();
 
+    /**
+     * Initialize global variables. <br />
+     * 
+     * @since 180629
+     * @author TACKSU
+     */
     ! function initializeVars(callback) {
         client_token = window.client_token = getCookie("JWT");
         client_authorization = window.client_authorization = 'Bearer ' + client_token;
@@ -48,6 +80,13 @@ $(document).ready(function () {
 
         initClientKey(callback);
     }(loadRecords);
+
+    /**
+     * Initialize UI components. <br />
+     * 
+     * @since 180629
+     * @author TACKSU
+     */
     ! function initializeUI() {
         $(".study-period").datepicker({
             dateFormat: "yy-mm-dd"
@@ -57,8 +96,9 @@ $(document).ready(function () {
     }();
 
     /**
-     * Initialize event listeners to target HTMLElements. <br />
+     * Initialize event listeners <br />
      * 
+     * @since 180628
      */
     ! function initializeListeners(callback) {
         // set event for element main page
@@ -939,7 +979,7 @@ $(document).ready(function () {
 
     function updateRecords(callback) {
         ui.removeRecordEls();
-        startLoading();
+        ui.startLoading();
         clearSessionStorage();
 
         //session storage dont have user info(txid list)
@@ -952,14 +992,88 @@ $(document).ready(function () {
 
                 } else {
                     ui.displayRecords(res.result, function () {
-                        // finishLoading(callback);
+                        finishLoading(callback);
                     });
                 }
             });
         });
     };
 
+    /**
+     * obtain 
+     * @param {*} cb 
+     */
+    function loadAgentRecords(cb) {
+        try {
+            var storedTxidList = getTxidList();
+            var storedAgentRecords = storedTxidList.map(function (item) {
+                return getData(item);
+            });
+        } catch (e) {
+            console.error(e);
+            isFunc(cb) && cb(e);
+        }
+        storedAgentRecords.length === 0 ? ajax.fetchAgentRecords(cb) : cb(null, storedAgentRecords);
+    }
+
+    /**
+     * Get private records data from session storage or fetch them. <br />
+     * 
+     * @since 180629
+     * @author TACKSU
+     * 
+     * @param {Function} cb 
+     */
+    function loadPrivateRecords(cb) {
+        var privateRecords = getPrivateData();
+
+        if (privateRecords.length > 0) {
+            privateRecords.sort(function (a, b) {
+                try {
+                    return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+                } catch (e) {
+                    console.error(e);
+                    return 0;
+                }
+            });
+            cb(null, privateRecords);
+        } else {
+            ajax.fetchPrivateRecords(function (err, privateRecords) {
+                privateRecords.sort(function (a, b) {
+                    try {
+                        return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+                    } catch (e) {
+                        console.error(e);
+                        return 0;
+                    }
+                });
+                cb(null, privateRecords);
+            });
+        }
+    }
+
     function loadRecords() {
+
+        // New Version
+        loadAgentRecords(function (err, records) {
+            clientsocket_listener(ui.displayAgentRecords);
+            loadPrivateRecords(function (err, privateRecords) {
+                if (!!err) {
+
+                } else {
+                    ui.displayPrivateRecords(privateRecords, function (err, res) {
+                        if (!!err) {
+
+                        } else {
+                            finishLoading(dispatchUpdateRecordEvent);
+                        }
+                    });
+                }
+            });
+        });
+
+
+
         //request to agent for get user info
         var storedTxidList = getTxidList();
 
@@ -992,7 +1106,7 @@ $(document).ready(function () {
             });
         } else {
             // updateRecords();
-            getAgentRecords(function (err, res) {
+            loadAgentRecords(function (err, res) {
                 getPrivateRecords(true, function (err, res) {
                     // if (!!err) {
                     //     return
@@ -1057,17 +1171,33 @@ $(document).ready(function () {
      * @author TACKSU
      */
     function uiModule() {
-        var uiContainer = {
+        return {
             showAlarm: function (callback) {
                 // Do something
             },
 
+            displayPrivateRecords: function (prvtRecords, callback) {
+                prvtRecords.forEach(function (item, idx) {
+                    var data = JSON.parse(item.data);
+                    data.certPrvtId = item.certPrvtId;
+                    if (item.subCd in view_formatter) {
+                        view_formatter[item.subCd](data);
+                    }
+                });
+
+                if (prvtRecords.length === 0) {
+                    // 하나도 없을 때 event 한번 발생시킴
+                    dispatchUpdateRecordEvent();
+                }
+
+                isFunc(callback) && callback();
+            },
             /**
              * Display records data on page. <br />
              * 
              * @since 180628
              */
-            displayRecords: function (records, callback) {
+            displayAgentRecords: function (records, callback) {
                 var recordList = {};
                 var subid = "";
                 records.forEach(function (record) {
@@ -1130,15 +1260,55 @@ $(document).ready(function () {
                     dispatchUpdateRecordEvent();
                 }
 
-                !!callback && callback instanceof Function && callback();
+                isFunc(callback) && callback();
             },
+
+            clearRecords: function (cb) {
+                $(".spec-body").remove();
+                $(".private-spec-body").remove();
+                isFunc(cb) && cb();
+            },
+
+            startLoading: function (cb) {
+                this.lock = this.lock || false;
+                if (!this.lock) {
+                    this.lock = true;
+                    $(".spec-body-default").fadeOut();
+                    document.getElementsByClassName('spec-body-loading').forEach(function (el, idx, array) {
+                        setTimeout(function () {
+                            transition.popIn(el);
+
+                            if (idx == array.length - 1) {
+                                this.lock = false;
+                                isFunc(cb) && cb();
+                                setTimeout(finishLoading, 5000);
+                            }
+                        }, transition.default.delay * idx);
+                    });
+                }
+            },
+
+            finishLoading: function (cb) {
+                document.getElementsByClassName('.spec-body-loading').each(function (el, idx, array) {
+                    setTimeout(function () {
+                        transition.popOut(el, (idx === array.length - 1) ? function () {
+                            isFunc(cb) && cb();
+                        } : null);
+
+                    }, transition.default.delay * idx);
+                });
+            }
         };
-        return uiContainer;
     };
 
+    /**
+     * Module for ajax requests. <br />
+     * 
+     * @since 180629
+     */
     function ajaxModule() {
         return {
-            fetchAgentRecords: function (_callback) {
+            fetchAgentRecords: function (_cb) {
                 $.ajax({
                     type: 'POST',
                     url: '/client',
@@ -1151,18 +1321,18 @@ $(document).ready(function () {
                         args: {
                             pkey: 'asdfasdf',
                             update: false,
-                            n: jwkPub2.n,
-                            e: jwkPub2.e
+                            n: window.jwkPub2.n,
+                            e: window.jwkPub2.e
                         }
                     }),
                     error: function (jqXhr, status, error) {
                         console.error(jqXhr.responseText);
-                        isFunc(callback) && callback(jqXhr.responseJSON);
+                        isFunc(_cb) && _cb(jqXhr.responseJSON);
                     },
                     success: function (res) {
                         setSocket(res.mid);
                         clientsocket_listener();
-                        isFunc(callback) && callback(res);
+                        isFunc(_cb) && _cb(res);
                     },
                 });
             },
@@ -1427,25 +1597,25 @@ $(document).ready(function () {
         genRsaKey(function () {
             getRSAKey();
             window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
-            !!callback && callback instanceof Function && callback();
+            isFunc(callback) && callback();
         });
     }
 
-    function getAgentRecords(callback) {
-        this.lock = this.lock || false;
-        var emptyarray = [];
-        setTxidList(emptyarray);
+    // function loadAgentRecords(callback) {
+    //     this.lock = this.lock || false;
+    //     var emptyarray = [];
+    //     setTxidList(emptyarray);
 
-        ajaxSearchRecords(function (err, res) {
-            if (!!err) {
-                return;
-            } else {
-                setSocket(res.mid);
-                clientsocket_listener();
-                return callback(err, res);
-            }
-        });
-    }
+    //     ajaxSearchRecords(function (err, res) {
+    //         if (!!err) {
+    //             return;
+    //         } else {
+    //             setSocket(res.mid);
+    //             clientsocket_listener();
+    //             return callback(err, res);
+    //         }
+    //     });
+    // }
 
     /**
      * Refresh all record divs. <br />
@@ -1612,7 +1782,7 @@ $(document).ready(function () {
         }!!callback && callback instanceof Function && callback();
     }
 
-    function clientsocket_listener() {
+    function clientsocket_listener(callback) {
         socket.on('SearchResult', function (msg) {
             console.log("=============clientsocket_listener=================");
             console.log(msg);
@@ -1643,7 +1813,7 @@ $(document).ready(function () {
                     continue;
                 }
             }
-            refreshview(omsg.records);
+            isFunc(callback) && callback(omsg.records);
         });
     }
 
