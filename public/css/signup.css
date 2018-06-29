@@ -112,6 +112,7 @@ input {
 .last-name {
     width: 100px;
     display: inline-block;
+    float: left;
 }
 
 .first-name {
@@ -285,5 +286,5 @@ input[type="password"]::-webkit-input-placeholder {
 }
 
 .error-message {
-    top: -24px;
+    top: -31px;
 }
