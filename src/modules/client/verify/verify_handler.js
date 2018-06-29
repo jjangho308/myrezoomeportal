@@ -3,6 +3,10 @@ var ClientRequest = require('../client_request');
 var AbstractAgentRequestHandler = require('../../agent/abstract_agent_request_handler');
 var Util = require('../../../util/util');
 
+var ResponseError = require('../../../core/error/response_error');
+var ErrorCodes = require('../../../core/error/error_code');
+var HttpStatusCode = require('../../../core/error/http_status_code');
+
 /**
  * Handler for VerifyRequestEntity. <br />
  * 
@@ -38,30 +42,37 @@ class VerifyHandler extends AbstractAgentRequestHandler {
 
         var nexledgerService = Managers.nex();
 
-        if("c" == urlType) { // cert
+        if ("c" == urlType) { // cert
             var certDAO = Managers.db().getCertDAO();
-            certDAO.getSharedUrl({url: url}, (err, shareModel) => {
+            certDAO.getSharedUrl({
+                url: url
+            }, (err, shareModel) => {
 
                 if (!!err) {
-                    done(ClientRequest.RESULT_FAILURE, err);
-                } else {                      
-                    var crypto = Managers.crypto();                     
-                    crypto.decryptAESECB(shareModel.encData, crypto.getSystemSymmetricKey(), (err, decrypted)=> { // decrypt with clientkey                                                                        
+                    return done(ClientRequest.RESULT_FAILURE, err);
+                } else if (shareModel.length == 0) {
+                    return done(ClientRequest.RESULT_FAILURE, new ResponseError({
+                        code : ErrorCodes.DATA_NO_SHORTURL,
+                        status : HttpStatusCode.NOT_FOUND,
+                    }));
+                } else {
+                    var crypto = Managers.crypto();
+                    crypto.decryptAESECB(shareModel[0].encData, crypto.getSystemSymmetricKey(), (err, decrypted) => { // decrypt with clientkey                                                                        
                         var json_decrypted = JSON.parse(decrypted);
-                        var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function(data_hashed_cb){     
-                            nexledgerService.getbytxid(null, shareModel.txId, 0, function (res) {    
+                        var data_hashed = Util.sha256(JSON.stringify(json_decrypted.data), function (data_hashed_cb) {
+                            nexledgerService.getbytxid(null, shareModel[0].txId, 0, function (res) {
                                 console.log("---Verify Handler---");
-                                if(res == undefined || res == null) {
+                                if (res == undefined || res == null) {
                                     res = {
-                                        result:{
-                                            hash:""
+                                        result: {
+                                            hash: ""
                                         }
                                     };
-                                }                         
-                                if(res.result.hash == data_hashed_cb) {
+                                }
+                                if (res.result.hash == data_hashed_cb) {
                                     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!Hash same!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                                    if("N" == shareModel.pubYn) { // encrypt with user's passcode when pubYn is N                                
-                                        crypto.encryptAES(decrypted, shareModel.passcode, (err, encodedIV, encryptedData) => {
+                                    if ("N" == shareModel[0].pubYn) { // encrypt with user's passcode when pubYn is N                                
+                                        crypto.encryptAES(decrypted, shareModel[0].passcode, (err, encodedIV, encryptedData) => {
                                             if (!!err) {
                                                 console.log(err);
                                             } else {
@@ -69,23 +80,23 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                                     encrypted: true,
                                                     iv: encodedIV,
                                                     data: encryptedData,
-                                                    created: shareModel.created,
-                                                    certId: shareModel.certId,
-                                                    url: shareModel.url,
-                                                    txid : shareModel.txId
+                                                    created: shareModel[0].created,
+                                                    certId: shareModel[0].certId,
+                                                    url: shareModel[0].url,
+                                                    txid: shareModel[0].txId
                                                 };
                                                 done(ClientRequest.RESULT_SUCCESS, verifyData);
                                             }
-                                        });                            
+                                        });
                                     } else {
                                         var verifyData = {
                                             encrypted: false,
                                             iv: "",
                                             data: JSON.parse(decrypted),
-                                            created: shareModel.created,
-                                            certId: shareModel.certId,
-                                            url: shareModel.url,
-                                            txid : shareModel.txId
+                                            created: shareModel[0].created,
+                                            certId: shareModel[0].certId,
+                                            url: shareModel[0].url,
+                                            txid: shareModel[0].txId
                                         };
                                         done(ClientRequest.RESULT_SUCCESS, verifyData);
                                     }
@@ -96,22 +107,24 @@ class VerifyHandler extends AbstractAgentRequestHandler {
                                         encrypted: false,
                                         iv: '',
                                         data: "관리자에게 문의하시오",
-                                        created: shareModel.created,
-                                        certId: shareModel.certId,
-                                        url: shareModel.url
-                                    };                                    
+                                        created: shareModel[0].created,
+                                        certId: shareModel[0].certId,
+                                        url: shareModel[0].url
+                                    };
                                     done(ClientRequest.RESULT_FAILURE, verifyData);
                                 }
                             });
                             console.log("==============================================================");
                         });
 
-                    });  
+                    });
                 }
             });
         } else if ("r" == urlType) { // resume
             var resumeDAO = Managers.db().getResumeDAO();
-            resumeDAO.getSharedUrl({url: url}, (err, shareModel) => {
+            resumeDAO.getSharedUrl({
+                url: url
+            }, (err, shareModel) => {
                 if (!!err) {
                     done(ClientRequest.RESULT_FAILURE, err);
                 } else {

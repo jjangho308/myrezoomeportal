@@ -17,6 +17,10 @@
 
                 <div id="signin_div" class="login-container">
                     <%if (!!locals.url) { %>
+                        <script type="text/javascript">
+                            //debugger;
+                            window.redirectionUrl = "<%= locals.url %>";
+                        </script>
                         <p align="center">로그인이 필요한 서비스입니다.</p>
                         <% } %>
                             <p>이메일</p>

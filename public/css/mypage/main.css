@@ -344,6 +344,10 @@ color:#676767;
 text-decoration:none;
 }
 
+.spec-right button:focus {
+  outline:0;
+}
+
 .spec-right p {
 color:#676767;
 text-align:left;
@@ -386,11 +390,11 @@ color:#fff;
 
 .modal-body #school {
 width:483px;
-margin-bottom:30px;
+margin-bottom:10px;
 }
 
 .modal-body .major {
-width:262px;
+width:250px;
 }
 
 .modal-body .add-major {
@@ -454,7 +458,7 @@ color:#d1d1d1;
 
 .select-100 {
 display:inline-block;
-width:95px;
+width:100px;
 vertical-align:top;
 margin-right:2px;
 }
@@ -464,7 +468,7 @@ vertical-align:2px;
 }
 
 #language-name {
-width:358px;
+width:350px;
 margin-left:5px;
 }
 

@@ -12,7 +12,6 @@
             <%- include('base_header_default') -%>
 
                 <h1>회원가입</h1>
-
                 <div class="signup-container">
                     <p class="title">이메일</p>
                     <div class="confirm-phone-input">
@@ -21,7 +20,7 @@
                         <div class="error-message">이미 가입되어 있는 이메일입니다.</div>
 
                     </div>
-                    <button class="phone-send border-btn" disabled="">중복체크</button>
+                    <button class="phone-send border-btn" disabled>중복체크</button>
                     <p class="title">비밀번호</p>
                     <input id="signup_pw" type="password" placeholder="영문자, 숫자, 특수문자 조합 8~12자" />
                     <div class="error-message">영문자, 숫자, 특수문자 조합 8~12자로 입력해주세요.</div>
@@ -33,15 +32,20 @@
                     <div class="last-name">
                         <p class="title">성</p>
                         <input id="signup_familyname" placeholder="홍" />
+                        <div class="error-message">이름을 입력하세요.</div>
                     </div>
 
                     <div class="first-name">
-
                         <p class="title">이름</p>
                         <input id="signup_firstname" placeholder="길동" />
+                        
                     </div>
+
+                    <div class="birth">
                     <p class="title">생년월일</p>
                     <input id="signup_birth" placeholder="8자리 숫자만 입력해주세요 ex) 20180401" />
+                    <div class="error-message">생년월일을 입력하세요</div>
+                    </div>
 
                     <p class="title">성별</p>
 
@@ -72,15 +76,17 @@
                         <div class="error-message">이미 가입된 번호입니다.</div>
                         <div class="info-message-1">인증번호가 발송되었습니다. (2:00)</div>
                     </div>
-                    <button class="phone-send border-btn">인증번호 발송</button>
+                    <button class="phone-send border-btn" disabled>인증번호 발송</button>
 
                     <p class="title">인증번호 확인</p>
 
                     <div class="confirm-phone-input">
-                        <input placeholder="8자리 숫자만 입력해주세요 ex) 20180401" />
+                        <input id="confirm_verify_phone" placeholder="8자리 숫자만 입력해주세요 ex) 20180401" />
                         <div class="error-message">인증번호가 일치하지 않습니다.</div>
                         <div class="info-message-2">정상적으로 확인되었습니다.</div>
                     </div>
+
+
                     <button class="phone-confirm border-btn" disabled="">인증번호 확인</button>
 
 
@@ -89,8 +95,8 @@
                         <div class="agreement-top">
                             <input type="checkbox" id="box-all" />
                             <label for="box-all"></label>
-
-                            <span>아래 내용에 모두 동의합니다.</span>
+                            <span id="box-all-div">아래 내용에 모두 동의합니다.</span>
+                            <div id="clause-error-message" class="error-message">필수약관에 동의하세요</div>
                         </div>
 
                         <div class="agreement-body">
