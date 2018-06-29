@@ -514,12 +514,14 @@ function nexledgerInfoView(reqtxid) {
 
             tempstr = '';
             for (var i = 0; i < res2.result.toaddress.length; i++) {
-                tempstr = tempstr + res2.result.toaddress[i] + '<br>';
+                if(res2.result.toaddress[i] != "") {
+                    tempstr = tempstr + res2.result.toaddress[i] + '<br>';
+                }                
             }
             $("#toAddress").html(tempstr);
 
             $("#total_volume").text(res2.result.total_volume);
-            $("#total_output").text(res2.result.output);
+            $("#total_output").text(res2.result.total_output);
             $("#txsize").text(res2.result.txsize + " byte");
 
             tempstr = '';
