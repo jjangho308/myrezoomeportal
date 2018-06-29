@@ -38,30 +38,30 @@ $(document).ready(function () {
         }
     });
 
-    $("#signup_carrierName").on("change", function(){
-        if (phonePattern.test($("#signup_phone").val()) && $("#signup_carrierName").val() != "") {            
+    $("#signup_carrierName").on("change", function () {
+        if (phonePattern.test($("#signup_phone").val()) && $("#signup_carrierName").val() != "") {
             $(".phone-send").eq(1).attr("disabled", false);
         } else {
             $(".phone-send").eq(1).attr("disabled", true);
         }
     });
 
-    document.getElementById("signup_phone").addEventListener("input", function (event) {        
+    document.getElementById("signup_phone").addEventListener("input", function (event) {
         console.log($("#signup_carrierName").val());
-        if (phonePattern.test($("#signup_phone").val()) && $("#signup_carrierName").val() != "") {            
+        if (phonePattern.test($("#signup_phone").val()) && $("#signup_carrierName").val() != "") {
             $(".phone-send").eq(1).attr("disabled", false);
         } else {
             $(".phone-send").eq(1).attr("disabled", true);
         }
     });
 
-    document.getElementById("confirm_verify_phone").addEventListener("input", function (event) {        
-        if (confirmPhonePattern.test($(this).val())) {            
+    document.getElementById("confirm_verify_phone").addEventListener("input", function (event) {
+        if (confirmPhonePattern.test($(this).val())) {
             $(".phone-confirm").attr("disabled", false);
         } else {
             $(".phone-confirm").attr("disabled", true);
         }
-    });   
+    });
 
     document.getElementById("signup_pw").addEventListener("input", function (event) {
         if (this.value.length > 0) {
@@ -125,26 +125,64 @@ $(document).ready(function () {
     });
 
     $('#btn_signup').click(function () {
+        var is_error = false;
 
-        $("input").css("border", "solid 1px #ced3d6");
+        //$("input").css("border", "solid 1px #ced3d6");
         $(".error-message").css("display", "none");
 
-        if ($('#signup_id').val() == '') {
+        if ($('#confirm-phone-input').val() == '' || checkSpace($('#confirm-phone-input').val())) {
             $("input").eq(0).addClass("input_error");
             $(".error-message").eq(0).css("display", "block");
-            $(".error-message").eq(0).html("ID입력해라");
-            return;
-        } else if ($('#signup_pw').val() == '') {
+            $(".error-message").eq(0).html("ID입력하세요");
+            is_error = true;
+        }
+
+        if ($('#signup_pw').val() == '' || checkSpace($('#signup_pw').val())) {
             $("input").eq(1).addClass("input_error");
             $(".error-message").eq(1).css("display", "block");
-            $(".error-message").eq(1).html("PW입력해라");
-            return;
-        } else if ($("#signup_carrierName").val() == '') {
-            $(".selectize-input").addClass("input_error");
-            $(".error-message").eq(3).css("display", "block");
-            $(".error-message").eq(3).html("통신사선택하라");
-            return;
+            $(".error-message").eq(1).html("비밀번호를 입력하세요");
+
+            is_error = true;
         }
+        if ($("#signup_familyname").val() == '' || $("#signup_firstname").val() == '' || checkSpace($("#signup_familyname").val()) || checkSpace($("#signup_firstname").val())) {
+            $("input").eq(3).addClass("input_error");
+            $("input").eq(4).addClass("input_error");
+            $(".error-message").eq(3).css("display", "block");
+            $(".error-message").eq(3).html("이름을 입력하세요");
+            is_error = true;
+        }
+
+        if ($("#signup_birth").val() == '' || checkSpace($("#signup_birth").val())) {
+            $("input").eq(5).addClass("input_error");
+            $(".error-message").eq(4).css("display", "block");
+            $(".error-message").eq(4).html("생년월일을 입력하세요");
+            is_error = true;
+        }
+
+        if ($("#signup_carrierName").val() == '' || checkSpace($("#signup_carrierName").val())) {
+            $(".selectize-input").addClass("input_error");
+            $(".error-message").eq(5).css("display", "block");
+            $(".error-message").eq(5).html("통신사선택하세요");
+            is_error = true;
+        }
+        if ($("#signup_phone").val() == '' || checkSpace($("#signup_phone").val())) {
+            $("#signup_phone").addClass("input_error");
+            $(".error-message").eq(5).css("display", "block");
+            $(".error-message").eq(5).html("전화번호를 입력하세요");
+            is_error = true;
+        }
+
+
+        if (!$("#box-1").prop("checked") || !$("#box-2").prop("checked") || !$("#box-3").prop("checked")) {
+            $("#box-all-div").addClass("input_error");
+            $(".error-message").eq(7).css("display", "block");
+            $(".error-message").eq(7).html("필수약관에 동의하세요");
+            $("#clause-error-message").css("top", "-3px");
+            $("#clause-error-message").css("font-size", "11px");
+            is_error = true;
+        }
+
+
 
         var user_email = $('#confirm-phone-input').val();
         var user_password = SHA256($('#signup_pw').val());
@@ -159,50 +197,53 @@ $(document).ready(function () {
         if (user_password != user_password_confirm) {
             $("input").eq(2).css("border", "solid 1px #f59188");
             $(".error-message").eq(2).css("display", "block");
-            $(".error-message").eq(2).html("PW가 다르다");
-            return;
+            $(".error-message").eq(2).html("패스워드가 일치하지 않습니다.");
+            is_error = true;
         }
 
-        var param = {
-            email: user_email,
-            pw: user_password,
-            familyNameKO: familyname,
-            firstNameKO: firstname,
-            fullNameKO: familyname + firstname,
-            birth: birth,
-            phone: phone,
-            gender: gender,
-            carrierName: carrier_name
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "/signup",
-            data: param,
-            dataType: "JSON",
-            success: function (response) {
-                location.href = "/signup/success?name="+param.fullNameKO;
-            },
-            error: function (request, status, error) {
-                if (request.responseJSON.code == "ER_DUP_ENTRY") {
-                    $("input").eq(0).addClass("input_error");
-                    $(".error-message").eq(0).css("display", "block");
-                    $(".error-message").eq(0).html("이미가입된ID가있다");
-                }
+        if (!is_error) {
+            var param = {
+                email: user_email,
+                pw: user_password,
+                familyNameKO: familyname,
+                firstNameKO: firstname,
+                fullNameKO: familyname + firstname,
+                birth: birth,
+                phone: phone,
+                gender: gender,
+                carrierName: carrier_name
             }
-        });
+
+            $.ajax({
+                type: "POST",
+                url: "/signup",
+                data: param,
+                dataType: "JSON",
+                success: function (response) {
+                    location.href = "/signup/success?name=" + param.fullNameKO;
+                },
+                error: function (request, status, error) {
+                    if (request.responseJSON.code == "ER_DUP_ENTRY") {
+                        $("input").eq(0).addClass("input_error");
+                        $(".error-message").eq(0).css("display", "block");
+                        $(".error-message").eq(0).html("이미 가입 된 이메일이 있습니다.");
+                    }
+                }
+            });
+        }
+
     });
 
-    $(".phone-send").eq(0).click(function(){
+    $(".phone-send").eq(0).click(function () {
         var email = $("#confirm-phone-input").val();
-        
+
         $.ajax({
             type: "POST",
             url: "/signup/confirm",
-            data: JSON.stringify({email: email}),
+            data: JSON.stringify({ email: email }),
             dataType: "JSON",
-            success: function (response) {                
-                if(!!response.err && response.err.code == "301") {
+            success: function (response) {
+                if (!!response.err && response.err.code == "301") {
                     $(".error-message").eq(0).html("사용 가능한 Email 입니다.").show();
                 } else {
                     $(".error-message").eq(0).html("이미 등록된 Email 입니다.").show();
@@ -212,17 +253,21 @@ $(document).ready(function () {
                 if (request.responseJSON.code == "ER_DUP_ENTRY") {
                     $("input").eq(0).addClass("input_error");
                     $(".error-message").eq(0).css("display", "block");
-                    $(".error-message").eq(0).html("이미가입된ID가있다");
+                    $(".error-message").eq(0).html("이미 가입 된 회원입니다.");
                 }
             },
             contentType: 'application/json'
-        });        
+        });
     });
 
-    $(".phone-send").eq(1).click(function(){        
+    $(".phone-send").eq(1).click(function () {
         var telecom = $(".item").html();
-        var phone = $("#signup_phone").val();        
+        var phone = $("#signup_phone").val();
         console.log(telecom + phone);
     });
 
 })
+
+function checkSpace(str) {
+    return str.search(/\s/) != -1;
+}

@@ -17,7 +17,7 @@ module.exports = {
         res.render('signup', {});
     },
 
-    signup_success: (req, res, next) => {        
+    signup_success: (req, res, next) => {                
         res.render('signup-success', {name: req.query.name});
     },
 
@@ -26,8 +26,10 @@ module.exports = {
             Managers.client().request(new SignUpRequest(req.body), (err, result) => {               
                 if (!!err) {
                     res.status(500).json(err);                    
-                } else {
-                    res.json(result);
+                } else {             
+                    return res.set('Set-Cookie', 'JWT=' + result.token)
+                        .type('application/json').json(result);       
+                    //res.json(result);
                 }
             });
         } else {

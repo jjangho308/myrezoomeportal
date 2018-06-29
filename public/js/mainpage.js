@@ -850,12 +850,10 @@ $(document).ready(function () {
                 if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)").length == 1) {
                     var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:not(:checked)");
                     parentparentNodeChecknot[0].checked = true;
-                    parentparentNodeChecknot[1].checked = true;
                     event.preventDefault();
                 } else if ($(event.target.parentNode.parentNode)[0].className == "spec-body" && $(event.target.parentNode.parentNode).find("input:checkbox:checked").length == 1) {
                     var parentparentNodeChecknot = $(event.target.parentNode.parentNode).find("input:checkbox:checked");
                     parentparentNodeChecknot[0].checked = false;
-                    parentparentNodeChecknot[1].checked = false;
                     event.preventDefault();
                 }
 
@@ -1640,10 +1638,10 @@ function clearAddSpanCert() {
     $("#cert-add-dialog #cert-grade").next().css("display", "none");
 
     $("#cert-add-dialog #certadd_startdate").removeClass("error");
-    $("#cert-add-dialog #certadd_startdate").next().css("display", "none");
+    //$("#cert-add-dialog #certadd_startdate").next().css("display", "none");
 
     $("#cert-add-dialog #certadd_enddate").removeClass("error");
-    $("#cert-add-dialog #certadd_enddate").next().css("display", "none");
+    //$("#cert-add-dialog #certadd_enddate").next().css("display", "none");
 
     $("#cert-add-dialog .error-message-period").hide();
 
@@ -1665,10 +1663,10 @@ function clearAddSpanLang() {
     $("#language-add-dialog #language-grade").next().css("display", "none");
 
     $("#language-add-dialog #langadd_startdate").removeClass("error");
-    $("#language-add-dialog #langadd_startdate").next().css("display", "none");
+    //$("#language-add-dialog #langadd_startdate").next().css("display", "none");
 
     $("#language-add-dialog #langadd_enddate").removeClass("error");
-    $("#language-add-dialog #langadd_enddate").next().css("display", "none");
+    //$("#language-add-dialog #langadd_enddate").next().css("display", "none");
 
     $("#language-add-dialog .error-message-period").hide();
 
