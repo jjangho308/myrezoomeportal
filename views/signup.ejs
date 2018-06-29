@@ -32,15 +32,20 @@
                     <div class="last-name">
                         <p class="title">성</p>
                         <input id="signup_familyname" placeholder="홍" />
+                        <div class="error-message">이름을 입력하세요.</div>
                     </div>
 
                     <div class="first-name">
-
                         <p class="title">이름</p>
                         <input id="signup_firstname" placeholder="길동" />
+                        
                     </div>
+
+                    <div class="birth">
                     <p class="title">생년월일</p>
                     <input id="signup_birth" placeholder="8자리 숫자만 입력해주세요 ex) 20180401" />
+                    <div class="error-message">생년월일을 입력하세요</div>
+                    </div>
 
                     <p class="title">성별</p>
 
@@ -80,6 +85,8 @@
                         <div class="error-message">인증번호가 일치하지 않습니다.</div>
                         <div class="info-message-2">정상적으로 확인되었습니다.</div>
                     </div>
+
+
                     <button class="phone-confirm border-btn" disabled="">인증번호 확인</button>
 
 
@@ -88,8 +95,8 @@
                         <div class="agreement-top">
                             <input type="checkbox" id="box-all" />
                             <label for="box-all"></label>
-
-                            <span>아래 내용에 모두 동의합니다.</span>
+                            <span id="box-all-div">아래 내용에 모두 동의합니다.</span>
+                            <div id="clause-error-message" class="error-message">필수약관에 동의하세요</div>
                         </div>
 
                         <div class="agreement-body">
