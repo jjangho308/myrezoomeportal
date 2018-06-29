@@ -1,5 +1,4 @@
-var IssueCertEntity = require('../../modules/client/api/v1/api_issue_cert_entity');
-var IssueCertHandler = require('../../modules/client/api/v1/api_issue_cert_handler');
+var APIIssueCertEntity = require('../../modules/client/api/v1/api_issue_cert_entity');
 
 var Managers = require('../../core/managers');
 
@@ -17,29 +16,16 @@ module.exports = {
      * @since 180528
      * @author TACKSU
      */
-    'issuecert': (req, res, next) => {
-        // Access token for API.
-        var accessToken = req.body.accessToken;
-
-        // Access granted user Id.
-        var uId = req.body.uId;
-
-        var clientId = req.body.clientId;
-
-        // Raw data of Client server
-        var data = req.body.data;
-
-        var entity = new IssueCertEntity({
-            uId: uId,
-            clientId: clientId,
-            data: data
-        });
-
-        Managers.client().request(entity, (err, result) => {
+    issuecert: (req, res, next) => {
+        Managers.client().request(new APIIssueCertEntity({
+            uId: req.body.uId,
+            clientId: req.body.clientId,
+            data: req.body.data,
+        }, (err, result) => {
             if (!!err) {
                 return next(err);
             }
             res.send(result);
-        });
+        }));
     }
 }

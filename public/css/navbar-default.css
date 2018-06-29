@@ -16,7 +16,8 @@
 }
 
 .grid {
-    width: 1680px;
+    /* width: 1680px; */
+    width: 1629px;
     height: 60px;
     margin: auto;
 }

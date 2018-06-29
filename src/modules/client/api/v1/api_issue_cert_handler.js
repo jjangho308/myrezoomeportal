@@ -12,6 +12,9 @@ var Util = require('../../../../util/util');
 var CertModel = require('../../../../models/cert/cert');
 var SharedCertModel = require('../../../../models/cert/shared_cert');
 
+var ErrorCode = require('../../../../core/error/error_code');
+var ResponseError = require('../../../../core/error/response_error');
+
 /**
  * Handler for IssueCertAPIV1RequestEntity. <br />
  * 
@@ -64,60 +67,38 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
             uId: uId
         }, (err, userModels) => {
             if (!!err) {
-                done(ClientRequest.RESULT_FAILURE, {
-                    err: {
-                        code: 500,
-                        msg: 'Internal error'
-                    }
-                });
-                return;
+                return done(ClientRequest.RESULT_FAILURE, err);
             } else if (userModels.length == 0) {
-                done(ClientRequest.RESULT_FAILURE, {
-                    err: {
-                        code: 200,
-                        msg: 'No user found'
-                    }
-                });
-                return;
+                return done(ClientRequest.RESULT_FAILURE, new ResponseError({
+                    code: ErrorCode.API_NO_USER,
+                }));
             } else {
                 var userWalletAddress = userModels[0].bcWalletAddr;
                 Util.sha256(JSON.stringify(data), (hashedRawData) => {
                     if (!!err) {
-                        done(ClientRequest.RESULT_FAILURE, {
-                            err: {
-                                code: 500,
-                                msg: 'Internal error'
-                            }
-                        });
-                        return;
+                        return done(ClientRequest.RESULT_FAILURE, err);
                     } else {
                         var nex = Managers.nex();
 
                         // NexLedger에 hash 데이터 있는지부터 확인
                         nex.getbyaddress(null, userWalletAddress, (userBCHashes) => {
-
                             if (!!userBCHashes) {
                                 // NexLedger에 이미 Hash가 저장되어 있는지 확인
                                 var found = false;
 
-                                if(!!userBCHashes.result) {
+                                if (!!userBCHashes.result) {
                                     found = false;
-                                }
-                                else {
+                                } else {
                                     userBCHashes.result.forEach((item) => {
                                         found = found || (item.hash === hashedRawData);
                                     });
                                 }
 
-                                
-
                                 if (found) {
                                     // 있다면 txid 가져온 다음에 아래 로직 수행.
                                     return;
                                 } else {
-                                    nex.put(null, userWalletAddress, {
-                                        hash: hashedRawData
-                                    }, (nexBody) => {
+                                    nex.put(null, userWalletAddress, {hash: hashedRawData}, 0, (nexBody) => {                                                                            
                                         var txid = nexBody.result.txid;
 
                                         // 일단 BLCMap DB에 넣음
@@ -128,8 +109,10 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                             "200", // FIXME Org code로 박아야 함 (임시)
                                             "RCCNF0001" // TODO 이걸 사실상 SubID로 인식해야 하나 (임시)
                                         ];
+                                        
 
                                         Managers.db().getRecordDAO().putRecord(blcmapinsertData, (putRecordResponse) => {
+                                            
                                             console.log(putRecordResponse);
                                         });
 
@@ -140,12 +123,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                             "subid": "RCCNF0001"
                                         }), crypto.getSystemSymmetricKey(), (err, encryptedRawData) => {
                                             if (!!err) {
-                                                done(ClientRequest.RESULT_FAILURE, {
-                                                    err: {
-                                                        code: 500,
-                                                        msg: 'Internal error'
-                                                    }
-                                                });
+                                                return done(ClientRequest.RESULT_FAILURE, err);
                                             } else {
                                                 var certId = Util.uuid();
                                                 var certModel = new CertModel({
@@ -157,12 +135,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                                 var certDao = Managers.db().getCertDAO();
                                                 certDao.putCert(certModel, (err, insertCertId) => {
                                                     if (!!err) {
-                                                        done(ClientRequest.RESULT_FAILURE, {
-                                                            err: {
-                                                                code: 500,
-                                                                msg: 'Internal error'
-                                                            }
-                                                        });
+                                                        return done(ClientRequest.RESULT_FAILURE, err);
                                                     } else if (insertCertId > 0) {
 
                                                         var sharedUrl = Util.randomStr({
@@ -175,17 +148,11 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                                             url: sharedUrl,
                                                             public: "Y"
                                                         });
-
-                                                        certDao.putShared(sharedCert, (err, insertSharedId) => {
+                                                        certDao.putShared(sharedCert, (err, insertSharedId) => {                                                           
                                                             if (!!err) {
-                                                                done(ClientRequest.RESULT_FAILURE, {
-                                                                    err: {
-                                                                        code: 500,
-                                                                        msg: 'Internal error'
-                                                                    }
-                                                                });
+                                                                return done(ClientRequest.RESULT_FAILURE, err);
                                                             } else if (insertSharedId > 0) {
-                                                                done(ClientRequest.RESULT_SUCCESS, {
+                                                                return done(ClientRequest.RESULT_SUCCESS, {
                                                                     url: 'https://dev.rezoome.io/v/' + sharedUrl
                                                                 });
                                                             }

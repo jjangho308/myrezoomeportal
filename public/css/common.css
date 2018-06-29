@@ -91,7 +91,9 @@ input {
 }
 
 input:focus {
-    border: solid 1px #4c80f1;
+    /* border: solid 1px #4c80f1; */
+    outline: 0;    
+    border: 1px solid #a2a2a2;
 }
 
 input:-moz-read-only {
@@ -477,7 +479,7 @@ input[type="checkbox"] {
 
 .modal>p>span {
     color: #a9afb3;
-    font-size: 10px;
+    font-size: 12px;
     margin-left: 11px;
     font-weight: normal;
 }
@@ -593,6 +595,11 @@ th:nth-child(6) {
     height: 40px;
     line-height: 1.08;
     vertical-align: top;
+    outline:0;
+}
+
+.modal button:focus {
+outline:0;
 }
 
 .modal .cancel-btn {
@@ -600,9 +607,18 @@ th:nth-child(6) {
     margin: 15px 10px 0px 0px;
 }
 
+.modal .cancel-btn:focus {
+    outline:0;
+}
+
+
 .modal .confirm-btn {
     float: right;
     margin: 15px 36px 0px 0px;
+}
+
+.modal .confirm-btn:focus {
+    outline:0;
 }
 
 .modal-body {
@@ -630,6 +646,12 @@ th:nth-child(6) {
     border: solid 1px #ced3d6;
     padding: 3px 11px;
     vertical-align: top;
+}
+
+.modal-body input:focus 
+{
+    outline: 0;    
+    border: 1px solid #a2a2a2;
 }
 
 /*
@@ -722,15 +744,15 @@ input:checked+.slide-toggle::after {
 
 .sub-info-select-div-signout {
     display: none;
-    width: 120px;
+    width: 150px;
     height: 40px;
     border-radius: 4px;
     box-shadow: 0 1px 3px 0 rgba(207,207,207,0.5);
     background-color: #fff;
     border: solid 1px #ced3d6;
     position: absolute;
-    top: 50px;
-    right: 130px;
+    top: 53px;
+    right: 225px;
     transform: none;
     z-index: 2;
 }
@@ -739,7 +761,7 @@ input:checked+.slide-toggle::after {
     width: auto;
     transform: initial;
     font-size: 13px;
-    text-align: left;
+    text-align: center;
     line-height: 38px;
     color: #676767;
     margin: 0;

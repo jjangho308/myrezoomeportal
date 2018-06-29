@@ -44,6 +44,7 @@ exports.DATA_NO_CERT = 304;
 exports.DATA_NO_BLCMAP = 305;
 exports.DATA_NO_ORG = 306;
 exports.DATA_NO_RECORD = 307;
+exports.DATA_NO_SHORTURL = 308;
 
 /**
  * API Error code set. <br />
@@ -57,3 +58,4 @@ exports.API_NO_CMD = 801;
 // Invalid api version name
 exports.API_VERSION_INVALID = 802;
 exports.API_UNAUTHORIZED = 803;
+exports.API_NO_USER = 804;

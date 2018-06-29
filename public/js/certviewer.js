@@ -72,7 +72,35 @@
             $(".cert-create-div").show();
         });
 
+        $('#cert-set-password').click(function (event) {
 
+            if($(event.target.parentNode).find(".cert-set-password-info").length == 0) {
+                var cert_set_password_info = document.createElement("div");
+                cert_set_password_info.setAttribute("class","cert-set-password-info");
+
+                if($("#shared_password").val().length > 0) {
+                    cert_set_password_info.innerText = "비밀번호가 설정되었습니다.";
+                    cert_set_password_info.style.color = "#4a90e2";
+                }
+                else {
+                    cert_set_password_info.innerText = "비밀번호가 올바르지 않습니다.";
+                    cert_set_password_info.style.color = "#ee4b3c";
+                }
+                event.target.parentNode.append(cert_set_password_info);
+            }
+            else {
+                var cert_set_password_info = $(event.target.parentNode).find(".cert-set-password-info")[0];
+
+                if($("#shared_password").val().length > 0) {
+                    cert_set_password_info.innerText = "비밀번호가 설정되었습니다.";
+                    cert_set_password_info.style.color = "#4a90e2";
+                }
+                else {
+                    cert_set_password_info.innerText = "비밀번호가 올바르지 않습니다.";
+                    cert_set_password_info.style.color = "#ee4b3c";
+                }                
+            }
+        });
 
         $('.modal-sub-header span:nth-child(2)').click(function () {
             $('.modal-sub-header span:nth-child(1)').css({
@@ -320,40 +348,52 @@
             summitform();
         });
 
-        // donwload PDF
-        $("#btn_download").click(function (event) {                
-                
-                $(".qr-container").show();
-                var $childern = $(".main-body >.outer-container");
+        $("#btn_send").click(function (event) {          
+            
+            $("#cert-url-input").val("");
 
-                // var $childern = $(".inner-container");
-                
-                var chilSize = $childern.size();
-                var size = 0;
-                var pdf = new jsPDF('p', 'mm',[297,210]);
-                
-                $childern.each(function (idx, array) {
-                    html2canvas($(this), {
-                        onrendered: function(canvas) {
-                            size++;
-                            pdf.addImage(canvas.toDataURL("image/png"),"png", 10,10,190,277);
-                            if(size != chilSize){
-                                pdf.addPage();                                
-                            }
-                           
-                            if (size === chilSize) {                                
-                                pdf.save('rezoome_cert.pdf');
-                            }
-                            
-                        }
-                    });       
-                });
-                            
-            $(".qr-container").hide();
+            var $children = $(".open-range-div");
+            $children.each(function (idx, array) {
+                $(this).find("input:radio[name=open-range-1]").removeAttr('checked');
+                $(this).find("input:radio[name=open-range-1]").prop('checked', false);
+            });
+
+            var $children = $(".expire-date-div");
+            $children.each(function (idx, array) {
+                $(this).find("input:radio[name=expire-date-1]").removeAttr('checked');
+                $(this).find("input:radio[name=expire-date-1]").prop('checked', false);
+            });
+            
+            $("#shared_password").val("");
+            $(".password-div").css('display', "none");
         });
 
-
-
+        // donwload PDF
+        $("#btn_download").click(function (event) {                
+            $(".qr-container").show();
+            var $children = $(".main-body >.outer-container");        
+            var childSize = $children.size();
+            var size = 0;
+            var pdf = new jsPDF('p', 'mm',[297,210]);
+            
+            $children.each(function (idx, array) {
+                console.log($(this));
+                html2canvas($(this), {
+                    onrendered: function(canvas) {
+                        size++;
+                        pdf.addImage(canvas.toDataURL("image/png"),"png", 10,10,190,277);
+                        if(size != childSize){
+                            pdf.addPage();                                
+                        }
+                        
+                        if (size === childSize) {                                
+                            pdf.save('rezoome_cert.pdf');
+                        }                        
+                    }
+                });       
+            });                            
+            $(".qr-container").hide();
+        });
 
         $("#btn_print").click(function (event) {
 
@@ -378,6 +418,12 @@
             html.appendChild(printDiv);
             printDiv.innerHTML = printContents;
             document.body.style.display = 'none';
+            window.onbeforeprint = function () {
+                //do before-printing stuff
+                setTimeout( function(){                                                                
+                }, 1000);
+            }
+            
             window.print();
             document.body.style.display = 'block';
             printDiv.remove();
@@ -468,12 +514,14 @@ function nexledgerInfoView(reqtxid) {
 
             tempstr = '';
             for (var i = 0; i < res2.result.toaddress.length; i++) {
-                tempstr = tempstr + res2.result.toaddress[i] + '<br>';
+                if(res2.result.toaddress[i] != "") {
+                    tempstr = tempstr + res2.result.toaddress[i] + '<br>';
+                }                
             }
             $("#toAddress").html(tempstr);
 
             $("#total_volume").text(res2.result.total_volume);
-            $("#total_output").text(res2.result.output);
+            $("#total_output").text(res2.result.total_output);
             $("#txsize").text(res2.result.txsize + " byte");
 
             tempstr = '';

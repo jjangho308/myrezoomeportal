@@ -1,150 +1,156 @@
 <%- include('base_head_import') -%>
-<%- include('base_all_dialog') -%>
+    <%- include('base_all_dialog') -%>
 
-<head>
-    <script src="js/utils<%= locals.min %>.js"></script>
-    <script src="js/signup<%= locals.min %>.js"></script>    
-    <link rel="stylesheet" href="css/navbar-default<%= locals.min %>.css">
-    <link rel="stylesheet" href="css/signup<%= locals.min %>.css">
-</head>
+        <head>
+            <script src="js/utils<%= locals.min %>.js"></script>
+            <script src="js/signup<%= locals.min %>.js"></script>
+            <link rel="stylesheet" href="css/navbar-default<%= locals.min %>.css">
+            <link rel="stylesheet" href="css/signup<%= locals.min %>.css">
+        </head>
 
-<body>
-    <%- include('base_header_default') -%>
+        <body>
+            <%- include('base_header_default') -%>
 
-    <h1>회원가입</h1>
+                <h1>회원가입</h1>
+                <div class="signup-container">
+                    <p class="title">이메일</p>
+                    <div class="confirm-phone-input">
 
-    <div class="signup-container">
-        <p class="title">이메일</p>
-        <div class="confirm-phone-input">
+                        <input id="confirm-phone-input" placeholder="로그인에 사용할 이메일을 입력해주세요.">
+                        <div class="error-message">이미 가입되어 있는 이메일입니다.</div>
 
-            <input id="confirm-phone-input" placeholder="로그인에 사용할 이메일을 입력해주세요.">
-            <div class="error-message">이미 가입되어 있는 이메일입니다.</div>
-            
-        </div>
-        <button class="phone-send border-btn" disabled="">중복체크</button>
-        <p class="title">비밀번호</p>
-        <input id="signup_pw" type="password" placeholder="영문자, 숫자, 특수문자 조합 8~12자" />
-        <div class="error-message">영문자, 숫자, 특수문자 조합 8~12자로 입력해주세요.</div>
+                    </div>
+                    <button class="phone-send border-btn" disabled>중복체크</button>
+                    <p class="title">비밀번호</p>
+                    <input id="signup_pw" type="password" placeholder="영문자, 숫자, 특수문자 조합 8~12자" />
+                    <div class="error-message">영문자, 숫자, 특수문자 조합 8~12자로 입력해주세요.</div>
 
-        <p class="title">비밀번호 확인</p>
-        <input id="signup_pw_confirm" type="password"  placeholder="위의 비밀번호를 다시 입력해주세요." />
-        <div class="error-message">비밀번호가 일치하지 않습니다.</div>
+                    <p class="title">비밀번호 확인</p>
+                    <input id="signup_pw_confirm" type="password" placeholder="위의 비밀번호를 다시 입력해주세요." />
+                    <div class="error-message">비밀번호가 일치하지 않습니다.</div>
 
-        <div class="last-name">
-            <p class="title">성</p>
-            <input id="signup_familyname" placeholder="홍" />
-        </div>
+                    <div class="last-name">
+                        <p class="title">성</p>
+                        <input id="signup_familyname" placeholder="홍" />
+                        <div class="error-message">이름을 입력하세요.</div>
+                    </div>
 
-        <div class="first-name">
+                    <div class="first-name">
+                        <p class="title">이름</p>
+                        <input id="signup_firstname" placeholder="길동" />
+                        
+                    </div>
 
-            <p class="title">이름</p>
-            <input id="signup_firstname" placeholder="길동" />
-        </div>
-        <p class="title">생년월일</p>
-        <input id="signup_birth"  placeholder="8자리 숫자만 입력해주세요 ex) 20180401" />
-        
-        <p class="title">성별</p>
+                    <div class="birth">
+                    <p class="title">생년월일</p>
+                    <input id="signup_birth" placeholder="8자리 숫자만 입력해주세요 ex) 20180401" />
+                    <div class="error-message">생년월일을 입력하세요</div>
+                    </div>
 
-        <div class="abc-radio">
-            <input type="radio" name="gender" id="radio-male" value="M" checked>
-            <label for="radio-male">
-                남
-            </label>
+                    <p class="title">성별</p>
 
-            <input type="radio" name="gender" id="radio-female" value="F">
-            <label for="radio-female">
-                여
-            </label>
-        </div>
+                    <div class="abc-radio">
+                        <input type="radio" name="gender" id="radio-male" value="M" checked>
+                        <label for="radio-male">
+                            남
+                        </label>
 
-        <p class="title">휴대폰</p>
-        <div class="phone-select">
-            <select id="signup_carrierName">
-                <option value="" disabled selected>통신사</option>                    
-                <option value="SKT">SKT</option>
-                <option value="LGT">LG</option>                
-                <option value="KTF">KT</option>
-            </select>
-        </div>
+                        <input type="radio" name="gender" id="radio-female" value="F">
+                        <label for="radio-female">
+                            여
+                        </label>
+                    </div>
 
-        <div class="phone-input">
-            <input id="signup_phone" placeholder="010-0000-0000" />
-            <div class="error-message">이미 가입된 번호입니다.</div>
-            <div class="info-message-1">인증번호가 발송되었습니다. (2:00)</div>
-        </div>
-        <button class="phone-send border-btn">인증번호 발송</button>
+                    <p class="title">휴대폰</p>
+                    <div class="phone-select">
+                        <select id="signup_carrierName">
+                            <option value="" disabled selected>통신사</option>
+                            <option value="SKT">SKT</option>
+                            <option value="LGT">LG</option>
+                            <option value="KTF">KT</option>
+                        </select>
+                    </div>
 
-        <p class="title">인증번호 확인</p>
+                    <div class="phone-input">
+                        <input id="signup_phone" placeholder="010-0000-0000" />
+                        <div class="error-message">이미 가입된 번호입니다.</div>
+                        <div class="info-message-1">인증번호가 발송되었습니다. (2:00)</div>
+                    </div>
+                    <button class="phone-send border-btn" disabled>인증번호 발송</button>
 
-        <div class="confirm-phone-input">
-            <input  placeholder="8자리 숫자만 입력해주세요 ex) 20180401" />
-            <div class="error-message">인증번호가 일치하지 않습니다.</div>
-            <div class="info-message-2">정상적으로 확인되었습니다.</div>
-        </div>
-        <button class="phone-confirm border-btn" disabled="">인증번호 확인</button>
+                    <p class="title">인증번호 확인</p>
+
+                    <div class="confirm-phone-input">
+                        <input id="confirm_verify_phone" placeholder="8자리 숫자만 입력해주세요 ex) 20180401" />
+                        <div class="error-message">인증번호가 일치하지 않습니다.</div>
+                        <div class="info-message-2">정상적으로 확인되었습니다.</div>
+                    </div>
 
 
-        <div class="agreement-div">
+                    <button class="phone-confirm border-btn" disabled="">인증번호 확인</button>
 
-            <div class="agreement-top">
-                <input type="checkbox" id="box-all" />
-                <label for="box-all"></label>
 
-                <span>아래 내용에 모두 동의합니다.</span>
-            </div>
+                    <div class="agreement-div">
 
-            <div class="agreement-body">
-                <div>
-                        <input type="checkbox" id="box-1" name="agreement"/>
-                        <label for="box-1"></label>
-                        <span>[필수] 서비스 이용약관 동의</span>
-                        <a>자세히</a>
+                        <div class="agreement-top">
+                            <input type="checkbox" id="box-all" />
+                            <label for="box-all"></label>
+                            <span id="box-all-div">아래 내용에 모두 동의합니다.</span>
+                            <div id="clause-error-message" class="error-message">필수약관에 동의하세요</div>
+                        </div>
+
+                        <div class="agreement-body">
+                            <div>
+                                <input type="checkbox" id="box-1" name="agreement" />
+                                <label for="box-1"></label>
+                                <span>[필수] 서비스 이용약관 동의</span>
+                                <a>자세히</a>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="box-2" name="agreement" />
+                                <label for="box-2"></label>
+                                <span>[필수] 개인정보 수집·이용 동의</span>
+                                <a>자세히</a>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="box-3" name="agreement" />
+                                <label for="box-3"></label>
+                                <span>[필수] 개인정보 제3자 정보 제공 동의</span>
+                                <a>자세히</a>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="box-4" name="agreement" />
+                                <label for="box-4"></label>
+                                <span>[선택] 개인정보 제3자 정보 제공 동의</span>
+                                <a>자세히</a>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="box-5" name="agreement" />
+                                <label for="box-5"></label>
+                                <span>[선택] 개인정보 제3자 정보 제공 동의</span>
+                                <a>자세히</a>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="box-6" name="agreement" />
+                                <label for="box-6"></label>
+                                <span>[선택] 개인정보 제3자 정보 제공 동의</span>
+                                <a>자세히</a>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="box-7" name="agreement" />
+                                <label for="box-7"></label>
+                                <span>[선택] 개인정보 제3자 정보 제공 동의</span>
+                                <a>자세히</a>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <button id="btn_signup" class="signup-button">회원가입</button>
                 </div>
-                <div>
-                        <input type="checkbox" id="box-2" name="agreement" />
-                        <label for="box-2"></label>
-                        <span>[필수] 개인정보 수집·이용 동의</span>
-                        <a>자세히</a>
-                </div>
-                <div>
-                        <input type="checkbox" id="box-3" name="agreement" />
-                        <label for="box-3"></label>
-                        <span>[필수] 개인정보 제3자 정보 제공 동의</span>
-                        <a>자세히</a>
-                </div>
-                <div>
-                        <input type="checkbox" id="box-4" name="agreement" />
-                        <label for="box-4"></label>
-                        <span>[선택] 개인정보 제3자 정보 제공 동의</span>
-                        <a>자세히</a>
-                </div>
-                <div>
-                        <input type="checkbox" id="box-5" name="agreement" />
-                        <label for="box-5"></label>
-                        <span>[선택] 개인정보 제3자 정보 제공 동의</span>
-                        <a>자세히</a>
-                </div>
-                <div>
-                        <input type="checkbox" id="box-6"  name="agreement"/>
-                        <label for="box-6"></label>
-                        <span>[선택] 개인정보 제3자 정보 제공 동의</span>
-                        <a>자세히</a>
-                </div>
-                <div>
-                        <input type="checkbox" id="box-7"  name="agreement"/>
-                        <label for="box-7"></label>
-                        <span>[선택] 개인정보 제3자 정보 제공 동의</span>
-                        <a>자세히</a>
-                </div>
+        </body>
 
-
-
-            </div>
-
-        </div>
-
-        <button id="btn_signup" class="signup-button">회원가입</button>        
-    </div>
-</body>
-
-</html>
+        </html>
