@@ -56,8 +56,16 @@ class SignupRequestHandler extends AbstractClientRequestHandler {
         userDAO.put(userModel, (err, insertId) => {
             if (!!err) {
                 return cb(ClientRequest.RESULT_FAILURE, err);
-            } else {
-                return cb(ClientRequest.RESULT_SUCCESS, insertId);
+            } else {                
+                var token = Managers.token().issueToken({
+                    uId: userModel.uId
+                });
+                
+                return cb(ClientRequest.RESULT_SUCCESS, {
+                    token: token
+                });
+
+                //return cb(ClientRequest.RESULT_SUCCESS, insertId);
             }
         });
     }
