@@ -364,7 +364,8 @@
                 $(this).find("input:radio[name=expire-date-1]").prop('checked', false);
             });
             
-
+            $("#shared_password").val("");
+            $(".password-div").css('display', "none");
         });
 
         // donwload PDF
