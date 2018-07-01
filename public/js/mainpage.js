@@ -2040,7 +2040,7 @@ $(document).ready(function () {
                 }
                 updateLock = true;
                 process.clearSessionStorage();
-                ui.removeRecordEls();
+                ui.clearRecords();
                 ui.startLoading();
 
                 //session storage dont have user info(txid list)
