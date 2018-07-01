@@ -1378,7 +1378,7 @@ $(document).ready(function () {
                     },
                     success: function (res) {
                         console.debug(res);
-                        isFunc(callback) && callback(null, res);
+                        isFunc(callback) && callback(null, res.result);
                     }
                 });
             },
