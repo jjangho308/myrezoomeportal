@@ -1125,12 +1125,13 @@ $(document).ready(function () {
      * @since 180628
      * @author TACKSU
      */
-    function transitionNS() {
+    function transitionNS(opt) {
+        opt = opt || {};
         var trans = {},
             def;
         trans.default = def = {
-            ease: "fast",
-            delay: 200,
+            ease: opt.ease || "fast",
+            delay: opt.delay || 200,
         };
 
         trans.popIn = function (htmlElement, callback) {
