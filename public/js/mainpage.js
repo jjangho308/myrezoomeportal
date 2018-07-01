@@ -1130,7 +1130,7 @@ $(document).ready(function () {
         var trans = {},
             def;
         trans.default = def = {
-            ease: opt.ease || "fast",
+            duration: opt.duration || "fast",
             delay: opt.delay || 200,
         };
 
@@ -1144,7 +1144,8 @@ $(document).ready(function () {
                 }, function () {
                     setTimeout(function () {
                         jqEl.animate({
-                            opacity: 1
+                            opacity: 1,
+                            duration: def.duration
                         }, callback);
                     }, def.delay);
                 });
@@ -1156,11 +1157,11 @@ $(document).ready(function () {
                 var jqEl = $(htmlElement);
                 jqEl.animate({
                     opacity: 0,
-                    ease: def.ease,
+                    duration: def.duration,
                 }, function () {
                     setTimeout(function () {
                         jqEl.slideUp({
-                            ease: def.ease
+                            duration: def.duration
                         }, callback)
                     }, def.delay);
                 })
