@@ -1924,14 +1924,14 @@ $(document).ready(function () {
                                 updateLock = false;
                                 console.info("Release lock");
                             } else {
-                                ui.finishLoading(function () {
-                                    dispatchUpdateRecordEvent();
-                                    setTimeout(function () {
-                                        updateLock = false;
-                                        console.info("Release lock");
-                                    }, 5000);
-                                    isFunc(callback) && callback();
-                                });
+                                // FIXME Finish loading callback이 안되네.
+                                ui.finishLoading();
+                                dispatchUpdateRecordEvent();
+                                setTimeout(function () {
+                                    updateLock = false;
+                                    console.info("Release lock");
+                                }, 5000);
+                                isFunc(callback) && callback();
                             }
                         });
                     }
