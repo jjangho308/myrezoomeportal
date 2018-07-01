@@ -1277,8 +1277,12 @@ $(document).ready(function () {
             },
 
             clearRecords: function (cb) {
-                $(".spec-body").remove();
-                $(".private-spec-body").remove();
+                $(".spec-body").each(function(idx, el){
+                    transition.popOut(el);
+                });
+                $(".private-spec-body").each(function(idx, el){
+                    transition.popOut(el);
+                });
                 isFunc(cb) && cb();
             },
 
@@ -1927,6 +1931,11 @@ $(document).ready(function () {
         }
     }
 
+    /**
+     * Namespace for process interface. <br />
+     * 
+     * @since 180701
+     */
     function processNS() {
         var updateLock = false;
         return {
@@ -1945,6 +1954,7 @@ $(document).ready(function () {
                 if (updateLock) {
                     return;
                 }
+                updateLock = true;
                 // New Version
                 process.loadAgentRecords(function (err, records) {
                     if (!!err) {
@@ -1964,7 +1974,10 @@ $(document).ready(function () {
                             } else {
                                 ui.finishLoading(function () {
                                     dispatchUpdateRecordEvent();
-                                    updateLock = false;
+                                    setTimeout(function(){
+                                        updateLock = false;
+                                    }, 5000);
+                                    isFunc(callback) && callback();
                                 });
                             }
                         });
@@ -1979,9 +1992,9 @@ $(document).ready(function () {
              */
             updateRecords: function (_cb) {
                 debugger;
-                // if (updateLock) {
-                //     return;
-                // }
+                if (updateLock) {
+                    return;
+                }
                 updateLock = true;
                 process.clearSessionStorage();
                 ui.clearRecords();
@@ -2000,7 +2013,9 @@ $(document).ready(function () {
                         } else {
                             ui.displayPrivateRecords(res, function () {
                                 ui.finishLoading(function () {
-                                    updateLock = true;
+                                    setTimeout(function(){
+                                        updateLock = false;
+                                    }, 5000);
                                     isFunc(_cb) && _cb();
                                 });
                             });
