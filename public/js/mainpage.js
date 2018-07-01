@@ -1298,26 +1298,26 @@ $(document).ready(function () {
                 if (!this.lock) {
                     this.lock = true;
                     $(".spec-body-default").fadeOut();
-                    $('.spec-body-loading')
-                        .each(function (idx, el) {
-                            setTimeout(function () {
-                                transition.popIn(el);
+                    var loadings = $('.spec-body-loading');
+                    loadings.each(function (idx, el) {
+                        setTimeout(function () {
+                            transition.popIn(el);
 
-                                if (idx == array.length - 1) {
-                                    this.lock = false;
-                                    isFunc(cb) && cb();
-                                    setTimeout(finishLoading, 5000);
-                                }
-                            }, transition.default.delay * idx);
-                        });
+                            if (idx == loadings.length - 1) {
+                                this.lock = false;
+                                isFunc(cb) && cb();
+                                setTimeout(finishLoading, 5000);
+                            }
+                        }, transition.default.delay * idx);
+                    });
                 }
             },
 
             finishLoading: function (cb) {
-                $('.spec-body-loading')
-                    .each(function (idx, el) {
+                var loadings = $('.spec-body-loading');
+                loadings.each(function (idx, el) {
                         setTimeout(function () {
-                            transition.popOut(el, (idx === array.length - 1) ? function () {
+                            transition.popOut(el, (idx === loadings.length - 1) ? function () {
                                 isFunc(cb) && cb();
                             } : null);
 
