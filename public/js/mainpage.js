@@ -1138,8 +1138,9 @@ $(document).ready(function () {
                 var jqEl = $(htmlElement);
                 jqEl.css({
                     opacity: 0,
+                }).slideDown({
                     ease: def.ease
-                }).slideDown(function () {
+                }, function () {
                     setTimeout(function () {
                         jqEl.animate({
                             opacity: 1
@@ -1158,7 +1159,7 @@ $(document).ready(function () {
                 }, function () {
                     setTimeout(function () {
                         jqEl.slideUp({
-                            ease: transition.defaultEase,
+                            ease: def.ease
                         }, callback)
                     }, def.delay);
                 })
