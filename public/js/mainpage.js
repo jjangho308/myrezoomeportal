@@ -1990,7 +1990,7 @@ $(document).ready(function () {
                 //session storage dont have user info(txid list)
                 ajax.fetchAgentRecords(function (err, res) {
                     if (!!res) {
-
+                        clientsocket_listener(ui.displayAgentRecords);
                     }
                 });
                 setTimeout(function () {
