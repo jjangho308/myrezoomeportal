@@ -62,9 +62,40 @@ $(document).ready(function () {
      * @since 180627
      * @author TACKSU
      */
-    var ajax = window.ajax || ajaxModule();
-    var ui = window.ui || uiModule();
-    var transition = window.transition || transitionModule();
+    var ajax = window.ajax || ajaxNS();
+
+    /**
+     * Namespace for UI interaction functions. <br />
+     */
+    var ui = window.ui || uiNS();
+
+    /**
+     * Namespace for UI effects and transition functions.
+     */
+    var transition = window.transition || transitionNS();
+
+    var socketNS = socketNS();
+
+    var eventNS = eventNS();
+
+    function eventNS() {
+        var eventWrapper = null;
+        return {
+            /**
+             * Emit event with arguments. <br />
+             */
+            dispatch: function (_event, args) {
+
+            },
+
+            /**
+             *  Update default record vie entry. <br />
+             */
+            updateRecords: function (eventName) {
+                dispatchUpdateRecordEvent();
+            }
+        }
+    }
 
     /**
      * Initialize global variables. <br />
@@ -1000,7 +1031,11 @@ $(document).ready(function () {
     };
 
     /**
-     * obtain 
+     * Get agent records from session storage first, <br />
+     * if not, fetch from server. <br />
+     * 
+     * @since 180629
+     * 
      * @param {*} cb 
      */
     function loadAgentRecords(cb) {
@@ -1009,11 +1044,14 @@ $(document).ready(function () {
             var storedAgentRecords = storedTxidList.map(function (item) {
                 return getData(item);
             });
-        } catch (e) {
-            console.error(e);
-            isFunc(cb) && cb(e);
+        } catch (err) {
+            console.error(err);
+            isFunc(cb) && cb(err);
         }
-        storedAgentRecords.length === 0 ? ajax.fetchAgentRecords(cb) : cb(null, storedAgentRecords);
+        storedAgentRecords.length === 0 ? ajax.fetchAgentRecords(function (err, result) {
+            clientsocket_listener(ui.displayAgentRecords);
+            cb(err, result)
+        }) : cb(null, storedAgentRecords);
     }
 
     /**
@@ -1056,7 +1094,6 @@ $(document).ready(function () {
 
         // New Version
         loadAgentRecords(function (err, records) {
-            clientsocket_listener(ui.displayAgentRecords);
             loadPrivateRecords(function (err, privateRecords) {
                 if (!!err) {
 
@@ -1116,6 +1153,41 @@ $(document).ready(function () {
         }
     };
 
+    /**
+     * Namespace for socket interface. <br />
+     * 
+     * @since 180701
+     * @author TACKSU
+     * 
+     * @param {*} opt 
+     */
+    function socketNS(opt) {
+        /**
+         * Default SocketIO instance. <br />
+         */
+        var socket = null;
+        return {
+            init: function (_context) {
+
+            },
+            setSocket: function (_mid) {
+                socket.close();
+                socket = io();
+                socket.emit('SetSocket', {
+                    mid: mId
+                });
+            },
+            addMessageHandler: function (_msg, callback) {
+                if (typeof _msg !== "string" || !isFunc(callback)) {
+                    console.err("Invalid arguments");
+                    return;
+                } else {
+                    socket.on(_msg, callback);
+                }
+            }
+        }
+    }
+
 
     /**
      * Initialize transition module.
@@ -1123,7 +1195,7 @@ $(document).ready(function () {
      * @since 180628
      * @author TACKSU
      */
-    function transitionModule(opt) {
+    function transitionNS() {
         var trans = {},
             def;
         trans.default = def = {
@@ -1170,7 +1242,7 @@ $(document).ready(function () {
      * @since 180628
      * @author TACKSU
      */
-    function uiModule() {
+    function uiNS() {
         return {
             showAlarm: function (callback) {
                 // Do something
@@ -1302,11 +1374,13 @@ $(document).ready(function () {
     };
 
     /**
-     * Module for ajax requests. <br />
+     * Namespace for ajax request functions. <br />
      * 
+     * @namespace
      * @since 180629
      */
-    function ajaxModule() {
+    function ajaxNS() {
+        var ajaxWrapper = null;
         return {
             fetchAgentRecords: function (_cb) {
                 $.ajax({
@@ -1331,8 +1405,7 @@ $(document).ready(function () {
                     },
                     success: function (res) {
                         setSocket(res.mid);
-                        clientsocket_listener();
-                        isFunc(_cb) && _cb(res);
+                        isFunc(_cb) && _cb(null, res);
                     },
                 });
             },
@@ -1347,11 +1420,11 @@ $(document).ready(function () {
                     error: function (jqXhr, status, error) {
                         console.error('Get private record Error : ' + error);
                         console.error(jqXhr.responseText);
-                        !!callback && callback instanceof Function && callback(jqXhr.responseJSON);
+                        isFunc(callback) && callback(jqXhr.responseJSON);
                     },
                     success: function (res) {
                         console.debug(res);
-                        !!callback && callback instanceof Function && callback(null, res);
+                        isFunc(callback) && callback(null, res);
                     }
                 });
             },
@@ -1387,16 +1460,6 @@ $(document).ready(function () {
             }
         }
     };
-
-    /**
-     * 
-     * @param {*} cb 
-     */
-    function clearRecords(cb) {
-        $(".spec-body").remove();
-        $(".private-spec-body").remove();
-        !!cb && cb instanceof Function && cb();
-    }
 
     function change_default_cert(subid) {
         $(".change_cert").remove();
@@ -1448,64 +1511,8 @@ $(document).ready(function () {
                 }, 2000);
 
                 // getPrivateRecords();
-                !!cb && cb instanceof Function && cb(null, response);
+                isFunc(cb) && cb(null, response);
             }
-        });
-    }
-
-    /**
-     * Ajax request to get private records. <br />
-     * @param {Function} callback 
-     */
-    function ajaxGetPrivateRecords(callback) {
-        $.ajax({
-            type: 'GET',
-            url: '/records/list',
-            headers: {
-                'Authorization': client_authorization
-            },
-            error: function (jqXhr, status, error) {
-                console.error('Get private record Error : ' + error);
-                console.error(jqXhr.responseText);
-                !!callback && callback instanceof Function && callback(jqXhr.responseJSON);
-            },
-            success: function (res) {
-                console.debug(res);
-                !!callback && callback instanceof Function && callback(null, res);
-            }
-        });
-    }
-
-    /**
-     * Ajax request to search records from agent. <br />
-     * 
-     * 
-     * @param {Function} callback 
-     */
-    function ajaxSearchRecords(callback) {
-        $.ajax({
-            type: 'POST',
-            url: '/client',
-            headers: {
-                'Authorization': client_authorization
-            },
-            contentType: 'application/json',
-            data: JSON.stringify({
-                cmd: 'SearchRecord',
-                args: {
-                    pkey: 'asdfasdf',
-                    update: false,
-                    n: window.jwkPub2.n,
-                    e: window.jwkPub2.e
-                }
-            }),
-            error: function (jqXhr, status, error) {
-                console.error(jqXhr.responseText);
-                !!callback && callback instanceof Function && callback(jqXhr.responseJSON);
-            },
-            success: function (res) {
-                !!callback && callback instanceof Function && callback(null, res);
-            },
         });
     }
 
@@ -1514,84 +1521,84 @@ $(document).ready(function () {
      * 
      * @param {Function} callback 
      */
-    function getPrivateRecords(update, callback) {
+    // function getPrivateRecords(update, callback) {
 
-        var prvtRecords = getPrivateData();
-        if (prvtRecords.length > 0 && !update) {
-            innerProcessPrivateRecords(prvtRecords, callback);
-            // privaterecords.sort(function (a, b) {
-            //     try {
-            //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-            //     } catch (e) {
-            //         console.error(e);
-            //         return 0;
-            //     }
-            // });
+    //     var prvtRecords = getPrivateData();
+    //     if (prvtRecords.length > 0 && !update) {
+    //         innerProcessPrivateRecords(prvtRecords, callback);
+    //         // privaterecords.sort(function (a, b) {
+    //         //     try {
+    //         //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+    //         //     } catch (e) {
+    //         //         console.error(e);
+    //         //         return 0;
+    //         //     }
+    //         // });
 
-            // privaterecords.forEach(function (item, idx) {
-            //     var data = JSON.parse(item.data);
-            //     data.certPrvtId = item.certPrvtId;
-            //     if (item.subCd in view_formatter) {
-            //         view_formatter[item.subCd](data);
-            //     }
-            // });
-        } else {
-            ajaxGetPrivateRecords(function (err, res) {
-                if (!!err) {
-                    return
-                } else {
-                    // setTimeout(function () {
-                    setPrivateData(res.result);
-                    innerProcessPrivateRecords(res.result, callback);
-                    // res.result.sort(function (a, b) {
-                    //     try {
-                    //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-                    //     } catch (e) {
-                    //         console.error(e);
-                    //         return 0;
-                    //     }
-                    // });
+    //         // privaterecords.forEach(function (item, idx) {
+    //         //     var data = JSON.parse(item.data);
+    //         //     data.certPrvtId = item.certPrvtId;
+    //         //     if (item.subCd in view_formatter) {
+    //         //         view_formatter[item.subCd](data);
+    //         //     }
+    //         // });
+    //     } else {
+    //         ajaxGetPrivateRecords(function (err, res) {
+    //             if (!!err) {
+    //                 return
+    //             } else {
+    //                 // setTimeout(function () {
+    //                 setPrivateData(res.result);
+    //                 innerProcessPrivateRecords(res.result, callback);
+    //                 // res.result.sort(function (a, b) {
+    //                 //     try {
+    //                 //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+    //                 //     } catch (e) {
+    //                 //         console.error(e);
+    //                 //         return 0;
+    //                 //     }
+    //                 // });
 
-                    // res.result.forEach(function (item, idx) {
-                    //     var data = JSON.parse(item.data);
-                    //     data.certPrvtId = item.certPrvtId;
-                    //     if (item.subCd in view_formatter) {
-                    //         view_formatter[item.subCd](data);
-                    //     }
-                    // });
-                    // refreshview();
-                    // !!callback && callback instanceof Function && callback(res);
-                    // for (var i in res.result) {
-                    //     var data = JSON.parse(res[i].data);
-                    //     data.certPrvtId = res[i].certPrvtId;
-                    //     formatter[res[i].subCd](data);
-                    // }
-                    // }, 2000)
-                }
-            });
-        }
+    //                 // res.result.forEach(function (item, idx) {
+    //                 //     var data = JSON.parse(item.data);
+    //                 //     data.certPrvtId = item.certPrvtId;
+    //                 //     if (item.subCd in view_formatter) {
+    //                 //         view_formatter[item.subCd](data);
+    //                 //     }
+    //                 // });
+    //                 // refreshview();
+    //                 // !!callback && callback instanceof Function && callback(res);
+    //                 // for (var i in res.result) {
+    //                 //     var data = JSON.parse(res[i].data);
+    //                 //     data.certPrvtId = res[i].certPrvtId;
+    //                 //     formatter[res[i].subCd](data);
+    //                 // }
+    //                 // }, 2000)
+    //             }
+    //         });
+    //     }
 
-        function innerProcessPrivateRecords(prvtRecords, callback) {
-            prvtRecords.sort(function (a, b) {
-                try {
-                    return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-                } catch (e) {
-                    console.error(e);
-                    return 0;
-                }
-            });
+    //     function innerProcessPrivateRecords(prvtRecords, callback) {
+    //         prvtRecords.sort(function (a, b) {
+    //             try {
+    //                 return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+    //             } catch (e) {
+    //                 console.error(e);
+    //                 return 0;
+    //             }
+    //         });
 
-            prvtRecords.forEach(function (item, idx) {
-                var data = JSON.parse(item.data);
-                data.certPrvtId = item.certPrvtId;
-                if (item.subCd in view_formatter) {
-                    view_formatter[item.subCd](data);
-                }
-            });
+    //         prvtRecords.forEach(function (item, idx) {
+    //             var data = JSON.parse(item.data);
+    //             data.certPrvtId = item.certPrvtId;
+    //             if (item.subCd in view_formatter) {
+    //                 view_formatter[item.subCd](data);
+    //             }
+    //         });
 
-            !!callback && callback instanceof Function && callback();
-        }
-    }
+    //         !!callback && callback instanceof Function && callback();
+    //     }
+    // }
 
     function initClientKey(callback) {
         genRsaKey(function () {
