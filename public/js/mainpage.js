@@ -1017,28 +1017,6 @@ $(document).ready(function () {
         }
     }
 
-    function updateRecords(callback) {
-        clearSessionStorage();
-        ui.removeRecordEls();
-        ui.startLoading();
-
-        //session storage dont have user info(txid list)
-        ajax.fetchAgentRecords(function (err, res) {
-            if (!!res) {
-
-            }
-            ajax.fetchPrivateRecords(function (err, res) {
-                if (!!err) {
-
-                } else {
-                    ui.displayRecords(res.result, function () {
-                        finishLoading(callback);
-                    });
-                }
-            });
-        });
-    };
-
     // function loadRecords() {
     //     // New Version
     //     loadAgentRecords(function (err, records) {
@@ -1316,13 +1294,13 @@ $(document).ready(function () {
             finishLoading: function (cb) {
                 var loadings = $('.spec-body-loading');
                 loadings.each(function (idx, el) {
-                        setTimeout(function () {
-                            transition.popOut(el, (idx === loadings.length - 1) ? function () {
-                                isFunc(cb) && cb();
-                            } : null);
+                    setTimeout(function () {
+                        transition.popOut(el, (idx === loadings.length - 1) ? function () {
+                            isFunc(cb) && cb();
+                        } : null);
 
-                        }, transition.default.delay * idx);
-                    });
+                    }, transition.default.delay * idx);
+                });
             }
         };
     };
@@ -1990,9 +1968,9 @@ $(document).ready(function () {
              */
             updateRecords: function (_cb) {
                 debugger;
-                if (updateLock) {
-                    return;
-                }
+                // if (updateLock) {
+                //     return;
+                // }
                 updateLock = true;
                 process.clearSessionStorage();
                 ui.clearRecords();
@@ -2003,18 +1981,18 @@ $(document).ready(function () {
                     if (!!res) {
 
                     }
-                    ajax.fetchPrivateRecords(function (err, res) {
-                        if (!!err) {
+                });
+                ajax.fetchPrivateRecords(function (err, res) {
+                    if (!!err) {
 
-                        } else {
-                            ui.displayPrivateRecords(res, function () {
-                                finishLoading(function () {
-                                    updateLock = true;
-                                    isFunc(_cb) && _cb();
-                                });
+                    } else {
+                        ui.displayPrivateRecords(res, function () {
+                            finishLoading(function () {
+                                updateLock = true;
+                                isFunc(_cb) && _cb();
                             });
-                        }
-                    });
+                        });
+                    }
                 });
             },
 
