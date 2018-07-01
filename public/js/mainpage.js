@@ -76,7 +76,7 @@ $(document).ready(function () {
 
     var socketNS = socketNS();
 
-    var eventNS = eventNS();
+    var eventDispatcher = eventNS();
 
     /**
      * Namespace for processing interface. <br />
@@ -98,7 +98,7 @@ $(document).ready(function () {
             /**
              *  Update default record vie entry. <br />
              */
-            updateRecords: function (eventName) {
+            dispatchUpdateRecordEvent: function (eventName) {
                 dispatchUpdateRecordEvent();
             }
         }
@@ -1433,67 +1433,45 @@ $(document).ready(function () {
                         isFunc(callback) && callback(jqXhr.responseJSON);
                     },
                     success: function (response) {
-                        ui.showAlarm('정상적으로 삭제 완료되었습니다.', callback);
+                        isFunc(callback) && callback(null, response.result);
                     }
                 });
             }
         }
     };
 
-    function change_default_cert(subid) {
-        $(".change_cert").remove();
+    // /**
+    //  * Ajax request to delete private record. <br />
+    //  * 
+    //  * @param {String} prvtId 
+    //  * @param {Function} cb 
+    //  */
+    // function ajaxDeletePrivateRecord(prvtId, cb) {
+    //     $.ajax({
+    //         type: 'DELETE',
+    //         url: '/records/' + prvtId,
+    //         headers: {
+    //             'Authorization': client_authorization
+    //         },
+    //         error: function (jqXhr, status, error) {
+    //             console.error('Delete private record Error : ' + error);
+    //             console.error(jqXhr.responseText);
+    //             cb(jqXhr.responseJSON);
+    //         },
+    //         success: function (response) {
+    //             $("#alarm-div span").text("정상적으로 삭제 완료되었습니다.");
+    //             $('#alarm-div').css("display", "block");
+    //             $('#alarm-div').css("margin-right", "-108px");
 
-        var txidList = getTxidList();
-        for (var i in txidList) {
-            try {
-                var record = getData(txidList[i]);
-                var dftYn = record.dftYn;
-                var subidTmp = record.subid;
+    //             setTimeout(function () {
+    //                 $('#alarm-div').fadeOut('slow');
+    //             }, 2000);
 
-                if (subid == subidTmp) {
-                    record_change_formatter[subidTmp](record);
-                }
-            } catch (exception) {
-                console.error(exception);
-                continue;
-            }
-        }
-
-        $('#spec-change-dialog').modal('show');
-    }
-
-    /**
-     * Ajax request to delete private record. <br />
-     * 
-     * @param {String} prvtId 
-     * @param {Function} cb 
-     */
-    function ajaxDeletePrivateRecord(prvtId, cb) {
-        $.ajax({
-            type: 'DELETE',
-            url: '/records/' + prvtId,
-            headers: {
-                'Authorization': client_authorization
-            },
-            error: function (jqXhr, status, error) {
-                console.error('Delete private record Error : ' + error);
-                console.error(jqXhr.responseText);
-                cb(jqXhr.responseJSON);
-            },
-            success: function (response) {
-                $("#alarm-div span").text("정상적으로 삭제 완료되었습니다.");
-                $('#alarm-div').css("display", "block");
-                $('#alarm-div').css("margin-right", "-108px");
-
-                setTimeout(function () {
-                    $('#alarm-div').fadeOut('slow');
-                }, 2000);
-
-                // getPrivateRecords();
-                isFunc(cb) && cb(null, response);
-            }
-        });
-    }
+    //             // getPrivateRecords();
+    //             isFunc(cb) && cb(null, response);
+    //         }
+    //     });
+    // }
 
     function initClientKey(callback) {
         genRsaKey(function () {
@@ -1871,6 +1849,19 @@ $(document).ready(function () {
     function processNS() {
         var updateLock = false;
         return {
+            deletePrivateRecord: function (_recordId, _recordContainer) {
+                ajax.deletePrivateRecord(_recordId, function (err, res) {
+                    if (!!err) {
+                        ui.showAlarm("삭제에 실패했습니다.");
+                    } else if (res) {
+                        ui.showAlarm("삭제에 성공했습니다.");
+                        transition.popOut(_recordContainer, function () {
+                            _recordContainer.remove();
+                            eventDispatcher.dispatchUpdateRecordEvent();
+                        });
+                    }
+                });
+            },
             createPrivateRecord: function (_orgCode, _subCode, _encData, _dialog, _successMsg, _callback) {
                 ajax.createPrivateRecord(_orgCode, _subCode, _encData, function (err, res) {
                     ui.closeDialog(_dialog);
@@ -2049,6 +2040,9 @@ $(document).ready(function () {
             }
         }
     };
+
+    // FIXME 아 안이러고 싶은데 일단 이렇게 해준다 ㅠㅠ 나중에 고쳐야됨
+    window.deletePrivateRecord = process.deletePrivateRecord;
 });
 // 이 아래로 function 또는 variable 선언하지 마시고 안에 넣어 주세요.
 
@@ -2065,5 +2059,27 @@ function dispatchUpdateRecordEvent() {
     document.getElementById("spec_edu_detail_targetdiv").dispatchEvent(recordUpdateEvent);
     document.getElementById("spec_certification_targetdiv").dispatchEvent(recordUpdateEvent);
     document.getElementById("spec_foreign_lang_targetdiv").dispatchEvent(recordUpdateEvent);
+}
+
+function change_default_cert(subid) {
+    $(".change_cert").remove();
+
+    var txidList = getTxidList();
+    for (var i in txidList) {
+        try {
+            var record = getData(txidList[i]);
+            var dftYn = record.dftYn;
+            var subidTmp = record.subid;
+
+            if (subid == subidTmp) {
+                record_change_formatter[subidTmp](record);
+            }
+        } catch (exception) {
+            console.error(exception);
+            continue;
+        }
+    }
+
+    $('#spec-change-dialog').modal('show');
 }
 // 얘는 외부 js에서 쓰는데가 있어서 어쩔 수 없이 여기있음 ㅈㅅ.
