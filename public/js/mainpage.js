@@ -1140,7 +1140,7 @@ $(document).ready(function () {
                 jqEl.css({
                     opacity: 0,
                 }).slideDown({
-                    ease: def.ease
+                    duration: def.duration
                 }, function () {
                     setTimeout(function () {
                         jqEl.animate({
