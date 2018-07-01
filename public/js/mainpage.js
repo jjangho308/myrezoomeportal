@@ -1147,7 +1147,13 @@ $(document).ready(function () {
 
     function loadRecords() {
         // New Version
-        loadAgentRecords(ui.displayAgentRecords);
+        loadAgentRecords(function(err, records){
+            if(!!err){
+                return;
+            }else{
+                ui.displayAgentRecords(records);
+            }
+        });
 
         loadPrivateRecords(function (err, privateRecords) {
             if (!!err) {
