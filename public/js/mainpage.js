@@ -1298,29 +1298,31 @@ $(document).ready(function () {
                 if (!this.lock) {
                     this.lock = true;
                     $(".spec-body-default").fadeOut();
-                    document.getElementsByClassName('spec-body-loading').forEach(function (el, idx, array) {
-                        setTimeout(function () {
-                            transition.popIn(el);
+                    document.getElementsByClassName('spec-body-loading')
+                        .forEach(function (el, idx, array) {
+                            setTimeout(function () {
+                                transition.popIn(el);
 
-                            if (idx == array.length - 1) {
-                                this.lock = false;
-                                isFunc(cb) && cb();
-                                setTimeout(finishLoading, 5000);
-                            }
-                        }, transition.default.delay * idx);
-                    });
+                                if (idx == array.length - 1) {
+                                    this.lock = false;
+                                    isFunc(cb) && cb();
+                                    setTimeout(finishLoading, 5000);
+                                }
+                            }, transition.default.delay * idx);
+                        });
                 }
             },
 
             finishLoading: function (cb) {
-                document.getElementsByClassName('.spec-body-loading').each(function (el, idx, array) {
-                    setTimeout(function () {
-                        transition.popOut(el, (idx === array.length - 1) ? function () {
-                            isFunc(cb) && cb();
-                        } : null);
+                document.getElementsByClassName('.spec-body-loading')
+                    .forEach(function (el, idx, array) {
+                        setTimeout(function () {
+                            transition.popOut(el, (idx === array.length - 1) ? function () {
+                                isFunc(cb) && cb();
+                            } : null);
 
-                    }, transition.default.delay * idx);
-                });
+                        }, transition.default.delay * idx);
+                    });
             }
         };
     };
