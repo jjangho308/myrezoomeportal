@@ -1306,7 +1306,7 @@ $(document).ready(function () {
                             if (idx == loadings.length - 1) {
                                 this.lock = false;
                                 isFunc(cb) && cb();
-                                setTimeout(finishLoading, 5000);
+                                setTimeout(ui.finishLoading, 5000);
                             }
                         }, transition.default.delay * idx);
                     });
