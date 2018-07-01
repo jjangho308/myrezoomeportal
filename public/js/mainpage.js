@@ -1039,71 +1039,71 @@ $(document).ready(function () {
         });
     };
 
-    function loadRecords() {
-        // New Version
-        loadAgentRecords(function (err, records) {
-            if (!!err) {
-                return;
-            } else {
-                ui.displayAgentRecords(records);
-            }
-        });
+    // function loadRecords() {
+    //     // New Version
+    //     loadAgentRecords(function (err, records) {
+    //         if (!!err) {
+    //             return;
+    //         } else {
+    //             ui.displayAgentRecords(records);
+    //         }
+    //     });
 
-        loadPrivateRecords(function (err, privateRecords) {
-            if (!!err) {
+    //     loadPrivateRecords(function (err, privateRecords) {
+    //         if (!!err) {
 
-            } else {
-                ui.displayPrivateRecords(privateRecords, function (err, res) {
-                    if (!!err) {
+    //         } else {
+    //             ui.displayPrivateRecords(privateRecords, function (err, res) {
+    //                 if (!!err) {
 
-                    } else {
-                        finishLoading(dispatchUpdateRecordEvent);
-                    }
-                });
-            }
-        });
+    //                 } else {
+    //                     finishLoading(dispatchUpdateRecordEvent);
+    //                 }
+    //             });
+    //         }
+    //     });
 
-        // //request to agent for get user info
-        // var storedTxidList = getTxidList();
+    //     // //request to agent for get user info
+    //     // var storedTxidList = getTxidList();
 
-        // // 왜 0이 아니고 1 초과일때지?
-        // if (storedTxidList.length > 0) {
+    //     // // 왜 0이 아니고 1 초과일때지?
+    //     // if (storedTxidList.length > 0) {
 
-        //     // Close initial dialog.
-        //     $('#initial-dialog .close-modal').click();
+    //     //     // Close initial dialog.
+    //     //     $('#initial-dialog .close-modal').click();
 
-        //     //sessing storage have user info (txid list)
-        //     var storedAgentRecords = storedTxidList.map(function (item) {
-        //         return getData(item);
-        //     });
-        //     // for (var i = 0; i < pagetxidlist.length; i++) {
-        //     //     try {
-        //     //         var objuserdata = getData(pagetxidlist[i]);
-        //     //         oridata.push(objuserdata);
-        //     //     } catch (exception) {
-        //     //         console.error(exception);
-        //     //         continue;
-        //     //     }
-        //     // }
-        //     // $('.spec-body-default').fadeIn();
-        //     refreshview(storedAgentRecords, function () {
-        //         getPrivateRecords(true, function (err, res) {
-        //             if (!!err) {
-        //                 return
-        //             } else {}
-        //         });
-        //     });
-        // } else {
-        //     // updateRecords();
-        //     loadAgentRecords(function (err, res) {
-        //         getPrivateRecords(true, function (err, res) {
-        //             // if (!!err) {
-        //             //     return
-        //             // } else {}
-        //         });
-        //     });
-        // }
-    };
+    //     //     //sessing storage have user info (txid list)
+    //     //     var storedAgentRecords = storedTxidList.map(function (item) {
+    //     //         return getData(item);
+    //     //     });
+    //     //     // for (var i = 0; i < pagetxidlist.length; i++) {
+    //     //     //     try {
+    //     //     //         var objuserdata = getData(pagetxidlist[i]);
+    //     //     //         oridata.push(objuserdata);
+    //     //     //     } catch (exception) {
+    //     //     //         console.error(exception);
+    //     //     //         continue;
+    //     //     //     }
+    //     //     // }
+    //     //     // $('.spec-body-default').fadeIn();
+    //     //     refreshview(storedAgentRecords, function () {
+    //     //         getPrivateRecords(true, function (err, res) {
+    //     //             if (!!err) {
+    //     //                 return
+    //     //             } else {}
+    //     //         });
+    //     //     });
+    //     // } else {
+    //     //     // updateRecords();
+    //     //     loadAgentRecords(function (err, res) {
+    //     //         getPrivateRecords(true, function (err, res) {
+    //     //             // if (!!err) {
+    //     //             //     return
+    //     //             // } else {}
+    //     //         });
+    //     //     });
+    //     // }
+    // };
 
     /**
      * Namespace for socket interface. <br />
@@ -2000,7 +2000,6 @@ $(document).ready(function () {
                 if (updateLock) {
                     return;
                 }
-                ui.startLoading();
                 // New Version
                 process.loadAgentRecords(function (err, records) {
                     if (!!err) {
@@ -2081,10 +2080,17 @@ $(document).ready(function () {
                     console.error(err);
                     isFunc(cb) && cb(err);
                 }
-                storedAgentRecords.length === 0 ? ajax.fetchAgentRecords(function (err, result) {
-                    clientsocket_listener(ui.displayAgentRecords);
-                    // Do not call callback.
-                }) : cb(null, storedAgentRecords);
+
+                // 저장된 게 없을 때 Loading start.
+                if (storedAgentRecords.length === 0) {
+                    ui.startLoading();
+                    ajax.fetchAgentRecords(function (err, result) {
+                        clientsocket_listener(ui.displayAgentRecords);
+                        // Do not call callback.
+                    });
+                } else {
+                    cb(null, storedAgentRecords);
+                }
             },
 
             /**
