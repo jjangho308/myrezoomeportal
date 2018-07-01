@@ -1277,19 +1277,19 @@ $(document).ready(function () {
                 // this.lock = this.lock || false;
                 // if (!this.lock) {
                 //     this.lock = true;
-                    $(".spec-body-default").fadeOut();
-                    var loadings = $('.spec-body-loading');
-                    loadings.each(function (idx, el) {
-                        setTimeout(function () {
-                            transition.popIn(el);
+                $(".spec-body-default").fadeOut();
+                var loadings = $('.spec-body-loading');
+                loadings.each(function (idx, el) {
+                    setTimeout(function () {
+                        transition.popIn(el);
 
-                            if (idx == loadings.length - 1) {
-                                this.lock = false;
-                                isFunc(cb) && cb();
-                                setTimeout(ui.finishLoading, 5000);
-                            }
-                        }, transition.default.delay * idx);
-                    });
+                        if (idx == loadings.length - 1) {
+                            this.lock = false;
+                            isFunc(cb) && cb();
+                            setTimeout(ui.finishLoading, 5000);
+                        }
+                    }, transition.default.delay * idx);
+                });
                 // }
             },
 
@@ -1984,18 +1984,20 @@ $(document).ready(function () {
 
                     }
                 });
-                ajax.fetchPrivateRecords(function (err, res) {
-                    if (!!err) {
+                setTimeout(function () {
+                    ajax.fetchPrivateRecords(function (err, res) {
+                        if (!!err) {
 
-                    } else {
-                        ui.displayPrivateRecords(res, function () {
-                            ui.finishLoading(function () {
-                                updateLock = true;
-                                isFunc(_cb) && _cb();
+                        } else {
+                            ui.displayPrivateRecords(res, function () {
+                                ui.finishLoading(function () {
+                                    updateLock = true;
+                                    isFunc(_cb) && _cb();
+                                });
                             });
-                        });
-                    }
-                });
+                        }
+                    });
+                }, 3000);
             },
 
             /**
