@@ -2000,7 +2000,7 @@ $(document).ready(function () {
                 }
                 ui.startLoading();
                 // New Version
-                loadAgentRecords(function (err, records) {
+                process.loadAgentRecords(function (err, records) {
                     if (!!err) {
                         return;
                     } else {
@@ -2008,7 +2008,7 @@ $(document).ready(function () {
                     }
                 });
 
-                loadPrivateRecords(function (err, privateRecords) {
+                process.loadPrivateRecords(function (err, privateRecords) {
                     if (!!err) {
 
                     } else {
@@ -2037,7 +2037,7 @@ $(document).ready(function () {
                     return;
                 }
                 updateLock = true;
-                clearSessionStorage();
+                process.clearSessionStorage();
                 ui.removeRecordEls();
                 ui.startLoading();
 
@@ -2127,6 +2127,8 @@ $(document).ready(function () {
         }
     };
 });
+// 이 아래로 function 또는 variable 선언하지 마시고 안에 넣어 주세요.
+
 /**
  * Dispath "record_updated" event to refresh default div <br />
  * for each records categories. <br />
@@ -2141,4 +2143,4 @@ function dispatchUpdateRecordEvent() {
     document.getElementById("spec_certification_targetdiv").dispatchEvent(recordUpdateEvent);
     document.getElementById("spec_foreign_lang_targetdiv").dispatchEvent(recordUpdateEvent);
 }
-// 이 아래로 function 또는 variable 선언하지 마시고 안에 넣어 주세요.
+// 얘는 외부 js에서 쓰는데가 있어서 어쩔 수 없이 여기있음 ㅈㅅ.
