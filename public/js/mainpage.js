@@ -1134,7 +1134,7 @@ $(document).ready(function () {
         };
 
         trans.popIn = function (htmlElement, callback) {
-            if (htmlElement instanceof HTMLElement && htmlElement.style.display === 'none') {
+            if (htmlElement instanceof HTMLElement && $(htmlElement).css('display') === 'none') {
                 var jqEl = $(htmlElement);
                 jqEl.css({
                     opacity: 0,
@@ -1150,7 +1150,7 @@ $(document).ready(function () {
         }
 
         trans.popOut = function (htmlElement, callback) {
-            if (htmlElement instanceof HTMLElement && htmlElement.style.display !== 'none') {
+            if (htmlElement instanceof HTMLElement && $(htmlElement).css('display') !== 'none') {
                 var jqEl = $(htmlElement);
                 jqEl.animate({
                     opacity: 0,
