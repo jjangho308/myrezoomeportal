@@ -2083,7 +2083,7 @@ $(document).ready(function () {
                 }
                 storedAgentRecords.length === 0 ? ajax.fetchAgentRecords(function (err, result) {
                     clientsocket_listener(ui.displayAgentRecords);
-                    cb(err, result)
+                    // Do not call callback.
                 }) : cb(null, storedAgentRecords);
             },
 
