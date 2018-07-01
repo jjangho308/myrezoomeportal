@@ -1140,14 +1140,17 @@ $(document).ready(function () {
                 jqEl.css({
                     opacity: 0,
                 }).slideDown({
-                    duration: def.duration
-                }, function () {
-                    setTimeout(function () {
-                        jqEl.animate({
-                            opacity: 1,
-                            duration: def.duration
-                        }, callback);
-                    }, def.delay);
+                    duration: def.duration,
+                    complete: function () {
+                        setTimeout(function () {
+                            jqEl.animate({
+                                opacity: 1
+                            }, {
+                                duration: def.duration,
+                                complete: callback
+                            });
+                        }, def.delay);
+                    }
                 });
             }
         }
@@ -1157,14 +1160,17 @@ $(document).ready(function () {
                 var jqEl = $(htmlElement);
                 jqEl.animate({
                     opacity: 0,
+                }, {
                     duration: def.duration,
-                }, function () {
-                    setTimeout(function () {
-                        jqEl.slideUp({
-                            duration: def.duration
-                        }, callback)
-                    }, def.delay);
-                })
+                    complete: function () {
+                        setTimeout(function () {
+                            jqEl.slideUp({
+                                duration: def.duration,
+                                complete: callback
+                            })
+                        }, def.delay);
+                    }
+                });
             }
         }
         return trans
