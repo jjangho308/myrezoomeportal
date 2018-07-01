@@ -1298,8 +1298,8 @@ $(document).ready(function () {
                 if (!this.lock) {
                     this.lock = true;
                     $(".spec-body-default").fadeOut();
-                    document.getElementsByClassName('spec-body-loading')
-                        .forEach(function (el, idx, array) {
+                    $('.spec-body-loading')
+                        .each(function (idx, el) {
                             setTimeout(function () {
                                 transition.popIn(el);
 
@@ -1314,8 +1314,8 @@ $(document).ready(function () {
             },
 
             finishLoading: function (cb) {
-                document.getElementsByClassName('.spec-body-loading')
-                    .forEach(function (el, idx, array) {
+                $('.spec-body-loading')
+                    .each(function (idx, el) {
                         setTimeout(function () {
                             transition.popOut(el, (idx === array.length - 1) ? function () {
                                 isFunc(cb) && cb();
@@ -1922,50 +1922,6 @@ $(document).ready(function () {
 
     function addMajorDelete(imgElement) {
         $(imgElement).parent().parent().remove();
-    }
-
-    function startLoading(cb) {
-        this.lock = this.lock || false;
-        if (!this.lock) {
-            this.lock = true;
-            $(".spec-body-default").fadeOut();
-            var loadings = $(".spec-body-loading");
-            loadings.each(function (idx, loadingDiv) {
-                setTimeout(function () {
-                    $(loadingDiv).css({
-                        opacity: 0
-                    }).slideDown(function () {
-                        setTimeout(function () {
-                            $(loadingDiv).animate({
-                                opacity: 1
-                            });
-                        }, 500);
-                    });
-
-                    // 혹시나 Loading이 끝나지 않을 경우를 대비하여
-                    if (idx == loadings.length - 1) {
-                        this.lock = false;
-                        setTimeout(finishLoading, 5000);
-                    }
-                }, idx * 200);
-            });
-            !!cb && cb instanceof Function && cb();
-        }
-    }
-
-    function finishLoading(cb) {
-        $(".spec-body-loading").each(function (idx, loadingDiv) {
-            setTimeout(function () {
-                $(loadingDiv).animate({
-                    opacity: 0
-                }, function () {
-                    setTimeout(function () {
-                        $(loadingDiv).slideUp();
-                    }, 500);
-                });
-            }, idx * 200);
-        });
-        !!cb && cb instanceof Function && cb();
     }
 
     function checkSpace(str) {
