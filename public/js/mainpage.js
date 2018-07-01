@@ -1173,6 +1173,8 @@ $(document).ready(function () {
      * @author TACKSU
      */
     function uiNS() {
+        // Lock for loading ui.
+        var loadingLock = false;
         return {
             showAlarm: function (callback) {
                 // Do something
@@ -1272,9 +1274,9 @@ $(document).ready(function () {
             },
 
             startLoading: function (cb) {
-                this.lock = this.lock || false;
-                if (!this.lock) {
-                    this.lock = true;
+                // this.lock = this.lock || false;
+                // if (!this.lock) {
+                //     this.lock = true;
                     $(".spec-body-default").fadeOut();
                     var loadings = $('.spec-body-loading');
                     loadings.each(function (idx, el) {
@@ -1288,7 +1290,7 @@ $(document).ready(function () {
                             }
                         }, transition.default.delay * idx);
                     });
-                }
+                // }
             },
 
             finishLoading: function (cb) {
@@ -1987,7 +1989,7 @@ $(document).ready(function () {
 
                     } else {
                         ui.displayPrivateRecords(res, function () {
-                            finishLoading(function () {
+                            ui.finishLoading(function () {
                                 updateLock = true;
                                 isFunc(_cb) && _cb();
                             });
