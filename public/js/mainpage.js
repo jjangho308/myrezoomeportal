@@ -85,8 +85,6 @@ $(document).ready(function () {
      */
     var process = processNS();
 
-    var init = initNS();
-
     function eventNS() {
         var eventWrapper = null;
         return {
