@@ -8,16 +8,19 @@ require socket.is
  */
 $(document).ready(function () {
 
-    Function.prototype.lock = function () {
-        this.lock = this.lock || false;
-        var locked = this.lock;
-        this.lock = true;
-        return !locked;
-    }
+    // 야!!!!! 세마포어 만드는 소리 좀 안나게 해라!!
+    // Function.prototype.locker = {
 
-    Function.prototype.unlock = function () {
-        this.lock = false;
-    }
+    // };
+
+    // Function.prototype.lock = function (_context) {
+    //     Function.prototype.locker[_context] = Function.prototype.locker[_context] || false;
+    //     return !Function.prototype.locker[_context] || 
+    // }
+
+    // Function.prototype.unlock = function (_context) {
+    //     this.lock = false;
+    // }
 
     /**
      * Return async version of current function. <br />
@@ -79,12 +82,17 @@ $(document).ready(function () {
     var eventDispatcher = eventNS();
 
     /**
-     * Namespace for processing interface. <br />
+     * Namespace for user event controller <br />
      * 
      * @since 180701
      */
-    var process = processNS();
+    var ctrl = ctrlNS();
 
+    /**
+     * Event namespace. <br />
+     * 
+     * @since 180701
+     */
     function eventNS() {
         var eventWrapper = null;
         return {
@@ -98,7 +106,7 @@ $(document).ready(function () {
             /**
              *  Update default record vie entry. <br />
              */
-            dispatchUpdateRecordEvent: function (eventName) {
+            dispatchUpdateRecordEvent: function () {
                 dispatchUpdateRecordEvent();
             }
         }
@@ -117,7 +125,7 @@ $(document).ready(function () {
         socket = io();
 
         initClientKey(callback);
-    }(process.loadRecords);
+    }(ctrl.loadRecords);
 
     /**
      * Initialize UI components. <br />
@@ -190,17 +198,11 @@ $(document).ready(function () {
             window.location = "main";
         });
 
-        $('#add-span-edu').click(function () {
-            clearAddSpanEdu();
-        })
+        $('#add-span-edu').click(clearAddSpanEdu)
 
-        $('#add-span-cert').click(function () {
-            clearAddSpanCert();
-        })
+        $('#add-span-cert').click(clearAddSpanCert);
 
-        $('#add-span-lang').click(function () {
-            clearAddSpanLang();
-        })
+        $('#add-span-lang').click(clearAddSpanLang);
 
         $('#education-add-dialog .add-span').click(function () {
             if ($("#education-add-dialog #add-major").length < 2) {
@@ -376,7 +378,7 @@ $(document).ready(function () {
                 var enc_record = JSON.stringify(param);
 
                 if (!is_error) {
-                    process.createPrivateRecord("UNV", "UNV", enc_record, 'education-add-dialog', '정상적으로 입력 완료되었습니다.');
+                    ctrl.createPrivateRecord("UNV", "UNV", enc_record, 'education-add-dialog', '정상적으로 입력 완료되었습니다.');
                     // $.ajax({
                     //     type: 'POST',
                     //     url: '/records',
@@ -435,7 +437,7 @@ $(document).ready(function () {
 
             // cert encryption
             var enc_record = JSON.stringify(param);
-            process.createPrivateRecord("ETC", "CPR", enc_record, 'career-add-dialog', '정상적으로 입력되었습니다.');
+            ctrl.createPrivateRecord("ETC", "CPR", enc_record, 'career-add-dialog', '정상적으로 입력되었습니다.');
             // $.ajax({
             //     type: 'POST',
             //     url: '/records',
@@ -533,7 +535,7 @@ $(document).ready(function () {
             var enc_record = JSON.stringify(param);
 
             if (!is_error) {
-                process.createPrivateRecord("EDI", "LPT", enc_record, 'language-add-dialog', '정상적으로 입력되었습니다.');
+                ctrl.createPrivateRecord("EDI", "LPT", enc_record, 'language-add-dialog', '정상적으로 입력되었습니다.');
                 // $.ajax({
                 //     type: 'POST',
                 //     url: '/records',
@@ -633,7 +635,7 @@ $(document).ready(function () {
             var enc_record = JSON.stringify(param);
 
             if (!is_error) {
-                process.createPrivateRecord("STI", "OGC", enc_record, 'cert-add-dialog', '정상적으로 입력되었습니다.');
+                ctrl.createPrivateRecord("STI", "OGC", enc_record, 'cert-add-dialog', '정상적으로 입력되었습니다.');
                 // $.ajax({
                 //     type: 'POST',
                 //     url: '/records',
@@ -909,7 +911,7 @@ $(document).ready(function () {
             });
         });
 
-        $('#refresh_record').click(process.updateRecords);
+        $('#refresh_record').click(ctrl.updateRecords);
 
         // var processingRefresh = false;
         // $('#refresh_record').click(function () {
@@ -1846,8 +1848,9 @@ $(document).ready(function () {
      * 
      * @since 180701
      */
-    function processNS() {
+    function ctrlNS() {
         var updateLock = false;
+
         return {
             deletePrivateRecord: function (_recordId, _recordContainer) {
                 ajax.deletePrivateRecord(_recordId, function (err, res) {
@@ -1869,11 +1872,13 @@ $(document).ready(function () {
                     ui.clearPrivateRecords();
                     ajax.fetchPrivateRecords(function (err, res) {
                         if (!!err) {
-
+                            updateLock = false;
+                            console.info("Release lock");
                         } else {
                             ui.displayPrivateRecords(res, function () {
                                 ui.finishLoading(function () {
                                     setTimeout(function () {
+                                        console.info("Release lock");
                                         updateLock = false;
                                     }, 5000);
                                     isFunc(_cb) && _cb();
@@ -1900,26 +1905,30 @@ $(document).ready(function () {
                 }
                 updateLock = true;
                 // New Version
-                process.loadAgentRecords(function (err, records) {
+                ctrl.loadAgentRecords(function (err, records) {
                     if (!!err) {
+
                         return;
                     } else {
                         ui.displayAgentRecords(records);
                     }
                 });
 
-                process.loadPrivateRecords(function (err, privateRecords) {
+                ctrl.loadPrivateRecords(function (err, privateRecords) {
                     if (!!err) {
-
+                        updateLock = false;
+                        console.info("Release lock");
                     } else {
                         ui.displayPrivateRecords(privateRecords, function (err, res) {
                             if (!!err) {
-
+                                updateLock = false;
+                                console.info("Release lock");
                             } else {
                                 ui.finishLoading(function () {
                                     dispatchUpdateRecordEvent();
                                     setTimeout(function () {
                                         updateLock = false;
+                                        console.info("Release lock");
                                     }, 5000);
                                     isFunc(callback) && callback();
                                 });
@@ -1938,9 +1947,10 @@ $(document).ready(function () {
                 if (updateLock) {
                     return;
                 }
-                ui.updateDate();
                 updateLock = true;
-                process.clearSessionStorage();
+
+                ui.updateDate();
+                ctrl.clearSessionStorage();
                 ui.clearRecords();
                 ui.startLoading();
 
@@ -1953,12 +1963,14 @@ $(document).ready(function () {
                 setTimeout(function () {
                     ajax.fetchPrivateRecords(function (err, res) {
                         if (!!err) {
-
+                            updateLock = false;
+                            console.info("Release lock");
                         } else {
                             ui.displayPrivateRecords(res, function () {
                                 ui.finishLoading(function () {
                                     setTimeout(function () {
                                         updateLock = false;
+                                        console.info("Release lock");
                                     }, 5000);
                                     isFunc(_cb) && _cb();
                                 });
@@ -2042,7 +2054,7 @@ $(document).ready(function () {
     };
 
     // FIXME 아 안이러고 싶은데 일단 이렇게 해준다 ㅠㅠ 나중에 고쳐야됨
-    window.deletePrivateRecord = process.deletePrivateRecord;
+    window.deletePrivateRecord = ctrl.deletePrivateRecord;
 });
 // 이 아래로 function 또는 variable 선언하지 마시고 안에 넣어 주세요.
 
