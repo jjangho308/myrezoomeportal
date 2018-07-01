@@ -2007,7 +2007,7 @@ $(document).ready(function () {
                         if (!!err) {
 
                         } else {
-                            ui.displayRecords(res.result, function () {
+                            ui.displayPrivateRecords(res, function () {
                                 finishLoading(function () {
                                     updateLock = true;
                                     isFunc(_cb) && _cb();
