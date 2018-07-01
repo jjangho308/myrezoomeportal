@@ -1991,7 +1991,6 @@ $(document).ready(function () {
              * @since 180701
              */
             updateRecords: function (_cb) {
-                debugger;
                 if (updateLock) {
                     return;
                 }
