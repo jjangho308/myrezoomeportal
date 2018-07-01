@@ -78,6 +78,15 @@ $(document).ready(function () {
 
     var eventNS = eventNS();
 
+    /**
+     * Namespace for processing interface. <br />
+     * 
+     * @since 180701
+     */
+    var process = processNS();
+
+    var init = initNS();
+
     function eventNS() {
         var eventWrapper = null;
         return {
@@ -110,7 +119,7 @@ $(document).ready(function () {
         socket = io();
 
         initClientKey(callback);
-    }(loadRecords);
+    }(process.loadRecords);
 
     /**
      * Initialize UI components. <br />
@@ -899,61 +908,63 @@ $(document).ready(function () {
             });
         });
 
-        var processingRefresh = false;
-        $('#refresh_record').click(function () {
-            if (processingRefresh) {
-                console.log('prevent!!');
-                return;
-            } else {
-                processingRefresh = true;
-                clearRecords();
-                startLoading();
-                getRSAKey();
-                window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+        $('#refresh_record').click(process.updateRecords);
 
-                var emptyarray = [];
-                setTxidList(emptyarray);
+        // var processingRefresh = false;
+        // $('#refresh_record').click(function () {
+        //     if (processingRefresh) {
+        //         console.log('prevent!!');
+        //         return;
+        //     } else {
+        //         processingRefresh = true;
+        //         clearRecords();
+        //         startLoading();
+        //         getRSAKey();
+        //         window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
 
-                $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
-                $.ajax({
-                    type: 'POST',
-                    url: '/client',
-                    headers: {
-                        'Authorization': client_authorization
-                    },
-                    beforeSend: function () {
-                        //clean view
-                        // $('.spec-body').remove();
-                        // $('.spec-body-default').hide();
-                        // $('.spec-body-loading').fadeIn();
-                    },
-                    data: JSON.stringify({
-                        cmd: 'SearchRecord',
-                        args: {
-                            pkey: 'asdfasdf',
-                            update: true,
-                            n: window.jwkPub2.n,
-                            e: window.jwkPub2.e
-                        }
-                    }),
-                    error: function (jqXhr, status, error) {
-                        console.error('Search record Error : ' + error);
-                        console.error(jqXhr.responseText);
-                    },
-                    success: function (res) {
-                        setSocket(res.mid);
-                        clientsocket_listener();
-                        getPrivateRecords(true, function () {
-                            processingRefresh = false;
-                            // finishLoading(function () {
-                            //     processingRefresh = false;
-                            // });
-                        });
-                    },
-                    contentType: 'application/json',
-                });
-            }
-        });
+        //         var emptyarray = [];
+        //         setTxidList(emptyarray);
+
+        //         $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '/client',
+        //             headers: {
+        //                 'Authorization': client_authorization
+        //             },
+        //             beforeSend: function () {
+        //                 //clean view
+        //                 // $('.spec-body').remove();
+        //                 // $('.spec-body-default').hide();
+        //                 // $('.spec-body-loading').fadeIn();
+        //             },
+        //             data: JSON.stringify({
+        //                 cmd: 'SearchRecord',
+        //                 args: {
+        //                     pkey: 'asdfasdf',
+        //                     update: true,
+        //                     n: window.jwkPub2.n,
+        //                     e: window.jwkPub2.e
+        //                 }
+        //             }),
+        //             error: function (jqXhr, status, error) {
+        //                 console.error('Search record Error : ' + error);
+        //                 console.error(jqXhr.responseText);
+        //             },
+        //             success: function (res) {
+        //                 setSocket(res.mid);
+        //                 clientsocket_listener();
+        //                 getPrivateRecords(true, function () {
+        //                     processingRefresh = false;
+        //                     // finishLoading(function () {
+        //                     //     processingRefresh = false;
+        //                     // });
+        //                 });
+        //             },
+        //             contentType: 'application/json',
+        //         });
+        //     }
+        // });
 
         document.getElementById("spec_edu_detail_targetdiv").addEventListener("record_updated", function (event) {
             event.stopPropagation();
@@ -1008,57 +1019,6 @@ $(document).ready(function () {
         }
     }
 
-    var process = function processNS() {
-        var updateLock = false;
-        return {
-            /**
-             * Clear session storage data. <br />
-             * 
-             * @since 180701
-            */
-            clearSessionStorage(callback) {
-                if (!!window.sessionStorage && !!window.sessionStorage.clear) {
-                    sessionStorage.clear();
-                    isFunc(callback) && callback();
-                }
-            },
-            loadRecords: function (callback) {
-                if (updateLock) {
-                    return;
-                }
-            },
-
-            updateRecords: function (_cb) {
-                if (updateLock) {
-                    return;
-                }
-                updateLock = true;
-                clearSessionStorage();
-                ui.removeRecordEls();
-                ui.startLoading();
-
-                //session storage dont have user info(txid list)
-                ajax.fetchAgentRecords(function (err, res) {
-                    if (!!res) {
-
-                    }
-                    ajax.fetchPrivateRecords(function (err, res) {
-                        if (!!err) {
-
-                        } else {
-                            ui.displayRecords(res.result, function () {
-                                finishLoading(function () {
-                                    updateLock = true;
-                                    isFunc(_cb) && _cb();
-                                });
-                            });
-                        }
-                    });
-                });
-            }
-        }
-    }();
-
     function updateRecords(callback) {
         clearSessionStorage();
         ui.removeRecordEls();
@@ -1081,76 +1041,12 @@ $(document).ready(function () {
         });
     };
 
-    /**
-     * Get agent records from session storage first, <br />
-     * if not, fetch from server. <br />
-     * 
-     * @since 180629
-     * 
-     * @param {*} cb 
-     */
-    function loadAgentRecords(cb) {
-        try {
-            var storedTxidList = getTxidList();
-            var storedAgentRecords = storedTxidList.map(function (item) {
-                return getData(item);
-            });
-        } catch (err) {
-            console.error(err);
-            isFunc(cb) && cb(err);
-        }
-        storedAgentRecords.length === 0 ? ajax.fetchAgentRecords(function (err, result) {
-            clientsocket_listener(ui.displayAgentRecords);
-            cb(err, result)
-        }) : cb(null, storedAgentRecords);
-    }
-
-    /**
-     * Get private records data from session storage or fetch them. <br />
-     * 
-     * @since 180629
-     * @author TACKSU
-     * 
-     * @param {Function} cb 
-     */
-    function loadPrivateRecords(cb) {
-        var privateRecords = getPrivateData();
-
-        if (privateRecords.length > 0) {
-            privateRecords.sort(function (a, b) {
-                try {
-                    return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-                } catch (e) {
-                    console.error(e);
-                    return 0;
-                }
-            });
-            cb(null, privateRecords);
-        } else {
-            ajax.fetchPrivateRecords(function (err, privateRecords) {
-                if (!!err) {
-                    return isFunc(cb) && cb(err);
-                } else {
-                    privateRecords.sort(function (a, b) {
-                        try {
-                            return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-                        } catch (e) {
-                            console.error(e);
-                            return 0;
-                        }
-                    });
-                    cb(null, privateRecords);
-                }
-            });
-        }
-    }
-
     function loadRecords() {
         // New Version
-        loadAgentRecords(function(err, records){
-            if(!!err){
+        loadAgentRecords(function (err, records) {
+            if (!!err) {
                 return;
-            }else{
+            } else {
                 ui.displayAgentRecords(records);
             }
         });
@@ -2085,6 +1981,153 @@ $(document).ready(function () {
             return false;
         }
     }
+
+    function processNS() {
+        var updateLock = false;
+        return {
+            /**
+             * Clear session storage data. <br />
+             * 
+             * @since 180701
+             */
+            clearSessionStorage(callback) {
+                if (!!window.sessionStorage && !!window.sessionStorage.clear) {
+                    sessionStorage.clear();
+                    isFunc(callback) && callback();
+                }
+            },
+            loadRecords: function (callback) {
+                if (updateLock) {
+                    return;
+                }
+                ui.startLoading();
+                // New Version
+                loadAgentRecords(function (err, records) {
+                    if (!!err) {
+                        return;
+                    } else {
+                        ui.displayAgentRecords(records);
+                    }
+                });
+
+                loadPrivateRecords(function (err, privateRecords) {
+                    if (!!err) {
+
+                    } else {
+                        ui.displayPrivateRecords(privateRecords, function (err, res) {
+                            if (!!err) {
+
+                            } else {
+                                ui.finishLoading(function () {
+                                    dispatchUpdateRecordEvent();
+                                    updateLock = false;
+                                });
+                            }
+                        });
+                    }
+                });
+            },
+
+            /**
+             * Force update agent/private records by fetching. <br />
+             * 
+             * @since 180701
+             */
+            updateRecords: function (_cb) {
+                debugger;
+                if (updateLock) {
+                    return;
+                }
+                updateLock = true;
+                clearSessionStorage();
+                ui.removeRecordEls();
+                ui.startLoading();
+
+                //session storage dont have user info(txid list)
+                ajax.fetchAgentRecords(function (err, res) {
+                    if (!!res) {
+
+                    }
+                    ajax.fetchPrivateRecords(function (err, res) {
+                        if (!!err) {
+
+                        } else {
+                            ui.displayRecords(res.result, function () {
+                                finishLoading(function () {
+                                    updateLock = true;
+                                    isFunc(_cb) && _cb();
+                                });
+                            });
+                        }
+                    });
+                });
+            },
+
+            /**
+             * Get agent records from session storage first, <br />
+             * if not, fetch from server. <br />
+             * 
+             * @since 180629
+             * 
+             * @param {*} cb 
+             */
+            loadAgentRecords: function (cb) {
+                try {
+                    var storedTxidList = getTxidList();
+                    var storedAgentRecords = storedTxidList.map(function (item) {
+                        return getData(item);
+                    });
+                } catch (err) {
+                    console.error(err);
+                    isFunc(cb) && cb(err);
+                }
+                storedAgentRecords.length === 0 ? ajax.fetchAgentRecords(function (err, result) {
+                    clientsocket_listener(ui.displayAgentRecords);
+                    cb(err, result)
+                }) : cb(null, storedAgentRecords);
+            },
+
+            /**
+             * Get private records data from session storage or fetch them. <br />
+             * 
+             * @since 180629
+             * @author TACKSU
+             * 
+             * @param {Function} cb 
+             */
+            loadPrivateRecords: function (cb) {
+                var privateRecords = getPrivateData();
+
+                if (privateRecords.length > 0) {
+                    privateRecords.sort(function (a, b) {
+                        try {
+                            return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+                        } catch (e) {
+                            console.error(e);
+                            return 0;
+                        }
+                    });
+                    cb(null, privateRecords);
+                } else {
+                    ajax.fetchPrivateRecords(function (err, privateRecords) {
+                        if (!!err) {
+                            return isFunc(cb) && cb(err);
+                        } else {
+                            privateRecords.sort(function (a, b) {
+                                try {
+                                    return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+                                } catch (e) {
+                                    console.error(e);
+                                    return 0;
+                                }
+                            });
+                            cb(null, privateRecords);
+                        }
+                    });
+                }
+            }
+        }
+    };
 });
 /**
  * Dispath "record_updated" event to refresh default div <br />
