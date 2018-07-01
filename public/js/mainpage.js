@@ -1185,8 +1185,19 @@ $(document).ready(function () {
         // Lock for loading ui.
         var loadingLock = false;
         return {
-            showAlarm: function (callback) {
-                // Do something
+            showAlarm: function (_msg, callback) {
+                $("#alarm-div span").text(_msg);
+                $('#alarm-div').css("display", "block");
+                $('#alarm-div').css("margin-right", "-108px");
+
+                setTimeout(function () {
+                    $('#alarm-div').fadeOut('slow');
+                    isFunc(callback) && callback();
+                }, 2000);
+            },
+
+            updateDate: function () {
+                $("#updateTime").html("업데이트 : " + new Date().format('yyyy-MM-dd(KS) HH:mm'));
             },
 
             displayPrivateRecords: function (prvtRecords, callback) {
@@ -1277,10 +1288,10 @@ $(document).ready(function () {
             },
 
             clearRecords: function (cb) {
-                $(".spec-body").each(function(idx, el){
+                $(".spec-body").each(function (idx, el) {
                     transition.popOut(el);
                 });
-                $(".private-spec-body").each(function(idx, el){
+                $(".private-spec-body").each(function (idx, el) {
                     transition.popOut(el);
                 });
                 isFunc(cb) && cb();
@@ -1393,15 +1404,7 @@ $(document).ready(function () {
                         isFunc(callback) && callback(jqXhr.responseJSON);
                     },
                     success: function (response) {
-                        $("#alarm-div span").text("정상적으로 삭제 완료되었습니다.");
-                        $('#alarm-div').css("display", "block");
-                        $('#alarm-div').css("margin-right", "-108px");
-
-                        setTimeout(function () {
-                            $('#alarm-div').fadeOut('slow');
-                        }, 2000);
-
-                        isFunc(callback) && callback(null, response);
+                        ui.showAlarm('정상적으로 삭제 완료되었습니다.', callback);
                     }
                 });
             }
@@ -1463,90 +1466,6 @@ $(document).ready(function () {
         });
     }
 
-    /**
-     * Load private records to attach. <br />
-     * 
-     * @param {Function} callback 
-     */
-    // function getPrivateRecords(update, callback) {
-
-    //     var prvtRecords = getPrivateData();
-    //     if (prvtRecords.length > 0 && !update) {
-    //         innerProcessPrivateRecords(prvtRecords, callback);
-    //         // privaterecords.sort(function (a, b) {
-    //         //     try {
-    //         //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-    //         //     } catch (e) {
-    //         //         console.error(e);
-    //         //         return 0;
-    //         //     }
-    //         // });
-
-    //         // privaterecords.forEach(function (item, idx) {
-    //         //     var data = JSON.parse(item.data);
-    //         //     data.certPrvtId = item.certPrvtId;
-    //         //     if (item.subCd in view_formatter) {
-    //         //         view_formatter[item.subCd](data);
-    //         //     }
-    //         // });
-    //     } else {
-    //         ajaxGetPrivateRecords(function (err, res) {
-    //             if (!!err) {
-    //                 return
-    //             } else {
-    //                 // setTimeout(function () {
-    //                 setPrivateData(res.result);
-    //                 innerProcessPrivateRecords(res.result, callback);
-    //                 // res.result.sort(function (a, b) {
-    //                 //     try {
-    //                 //         return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-    //                 //     } catch (e) {
-    //                 //         console.error(e);
-    //                 //         return 0;
-    //                 //     }
-    //                 // });
-
-    //                 // res.result.forEach(function (item, idx) {
-    //                 //     var data = JSON.parse(item.data);
-    //                 //     data.certPrvtId = item.certPrvtId;
-    //                 //     if (item.subCd in view_formatter) {
-    //                 //         view_formatter[item.subCd](data);
-    //                 //     }
-    //                 // });
-    //                 // refreshview();
-    //                 // !!callback && callback instanceof Function && callback(res);
-    //                 // for (var i in res.result) {
-    //                 //     var data = JSON.parse(res[i].data);
-    //                 //     data.certPrvtId = res[i].certPrvtId;
-    //                 //     formatter[res[i].subCd](data);
-    //                 // }
-    //                 // }, 2000)
-    //             }
-    //         });
-    //     }
-
-    //     function innerProcessPrivateRecords(prvtRecords, callback) {
-    //         prvtRecords.sort(function (a, b) {
-    //             try {
-    //                 return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-    //             } catch (e) {
-    //                 console.error(e);
-    //                 return 0;
-    //             }
-    //         });
-
-    //         prvtRecords.forEach(function (item, idx) {
-    //             var data = JSON.parse(item.data);
-    //             data.certPrvtId = item.certPrvtId;
-    //             if (item.subCd in view_formatter) {
-    //                 view_formatter[item.subCd](data);
-    //             }
-    //         });
-
-    //         !!callback && callback instanceof Function && callback();
-    //     }
-    // }
-
     function initClientKey(callback) {
         genRsaKey(function () {
             getRSAKey();
@@ -1554,22 +1473,6 @@ $(document).ready(function () {
             isFunc(callback) && callback();
         });
     }
-
-    // function loadAgentRecords(callback) {
-    //     this.lock = this.lock || false;
-    //     var emptyarray = [];
-    //     setTxidList(emptyarray);
-
-    //     ajaxSearchRecords(function (err, res) {
-    //         if (!!err) {
-    //             return;
-    //         } else {
-    //             setSocket(res.mid);
-    //             clientsocket_listener();
-    //             return callback(err, res);
-    //         }
-    //     });
-    // }
 
     /**
      * Refresh all record divs. <br />
@@ -1974,7 +1877,7 @@ $(document).ready(function () {
                             } else {
                                 ui.finishLoading(function () {
                                     dispatchUpdateRecordEvent();
-                                    setTimeout(function(){
+                                    setTimeout(function () {
                                         updateLock = false;
                                     }, 5000);
                                     isFunc(callback) && callback();
@@ -1994,6 +1897,7 @@ $(document).ready(function () {
                 if (updateLock) {
                     return;
                 }
+                ui.updateDate();
                 updateLock = true;
                 process.clearSessionStorage();
                 ui.clearRecords();
@@ -2012,7 +1916,7 @@ $(document).ready(function () {
                         } else {
                             ui.displayPrivateRecords(res, function () {
                                 ui.finishLoading(function () {
-                                    setTimeout(function(){
+                                    setTimeout(function () {
                                         updateLock = false;
                                     }, 5000);
                                     isFunc(_cb) && _cb();
