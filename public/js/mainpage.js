@@ -376,39 +376,40 @@ $(document).ready(function () {
                 var enc_record = JSON.stringify(param);
 
                 if (!is_error) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/records',
-                        headers: {
-                            'Authorization': client_authorization
-                        },
-                        contentType: 'application/json',
-                        data: JSON.stringify({
-                            orgCd: "UNV", // TODO 코드 분기 필요
-                            subCd: "UNV", // TODO 코드 분기 필요
-                            data: enc_record
-                        }),
-                        error: function (jqXhr, status, error) {
-                            console.error('/record Error : ' + error);
-                            console.error(jqXhr.responseText);
-                        },
-                        success: function (res) {
-                            $("#education-add-dialog .close-modal").click();
-                            $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
-                            $('#alarm-div').css("display", "block");
-                            $('#alarm-div').css("margin-right", "-108px");
+                    process.createPrivateRecord("UNV", "UNV", enc_record, 'education-add-dialog', '정상적으로 입력 완료되었습니다.');
+                    // $.ajax({
+                    //     type: 'POST',
+                    //     url: '/records',
+                    //     headers: {
+                    //         'Authorization': client_authorization
+                    //     },
+                    //     contentType: 'application/json',
+                    //     data: JSON.stringify({
+                    //         orgCd: "UNV", // TODO 코드 분기 필요
+                    //         subCd: "UNV", // TODO 코드 분기 필요
+                    //         data: enc_record
+                    //     }),
+                    //     error: function (jqXhr, status, error) {
+                    //         console.error('/record Error : ' + error);
+                    //         console.error(jqXhr.responseText);
+                    //     },
+                    //     success: function (res) {
+                    //         $("#education-add-dialog .close-modal").click();
+                    //         $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
+                    //         $('#alarm-div').css("display", "block");
+                    //         $('#alarm-div').css("margin-right", "-108px");
 
-                            setTimeout(function () {
-                                $('#alarm-div').fadeOut('slow');
-                            }, 2000);
+                    //         setTimeout(function () {
+                    //             $('#alarm-div').fadeOut('slow');
+                    //         }, 2000);
 
-                            //clean view
-                            $('.private-spec-body').remove();
-                            $('#spec_edu_detail > .spec-body-default').hide();
+                    //         //clean view
+                    //         $('.private-spec-body').remove();
+                    //         $('#spec_edu_detail > .spec-body-default').hide();
 
-                            getPrivateRecords(true);
-                        },
-                    });
+                    //         getPrivateRecords(true);
+                    //     },
+                    // });
                 }
             }
         });
@@ -434,34 +435,34 @@ $(document).ready(function () {
 
             // cert encryption
             var enc_record = JSON.stringify(param);
+            process.createPrivateRecord("ETC", "CPR", enc_record, 'career-add-dialog', '정상적으로 입력되었습니다.');
+            // $.ajax({
+            //     type: 'POST',
+            //     url: '/records',
+            //     headers: {
+            //         'Authorization': client_authorization
+            //     },
+            //     data: JSON.stringify({
+            //         orgCd: "ETC", // 코드 분기 필요
+            //         subCd: "CPR", // 코드 분기 필요
+            //         data: enc_record
+            //     }),
+            //     error: function (jqXhr, status, error) {
+            //         console.error('/record Error : ' + error);
+            //         console.error(jqXhr.responseText);
+            //     },
+            //     success: function (res) {
+            //         $("#career-add-dialog .close-modal").click();
+            //         $("#alarm-div span").text("사용자 이력 수기 입력했다.");
+            //         $('#alarm-div').css("display", "block");
+            //         $('#alarm-div').css("margin-right", "-108px");
 
-            $.ajax({
-                type: 'POST',
-                url: '/records',
-                headers: {
-                    'Authorization': client_authorization
-                },
-                data: JSON.stringify({
-                    orgCd: "ETC", // 코드 분기 필요
-                    subCd: "CPR", // 코드 분기 필요
-                    data: enc_record
-                }),
-                error: function (jqXhr, status, error) {
-                    console.error('/record Error : ' + error);
-                    console.error(jqXhr.responseText);
-                },
-                success: function (res) {
-                    $("#career-add-dialog .close-modal").click();
-                    $("#alarm-div span").text("사용자 이력 수기 입력했다.");
-                    $('#alarm-div').css("display", "block");
-                    $('#alarm-div').css("margin-right", "-108px");
-
-                    //clean view
-                    $('.private-spec-body').remove();
-                    getPrivateRecords(true);
-                },
-                contentType: 'application/json'
-            });
+            //         //clean view
+            //         $('.private-spec-body').remove();
+            //         getPrivateRecords(true);
+            //     },
+            //     contentType: 'application/json'
+            // });
         });
 
         $('#language-add-dialog .confirm-btn').click(function () {
@@ -532,38 +533,39 @@ $(document).ready(function () {
             var enc_record = JSON.stringify(param);
 
             if (!is_error) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/records',
-                    headers: {
-                        'Authorization': client_authorization
-                    },
-                    data: JSON.stringify({
-                        orgCd: "EDI", // 코드 분기 필요
-                        subCd: "LPT", // 코드 분기 필요
-                        data: enc_record
-                    }),
-                    error: function (jqXhr, status, error) {
-                        console.error('/record Error : ' + error);
-                        console.error(jqXhr.responseText);
-                    },
-                    success: function (res) {
-                        $("#language-add-dialog .close-modal").click();
-                        $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
-                        $('#alarm-div').css("display", "block");
-                        $('#alarm-div').css("margin-right", "-108px");
+                process.createPrivateRecord("EDI", "LPT", enc_record, 'language-add-dialog', '정상적으로 입력되었습니다.');
+                // $.ajax({
+                //     type: 'POST',
+                //     url: '/records',
+                //     headers: {
+                //         'Authorization': client_authorization
+                //     },
+                //     data: JSON.stringify({
+                //         orgCd: "EDI", // 코드 분기 필요
+                //         subCd: "LPT", // 코드 분기 필요
+                //         data: enc_record
+                //     }),
+                //     error: function (jqXhr, status, error) {
+                //         console.error('/record Error : ' + error);
+                //         console.error(jqXhr.responseText);
+                //     },
+                //     success: function (res) {
+                //         $("#language-add-dialog .close-modal").click();
+                //         $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
+                //         $('#alarm-div').css("display", "block");
+                //         $('#alarm-div').css("margin-right", "-108px");
 
-                        setTimeout(function () {
-                            $('#alarm-div').fadeOut('slow');
-                        }, 2000);
+                //         setTimeout(function () {
+                //             $('#alarm-div').fadeOut('slow');
+                //         }, 2000);
 
-                        //clean view
-                        $('.private-spec-body').remove();
-                        // $('#spec_foreign_lang > .spec-body-default').hide();
-                        getPrivateRecords(true);
-                    },
-                    contentType: 'application/json',
-                });
+                //         //clean view
+                //         $('.private-spec-body').remove();
+                //         // $('#spec_foreign_lang > .spec-body-default').hide();
+                //         getPrivateRecords(true);
+                //     },
+                //     contentType: 'application/json',
+                // });
             }
         });
 
@@ -631,37 +633,38 @@ $(document).ready(function () {
             var enc_record = JSON.stringify(param);
 
             if (!is_error) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/records',
-                    headers: {
-                        'Authorization': client_authorization
-                    },
-                    data: JSON.stringify({
-                        orgCd: "STI", // 코드 분기 필요
-                        subCd: "OGC", // 코드 분기 필요
-                        data: enc_record
-                    }),
-                    error: function (jqXhr, status, error) {
-                        console.error('/record Error : ' + error);
-                        console.error(jqXhr.responseText);
-                    },
-                    success: function (res) {
-                        $("#cert-add-dialog .close-modal").click();
-                        $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
-                        $('#alarm-div').css("display", "block");
+                process.createPrivateRecord("STI", "OGC", enc_record, 'cert-add-dialog', '정상적으로 입력되었습니다.');
+                // $.ajax({
+                //     type: 'POST',
+                //     url: '/records',
+                //     headers: {
+                //         'Authorization': client_authorization
+                //     },
+                //     data: JSON.stringify({
+                //         orgCd: "STI", // 코드 분기 필요
+                //         subCd: "OGC", // 코드 분기 필요
+                //         data: enc_record
+                //     }),
+                //     error: function (jqXhr, status, error) {
+                //         console.error('/record Error : ' + error);
+                //         console.error(jqXhr.responseText);
+                //     },
+                //     success: function (res) {
+                //         $("#cert-add-dialog .close-modal").click();
+                //         $("#alarm-div span").text("정상적으로 입력 완료되었습니다.");
+                //         $('#alarm-div').css("display", "block");
 
-                        setTimeout(function () {
-                            $('#alarm-div').fadeOut('slow');
-                        }, 2000);
+                //         setTimeout(function () {
+                //             $('#alarm-div').fadeOut('slow');
+                //         }, 2000);
 
-                        //clean view
-                        $('.private-spec-body').remove();
-                        // $('#spec_certification > .spec-body-default').hide();
-                        getPrivateRecords(true);
-                    },
-                    contentType: 'application/json',
-                });
+                //         //clean view
+                //         $('.private-spec-body').remove();
+                //         // $('#spec_certification > .spec-body-default').hide();
+                //         getPrivateRecords(true);
+                //     },
+                //     contentType: 'application/json',
+                // });
             }
         });
 
@@ -1182,9 +1185,10 @@ $(document).ready(function () {
      * @author TACKSU
      */
     function uiNS() {
-        // Lock for loading ui.
-        var loadingLock = false;
         return {
+            closeDialog: function (_diagId) {
+                $('#' + _diagId + ' .close-modal').click()
+            },
             showAlarm: function (_msg, callback) {
                 $("#alarm-div span").text(_msg);
                 $('#alarm-div').css("display", "block");
@@ -1216,6 +1220,7 @@ $(document).ready(function () {
 
                 isFunc(callback) && callback();
             },
+
             /**
              * Display records data on page. <br />
              * 
@@ -1287,20 +1292,25 @@ $(document).ready(function () {
                 isFunc(callback) && callback();
             },
 
-            clearRecords: function (cb) {
+            clearAgentRecords: function (cb) {
                 $(".spec-body").each(function (idx, el) {
                     transition.popOut(el);
                 });
+            },
+
+            clearPrivateRecords: function (cb) {
                 $(".private-spec-body").each(function (idx, el) {
                     transition.popOut(el);
                 });
+            },
+
+            clearRecords: function (cb) {
+                ui.clearAgentRecords();
+                ui.clearPrivateRecords();
                 isFunc(cb) && cb();
             },
 
             startLoading: function (cb) {
-                // this.lock = this.lock || false;
-                // if (!this.lock) {
-                //     this.lock = true;
                 $(".spec-body-default").fadeOut();
                 var loadings = $('.spec-body-loading');
                 loadings.each(function (idx, el) {
@@ -1314,7 +1324,6 @@ $(document).ready(function () {
                         }
                     }, transition.default.delay * idx);
                 });
-                // }
             },
 
             finishLoading: function (cb) {
@@ -1387,8 +1396,28 @@ $(document).ready(function () {
                 });
             },
 
-            createPrivateRecord: function (data, callback) {
-
+            createPrivateRecord: function (_orgCode, _subCode, _encData, callback) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/records',
+                    headers: {
+                        'Authorization': client_authorization
+                    },
+                    data: JSON.stringify({
+                        orgCd: _orgCode, // 코드 분기 필요
+                        subCd: _subCode, // 코드 분기 필요
+                        data: _encData
+                    }),
+                    error: function (jqXhr, status, error) {
+                        console.error('/record Error : ' + error);
+                        console.error(jqXhr.responseText);
+                        isFunc(callback) && callback(jqXhr.responseJSON);
+                    },
+                    success: function (res) {
+                        isFunc(callback) && callback(res);
+                    },
+                    contentType: 'application/json',
+                });
             },
 
             deletePrivateRecord: function (recordId, callback) {
@@ -1842,6 +1871,27 @@ $(document).ready(function () {
     function processNS() {
         var updateLock = false;
         return {
+            createPrivateRecord: function (_orgCode, _subCode, _encData, _dialog, _successMsg, _callback) {
+                ajax.createPrivateRecord(_orgCode, _subCode, _encData, function (err, res) {
+                    ui.closeDialog(_dialog);
+                    ui.showAlarm(_successMsg);
+                    ui.clearPrivateRecords();
+                    ajax.fetchPrivateRecords(function (err, res) {
+                        if (!!err) {
+
+                        } else {
+                            ui.displayPrivateRecords(res, function () {
+                                ui.finishLoading(function () {
+                                    setTimeout(function () {
+                                        updateLock = false;
+                                    }, 5000);
+                                    isFunc(_cb) && _cb();
+                                });
+                            });
+                        }
+                    });
+                });
+            },
             /**
              * Clear session storage data. <br />
              * 
