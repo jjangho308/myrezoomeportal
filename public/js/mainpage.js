@@ -123,7 +123,7 @@ $(document).ready(function () {
             dateFormat: "yy-mm-dd"
         });
 
-        var recordUpdateEvent = setInterval(dispatchUpdateRecordEvent, 2000);
+        // var recordUpdateEvent = setInterval(dispatchUpdateRecordEvent, 2000);
     }();
 
     /**
@@ -1008,10 +1008,61 @@ $(document).ready(function () {
         }
     }
 
+    var process = function processNS() {
+        var updateLock = false;
+        return {
+            /**
+             * Clear session storage data. <br />
+             * 
+             * @since 180701
+            */
+            clearSessionStorage(callback) {
+                if (!!window.sessionStorage && !!window.sessionStorage.clear) {
+                    sessionStorage.clear();
+                    isFunc(callback) && callback();
+                }
+            },
+            loadRecords: function (callback) {
+                if (updateLock) {
+                    return;
+                }
+            },
+
+            updateRecords: function (_cb) {
+                if (updateLock) {
+                    return;
+                }
+                updateLock = true;
+                clearSessionStorage();
+                ui.removeRecordEls();
+                ui.startLoading();
+
+                //session storage dont have user info(txid list)
+                ajax.fetchAgentRecords(function (err, res) {
+                    if (!!res) {
+
+                    }
+                    ajax.fetchPrivateRecords(function (err, res) {
+                        if (!!err) {
+
+                        } else {
+                            ui.displayRecords(res.result, function () {
+                                finishLoading(function () {
+                                    updateLock = true;
+                                    isFunc(_cb) && _cb();
+                                });
+                            });
+                        }
+                    });
+                });
+            }
+        }
+    }();
+
     function updateRecords(callback) {
+        clearSessionStorage();
         ui.removeRecordEls();
         ui.startLoading();
-        clearSessionStorage();
 
         //session storage dont have user info(txid list)
         ajax.fetchAgentRecords(function (err, res) {
@@ -1077,80 +1128,81 @@ $(document).ready(function () {
             cb(null, privateRecords);
         } else {
             ajax.fetchPrivateRecords(function (err, privateRecords) {
-                privateRecords.sort(function (a, b) {
-                    try {
-                        return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
-                    } catch (e) {
-                        console.error(e);
-                        return 0;
-                    }
-                });
-                cb(null, privateRecords);
+                if (!!err) {
+                    return isFunc(cb) && cb(err);
+                } else {
+                    privateRecords.sort(function (a, b) {
+                        try {
+                            return Date.parse(JSON.parse(a.data).startdate || 0) - Date.parse(JSON.parse(b.data).startdate || 0);
+                        } catch (e) {
+                            console.error(e);
+                            return 0;
+                        }
+                    });
+                    cb(null, privateRecords);
+                }
             });
         }
     }
 
     function loadRecords() {
-
         // New Version
-        loadAgentRecords(function (err, records) {
-            loadPrivateRecords(function (err, privateRecords) {
-                if (!!err) {
+        loadAgentRecords(ui.displayAgentRecords);
 
-                } else {
-                    ui.displayPrivateRecords(privateRecords, function (err, res) {
-                        if (!!err) {
+        loadPrivateRecords(function (err, privateRecords) {
+            if (!!err) {
 
-                        } else {
-                            finishLoading(dispatchUpdateRecordEvent);
-                        }
-                    });
-                }
-            });
+            } else {
+                ui.displayPrivateRecords(privateRecords, function (err, res) {
+                    if (!!err) {
+
+                    } else {
+                        finishLoading(dispatchUpdateRecordEvent);
+                    }
+                });
+            }
         });
 
+        // //request to agent for get user info
+        // var storedTxidList = getTxidList();
 
+        // // 왜 0이 아니고 1 초과일때지?
+        // if (storedTxidList.length > 0) {
 
-        //request to agent for get user info
-        var storedTxidList = getTxidList();
+        //     // Close initial dialog.
+        //     $('#initial-dialog .close-modal').click();
 
-        // 왜 0이 아니고 1 초과일때지?
-        if (storedTxidList.length > 0) {
-
-            // Close initial dialog.
-            $('#initial-dialog .close-modal').click();
-
-            //sessing storage have user info (txid list)
-            var storedAgentRecords = storedTxidList.map(function (item) {
-                return getData(item);
-            });
-            // for (var i = 0; i < pagetxidlist.length; i++) {
-            //     try {
-            //         var objuserdata = getData(pagetxidlist[i]);
-            //         oridata.push(objuserdata);
-            //     } catch (exception) {
-            //         console.error(exception);
-            //         continue;
-            //     }
-            // }
-            // $('.spec-body-default').fadeIn();
-            refreshview(storedAgentRecords, function () {
-                getPrivateRecords(true, function (err, res) {
-                    if (!!err) {
-                        return
-                    } else {}
-                });
-            });
-        } else {
-            // updateRecords();
-            loadAgentRecords(function (err, res) {
-                getPrivateRecords(true, function (err, res) {
-                    // if (!!err) {
-                    //     return
-                    // } else {}
-                });
-            });
-        }
+        //     //sessing storage have user info (txid list)
+        //     var storedAgentRecords = storedTxidList.map(function (item) {
+        //         return getData(item);
+        //     });
+        //     // for (var i = 0; i < pagetxidlist.length; i++) {
+        //     //     try {
+        //     //         var objuserdata = getData(pagetxidlist[i]);
+        //     //         oridata.push(objuserdata);
+        //     //     } catch (exception) {
+        //     //         console.error(exception);
+        //     //         continue;
+        //     //     }
+        //     // }
+        //     // $('.spec-body-default').fadeIn();
+        //     refreshview(storedAgentRecords, function () {
+        //         getPrivateRecords(true, function (err, res) {
+        //             if (!!err) {
+        //                 return
+        //             } else {}
+        //         });
+        //     });
+        // } else {
+        //     // updateRecords();
+        //     loadAgentRecords(function (err, res) {
+        //         getPrivateRecords(true, function (err, res) {
+        //             // if (!!err) {
+        //             //     return
+        //             // } else {}
+        //         });
+        //     });
+        // }
     };
 
     /**
