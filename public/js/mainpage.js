@@ -1859,6 +1859,7 @@ $(document).ready(function () {
                     } else if (res) {
                         ui.showAlarm("삭제에 성공했습니다.");
                         transition.popOut(_recordContainer, function () {
+                            // TODO 여기 약간 이상함. remove보다 dispatch가 먼저 발생하는 거 같음...
                             _recordContainer.remove();
                             eventDispatcher.dispatchUpdateRecordEvent();
                         });
