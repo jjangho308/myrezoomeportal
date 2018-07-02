@@ -1350,7 +1350,7 @@ $(document).ready(function () {
     function ajaxNS() {
         var ajaxWrapper = null;
         return {
-            fetchAgentRecords: function (_cb) {
+            searchAgentRecord: function (_cb) {
                 $.ajax({
                     type: 'POST',
                     url: '/client',
@@ -1363,6 +1363,34 @@ $(document).ready(function () {
                         args: {
                             pkey: 'asdfasdf',
                             update: false,
+                            n: window.jwkPub2.n,
+                            e: window.jwkPub2.e
+                        }
+                    }),
+                    error: function (jqXhr, status, error) {
+                        console.error(jqXhr.responseText);
+                        isFunc(_cb) && _cb(jqXhr.responseJSON);
+                    },
+                    success: function (res) {
+                        setSocket(res.mid);
+                        isFunc(_cb) && _cb(null, res);
+                    },
+                });
+            },
+
+            fetchAgentRecords: function (_cb) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/client',
+                    headers: {
+                        'Authorization': client_authorization
+                    },
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        cmd: 'SearchRecord',
+                        args: {
+                            pkey: 'asdfasdf',
+                            update: true,
                             n: window.jwkPub2.n,
                             e: window.jwkPub2.e
                         }
