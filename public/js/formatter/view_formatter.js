@@ -4,28 +4,28 @@
 
 ! function (_win) {
 
-    /**
-     * Delete a single private record. <br />
-     * 
-     * @since 180626
-     * @author TACKSU
-     */
-    function deletePrivateRecord(recordId, recordContainer, eventTargetId) {
-        if (!!ajaxDeletePrivateRecord) {
-            ajaxDeletePrivateRecord(recordId, function (err, response) {
-                if (!!err) {
-                    return console.error(err);
-                } else if (response.result === true) {
-                    recordContainer.remove();
-                    var privateRecordUpdateEvent = document.createEvent('Event');
-                    privateRecordUpdateEvent.initEvent("record_updated", true, true);
-                    document.getElementById(eventTargetId).dispatchEvent(privateRecordUpdateEvent);
-                }
-            });
-        } else {
-            console.error("AJAX script is not loaded yet.");
-        }
-    }
+    // /**
+    //  * Delete a single private record. <br />
+    //  * 
+    //  * @since 180626
+    //  * @author TACKSU
+    //  */
+    // function deletePrivateRecord(recordId, recordContainer, eventTargetId) {
+    //     if (!!ajaxDeletePrivateRecord) {
+    //         ajaxDeletePrivateRecord(recordId, function (err, response) {
+    //             if (!!err) {
+    //                 return console.error(err);
+    //             } else if (response.result === true) {
+    //                 recordContainer.remove();
+    //                 var privateRecordUpdateEvent = document.createEvent('Event');
+    //                 privateRecordUpdateEvent.initEvent("record_updated", true, true);
+    //                 document.getElementById(eventTargetId).dispatchEvent(privateRecordUpdateEvent);
+    //             }
+    //         });
+    //     } else {
+    //         console.error("AJAX script is not loaded yet.");
+    //     }
+    // }
 
     // var deletePrivateCert = function (event) {
     //     debugger;
