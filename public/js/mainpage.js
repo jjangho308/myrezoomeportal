@@ -70,7 +70,7 @@ $(document).ready(function () {
     /**
      * Namespace for UI interaction functions. <br />
      */
-    var ui = window.ui || uiNS();
+    var ui = window.ui = window.ui || uiNS();
 
     /**
      * Namespace for UI effects and transition functions.
