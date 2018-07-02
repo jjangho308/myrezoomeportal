@@ -21,11 +21,11 @@ module.exports = {
             uId: req.body.uId,
             clientId: req.body.clientId,
             data: req.body.data,
-        }, (err, result) => {
+        }), (err, result) => {
             if (!!err) {
                 return next(err);
             }
             res.send(result);
-        }));
+        });
     }
 }
