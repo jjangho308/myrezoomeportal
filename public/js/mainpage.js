@@ -2084,6 +2084,7 @@ function dispatchUpdateRecordEvent() {
 
 function change_default_cert(subid) {
     $(".change_cert").remove();
+    ui.clearAgentRecords();
 
     var txidList = getTxidList();
     for (var i in txidList) {
