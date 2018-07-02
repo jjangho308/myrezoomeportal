@@ -56,11 +56,11 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
         }, (err, userModels) => {
 
             // 회원 정보가 없다면 즉시 Failure
-            if (!!err){
+            if (!!err) {
                 done(ClientRequestManager.RESULT_FAILURE, err);
-            } else if(userModels.length <= 0) {
+            } else if (userModels.length <= 0) {
                 done(ClientRequestManager.RESULT_FAILURE, new ResponseError({
-                    code : ErrorCode.DATA_NO_EMAIL,
+                    code: ErrorCode.DATA_NO_EMAIL,
                 }));
                 return;
             } else {
@@ -368,7 +368,7 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
                                                     // BlockChain에 저장된 hash값을 실어서 전송함.
                                                     storedData.forEach((storedDataItem, storedDataIdx) => {
                                                         defferedStoredDataFunctions.push(new Promise((storedDataResolve, storedDataReject) => {
-                                                                nexledgerService.getbytxid(null, storedDataItem.TRX_ID, 0,function (res) {
+                                                                nexledgerService.getbytxid(null, storedDataItem.TRX_ID, 0, function (res) {
                                                                     //console.log(res);
                                                                     storedDataResolve(res);
                                                                 });
@@ -453,65 +453,70 @@ class SearchRecordRequestHandler extends AbstractClientRequestHandler {
             console.log('User Wallet : ' + user_bc_wallet_addr);
 
             var nexledgerPromises = [];
-            agentRequest.records.forEach((recordsItem, recordsIdx) => {
+            if (!!agentRequest.records) {
 
-                if (recordsItem.stored == 'N') {
-                    console.log('to Store : ' + recordsItem.hash);
-                    nexledgerPromises.push(new Promise((resolve, reject) => {
-                            console.log('Each promise : ' + recordsItem.hash);
+                agentRequest.records.forEach((recordsItem, recordsIdx) => {
+
+                    if (recordsItem.stored == 'N') {
+                        console.log('to Store : ' + recordsItem.hash);
+                        nexledgerPromises.push(new Promise((resolve, reject) => {
+                                console.log('Each promise : ' + recordsItem.hash);
+                                var data = {
+                                    hash: recordsItem.hash
+                                }
+
+                                nexledgerService.put(null, user_bc_wallet_addr, data, 0, (nexledgerResponse) => {
+                                    console.log('NexLedger Response : ' + nexledgerResponse);
+                                    resolve(nexledgerResponse);
+                                });
+                            })
+                            .then(nexledgerResponse => {
+                                recordsItem.txid = nexledgerResponse.result.txid;
+
+                                var db = Managers.db();
+
+                                var blcmapinsertData = [
+                                    Util.uuid(),
+                                    uId, //uid
+                                    nexledgerResponse.result.txid, //trxid
+                                    agentRequest.orgcode, //orgid
+                                    recordsItem.subid //subid
+                                ];
+                                console.log("===========blcmapinsertData==============");
+                                console.log(blcmapinsertData);
+                                console.log("=========================================");
+
+                                db.getRecordDAO().putRecord(blcmapinsertData, (putRecordResponse) => {
+                                    console.log(putRecordResponse);
+                                });
+
+                                db.getUserDAO().setFristYN(uId, (setFirstResponse) => {
+                                    console.log(setFirstResponse);
+                                });
+
+                                // set default N in initially
+                                recordsItem.dftYn = 'N';
+
+                                return;
+                            }));
+                    } else {
+                        nexledgerPromises.push(new Promise((resolve, reject) => {
+                            // Get BLC MAP Default YN
                             var data = {
-                                hash: recordsItem.hash
-                            }
+                                uid: uId,
+                                txid: recordsItem.txid
+                            };
 
-                            nexledgerService.put(null, user_bc_wallet_addr, data, 0, (nexledgerResponse) => {
-                                console.log('NexLedger Response : ' + nexledgerResponse);
-                                resolve(nexledgerResponse);
+                            db.getRecordDAO().getDefaultYn(data, function (dbres) {
+                                recordsItem.dftYn = dbres.DFT_YN;
+                                resolve();
                             });
-                        })
-                        .then(nexledgerResponse => {
-                            recordsItem.txid = nexledgerResponse.result.txid;
-
-                            var db = Managers.db();
-
-                            var blcmapinsertData = [
-                                Util.uuid(),
-                                uId, //uid
-                                nexledgerResponse.result.txid, //trxid
-                                agentRequest.orgcode, //orgid
-                                recordsItem.subid //subid
-                            ];
-                            console.log("===========blcmapinsertData==============");
-                            console.log(blcmapinsertData);
-                            console.log("=========================================");
-
-                            db.getRecordDAO().putRecord(blcmapinsertData, (putRecordResponse) => {
-                                console.log(putRecordResponse);
-                            });
-
-                            db.getUserDAO().setFristYN(uId, (setFirstResponse) => {
-                                console.log(setFirstResponse);
-                            });
-
-                            // set default N in initially
-                            recordsItem.dftYn = 'N';
-
-                            return;
                         }));
-                } else {
-                    nexledgerPromises.push(new Promise((resolve, reject) => {
-                        // Get BLC MAP Default YN
-                        var data = {
-                            uid: uId,
-                            txid: recordsItem.txid
-                        };
-
-                        db.getRecordDAO().getDefaultYn(data, function (dbres) {
-                            recordsItem.dftYn = dbres.DFT_YN;
-                            resolve();
-                        });
-                    }));
-                }
-            });
+                    }
+                });
+            }else{
+                console.error("No agent records");
+            }
 
             // Response의 모든 처리가 완료된 후 Client socket으로 Response push.
             Promise.all(nexledgerPromises)

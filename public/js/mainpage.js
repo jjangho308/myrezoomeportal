@@ -1690,41 +1690,6 @@ $(document).ready(function () {
         });
     }
 
-    function firstLogin() {
-        $(".inital-section-1 button").click(function () {
-            $('.inital-section-1').css("display", "none");
-            $('.inital-section-3').css("display", "block");
-
-            setTimeout(function () {
-                $('.ko-progress-circle').attr('data-progress', 20);
-                $('.percentage span').text("20%");
-            }, 100);
-            setTimeout(function () {
-                $('.ko-progress-circle').attr('data-progress', 50);
-                $('.percentage span').text("50%");
-            }, 1000);
-            setTimeout(function () {
-                $('.ko-progress-circle').attr('data-progress', 100);
-                $('.percentage span').text("100%");
-
-                setTimeout(function () {
-                    $('.percentage span').css("display", "none");
-                    $('.inital-section-3 button').prop("disabled", false);
-
-                    $('.percentage img').css("display", "block");
-
-                }, 1000);
-
-            }, 2000);
-        });
-
-        $(".inital-section-3 button").click(function () {
-            $('#initial-dialog .close-modal').click();
-        });
-
-        $('#initial-dialog').modal('show');
-    }
-
     function setSocket(mId) {
         socket.close();
         socket = io();
@@ -2099,5 +2064,40 @@ function change_default_cert(subid) {
     }
 
     $('#spec-change-dialog').modal('show');
+}
+
+function firstLogin() {
+    $(".inital-section-1 button").click(function () {
+        $('.inital-section-1').css("display", "none");
+        $('.inital-section-3').css("display", "block");
+
+        setTimeout(function () {
+            $('.ko-progress-circle').attr('data-progress', 20);
+            $('.percentage span').text("20%");
+        }, 100);
+        setTimeout(function () {
+            $('.ko-progress-circle').attr('data-progress', 50);
+            $('.percentage span').text("50%");
+        }, 1000);
+        setTimeout(function () {
+            $('.ko-progress-circle').attr('data-progress', 100);
+            $('.percentage span').text("100%");
+
+            setTimeout(function () {
+                $('.percentage span').css("display", "none");
+                $('.inital-section-3 button').prop("disabled", false);
+
+                $('.percentage img').css("display", "block");
+
+            }, 1000);
+
+        }, 2000);
+    });
+
+    $(".inital-section-3 button").click(function () {
+        $('#initial-dialog .close-modal').click();
+    });
+
+    $('#initial-dialog').modal('show');
 }
 // 얘는 외부 js에서 쓰는데가 있어서 어쩔 수 없이 여기있음 ㅈㅅ.
