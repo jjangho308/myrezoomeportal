@@ -57,7 +57,7 @@ $(document).ready(function () {
     /**
      * JSON web key container. <br />
      */
-    var jwkPub2 = window.jwkPub2 = window.jwkPub2 || null;
+    var jwkPub2 = window.jwkPub2 || null;
 
     /**
      * Namespace for ajax request functions.
@@ -671,6 +671,7 @@ $(document).ready(function () {
         });
 
         $('#spec-change-dialog .confirm-btn').click(function () {
+            ui.clearAgentRecords();
             $(".abc-radio input:radio").each(function () {
                 if ($(this).is(':checked')) {
                     var txid = $(this).attr("id").substring(12);
@@ -2081,7 +2082,6 @@ function dispatchUpdateRecordEvent() {
 
 function change_default_cert(subid) {
     $(".change_cert").remove();
-
     var txidList = getTxidList();
     for (var i in txidList) {
         try {
