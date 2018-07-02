@@ -1473,12 +1473,20 @@ $(document).ready(function () {
     //     });
     // }
 
+    /**
+     * Provision client RSA Key pair. <br />
+     * @param {Function} callback 
+     */
     function initClientKey(callback) {
-        genRsaKey(function () {
-            getRSAKey();
-            window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+        if (!!window.jwkPub2) {
             isFunc(callback) && callback();
-        });
+        } else {
+            genRsaKey(function () {
+                getRSAKey();
+                window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+                isFunc(callback) && callback();
+            });
+        }
     }
 
     /**
@@ -1799,7 +1807,7 @@ $(document).ready(function () {
 
         $("#language-add-dialog #language-issuer").removeClass("error");
         $("#language-add-dialog #language-issuer").next().css("display", "none");
-       
+
         $("#language-add-dialog #langadd_startdate").removeClass("error");
         //$("#language-add-dialog #langadd_startdate").next().css("display", "none");
 
@@ -2073,7 +2081,6 @@ function dispatchUpdateRecordEvent() {
 
 function change_default_cert(subid) {
     $(".change_cert").remove();
-    ui.clearAgentRecords();
 
     var txidList = getTxidList();
     for (var i in txidList) {
