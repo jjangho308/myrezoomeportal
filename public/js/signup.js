@@ -122,6 +122,15 @@ $(document).ready(function () {
     $(".phone-confirm").click(function () {
         $(".info-message-2").css("display", "block");
         $(".agreement-div").css("margin-top", "-18px");
+
+        $("#alarm-div span").text("인증되었습니다.");
+        $('#alarm-div').css("display", "block");
+        $('#alarm-div').css("margin-right", "-108px");
+
+        setTimeout(function () {
+            $('#alarm-div').fadeOut('slow');
+            isFunc(callback) && callback();
+        }, 2000);
     });
 
     $('#btn_signup').click(function () {
@@ -240,7 +249,9 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/signup/confirm",
-            data: JSON.stringify({ email: email }),
+            data: JSON.stringify({
+                email: email
+            }),
             dataType: "JSON",
             success: function (response) {
                 if (!!response.err && response.err.code == "301") {

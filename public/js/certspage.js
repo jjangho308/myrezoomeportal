@@ -130,6 +130,31 @@ function loadcertlist() {
 
 $(document).ready(function () {
 
+    // for demo
+    $("#footer").click(function(){
+        $(".navbar-mypage").hide();
+        $(".container").hide();
+        $("#header-2").hide();
+        $("#main-body").hide();
+        $("#footer").hide();
+        $("#demo-1").fadeIn();
+    });
+
+    $("#demo-1").click(function(){
+        $("#demo-1").hide();
+        $("#demo-2").fadeIn();
+    });
+
+    $("#demo-2").click(function(){
+        $("#demo-2").hide();
+        $(".navbar-mypage").show();
+        $(".container").show();
+        $("#header-2").show();
+        $("#main-body").show();
+        $("#footer").show();        
+    });
+
+
     //get client token
 
     $(".modal tbody").mCustomScrollbar({
