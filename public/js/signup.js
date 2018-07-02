@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     var emailPattern = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     var passwordPattern = new RegExp(/[\w]{8,12}/);
-    var phonePattern = new RegExp(/^\d{3}-\d{3,4}-\d{4}$/);
+    var phonePattern = new RegExp(/^\d{3}\d{3,4}\d{4}$/);
     var confirmPhonePattern = new RegExp(/^\d{6}$/);
 
     //최상단 체크박스 클릭
