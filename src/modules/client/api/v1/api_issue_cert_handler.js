@@ -153,7 +153,7 @@ class IssueCertAPIV1RequestHandler extends AbstractClientRequestHandler {
                                                                 return done(ClientRequest.RESULT_FAILURE, err);
                                                             } else if (insertSharedId > 0) {
                                                                 return done(ClientRequest.RESULT_SUCCESS, {
-                                                                    url: 'https://rezoome.io/v/' + sharedUrl
+                                                                    url: 'https://dev.rezoome.io/v/' + sharedUrl
                                                                 });
                                                             }
                                                         });
