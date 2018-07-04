@@ -121,18 +121,20 @@ var defaultController = {
             if (!!err) {
                 next(err);
             } else {
-                if (userModels[0].pw == password) {
-                    res.send({
-                        code: Buffer.from(Managers.token().issueToken({
-                            clientId: clientId,
-                            uId: userModels[0].uId
-                        })).toString('base64')
-                    });
-                } else {
-                    return next(new ResponseError({
-                        code: ErrorCode.DATA_PASSWORD_INCORRECT,
-                        status: HttpStatusCode.BAD_REQUEST,
-                    }))
+                if(userModels != null) {
+                    if (userModels[0].pw == password) {
+                        res.send({
+                            code: Buffer.from(Managers.token().issueToken({
+                                clientId: clientId,
+                                uId: userModels[0].uId
+                            })).toString('base64')
+                        });
+                    } else {
+                        return next(new ResponseError({
+                            code: ErrorCode.DATA_PASSWORD_INCORRECT,
+                            status: HttpStatusCode.BAD_REQUEST,
+                        }))
+                    }
                 }
             }
         });
