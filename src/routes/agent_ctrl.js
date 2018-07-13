@@ -16,9 +16,9 @@ module.exports = {
      * @author TACKSU
      */
     post: (req, res, next) => {
-        console.log('Agent body : ');
-        console.log(req.body);
-        console.log('===========================');
+        // console.log('Agent body : ');
+        // console.log(req.body);
+        // console.log('===========================');
 
         var agentRequestManager = Managers.agent();
         var entity = new(agentRequestManager.getEntity(req.body.cmd))(req.body.args);
@@ -26,9 +26,9 @@ module.exports = {
         entity.cmd = req.body.cmd;
         entity.code = req.body.code;
 
-        console.log('Agent entity');
-        console.log(entity);
-        console.log('===========================');
+        // console.log('Agent entity');
+        // console.log(entity);
+        // console.log('===========================');
 
         agentRequestManager.request(entity, (err, result) => {
             if (!!err) {
