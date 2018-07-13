@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
 
     req.requestUid = Util.uuid().substr(0, 6);
 
-    console.info('Request logger : ' + req.requestUid);
+    // console.info('Request logger : ' + req.requestUid);
     if (req.method == 'GET') {
         console.info(req.requestUid + ':Query : ' + JSON.stringify(req.query));
     } else {
