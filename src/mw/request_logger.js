@@ -12,9 +12,9 @@ module.exports = (req, res, next) => {
 
     // console.info('Request logger : ' + req.requestUid);
     if (req.method == 'GET') {
-        console.info(req.requestUid + ':Query : ' + JSON.stringify(req.query));
+        // console.info(req.requestUid + ':Query : ' + JSON.stringify(req.query));
     } else {
-        console.info(req.requestUid + ':Body : ' + JSON.stringify(req.body));
+        // console.info(req.requestUid + ':Body : ' + JSON.stringify(req.body));
     }
 
     next();
