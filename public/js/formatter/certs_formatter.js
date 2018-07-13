@@ -49,9 +49,9 @@
             $(".outer-container").load("../../viewhtml/RCCNF0001.html", function () {
                 console.log(record_data);
 
-                $("#user-info-div").children('p').eq(0).html("박헌욱")
-                    .next().html("870123-1111111")
-                    .next().html("1234567")
+                $("#user-info-div").children('p').eq(0).html("김대열")
+                    .next().html("870224-1084651")
+                    .next().html("002153")
                     .next().html("2017.07.16");  
                 $("#main-score-info-div").children('p').eq(0).html(record_data.grade)
                     .next().html(parseFloat(record_data.re_point1).toFixed(2))

@@ -57,7 +57,7 @@ $(document).ready(function () {
     /**
      * JSON web key container. <br />
      */
-    var jwkPub2 = window.jwkPub2 = window.jwkPub2 || null;
+    var jwkPub2 = window.jwkPub2 || null;
 
     /**
      * Namespace for ajax request functions.
@@ -70,7 +70,7 @@ $(document).ready(function () {
     /**
      * Namespace for UI interaction functions. <br />
      */
-    var ui = window.ui || uiNS();
+    var ui = window.ui = window.ui || uiNS();
 
     /**
      * Namespace for UI effects and transition functions.
@@ -671,6 +671,7 @@ $(document).ready(function () {
         });
 
         $('#spec-change-dialog .confirm-btn').click(function () {
+            ui.clearAgentRecords();
             $(".abc-radio input:radio").each(function () {
                 if ($(this).is(':checked')) {
                     var txid = $(this).attr("id").substring(12);
@@ -1349,7 +1350,7 @@ $(document).ready(function () {
     function ajaxNS() {
         var ajaxWrapper = null;
         return {
-            fetchAgentRecords: function (_cb) {
+            searchAgentRecord: function (_cb) {
                 $.ajax({
                     type: 'POST',
                     url: '/client',
@@ -1362,6 +1363,34 @@ $(document).ready(function () {
                         args: {
                             pkey: 'asdfasdf',
                             update: false,
+                            n: window.jwkPub2.n,
+                            e: window.jwkPub2.e
+                        }
+                    }),
+                    error: function (jqXhr, status, error) {
+                        console.error(jqXhr.responseText);
+                        isFunc(_cb) && _cb(jqXhr.responseJSON);
+                    },
+                    success: function (res) {
+                        setSocket(res.mid);
+                        isFunc(_cb) && _cb(null, res);
+                    },
+                });
+            },
+
+            fetchAgentRecords: function (_cb) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/client',
+                    headers: {
+                        'Authorization': client_authorization
+                    },
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        cmd: 'SearchRecord',
+                        args: {
+                            pkey: 'asdfasdf',
+                            update: true,
                             n: window.jwkPub2.n,
                             e: window.jwkPub2.e
                         }
@@ -1473,12 +1502,20 @@ $(document).ready(function () {
     //     });
     // }
 
+    /**
+     * Provision client RSA Key pair. <br />
+     * @param {Function} callback 
+     */
     function initClientKey(callback) {
-        genRsaKey(function () {
-            getRSAKey();
-            window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+        if (!!window.jwkPub2) {
             isFunc(callback) && callback();
-        });
+        } else {
+            genRsaKey(function () {
+                getRSAKey();
+                window.jwkPub2 = KEYUTIL.getJWKFromKey(rsakey_pub);
+                isFunc(callback) && callback();
+            });
+        }
     }
 
     /**
@@ -1681,41 +1718,6 @@ $(document).ready(function () {
         });
     }
 
-    function firstLogin() {
-        $(".inital-section-1 button").click(function () {
-            $('.inital-section-1').css("display", "none");
-            $('.inital-section-3').css("display", "block");
-
-            setTimeout(function () {
-                $('.ko-progress-circle').attr('data-progress', 20);
-                $('.percentage span').text("20%");
-            }, 100);
-            setTimeout(function () {
-                $('.ko-progress-circle').attr('data-progress', 50);
-                $('.percentage span').text("50%");
-            }, 1000);
-            setTimeout(function () {
-                $('.ko-progress-circle').attr('data-progress', 100);
-                $('.percentage span').text("100%");
-
-                setTimeout(function () {
-                    $('.percentage span').css("display", "none");
-                    $('.inital-section-3 button').prop("disabled", false);
-
-                    $('.percentage img').css("display", "block");
-
-                }, 1000);
-
-            }, 2000);
-        });
-
-        $(".inital-section-3 button").click(function () {
-            $('#initial-dialog .close-modal').click();
-        });
-
-        $('#initial-dialog').modal('show');
-    }
-
     function setSocket(mId) {
         socket.close();
         socket = io();
@@ -1799,7 +1801,7 @@ $(document).ready(function () {
 
         $("#language-add-dialog #language-issuer").removeClass("error");
         $("#language-add-dialog #language-issuer").next().css("display", "none");
-       
+
         $("#language-add-dialog #langadd_startdate").removeClass("error");
         //$("#language-add-dialog #langadd_startdate").next().css("display", "none");
 
@@ -2073,7 +2075,6 @@ function dispatchUpdateRecordEvent() {
 
 function change_default_cert(subid) {
     $(".change_cert").remove();
-
     var txidList = getTxidList();
     for (var i in txidList) {
         try {
@@ -2091,5 +2092,40 @@ function change_default_cert(subid) {
     }
 
     $('#spec-change-dialog').modal('show');
+}
+
+function firstLogin() {
+    $(".inital-section-1 button").click(function () {
+        $('.inital-section-1').css("display", "none");
+        $('.inital-section-3').css("display", "block");
+
+        setTimeout(function () {
+            $('.ko-progress-circle').attr('data-progress', 20);
+            $('.percentage span').text("20%");
+        }, 100);
+        setTimeout(function () {
+            $('.ko-progress-circle').attr('data-progress', 50);
+            $('.percentage span').text("50%");
+        }, 1000);
+        setTimeout(function () {
+            $('.ko-progress-circle').attr('data-progress', 100);
+            $('.percentage span').text("100%");
+
+            setTimeout(function () {
+                $('.percentage span').css("display", "none");
+                $('.inital-section-3 button').prop("disabled", false);
+
+                $('.percentage img').css("display", "block");
+
+            }, 1000);
+
+        }, 2000);
+    });
+
+    $(".inital-section-3 button").click(function () {
+        $('#initial-dialog .close-modal').click();
+    });
+
+    $('#initial-dialog').modal('show');
 }
 // 얘는 외부 js에서 쓰는데가 있어서 어쩔 수 없이 여기있음 ㅈㅅ.
